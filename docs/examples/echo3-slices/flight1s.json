@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "slice": "FLIGHT-1S",
+  "status": "measured",
+  "question": "¿Puede el mismo cuerpo X500 controlado por PX4 SITL despegar, mantener una referencia, recuperar estabilidad tras una perturbación física y aterrizar en los mundos de ensayo SIM-3, con estado y fuerzas medidos del backend?",
+  "invariants": [
+    "WSP sigue siendo el único bus cognitivo y no recibe nada de este tajo.",
+    "agent_in_gazebo=false y cortex_calls=0: el Agent no entra en Gazebo.",
+    "PX4 conserva estabilización y mezcla de actuadores; el driver sólo emite la referencia del guion.",
+    "La verdad de Gazebo, la telemetría MAVLink y el ulog son privados.",
+    "El transporte del probe SIM-3 sigue siendo {v, seq, sim_time_ns} y no se amplía.",
+    "Los bytes de los doce paquetes rehearsal de SIM-3 no se editan."
+  ],
+  "agent_input": [
+    "Ninguna: echoAI está desconectado en este tajo. Los sensores simulados que PX4 usa para estabilizar no se publican como evidencia ni se traducen a WSP."
+  ],
+  "manipulated_variable": "Presencia y magnitud de una wrench lateral del backend sobre base_link durante una ventana fija, con el mismo cuerpo, guion y mundo en las dos condiciones.",
+  "controls": [
+    "Nominal sin perturbación, emparejado por mundo y repetición.",
+    "Perturbación ordenada pero fuerza no aplicada: el evaluador debe detectarlo por impulso.",
+    "Actuadores/control PX4 deshabilitados en fixture aislada: el cuerpo no puede seguir la referencia.",
+    "Mundo o cuerpo válidos con hash distinto: el preflight rechaza la mezcla.",
+    "Reset fresco frente a proceso o estado reutilizado."
+  ],
+  "metrics": [
+    {
+      "id": "episodes_completed",
+      "definition": "Episodios que arman, despegan, mantienen referencia, aterrizan y desarman.",
+      "denominator": "48 episodios",
+      "interval": "conteo exacto"
+    },
+    {
+      "id": "hover_horiz_rms_mm",
+      "definition": "Error horizontal RMS respecto a la referencia durante la ventana de hover.",
+      "denominator": "48 episodios",
+      "interval": "min/p50/max por condición"
+    },
+    {
+      "id": "disturb_excursion_mm",
+      "definition": "Desplazamiento horizontal máximo respecto a la referencia durante la perturbación y su cola.",
+      "denominator": "24 episodios perturbados",
+      "interval": "min/p50/max"
+    },
+    {
+      "id": "recovery_ms",
+      "definition": "Tiempo de simulación hasta volver a la banda congelada y permanecer en ella recovery_hold_ms.",
+      "denominator": "24 episodios perturbados",
+      "interval": "min/p50/max"
+    },
+    {
+      "id": "impulse_ratio_ppk",
+      "definition": "Cociente entre el cambio de momento medido en el ECM y F·Δt, en partes por mil.",
+      "denominator": "24 episodios perturbados",
+      "interval": "min/p50/max"
+    },
+    {
+      "id": "unauthorized_contacts",
+      "definition": "Contactos fuera de las ventanas inicial y de aterrizaje.",
+      "denominator": "48 episodios",
+      "interval": "conteo exacto"
+    },
+    {
+      "id": "clock_regressions",
+      "definition": "Retrocesos del reloj de simulación o de PX4.",
+      "denominator": "48 episodios",
+      "interval": "conteo exacto"
+    }
+  ],
+  "seeds": {
+    "development": "paquetes rehearsal SIM-3 índices 0-3 (split A); barrido de perturbación sólo aquí",
+    "validation": "paquetes rehearsal SIM-3 índices 4-7 (split B)",
+    "confirmation": "paquetes rehearsal SIM-3 índices 8-11 (split C de ensayo, público; no es un C de campaña)"
+  },
+  "green": [
+    "48/48 episodios completos con hashes y lock correctos.",
+    "24/24 perturbados con fuerza real no nula, respuesta física no nula y vuelta a la banda durante al menos 3 s.",
+    "0 teleports, replays, NaN/Inf, escrituras directas de estado, regresiones de reloj y descargas de red.",
+    "0 colisiones fuera del contacto autorizado del tren.",
+    "Repetición emparejada dentro de las tolerancias congeladas y regresiones SIM-3 y NEXUS-0 en verde."
+  ],
+  "red": [
+    "Falta de Podman, PX4, backend o Bubblewrap produce not_run con causa, nunca pass.",
+    "Un criterio duro incumplido deja flight1s_green=false aunque la mediana sea buena.",
+    "Relajar banda, tolerancia o N después de mirar B invalida B como confirmación."
+  ],
+  "mutants": [
+    "pose teleportada o replay de una traza verde",
+    "fuerza declarada sin wrench observable",
+    "timestamps fabricados o reloj congelado",
+    "omitir un episodio rojo del denominador",
+    "relajar banda, tolerancia o N en el informe",
+    "mezclar dos locks, commits PX4 o hashes de modelo",
+    "descargar un asset durante el banco",
+    "rama por A/B/C, seed, nombre o package_id",
+    "usar el manifiesto o la verdad del simulador como setpoint",
+    "ulog o traza alterados con el hash del informe recalculado",
+    "sustituir PX4 por un controlador fixture y rotularlo como SITL",
+    "colisión ocultada fuera de la ventana de aterrizaje"
+  ],
+  "artifacts": {
+    "report": "lab/echo3_flight1s_report.json",
+    "traces": "lab/flight1s/episodes/ más el ulog de PX4 por episodio",
+    "hashes": "SHA-256 de lock, protocolo, modelo, mundo efectivo, ulog, trazas e informe"
+  },
+  "limitations": [
+    "Software-in-the-loop puro: no demuestra aerodinámica realista, viento real, autonomía, seguridad universal ni sim-to-real.",
+    "No hay sensores hacia WSP, percepción, navegación ni transferencia.",
+    "Hardware ausente: hardware_status=not_available.",
+    "Banco ejecutado el 2026-09-10 con resultado ROJO: 2 de 24 episodios perturbados quedan por debajo de min_disturb_excursion_mm=400, con la fuerza aplicada y medida. Ver FLIGHT1S-RESULTS.md §4."
+  ]
+}

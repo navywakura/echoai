@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "profile": "sim3-boxes-v1",
+  "family_id": "pattern1r-v1",
+  "prng": {
+    "name": "SplitMix64",
+    "version": 1
+  },
+  "lattice_mm": 100,
+  "archetypes": {
+    "A": {
+      "template": "single_wall",
+      "thickness_choices_mm": [
+        200,
+        300,
+        400
+      ],
+      "wall_x_mm": {
+        "lo": -600,
+        "hi": 600,
+        "step": 100
+      },
+      "half_length_mm": {
+        "lo": 1500,
+        "hi": 2600,
+        "step": 100
+      },
+      "height_mm": {
+        "lo": 1400,
+        "hi": 2600,
+        "step": 100
+      },
+      "station_x_mm": {
+        "lo": 2400,
+        "hi": 4000,
+        "step": 100
+      },
+      "station_y_mm": {
+        "lo": -1200,
+        "hi": 1200,
+        "step": 100
+      },
+      "spawn_x_mm": {
+        "lo": -4000,
+        "hi": -2600,
+        "step": 100
+      },
+      "spawn_y_mm": {
+        "lo": -1000,
+        "hi": 1000,
+        "step": 100
+      }
+    },
+    "B": {
+      "template": "staggered_walls",
+      "thickness_choices_mm": [
+        200,
+        300
+      ],
+      "wall1_x_mm": {
+        "lo": -3000,
+        "hi": -2600,
+        "step": 100
+      },
+      "wall2_x_mm": {
+        "lo": 2600,
+        "hi": 3000,
+        "step": 100
+      },
+      "span1_mm": {
+        "lo": 2600,
+        "hi": 2800,
+        "step": 100
+      },
+      "span2_mm": {
+        "lo": 4000,
+        "hi": 4200,
+        "step": 100
+      },
+      "height1_mm": {
+        "lo": 2400,
+        "hi": 2600,
+        "step": 100
+      },
+      "height2_mm": {
+        "lo": 2400,
+        "hi": 2600,
+        "step": 100
+      },
+      "station_x_mm": {
+        "lo": 2600,
+        "hi": 4000,
+        "step": 100
+      },
+      "station_y_mm": {
+        "lo": -2600,
+        "hi": -1000,
+        "step": 100
+      },
+      "spawn_x_mm": {
+        "lo": -4200,
+        "hi": -3000,
+        "step": 100
+      },
+      "spawn_y_mm": {
+        "lo": 1000,
+        "hi": 3000,
+        "step": 100
+      }
+    },
+    "C": {
+      "template": "three_sided_pocket",
+      "station_x_mm": {
+        "lo": 2200,
+        "hi": 3400,
+        "step": 100
+      },
+      "station_y_mm": {
+        "lo": -800,
+        "hi": 800,
+        "step": 100
+      },
+      "depth_mm": {
+        "lo": 900,
+        "hi": 1400,
+        "step": 100
+      },
+      "half_width_mm": {
+        "lo": 1200,
+        "hi": 1800,
+        "step": 100
+      },
+      "height_mm": {
+        "lo": 600,
+        "hi": 1200,
+        "step": 100
+      },
+      "thickness_choices_mm": [
+        200,
+        300
+      ],
+      "spawn_x_mm": {
+        "lo": -4200,
+        "hi": -2600,
+        "step": 100
+      },
+      "spawn_y_mm": {
+        "lo": -1600,
+        "hi": 1600,
+        "step": 100
+      }
+    }
+  }
+}

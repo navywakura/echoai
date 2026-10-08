@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "campaign_id": "sim3-rehearsal-20260910",
+  "dataset_kind": "rehearsal",
+  "frozen_at_utc": "2026-09-10T06:39:26Z",
+  "custodian": "Roger (rehearsal; public secret only)",
+  "access_ledger_external": "External SIM-3 rehearsal ledger held by Roger; not a reserved campaign ledger.",
+  "protocol_sha256": "b3be07e1d4933a716fce9207bfdda33dcc799ec413e5f749c56b859ab86f6c45",
+  "lock_sha256": "80ef5a38853b6b92d4b21093857f7cda6d0a7966f259764475e3668604fdbf2a",
+  "code_sha256": "00c4061af6cefabc511380706734f756cbef39deb90d3ef7b3a81b6895752346",
+  "generator": {
+    "family_sha256": "b244b5f5f9121cfe16364ec9bc40d65efee2f41234fa7a586a4ce17af42c5d6c",
+    "prng": "SplitMix64",
+    "prng_version": 1
+  },
+  "partitions": {
+    "A": {"n_packages": 4, "seed_policy": "public_fixture"},
+    "B": {"n_packages": 4, "seed_policy": "public_fixture"},
+    "C": {"n_packages": 4, "seed_policy": "public_fixture"}
+  },
+  "kpis": [
+    {"id": "package_valid", "definition": "Perfil propio y libsdformat aceptan cada paquete.", "denominator": "12 paquetes rehearsal"},
+    {"id": "oracle_leaks", "definition": "Canarios privados visibles para el consumidor.", "denominator": "24 ejecuciones rehearsal"}
+  ],
+  "thresholds": [
+    {"id": "oracle_leaks", "operator": "==", "value": 0, "unit": "leaks"},
+    {"id": "physics_runs", "operator": "==", "value": 24, "unit": "runs"}
+  ],
+  "controls": ["paquete positivo", "renombrado", "pared movida", "consumidor abusivo", "backend desconectado"],
+  "commitments": {
+    "protocol_formula": "SIM3/v1/commit",
+    "protocol_commitment_sha256": "aea59bf8d1fa915a01ffb9f8fdd209a765d3607b4d648e27b68d0534c67e3b66",
+    "inventory_formula": "SIM3/v1/inventory",
+    "inventory_commitment_sha256": "6f8c692097cbaeeff58e7386c65661a4bd0e642f2f91c457dab39f7ee9c71710",
+    "inventory_salt_location_external": "Rehearsal salt 32×0x02 published in SIM3-RESULTS.md; no campaign C is represented here."
+  }
+}

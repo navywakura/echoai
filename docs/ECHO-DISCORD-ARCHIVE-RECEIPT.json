@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-22",
+  "status": "archived",
+  "source": "/home/roger/REALRXOS/RXos/echo-discord",
+  "destination": "/home/roger/archivos-laboratorio/echo-discord-2026-09-22",
+  "operation": "same-filesystem directory rename",
+  "entries_preserved": 4205,
+  "all_entry_inodes_modes_sizes_mtimes_links_equal": true,
+  "deleted_files": 0,
+  "legacy_files_edited": 0,
+  "compatibility_symlink": false,
+  "active_references_found": [],
+  "warning": "Legacy venv scripts may retain the old absolute path. Archive is not an active runtime; do not repair or launch it."
+}

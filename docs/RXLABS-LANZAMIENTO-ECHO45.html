@@ -1,0 +1,250 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:A4;margin:0}html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.cursor{animation:none!important}</style></head><body>
+<title>RxLabs · ECHO-4.5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+  /* Single deliberate look: RxLabs is black ground, white letters. Painted explicitly. */
+  :root {
+    color-scheme: dark;
+    --ground: #000000;
+    --surface: #0d0d0b;
+    --line: #2a2924;
+    --ink: #eeece4;
+    --muted: #9c998e;
+    --gold: #d8be86;
+    --gold-dim: #6f6247;
+    --green: #86c98f;
+    --red: #e27a6e;
+    --blue: #8fb8d8;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --serif: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  }
+  html, body { background: var(--ground); color: var(--ink); }
+  body { font-family: var(--serif); font-size: 19px; line-height: 1.6; padding-inline: 20px; padding-block: 0 64px; }
+  .page { max-width: 760px; margin: 0 auto; }
+  a { color: var(--gold); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  h1, h2, h3 { font-family: var(--mono); text-wrap: balance; letter-spacing: -0.01em; }
+  h2 { font-size: 1.35rem; font-weight: 700; margin: 0 0 18px; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 0 0 6px; }
+  p { margin: 0 0 16px; max-width: 66ch; }
+  strong { font-weight: 500; color: #fff; }
+  .mono { font-family: var(--mono); }
+  .tab { font-variant-numeric: tabular-nums; }
+
+  /* masthead: the two marks side by side, RxLabs first */
+  .mast { display: flex; align-items: center; gap: 14px; padding-block: 28px 18px; border-bottom: 1px solid var(--line); }
+  .rx { width: 56px; height: 56px; border: 1px solid #fff; display: grid; place-items: center; background: #000; }
+  .rx svg { width: 40px; height: 40px; display: block; }
+  .echo-mark { width: 56px; height: 56px; border: 1px solid var(--line); background: #000; }
+  .mast .who { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+  .mast .who b { color: var(--ink); font-weight: 700; }
+
+  .hero { padding-block: 48px 36px; border-bottom: 1px solid var(--line); }
+  .hero .kicker { font-family: var(--mono); font-size: 0.8rem; color: var(--gold); letter-spacing: 0.04em; margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(2rem, 6vw, 3.3rem); line-height: 1.08; font-weight: 800; margin: 0 0 22px; }
+  .hero h1 .cursor { color: var(--gold); }
+  .hero .lede { font-size: 1.2rem; color: var(--ink); }
+  .fact-law { margin-top: 26px; font-family: var(--mono); font-size: 0.92rem; padding: 14px 16px; border-left: 3px solid var(--gold); background: var(--surface); }
+  .fact-law span { color: var(--muted); }
+
+  section { padding-block: 44px; border-bottom: 1px solid var(--line); }
+  .sec-label { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; }
+
+  /* verdict stamps: the lab's own vocabulary */
+  .stamp { display: inline-block; align-self: start; justify-self: end; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; padding: 2px 8px; border: 1px solid currentColor; white-space: nowrap; }
+  .stamp.green { color: var(--green); }
+  .stamp.red { color: var(--red); }
+  .stamp.goal { color: var(--blue); }
+  .stamp.done { color: var(--green); }
+  .stamp.now { color: var(--gold); }
+
+  /* the ledger of measured results */
+  .ledger { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: 11rem 1fr auto; gap: 16px; padding-block: 16px; border-bottom: 1px solid var(--line); align-items: start; }
+  .row .bench { font-family: var(--mono); font-size: 0.86rem; font-weight: 700; }
+  .row .bench small { display: block; font-weight: 400; color: var(--muted); font-size: 0.76rem; margin-top: 2px; }
+  .row .what { font-size: 1rem; }
+  .row .what .num { font-family: var(--mono); color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .row .what .cost { color: var(--muted); }
+  @media (max-width: 620px) {
+    .row { grid-template-columns: 1fr auto; }
+    .row .what { grid-column: 1 / -1; }
+  }
+
+  .big { display: flex; flex-wrap: wrap; gap: 28px; margin: 8px 0 26px; }
+  .big div { font-family: var(--mono); }
+  .big b { display: block; font-size: 2.4rem; font-weight: 800; color: #fff; line-height: 1; font-variant-numeric: tabular-nums; }
+  .big span { font-size: 0.8rem; color: var(--muted); }
+
+  /* ECHO-4.5 phases: a real sequence, so it is numbered by its own phase ids */
+  .phases { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .phases li { display: grid; grid-template-columns: 5.2rem 1fr auto; gap: 14px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+  .phases .id { font-family: var(--mono); font-weight: 800; color: var(--gold); }
+  .phases p { margin: 0; font-size: 1rem; }
+  .phases .note { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
+  @media (max-width: 620px) {
+    .phases li { grid-template-columns: 1fr auto; }
+    .phases li > div { grid-column: 1 / -1; }
+  }
+
+  .req { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 22px; }
+  .req div { border: 1px solid var(--line); padding: 14px; background: var(--surface); }
+  .req b { font-family: var(--mono); color: var(--gold); display: block; margin-bottom: 4px; }
+  .req span { font-size: 0.95rem; }
+
+  .callout { border: 1px solid var(--gold-dim); padding: 18px 20px; margin-top: 24px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .board { font-family: var(--mono); font-size: 0.86rem; overflow-x: auto; margin: 18px 0 8px; }
+  .board table { border-collapse: collapse; min-width: 480px; width: 100%; }
+  .board th, .board td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  .board th { color: var(--muted); font-weight: 500; }
+  .board td.us { color: var(--gold); font-weight: 700; }
+
+  .problems { display: grid; gap: 18px; margin-top: 8px; }
+  .problems div { padding-left: 16px; border-left: 1px solid var(--gold-dim); }
+  .problems h3 { color: #fff; }
+  .problems p { margin: 0; font-size: 1rem; color: var(--ink); }
+
+  .cta { padding-block: 48px 12px; }
+  .cta h2 { font-size: 1.7rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 8px; }
+  .btn { font-family: var(--mono); font-size: 0.9rem; font-weight: 700; text-decoration: none; padding: 12px 18px; border: 1px solid var(--gold); color: var(--gold); }
+  .btn.primary { background: var(--gold); color: #000; }
+  .btn:hover { background: #fff; color: #000; border-color: #fff; }
+  .fine { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); line-height: 1.6; margin-top: 34px; max-width: 72ch; }
+  @media (prefers-reduced-motion: no-preference) {
+    .cursor { animation: blink 1.1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  }
+</style>
+
+<div class="page">
+  <header class="mast">
+    <div class="rx" aria-label="RxLabs">
+      <svg viewBox="0 0 40 40" role="img" aria-hidden="true">
+        <text x="20" y="28" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="21" font-weight="800" fill="#ffffff">R<tspan font-weight="500" font-size="17">x</tspan></text>
+      </svg>
+    </div>
+    <img class="echo-mark" src="data:image/png;base64,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" width="56" height="56" alt="Logo de echoAI">
+    <div class="who"><b>RxLabs</b> presenta <b>ECHO</b><br>25 de septiembre de 2026 · lanzamiento</div>
+  </header>
+
+  <div class="hero">
+    <div class="kicker">ECHO-4 hoy · ECHO-4.5 en camino</div>
+    <h1>La IA que no afirma lo que no ha comprobado<span class="cursor">_</span></h1>
+    <p class="lede">ECHO es un agente de dos relojes. Un <strong>núcleo rápido de enteros</strong> percibe, recuerda, predice, decide y aprende, y funciona <strong>con el modelo de lenguaje apagado</strong>. El reloj lento, el córtex, que puede ser cualquier modelo de lenguaje, solo <strong>propone</strong>. ECHO decide qué es un hecho y qué acción se permite.</p>
+    <div class="fact-law">HECHO ∈ {VERIFICADO, DESCONOCIDO}<br><span>Una hipótesis nunca se escribe como hecho. Si no hay evidencia comprobada, ECHO dice «no lo sé».</span></div>
+  </div>
+
+  <section id="hoy">
+    <div class="sec-label">1 · lo que ECHO-4 ya hace, medido y auditado</div>
+    <h2>Menos respuestas inventadas. Con sus rojos.</h2>
+    <p>Cada prueba tuvo sus umbrales escritos <strong>antes</strong> del examen, con muestras selladas por semilla y una auditoría que reconstruye los números sin volver a llamar a ningún modelo. Publicamos lo que sale verde y lo que sale rojo.</p>
+
+    <div class="big">
+      <div><b class="tab">81–87 %</b><span>menos respuestas inventadas<br>en SimpleQA, 4 modelos</span></div>
+      <div><b class="tab">105 → 0</b><span>respuestas incorrectas enviadas<br>por Qwen en ARC-AGI-2</span></div>
+      <div><b class="tab">13 vs 2</b><span>niveles de ARC-AGI-3<br>ECHO solo frente al azar</span></div>
+    </div>
+
+    <div class="ledger">
+      <div class="row">
+        <div class="bench">SimpleQA<small>200 preguntas de hechos</small></div>
+        <div class="what">Con Claude Sonnet 5, DeepSeek V4.1 Flash, GPT-5.4 mini y Qwen3-30B, ECHO reduce las respuestas incorrectas entre un <span class="num">81</span> y un <span class="num">87 %</span> frente al modelo solo, y <strong>sube la precisión en los cuatro</strong>. <span class="cost">A cambio responde menos: el F-score baja en 3 de los 4 modelos.</span></div>
+        <span class="stamp green">VERDE</span>
+      </div>
+      <div class="row">
+        <div class="bench">ARC-AGI-2<small>puzles de rejillas</small></div>
+        <div class="what">Qwen solo envió <span class="num">105</span> respuestas incorrectas; con ECHO envió <span class="num">0</span>, porque se abstuvo cuando no pudo verificar. <span class="cost">Pero en aciertos, DeepSeek con ECHO (6,7 %) empató con un control que prueba más programas sin verificar. No demostramos que verificar sume aciertos.</span></div>
+        <span class="stamp red">ROJO</span>
+      </div>
+      <div class="row">
+        <div class="bench">ARC-AGI-3<small>juegos sin instrucciones</small></div>
+        <div class="what">Sin ningún modelo de lenguaje, ECHO completa <span class="num">13</span> de <span class="num">112</span> niveles, frente a <span class="num">2</span> del azar. <span class="cost">Pero la puntuación oficial, que premia hacerlo con tan pocas acciones como un humano, es de solo <span class="num">0,07</span> sobre 100 (corregida: antes publicamos 1).</span></div>
+        <span class="stamp green">NIVELES</span>
+      </div>
+      <div class="row">
+        <div class="bench">Experimentos<small>programa ECHO-4</small></div>
+        <div class="what">BOUNDARY (qué depende de mí), SITUATE (qué soy, dicho solo con hechos comprobados), CONTINUITY (pausar, reanudar y seguir siendo el mismo) e INTEGRATE, en verde y auditados. <span class="cost">Son resultados funcionales, no una prueba de conciencia.</span></div>
+        <span class="stamp green">VERDE</span>
+      </div>
+    </div>
+    <p style="margin-top:22px">La release <strong>ECHO-4 4.0.0rc2</strong> ya se puede descargar e instalar en <a href="https://www.rxlabs.org/echoai">rxlabs.org/echoai</a>. Todos los números, gráficas y rojos están en <a href="https://www.rxlabs.org/articulos/echo4-benchmarks-resultados">el artículo de resultados</a>.</p>
+  </section>
+
+  <section id="manana">
+    <div class="sec-label">2 · ECHO-4.5: objetivos, no logros</div>
+    <h2>Lo que ECHO-4.5 será capaz de hacer si todo sale verde</h2>
+    <p>ECHO-4.5 parte de una <strong>semilla sin preentrenar</strong> que se clona en sandboxes y aprende en ellas: busca programas y guarda como hecho solo lo que reproduce todos los ejemplos (fase despierta), y convierte en <strong>conceptos nuevos</strong> lo que se repite en tareas distintas (fase de sueño). Lo que sigue son las fases del plan. Las que no están en verde son <strong>objetivos</strong>.</p>
+    <ol class="phases">
+      <li><span class="id">S0</span><div><p>Semilla, sandboxes clonables con diario encadenado y un gimnasio de 1009 tareas con las evaluaciones selladas.</p></div><span class="stamp done">HECHO</span></li>
+      <li><span class="id">S1</span><div><p>Ver las rejillas como <strong>objetos</strong>.</p><p class="note">De 15 a 21 tareas reservadas resueltas (+40 %), sin entrenar.</p></div><span class="stamp done">HECHO</span></li>
+      <li><span class="id">S2</span><div><p>Aprender mejor: conceptos con parámetros, intuición sobre qué probar primero y evolución entre clones.</p></div><span class="stamp now">EN CURSO</span></li>
+      <li><span class="id">S3</span><div><p>Ver los juegos como objetos, con reglas de acción verificadas e imaginar caminos antes de gastar acciones.</p><p class="note">Pista ya medida: ECHO descubre por sí mismo cuál es su personaje, porque es lo que se mueve cuando él actúa, en 5 de 5 juegos de desarrollo con teclas.</p></div><span class="stamp goal">OBJETIVO</span></li>
+      <li><span class="id">S4</span><div><p>Inferir la meta de un juego y planificar hacia ella con pocas acciones.</p></div><span class="stamp goal">OBJETIVO</span></li>
+      <li><span class="id">S5</span><div><p>ARC3-GYM: un simulador propio de juegos por turnos para entrenar sin tocar el examen.</p></div><span class="stamp goal">OBJETIVO</span></li>
+      <li><span class="id">EGO-M1</span><div><p>EGO-MEMORIA-1: que la <strong>necesidad de documentar</strong> surja sola, que las memorias con valencia (lo que le ayudó y lo que le engañó) cambien su conducta y que dos clones idénticos acaben siendo dos yoes distintos por lo que vivió cada uno.</p><p class="note">En desarrollo, M2, M3 y M4 salen en verde en 8 de 8 semillas. Es un yo funcional, no conciencia.</p></div><span class="stamp goal">OBJETIVO</span></li>
+    </ol>
+
+    <div class="req">
+      <div><b>R1 · ARC-AGI-1</b><span>superar el 0 % y a la semilla sin entrenar</span></div>
+      <div><b>R2 · ARC-AGI-2</b><span>superar el 0 % y a la semilla sin entrenar</span></div>
+      <div><b>R3 · ARC-AGI-3</b><span>al menos el 20 % de los 112 niveles</span></div>
+      <div><b>R4 · auditoría</b><span>cada programa, concepto y diario, rehechos</span></div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Si sale verde</strong>, sería la primera evidencia medida y auditada de que un sistema pequeño, en una CPU normal y sin preentrenamiento masivo, <strong>adquiere abstracciones por su cuenta y las traslada a situaciones nuevas</strong>, en bancos hechos para que memorizar no sirva. No significaría que ECHO entienda como una persona, que sea consciente ni que sea una inteligencia general.</p>
+    </div>
+  </section>
+
+  <section id="medida">
+    <div class="sec-label">3 · cómo lo vamos a medir</div>
+    <h2>En los bancos más difíciles, a la vista de todos</h2>
+    <p>Mediremos ECHO-4.5 en <strong>ARC-AGI-1, ARC-AGI-2 y ARC-AGI-3</strong>: problemas nuevos que no se pueden memorizar y juegos cuyas reglas hay que descubrir jugando. Seguiremos el método de siempre:</p>
+    <ul>
+      <li>contrato con umbrales <strong>antes</strong> del examen;</li>
+      <li>evaluaciones selladas por código hasta ese día;</li>
+      <li>auditoría completa;</li>
+      <li>los rojos se publican.</li>
+    </ul>
+    <p>Además competimos como equipo <strong>RxLabs</strong> en <strong>ARC Prize 2026</strong> en Kaggle, donde la tabla es la comparación oficial con otros sistemas, y presentaremos el enfoque en el paper track. Lo decimos claro: partimos de casi cero.</p>
+    <div class="board">
+      <table>
+        <thead><tr><th>ARC-AGI-3, puntuación oficial</th><th>1.º de la tabla hoy</th><th>ECHO hoy</th></tr></thead>
+        <tbody><tr><td>sobre 100</td><td>≈ 19,45</td><td class="us">0,07 – 0,34</td></tr></tbody>
+      </table>
+    </div>
+    <p class="note" style="color:var(--muted);font-size:0.95rem">Nuestro objetivo en la competición es aprender en público, subir en la tabla y demostrar con ablaciones cuánto aporta ECHO. No prometemos ganar.</p>
+  </section>
+
+  <section id="proposito">
+    <div class="sec-label">4 · por qué hacemos esto</div>
+    <h2>IA para robots que actúan en el mundo real</h2>
+    <p>Lo que nos apasiona es hacer evolucionar la IA para la <strong>robótica autónoma</strong>. Un robot no puede fiarse de un modelo de lenguaje que afirma con seguridad lo que no sabe. Necesita un núcleo que <strong>actúe, compruebe y aprenda de las consecuencias</strong>, que corra en hardware pequeño y que se pueda auditar.</p>
+    <p>ECHO ya tiene esas piezas. Su núcleo es de enteros y corre en CPU, sin GPU, y ya ha volado drones en simulación. En el futuro queremos llevar su cabeza de acciones a un coprocesador neuromórfico como Akida, y a placas de borde para robots.</p>
+    <div class="problems">
+      <div><h3>Una IA que no afirma lo que no sabe</h3><p>Que «no lo sé» sea una respuesta válida y medida, y no un fallo.</p></div>
+      <div><h3>Robots que aprenden actuando y verificando</h3><p>En lugar de creerse un modelo de lenguaje, comprobar cada hipótesis contra lo que ha pasado de verdad.</p></div>
+      <div><h3>Pequeño, barato y auditable</h3><p>Sistemas que caben en una CPU y cuyos números reconstruye cualquiera, frente a modelos gigantes y opacos.</p></div>
+      <div><h3>Agentes que saben qué depende de ellos</h3><p>Distinguir lo que causa uno mismo de lo que pasa solo es la base de un robot seguro.</p></div>
+      <div><h3>Medición abierta, mantenida por la comunidad</h3><p>Pruebas con contrato, rojos incluidos, que cualquiera pueda repetir y ampliar.</p></div>
+    </div>
+  </section>
+
+  <section class="cta" id="participa">
+    <div class="sec-label">5 · participa</div>
+    <h2>ECHO-4 lo mantiene la comunidad</h2>
+    <p>Descarga ECHO-4 y haz las pruebas que aún faltan: Humanity's Last Exam, MMLU, FrontierScience, ARC-AGI-2 y ARC-AGI-3 con modelos fuertes, y SWE-bench. Usa nuestro método y publica tu resultado con nosotros, también si sale rojo.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://www.rxlabs.org/echoai">Descargar ECHO-4</a>
+      <a class="btn" href="https://www.rxlabs.org/articulos/echo4-benchmarks-resultados">Ver los resultados</a>
+      <a class="btn" href="https://www.rxlabs.org/contact">Contactar con RxLabs</a>
+    </div>
+    <p class="fine">RxLabs · <a href="https://www.rxlabs.org">rxlabs.org</a><br>Todas las cifras proceden de exámenes con contrato previo y auditoría. Lo planificado se describe como objetivo. Los resultados sobre el «yo» de ECHO son funcionales y no demuestran conciencia ni experiencia subjetiva. ECHO no se presenta como una inteligencia general.</p>
+  </section>
+</div>
+</body></html>

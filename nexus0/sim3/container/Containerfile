@@ -1,0 +1,28 @@
+# SIM-3 rehearsal runtime: Gazebo Harmonic on Ubuntu 24.04 (noble).
+#
+# Built locally with podman; never pulled as `latest`. The exact package
+# versions that end up inside are read back out by `sim3 preflight` and
+# frozen into lab/sim3/runtime-lock.json together with the image digest.
+# Nothing here is installed on the host.
+FROM docker.io/ubuntu:24.04@sha256:a61567bd31828687156d735ea8eb01ba4e37636e225dd6a48ba94136a70d9d61
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      ca-certificates curl gnupg lsb-release \
+ && curl -sSL https://packages.osrfoundation.org/gazebo.gpg \
+      -o /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
+ && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable noble main" \
+      > /etc/apt/sources.list.d/gazebo-stable.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+      gz-harmonic \
+      python3 python3-gz-transport13 python3-gz-msgs10 \
+ && rm -rf /var/lib/apt/lists/*
+
+# No Fuel downloads during the bench.
+ENV GZ_FUEL_STATIC_ONLY=1 \
+    GZ_PARTITION=sim3 \
+    GZ_IP=127.0.0.1 \
+    GZ_TRANSPORT_TOPIC_STATISTICS=0

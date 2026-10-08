@@ -1,0 +1,30 @@
+# FLIGHT-1S v3: the frozen image with one corrected label in the simulated GNSS.
+#
+# SensorGpsSim injects sigma 0.2 m of horizontal position noise and then
+# advertises eph = 0.9 m. EKF2 consumes that number as the per-axis observation
+# sigma, so the filter is told the variance is twenty times what it is and
+# leans on inertial dead reckoning, which drifts. This corrects the label to
+# the value the file itself injects three lines above.
+#
+# It does not reduce the injected noise: generate_wgn() * 0.2 is untouched.
+# epv is wrong in the same way (1.78 declared, 0.5 injected) and is left alone
+# on purpose: the measured failure is horizontal.
+#
+# A separate tag. The v1/v2 image and their locks are not touched.
+FROM localhost/echoai-flight1s-px4:v1.15.4
+
+ARG SRC=/opt/PX4-Autopilot/src/modules/simulation/sensor_gps_sim/SensorGpsSim.cpp
+
+RUN cp ${SRC} /opt/SensorGpsSim.cpp.orig \
+ && grep -q 'sensor_gps.eph = 0.9f;' ${SRC} \
+ && sed -i 's/sensor_gps\.eph = 0\.9f;/sensor_gps.eph = 0.2f; \/\/ FLIGHT1S-v3: match the injected sigma/' ${SRC} \
+ && grep -q 'sensor_gps.eph = 0.2f;' ${SRC} \
+ && grep -q 'generate_wgn() \* 0.2' ${SRC} \
+ && diff -u /opt/SensorGpsSim.cpp.orig ${SRC} > /opt/gps-eph.patch || true
+RUN test "$(diff /opt/SensorGpsSim.cpp.orig ${SRC} | grep -c '^[<>]')" = "2"
+
+RUN cd /opt/PX4-Autopilot && make px4_sitl_default \
+ && test -x build/px4_sitl_default/bin/px4 \
+ && sha256sum build/px4_sitl_default/bin/px4 > /opt/px4-binary.sha256
+
+LABEL flight1s.patch="SensorGpsSim eph 0.9 -> 0.2 (match injected sigma)"

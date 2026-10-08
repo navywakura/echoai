@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SIM-3 campaign manifest v1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "campaign_id", "dataset_kind", "frozen_at_utc", "custodian", "access_ledger_external", "protocol_sha256", "lock_sha256", "code_sha256", "generator", "partitions", "kpis", "thresholds", "controls", "commitments"],
+  "properties": {
+    "schema_version": {"const": 1}, "campaign_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,62}$"}, "dataset_kind": {"enum": ["rehearsal", "campaign"]}, "frozen_at_utc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"}, "custodian": {"type": "string", "minLength": 1}, "access_ledger_external": {"type": "string", "minLength": 1},
+    "protocol_sha256": {"$ref": "#/$defs/hash"}, "lock_sha256": {"$ref": "#/$defs/hash"}, "code_sha256": {"$ref": "#/$defs/hash"},
+    "generator": {"type": "object", "additionalProperties": false, "required": ["family_sha256", "prng", "prng_version"], "properties": {"family_sha256": {"$ref": "#/$defs/hash"}, "prng": {"const": "SplitMix64"}, "prng_version": {"const": 1}}},
+    "partitions": {"type": "object", "additionalProperties": false, "required": ["A", "B", "C"], "properties": {"A": {"$ref": "#/$defs/partition"}, "B": {"$ref": "#/$defs/partition"}, "C": {"$ref": "#/$defs/partition"}}},
+    "kpis": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "definition", "denominator"], "properties": {"id": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "definition": {"type": "string", "minLength": 1}, "denominator": {"type": "string", "minLength": 1}}}},
+    "thresholds": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "operator", "value", "unit"], "properties": {"id": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "operator": {"enum": ["==", "<=", ">=", "<", ">"]}, "value": {"type": "integer"}, "unit": {"type": "string", "minLength": 1}}}},
+    "controls": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "commitments": {"type": "object", "additionalProperties": false, "required": ["protocol_formula", "protocol_commitment_sha256", "inventory_formula", "inventory_commitment_sha256", "inventory_salt_location_external"], "properties": {"protocol_formula": {"const": "SIM3/v1/commit"}, "protocol_commitment_sha256": {"$ref": "#/$defs/hash"}, "inventory_formula": {"const": "SIM3/v1/inventory"}, "inventory_commitment_sha256": {"$ref": "#/$defs/hash"}, "inventory_salt_location_external": {"type": "string", "minLength": 1}}}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "partition": {"type": "object", "additionalProperties": false, "required": ["n_packages", "seed_policy"], "properties": {"n_packages": {"type": "integer", "minimum": 1}, "seed_policy": {"enum": ["public_fixture", "sealed_hmac"]}}}}
+}

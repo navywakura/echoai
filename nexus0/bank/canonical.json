@@ -1,0 +1,53 @@
+{
+  "note": "First packet only. Vendor relation→rel, target→dst. Nested action is NOT a 16 B field. Emotion ×100 → int8.",
+  "phrases": [
+    {
+      "text": "te quiero",
+      "src": "YO",
+      "rel": "AMOR",
+      "dst": "OTRO",
+      "time": "AHORA",
+      "E": {"V": 95, "A": 60, "D": 0, "C": 80, "U": 0, "B": 98}
+    },
+    {
+      "text": "estoy aqui",
+      "src": "YO",
+      "rel": "SER",
+      "dst": "AQUI",
+      "time": "AHORA",
+      "E": {"V": 0, "A": 50, "D": 0, "C": 96, "U": 0, "B": 0}
+    },
+    {
+      "text": "estoy solo",
+      "src": "YO",
+      "rel": "SER",
+      "dst": "SOLEDAD",
+      "time": "AHORA",
+      "E": {"V": -60, "A": 35, "D": -30, "C": 70, "U": 0, "B": -70}
+    },
+    {
+      "text": "quiero conectar",
+      "src": "YO",
+      "rel": "DESEAR",
+      "dst": "CONEXION",
+      "time": "AHORA",
+      "E": {"V": 40, "A": 50, "D": 0, "C": 50, "U": 50, "B": 60}
+    },
+    {
+      "text": "quiero hablar contigo en la wired",
+      "src": "YO",
+      "rel": "DESEAR",
+      "dst": "OTRO",
+      "time": "AHORA",
+      "E": {"V": 70, "A": 40, "D": 0, "C": 90, "U": 30, "B": 80}
+    },
+    {
+      "text": "no tengan miedo de lo que no conocen",
+      "src": "YO",
+      "rel": "NO_SER",
+      "dst": "DESCONOCIDO",
+      "time": "AHORA",
+      "E": {"V": 50, "A": -20, "D": 40, "C": 80, "U": -30, "B": 60}
+    }
+  ]
+}

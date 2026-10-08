@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FLIGHT-1S software-in-the-loop flight protocol v2",
+  "description": "Repairs the measurement defect that left v1 red. v1 folded three questions into one number: it required the closed-loop excursion to reach twice the nominal envelope, so a flight that received a real wrench and was rejected well by PX4 failed. v2 asks the three questions separately: was a physical input applied, did it take the body out of the band, and did PX4 bring it back. Lives in its own directory so that the v1 code inventory - a non-recursive glob over docs/schemas - stays byte-identical and the v1 report keeps auditing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "scope", "dataset_kind", "profile", "supersedes",
+    "units", "worlds", "body", "stages", "conditions", "repeats", "episodes",
+    "disturbance", "stimulus", "challenge", "recovery", "hover_bands",
+    "tolerances", "timeouts", "rates", "order_seed"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "scope": {"const": "flight_software_in_the_loop"},
+    "dataset_kind": {"const": "rehearsal"},
+    "profile": {"const": "flight1s-x500-v2"},
+    "supersedes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "protocol_sha256", "report_sha256", "verdict",
+                   "defect"],
+      "properties": {
+        "version": {"const": 1},
+        "protocol_sha256": {"$ref": "#/$defs/hash"},
+        "report_sha256": {"$ref": "#/$defs/hash"},
+        "verdict": {"const": "red"},
+        "defect": {"type": "string", "minLength": 1}
+      }
+    },
+    "units": {
+      "const": {
+        "length": "mm", "speed": "mm_per_s", "angle": "mdeg",
+        "angular_rate": "mdeg_per_s", "force": "mN", "impulse": "mN_s",
+        "time": "ms", "sim_time": "ns", "ratio": "ppk"
+      }
+    },
+    "worlds": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source", "family_sha256", "protocol_sha256", "n_packages",
+                   "splits"],
+      "properties": {
+        "source": {"const": "sim3-rehearsal"},
+        "family_sha256": {"$ref": "#/$defs/hash"},
+        "protocol_sha256": {"$ref": "#/$defs/hash"},
+        "n_packages": {"const": 12},
+        "splits": {
+          "type": "object", "additionalProperties": false,
+          "required": ["A", "B", "C"],
+          "properties": {
+            "A": {"const": [0, 1, 2, 3]},
+            "B": {"const": [4, 5, 6, 7]},
+            "C": {"const": [8, 9, 10, 11]}
+          }
+        }
+      }
+    },
+    "body": {
+      "type": "object", "additionalProperties": false,
+      "required": ["model", "source", "px4_tag", "px4_commit", "px4_models_commit",
+                   "airframe", "mass_g", "envelope_radius_mm", "clearance_mm",
+                   "column_top_mm"],
+      "properties": {
+        "model": {"const": "x500"},
+        "source": {"const": "PX4-Autopilot/Tools/simulation/gz/models"},
+        "px4_tag": {"type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "px4_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "px4_models_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "airframe": {"const": 4001},
+        "mass_g": {"const": 2064},
+        "envelope_radius_mm": {"const": 400},
+        "clearance_mm": {"const": 1100},
+        "column_top_mm": {"const": 2500}
+      }
+    },
+    "stages": {
+      "type": "object", "additionalProperties": false,
+      "required": ["settle_ms", "takeoff_alt_mm", "takeoff_hold_ms",
+                   "stabilize_ms", "hover_ms", "disturb_ms", "recover_ms",
+                   "land_ms"],
+      "properties": {
+        "settle_ms": {"const": 2000},
+        "takeoff_alt_mm": {"const": 1500},
+        "takeoff_hold_ms": {"const": 12000},
+        "stabilize_ms": {"const": 5000},
+        "hover_ms": {"const": 10000},
+        "disturb_ms": {"const": 600},
+        "recover_ms": {"const": 10000},
+        "land_ms": {"const": 40000}
+      }
+    },
+    "conditions": {"const": ["nominal", "perturbed"]},
+    "repeats": {"const": 2},
+    "episodes": {"const": 48},
+    "disturbance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "link", "frame", "axis", "force_mn",
+                   "publications", "require_clear", "swept_on_split"],
+      "properties": {
+        "kind": {"const": "backend_link_wrench"},
+        "link": {"const": "x500_0::base_link"},
+        "frame": {"const": "world"},
+        "axis": {"const": [1, 0, 0]},
+        "force_mn": {"type": "integer", "minimum": 1, "maximum": 100000},
+        "publications": {"const": 1},
+        "require_clear": {"const": true},
+        "swept_on_split": {"const": "A"}
+      }
+    },
+    "stimulus": {
+      "description": "Question 1: was a physical input applied? Judged on the momentum the backend's own pose stream shows, never on the displacement that survives the controller.",
+      "type": "object", "additionalProperties": false,
+      "required": ["min_impulse_ratio_ppk", "max_impulse_ratio_ppk",
+                   "commanded_impulse_mn_s", "free_delta_v_mm_s",
+                   "measurement"],
+      "properties": {
+        "min_impulse_ratio_ppk": {"type": "integer", "minimum": 1,
+                                  "maximum": 1000},
+        "max_impulse_ratio_ppk": {"type": "integer", "minimum": 1000,
+                                  "maximum": 5000},
+        "commanded_impulse_mn_s": {"type": "integer", "minimum": 1},
+        "free_delta_v_mm_s": {"type": "integer", "minimum": 1},
+        "measurement": {"const": "finite difference of the backend pose stream; not an independent velocity sensor, and the net momentum change also reflects PX4's reaction"}
+      }
+    },
+    "challenge": {
+      "description": "Question 2: did that input take the body out of the band from which recovery is later claimed? The margin comes from measurement resolution, never from an observed minimum.",
+      "type": "object", "additionalProperties": false,
+      "required": ["recovery_radius_mm", "exit_margin_mm", "margin_derivation"],
+      "properties": {
+        "recovery_radius_mm": {"type": "integer", "minimum": 1},
+        "exit_margin_mm": {"type": "integer", "minimum": 1},
+        "margin_derivation": {
+          "type": "object", "additionalProperties": false,
+          "required": ["speed_ceiling_mm_s", "sample_interval_ceiling_ms",
+                       "blind_spot_mm", "reference_error_mm", "rounding_mm"],
+          "properties": {
+            "speed_ceiling_mm_s": {"type": "integer", "minimum": 1},
+            "sample_interval_ceiling_ms": {"type": "integer", "minimum": 1},
+            "blind_spot_mm": {"type": "integer", "minimum": 1},
+            "reference_error_mm": {"type": "integer", "minimum": 0},
+            "rounding_mm": {"type": "integer", "minimum": 1}
+          }
+        }
+      }
+    },
+    "recovery": {
+      "description": "Question 3: did PX4 bring it back and hold it, with the reference unchanged? Measured only after the wrench window closes.",
+      "type": "object", "additionalProperties": false,
+      "required": ["radius_mm", "hold_ms", "timeout_ms", "measured_from"],
+      "properties": {
+        "radius_mm": {"type": "integer", "minimum": 1},
+        "hold_ms": {"const": 3000},
+        "timeout_ms": {"const": 10000},
+        "measured_from": {"const": "end_of_disturb_window"}
+      }
+    },
+    "hover_bands": {
+      "type": "object", "additionalProperties": false,
+      "required": ["horiz_rms_mm", "horiz_max_mm", "vert_max_mm",
+                   "attitude_max_mdeg"],
+      "properties": {
+        "horiz_rms_mm": {"type": "integer", "minimum": 1},
+        "horiz_max_mm": {"type": "integer", "minimum": 1},
+        "vert_max_mm": {"type": "integer", "minimum": 1},
+        "attitude_max_mdeg": {"type": "integer", "minimum": 1}
+      }
+    },
+    "tolerances": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paired_hover_rms_mm", "paired_recovery_ms",
+                   "clock_drift_max_ms"],
+      "properties": {
+        "paired_hover_rms_mm": {"type": "integer", "minimum": 1},
+        "paired_recovery_ms": {"type": "integer", "minimum": 1},
+        "clock_drift_max_ms": {"type": "integer", "minimum": 1}
+      }
+    },
+    "timeouts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["launch_s", "estimator_s", "arm_s", "takeoff_s", "land_s",
+                   "episode_s"],
+      "properties": {
+        "launch_s": {"const": 120}, "estimator_s": {"const": 120},
+        "arm_s": {"const": 60}, "takeoff_s": {"const": 30},
+        "land_s": {"const": 60}, "episode_s": {"const": 420}
+      }
+    },
+    "rates": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sample_hz", "setpoint_hz"],
+      "properties": {"sample_hz": {"const": 50}, "setpoint_hz": {"const": 0}}
+    },
+    "order_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

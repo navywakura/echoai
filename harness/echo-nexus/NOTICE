@@ -1,0 +1,9 @@
+echo-nexus · developer: rxlabs
+Copyright (c) 2026 RxLabs. Harness source: MIT.
+
+RxLabs, echoAI and echo-nexus are brand names of RxLabs. The software license
+does not grant trademark rights or imply endorsement of modified versions.
+The ECHO engine, weights, private adapters, training data, reserved exams and
+research source code are not included and are not licensed by this repository.
+Third-party libraries retain their own licenses. No registration claim is
+made for the new echo-nexus name.

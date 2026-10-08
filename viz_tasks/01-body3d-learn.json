@@ -1,0 +1,23 @@
+{
+  "id": "body3d-learn",
+  "title": "GUI-3.5 · cuerpo 3D aprendiendo",
+  "description": "Agent real en Body3DEnv; aprende CAM, T, Q y PATTERN sin escuela previa.",
+  "ticks_per_second": 18,
+  "sleep_every": 128,
+  "greedy": false,
+  "agent": {
+    "factory": "echoai.nexus0.loop:Agent",
+    "kwargs": {
+      "env": {
+        "factory": "echoai.nexus0.body3d:Body3DEnv",
+        "kwargs": {"layout": "open"}
+      },
+      "ask": false,
+      "remainder": true,
+      "explore_flat": true,
+      "pattern_memory": true,
+      "evidence_budget": 8,
+      "evidence_greedy": false
+    }
+  }
+}

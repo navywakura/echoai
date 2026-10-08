@@ -1,0 +1,12 @@
+{
+  "id": "heat-live",
+  "title": "HEAT-1b · temperatura, vida y muerte",
+  "description": "HEAT-1b real: H y temperatura enteras, muerte terminal, respawn y memoria conservada.",
+  "ticks_per_second": 16,
+  "sleep_every": 128,
+  "greedy": false,
+  "agent": {
+    "factory": "echoai.nexus0.heat1b:new_agent",
+    "kwargs": {"observe_temperature": true}
+  }
+}

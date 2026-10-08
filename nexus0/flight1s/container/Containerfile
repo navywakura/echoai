@@ -1,0 +1,50 @@
+# FLIGHT-1S rehearsal runtime: PX4 SITL v1.15.4 on top of the frozen SIM-3
+# Gazebo Harmonic image.
+#
+# Composition, not modification: the SIM-3 image and therefore its runtime
+# lock are untouched. This image adds PX4 and nothing else. The PX4 checkout
+# is pinned to an exact commit, submodules included; no branch, no `latest`.
+FROM localhost/echoai-sim3-gz:harmonic
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PX4_TAG=v1.15.4 \
+    PX4_COMMIT=99c40407ffd7ac184e2d7b4b293f36f10fe561ef
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      git ca-certificates build-essential cmake ninja-build ccache \
+      python3-pip python3-venv python3-setuptools python3-wheel \
+      libeigen3-dev libopencv-dev protobuf-compiler libprotobuf-dev \
+      libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-bad \
+      gstreamer1.0-libav zip unzip file rsync \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN git clone --recursive --depth 1 --branch ${PX4_TAG} \
+      https://github.com/PX4/PX4-Autopilot.git /opt/PX4-Autopilot \
+ && cd /opt/PX4-Autopilot \
+ && test "$(git rev-parse HEAD)" = "${PX4_COMMIT}" \
+ && git rev-parse HEAD > /opt/px4-commit.txt
+
+RUN pip3 install --break-system-packages --no-cache-dir \
+      "pyros-genmsg==0.5.8" "jinja2==3.1.4" "empy==3.3.4" "packaging==24.1" \
+      "toml==0.10.2" "numpy==1.26.4" "jsonschema==4.23.0" "pyyaml==6.0.2" \
+      "pymavlink==2.4.41" "future==1.0.0" "kconfiglib==14.1.0" \
+      "pyulog==1.2.0" "lxml==5.3.0" "psutil==6.0.0" "symforce==0.9.0" || \
+    pip3 install --break-system-packages --no-cache-dir \
+      "pyros-genmsg" "jinja2" "empy==3.3.4" "packaging" "toml" "numpy" \
+      "jsonschema" "pyyaml" "pymavlink" "future" "kconfiglib" "pyulog" \
+      "lxml" "psutil"
+
+# gz-transport13's CMake config exports a CPPZMQ::CPPZMQ target, so the header
+# package has to be present or every consumer fails at generate time. Added as
+# its own layer, after the submodule clone, to keep that clone cached.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends cppzmq-dev libzmq3-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN cd /opt/PX4-Autopilot \
+ && make px4_sitl_default \
+ && test -x build/px4_sitl_default/bin/px4
+
+ENV PX4_ROOT=/opt/PX4-Autopilot \
+    GZ_FUEL_STATIC_ONLY=1

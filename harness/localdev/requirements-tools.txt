@@ -1,0 +1,6 @@
+# Dedicated optional type checker; runtime and worker use the system stdlib.
+mypy==1.19.1
+librt==0.16.0
+mypy_extensions==1.1.0
+pathspec==1.1.1
+typing_extensions==4.16.0

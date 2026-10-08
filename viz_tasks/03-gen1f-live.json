@@ -1,0 +1,17 @@
+{
+  "id": "gen1f-live",
+  "title": "GEN-1f · muerte y herencia en vivo",
+  "description": "Banco GEN-1f real: cada acción termina una vida; cada 48 muertes nace un hijo con b=8 y memorias nuevas.",
+  "ticks_per_second": 8,
+  "sleep_every": 96,
+  "greedy": false,
+  "agent": {
+    "factory": "echoai.nexus0.gen1f:new_agent",
+    "args": [8, 5, 1301]
+  },
+  "child": {
+    "every_deaths": 48,
+    "factory": "echoai.nexus0.gen1f:spawn_child",
+    "args": ["$agent", 5, 1301]
+  }
+}

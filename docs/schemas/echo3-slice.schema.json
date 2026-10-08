@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECHO-3 slice acceptance manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "slice", "status", "question", "invariants", "agent_input", "manipulated_variable", "controls", "metrics", "seeds", "green", "red", "mutants", "artifacts"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "slice": {"type": "string", "pattern": "^[A-Z]+-[0-9]+[A-Z]?$"},
+    "status": {"enum": ["design", "implemented", "measured"]},
+    "question": {"$ref": "#/$defs/text"},
+    "invariants": {"$ref": "#/$defs/texts"},
+    "agent_input": {"$ref": "#/$defs/texts"},
+    "manipulated_variable": {"$ref": "#/$defs/text"},
+    "controls": {"$ref": "#/$defs/texts"},
+    "metrics": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "definition", "denominator", "interval"], "properties": {"id": {"$ref": "#/$defs/id"}, "definition": {"$ref": "#/$defs/text"}, "denominator": {"$ref": "#/$defs/text"}, "interval": {"$ref": "#/$defs/text"}}}},
+    "seeds": {"type": "object", "additionalProperties": false, "required": ["development", "validation", "confirmation"], "properties": {"development": {"$ref": "#/$defs/text"}, "validation": {"$ref": "#/$defs/text"}, "confirmation": {"$ref": "#/$defs/text"}}},
+    "green": {"$ref": "#/$defs/texts"},
+    "red": {"$ref": "#/$defs/texts"},
+    "mutants": {"$ref": "#/$defs/texts"},
+    "artifacts": {"type": "object", "additionalProperties": false, "required": ["report", "traces", "hashes"], "properties": {"report": {"$ref": "#/$defs/text"}, "traces": {"$ref": "#/$defs/text"}, "hashes": {"$ref": "#/$defs/text"}}},
+    "limitations": {"$ref": "#/$defs/texts"}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "texts": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+    "id": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+  }
+}

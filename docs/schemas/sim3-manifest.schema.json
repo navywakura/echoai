@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SIM-3 private world manifest v1",
+  "description": "Supervisor/evaluator only. Semantic and SDF checks are additionally mandatory; see SIM3-DESIGN.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile",
+    "sdf",
+    "protocol_sha256",
+    "spawn_mm",
+    "roles"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "profile": {
+      "const": "sim3-boxes-v1"
+    },
+    "sdf": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "world.sdf"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "protocol_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "spawn_mm": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": -8000,
+          "maximum": 8000
+        },
+        {
+          "type": "integer",
+          "minimum": -8000,
+          "maximum": 8000
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4000
+        }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "model",
+          "role"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "pattern": "^m[0-9]{1,3}$"
+          },
+          "role": {
+            "enum": [
+              "floor",
+              "barrier",
+              "charging_station"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

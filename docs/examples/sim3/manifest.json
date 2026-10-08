@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "profile": "sim3-boxes-v1",
+  "sdf": {
+    "path": "world.sdf",
+    "sha256": "341c928d85251615b01878a9172d8bd4e7bf971986f7e40b438929471836ddab"
+  },
+  "protocol_sha256": "b3be07e1d4933a716fce9207bfdda33dcc799ec413e5f749c56b859ab86f6c45",
+  "spawn_mm": [-3000, 0, 1000],
+  "roles": [
+    {"model": "m0", "role": "floor"},
+    {"model": "m1", "role": "barrier"},
+    {"model": "m2", "role": "charging_station"}
+  ]
+}

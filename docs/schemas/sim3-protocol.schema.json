@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SIM-3 infrastructure rehearsal protocol v1",
+  "description": "Frozen rehearsal only; not a behavioral acceptance protocol and never agent input.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scope",
+    "dataset_kind",
+    "profile",
+    "step_ns",
+    "steps",
+    "seeds",
+    "repeats",
+    "geometry",
+    "rig",
+    "timeouts",
+    "criteria"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scope": {
+      "const": "simulation_infrastructure"
+    },
+    "dataset_kind": {
+      "const": "rehearsal"
+    },
+    "profile": {
+      "const": "sim3-boxes-v1"
+    },
+    "step_ns": {
+      "const": 1000000
+    },
+    "steps": {
+      "const": 1000
+    },
+    "seeds": {
+      "const": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "repeats": {
+      "const": 2
+    },
+    "geometry": {
+      "const": {
+        "probe_radius_mm": 250,
+        "clearance_mm": 50,
+        "grid_mm": 100,
+        "target_offset_mm": 100,
+        "max_generation_attempts": 100
+      }
+    },
+    "rig": {
+      "const": {
+        "radius_mm": 50,
+        "mass_g": 100,
+        "start_center_above_floor_mm": 1000,
+        "fall_sample_ns": 200000000
+      }
+    },
+    "timeouts": {
+      "const": {
+        "launch_s": 60,
+        "ack_s": 2
+      }
+    },
+    "criteria": {
+      "const": {
+        "fall_min_mm": 150,
+        "fall_max_mm": 250,
+        "rest_error_mm": 10,
+        "pair_pose_error_mm": 2
+      }
+    }
+  }
+}

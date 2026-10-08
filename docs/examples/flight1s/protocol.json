@@ -1,0 +1,107 @@
+{
+  "bands": {
+    "attitude_max_mdeg": 25000,
+    "hover_horiz_max_mm": 200,
+    "hover_horiz_rms_mm": 100,
+    "hover_vert_max_mm": 210,
+    "min_disturb_excursion_mm": 400,
+    "recovery_hold_ms": 3000,
+    "recovery_radius_mm": 200,
+    "recovery_timeout_ms": 10000
+  },
+  "body": {
+    "airframe": 4001,
+    "clearance_mm": 1100,
+    "column_top_mm": 2500,
+    "envelope_radius_mm": 400,
+    "model": "x500",
+    "px4_commit": "99c40407ffd7ac184e2d7b4b293f36f10fe561ef",
+    "px4_tag": "v1.15.4",
+    "source": "PX4-Autopilot/Tools/simulation/gz/models"
+  },
+  "conditions": [
+    "nominal",
+    "perturbed"
+  ],
+  "dataset_kind": "rehearsal",
+  "disturbance": {
+    "axis": [
+      1,
+      0,
+      0
+    ],
+    "force_mn": 5000,
+    "frame": "world",
+    "kind": "backend_link_wrench",
+    "link": "x500_0::base_link",
+    "swept_on_split": "A"
+  },
+  "episodes": 48,
+  "order_seed": 20260910,
+  "profile": "flight1s-x500-v1",
+  "rates": {
+    "sample_hz": 50,
+    "setpoint_hz": 0
+  },
+  "repeats": 2,
+  "schema_version": 1,
+  "scope": "flight_software_in_the_loop",
+  "stages": {
+    "disturb_ms": 600,
+    "hover_ms": 10000,
+    "land_ms": 40000,
+    "recover_ms": 10000,
+    "settle_ms": 2000,
+    "stabilize_ms": 5000,
+    "takeoff_alt_mm": 1500,
+    "takeoff_hold_ms": 12000
+  },
+  "timeouts": {
+    "arm_s": 60,
+    "episode_s": 420,
+    "estimator_s": 120,
+    "land_s": 60,
+    "launch_s": 120,
+    "takeoff_s": 30
+  },
+  "tolerances": {
+    "clock_drift_max_ms": 100,
+    "paired_hover_rms_mm": 200,
+    "paired_recovery_ms": 5000
+  },
+  "units": {
+    "angle": "mdeg",
+    "angular_rate": "mdeg_per_s",
+    "force": "mN",
+    "length": "mm",
+    "sim_time": "ns",
+    "speed": "mm_per_s",
+    "time": "ms"
+  },
+  "worlds": {
+    "family_sha256": "b244b5f5f9121cfe16364ec9bc40d65efee2f41234fa7a586a4ce17af42c5d6c",
+    "n_packages": 12,
+    "protocol_sha256": "b3be07e1d4933a716fce9207bfdda33dcc799ec413e5f749c56b859ab86f6c45",
+    "source": "sim3-rehearsal",
+    "splits": {
+      "A": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "B": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "C": [
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  }
+}

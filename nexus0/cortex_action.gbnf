@@ -1,0 +1,44 @@
+# SIGN-C — the grammar for a turn whose only output is a local decision.
+#
+# `cortex.gbnf` stays the general contract and is not touched: the slow
+# clock's vocabulary is the 42 atoms in all four fields, because a cortex
+# that can only name actions cannot think anything else. This file is not
+# a smaller vocabulary. It is a different question.
+#
+# The first real 4B run failed on exactly that difference. Asked what the
+# hazard sign meant, it answered:
+#
+#     AMOR → CAMBIAR → TEMER @AHORA
+#
+# which is a well-formed WSP and a fair reading of the sentence — the
+# thing that changed is now to be feared. `parse_reply` accepted it, so it
+# was not a reject; but `loop` only turns a **rel** of UNIR / TEMER /
+# OBSERVAR into a proposal, and this line has TEMER in DST. So it produced
+# no action, and the operator gate was red with `qwen_rejected = 0`: the
+# model had read the sign and said so in a shape the body cannot take.
+#
+# The fix is not to teach the parser that sentence, and not to widen what
+# counts as an action. It is to ask the question in the shape the answer
+# has to have. This report scores one local proposal, so SRC, DST and TIME
+# are fixed and the only free field is the relation:
+#
+#     YO → { UNIR | TEMER | OBSERVAR | NONE } → AQUI @AHORA
+#
+# UNIR is approach, TEMER is avoid, OBSERVAR is wait. NONE is the fourth
+# on purpose: it parses as an atom and maps to no action, so abstaining is
+# sayable. A grammar of three would make every turn produce a verb, and a
+# cortex that cannot decline is a cortex that cannot be wrong.
+#
+# The shape is byte-for-byte the shape `cortex.gbnf` produces, so the same
+# `parse_reply` reads both and nothing downstream knows which was used.
+#
+#   llama-cli --grammar-file echoai/nexus0/cortex_action.gbnf ...
+
+root ::= src " " arrow " " rel " " arrow " " dst " @" time "\n"
+
+arrow ::= "→"
+
+src ::= "YO"
+rel ::= "UNIR" | "TEMER" | "OBSERVAR" | "NONE"
+dst ::= "AQUI"
+time ::= "AHORA"

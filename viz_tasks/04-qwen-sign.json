@@ -1,0 +1,25 @@
+{
+  "id": "qwen-sign",
+  "title": "CORTEX-1 · Qwen lee una señal",
+  "description": "SignEnv prize con el córtex lento real. Requiere NAVI_CORTEX_CMD y llama-server; la GUI no se bloquea.",
+  "ticks_per_second": 1,
+  "sleep_every": 0,
+  "greedy": true,
+  "environment": {
+    "NAVI_CORTEX_CMD": "python3 -m echoai.nexus0.tools.qwen_cortex",
+    "NAVI_QWEN_URL": "http://127.0.0.1:8080",
+    "NAVI_CORTEX_TIMEOUT": "120"
+  },
+  "agent": {
+    "factory": "echoai.nexus0.loop:Agent",
+    "kwargs": {
+      "env": {
+        "factory": "echoai.nexus0.sign:SignEnv",
+        "kwargs": {"layout": "prize"}
+      },
+      "ask": false,
+      "cortex": true,
+      "conflict_attend": false
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "body": {
+    "airframe": 4001,
+    "clearance_mm": 1100,
+    "column_top_mm": 2500,
+    "envelope_radius_mm": 400,
+    "mass_g": 2064,
+    "model": "x500",
+    "px4_commit": "99c40407ffd7ac184e2d7b4b293f36f10fe561ef",
+    "px4_models_commit": "d754381a1cecdd7f17050acd72bf5bf1327bced6",
+    "px4_tag": "v1.15.4",
+    "source": "PX4-Autopilot/Tools/simulation/gz/models"
+  },
+  "challenge": {
+    "exit_margin_mm": 50,
+    "margin_derivation": {
+      "blind_spot_mm": 38,
+      "reference_error_mm": 10,
+      "rounding_mm": 10,
+      "sample_interval_ceiling_ms": 25,
+      "speed_ceiling_mm_s": 1500
+    },
+    "recovery_radius_mm": 200
+  },
+  "conditions": [
+    "nominal",
+    "perturbed"
+  ],
+  "dataset_kind": "rehearsal",
+  "disturbance": {
+    "axis": [
+      1,
+      0,
+      0
+    ],
+    "force_mn": 5000,
+    "frame": "world",
+    "kind": "backend_link_wrench",
+    "link": "x500_0::base_link",
+    "publications": 1,
+    "require_clear": true,
+    "swept_on_split": "A"
+  },
+  "episodes": 48,
+  "hover_bands": {
+    "attitude_max_mdeg": 25000,
+    "horiz_max_mm": 200,
+    "horiz_rms_mm": 120,
+    "vert_max_mm": 290
+  },
+  "order_seed": 20260912,
+  "profile": "flight1s-x500-v2",
+  "rates": {
+    "sample_hz": 50,
+    "setpoint_hz": 0
+  },
+  "recovery": {
+    "hold_ms": 3000,
+    "measured_from": "end_of_disturb_window",
+    "radius_mm": 200,
+    "timeout_ms": 10000
+  },
+  "repeats": 2,
+  "schema_version": 2,
+  "scope": "flight_software_in_the_loop",
+  "stages": {
+    "disturb_ms": 600,
+    "hover_ms": 10000,
+    "land_ms": 40000,
+    "recover_ms": 10000,
+    "settle_ms": 2000,
+    "stabilize_ms": 5000,
+    "takeoff_alt_mm": 1500,
+    "takeoff_hold_ms": 12000
+  },
+  "stimulus": {
+    "commanded_impulse_mn_s": 3000,
+    "free_delta_v_mm_s": 1453,
+    "max_impulse_ratio_ppk": 1500,
+    "measurement": "finite difference of the backend pose stream; not an independent velocity sensor, and the net momentum change also reflects PX4's reaction",
+    "min_impulse_ratio_ppk": 500
+  },
+  "supersedes": {
+    "defect": "min_disturb_excursion_mm=400 judged the stimulus by a closed-loop outcome, so two episodes with a real wrench and a measured impulse of 963 and 957 ppk failed for being rejected well by PX4",
+    "protocol_sha256": "ac1db6f9abf849f96ee3671e73ce63c116d62a43dc4d9c5184c4598e65c98229",
+    "report_sha256": "57ccea7f19ebc3b3851abe6faf9c5f1a25365be1f6181291c8e748414944e809",
+    "verdict": "red",
+    "version": 1
+  },
+  "timeouts": {
+    "arm_s": 60,
+    "episode_s": 420,
+    "estimator_s": 120,
+    "land_s": 60,
+    "launch_s": 120,
+    "takeoff_s": 30
+  },
+  "tolerances": {
+    "clock_drift_max_ms": 100,
+    "paired_hover_rms_mm": 230,
+    "paired_recovery_ms": 5000
+  },
+  "units": {
+    "angle": "mdeg",
+    "angular_rate": "mdeg_per_s",
+    "force": "mN",
+    "impulse": "mN_s",
+    "length": "mm",
+    "ratio": "ppk",
+    "sim_time": "ns",
+    "speed": "mm_per_s",
+    "time": "ms"
+  },
+  "worlds": {
+    "family_sha256": "b244b5f5f9121cfe16364ec9bc40d65efee2f41234fa7a586a4ce17af42c5d6c",
+    "n_packages": 12,
+    "protocol_sha256": "b3be07e1d4933a716fce9207bfdda33dcc799ec413e5f749c56b859ab86f6c45",
+    "source": "sim3-rehearsal",
+    "splits": {
+      "A": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "B": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "C": [
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  }
+}

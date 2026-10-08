@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scope": "simulation_infrastructure",
+  "dataset_kind": "rehearsal",
+  "profile": "sim3-boxes-v1",
+  "step_ns": 1000000,
+  "steps": 1000,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "repeats": 2,
+  "geometry": {
+    "probe_radius_mm": 250,
+    "clearance_mm": 50,
+    "grid_mm": 100,
+    "target_offset_mm": 100,
+    "max_generation_attempts": 100
+  },
+  "rig": {
+    "radius_mm": 50,
+    "mass_g": 100,
+    "start_center_above_floor_mm": 1000,
+    "fall_sample_ns": 200000000
+  },
+  "timeouts": {
+    "launch_s": 60,
+    "ack_s": 2
+  },
+  "criteria": {
+    "fall_min_mm": 150,
+    "fall_max_mm": 250,
+    "rest_error_mm": 10,
+    "pair_pose_error_mm": 2
+  }
+}

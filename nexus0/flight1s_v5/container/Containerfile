@@ -1,0 +1,6 @@
+FROM localhost/echoai-flight1s-px4:v1.15.4
+COPY patch_source.py /opt/flight1s-patch-source.py
+RUN python3 /opt/flight1s-patch-source.py
+RUN cd /opt/PX4-Autopilot && make px4_sitl_default \
+ && sha256sum build/px4_sitl_default/bin/px4 > /opt/px4-binary.sha256
+LABEL flight1s.patch="GNSS eph 0.2m, speed accuracy 0.158m/s; injected noise unchanged"

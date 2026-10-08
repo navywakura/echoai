@@ -1,0 +1,26 @@
+# CORTEX-1 — the grammar a local llama.cpp must be constrained to.
+#
+# Nothing in CI runs this file. It is the contract: `cortex.parse_reply`
+# accepts exactly one compact line, `SRC -> REL -> DST @ TIME`, built from
+# the 42 atoms of `encoder.ATOM_ID`, and `@AHORA` (or another TIME atom) is
+# not optional. A model that free-associates is rejected by the parser,
+# which is the firewall working; constraining it here means the reject
+# never has to happen.
+#
+#   llama-cli --grammar-file echoai/nexus0/cortex.gbnf ...
+#
+# The four rel atoms the loop acts on are UNIR (approach), TEMER (avoid),
+# OBSERVAR (wait) and PREGUNTAR (ask the oracle). Every other atom parses
+# and then changes nothing, on purpose: the grammar is the vocabulary, not
+# the policy.
+
+root ::= src " " arrow " " rel " " arrow " " dst " @" time "\n"
+
+arrow ::= "→"
+
+src ::= atom
+rel ::= atom
+dst ::= atom
+time ::= atom
+
+atom ::= "SER" | "NO_SER" | "YO" | "OTRO" | "AQUI" | "ALLI" | "DENTRO" | "FUERA" | "AHORA" | "ANTES" | "DESPUES" | "UNIR" | "SEPARAR" | "CAMBIAR" | "OBSERVAR" | "PREGUNTAR" | "RESPONDER" | "DESEAR" | "TEMER" | "RECORDAR" | "OLVIDAR" | "CREAR" | "DESTRUIR" | "SUBIR" | "BAJAR" | "ABRIR" | "CERRAR" | "CAUSA" | "EFECTO" | "POSIBLE" | "IMPOSIBLE" | "DESCONOCIDO" | "AMOR" | "SOLEDAD" | "COMUNICAR" | "CONEXION" | "PELIGRO" | "BIENVENIDA" | "CONCIENCIA" | "WIRED" | "NONE" | "UNK"

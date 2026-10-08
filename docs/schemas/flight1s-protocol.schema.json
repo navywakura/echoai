@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FLIGHT-1S software-in-the-loop flight protocol v1",
+  "description": "Frozen before B/C. The protocol file's SHA-256 is the freeze: every report records it and the auditor refuses a report whose protocol bytes differ. Calibrated values (disturbance magnitude, bands) are chosen on split A only, published with their sweep, and then frozen here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scope",
+    "dataset_kind",
+    "profile",
+    "worlds",
+    "body",
+    "stages",
+    "conditions",
+    "repeats",
+    "episodes",
+    "disturbance",
+    "bands",
+    "tolerances",
+    "timeouts",
+    "rates",
+    "order_seed",
+    "units"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scope": {
+      "const": "flight_software_in_the_loop"
+    },
+    "dataset_kind": {
+      "const": "rehearsal"
+    },
+    "profile": {
+      "const": "flight1s-x500-v1"
+    },
+    "units": {
+      "const": {
+        "length": "mm",
+        "speed": "mm_per_s",
+        "angle": "mdeg",
+        "angular_rate": "mdeg_per_s",
+        "force": "mN",
+        "time": "ms",
+        "sim_time": "ns"
+      }
+    },
+    "worlds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "family_sha256",
+        "protocol_sha256",
+        "n_packages",
+        "splits"
+      ],
+      "properties": {
+        "source": {
+          "const": "sim3-rehearsal"
+        },
+        "family_sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "protocol_sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "n_packages": {
+          "const": 12
+        },
+        "splits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "A",
+            "B",
+            "C"
+          ],
+          "properties": {
+            "A": {
+              "const": [
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            "B": {
+              "const": [
+                4,
+                5,
+                6,
+                7
+              ]
+            },
+            "C": {
+              "const": [
+                8,
+                9,
+                10,
+                11
+              ]
+            }
+          }
+        }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "source",
+        "px4_tag",
+        "px4_commit",
+        "airframe",
+        "envelope_radius_mm",
+        "clearance_mm",
+        "column_top_mm"
+      ],
+      "properties": {
+        "model": {
+          "const": "x500"
+        },
+        "source": {
+          "const": "PX4-Autopilot/Tools/simulation/gz/models"
+        },
+        "px4_tag": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "px4_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "airframe": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "envelope_radius_mm": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "clearance_mm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4000
+        },
+        "column_top_mm": {
+          "type": "integer",
+          "minimum": 500,
+          "maximum": 4000
+        }
+      }
+    },
+    "stages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "settle_ms",
+        "takeoff_alt_mm",
+        "takeoff_hold_ms",
+        "stabilize_ms",
+        "hover_ms",
+        "disturb_ms",
+        "recover_ms",
+        "land_ms"
+      ],
+      "properties": {
+        "settle_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60000
+        },
+        "takeoff_alt_mm": {
+          "const": 1500
+        },
+        "stabilize_ms": {
+          "const": 5000
+        },
+        "hover_ms": {
+          "const": 10000
+        },
+        "disturb_ms": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 5000
+        },
+        "recover_ms": {
+          "const": 10000
+        },
+        "land_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 120000
+        },
+        "takeoff_hold_ms": {
+          "const": 12000
+        }
+      }
+    },
+    "conditions": {
+      "const": [
+        "nominal",
+        "perturbed"
+      ]
+    },
+    "repeats": {
+      "const": 2
+    },
+    "episodes": {
+      "const": 48
+    },
+    "disturbance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "link",
+        "frame",
+        "axis",
+        "force_mn",
+        "swept_on_split"
+      ],
+      "properties": {
+        "kind": {
+          "const": "backend_link_wrench"
+        },
+        "link": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frame": {
+          "const": "world"
+        },
+        "axis": {
+          "const": [
+            1,
+            0,
+            0
+          ]
+        },
+        "force_mn": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "swept_on_split": {
+          "const": "A"
+        }
+      }
+    },
+    "bands": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hover_horiz_rms_mm",
+        "hover_horiz_max_mm",
+        "hover_vert_max_mm",
+        "attitude_max_mdeg",
+        "recovery_radius_mm",
+        "recovery_hold_ms",
+        "recovery_timeout_ms",
+        "min_disturb_excursion_mm"
+      ],
+      "properties": {
+        "hover_horiz_rms_mm": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "hover_horiz_max_mm": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "hover_vert_max_mm": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "attitude_max_mdeg": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "recovery_radius_mm": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "recovery_hold_ms": {
+          "const": 3000
+        },
+        "recovery_timeout_ms": {
+          "type": "integer",
+          "minimum": 1000
+        },
+        "min_disturb_excursion_mm": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "tolerances": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paired_hover_rms_mm",
+        "paired_recovery_ms",
+        "clock_drift_max_ms"
+      ],
+      "properties": {
+        "paired_hover_rms_mm": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "paired_recovery_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "clock_drift_max_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "timeouts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "launch_s",
+        "estimator_s",
+        "arm_s",
+        "takeoff_s",
+        "land_s",
+        "episode_s"
+      ],
+      "properties": {
+        "launch_s": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "estimator_s": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "arm_s": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "takeoff_s": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "land_s": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "episode_s": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 3600
+        }
+      }
+    },
+    "rates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample_hz",
+        "setpoint_hz"
+      ],
+      "properties": {
+        "sample_hz": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "setpoint_hz": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      }
+    },
+    "order_seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

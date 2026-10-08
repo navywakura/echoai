@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "echo-nexus"
+version = "1.5.2"
+description = "The open terminal harness for ECHO. Developer: RxLabs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "RxLabs"}]
+classifiers = ["Development Status :: 4 - Beta"]
+dependencies = ["textual==6.12.0", "Pillow==12.3.0", "httpx==0.28.1"]
+
+[project.scripts]
+echo-nexus = "echo_nexus.__main__:main"
+
+[project.urls]
+Homepage = "https://www.rxlabs.org/echo-nexus"
+Documentation = "https://www.rxlabs.org/docs/echoai/echo-nexus"
+Source = "https://github.com/navywakura/echo-nexus"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/echo_nexus"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/scripts", "/docs", "/README.md", "/LICENSE", "/NOTICE", "/pyproject.toml"]
