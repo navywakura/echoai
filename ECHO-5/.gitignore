@@ -1,0 +1,12 @@
+/.venv/
+/artifacts/*
+!/artifacts/README.md
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.gguf
+*.safetensors
+node_modules/
+dist/
+build/

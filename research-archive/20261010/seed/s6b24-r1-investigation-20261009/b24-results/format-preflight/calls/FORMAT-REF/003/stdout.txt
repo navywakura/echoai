@@ -1,0 +1,14 @@
+{
+  "patches": [
+   {
+   "set": {
+   "HOLD": 16
+   },
+   "when": {
+   "click_only": ["eq", 0]
+   }
+   }
+  ]
+} [end of text]
+
+

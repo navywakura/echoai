@@ -1,0 +1,12 @@
+{"arm": "FORMAT-REF", "at": "2026-10-08T22:59:50.553527+00:00", "condition": "S6-B24", "games_started": false, "slot": 1, "stage": "FORMAT_PREFLIGHT", "total_slots": 4}
+{"arm": "FORMAT-REF", "at": "2026-10-08T22:59:57.000787+00:00", "condition": "S6-B24", "games_started": false, "slot": 1, "stage": "FORMAT_CASE_PASS"}
+{"arm": "FORMAT-REF", "at": "2026-10-08T22:59:57.007259+00:00", "condition": "S6-B24", "games_started": false, "slot": 2, "stage": "FORMAT_PREFLIGHT", "total_slots": 4}
+{"arm": "FORMAT-REF", "at": "2026-10-08T23:00:03.030217+00:00", "condition": "S6-B24", "games_started": false, "slot": 2, "stage": "FORMAT_CASE_PASS"}
+{"arm": "FORMAT-REF", "at": "2026-10-08T23:00:03.036724+00:00", "condition": "S6-B24", "games_started": false, "slot": 3, "stage": "FORMAT_PREFLIGHT", "total_slots": 4}
+{"arm": "FORMAT-REF", "at": "2026-10-08T23:00:10.158682+00:00", "condition": "S6-B24", "games_started": false, "slot": 3, "stage": "FORMAT_CASE_PASS"}
+{"arm": "FORMAT-REF", "at": "2026-10-08T23:00:10.164508+00:00", "condition": "S6-B24", "games_started": false, "slot": 4, "stage": "FORMAT_PREFLIGHT", "total_slots": 4}
+{"arm": "FORMAT-REF", "at": "2026-10-08T23:00:16.947916+00:00", "condition": "S6-B24", "games_started": false, "slot": 4, "stage": "FORMAT_CASE_PASS"}
+{"arm": "FORMAT-ID", "at": "2026-10-08T23:00:16.954281+00:00", "condition": "S6-B24", "games_started": false, "slot": 1, "stage": "FORMAT_PREFLIGHT", "total_slots": 4}
+{"arm": "FORMAT-ID", "at": "2026-10-08T23:00:22.464670+00:00", "condition": "S6-B24", "games_started": false, "slot": 1, "stage": "FORMAT_CASE_PASS"}
+{"arm": "FORMAT-ID", "at": "2026-10-08T23:00:22.470852+00:00", "condition": "S6-B24", "games_started": false, "slot": 2, "stage": "FORMAT_PREFLIGHT", "total_slots": 4}
+{"at": "2026-10-08T23:00:27.541121+00:00", "condition": "S6-B24", "reason": "RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)", "s6_green": false, "stage": "INSTRUMENT_BLOCKED"}

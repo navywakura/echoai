@@ -1,0 +1,1 @@
+{"at":"2026-10-08T23:00:27.541121+00:00","condition":"S6-B24","reason":"RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)","s6_green":false,"stage":"INSTRUMENT_BLOCKED"}

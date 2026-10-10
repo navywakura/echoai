@@ -1,0 +1,65 @@
+test_abstention_is_not_scored_as_submission_zero_fallback (tests.test_arc_v3_batch.Batch.test_abstention_is_not_scored_as_submission_zero_fallback) ... ok
+test_changed_labels_and_changed_receipts_block_resume (tests.test_arc_v3_batch.Batch.test_changed_labels_and_changed_receipts_block_resume) ... {"stage": "RUNNING", "at": "2026-10-08T23:28:42.864815+00:00", "completed": 0, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:42.983323+00:00", "completed": 1, "total": 1, "exact_tasks": 1, "timeouts": 0, "errors": 0, "model_calls": 0}
+ok
+test_duplicate_json_keys_and_unsafe_ids_are_rejected (tests.test_arc_v3_batch.Batch.test_duplicate_json_keys_and_unsafe_ids_are_rejected) ... ok
+test_external_labels_never_become_embedded_worker_labels (tests.test_arc_v3_batch.Batch.test_external_labels_never_become_embedded_worker_labels) ... {"stage": "RUNNING", "at": "2026-10-08T23:28:43.467012+00:00", "completed": 0, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:43.583641+00:00", "completed": 1, "total": 1, "exact_tasks": 1, "timeouts": 0, "errors": 0, "model_calls": 0}
+ok
+test_external_solution_count_must_match_test_inputs (tests.test_arc_v3_batch.Batch.test_external_solution_count_must_match_test_inputs) ... ok
+test_fresh_process_prediction_and_resume_do_not_replay_completed_work (tests.test_arc_v3_batch.Batch.test_fresh_process_prediction_and_resume_do_not_replay_completed_work) ... {"stage": "RUNNING", "at": "2026-10-08T23:28:44.521857+00:00", "completed": 0, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:44.632600+00:00", "completed": 1, "total": 1, "exact_tasks": 1, "timeouts": 0, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:44.635574+00:00", "completed": 1, "total": 1, "exact_tasks": 1, "timeouts": 0, "errors": 0, "model_calls": 0}
+ok
+test_invalid_grids_are_rejected_before_worker (tests.test_arc_v3_batch.Batch.test_invalid_grids_are_rejected_before_worker) ... ok
+test_known_sealed_paths_are_rejected_as_development_even_via_symlink (tests.test_arc_v3_batch.Batch.test_known_sealed_paths_are_rejected_as_development_even_via_symlink) ... ok
+test_multiple_test_outputs_need_all_exact_for_task_success (tests.test_arc_v3_batch.Batch.test_multiple_test_outputs_need_all_exact_for_task_success) ... ok
+test_orphaned_started_task_is_accounted_without_a_free_retry (tests.test_arc_v3_batch.Batch.test_orphaned_started_task_is_accounted_without_a_free_retry) ... {"stage": "RUNNING", "at": "2026-10-08T23:28:45.108996+00:00", "completed": 0, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:45.110193+00:00", "completed": 1, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
+ok
+test_prepare_removes_test_labels_and_metadata_from_worker_input (tests.test_arc_v3_batch.Batch.test_prepare_removes_test_labels_and_metadata_from_worker_input) ... ok
+test_public_evaluation_waits_for_b24_closure_before_reading_tasks (tests.test_arc_v3_batch.Batch.test_public_evaluation_waits_for_b24_closure_before_reading_tasks) ... ok
+test_timeout_is_recorded_and_kept_in_denominator (tests.test_arc_v3_batch.Batch.test_timeout_is_recorded_and_kept_in_denominator) ... {"stage": "RUNNING", "at": "2026-10-08T23:28:46.060272+00:00", "completed": 0, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:46.064389+00:00", "completed": 1, "total": 1, "exact_tasks": 0, "timeouts": 1, "errors": 0, "model_calls": 0}
+{"stage": "COMPLETE", "at": "2026-10-08T23:28:46.067246+00:00", "completed": 1, "total": 1, "exact_tasks": 0, "timeouts": 1, "errors": 0, "model_calls": 0}
+ok
+test_unlabelled_challenges_are_unscored_not_zero_accuracy (tests.test_arc_v3_batch.Batch.test_unlabelled_challenges_are_unscored_not_zero_accuracy) ... ok
+test_worker_rejects_label_bearing_input (tests.test_arc_v3_batch.Batch.test_worker_rejects_label_bearing_input) ... ok
+test_actor_accounts_real_work_and_has_no_test_reward (tests.test_relational_v3.DelayedPolicy.test_actor_accounts_real_work_and_has_no_test_reward) ... ok
+test_credit_only_matures_at_horizon_and_handles_late_cost (tests.test_relational_v3.DelayedPolicy.test_credit_only_matures_at_horizon_and_handles_late_cost) ... ok
+test_read_only_evaluation_does_not_learn (tests.test_relational_v3.DelayedPolicy.test_read_only_evaluation_does_not_learn) ... ok
+test_resume_including_rng_pending_costs_and_decisions (tests.test_relational_v3.DelayedPolicy.test_resume_including_rng_pending_costs_and_decisions) ... ok
+test_all_32_programs_match_independent_pixel_judge (tests.test_relational_v3.ProgramBank.test_all_32_programs_match_independent_pixel_judge) ... ok
+test_encoder_color_and_position_invariance (tests.test_relational_v3.ProgramBank.test_encoder_color_and_position_invariance) ... ok
+test_guide_verified_learning_roundtrip_and_no_label_access (tests.test_relational_v3.ProgramBank.test_guide_verified_learning_roundtrip_and_no_label_access) ... ok
+test_memory_removal_never_changes_remaining_evidence (tests.test_relational_v3.ProgramBank.test_memory_removal_never_changes_remaining_evidence) ... ok
+test_ambiguous_role_rejected (tests.test_relational_v3.Relational.test_ambiguous_role_rejected) ... ok
+test_budget_never_exceeded_even_on_failed_operation (tests.test_relational_v3.Relational.test_budget_never_exceeded_even_on_failed_operation) ... ok
+test_consistency_exposes_ambiguity (tests.test_relational_v3.Relational.test_consistency_exposes_ambiguity) ... ok
+test_object_order_does_not_change_binding (tests.test_relational_v3.Relational.test_object_order_does_not_change_binding) ... ok
+test_private_output_not_read (tests.test_relational_v3.Relational.test_private_output_not_read) ... ok
+test_receipt_replay_and_tampering (tests.test_relational_v3.Relational.test_receipt_replay_and_tampering) ... ok
+test_roles_rebind_after_color_permutation_and_translation (tests.test_relational_v3.Relational.test_roles_rebind_after_color_permutation_and_translation) ... ok
+test_stamp_matches_independent_judge (tests.test_relational_v3.Relational.test_stamp_matches_independent_judge) ... ok
+test_closed_dsl_rejects_code (tests.test_refinement.RefinementTests.test_closed_dsl_rejects_code) ... ok
+test_eight_distinct_views_and_inverse_rectangles (tests.test_refinement.RefinementTests.test_eight_distinct_views_and_inverse_rectangles) ... ok
+test_fit_verify_no_hidden_answers_or_library_updates (tests.test_refinement.RefinementTests.test_fit_verify_no_hidden_answers_or_library_updates) ... ok
+test_fitting_programs_disagree_on_test (tests.test_refinement.RefinementTests.test_fitting_programs_disagree_on_test) ... ok
+test_observer_does_not_change_result (tests.test_refinement.RefinementTests.test_observer_does_not_change_result) ... ok
+test_refines_failed_model_proposal (tests.test_refinement.RefinementTests.test_refines_failed_model_proposal) ... ok
+test_relational_operator_generalizes_objects (tests.test_refinement.RefinementTests.test_relational_operator_generalizes_objects) ... ok
+test_strict_color_bounds (tests.test_refinement.RefinementTests.test_strict_color_bounds) ... ok
+test_budget_determinism_and_prefix_cache (tests.test_arc_integration.ArcIntegration.test_budget_determinism_and_prefix_cache) ... ok
+test_memory_capacity (tests.test_arc_integration.ArcIntegration.test_memory_capacity) ... ok
+test_memory_has_causal_effect_on_first_solution_cost (tests.test_arc_integration.ArcIntegration.test_memory_has_causal_effect_on_first_solution_cost) ... ok
+test_only_verified_demonstrations_enter_memory (tests.test_arc_integration.ArcIntegration.test_only_verified_demonstrations_enter_memory) ... ok
+test_recalled_program_still_has_to_fit_current_examples (tests.test_arc_integration.ArcIntegration.test_recalled_program_still_has_to_fit_current_examples) ... ok
+test_replay_restore_and_tamper_rejection (tests.test_arc_integration.ArcIntegration.test_replay_restore_and_tamper_rejection) ... ok
+test_solver_does_not_change_guide_or_library (tests.test_arc_integration.ArcIntegration.test_solver_does_not_change_guide_or_library) ... ok
+test_suppression_reuses_3e_evidence_path (tests.test_arc_integration.ArcIntegration.test_suppression_reuses_3e_evidence_path) ... ok
+test_test_output_is_never_read (tests.test_arc_integration.ArcIntegration.test_test_output_is_never_read) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 4.434s
+
+OK

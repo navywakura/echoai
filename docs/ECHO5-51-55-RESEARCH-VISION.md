@@ -1,5 +1,19 @@
 # Visiones de ECHO-5, ECHO-5.1 y ECHO-5.5: programa de investigación
 
+Nota del 10 de octubre de 2026: ECHO-5 está en preparación e inventario;
+su implementación funcional no ha empezado. Se conserva la
+[propuesta de aprendizaje adversarial inspirada en GAN](../ECHO-5/docs/ADVERSARIAL-LEARNING-PROPOSAL.md)
+para un posible experimento futuro de soluciones y contraejemplos con
+verificador independiente. No añade una capacidad validada ni cambia B24/S6.
+
+**Decisión posterior — 9 de octubre de 2026.** El propietario sitúa la nueva
+investigación S6 después de completar ECHO-5.5. B24 continúa; el cierre de 4.5
+conservará su resultado real y los criterios históricos sin aprobar. La
+siguiente etapa consolida la robótica Gazebo/PX4 ya existente, el núcleo
+compartido y una GUI local de decisiones observables. Las propuestas siguientes
+se conservan como antecedentes y quedan sujetas a esta secuencia.
+[Decisión detallada](ECHO45-TO-ECHO5-DECISION-20261009.md).
+
 1 de octubre de 2026. **Estado: propuesta de investigación.** Este documento conserva las ideas de Roger y las convierte en preguntas contrastables. No es un contrato congelado, una acreditación de capacidades ni una autorización de gasto. Los criterios ya registrados de ECHO-4.5, S6 y RSI1 conservan su significado. Los experimentos nuevos necesitarán contratos propios antes de medir.
 
 La visión consiste en desarrollar un agente que mantenga su estado, aprenda de las consecuencias de sus acciones, consulte ayuda cuando la necesite y conserve habilidades útiles después de retirar esa ayuda. La versión 5 investigaría las representaciones y operaciones necesarias; 5.1 estudiaría colaboración y eficiencia; 5.5 intentaría reunirlas en un candidato persistente, instalable y medido. La ambición de obtener capacidades amplias orienta el trabajo. El rendimiento todavía debe establecerse para cada tarea, presupuesto y condición.

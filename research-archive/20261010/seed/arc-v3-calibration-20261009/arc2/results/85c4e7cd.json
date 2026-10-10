@@ -1,0 +1,61 @@
+{
+  "payload": {
+    "cpu_seconds": 0.42615899999999995,
+    "grading": {
+      "abstained_outputs": 1,
+      "exact_outputs": 0,
+      "exact_task": false,
+      "scored": true,
+      "test_outputs": 1
+    },
+    "model_calls": 0,
+    "peak_rss_bytes": 29966336,
+    "predictions": null,
+    "profile_sha256": "13d14deba3fe64149b6e6ae99ba6c54568ba61682fa7101fc876dfccc02dddb6",
+    "result": {
+      "S6_green": false,
+      "alternatives": [],
+      "metrics": {
+        "action": 0,
+        "budget_exhausted": true,
+        "context": "multiple",
+        "counts": {
+          "bind_objects": 3091,
+          "map_cells": 19612,
+          "object_pairs": 10821,
+          "primitive_cells": 182760,
+          "recall_features": 2752,
+          "receipt_lookup": 3,
+          "render_cells": 49876,
+          "segment_cells": 110740,
+          "stamp_cells": 180,
+          "verification_cells": 120056
+        },
+        "first_solution_trial": null,
+        "first_solution_work": null,
+        "invalid": 710,
+        "memory_reads": 3,
+        "memory_verified": 0,
+        "prediction_groups": 0,
+        "trials": 1060,
+        "verified_programs": 0,
+        "view_trials": 329,
+        "work": 499891
+      },
+      "predictions": null,
+      "program": null,
+      "programs": [],
+      "release_ready": false,
+      "status": "NO_PROGRAM",
+      "test_verified": false
+    },
+    "solve_wall_seconds": 0.33381911300239153,
+    "state_unchanged": true,
+    "status": "NO_PROGRAM",
+    "task_id": "85c4e7cd",
+    "test_outputs": 1,
+    "work": 499891,
+    "worker_wall_seconds": 0.45573583799705375
+  },
+  "sha256": "c6b1fd1d483b01b8cd4a11180f2ae1fae71d20e1610e0e62a8f8d2a88406f309"
+}

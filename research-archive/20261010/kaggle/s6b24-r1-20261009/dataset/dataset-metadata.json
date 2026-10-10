@@ -1,0 +1,10 @@
+{
+  "description": "Private declared B24 R1 ZIP profile and exact v1 native binaries; fresh preflight, no evidence checkpoint.",
+  "id": "rogeernavarro/echo45-s6b24-r1-private-20261009",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "title": "echo45-s6b24-r1-private-20261009"
+}

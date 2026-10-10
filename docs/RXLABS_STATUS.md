@@ -1,12 +1,73 @@
 # RXLABS_STATUS
 
-**8 de octubre: B23-R4 en Kaggle; su puerta de formato pasó.**
-N14 lleva tres propuestas ejecutadas sin ganancia ni pérdida en las 14 partidas
-de desarrollo; la cuarta terminó medición y está en replay. N7 está pendiente. R3 había cerrado
-con 2478 partidas y 36 respuestas inválidas. R4 corrige el formato y conserva
-el umbral original; S6 y el cierre de ECHO-4.5 siguen pendientes.
-[Estado](ECHO45-S6-B23-R4-STATUS-20261008.md) ·
-[Contrato](ECHO45-S6-B23-R4-RECOVERY.md).
+**9 de octubre, 14:15 Madrid · dirección acordada para ECHO-5.**
+B24 continúa desde su checkpoint cuando Kaggle renueve cuota. Después se
+cerrará la etapa 4.5 con su evidencia real; S6 permanece sin pase y su nueva
+investigación se traslada a después de 5.5. La robótica previa tiene validación
+Gazebo/PX4, con HIL y jaula pendientes. La prioridad posterior es consolidar
+el código, recuperar esa integración y diseñar una GUI local basada en trazas.
+Hugging Face queda pendiente de decisión; no se ha publicado ni cerrado 4.5.
+[Registro de la decisión](ECHO45-TO-ECHO5-DECISION-20261009.md).
+
+**9 de octubre, 01:54 Madrid · B24-R1 ya mide partidas; evaluador ARC preparado y calibrado.**
+B24 v1 se detuvo en el preflight neutral antes de jugar: seis llamadas de
+formato cobradas, cinco correctas, cero partidas y cero llamadas científicas.
+El CLI nativo interpretaba un token EOG del prompt como fin de generación en
+una frontera de 128 tokens. [Forensia](ECHO45-S6-B24-R1-FORENSICS-20261009.md).
+R1 conserva el fallo y los costes, usa un ZIP separado con lote lógico 8192,
+microlote 64 y exige ocho comprobaciones nuevas. Las 100 fuentes originales
+siguen intactas; 69 pruebas locales pasan y los dos validadores nativos
+quedan para el runtime CUDA. [Recuperación](ECHO45-S6-B24-R1-RECOVERY-20261009.md).
+[Kaggle R1 privado](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-r1-20261009)
+aceptó la versión 1 a las 01:47. A las 01:52:38 pasó las ocho comprobaciones
+de formato; a las 01:53 ya registra partidas de la base R4-REF. El seguimiento
+está en `lab/kaggle/s6b24-r1-20261009/pipeline-status.json` y
+`live-scientific-status.json`. No hay todavía resultado final ni pase S6 de R1.
+
+En paralelo, [el evaluador offline V3](ECHO45-ARC-V3-BATCH-20261009.md)
+prepara ARC-1/2 con cuatro procesos CPU, estado congelado por tarea, sin LLM
+y respuestas de test separadas. La calibración completó 16 tareas conocidas
+por corpus en 4,17 s de ejecución total, sin errores ni timeouts: 0/16 exactas
+en cada corpus y abstención en todas. Pasan 69 pruebas diferentes del
+evaluador, custodia, observador y módulos adyacentes. La proyección para
+400+120 tareas es 63–88 s; reservar 2–5 min con margen operativo, sin garantía.
+El lote público completo no se ha abierto y exige el cierre válido de B24.
+Recibos: `lab/seed/arc-v3-calibration-20261009/calibration-receipt.json`.
+Se mantiene la decisión del propietario: acabar B24, medir ARC y cerrar la
+versión 4.5 con su resultado real, aunque S6 siga pendiente.
+
+**9 de octubre, 00:40 Madrid · B24 enviado a Kaggle; cierre de 4.5 acordado tras medir.**
+El propietario decide terminar B24 y después cerrar ECHO-4.5 aunque S6
+continúe sin superar su criterio. Se preparará una medición ARC con el
+resultado que obtenga; no se rebajan umbrales ni se cambia un rojo histórico.
+B24 ya tiene implementación aislada: cinco brazos, reparación de guardas,
+selección por catálogo, archivos separados/compartidos por ronda y custodia
+completa de partidas. Paquete aislado: 61 pruebas pasan y dos validadores
+nativos quedan para CUDA. La versión 1 se envió en privado a las 00:40;
+Kaggle la aceptó y comenzó a compilar CUDA. El preflight hará ocho
+inferencias reales. [Registro de ejecución](ECHO45-S6-B24-RUN-20261009.md).
+Todavía no hay resultado científico B24.
+[Contrato ejecutable](ECHO45-S6-B24-DESIGN.md) ·
+[Capacidades confirmadas y opciones ARC](ECHO45-CLOSURE-EVIDENCE-20261009.md).
+[Ejecución privada](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-20261009).
+El estado operativo está en `lab/kaggle/s6b24-20261009/pipeline-status.json`;
+la cuota puede exigir continuaciones con el mismo perfil. Los bloques
+anteriores conservan sus resultados y decisiones históricas.
+
+
+**8 de octubre: B23-R4 cerrado; B24 incorpora su diagnóstico.**
+La ejecución completó 924 partidas y 36 propuestas legales, sin promociones.
+La autopsia verifica los prompts y replays: 16 intentos repitieron propuestas,
+12 propuestas medidas eran inactivas y las ocho activas tuvieron pérdidas.
+Ambos modelos ganaron cuatro niveles, conservando niveles por partida pero
+perdiendo eficiencia en cinco. Una proyección del control humano antiguo
+reproduce +6 sin pérdidas en el mismo desarrollo; todavía falta descubrir
+autónomamente una regla conservadora. Se ha documentado un B24 conjunto de
+búsqueda corregida y cooperación, con controles para atribuir sus efectos.
+B24 está planificado, sin implementación ni partidas. S6 y cierre final siguen
+pendientes; aumentar parámetros no ha demostrado resolver este bloqueo.
+[Autopsia](ECHO45-S6-B23-R4-FORENSICS-20261008.md) ·
+[Plan B24](ECHO45-S6-B24-CONDITIONAL-PLAN.md).
 Los bloques siguientes conservan estados históricos fechados.
 
 <!-- S6B23-BEGIN -->

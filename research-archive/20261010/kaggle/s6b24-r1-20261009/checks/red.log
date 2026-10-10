@@ -1,0 +1,112 @@
+test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) ... 
+  test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/000/command.json') ... FAIL
+  test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/001/command.json') ... FAIL
+  test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/002/command.json') ... FAIL
+  test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/003/command.json') ... FAIL
+  test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-ID/000/command.json') ... FAIL
+  test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-ID/001/command.json') ... FAIL
+test_configuration_declares_only_the_transport_delta (r1_checks.R1Package.test_configuration_declares_only_the_transport_delta) ... FAIL
+
+======================================================================
+FAIL: test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/000/command.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 59, in test_only_logical_batch_changes_in_the_six_recorded_commands
+    self.assertEqual(after, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['/tm[216 chars]b', '128', '-ub', '64', '-n', '768', '--seed',[9948 chars]txt'] != ['/tm[216 chars]b', '8192', '-ub', '64', '-n', '768', '--seed'[9949 chars]txt']
+
+First differing element 16:
+'128'
+'8192'
+
+Diff is 11377 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/001/command.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 59, in test_only_logical_batch_changes_in_the_six_recorded_commands
+    self.assertEqual(after, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['/tm[216 chars]b', '128', '-ub', '64', '-n', '768', '--seed',[9948 chars]txt'] != ['/tm[216 chars]b', '8192', '-ub', '64', '-n', '768', '--seed'[9949 chars]txt']
+
+First differing element 16:
+'128'
+'8192'
+
+Diff is 11377 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/002/command.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 59, in test_only_logical_batch_changes_in_the_six_recorded_commands
+    self.assertEqual(after, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['/tm[216 chars]b', '128', '-ub', '64', '-n', '768', '--seed',[9948 chars]txt'] != ['/tm[216 chars]b', '8192', '-ub', '64', '-n', '768', '--seed'[9949 chars]txt']
+
+First differing element 16:
+'128'
+'8192'
+
+Diff is 11377 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-REF/003/command.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 59, in test_only_logical_batch_changes_in_the_six_recorded_commands
+    self.assertEqual(after, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['/tm[216 chars]b', '128', '-ub', '64', '-n', '768', '--seed',[9948 chars]txt'] != ['/tm[216 chars]b', '8192', '-ub', '64', '-n', '768', '--seed'[9949 chars]txt']
+
+First differing element 16:
+'128'
+'8192'
+
+Diff is 11377 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-ID/000/command.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 59, in test_only_logical_batch_changes_in_the_six_recorded_commands
+    self.assertEqual(after, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['/tm[216 chars]b', '128', '-ub', '64', '-n', '768', '--seed',[390 chars]txt'] != ['/tm[216 chars]b', '8192', '-ub', '64', '-n', '768', '--seed'[391 chars]txt']
+
+First differing element 16:
+'128'
+'8192'
+
+Diff is 817 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_only_logical_batch_changes_in_the_six_recorded_commands (r1_checks.R1Package.test_only_logical_batch_changes_in_the_six_recorded_commands) (case='b24-results/format-preflight/calls/FORMAT-ID/001/command.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 59, in test_only_logical_batch_changes_in_the_six_recorded_commands
+    self.assertEqual(after, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['/tm[216 chars]b', '128', '-ub', '64', '-n', '768', '--seed',[390 chars]txt'] != ['/tm[216 chars]b', '8192', '-ub', '64', '-n', '768', '--seed'[391 chars]txt']
+
+First differing element 16:
+'128'
+'8192'
+
+Diff is 817 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_configuration_declares_only_the_transport_delta (r1_checks.R1Package.test_configuration_declares_only_the_transport_delta)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_r1_package.py", line 64, in test_configuration_declares_only_the_transport_delta
+    self.assertEqual(config["model"].pop("logical_batch_size", None), 8192)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 8192
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.193s
+
+FAILED (failures=7)

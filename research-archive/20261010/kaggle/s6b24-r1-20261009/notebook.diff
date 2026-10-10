@@ -1,0 +1,78 @@
+--- v1/notebook/run.py
++++ r1/notebook/run.py
+@@ -11,15 +11,16 @@
+ import zipfile
+ 
+ WORK = Path('/kaggle/working')
+-PROJECT = WORK / 'b24-project'
+-RESULTS = WORK / 'b24-results'
++PROJECT = WORK / 'b24-r1-project'
++RESULTS = WORK / 'b24-r1-results'
+ ASSETS = Path('/tmp/b24-assets')
+ MODEL_COMMITS = {
+     'N7': ('Qwen/Qwen2.5-Coder-7B-Instruct-GGUF', '13fb94bfda8c8cf22497dc57b78f391a9acb426a',
+            'qwen2.5-coder-7b-instruct-q4_k_m.gguf'),
+ }
+ LLAMA_COMMIT = '79e0b68c178656bb0632cb8602d2940b755077f8'
+-BUNDLE_SHA = 'a2cab9b6a6d5d1dd3fd9b0bcdf294c190f051ef733e695c2af77f4be91a74b2b'
++BUNDLE_SHA = 'd68e890ce70b4400a6a8e046ef48f536a5fdeac9b5e8674625f8d6bfb1fb611d'
++NATIVE_SHA = 'a0dac5390422129b6cf4eacda0746d4e1f7b1ee81edea6c96d9aa5f90128b2f8'
+ SLICE_SECONDS = 7200
+ STARTED = __import__('time').time()
+ 
+@@ -42,7 +43,7 @@
+ 
+ 
+ def setup_project():
+-    bundles = list(Path('/kaggle/input').rglob('echo-b24-private.zip'))
++    bundles = list(Path('/kaggle/input').rglob('echo-b24-r1-private.zip'))
+     if len(bundles) == 1:
+         if digest(bundles[0]) != BUNDLE_SHA: raise RuntimeError('changed private B24 bundle')
+         PROJECT.mkdir()
+@@ -88,31 +89,12 @@
+ 
+ def setup_llama():
+     bundles=list(Path('/kaggle/input').rglob('b24-native.bin'))
+-    if bundles:
+-        if len(bundles)!=1:raise RuntimeError('ambiguous native checkpoint')
+-        with tarfile.open(bundles[0]) as tar:tar.extractall(ASSETS,filter='data')
+-        return ASSETS/'cuda-build/bin/llama-cli',ASSETS/'cuda-build/bin/llama-tokenize'
+-    archive = ASSETS / 'llama-source.tar.gz'
+-    urllib.request.urlretrieve('https://github.com/ggml-org/llama.cpp/archive/' + LLAMA_COMMIT + '.tar.gz', archive)
+-    with tarfile.open(archive) as tar:
+-        tar.extractall(ASSETS, filter='data')
+-    source = ASSETS / ('llama.cpp-' + LLAMA_COMMIT)
+-    build = ASSETS / 'cuda-build'
+-    import re
+-    listing = subprocess.run(['ldconfig', '-p'], capture_output=True, text=True, check=True).stdout
+-    paths = re.findall(r'libcuda\.so(?:\.1)? .*?=> (\S+)', listing)
+-    if not paths:
+-        import ctypes
+-        ctypes.CDLL('libcuda.so.1')
+-        paths = [line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()
+-                 if '/libcuda.so' in line]
+-    if not paths: raise RuntimeError('CUDA driver not mounted')
+-    run(['cmake', '-S', source, '-B', build, '-DGGML_CUDA=ON',
+-         '-DCUDA_cuda_driver_LIBRARY=' + str(Path(paths[0]).resolve()),
+-         '-DCMAKE_CUDA_ARCHITECTURES=75', '-DGGML_NATIVE=OFF', '-DLLAMA_CURL=OFF',
+-         '-DBUILD_SHARED_LIBS=OFF', '-DLLAMA_BUILD_TESTS=ON', '-DLLAMA_BUILD_SERVER=OFF'], timeout=600)
+-    run(['cmake', '--build', build, '--target', 'llama-cli', 'llama-tokenize', 'test-gbnf-validator', '-j', '4'], timeout=3600)
+-    return build / 'bin/llama-cli', build / 'bin/llama-tokenize'
++    if len(bundles)!=1:
++        raise RuntimeError('R1 requires exactly one pinned native archive')
++    if digest(bundles[0])!=NATIVE_SHA:
++        raise RuntimeError('R1 native archive differs from v1')
++    with tarfile.open(bundles[0]) as tar:tar.extractall(ASSETS,filter='data')
++    return ASSETS/'cuda-build/bin/llama-cli',ASSETS/'cuda-build/bin/llama-tokenize'
+ 
+ 
+ def setup_models(hf):
+@@ -149,7 +131,7 @@
+     if (RESULTS / 'format-preflight/receipt.json').is_file():
+         shutil.copy2(RESULTS / 'format-preflight/receipt.json', WORK / 'b24-format-receipt.json')
+     with tarfile.open(WORK / 'b24-evidence.tar.gz', 'w:gz') as archive:
+-        archive.add(RESULTS, arcname='b24-results')
++        archive.add(RESULTS, arcname='b24-r1-results')
+ 
+ 
+ def main():

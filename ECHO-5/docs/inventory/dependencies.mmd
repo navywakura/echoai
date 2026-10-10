@@ -1,0 +1,44 @@
+flowchart LR
+  g0["..: 6 Python"]
+  g1["__init__.py: 1 Python"]
+  g2["echo4: 109 Python"]
+  g3["echo_arc: 51 Python"]
+  g4["gui4: 8 Python"]
+  g5["harness: 28 Python"]
+  g6["metaverse1: 9 Python"]
+  g7["nexus0: 385 Python"]
+  g8["observe.py: 1 Python"]
+  g9["observe_b5.py: 1 Python"]
+  g10["release1: 11 Python"]
+  g11["seed: 167 Python"]
+  g12["tests: 204 Python"]
+  g2 -->|"74 imports locales"| g0
+  g2 -->|"59 imports locales"| g7
+  g3 -->|"22 imports locales"| g11
+  g4 -->|"13 imports locales"| g7
+  g5 -->|"6 imports locales"| g3
+  g5 -->|"3 imports locales"| g4
+  g5 -->|"2 imports locales"| g7
+  g5 -->|"12 imports locales"| g11
+  g6 -->|"3 imports locales"| g7
+  g7 -->|"43 imports locales"| g0
+  g7 -->|"9 imports locales"| g12
+  g8 -->|"2 imports locales"| g7
+  g9 -->|"1 imports locales"| g8
+  g10 -->|"2 imports locales"| g1
+  g10 -->|"22 imports locales"| g2
+  g11 -->|"214 imports locales"| g3
+  g11 -->|"1 imports locales"| g5
+  g11 -->|"1 imports locales"| g12
+  g12 -->|"31 imports locales"| g0
+  g12 -->|"2 imports locales"| g1
+  g12 -->|"219 imports locales"| g2
+  g12 -->|"154 imports locales"| g3
+  g12 -->|"7 imports locales"| g4
+  g12 -->|"5 imports locales"| g5
+  g12 -->|"6 imports locales"| g6
+  g12 -->|"562 imports locales"| g7
+  g12 -->|"7 imports locales"| g8
+  g12 -->|"1 imports locales"| g9
+  g12 -->|"2 imports locales"| g10
+  g12 -->|"225 imports locales"| g11

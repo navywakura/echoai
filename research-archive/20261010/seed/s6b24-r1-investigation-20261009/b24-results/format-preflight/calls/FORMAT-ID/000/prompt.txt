@@ -1,0 +1,5 @@
+<|im_start|>system
+Return one executable JSON proposal, no prose.<|im_end|>
+<|im_start|>user
+{"menu":[{"id":"C000","proposal":{"patches":[{"set":{"HOLD":4},"when":{"body_known":["eq",0]}}]}},{"id":"C001","proposal":{"patches":[{"set":{"HOLD":8},"when":{"body_known":["eq",1],"click_only":["eq",0]}}]}}],"task":"Return exactly {\"candidate_id\":\"C000\"}. Neutral protocol test; no game evidence."}<|im_end|>
+<|im_start|>assistant

@@ -1,0 +1,188 @@
+• Sí: trabajaría con una cadena estable en la que Codex diseña y audita, mientras Claude Code implementa el núcleo. Terra también puede implementar infraestructura separada para aprovechar ambos entornos sin
+  perder independencia.
+
+  La documentación oficial presenta Astra como el modelo para los trabajos completos más difíciles y con mejor coherencia en tareas largas. Por eso conviene reservarlo para decisiones metodológicas, seguridad,
+  composición y cierre final, no para ejecutar cientos de tests. OpenAI Docs sobre GPT-6 Astra.
+
+  ### Papel de cada modelo
+
+   Modelo           Papel principal
+  ━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Luna             Repeticiones, matrices de seeds, tablas, extracción de métricas, comprobaciones mecánicas y documentación generada
+  ───────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   Terra            Infraestructura, loaders, adaptadores, runners, telemetría, herramientas de auditoría y correcciones medianas
+  ───────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   Sol              Revisión diaria, tests adversariales, lectura de diffs, auditoría de informes y preparación de prompts bien acotados
+  ───────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   Astra            Arquitectura, hipótesis, criterios causales, amenazas de validez, seguridad, interfaces entre fases y cierre integral
+  ───────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   Claude Opus 5    Implementación principal de algoritmos, integración compleja, tests focales y reparación tras revisiones
+
+  Astra admite varios niveles de razonamiento; usaría high normalmente, xhigh en las fases críticas y max sólo en una revisión final o cuando dos diseños plausibles conduzcan a arquitecturas distintas. Ficha
+  oficial de GPT-6 Astra.
+
+  ## Asignación por fase
+
+   Fase          Diseño y prompt                                      Implementación                                                  Revisión y cierre                                         Automatización
+  ━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━
+   SIM-3         Astra high                                           Terra para manifiestos/runners; Claude Opus para integración    Sol high; Claude revisa la parte de Terra                 Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   FLIGHT-1S     Sol high                                             Claude Opus 5                                                   Terra prueba interfaces; Sol cierra                       Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   SENSOR-1S     Sol high                                             Terra para streams/timestamps; Claude para integración          Sol high                                                  Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   GROUND-1      Astra high                                           Claude Opus 5                                                   Sol xhigh, especialmente fugas oracle/WSP                 Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   PATTERN-1R    Sol high; Astra revisa el protocolo reservado        Claude Opus 5                                                   Sol xhigh; Astra sólo si hay posible fuga de identidad    Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   FUSION-1      Astra high                                           Claude Opus 5                                                   Sol xhigh                                                 Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   DYNAMIC-1     Sol high                                             Terra o Claude, según alcance                                   El que no implementó revisa; Sol cierra                   Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   COMPOSE-1     Astra xhigh                                          Claude Opus 5 con razonamiento alto                             Sol xhigh y auditoría final Astra                         Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   CAUSE-1       Astra xhigh                                          Claude Opus 5                                                   Sol xhigh y revisión Astra                                Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   PX4-1S        Sol high, apoyado en documentación oficial de PX4    Claude Opus 5                                                   Astra revisa autoridad/gate; Terra depura transporte      Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   POWER-1S      Sol high                                             Terra implementa medición; Claude revisa integración            Astra high para causalidad energética                     Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   SAFE-1S       Astra xhigh                                          Claude Opus 5                                                   Sol xhigh; Astra valida el cierre                         Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   HOST-1        Astra high                                           Terra para tablas/protocolo; Claude para integración            Sol high y mutantes Anti-Clever-Hans                      Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   TRANSFER-3    Astra xhigh                                          Claude Opus 5                                                   Sol xhigh; Astra firma el protocolo final                 Luna
+  ────────────  ───────────────────────────────────────────────────  ──────────────────────────────────────────────────────────────  ────────────────────────────────────────────────────────  ────────────────
+   DRONE-3S      Astra xhigh                                          Claude Opus 5; Terra ayuda con herramientas                     Sol xhigh y cierre integral Astra max                     Luna
+
+  La S significa software/SITL. Las puertas físicas se separan:
+
+   Puerta futura            Modelo recomendado
+  ━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FLIGHT-1H / SENSOR-1H    Claude implementa; Sol audita; Astra revisa discrepancias sim-real
+  ───────────────────────  ────────────────────────────────────────────────────────────────────────────────
+   PX4-1H                   Claude implementa; Astra diseña seguridad; Sol reproduce
+  ───────────────────────  ────────────────────────────────────────────────────────────────────────────────
+   POWER-1H                 Terra prepara adquisición; Sol analiza; Astra valida inferencias
+  ───────────────────────  ────────────────────────────────────────────────────────────────────────────────
+   DRONE-3H                 Claude integra; Sol ejecuta certificado; Astra hace revisión final
+  ───────────────────────  ────────────────────────────────────────────────────────────────────────────────
+   AKD1500-1                Astra diseña comparación; Claude integra runtime; Terra automatiza; Sol audita
+
+  ## Flujo de trabajo por fase
+
+  Usaría siempre este ciclo:
+
+  1. Astra o Sol escribe el contrato, según la tabla:
+
+     pregunta única
+     invariantes
+     entradas disponibles
+     métricas y denominadores
+     controles
+     seeds
+     mutantes
+     verde y rojo
+     archivos permitidos
+
+  2. El mismo Codex prepara un prompt CLAUDE_<FASE>.md cerrado. El prompt debe ordenar a Claude implementar sólo esa fase, conservar informes anteriores y no cambiar umbrales después de observar resultados.
+  3. Claude Opus 5 implementa producción, tests focales, runner e informe. No declara por sí solo el cierre definitivo.
+  4. Sol revisa sin arreglar inicialmente:
+      - código;
+      - tests;
+      - denominadores;
+      - aislamiento de controles;
+      - escrituras causales;
+      - fugas del oracle;
+      - mutantes capaces de producir falsos verdes.
+
+  5. Claude recibe un prompt corto de reparación con defectos reproducidos. Sólo entonces corrige.
+  6. Sol ejecuta tests focales, regresión completa y reconstruye el informe desde filas crudas.
+  7. Luna ejecuta las repeticiones después de congelar el protocolo. Genera tablas y comparaciones, pero no interpreta el resultado ni cambia criterios.
+  8. Astra interviene al final de GROUND, FUSION, COMPOSE, CAUSE, SAFE, TRANSFER y DRONE. En las demás fases basta Sol salvo que aparezca un conflicto arquitectónico.
+
+  ## Cómo dividir trabajo sin estorbarse
+
+  Cuando trabajen Codex y Claude sobre la misma fase, no deberían editar simultáneamente los mismos archivos.
+
+  La división segura sería:
+
+  Claude:
+    algoritmo y archivos productivos
+    tests focales
+    runner inicial
+
+  Terra:
+    loaders SDF
+    herramientas de telemetría
+    comparadores de logs
+    automatización externa
+    validadores de esquema
+
+  Sol:
+    lectura y ejecución
+    tests adversariales separados
+    auditor del certificado
+
+  Luna:
+    barridos y tablas después del freeze
+
+  Si Terra implementa una pieza, Claude debe revisarla antes de integrarla. Si Claude implementa el núcleo, Sol conserva la independencia de revisión.
+
+  ## Protección de B y C
+
+  No dejaría los escenarios confirmatorios completamente legibles en el repositorio durante el desarrollo.
+
+  - A puede estar visible.
+  - B sirve para validación.
+  - La seed o configuración final de C debe conservarla Roger fuera del contexto de los agentes.
+  - C se genera después de congelar código y hashes.
+  - Si un agente ve C y luego modifica el sistema, ese examen queda consumido.
+  - Luna puede ejecutar C, pero no ajustar nada después.
+
+  Esto es especialmente importante en PATTERN-1R, COMPOSE-1 y TRANSFER-3.
+
+  ## Qué podemos cerrar sin hardware
+
+  Ahora mismo podemos llevar a verde:
+
+  - SIM-3.
+  - FLIGHT-1S en Gazebo.
+  - SENSOR-1S con sensores simulados.
+  - GROUND-1.
+  - PATTERN-1R.
+  - FUSION-1.
+  - DYNAMIC-1.
+  - COMPOSE-1.
+  - CAUSE-1.
+  - PX4-1S.
+  - POWER-1S con energía simulada.
+  - SAFE-1S.
+  - HOST-1.
+  - TRANSFER-3.
+  - DRONE-3S.
+
+  No podemos declarar verdes todavía:
+
+  - HIL real.
+  - Cámara, LiDAR o IMU físicos.
+  - Vatios medidos del vehículo.
+  - Jaula de vuelo real.
+  - DRONE-3 físico completo.
+  - AKD1500.
+
+  Los resultados de software deben decir simulated_energy, nunca vatios reales. Cuando llegue el hardware, abriremos las puertas H sin reetiquetar los resultados SITL.
+
+  ## Recomendación inmediata
+
+  Para empezar SIM-3:
+
+  1. Astra high: diseña SIM3-DESIGN.md, el esquema SDF/manifiesto, aislamiento A/B/C y el prompt para Claude.
+  2. Terra high: implementa loaders, validación declarativa y runner determinista.
+  3. Claude Opus 5: integra el mundo con el agente y corrige los límites arquitectónicos.
+  4. Sol high: intenta romper el certificado y ejecuta la regresión.
+  5. Luna: resume las repeticiones y produce la tabla final.
+
+  Este reparto usa Astra donde una equivocación contaminaría todo ECHO-3, Claude donde hay que construir profundamente, Sol como auditor constante, Terra para avanzar infraestructura y Luna para convertir muchas
+  ejecuciones en evidencia reproducible.
+

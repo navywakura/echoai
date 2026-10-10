@@ -49,6 +49,15 @@ def render(row, technical=False):
         if hashlib.sha256(raw.encode()).hexdigest() != row.get("hash"):
             raise ValueError("hash del registro ARC incorrecto")
         kind = row["kind"]
+        if row.get("agent") == "echo45-relational-v3":
+            if kind == "observation":
+                return [f"REJILLA V3 · contexto {clean(row['context'])} · acción {clean(row['action'])}",
+                        f"  Valores de política {clean(row['policy_scores'])} · presupuesto {row['budget']}"]
+            if kind == "result":
+                metrics = row["metrics"]
+                return [f"REJILLA V3 · resultado {clean(row['status'])}",
+                        f"  Trabajo {metrics['work']} · programas probados {metrics['trials']} · "
+                        f"programas verificados {metrics['verified_programs']}"]
         if kind == "observation":
             return []  # Raw observation stays in the diary, alongside the decision/result.
         if kind == "decision":

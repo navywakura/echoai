@@ -1,0 +1,13 @@
+test_allocation_scopes (tests.test_s6b24_runner.RunnerTests.test_allocation_scopes) ... ok
+test_checkpoint_is_transport_boundary (tests.test_s6b24_runner.RunnerTests.test_checkpoint_is_transport_boundary) ... ok
+test_cross_attempts_pay_their_own_games (tests.test_s6b24_runner.RunnerTests.test_cross_attempts_pay_their_own_games) ... ok
+test_equal_per_arm_caps (tests.test_s6b24_runner.RunnerTests.test_equal_per_arm_caps) ... ok
+test_regression_not_hidden_by_aggregate_gain (tests.test_s6b24_runner.RunnerTests.test_regression_not_hidden_by_aggregate_gain) ... ok
+test_reserved_partition_requires_permit (tests.test_s6b24_runner.RunnerTests.test_reserved_partition_requires_permit) ... ok
+test_time_is_accumulated_when_a_slot_checkpoints (tests.test_s6b24_runner.RunnerTests.test_time_is_accumulated_when_a_slot_checkpoints) ... ok
+test_unknown_game_not_played (tests.test_s6b24_runner.RunnerTests.test_unknown_game_not_played) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.011s
+
+OK

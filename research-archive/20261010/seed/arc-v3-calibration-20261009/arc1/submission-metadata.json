@@ -1,0 +1,12 @@
+{
+  "attempt_2": "duplicate of attempt_1",
+  "distinct_attempts_per_output": 1,
+  "fallback_grid": [
+    [
+      0
+    ]
+  ],
+  "fallback_outputs": 18,
+  "placeholders_scored_in_strict_report": false,
+  "submitted": false
+}

@@ -1,0 +1,48 @@
+{
+  "abstention_outputs": 35,
+  "all_tasks_complete": true,
+  "at": "2026-10-08T23:53:21.419281+00:00",
+  "corpora": [
+    "ARC-1",
+    "ARC-2"
+  ],
+  "errors": 0,
+  "exact_tasks": 0,
+  "files": {
+    "arc1/estimate-400.json": "1324e49c96f313e3e4e4d8f1bc11e2b970e71e0a1bb2a2f20b2f5687aa08dc07",
+    "arc1/manifest.json": "4f73ce9d42bc432736b94829d9fcf6718ed15b5e6825538a57b7bb6858f44fb8",
+    "arc1/report.json": "c920185bbe76a3fab8b4aac48f7eb2b49ef869320f60973139a6dae743f5b787",
+    "arc1/results.csv": "1584640b5063436cc23d4f1700850f47b046b37b65098d24bc0891c87973d9b1",
+    "arc2/estimate-120.json": "d99d1561ed6e1f302bd06b318e9317eed3ed733639abbdab8f910006f3954ca0",
+    "arc2/manifest.json": "fddd75d8442fd8c7df4edc6cc97fca78fd08b29bbae043ff79a5302d09796985",
+    "arc2/report.json": "11b0cc4af2964cb60b47310910f3715819169980eb6efb160ffed3ebd92c6f98",
+    "arc2/results.csv": "6b4b6d8e1db7fed336d167fac0168ce76cff38611a3d0ab901e7fd6053ae0454",
+    "selection.json": "e92375438d5fade57fce51df0a1bee53499a6c32949878d62c1f91299141ccf7",
+    "tests-batch-and-closure.log": "571a785232fb2040f73e59047fa43b228c25282ee11a14b65c5cb54ce95a36ae",
+    "tests-observer.log": "09cc88dd39fcd8e7f7c4b03a84a71a2d54b1968184071b9c06f1ea29d206049c",
+    "tests-regression.log": "856c08cb20ef4dbfd143bebd7da7c55ba6d467458ae649212f229a0606fbc851",
+    "timing.json": "2d96ceadb7b2d4f3f9a1fd3c278b2c692c565e9b645584a7aaa4f8c124d6f1c6"
+  },
+  "llm_calls": 0,
+  "logical_work_limit_per_task": 500000,
+  "mean_full_projection_seconds": 63.03156350561949,
+  "p90_full_scenario_seconds": 87.82764103038062,
+  "planning_window_seconds": [
+    120,
+    300
+  ],
+  "public_evaluation_started": false,
+  "purpose": "known-development timing; no official score or new transfer claim",
+  "statistical_confidence_interval": false,
+  "tasks": 32,
+  "tests": {
+    "additional_observer": 1,
+    "adjacent_regression": 33,
+    "batch_and_closure": 35,
+    "unique_passed": 69
+  },
+  "timeout_seconds": 120,
+  "timeouts": 0,
+  "total_execution_wall_seconds": 4.17301587700058,
+  "workers": 4
+}

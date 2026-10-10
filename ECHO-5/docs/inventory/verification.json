@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-10T14:05:01.547189+00:00",
+  "method": "independent rg enumeration, source hashes and document link checks; no agent execution",
+  "valid": true,
+  "python_files": 981,
+  "python_inside_echoai": 975,
+  "parent_dependencies": 6,
+  "test_source_files": 208,
+  "non_python_hashed": 5,
+  "source_set_sha256": "fe7f7f90e9a8dc7b1275e0f9f336e3bbf52c4d832c8e37dba4e9a22fce9fb6a0",
+  "changed_sources": [],
+  "missing_links": [],
+  "scientific_tests_run": 0,
+  "integration_performed": false
+}

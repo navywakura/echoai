@@ -18,6 +18,13 @@ ECHO-AI combines an integer cognitive core, causal memory, verified program sear
 
 **ECHO-4.5 is a development beta. S6 and final release closure remain open.** Installation integrity and development tests are separate from scientific acceptance. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic).
 
+The [10 October checkpoint](docs/PROJECT-CHECKPOINT-20261010.md) preserves
+the latest B24/ARC work and [research evidence](research-archive/20261010/README.md).
+[ECHO-5](ECHO-5/README.md) contains development preparation and a module
+inventory only; functional implementation has **not started**. The
+[GAN-inspired adversarial learning proposal](ECHO-5/docs/ADVERSARIAL-LEARNING-PROPOSAL.md)
+is documented for future investigation and has not been implemented or tested.
+
 ## Start
 
 ```bash
@@ -88,6 +95,11 @@ tools/       Source verification and terminal setup
 ```
 
 The former `echoai/` folder is now the repository root. Its required mathematical helpers live in `core/`; no obsolete chatbot or website is shipped. The live laboratory workspace and frozen experiments remain separate. Raw experiment environments and sealed input data are excluded from distribution.
+
+`research-archive/` contains explicitly preserved research snapshots, separate
+from live `lab/` directories. Their manifests identify original paths, hashes,
+deduplicated files and omitted external build binaries. Installing this source
+does not execute those scripts or resume their experiments.
 
 Read [current status](docs/NOW.md), [the roadmap](docs/ECHO45-ECHO5-ROADMAP.md), [distribution notes](docs/DISTRIBUTION.md) and [the terminal guide](harness/echo-nexus/README.md). Historical reports preserve their original paths and hashes.
 

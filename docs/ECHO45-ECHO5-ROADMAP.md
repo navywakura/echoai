@@ -1,26 +1,84 @@
-# Roadmap: acabar ECHO-4.5 y hacer ECHO-5 (actualizado 2026-10-08)
+# Roadmap: acabar ECHO-4.5 y hacer ECHO-5 (actualizado 2026-10-09)
 
-**B23-R4: formato reparado; micro en curso en Kaggle (8 de octubre, 15:09 Madrid).**
-Las 8/8 inferencias de formato pasaron. N14 lleva 3/18 propuestas ejecutadas;
-ninguna mejoró las 14 partidas de desarrollo. Slot 4 terminó medición y está
-en replay; N7 pendiente. Las validaciones amplias y S6 siguen abiertos.
-[Estado](ECHO45-S6-B23-R4-STATUS-20261008.md) ·
-[Condición](ECHO45-S6-B23-R4-RECOVERY.md).
+**9 de octubre, 14:15 Madrid · decisión vigente, posterior a los bloques históricos.**
+Terminar B24, revisar sus recibos, conservar las mediciones ARC pendientes y
+cerrar la etapa 4.5 con sus límites explícitos. S6 seguirá sin pase salvo la
+evidencia exigida por su contrato; su nueva investigación se retomará después
+de ECHO-5.5. El cierre oficial aún no se ha realizado. Primero en ECHO-5:
+inventario y consolidación del runtime, recuperación de la cadena robótica
+Gazebo/PX4 existente y diseño de GUI local de observabilidad. Comparar después
+las contribuciones de memoria compartida, multiagente, competición, simulación
+e investigador mediante ablaciones y casos nuevos. No se sustituye el protocolo
+B24 en curso. [Decisión y alcance](ECHO45-TO-ECHO5-DECISION-20261009.md).
+
+**9 de octubre, 01:54 Madrid · B24-R1 ya mide partidas; evaluador ARC preparado y calibrado.**
+B24 v1 se detuvo en el preflight neutral antes de jugar: seis llamadas de
+formato cobradas, cinco correctas, cero partidas y cero llamadas científicas.
+El CLI nativo interpretaba un token EOG del prompt como fin de generación en
+una frontera de 128 tokens. [Forensia](ECHO45-S6-B24-R1-FORENSICS-20261009.md).
+R1 conserva el fallo y los costes, usa un ZIP separado con lote lógico 8192,
+microlote 64 y exige ocho comprobaciones nuevas. Las 100 fuentes originales
+siguen intactas; 69 pruebas locales pasan y los dos validadores nativos
+quedan para el runtime CUDA. [Recuperación](ECHO45-S6-B24-R1-RECOVERY-20261009.md).
+[Kaggle R1 privado](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-r1-20261009)
+aceptó la versión 1 a las 01:47. A las 01:52:38 pasó las ocho comprobaciones
+de formato; a las 01:53 ya registra partidas de la base R4-REF. El seguimiento
+está en `lab/kaggle/s6b24-r1-20261009/pipeline-status.json` y
+`live-scientific-status.json`. No hay todavía resultado final ni pase S6 de R1.
+
+En paralelo, [el evaluador offline V3](ECHO45-ARC-V3-BATCH-20261009.md)
+prepara ARC-1/2 con cuatro procesos CPU, estado congelado por tarea, sin LLM
+y respuestas de test separadas. La calibración completó 16 tareas conocidas
+por corpus en 4,17 s de ejecución total, sin errores ni timeouts: 0/16 exactas
+en cada corpus y abstención en todas. Pasan 69 pruebas diferentes del
+evaluador, custodia, observador y módulos adyacentes. La proyección para
+400+120 tareas es 63–88 s; reservar 2–5 min con margen operativo, sin garantía.
+El lote público completo no se ha abierto y exige el cierre válido de B24.
+Recibos: `lab/seed/arc-v3-calibration-20261009/calibration-receipt.json`.
+Se mantiene la decisión del propietario: acabar B24, medir ARC y cerrar la
+versión 4.5 con su resultado real, aunque S6 siga pendiente.
+
+**9 de octubre, 00:40 Madrid · B24 enviado a Kaggle; cierre de 4.5 acordado tras medir.**
+El propietario decide terminar B24 y después cerrar ECHO-4.5 aunque S6
+continúe sin superar su criterio. Se preparará una medición ARC con el
+resultado que obtenga; no se rebajan umbrales ni se cambia un rojo histórico.
+B24 ya tiene implementación aislada: cinco brazos, reparación de guardas,
+selección por catálogo, archivos separados/compartidos por ronda y custodia
+completa de partidas. Paquete aislado: 61 pruebas pasan y dos validadores
+nativos quedan para CUDA. La versión 1 se envió en privado a las 00:40;
+Kaggle la aceptó y comenzó a compilar CUDA. El preflight hará ocho
+inferencias reales. [Registro de ejecución](ECHO45-S6-B24-RUN-20261009.md).
+Todavía no hay resultado científico B24.
+[Contrato ejecutable](ECHO45-S6-B24-DESIGN.md) ·
+[Capacidades confirmadas y opciones ARC](ECHO45-CLOSURE-EVIDENCE-20261009.md).
+[Ejecución privada](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-20261009).
+El estado operativo está en `lab/kaggle/s6b24-20261009/pipeline-status.json`;
+la cuota puede exigir continuaciones con el mismo perfil. Los bloques
+anteriores conservan sus resultados y decisiones históricas.
+
+
+**B23-R4 cerrado sin pase; B24 integra reparación y cooperación.**
+924 partidas y 36 propuestas: 16 duplicados, 12 inactivas medidas y ocho
+activas con pérdidas. Ambos modelos alcanzaron 61→65 conservando niveles,
+pero perdiendo score en cinco casos. La autopsia recalcula las 66 mediciones,
+36 prompts y confirma 88 fuentes intactas. El control humano histórico permite
+61→67 sin pérdidas en esos mismos casos; falta descubrimiento autónomo.
+[Investigación reproducible](ECHO45-S6-B23-R4-FORENSICS-20261008.md).
 
 **B23-R3 cerrado sin ganador**: [resultados auditados](ECHO45-S6-B23-KAGGLE-RESULTS-20261008.md).
 Los tres brazos sin LLM midieron sus propuestas y no hallaron pase; los
 dos brazos Qwen generaron 36 propuestas inválidas, ninguna ejecutada.
-La comparación de tamaño de modelo queda inconclusa. S6 permanece abierto.
-Antes de decidir B24 se necesita un diagnóstico de formato con contrato
-nuevo; la propuesta de cooperación queda disponible, sin ejecución.
+La comparación de tamaño de ese R3 quedó inconclusa. R4 reparó el formato,
+pero tampoco acreditó ventaja del 14B ni conservación. S6 permanece abierto.
 
-**Decisión del 8 de octubre: [B24 condicionado a B23](ECHO45-S6-B24-CONDITIONAL-PLAN.md).**
-Investigar cooperación frente a un investigador y tres independientes, con
-presupuesto total común. B23 cerró sin ganador; antes de B24 se estudiará
-por separado el formato de las propuestas del neocórtex. Si ese diagnóstico
-permite hacer una comparación justa, se decidirá el ensayo de cooperación.
-Es un plan sin ejecución. Los bloques del día 7 siguientes describen el
-estado anterior al lanzamiento de B23.
+**Decisión actual: [B24 integrado](ECHO45-S6-B24-CONDITIONAL-PLAN.md).**
+Reparar recuperación de evidencia, selección de padre, resumen numérico y
+desperdicio por duplicados/inactividad en todos sus brazos. Comparar un
+investigador, tres independientes y tres cooperativos; añadir referencia R4
+y control sin LLM. Los cinco brazos permiten distinguir corrección, selección
+con neocórtex e intercambio. Plan posterior a los resultados; todavía sin
+implementación, contrato ejecutable congelado ni partidas B24. Los bloques
+del día 7 siguientes conservan el estado histórico.
 S6 conserva sus requisitos de confirmación desde SEMILLA y examen B1–B5.
 
 <!-- S6B23-BEGIN -->

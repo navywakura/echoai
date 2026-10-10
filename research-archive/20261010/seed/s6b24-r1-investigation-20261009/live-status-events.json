@@ -1,0 +1,163 @@
+[
+  {
+    "line": 289,
+    "version": 1,
+    "event_time": 1147.594847493,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T22:59:50.553527+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 1,
+      "stage": "FORMAT_PREFLIGHT",
+      "total_slots": 4
+    }
+  },
+  {
+    "line": 290,
+    "version": 1,
+    "event_time": 1154.041068939,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T22:59:57.000787+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 1,
+      "stage": "FORMAT_CASE_PASS"
+    }
+  },
+  {
+    "line": 291,
+    "version": 1,
+    "event_time": 1154.047115736,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T22:59:57.007259+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 2,
+      "stage": "FORMAT_PREFLIGHT",
+      "total_slots": 4
+    }
+  },
+  {
+    "line": 292,
+    "version": 1,
+    "event_time": 1160.070498386,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T23:00:03.030217+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 2,
+      "stage": "FORMAT_CASE_PASS"
+    }
+  },
+  {
+    "line": 293,
+    "version": 1,
+    "event_time": 1160.076903536,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T23:00:03.036724+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 3,
+      "stage": "FORMAT_PREFLIGHT",
+      "total_slots": 4
+    }
+  },
+  {
+    "line": 294,
+    "version": 1,
+    "event_time": 1167.198306961,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T23:00:10.158682+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 3,
+      "stage": "FORMAT_CASE_PASS"
+    }
+  },
+  {
+    "line": 295,
+    "version": 1,
+    "event_time": 1167.204671561,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T23:00:10.164508+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 4,
+      "stage": "FORMAT_PREFLIGHT",
+      "total_slots": 4
+    }
+  },
+  {
+    "line": 296,
+    "version": 1,
+    "event_time": 1173.988099784,
+    "status": {
+      "arm": "FORMAT-REF",
+      "at": "2026-10-08T23:00:16.947916+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 4,
+      "stage": "FORMAT_CASE_PASS"
+    }
+  },
+  {
+    "line": 297,
+    "version": 1,
+    "event_time": 1173.994545415,
+    "status": {
+      "arm": "FORMAT-ID",
+      "at": "2026-10-08T23:00:16.954281+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 1,
+      "stage": "FORMAT_PREFLIGHT",
+      "total_slots": 4
+    }
+  },
+  {
+    "line": 298,
+    "version": 1,
+    "event_time": 1179.504663726,
+    "status": {
+      "arm": "FORMAT-ID",
+      "at": "2026-10-08T23:00:22.464670+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 1,
+      "stage": "FORMAT_CASE_PASS"
+    }
+  },
+  {
+    "line": 299,
+    "version": 1,
+    "event_time": 1179.510888502,
+    "status": {
+      "arm": "FORMAT-ID",
+      "at": "2026-10-08T23:00:22.470852+00:00",
+      "condition": "S6-B24",
+      "games_started": false,
+      "slot": 2,
+      "stage": "FORMAT_PREFLIGHT",
+      "total_slots": 4
+    }
+  },
+  {
+    "line": 304,
+    "version": 1,
+    "event_time": 1184.581437051,
+    "status": {
+      "at": "2026-10-08T23:00:27.541121+00:00",
+      "condition": "S6-B24",
+      "reason": "RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)",
+      "s6_green": false,
+      "stage": "INSTRUMENT_BLOCKED"
+    }
+  }
+]

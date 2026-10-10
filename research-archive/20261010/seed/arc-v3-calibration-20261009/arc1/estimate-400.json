@@ -1,0 +1,11 @@
+{
+  "calibration_tasks": 16,
+  "confidence_interval": false,
+  "mean_projection_seconds": 48.345399312484005,
+  "note": "Empirical scenarios, not bounds; task mix, CPU contention and batch overhead may differ.",
+  "p90_scenario_seconds": 62.401405600394355,
+  "per_task_limit_seconds": 120,
+  "target_tasks": 400,
+  "timeout_budget_seconds": 12000,
+  "workers": 4
+}

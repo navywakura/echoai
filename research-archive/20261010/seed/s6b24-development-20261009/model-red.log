@@ -1,0 +1,18 @@
+test_s6b24_model (unittest.loader._FailedTest.test_s6b24_model) ... ERROR
+
+======================================================================
+ERROR: test_s6b24_model (unittest.loader._FailedTest.test_s6b24_model)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_s6b24_model
+Traceback (most recent call last):
+  File "/usr/lib64/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_model.py", line 7, in <module>
+    from seed import s6b24_model as m
+ImportError: cannot import name 's6b24_model' from 'seed' (/home/roger/REALRXOS/RXos/echoai/seed/__init__.py)
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

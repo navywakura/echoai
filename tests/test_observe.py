@@ -11,6 +11,23 @@ from echo_arc.observe import Journal, ObservedAgent
 
 
 class ObserveTests(unittest.TestCase):
+    def test_relational_v3_diary_renders_its_actual_fields(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "journal.jsonl"
+            journal = Journal(path)
+            journal.write(kind="observation", agent="echo45-relational-v3", origin="DEVELOPMENT",
+                          context="multiple", action="search_first", policy_scores=[3, 7], budget=500000)
+            journal.write(kind="result", agent="echo45-relational-v3", origin="DEVELOPMENT",
+                          status="NO_PROGRAM", metrics={"work": 499800, "trials": 420,
+                                                         "verified_programs": 0, "budget_exhausted": True})
+            journal.close()
+            rows = [json.loads(line) for line in path.read_text().splitlines()]
+            self.assertIn("search_first", " ".join(observe.render(rows[0])))
+            self.assertIn("499800", " ".join(observe.render(rows[1])))
+            rows[1]["metrics"]["work"] = 1
+            with self.assertRaisesRegex(ValueError, "hash"):
+                observe.render(rows[1])
+
     def test_attaching_to_old_diary_skips_history_but_preserves_split_last_record(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "journal.jsonl"

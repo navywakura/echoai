@@ -1,0 +1,352 @@
+{"version": 1, "event": {"stream_name": "stdout", "time": 1.209775631, "data": "B24_DATASET_MOUNT /kaggle/input/datasets/rogeernavarro/echo45-s6b24-private-20261009\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1.5295407669999999, "data": "{\"command\": [\"/usr/bin/python3\", \"-m\", \"pip\", \"install\", \"-q\", \"uv==0.11.32\", \"huggingface_hub\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 6.189248439, "data": "   \u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081\u00e2\u0094\u0081 27.0/27.0 MB 71.9 MB/s eta 0:00:00\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 9.01529385, "data": "{\"command\": [\"/usr/local/bin/uv\", \"python\", \"install\", \"3.12.13\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 9.233341513, "data": "Downloading cpython-3.12.13-linux-x86_64-gnu (download) (32.6MiB)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.525731035, "data": " Downloaded cpython-3.12.13-linux-x86_64-gnu (download)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.549124474, "data": "Installed Python 3.12.13 in 1.51s\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.549254109, "data": " + cpython-3.12.13-linux-x86_64-gnu (python3.12)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.549641577, "data": "warning: `/root/.local/bin` is not on your PATH. To use installed Python executables, run `export PATH=\"/root/.local/bin:$PATH\"` or `uv python update-shell`.\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 10.583575362, "data": "{\"command\": [\"/usr/local/bin/uv\", \"venv\", \"--python\", \"3.12.13\", \"/tmp/b24-assets/python\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.596561497, "data": "warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.783572024, "data": "Using CPython 3.12.13\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.78360909, "data": "Creating virtual environment at: /tmp/b24-assets/python\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 10.785112683, "data": "Activate with: source /tmp/b24-assets/python/bin/activate\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 10.798256063, "data": "{\"command\": [\"/usr/local/bin/uv\", \"pip\", \"install\", \"--python\", \"/tmp/b24-assets/python/bin/python\", \"numpy==2.3.2\", \"arcengine==0.9.3\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 11.022603385, "data": "Using Python 3.12.13 environment at: /tmp/b24-assets/python\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 11.516198767, "data": "Resolved 7 packages in 491ms\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 11.549001975, "data": "Downloading pydantic-core (2.1MiB)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 11.549236123, "data": "Downloading numpy (15.9MiB)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 11.661957344, "data": " Downloaded pydantic-core\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.088622783, "data": " Downloaded numpy\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.089138035, "data": "Prepared 7 packages in 572ms\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122043859, "data": "Installed 7 packages in 32ms\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122080724, "data": " + annotated-types==0.8.0\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122111626, "data": " + arcengine==0.9.3\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122234695, "data": " + numpy==2.3.2\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122269283, "data": " + pydantic==2.14.0\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122307849, "data": " + pydantic-core==2.50.0\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122414886, "data": " + typing-extensions==4.16.0\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 12.122482767, "data": " + typing-inspection==0.4.4\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 16.394483777, "data": "{\"command\": [\"cmake\", \"-S\", \"/tmp/b24-assets/llama.cpp-79e0b68c178656bb0632cb8602d2940b755077f8\", \"-B\", \"/tmp/b24-assets/cuda-build\", \"-DGGML_CUDA=ON\", \"-DCUDA_cuda_driver_LIBRARY=/usr/local/nvidia/lib64/libcuda.so.580.178.04\", \"-DCMAKE_CUDA_ARCHITECTURES=75\", \"-DGGML_NATIVE=OFF\", \"-DLLAMA_CURL=OFF\", \"-DBUILD_SHARED_LIBS=OFF\", \"-DLLAMA_BUILD_TESTS=ON\", \"-DLLAMA_BUILD_SERVER=OFF\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.213554455, "data": "-- The C compiler identification is GNU 13.3.0\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.547153558, "data": "-- The CXX compiler identification is GNU 13.3.0\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.57639591, "data": "-- Detecting C compiler ABI info\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.720588807, "data": "-- Detecting C compiler ABI info - done\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.744090874, "data": "-- Check for working C compiler: /usr/bin/cc - skipped\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.745337304, "data": "-- Detecting C compile features\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.747813604, "data": "-- Detecting C compile features - done\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.773383619, "data": "-- Detecting CXX compiler ABI info\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.869973557, "data": "-- Detecting CXX compiler ABI info - done\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.893307867, "data": "-- Check for working CXX compiler: /usr/bin/c++ - skipped\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.893864807, "data": "-- Detecting CXX compile features\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.894866784, "data": "-- Detecting CXX compile features - done\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.944837073, "data": "-- Found Git: /usr/bin/git (found version \"2.43.0\")\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 17.960485224, "data": "fatal: not a git repository (or any of the parent directories): .git\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 17.962477689, "data": "fatal: not a git repository (or any of the parent directories): .git\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 17.974397351, "data": "-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.107800954, "data": "-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.109389479, "data": "-- Found Threads: TRUE\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.121455237, "data": "-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.147549506, "data": "-- CMAKE_SYSTEM_PROCESSOR: x86_64\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.147691184, "data": "-- GGML_SYSTEM_ARCH: x86\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.152776252, "data": "-- Including CPU backend\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.476813958, "data": "-- Found OpenMP_C: -fopenmp (found version \"4.5\")\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.58222251, "data": "-- Found OpenMP_CXX: -fopenmp (found version \"4.5\")\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.582961191, "data": "-- Found OpenMP: TRUE (found version \"4.5\")\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.583568769, "data": "-- x86 detected\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.583897886, "data": "-- Adding CPU backend variant ggml-cpu: -msse4.2;-mf16c;-mfma;-mbmi2;-mavx;-mavx2 GGML_SSE42;GGML_F16C;GGML_FMA;GGML_BMI2;GGML_AVX;GGML_AVX2\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.628402348, "data": "-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include (found version \"12.8.93\")\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.710116212, "data": "-- CUDA Toolkit found\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 18.710151699, "data": "-- Using CUDA architectures: 75\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 21.362393438, "data": "-- The CUDA compiler identification is NVIDIA 12.8.93 with host compiler GNU 13.3.0\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 21.38363084, "data": "-- Detecting CUDA compiler ABI info\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 22.617970284, "data": "-- Detecting CUDA compiler ABI info - done\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 22.688527362, "data": "-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.054493189, "data": "-- Detecting CUDA compile features\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.055453656, "data": "-- Detecting CUDA compile features - done\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.111757709, "data": "-- CUDA host compiler is GNU 13.3.0\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.112293939, "data": "-- Including CUDA backend\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.123722372, "data": "-- ggml version: 0.0.0\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.12374101, "data": "-- ggml commit:  unknown\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 23.128120137, "data": "CMake Warning at common/CMakeLists.txt:32 (message):\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 23.12813527, "data": "  Git repository not found; to enable automatic generation of build info,\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 23.128140388, "data": "  make sure Git is installed and the project is a Git repository.\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 23.128144516, "data": "\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 23.128148261, "data": "\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.185585376, "data": "-- Configuring done (6.4s)\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.563479341, "data": "-- Generating done (0.4s)\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.564379855, "data": "-- Build files have been written to: /tmp/b24-assets/cuda-build\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.578325487, "data": "{\"command\": [\"cmake\", \"--build\", \"/tmp/b24-assets/cuda-build\", \"--target\", \"llama-cli\", \"llama-tokenize\", \"test-gbnf-validator\", \"-j\", \"4\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.791611438, "data": "[  0%] Building CXX object common/CMakeFiles/build_info.dir/build-info.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.792911245, "data": "[  0%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.793020697, "data": "[  0%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.794170718, "data": "[  2%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.818336928, "data": "[  2%] Built target build_info\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 23.823753581, "data": "[  2%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 24.415033662, "data": "[  2%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 24.587643355, "data": "[  2%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 24.867395674, "data": "[  4%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 26.331139266, "data": "[  4%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 34.131310127, "data": "[  4%] Linking CXX static library libggml-base.a\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 34.176804591, "data": "[  4%] Built target ggml-base\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 34.192126327, "data": "[  6%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 34.192149519, "data": "[  6%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 34.192154641, "data": "[  6%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 34.201139915, "data": "[  6%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/acc.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 36.516436947, "data": "[  8%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 36.545163578, "data": "[  8%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 36.576692243, "data": "[ 10%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/arange.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 39.531795752, "data": "[ 10%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/argmax.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 39.606867921, "data": "[ 10%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 40.541299046, "data": "[ 10%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/argsort.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 41.196847353, "data": "[ 10%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 43.026028606, "data": "[ 12%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 43.117724427, "data": "[ 14%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/binbcast.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 45.056627888, "data": "[ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 46.140135397, "data": "[ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 47.586455532, "data": "[ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 49.343996039, "data": "[ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 50.03639757, "data": "[ 16%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/clamp.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 51.387283644, "data": "[ 16%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/concat.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 56.219529698, "data": "[ 18%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv-transpose-1d.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 56.712284093, "data": "[ 18%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/llamafile/sgemm.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 58.340140415, "data": "[ 20%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/quants.c.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 60.663850907, "data": "[ 20%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv2d-dw.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 62.548603658, "data": "[ 20%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv2d-transpose.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 63.006480495, "data": "[ 20%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/repack.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 64.836648561, "data": "[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/convert.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 66.624508092, "data": "[ 22%] Linking CXX static library libggml-cpu.a\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 66.664557053, "data": "[ 22%] Built target ggml-cpu\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 66.673330624, "data": "[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/count-equal.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 67.311766382, "data": "[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/cpy.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 69.076107736, "data": "[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/cross-entropy-loss.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 73.165168899, "data": "[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/diagmask.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 74.448692193, "data": "[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn-tile-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 75.995829294, "data": "[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn-tile-f32.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 76.34413543, "data": "[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn-wmma-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 79.168027295, "data": "[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 83.540518987, "data": "[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/getrows.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 84.623230503, "data": "[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/ggml-cuda.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 86.47896334, "data": "[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/gla.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 91.837291118, "data": "[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/im2col.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 92.549579909, "data": "/tmp/b24-assets/llama.cpp-79e0b68c178656bb0632cb8602d2940b755077f8/ggml/src/ggml-cuda/ggml-cuda.cu: In function \u00e2\u0080\u0098bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t, const ggml_tensor*)\u00e2\u0080\u0099:\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 92.549649195, "data": "/tmp/b24-assets/llama.cpp-79e0b68c178656bb0632cb8602d2940b755077f8/ggml/src/ggml-cuda/ggml-cuda.cu:3229:133: note: \u00e2\u0080\u0098#pragma message: TODO: implement Q4_0, Q4_1, Q5_0, Q5_1, Q8_0, IQ4_NL support (https://github.com/ggml-org/llama.cpp/pull/14661)\u00e2\u0080\u0099\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 92.549658504, "data": " 3229 | #pragma message(\"TODO: implement Q4_0, Q4_1, Q5_0, Q5_1, Q8_0, IQ4_NL support (https://github.com/ggml-org/llama.cpp/pull/14661)\")\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 92.549663644, "data": "      |                                                                                                                                     ^\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 92.840492886, "data": "[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mean.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 93.546486496, "data": "[ 30%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmq.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 97.888898474, "data": "[ 30%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmv.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 98.276434408, "data": "[ 30%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmvq.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 99.028552721, "data": "[ 32%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/norm.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 100.371212554, "data": "[ 32%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/opt-step-adamw.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 106.357484048, "data": "[ 32%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/out-prod.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 106.455006311, "data": "[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/pad.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 112.391363384, "data": "[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/pool2d.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 112.719217394, "data": "[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/quantize.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 118.470969394, "data": "[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/rope.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 119.256641776, "data": "[ 36%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/scale.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 125.173192603, "data": "[ 36%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/set-rows.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 127.112418825, "data": "[ 36%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/softmax.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 131.378620318, "data": "[ 38%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/ssm-conv.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 135.250121915, "data": "[ 38%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/ssm-scan.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 137.690224467, "data": "[ 38%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/sum.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 141.853029252, "data": "[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/sumrows.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 147.524634807, "data": "[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/tsembd.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 153.439137593, "data": "[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/unary.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 153.65330105, "data": "[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/upscale.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 159.451724617, "data": "[ 42%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/wkv.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 159.753861278, "data": "[ 42%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_1-ncols2_16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 162.393283843, "data": "[ 42%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_1-ncols2_8.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 167.878633939, "data": "[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_16-ncols2_1.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 167.945462464, "data": "[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_16-ncols2_2.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 182.516493635, "data": "[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_16-ncols2_4.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 194.356482862, "data": "[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 203.376613259, "data": "[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_4.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 211.60135846, "data": "[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_8.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 216.502461046, "data": "[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_32-ncols2_1.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 220.436937531, "data": "[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_32-ncols2_2.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 232.215649135, "data": "[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 239.21967679, "data": "[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_2.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 244.659311606, "data": "[ 51%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_4.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 260.219951139, "data": "[ 51%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_8.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 268.218921848, "data": "[ 51%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_64-ncols2_1.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 279.800230269, "data": "[ 53%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_1.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 280.593799886, "data": "[ 53%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_2.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 293.385090518, "data": "[ 53%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_4.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 311.186492477, "data": "[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_8.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 320.690753593, "data": "[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq1_s.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 322.684007424, "data": "[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq2_s.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 330.018919292, "data": "[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq2_xs.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 344.531464733, "data": "[ 57%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq2_xxs.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 406.376844858, "data": "[ 57%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq3_s.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 420.089239184, "data": "[ 57%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq3_xxs.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 422.7926863, "data": "[ 59%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq4_nl.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 428.294633916, "data": "[ 59%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq4_xs.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 492.904150393, "data": "[ 59%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q2_k.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 501.358637754, "data": "[ 61%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q3_k.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 518.922026552, "data": "[ 61%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q4_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 522.98861163, "data": "[ 61%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q4_1.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 598.417566885, "data": "[ 61%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q4_k.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 603.746863418, "data": "[ 63%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q5_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 607.833577078, "data": "[ 63%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q5_1.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 614.578470844, "data": "[ 63%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q5_k.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 683.117304418, "data": "[ 65%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q6_k.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 697.322884691, "data": "[ 65%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q8_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 699.624854907, "data": "[ 65%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f16-instance-hs128-q4_0-q4_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 703.707707578, "data": "[ 67%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f32-instance-hs128-q4_0-q4_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 712.699152059, "data": "[ 67%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f16-instance-hs128-q8_0-q8_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 716.471167002, "data": "[ 67%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f32-instance-hs128-q8_0-q8_0.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 725.449494215, "data": "[ 67%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f16-instance-hs128-f16-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 729.10310013, "data": "[ 69%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f16-instance-hs256-f16-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 735.931844345, "data": "[ 69%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f16-instance-hs64-f16-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 741.735651571, "data": "[ 69%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f32-instance-hs128-f16-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 744.867593054, "data": "[ 71%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f32-instance-hs256-f16-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 752.224114168, "data": "[ 71%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-f32-instance-hs64-f16-f16.cu.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 774.078774715, "data": "[ 71%] Linking CXX static library libggml-cuda.a\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 774.293436918, "data": "[ 71%] Built target ggml-cuda\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 774.30647269, "data": "[ 71%] Building CXX object ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 776.032234614, "data": "[ 73%] Linking CXX static library libggml.a\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 776.052988708, "data": "[ 73%] Built target ggml\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 776.068137705, "data": "[ 75%] Building CXX object src/CMakeFiles/llama.dir/llama.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 776.068183213, "data": "[ 75%] Building CXX object src/CMakeFiles/llama.dir/llama-adapter.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 776.068190894, "data": "[ 75%] Building CXX object src/CMakeFiles/llama.dir/llama-arch.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 776.068455424, "data": "[ 75%] Building CXX object src/CMakeFiles/llama.dir/llama-batch.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 778.301925516, "data": "[ 77%] Building CXX object src/CMakeFiles/llama.dir/llama-chat.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 778.872315471, "data": "[ 77%] Building CXX object src/CMakeFiles/llama.dir/llama-context.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 780.12494517, "data": "[ 77%] Building CXX object src/CMakeFiles/llama.dir/llama-cparams.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 780.208094604, "data": "[ 79%] Building CXX object src/CMakeFiles/llama.dir/llama-grammar.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 780.283082129, "data": "[ 79%] Building CXX object src/CMakeFiles/llama.dir/llama-graph.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 781.63230915, "data": "[ 79%] Building CXX object src/CMakeFiles/llama.dir/llama-hparams.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 781.877621959, "data": "[ 81%] Building CXX object src/CMakeFiles/llama.dir/llama-impl.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 783.185958825, "data": "[ 81%] Building CXX object src/CMakeFiles/llama.dir/llama-io.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 783.597859265, "data": "[ 81%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-unified.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 783.9355574, "data": "[ 83%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-unified-iswa.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 784.41400078, "data": "[ 83%] Building CXX object src/CMakeFiles/llama.dir/llama-memory.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 784.764229092, "data": "[ 83%] Building CXX object src/CMakeFiles/llama.dir/llama-memory-hybrid.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 786.34047532, "data": "[ 83%] Building CXX object src/CMakeFiles/llama.dir/llama-memory-recurrent.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 787.153996339, "data": "[ 85%] Building CXX object src/CMakeFiles/llama.dir/llama-mmap.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 788.42664166, "data": "[ 85%] Building CXX object src/CMakeFiles/llama.dir/llama-model-loader.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 789.530642882, "data": "[ 85%] Building CXX object src/CMakeFiles/llama.dir/llama-model-saver.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 789.883608951, "data": "[ 87%] Building CXX object src/CMakeFiles/llama.dir/llama-model.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 791.433800857, "data": "[ 87%] Building CXX object src/CMakeFiles/llama.dir/llama-quant.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 791.954917094, "data": "[ 87%] Building CXX object src/CMakeFiles/llama.dir/llama-sampling.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 794.522609812, "data": "[ 89%] Building CXX object src/CMakeFiles/llama.dir/llama-vocab.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 802.608345767, "data": "[ 89%] Building CXX object src/CMakeFiles/llama.dir/unicode-data.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 804.173358019, "data": "[ 89%] Building CXX object src/CMakeFiles/llama.dir/unicode.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 818.283231939, "data": "[ 89%] Linking CXX static library libllama.a\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 818.351301809, "data": "[ 89%] Built target llama\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 818.365123344, "data": "[ 89%] Building CXX object common/CMakeFiles/common.dir/arg.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 818.365537469, "data": "[ 89%] Building CXX object common/CMakeFiles/common.dir/chat-parser.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 818.366106991, "data": "[ 91%] Building CXX object common/CMakeFiles/common.dir/chat.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 818.367975215, "data": "[ 91%] Building CXX object common/CMakeFiles/common.dir/common.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 826.138690637, "data": "[ 91%] Building CXX object common/CMakeFiles/common.dir/console.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 827.078402022, "data": "[ 93%] Building CXX object common/CMakeFiles/common.dir/json-partial.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 829.834442641, "data": "[ 93%] Building CXX object common/CMakeFiles/common.dir/json-schema-to-grammar.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 835.971193841, "data": "[ 93%] Building CXX object common/CMakeFiles/common.dir/llguidance.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 836.840643921, "data": "[ 95%] Building CXX object common/CMakeFiles/common.dir/log.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 838.319289021, "data": "[ 95%] Building CXX object common/CMakeFiles/common.dir/ngram-cache.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 840.709790088, "data": "[ 95%] Building CXX object common/CMakeFiles/common.dir/regex-partial.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 845.972578163, "data": "[ 95%] Building CXX object common/CMakeFiles/common.dir/sampling.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 848.989117349, "data": "[ 97%] Building CXX object common/CMakeFiles/common.dir/speculative.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 861.127190704, "data": "[ 97%] Linking CXX static library libcommon.a\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 861.197745027, "data": "[ 97%] Built target common\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 861.211844516, "data": "[100%] Building CXX object tools/main/CMakeFiles/llama-cli.dir/main.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.049887073, "data": "[100%] Linking CXX executable ../../bin/llama-cli\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.570183352, "data": "[100%] Built target llama-cli\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.619175089, "data": "[  0%] Built target build_info\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.630130891, "data": "[  4%] Built target ggml-base\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.672746922, "data": "[ 14%] Built target ggml-cpu\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.846532156, "data": "[ 72%] Built target ggml-cuda\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.866465444, "data": "[ 75%] Built target ggml\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.916538918, "data": "[ 91%] Built target llama\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.954730259, "data": "[100%] Built target common\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 864.966743526, "data": "[100%] Building CXX object tools/tokenize/CMakeFiles/llama-tokenize.dir/tokenize.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 865.823318322, "data": "[100%] Linking CXX executable ../../bin/llama-tokenize\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.233334418, "data": "[100%] Built target llama-tokenize\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.273897413, "data": "[  0%] Built target build_info\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.282899618, "data": "[  4%] Built target ggml-base\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.307859831, "data": "[ 14%] Built target ggml-cpu\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.370350349, "data": "[ 72%] Built target ggml-cuda\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.385141775, "data": "[ 75%] Built target ggml\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.412761766, "data": "[ 91%] Built target llama\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.43576586, "data": "[100%] Built target common\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 866.447439309, "data": "[100%] Building CXX object tests/CMakeFiles/test-gbnf-validator.dir/test-gbnf-validator.cpp.o\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 867.240889072, "data": "[100%] Linking CXX executable ../bin/test-gbnf-validator\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 867.639195481, "data": "[100%] Built target test-gbnf-validator\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 869.100674068, "data": "{\"command\": [\"/usr/local/bin/hf\", \"download\", \"Qwen/Qwen2.5-Coder-7B-Instruct-GGUF\", \"qwen2.5-coder-7b-instruct-q4_k_m.gguf\", \"--revision\", \"13fb94bfda8c8cf22497dc57b78f391a9acb426a\", \"--local-dir\", \"/tmp/b24-assets/models/N7\"], \"cwd\": null}\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 870.252420882, "data": "\u001b[90mHint: A new version of huggingface_hub (2.2.0) is available! You are using version 1.29.0.\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 870.252460793, "data": "To update, run: hf update\u001b[0m\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 870.253166262, "data": "\u001b[90mHint: The `hf-cli` skill is not installed. Run `hf skills add -g --claude` to teach your AI agents how to use the `hf` CLI.\u001b[0m\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 870.351998206, "data": "Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 889.61125865, "data": "\u001b[32m\u00e2\u009c\u0093 Downloaded\u001b[0m\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 889.611294085, "data": "  path: /tmp/b24-assets/models/N7/qwen2.5-coder-7b-instruct-q4_k_m.gguf\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 903.730307029, "data": "{\"command\": [\"/tmp/b24-assets/python/bin/python\", \"-c\", \"import sys\\nfrom pathlib import Path\\nfrom seed import s6b24_model as m\\nfrom seed.s6b11 import atomic\\np,cli,tok,out=sys.argv[1:]\\ns=dict(family='Qwen2.5-Coder-Instruct',repo='Qwen/Qwen2.5-Coder-7B-Instruct-GGUF',revision=m.REVISION,\\n       model=p,cli=cli,tokenizer=tok,quantization='Q4_K_M',backend='cuda',gpu_layers=99,tensor_split='1,1')\\nfor k in ('model','cli','tokenizer'):s[k+'_sha256']=m.prior.digest_file(Path(s[k]))\\ns['gguf']=m.prior.gguf_info(p);s['prompt_protocol']=m.prior.prompt_protocol(s)\\nm.verify_registry({'N7':s});atomic(Path(out),{'N7':s})\\n\", \"/tmp/b24-assets/models/N7/qwen2.5-coder-7b-instruct-q4_k_m.gguf\", \"/tmp/b24-assets/cuda-build/bin/llama-cli\", \"/tmp/b24-assets/cuda-build/bin/llama-tokenize\", \"/kaggle/working/b24-models.json\"], \"cwd\": \"/kaggle/working/b24-project\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 933.240438131, "data": "B24_R4_ASSETS_READY\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 933.300966559, "data": "{\"command\": [\"/tmp/b24-assets/python/bin/python\", \"-m\", \"seed.s6b24_cloud\", \"prepare\", \"--input\", \"/kaggle/working/b24-project/b24-input\", \"--models\", \"/kaggle/working/b24-models.json\", \"--root\", \"/kaggle/working/b24-results\"], \"cwd\": \"/kaggle/working/b24-project\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1128.325127259, "data": "B24_PREPARED_PROFILE_FROZEN\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1128.325189812, "data": "{\"command\": [\"/tmp/b24-assets/python/bin/python\", \"-u\", \"-m\", \"seed.s6b24_cloud\", \"run\", \"--root\", \"/kaggle/working/b24-results\"], \"cwd\": \"/kaggle/working/b24-project\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1147.594847493, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T22:59:50.553527+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":1,\"stage\":\"FORMAT_PREFLIGHT\",\"total_slots\":4}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1154.041068939, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T22:59:57.000787+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":1,\"stage\":\"FORMAT_CASE_PASS\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1154.047115736, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T22:59:57.007259+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":2,\"stage\":\"FORMAT_PREFLIGHT\",\"total_slots\":4}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1160.070498386, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T23:00:03.030217+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":2,\"stage\":\"FORMAT_CASE_PASS\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1160.076903536, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T23:00:03.036724+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":3,\"stage\":\"FORMAT_PREFLIGHT\",\"total_slots\":4}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1167.198306961, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T23:00:10.158682+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":3,\"stage\":\"FORMAT_CASE_PASS\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1167.204671561, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T23:00:10.164508+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":4,\"stage\":\"FORMAT_PREFLIGHT\",\"total_slots\":4}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1173.988099784, "data": "{\"arm\":\"FORMAT-REF\",\"at\":\"2026-10-08T23:00:16.947916+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":4,\"stage\":\"FORMAT_CASE_PASS\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1173.994545415, "data": "{\"arm\":\"FORMAT-ID\",\"at\":\"2026-10-08T23:00:16.954281+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":1,\"stage\":\"FORMAT_PREFLIGHT\",\"total_slots\":4}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1179.504663726, "data": "{\"arm\":\"FORMAT-ID\",\"at\":\"2026-10-08T23:00:22.464670+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":1,\"stage\":\"FORMAT_CASE_PASS\"}\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1179.510888502, "data": "{\"arm\":\"FORMAT-ID\",\"at\":\"2026-10-08T23:00:22.470852+00:00\",\"condition\":\"S6-B24\",\"games_started\":false,\"slot\":2,\"stage\":\"FORMAT_PREFLIGHT\",\"total_slots\":4}\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581431122, "data": "Traceback (most recent call last):\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581464624, "data": "  File \"<frozen runpy>\", line 198, in _run_module_as_main\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581470339, "data": "  File \"<frozen runpy>\", line 88, in _run_code\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581474567, "data": "  File \"/kaggle/working/b24-project/seed/s6b24.py\", line 401, in <module>\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 1184.581437051, "data": "{\"at\":\"2026-10-08T23:00:27.541121+00:00\",\"condition\":\"S6-B24\",\"reason\":\"RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)\",\"s6_green\":false,\"stage\":\"INSTRUMENT_BLOCKED\"}\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581656437, "data": "    s6b24.main(sys.argv[1:])\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581778956, "data": "  File \"/kaggle/working/b24-project/seed/s6b24.py\", line 388, in main\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.581943982, "data": "    if args==['follow']:follow()\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.582021834, "data": "                        ^^^^^^^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.582028187, "data": "  File \"/kaggle/working/b24-project/seed/s6b24.py\", line 348, in follow\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.582253301, "data": "    preflight.run(ROOT,registry,sha(integrity()),status)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.582268726, "data": "  File \"/kaggle/working/b24-project/seed/s6b24_preflight.py\", line 78, in run\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.584153146, "data": "    result=model.propose(folder,registry,arm,index,case['request'],SEED+index,profile)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.584174613, "data": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.584180208, "data": "  File \"/kaggle/working/b24-project/seed/s6b24_model.py\", line 133, in propose\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.584185026, "data": "    if not transport_ok or proposal is None:raise RuntimeError('B24 instrument failure: '+str(error))\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.584189425, "data": "                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.584193481, "data": "RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.604825166, "data": "Traceback (most recent call last):\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.604866503, "data": "  File \"<frozen runpy>\", line 198, in _run_module_as_main\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.604870909, "data": "  File \"<frozen runpy>\", line 88, in _run_code\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.604873547, "data": "  File \"/kaggle/working/b24-project/seed/s6b24_cloud.py\", line 57, in <module>\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.604966697, "data": "    if __name__=='__main__':main()\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.605080401, "data": "                            ^^^^^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.605135988, "data": "  File \"/kaggle/working/b24-project/seed/s6b24_cloud.py\", line 54, in main\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.605244178, "data": "    subprocess.run([sys.executable,'-u','-m','seed.s6b24','follow'],cwd=r.REPO,env=env,check=True)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.605337234, "data": "  File \"/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py\", line 571, in run\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.605661893, "data": "    raise CalledProcessError(retcode, process.args,\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1184.605669985, "data": "subprocess.CalledProcessError: Command '['/tmp/b24-assets/python/bin/python', '-u', '-m', 'seed.s6b24', 'follow']' returned non-zero exit status 1.\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.34343306, "data": "Traceback (most recent call last):\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344512145, "data": "  File \"/kaggle/src/script.py\", line 200, in <module>\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344535794, "data": "    main()\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344541111, "data": "    ~~~~^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344544482, "data": "  File \"/kaggle/src/script.py\", line 194, in main\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344548523, "data": "    run([python,'-u','-m','seed.s6b24_cloud','run','--root',RESULTS],cwd=PROJECT,env=env,timeout=41000)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344553085, "data": "    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344556835, "data": "  File \"/kaggle/src/script.py\", line 29, in run\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344560513, "data": "    subprocess.run([str(x) for x in args], cwd=cwd, env=env, check=True, timeout=timeout)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344564196, "data": "    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344568661, "data": "  File \"/usr/lib/python3.13/subprocess.py\", line 577, in run\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344573065, "data": "    raise CalledProcessError(retcode, process.args,\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344577316, "data": "                             output=stdout, stderr=stderr)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1190.344581363, "data": "subprocess.CalledProcessError: Command '['/tmp/b24-assets/python/bin/python', '-u', '-m', 'seed.s6b24_cloud', 'run', '--root', '/kaggle/working/b24-results']' returned non-zero exit status 1.\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1192.789373023, "data": "/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1192.789413272, "data": "  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1193.118911455, "data": "/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1193.118944182, "data": "  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1194.250462798, "data": "[NbConvertApp] Converting notebook __script__.ipynb to html\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 1195.410241736, "data": "[NbConvertApp] Writing 321186 bytes to __results__.html\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 6.189248439, "data": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 27.0/27.0 MB 71.9 MB/s eta 0:00:00\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 92.549579909, "data": "/tmp/b24-assets/llama.cpp-79e0b68c178656bb0632cb8602d2940b755077f8/ggml/src/ggml-cuda/ggml-cuda.cu: In function \u2018bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t, const ggml_tensor*)\u2019:\n"}}
+{"version": 1, "event": {"stream_name": "stderr", "time": 92.549649195, "data": "/tmp/b24-assets/llama.cpp-79e0b68c178656bb0632cb8602d2940b755077f8/ggml/src/ggml-cuda/ggml-cuda.cu:3229:133: note: \u2018#pragma message: TODO: implement Q4_0, Q4_1, Q5_0, Q5_1, Q8_0, IQ4_NL support (https://github.com/ggml-org/llama.cpp/pull/14661)\u2019\n"}}
+{"version": 1, "event": {"stream_name": "stdout", "time": 889.61125865, "data": "\u001b[32m\u2713 Downloaded\u001b[0m\n"}}

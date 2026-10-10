@@ -1,0 +1,20 @@
+test_actual_foreign_id_and_menu_tamper_rejected (tests.test_s6b24_model.ModelProtocol.test_actual_foreign_id_and_menu_tamper_rejected) ... ok
+test_candidate_exact_reconstruction (tests.test_s6b24_model.ModelProtocol.test_candidate_exact_reconstruction) ... ok
+test_duplicate_json_key_rejected (tests.test_s6b24_model.ModelProtocol.test_duplicate_json_key_rejected) ... ok
+test_dynamic_id_grammar (tests.test_s6b24_model.ModelProtocol.test_dynamic_id_grammar) ... ok
+test_foreign_id_fails (tests.test_s6b24_model.ModelProtocol.test_foreign_id_fails) ... ok
+test_interrupted_call_never_retried (tests.test_s6b24_model.ModelProtocol.test_interrupted_call_never_retried) ... ok
+test_real_preflight_selections_reconstruct (tests.test_s6b24_model.ModelProtocol.test_real_preflight_selections_reconstruct) ... ok
+test_ref_uses_original_grammar (tests.test_s6b24_model.ModelProtocol.test_ref_uses_original_grammar) ... ok
+test_transport_preserves_pinned_options (tests.test_s6b24_model.ModelProtocol.test_transport_preserves_pinned_options) ... ok
+test_allocation_scopes (tests.test_s6b24_runner.RunnerTests.test_allocation_scopes) ... ok
+test_checkpoint_is_transport_boundary (tests.test_s6b24_runner.RunnerTests.test_checkpoint_is_transport_boundary) ... ok
+test_equal_per_arm_caps (tests.test_s6b24_runner.RunnerTests.test_equal_per_arm_caps) ... ok
+test_regression_not_hidden_by_aggregate_gain (tests.test_s6b24_runner.RunnerTests.test_regression_not_hidden_by_aggregate_gain) ... ok
+test_reserved_partition_requires_permit (tests.test_s6b24_runner.RunnerTests.test_reserved_partition_requires_permit) ... ok
+test_unknown_game_not_played (tests.test_s6b24_runner.RunnerTests.test_unknown_game_not_played) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.005s
+
+OK

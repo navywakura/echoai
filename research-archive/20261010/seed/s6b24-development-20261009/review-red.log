@@ -1,0 +1,30 @@
+test_allocation_scopes (tests.test_s6b24_runner.RunnerTests.test_allocation_scopes) ... ok
+test_checkpoint_is_transport_boundary (tests.test_s6b24_runner.RunnerTests.test_checkpoint_is_transport_boundary) ... ok
+test_cross_attempts_pay_their_own_games (tests.test_s6b24_runner.RunnerTests.test_cross_attempts_pay_their_own_games) ... FAIL
+test_equal_per_arm_caps (tests.test_s6b24_runner.RunnerTests.test_equal_per_arm_caps) ... ok
+test_regression_not_hidden_by_aggregate_gain (tests.test_s6b24_runner.RunnerTests.test_regression_not_hidden_by_aggregate_gain) ... ok
+test_reserved_partition_requires_permit (tests.test_s6b24_runner.RunnerTests.test_reserved_partition_requires_permit) ... ok
+test_time_is_accumulated_when_a_slot_checkpoints (tests.test_s6b24_runner.RunnerTests.test_time_is_accumulated_when_a_slot_checkpoints) ... ERROR
+test_unknown_game_not_played (tests.test_s6b24_runner.RunnerTests.test_unknown_game_not_played) ... ok
+
+======================================================================
+ERROR: test_time_is_accumulated_when_a_slot_checkpoints (tests.test_s6b24_runner.RunnerTests.test_time_is_accumulated_when_a_slot_checkpoints)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_runner.py", line 42, in test_time_is_accumulated_when_a_slot_checkpoints
+    with r.slot_timing('B24-S',0):raise r.SliceComplete('test cut')
+         ^^^^^^^^^^^^^
+AttributeError: module 'seed.s6b24' has no attribute 'slot_timing'
+
+======================================================================
+FAIL: test_cross_attempts_pay_their_own_games (tests.test_s6b24_runner.RunnerTests.test_cross_attempts_pay_their_own_games)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/roger/REALRXOS/RXos/echoai/tests/test_s6b24_runner.py", line 36, in test_cross_attempts_pay_their_own_games
+    self.assertNotEqual(batches[0][0]['key'],batches[1][0]['key'])
+AssertionError: '566e4845da556e6158f8b8a449f25f4c2f48f1642fc0b4eb01d082a16359f11c' == '566e4845da556e6158f8b8a449f25f4c2f48f1642fc0b4eb01d082a16359f11c'
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.010s
+
+FAILED (failures=1, errors=1)
