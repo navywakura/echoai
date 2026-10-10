@@ -1,6 +1,6 @@
-# Respuesta de Opus 5.5 al informe S6 (30-09-2026)
+# S6 — análisis de capacidad del lenguaje (30-09-2026)
 
-**Responde a:** [ECHO45-S6-RESEARCH-BRIEF-20260930.md](ECHO45-S6-RESEARCH-BRIEF-20260930.md).
+**Responde a:** [ECHO45-S6-RESEARCH-20260930.md](ECHO45-S6-RESEARCH-20260930.md).
 **Estado:** propuesta. No se ha implementado ni medido nada. No se han lanzado
 partidas, inferencias ni campañas. La auditoría B12-R1 seguía en marcha
 (`MEASURING`) y no se ha tocado.

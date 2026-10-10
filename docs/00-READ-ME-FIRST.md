@@ -1,6 +1,6 @@
 # 00 — Tesis (una página)
 
-**Fecha:** 2026-09-03. Relevo arquitecto 2026-09-04: `CHATGPT_CODEX.md` + `ROADMAP.md`.
+**Fecha:** 2026-09-03. Evolución del proyecto: [roadmap](ROADMAP.md).
 **Hardware Akida:** no hay placa. El fast loop es software.
 
 ## Qué es

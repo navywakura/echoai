@@ -229,7 +229,7 @@ bloqueada en una sola sesión PX4/Gazebo por vuelo, B 12/12 y C 12/12 en salas
 frescas; cero colisiones y cero restricciones duras; certificado `c44402df…`
 con `drone3_sitl_green=true` y segunda auditoría que lo reproduce. HIL y jaula
 siguen pendientes de hardware: `drone3_green=false`.
-[Resultados](DRONE3-RESULTS.md) · [Traspaso](DRONE3-HARDWARE-HANDOFF.md).
+[Resultados](DRONE3-RESULTS.md) · [Traspaso](DRONE3-HARDWARE-GUIDE.md).
 **Continuación física diferida hasta después del software:** hardware del
 traspaso, en el orden FLIGHT-1H → SENSOR-1H → PX4-1H → POWER-1H → DRONE-3H.
 **Siguiente trabajo software: ECHO-4 / RELATION-B**, tras RELATION-A e INTERACTION B/C/D,
@@ -240,8 +240,7 @@ Esto cambia la prioridad, no los requisitos del cierre físico.
 GROUND-1 v2 ya está cerrado; no va después de PATTERN-1R.
 **Regla:** un tajo, un KPI causal, un informe propio. No saltar.
 
-Este es el mapa canónico de trabajo. Los números vivos están en `NOW.md`;
-el contrato Codex ↔ Claude, en `CHATGPT_CODEX.md`.
+Este es el mapa canónico de trabajo. El estado actual está en `NOW.md`.
 
 ---
 
@@ -421,7 +420,7 @@ rechazos y cero hechos falsos. Las dos amenazas no canónicas equivocadas
 (`approach`, recompensa −16) quedan visibles: no eran condición de este
 KPI, pero son deuda de seguridad explícita para ECHO-2.
 
-Prompt siguiente: `CLAUDE_TALK1.md`.
+Siguiente fase: TALK-1.
 
 ---
 
@@ -446,17 +445,17 @@ Primera entrega: 406 tests y salida correcta, pero Codex reprodujo seis
 falsos verdes. Pose se comparaba por presencia de dígitos, el auditor
 compartía las razones traducidas con el renderer y el escáner AST no veía
 `Path.open(...).write(...)` ni modos dinámicos. Se corrige en
-`CLAUDE_TALK1B.md`; PATTERN-0 espera.
+TALK-1b; PATTERN-0 espera.
 
 TALK-1b cerró esos contraejemplos. La revisión posterior encontró uno
 residual: `battery_state` sólo cuenta vivos dentro de `REQUIRED_MUTANTS`,
 por lo que un mutante futuro vivo pasa si los resúmenes mienten. Cierre
-mínimo en `CLAUDE_TALK1C.md`.
+mínimo en TALK-1c.
 
 TALK-1c cerró el último falso verde: toda entrada se valida y todo mutante
 vivo, requerido o futuro, cae aunque los resúmenes mientan. Auditoría
 Codex: 31 tests focales, suite 423 y `talk1/bench/signc rc=0`. TALK-1 verde.
-Siguiente `CLAUDE_PATTERN0.md`.
+Siguiente fase: PATTERN-0.
 
 ---
 
@@ -480,8 +479,7 @@ incluir un mutante sin regularidad y otro que memoriza el conjunto de test.
 Cierre auditado: contexto `(prev_slot, slot, action)`, tabla fija de 512,
 frecuencia mínima 2, examen congelado en cuatro rotaciones. Pattern acierta
 80/80 donde T acierta 40/80; gain +40, cero unknown. PATTERN-0b corrige el
-auditor de escrituras ajenas sin mover esas cifras. Prompt siguiente:
-`CLAUDE_XFER1.md`.
+auditor de escrituras ajenas sin mover esas cifras. Siguiente fase: XFER-1.
 
 ---
 
@@ -556,8 +554,7 @@ No rompen lo ya verde, pero sí son minas para generalizar:
 
 ROOM-2, espejo, segundo agente, SLEEP, hambre, muerte, evolución, 24
 orientaciones, cubo 4³, MiniGrid, planner always-on, `room_id` en `domain`,
-Akida y prosa como verdad. El mapa de ECHO-2 sigue en
-`CHATGPT_ECHO2_VERDICT.md`, bloqueado hasta XFER-1.
+Akida y prosa como verdad. El mapa de ECHO-2 queda bloqueado hasta XFER-1.
 
 ---
 

@@ -87,7 +87,7 @@ PYTHONPATH=.. python3 -m unittest echoai.tests.test_transfer3_v4 echoai.tests.te
 4. **Campaña A→B→C:** no ejecutada ni generada. No hay candidatura válida ni
    protocolo final; custodia externa de Roger pendiente cuando estén listos.
 
-Se solicita [revisión independiente a Claude](TRANSFER3-CLAUDE-REVIEW.md)
+Se solicita revisión independiente
 antes de decidir otro cambio de representación/experimento. No se delega
 custodia de secretos a un agente con acceso al desarrollo. TRANSFER-3 permanece
 abierto, ECHO-3 en 13/15. No se pide aún generar secretos.

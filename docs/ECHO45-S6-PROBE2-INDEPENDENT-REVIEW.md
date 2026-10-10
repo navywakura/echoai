@@ -1,6 +1,6 @@
-# PROBE2 · revisión de Codex y auditoría independiente
+# PROBE2 · revisión y auditoría independiente
 
-2026-10-01. La preparación de Claude es viable como control de capacidad
+2026-10-01. El diseño preparado es viable como control de capacidad
 dirigido. Se mantiene el plan de 874 propuestas HOLD 0/1, 126 firmas, las
 80 partidas A, V3 nativo y el tope de 14.544 partidas. S6 sigue pendiente.
 
@@ -12,7 +12,7 @@ de partir del mismo programa y de una ejecución determinista. La comparación
 de candidatos existentes y la muestra completa de solidez ponen a prueba
 el argumento. Una firma compartida no se utiliza para omitir variantes.
 
-Codex incorporó estas correcciones antes de crear el perfil PROBE2:
+Se incorporaron estas correcciones antes de crear el perfil PROBE2:
 
 - El recibo independiente se vincula al SHA del perfil y resultado originales,
   la base reproducida y los hashes de los controles reejecutados. `valid: true`
@@ -100,7 +100,7 @@ Estos cinco casos no permiten extrapolar el resultado de los otros 869.
 
 La integridad se comprobó de nuevo tras medir. El recorrido completo **no
 se ha lanzado**: se entrega el dato real de calibración para la revisión
-acordada con Claude. No editar `seed/s6probe2.py`, sus tests ni el contrato:
+acordada durante la revisión. No editar `seed/s6probe2.py`, sus tests ni el contrato:
 las fuentes están congeladas. Tras revisar `estimate.json`, la continuación
 usa `lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -m seed.s6probe2 run` y
 reutiliza los cinco cribados existentes. Mantener los cuatro workers, el

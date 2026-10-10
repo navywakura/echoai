@@ -7,7 +7,7 @@ hash a campaña y perfiles íntegros; examen sin abrir también en el filesystem
 **Tipo:** control de capacidad. **No** es mejora autónoma, **no** es evidencia de S6
 y no cambia ningún veredicto de B12.
 
-Origen: [respuesta de Opus](ECHO45-S6-OPUS-RESPONSE-20260930.md), con las
+Origen: [respuesta de Opus](ECHO45-S6-CAPACITY-ANALYSIS-20260930.md), con las
 correcciones de Roger del 30-09-2026 (redacción de conclusiones, pares
 complementarios con ganancia cero, sin estimación de tiempo no medida).
 

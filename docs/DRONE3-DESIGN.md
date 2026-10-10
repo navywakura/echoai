@@ -1,9 +1,8 @@
 # DRONE-3 — contrato prospectivo (SITL)
 
-2026-09-19. Escrito antes de abrir B. Encargo:
-[prompt de DRONE-3](DRONE3-CLAUDE-OPUS5-PROMPT.md). Contrato general:
+2026-09-19. Escrito antes de abrir B. Contrato general:
 [ECHO-3](ECHO-3-ACCEPTANCE.md), hito 15. Este documento cubre el cierre **SITL**.
-HIL y jaula física quedan en el [traspaso de hardware](DRONE3-HARDWARE-HANDOFF.md):
+HIL y jaula física quedan en el [traspaso de hardware](DRONE3-HARDWARE-GUIDE.md):
 aquí no hay placa, dron, sensores reales ni jaula.
 
 ## Pregunta y alcance

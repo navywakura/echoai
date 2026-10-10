@@ -11,8 +11,7 @@
 
 **Estado: ROJO. El banco se ejecutó entero y no cierra.**
 Fecha: 2026-09-10.
-Diseño: [FLIGHT1S-DESIGN.md](FLIGHT1S-DESIGN.md). Relevo:
-[GPT-OPUS5-FLIGHT1S-PROMPT.md](GPT-OPUS5-FLIGHT1S-PROMPT.md).
+Diseño: [FLIGHT1S-DESIGN.md](FLIGHT1S-DESIGN.md).
 Informe: `lab/echo3_flight1s_report.json` ·
 `report_sha256 = 57ccea7f19ebc3b3851abe6faf9c5f1a25365be1f6181291c8e748414944e809`.
 Auditoría: `lab/echo3_flight1s_audit.json`.

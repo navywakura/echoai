@@ -765,7 +765,7 @@
       "role_hint": "package",
       "imports": [],
       "definitions": [],
-      "docstring": "echoAI MONAD workspace. See echoai/CLAUDE.md.",
+      "docstring": "echoAI MONAD workspace.",
       "dynamic_imports": [],
       "sys_path_mutation_lines": [],
       "parse_error": null,
@@ -7101,7 +7101,6 @@
         "tests/test_echo4_dream1_v2.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO4-DREAM1-D-V3-HANDOFF.md",
         "docs/NOW.md"
       ]
     },
@@ -7279,7 +7278,6 @@
         "tests/test_echo4_dream1_v2.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO4-DREAM1-D-V3-HANDOFF.md",
         "docs/NOW.md"
       ]
     },
@@ -20305,7 +20303,7 @@
         "tests/test_s6b12.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -20521,7 +20519,7 @@
         "tests/test_s6probe1.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -20668,7 +20666,7 @@
         "tests/test_s6probe2.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -20760,7 +20758,7 @@
       ],
       "document_path_mentions": [
         "docs/ECHO45-S6-B14-FORENSICS.md",
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -21508,7 +21506,7 @@
         "tests/test_repair_campaign.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -22115,7 +22113,7 @@
       ],
       "document_path_mentions": [
         "docs/ECHO45-S6-B17-FORENSICS.md",
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -24416,7 +24414,7 @@
         "tests/test_stale_transition.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -30266,7 +30264,6 @@
       "document_path_mentions": [
         "docs/METAVERSE1-CUSTODY-RESULTS.md",
         "docs/METAVERSE1-FREEZE-20260920.md",
-        "docs/METAVERSE1-HANDOFF-20260921.md",
         "docs/METAWORLD2-RESULTS.md"
       ]
     },
@@ -31177,7 +31174,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_SIGNC.md",
         "docs/NOW.md"
       ]
     },
@@ -31484,10 +31480,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_GUI1.md",
-        "docs/CLAUDE_GUI2.md",
-        "docs/CLAUDE_GUI3.md",
-        "docs/CLAUDE_GUI35.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -31787,10 +31779,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_CREDIT1.md",
-        "docs/CLAUDE_CUERPO1.md",
-        "docs/CLAUDE_PULPO.md",
-        "docs/CLAUDE_WALK1.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -32118,13 +32106,6 @@
         "tests/test_shifts.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_GUI3.md",
-        "docs/CLAUDE_GUI35.md",
-        "docs/CLAUDE_OBJ1.md",
-        "docs/CLAUDE_PULPO.md",
-        "docs/CLAUDE_PULPOC.md",
-        "docs/CLAUDE_ROOM1.md",
-        "docs/CLAUDE_SELF1.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -34147,9 +34128,7 @@
         "tests/test_transfer3_v5.py",
         "tests/test_transfer3_v6.py"
       ],
-      "document_path_mentions": [
-        "docs/TRANSFER3-CLAUDE-REVIEW.md"
-      ]
+      "document_path_mentions": []
     },
     {
       "path": "nexus0/compose1/space.py",
@@ -38785,7 +38764,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_WORLD3.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -38933,7 +38911,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_SIGNC.md",
         "docs/NOW.md"
       ]
     },
@@ -39019,7 +38996,6 @@
       ],
       "referencing_tests": [],
       "document_path_mentions": [
-        "docs/CLAUDE_SIGNC.md",
         "docs/NOW.md"
       ]
     },
@@ -40116,7 +40092,7 @@
         "tests/test_drone3.py"
       ],
       "document_path_mentions": [
-        "docs/DRONE3-HARDWARE-HANDOFF.md"
+        "docs/DRONE3-HARDWARE-GUIDE.md"
       ]
     },
     {
@@ -44736,8 +44712,6 @@
       "document_path_mentions": [
         "docs/04-DECISIONS.md",
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CLAUDE_OBJ1.md",
-        "docs/CLAUDE_ROOM1.md",
         "docs/ECHO4-INVESTIGACION-Y-PROGRAMA-20260921.md",
         "docs/NOW.md",
         "docs/TRANSFER3-C1-CAMPAIGN.md"
@@ -44889,8 +44863,6 @@
       "document_path_mentions": [
         "docs/04-DECISIONS.md",
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CLAUDE_CUERPO1.md",
-        "docs/CLAUDE_OBJ1.md",
         "docs/NOW.md"
       ]
     },
@@ -52621,7 +52593,6 @@
       "document_path_mentions": [
         "docs/04-DECISIONS.md",
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CLAUDE_OPEN1.md",
         "docs/ECHO45-CLOSURE-EVIDENCE-20261009.md",
         "docs/NOW.md"
       ]
@@ -54205,10 +54176,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_CUERPO1.md",
-        "docs/CLAUDE_ROOM1.md",
-        "docs/CLAUDE_SIGNC.md",
-        "docs/CLAUDE_WORLD3.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -58056,15 +58023,10 @@
       "document_path_mentions": [
         "docs/04-DECISIONS.md",
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CLAUDE-SIM3-PROMPT.md",
-        "docs/CLAUDE_GUI3.md",
-        "docs/CLAUDE_OPEN1.md",
-        "docs/CLAUDE_SIGNC.md",
         "docs/ECHO4-INVESTIGACION-Y-PROGRAMA-20260921.md",
         "docs/ECHO45-CLOSURE-EVIDENCE-20261009.md",
         "docs/ECHOAI-VIDA-ARTIFICIAL-ANTIMATERIA-SINTESIS-20260921.md",
         "docs/ECHOAI-VIDA-ARTIFICIAL-INVESTIGACION-20260921.md",
-        "docs/ECHOAI_FOR_GEMINI.md",
         "docs/GEN1-DESIGN.md",
         "docs/NOW.md",
         "docs/RELEASE_2026-09-24.md",
@@ -58929,9 +58891,6 @@
         "tests/test_shifts.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_OBJ1.md",
-        "docs/CLAUDE_OBJ1B.md",
-        "docs/CLAUDE_OPEN1.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -59259,9 +59218,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CHATGPT_CODEX.md",
-        "docs/CLAUDE_OPEN1.md",
-        "docs/ECHOAI_FOR_CHATGPT_CODEX.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -59447,7 +59403,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_PATTERN0.md",
         "docs/NOW.md"
       ]
     },
@@ -59778,7 +59733,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_PATTERN0.md",
         "docs/NOW.md"
       ]
     },
@@ -68789,10 +68743,6 @@
       "document_path_mentions": [
         "docs/04-DECISIONS.md",
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CLAUDE_CREDIT1.md",
-        "docs/CLAUDE_OPEN1.md",
-        "docs/CLAUDE_PULPO.md",
-        "docs/CLAUDE_PULPOC.md",
         "docs/ECHO45-CLOSURE-EVIDENCE-20261009.md",
         "docs/GEN1-DESIGN.md",
         "docs/NOW.md",
@@ -69173,8 +69123,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_SIGNC.md",
-        "docs/CLAUDE_SIGNCC.md",
         "docs/NOW.md"
       ]
     },
@@ -69417,7 +69365,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_ROOM1.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -71051,7 +70998,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_SELF1.md",
         "docs/ECHO4-EGO-PROGRAMA.md",
         "docs/NOW.md",
         "docs/STATUS.md"
@@ -74403,9 +74349,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_CORTEX1.md",
-        "docs/CLAUDE_SIGNC.md",
-        "docs/CLAUDE_WORLD3.md",
         "docs/NOW.md",
         "docs/STATUS.md"
       ]
@@ -74688,7 +74631,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_SIGNC.md",
         "docs/NOW.md"
       ]
     },
@@ -79287,7 +79229,6 @@
         "tests/test_observe.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_TALK1.md",
         "docs/ECHO45-OBSERVABILITY.md",
         "docs/NOW.md"
       ]
@@ -79690,9 +79631,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_GUI1.md",
-        "docs/CLAUDE_GUI3.md",
-        "docs/CLAUDE_GUI35.md",
         "docs/ECHO45-OBSERVABILITY.md",
         "docs/ECHO45-TO-ECHO5-DECISION-20261009.md",
         "docs/NOW.md"
@@ -80018,8 +79956,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_CORTEX1.md",
-        "docs/CLAUDE_SIGNC.md",
         "docs/STATUS.md"
       ]
     },
@@ -80085,9 +80021,7 @@
       "referencing_tests": [
         "tests/test_nexus0.py"
       ],
-      "document_path_mentions": [
-        "docs/CLAUDE_SIGNC.md"
-      ]
+      "document_path_mentions": []
     },
     {
       "path": "nexus0/transfer3/__init__.py",
@@ -82276,7 +82210,7 @@
         "tests/test_transfer3_v8.py"
       ],
       "document_path_mentions": [
-        "docs/TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md"
+        "docs/TRANSFER3-IMPLEMENTATION-20260918.md"
       ]
     },
     {
@@ -84851,7 +84785,7 @@
         "tests/test_transfer3_v8.py"
       ],
       "document_path_mentions": [
-        "docs/TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md"
+        "docs/TRANSFER3-IMPLEMENTATION-20260918.md"
       ]
     },
     {
@@ -85198,7 +85132,7 @@
         "tests/test_transfer3_v8.py"
       ],
       "document_path_mentions": [
-        "docs/TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md"
+        "docs/TRANSFER3-IMPLEMENTATION-20260918.md"
       ]
     },
     {
@@ -85636,7 +85570,7 @@
         "tests/test_transfer3_v6.py"
       ],
       "document_path_mentions": [
-        "docs/TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md"
+        "docs/TRANSFER3-IMPLEMENTATION-20260918.md"
       ]
     },
     {
@@ -86325,8 +86259,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_GUI1.md",
-        "docs/CLAUDE_GUI2.md",
         "docs/NOW.md"
       ]
     },
@@ -86497,8 +86429,6 @@
       "document_path_mentions": [
         "docs/04-DECISIONS.md",
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CLAUDE_SELF1.md",
-        "docs/CLAUDE_SIGNC.md",
         "docs/ECHO45-CLOSURE-EVIDENCE-20261009.md",
         "docs/NOW.md"
       ]
@@ -86900,7 +86830,6 @@
         "tests/test_nexus0.py"
       ],
       "document_path_mentions": [
-        "docs/CLAUDE_XFER1.md",
         "docs/NOW.md"
       ]
     },
@@ -99580,7 +99509,7 @@
       "document_path_mentions": [
         "docs/ECHO45-S6-B13-DESIGN.md",
         "docs/ECHO45-S6-DIAGNOSIS-20260929.md",
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -100892,7 +100821,7 @@
         "tests/test_s6b11.py"
       ],
       "document_path_mentions": [
-        "docs/ECHO45-S6-RESEARCH-BRIEF-20260930.md",
+        "docs/ECHO45-S6-RESEARCH-20260930.md",
         "docs/NOW.md"
       ]
     },
@@ -112757,7 +112686,7 @@
       ],
       "referencing_tests": [],
       "document_path_mentions": [
-        "docs/ECHO45-S6-PROBE2-CODEX-REVIEW.md",
+        "docs/ECHO45-S6-PROBE2-INDEPENDENT-REVIEW.md",
         "docs/NOW.md"
       ]
     },
@@ -112849,7 +112778,7 @@
       "imported_by": [],
       "referencing_tests": [],
       "document_path_mentions": [
-        "docs/ECHO45-S6-PROBE2-CODEX-REVIEW.md",
+        "docs/ECHO45-S6-PROBE2-INDEPENDENT-REVIEW.md",
         "docs/NOW.md"
       ]
     },
@@ -113135,8 +113064,7 @@
       "document_path_mentions": [
         "docs/ECHO-RSI-2-FUTURE-REVIEW-20261007.md",
         "docs/ECHO-RSI-2-RESEARCH-PLAN.md",
-        "docs/ECHO45-S6-PROBE2-CODEX-REVIEW.md",
-        "docs/ECHO45-S6-PROBE2-HANDOFF.md",
+        "docs/ECHO45-S6-PROBE2-INDEPENDENT-REVIEW.md",
         "docs/NOW.md"
       ]
     },
@@ -117539,9 +117467,7 @@
       ],
       "imported_by": [],
       "referencing_tests": [],
-      "document_path_mentions": [
-        "docs/DRONE3-CLAUDE-OPUS5-PROMPT.md"
-      ]
+      "document_path_mentions": []
     },
     {
       "path": "tests/test_dynamic1.py",
@@ -117731,7 +117657,7 @@
       "imported_by": [],
       "referencing_tests": [],
       "document_path_mentions": [
-        "docs/TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md",
+        "docs/TRANSFER3-IMPLEMENTATION-20260918.md",
         "docs/TRANSFER3-INDEX.md",
         "docs/TRANSFER3-PENDIENTE.md"
       ]
@@ -124122,8 +124048,7 @@
       "referencing_tests": [],
       "document_path_mentions": [
         "docs/FLIGHT1S-RESULTS.md",
-        "docs/FLIGHT1S-V2-RESULTS.md",
-        "docs/GPT-OPUS5-FLIGHT1S-V2-PROMPT.md"
+        "docs/FLIGHT1S-V2-RESULTS.md"
       ]
     },
     {
@@ -124299,8 +124224,7 @@
       "referencing_tests": [],
       "document_path_mentions": [
         "docs/FLIGHT1S-RESULTS.md",
-        "docs/FLIGHT1S-V2-RESULTS.md",
-        "docs/GPT-OPUS5-FLIGHT1S-V2-PROMPT.md"
+        "docs/FLIGHT1S-V2-RESULTS.md"
       ]
     },
     {
@@ -126244,8 +126168,7 @@
       "referencing_tests": [],
       "document_path_mentions": [
         "docs/GUI4-DESIGN.md",
-        "docs/GUI4-RESULTS.md",
-        "docs/METAVERSE1-HANDOFF-20260921.md"
+        "docs/GUI4-RESULTS.md"
       ]
     },
     {
@@ -127351,7 +127274,6 @@
         "docs/METAVERSE1-CUSTODY-RESULTS.md",
         "docs/METAVERSE1-DESIGN.md",
         "docs/METAVERSE1-FREEZE-20260920.md",
-        "docs/METAVERSE1-HANDOFF-20260921.md",
         "docs/METAWORLD2-RESULTS.md"
       ]
     },
@@ -128413,12 +128335,6 @@
       "referencing_tests": [],
       "document_path_mentions": [
         "docs/05-NEXUS-0-SPEC.md",
-        "docs/CHATGPT_CODEX.md",
-        "docs/CLAUDE_CORTEX1.md",
-        "docs/CLAUDE_SIGNC.md",
-        "docs/CLAUDE_WORLD3.md",
-        "docs/CLAUDE_XFER1.md",
-        "docs/ECHOAI_FOR_GEMINI.md",
         "docs/GUI4-RESULTS.md"
       ]
     },
@@ -136569,9 +136485,7 @@
       ],
       "imported_by": [],
       "referencing_tests": [],
-      "document_path_mentions": [
-        "docs/ECHO45-S6-PROBE2-HANDOFF.md"
-      ]
+      "document_path_mentions": []
     },
     {
       "path": "tests/test_safe1.py",
@@ -137565,7 +137479,6 @@
       "referencing_tests": [],
       "document_path_mentions": [
         "docs/FLIGHT1S-V2-RESULTS.md",
-        "docs/GPT-OPUS5-FLIGHT1S-V2-PROMPT.md",
         "docs/SIM3-RESULTS.md"
       ]
     },
@@ -141201,5 +141114,6 @@
       "seed/s6b16.py",
       "seed/s6b16_micro.py"
     ]
-  ]
+  ],
+  "documentation_publication_note": "2026-10-10: working instructions for coding assistants omitted; technical report paths updated. Source hashes and AST data retain the original inventory scope."
 }

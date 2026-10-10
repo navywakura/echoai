@@ -140,7 +140,6 @@ Quedan dos bloques superiores: S6 y cierre final; los verdes V3 mantienen
 su alcance sintético y la transferencia ARC sigue pendiente.
 [Investigación](ECHO45-S6-B19-FORENSICS.md) ·
 [Plan B20](ECHO45-S6-B20-PLAN.md) ·
-[Prompt de implementación](ECHO45-S6-B20-IMPLEMENTATION-PROMPT.md).
 <!-- S6B20-RESEARCH-END -->
 
 <!-- S6B19-BEGIN -->

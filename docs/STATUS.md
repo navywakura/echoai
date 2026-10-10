@@ -550,7 +550,7 @@ mutants detected, eight trace manipulations rejected by the audit. Certificate
 `c44402df…` carries `drone3_sitl_green=true`; a fresh-process audit reproduces
 it. **`drone3_hil_green`, `drone3_cage_green` and `drone3_green` stay false:
 there is no flight controller, drone, real sensor or cage in the laboratory**
-([results](DRONE3-RESULTS.md), [handoff](DRONE3-HARDWARE-HANDOFF.md)).
+([results](DRONE3-RESULTS.md), [handoff](DRONE3-HARDWARE-GUIDE.md)).
 Hardware HIL/cage validation remains outstanding, so ECHO-3 stays at 14/15. See the [versioned status review](ECHO3-STATUS-20260917.md)
 and [roadmap](ROADMAP.md). The sections below preserve the historical results;
 their old “next” instructions do not override this checkpoint.
@@ -1381,7 +1381,6 @@ Tests 145 → 153. MVP watch: `python3 -m echoai.nexus0.demo`. The
 situated program ChatGPT signed is closed. What follows (sleep, a real
 LLM behind the firewall, a body, Akida) is another project.
 
-Briefing for a future discussion: `echoai/docs/ECHOAI_FOR_GEMINI.md`.
 
 ---
 
@@ -3376,7 +3375,7 @@ open1 rc=0 · tests 330 → 342, OK (expected failures=1)
 > focales, los bancos `bench/signc/graph/open1/obj1` y 392 pruebas completas.
 > La repetición real con Qwen dio `green=true`: 6/8, paráfrasis 4/6 vs 0,
 > ambos canónicos, ROI +16, 8 llamadas, 0 rechazos y 0 hechos falsos.
-> Siguiente `CLAUDE_TALK1.md`.
+> Siguiente TALK-1.
 
 `PYTHONPATH=. python3 -m echoai.nexus0.signc` · `lab/nexus0_signc_report.json`
 
@@ -4067,7 +4066,7 @@ sólo intersecta con `REQUIRED_MUTANTS` y la cláusula posterior confía en
 los contadores, pese a prometer proteger mutantes requeridos o no.
 
 Veredicto: semántica e aislamiento cerrados; puerta del informe aún roja.
-Siguiente `CLAUDE_TALK1C.md`. PATTERN-0 espera.
+Siguiente TALK-1c. PATTERN-0 espera.
 
 ### Revisión Codex posterior — rojo de verificación
 
@@ -4089,7 +4088,7 @@ Además, redactor y auditor comparten `talk.REASON_ES`: si ambos llaman
 `Path(p).open('w').write('x')` ni `open(p, mode).write('x')`.
 
 Veredicto vigente: narrador correcto, aislamiento actual correcto,
-**auditor con falsos verdes**. Siguiente `CLAUDE_TALK1B.md`; PATTERN-0 no
+**auditor con falsos verdes**. Siguiente TALK-1b; PATTERN-0 no
 empieza.
 
 
@@ -4249,7 +4248,7 @@ extra_future_mutant_killed=false  green=true   # falso verde
 ```
 
 Semántica e aislamiento quedan aceptados. La puerta del informe espera la
-corrección mínima de `CLAUDE_TALK1C.md`; PATTERN-0 no empieza todavía.
+corrección mínima de TALK-1c; PATTERN-0 no empieza todavía.
 
 ### Revisión Codex final — TALK-1 verde
 
@@ -4270,7 +4269,7 @@ required / alive / malformed 42 / 0 / 0
 causal_writes                0
 ```
 
-TALK-1 queda cerrado. Siguiente `CLAUDE_PATTERN0.md`.
+TALK-1 queda cerrado. Siguiente PATTERN-0.
 
 ---
 
@@ -4758,7 +4757,7 @@ brazos que corren; y el 96–0 de Pattern usa un scratch sin slots CAM del riff,
 por lo que no aísla la utilidad propia de PatternMemory. Los 15 tests focales
 pasan, pero esos contraejemplos se reprodujeron directamente.
 
-Siguiente tajo: `CLAUDE_XFER1B.md`. Hasta ese cierre, **ECHO-1 sigue abierto**.
+Siguiente tajo: XFER-1b. Hasta ese cierre, **ECHO-1 sigue abierto**.
 
 
 ---
@@ -4930,7 +4929,7 @@ recomputar la puerta desde `rows`, firmas, métricas, ablación y canal, e
 instrumentar las llamadas reales del brazo rechazado. No se toca el animal,
 la física ni los números.
 
-Siguiente tajo: `CLAUDE_XFER1C.md`. Hasta cerrarlo, **ECHO-1 sigue abierto**.
+Siguiente tajo: XFER-1c. Hasta cerrarlo, **ECHO-1 sigue abierto**.
 
 
 ---
@@ -5055,7 +5054,7 @@ Son relaciones exigidas por el propio XFER-1c: el silencio debe derivarse de
 los dos contadores, una firma igual también debe ser completa y canónica,
 `None` permanece en el denominador, los puntos de ablación deben ser los de
 la sonda y el protocolo debe derivarse de las caminatas reales. El tajo
-`CLAUDE_XFER1D.md` cierra el grafo completo sin tocar el núcleo ni las cifras.
+XFER-1d cierra el grafo completo sin tocar el núcleo ni las cifras.
 
 Hasta ese cierre, **ECHO-1 sigue abierto**.
 

@@ -13,7 +13,7 @@ fichero ajeno; el espacio de nombres `a1` está libre.
 
 ## Corrección de un error propio, antes de nada
 
-El registro [de implementación](TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md)
+El registro [de implementación](TRANSFER3-IMPLEMENTATION-20260918.md)
 afirmó que la feature 504 era «el único obstáculo entre el mejor brazo y el
 cribado». **Es falso.** Con 12 salas, aun con `new_failures = 0`, el brazo
 seguía incumpliendo tres condiciones más:

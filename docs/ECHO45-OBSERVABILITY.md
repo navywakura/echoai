@@ -120,8 +120,7 @@ python3 observe.py --launch --run python3 -m echoai.nexus0.bench
 ```
 
 Esto activa únicamente el registro existente: no enciende el córtex ni cambia
-opciones del agente. Los agentes futuros tienen este procedimiento enlazado en
-`AGENTS.md`. Una ejecución antigua sin traza no permite recuperar las decisiones
+opciones del agente. Una ejecución antigua sin traza no permite recuperar las decisiones
 que nunca guardó; una ejecución nueva sin estos mecanismos tampoco las exporta.
 
 ## Cómo se conserva el comportamiento

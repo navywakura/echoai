@@ -6,7 +6,7 @@
 `drone3_sitl_green=true`), pero el hito 15 exige SITL, HIL y jaula: sin hardware,
 `drone3_green=false` y ECHO-3 sigue en 14/15.
 [Resultados](DRONE3-RESULTS.md) · [Contrato](DRONE3-DESIGN.md) ·
-[Traspaso de hardware](DRONE3-HARDWARE-HANDOFF.md).
+[Traspaso de hardware](DRONE3-HARDWARE-GUIDE.md).
 SIM-3, FLIGHT-1S v6, SENSOR-1S v3, GROUND-1 v2, DYNAMIC-1 v2, PATTERN-1R v4
 y FUSION-1, junto con COMPOSE-1 v4, CAUSE-1, PX4-1, POWER-1, SAFE-1 v2,
 HOST-1 y TRANSFER-3, tienen certificados verdes software: catorce de quince hitos. DYNAMIC sólo en el alcance de

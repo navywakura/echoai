@@ -5,7 +5,6 @@ sigue siendo el diseño congelado y no se reescribe. Lo medido está en
 [SIM3-RESULTS.md](SIM3-RESULTS.md) y en `lab/echo3_sim3_report.json`.
 Fecha de diseño: 2026-09-10.
 Contrato superior: [ECHO-3-ACCEPTANCE.md](ECHO-3-ACCEPTANCE.md).
-Relevo: [CLAUDE-SIM3-PROMPT.md](CLAUDE-SIM3-PROMPT.md).
 
 ## 1. Pregunta y alcance
 

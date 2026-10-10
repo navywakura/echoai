@@ -23,7 +23,7 @@ Detalle de símbolos, hashes, imports, consumidores, tests y documentos: [module
 
 | Archivo | Descripción declarada / rol orientativo | Dependencias locales | Tests importadores |
 |---|---|---:|---:|
-| [__init__.py](../../../__init__.py) | echoAI MONAD workspace. See echoai/CLAUDE.md. | 0 | 2 |
+| [__init__.py](../../../__init__.py) | echoAI MONAD workspace. | 0 | 2 |
 
 ## echo4 — 109 archivos
 

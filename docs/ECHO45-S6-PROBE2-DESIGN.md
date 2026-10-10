@@ -5,7 +5,7 @@ revisión de Codex. No se ha jugado ninguna partida de PROBE2.
 **Tipo:** control de capacidad **dirigido después de conocer PROBE1**. No es mejora
 autónoma, no es evidencia de S6 y no cambia ningún veredicto de B12 ni de PROBE1.
 
-Origen: [encargo](ECHO45-S6-PROBE2-HANDOFF.md) · [resultados PROBE1](ECHO45-S6-PROBE1-RESULTS.md).
+Origen: [resultados PROBE1](ECHO45-S6-PROBE1-RESULTS.md).
 
 ## 1. Selección posterior declarada e hipótesis
 

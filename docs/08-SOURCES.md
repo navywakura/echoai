@@ -9,7 +9,6 @@ son contexto, no dependencias.
 
 | Path | Por qué |
 |---|---|
-| `echoai/CLAUDE.md` | contrato del implementador |
 | `echoai/docs/05-NEXUS-0-SPEC.md` | spec de este sprint |
 | `kernel/include/wsp.h` | cable 16 B |
 | `kernel/navi/wsp_lex.c` | n-gramas encoder |
@@ -32,7 +31,6 @@ son contexto, no dependencias.
 | `docs/AKIDA.md` | cinco cerraduras |
 | `docs/CIANOTIPO.md` | tres líneas, un idioma |
 | `docs/ECHO.md` | tipos de acto |
-| `docs/SCHNC_SUPERPROMPT.md` | briefing que corrigió SCHNC-1 |
 | `docs2.0/neuromorfico.md` | 2.1: Q6, prisma5 sintético, navi10 fuera |
 | `docs2.0/limites.md` | lo que 2.1 no hace |
 | `vendor/RogexWSP/docs/SPEC.md` | 32 átomos, E[6] |

@@ -246,7 +246,7 @@ El paralelismo con software es una analogía de fronteras y canales de interacci
 - La reproducción determinista requiere controlar entradas, orden de eventos y otras fuentes de variación.
 - El confinamiento de antimateria limita encuentros físicos con partículas del entorno.
 
-ECHO-AI no necesita convertirse en bare-metal para estudiar esos problemas. NEXUS-0 está especificado como software host Python; echOS y el núcleo cognitivo no se deben confundir. [Contrato local](../CLAUDE.md), [especificación de NEXUS-0](05-NEXUS-0-SPEC.md).
+ECHO-AI no necesita convertirse en bare-metal para estudiar esos problemas. NEXUS-0 está especificado como software host Python; echOS y el núcleo cognitivo no se deben confundir. [especificación de NEXUS-0](05-NEXUS-0-SPEC.md).
 
 ## Parte III. Una interpretación conjunta para Kurau, Asdro y ECHO
 

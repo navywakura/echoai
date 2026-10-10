@@ -1,6 +1,6 @@
-# Investigación para cerrar S6: diagnóstico y propuestas para Opus 5.5
+# Investigación para cerrar S6: diagnóstico y propuestas
 
-**Fecha: 30 de septiembre de 2026. Destinatario: Opus 5.5.**
+**Fecha: 30 de septiembre de 2026.**
 Estado operativo comprobado a las **21:04 CEST (19:04 UTC)** de esa fecha.
 Informe de investigación preparado a petición del responsable de echoAI.
 Las propuestas de este documento **no están implementadas ni medidas**.
@@ -419,7 +419,7 @@ Fuente: [comparación 500K](ECHO45-CAPACITY500K-ARC1-RESULTS.md).
 2. **Diagnóstico sin nuevas llamadas al modelo.** Reproducir este informe,
    construir fixtures para P1/P2 y probar semántica de parches. Son controles
    de software, no evidencia de mejora autónoma.
-3. **Elegir con Opus una intervención mínima y prerregistrarla.** Definir
+3. **Elegir una intervención mínima y prerregistrarla.** Definir
    población, cohortes, semillas, presupuesto, métricas, ablaciones y criterios
    de abandono. No aplicar siete ideas simultáneamente y atribuir el efecto
    a la preferida.
@@ -477,49 +477,7 @@ selección adaptativa. La investigación debe precisar **qué falta en su
 implementación concreta**, en vez de recomendar esos nombres como si fueran
 componentes ausentes.
 
-## 8. Entrega solicitada a Opus 5.5
-
-Se solicita una respuesta que incluya:
-
-1. Diagnóstico crítico: hechos, hipótesis y explicaciones alternativas;
-   confianza cualitativa y qué observación refutaría cada hipótesis.
-2. Orden de prioridad y elección de **una intervención inicial**. Explicar por
-   qué debería mejorar ECHO frente a FIJO, además de mejorar ambos frente a
-   SEMILLA, y qué tendría que ocurrir para superar SIN FILTRO.
-3. Diseño del cambio mínimo: funciones afectadas, esquema de datos o pseudocódigo,
-   sin editar fuentes congeladas ni proponer una implementación paralela del núcleo.
-4. Ablaciones, controles, métricas, cohortes y presupuestos exactos; separar
-   control humano de capacidad, descubrimiento del modelo y selección de ECHO.
-5. Referencias primarias adicionales verificadas, mecanismo aplicable y coste;
-   señalar cuando una recomendación no esté respaldada por evidencia directa.
-6. Criterios para continuar o abandonar la hipótesis, plan de auditoría y
-   condiciones explícitas bajo las que **no** se podría declarar verde.
-
-Restricciones del proyecto: no modificar B12-R1 durante su auditoría; no
-introducir otro thought-bus; no activar un LLM para NEXUS-0; no utilizar el
-proyecto legado `echo-discord`; no asumir hardware AKD1000. Los nuevos ensayos
-de desarrollo deben mantener observables sus decisiones reales con el sistema
-existente; ningún monólogo inventado ni texto del visor realimentado al agente.
-No instrumentar B ni el examen reservado.
-
-### Mensaje listo para acompañar este informe
-
-> Investiga cómo cerrar S6 de echoAI a partir del informe adjunto. La campaña
-> B12-R1 terminó ECHO 378, FIJO 378, SEMILLA 365 en desarrollo; el examen no se
-> ha abierto. No des por hecho que más neuronas o un modelo mayor resuelven el
-> problema. Hay evidencia de un objetivo REFINE que persiste aunque su propuesta
-> y contrastes salen del prompt, feedback solo entre lotes de cinco, escasa
-> diversidad de comportamiento y un lenguaje que añade reglas sin editarlas.
-> Evalúa críticamente esas causas, contrástalas con fuentes primarias y elige
-> la intervención mínima con mayor valor informativo. Propón pseudocódigo,
-> ablaciones y presupuesto. Separa corregir un bug, demostrar capacidad del
-> lenguaje, descubrir una mejora autónoma y aprobar el examen. Deben conservarse
-> V1–V4 y B1–B5, igualdad de recursos entre brazos y protección de datos.
-> Explica qué resultado refutaría tu propuesta y qué hacer entonces. No
-> prometas verde ni inventes resultados. Si necesitas archivos que no tienes,
-> pide los fragmentos concretos; este informe no supone acceso a mi repositorio.
-
-## 9. Evidencia y reproducibilidad
+## 8. Evidencia y reproducibilidad
 
 - [Resumen calculado y hashes](../lab/research/s6-brief-20260930/evidence.json).
 - [Analizador de solo lectura de campaña](../lab/research/s6-brief-20260930/analyze.py).

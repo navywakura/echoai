@@ -143,5 +143,6 @@ d2d89135db0066cdb13d86d46145ea9fcedd21e959841349345684ce9c9fc35d  lab/metaverse1
 
 Mañana no se empieza por el acabado visual. Se empieza por reparar la cadena de custodia declaración → GLB → recibo y demostrar que una reconstrucción headless conserva la declaración, produce un recibo separado y genera un artefacto verificable. Después se avanza hacia la paridad Gazebo/PX4 y sólo entonces hacia el adaptador y el visor.
 
-El procedimiento completo está en `docs/METAVERSE1-HANDOFF-20260921.md`.
+La custodia de la etapa 0 se documenta en
+[METAVERSE1-CUSTODY-RESULTS.md](METAVERSE1-CUSTODY-RESULTS.md).
 

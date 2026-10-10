@@ -96,7 +96,7 @@ Se reutilizan implementaciones donde los contratos encajen y métodos de
 evaluación donde no encajen todavía. No se copian módulos para evitar sus
 restricciones, ni se reetiquetan éxitos anteriores como nuevos éxitos de ego.
 
-Referencias: [SELF-1](CLAUDE_SELF1.md), [su código](../nexus0/self1.py),
+Referencias: [código de SELF-1](../nexus0/self1.py),
 [CAUSE-1](CAUSE1-DESIGN.md), [investigación de ECHO-4](ECHO4-INVESTIGACION-Y-PROGRAMA-20260921.md).
 
 ## Secuencia integrada

@@ -9,7 +9,7 @@ campañas reales. No reutilizar `custody.py` v1 como plantilla de campaña.
 variantes con 128 movimientos de aprendizaje cada una en 64 salas nuevas.
 Ninguna pasa el cribado; no existe aún candidatura para el examen final.
 [Requisitos pendientes](TRANSFER3-FINAL-PROTOCOL-DRAFT.md) y
-[encargo de revisión a Claude](TRANSFER3-CLAUDE-REVIEW.md), ya recibido.
+[reparaciones tras revisión](TRANSFER3-REPAIR-V5.md).
 No generar secretos.
 
 **Actualización:** [v3](TRANSFER3-REHEARSAL-V3.md) corrige la doble

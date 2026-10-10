@@ -30,7 +30,6 @@ La columna **vigencia** es lo importante:
 | [V3-DESIGN](TRANSFER3-V3-DESIGN.md) · [REHEARSAL-V3](TRANSFER3-REHEARSAL-V3.md) | captura única corregida; Q idéntica | vigente |
 | [V4-DESIGN](TRANSFER3-V4-DESIGN.md) · [REHEARSAL-V4](TRANSFER3-REHEARSAL-V4.md) | cribado a igual presupuesto: los tres brazos pierden | vigente |
 | [REPAIR-V5](TRANSFER3-REPAIR-V5.md) | reparaciones + diagnóstico de sensibilidad a Q | vigente |
-| [CLAUDE-REVIEW](TRANSFER3-CLAUDE-REVIEW.md) | mis 16 hallazgos sobre v2–v3 y custodia | vigente |
 | [PREPARATION](TRANSFER3-PREPARATION.md) · [FINAL-PROTOCOL-DRAFT](TRANSFER3-FINAL-PROTOCOL-DRAFT.md) | custodia y borrador de protocolo | vigente |
 
 ## Línea de cobertura y representación (Claude)
@@ -40,12 +39,11 @@ La columna **vigencia** es lo importante:
 | [V6-DESIGN](TRANSFER3-V6-DESIGN.md) · [V6-RESULTS](TRANSFER3-V6-RESULTS.md) | el optimismo por cero **no** era la restricción | vigente |
 | [V7-DESIGN](TRANSFER3-V7-DESIGN.md) · [V7-RESULTS](TRANSFER3-V7-RESULTS.md) | el presupuesto no lo es: ×8 compra 2 pares | vigente |
 | [V8-DESIGN](TRANSFER3-V8-DESIGN.md) · [V8-RESULTS](TRANSFER3-V8-RESULTS.md) | la diversidad de salas sí sube cobertura; sigue sin pasar | vigente |
-| [OPUS5-IMPLEMENTATION](TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md) | registro histórico de v6–v8 | **corregido**: afirma que la feature 504 era el único bloqueo; eran cuatro criterios. Corrección en [A1-DESIGN](TRANSFER3-PLAN-A1-DESIGN.md) |
+| [OPUS5-IMPLEMENTATION](TRANSFER3-IMPLEMENTATION-20260918.md) | registro histórico de v6–v8 | **corregido**: afirma que la feature 504 era el único bloqueo; eran cuatro criterios. Corrección en [A1-DESIGN](TRANSFER3-PLAN-A1-DESIGN.md) |
 
-## Cambio de variable: propiedades del cuerpo (Claude)
+## Cambio de variable: propiedades del cuerpo
 
-Autorizado por [la propuesta](TRANSFER3-PROPUESTA-TRANSFERENCIA-UTIL.md) y
-[el encargo](TRANSFER3-CLAUDE-OPUS5-PLANES-ABC.md), ambos de codex.
+Diseño en [la propuesta de transferencia útil](TRANSFER3-PROPUESTA-TRANSFERENCIA-UTIL.md).
 
 ### Plan A — calibración de costes de movimiento · **CERRADO EN ROJO**
 

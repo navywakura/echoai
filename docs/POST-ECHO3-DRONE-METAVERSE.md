@@ -236,7 +236,7 @@ El cuerpo puede parecer un dron y seguir siendo PULPO. La etiqueta describe
 conducta comprobada, no aspecto, tamaño de la red, número de voxeles ni motor
 gráfico.
 
-La progresión existente de `ECHOAI_FOR_CHATGPT_SCALE.md` sigue vigente:
+La progresión de capacidades propuesta sigue vigente:
 
 1. **PULPO:** orientación y aprendizaje espacial con el córtex apagado,
    predicción de consecuencias y desvío cuando cambia el camino.

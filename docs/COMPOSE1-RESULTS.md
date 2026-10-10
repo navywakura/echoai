@@ -64,7 +64,7 @@ La reserva usa costes enteros de movimiento; no son julios ni POWER-1 cerrado.
 
 Falta la puerta Gazebo/PX4 del [diseño congelado](COMPOSE1-DESIGN.md), además
 de un banco que discrimine composición de medios frente a reacción con memoria.
-La continuación está descrita en [COMPOSE1-SITL-HANDOFF.md](COMPOSE1-SITL-HANDOFF.md).
+La continuación está descrita en [COMPOSE1-SITL-PLAN.md](COMPOSE1-SITL-PLAN.md).
 No hace falta AKD1500 ni otro hardware para desarrollar esa continuación SITL.
 
 ## Verificación y coste

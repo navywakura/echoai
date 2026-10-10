@@ -31,7 +31,7 @@ El resultado defendible sería «agente de vida artificial con mantenimiento y a
 
 ## 2. Método, alcance y estado real del proyecto
 
-Se revisaron las instrucciones de `CLAUDE.md`, la especificación de NEXUS-0, los documentos de estado, los contratos pertinentes, implementaciones de homeostasis, aprendizaje, energía, integración corporal y mundo virtual, y bibliografía primaria. Se realizó una comprobación exhaustiva en memoria de las transiciones de HEAT-1b; no se ejecutaron nuevas campañas de aprendizaje ni se reabrieron exámenes sellados.
+Se revisaron la especificación de NEXUS-0, los documentos de estado, los contratos pertinentes, implementaciones de homeostasis, aprendizaje, energía, integración corporal y mundo virtual, y bibliografía primaria. Se realizó una comprobación exhaustiva en memoria de las transiciones de HEAT-1b; no se ejecutaron nuevas campañas de aprendizaje ni se reabrieron exámenes sellados.
 
 Distingo cuatro categorías en todo el documento:
 
@@ -54,7 +54,7 @@ Invariantes que se conservan:
 - Sin cambiar kernel, echOS, contratos históricos ni evidencias selladas.
 - Sensores y mensajes admitidos por contratos explícitos; nunca acceso privilegiado del agente a la verdad del simulador.
 
-Referencias locales: [instrucciones](../CLAUDE.md), [especificación](05-NEXUS-0-SPEC.md), [roadmap](ROADMAP.md), [DRONE-3](DRONE3-RESULTS.md), [META-WORLD-2](METAWORLD2-RESULTS.md) y [custodia de METAVERSE-1](METAVERSE1-CUSTODY-RESULTS.md).
+Referencias locales: [especificación](05-NEXUS-0-SPEC.md), [roadmap](ROADMAP.md), [DRONE-3](DRONE3-RESULTS.md), [META-WORLD-2](METAWORLD2-RESULTS.md) y [custodia de METAVERSE-1](METAVERSE1-CUSTODY-RESULTS.md).
 
 ## 3. Qué puede heredarse y qué no se puede conectar sin más
 

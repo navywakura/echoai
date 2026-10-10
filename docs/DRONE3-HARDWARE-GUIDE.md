@@ -1,6 +1,6 @@
 # DRONE-3 — traspaso a hardware: HIL y jaula física
 
-2026-09-19. Documento para Roger, para cuando el hardware exista. **Hoy no hay
+2026-09-19. Procedimiento previsto para cuando el hardware exista. **Hoy no hay
 controlador de vuelo, dron, sensores reales ni jaula en el laboratorio.** Nada
 de lo que sigue está ejecutado: es el procedimiento y lo que hace falta.
 `drone3_hil_green` y `drone3_cage_green` siguen en `false` hasta que haya
@@ -140,7 +140,7 @@ Los mismos del [contrato SITL](DRONE3-DESIGN.md#criterios), con:
 - Artefactos por vuelo: traza del runner, diario del agente, ULog del FC, verdad
   de terreno, vídeo sólo ilustrativo, parámetros exportados, lista previa firmada.
 
-## 9. Procedimiento B/C (para Roger)
+## 9. Procedimiento B/C
 
 1. Cerrar FLIGHT-1H, SENSOR-1H, PX4-1H y POWER-1H, cada uno con su contrato.
 2. Escribir y aprobar el contrato DRONE-3H: escala, sensores, energía y juez.

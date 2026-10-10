@@ -2,7 +2,7 @@
 
 Roger autoriza empezar implementación por tajos y fija como destino el
 **AKD1500 M.2**. Las notas de rol «Codex no pica» de NOW son históricas.
-El mapa funcional sigue siendo `CHATGPT_ECHO2_VERDICT.md`: VITA-1 →
+El mapa funcional de ECHO-2: VITA-1 →
 FOOD-1 → SURV-1 → SHIFT-S; escala y herencia después.
 
 ## Puerta y primer cambio

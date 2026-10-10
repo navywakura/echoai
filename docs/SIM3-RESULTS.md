@@ -391,5 +391,4 @@ Ninguna de las tres se ha corregido aquí, ni a escondidas ni de frente.
 ## 9. Relevo
 
 Manifiestos y runners cerrados: [SIM3-RUNNERS.md](SIM3-RUNNERS.md).
-Siguiente tajo software: FLIGHT-1S. Relevo para Claude Opus 5:
-[GPT-OPUS5-FLIGHT1S-PROMPT.md](GPT-OPUS5-FLIGHT1S-PROMPT.md).
+Siguiente fase software: [FLIGHT-1S](FLIGHT1S-DESIGN.md).

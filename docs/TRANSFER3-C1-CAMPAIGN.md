@@ -207,8 +207,7 @@ correr. Es deliberado: garantiza que examina exactamente el código comprometido
 Las dependencias van **más allá de `transfer3/`**. Incluyen el núcleo de
 NEXUS-0: `nexus0/encoder.py`, `lex.py`, `qtable.py`, `gate.py`, `loop.py`,
 `env.py`, `types.py`, además de `compose1*/`, `fusion1/`, `sim3/` y los cinco
-`RXos/navi10_*.py`. **Portar `wsp_lex` al encoder** (tarea pendiente de
-CLAUDE.md) **rompería la campaña**: tiene que esperar a que cierre. La lista
+`RXos/navi10_*.py`. **Portar `wsp_lex` al encoder** **rompería la campaña**: tiene que esperar a que cierre. La lista
 exacta está en `examiner_manifest` del protocolo, y la orden del paso 0 dice en
 un segundo si el árbol sigue intacto.
 

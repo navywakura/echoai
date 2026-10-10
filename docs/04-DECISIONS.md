@@ -1,7 +1,7 @@
 # 04 — Decisiones: se queda / se tira / se añade
 
-Síntesis de: inventario del repo, `docs/SCHNC_SUPERPROMPT.md` (briefing
-a ChatGPT), y la respuesta de investigación 2026 (SCHNC-2).
+Síntesis del inventario del repositorio y de la revisión de investigación
+de 2026 (SCHNC-2).
 
 ## Se queda (hipótesis)
 

@@ -3,7 +3,6 @@
 **Estado: diseño congelado antes de calibrar.** Fecha: 2026-09-10.
 Repara: [FLIGHT1S-DESIGN.md](FLIGHT1S-DESIGN.md) y su resultado rojo en
 [FLIGHT1S-RESULTS.md](FLIGHT1S-RESULTS.md), que **no se tocan**.
-Relevo: [GPT-OPUS5-FLIGHT1S-V2-PROMPT.md](GPT-OPUS5-FLIGHT1S-V2-PROMPT.md).
 Resultados: [FLIGHT1S-V2-RESULTS.md](FLIGHT1S-V2-RESULTS.md).
 
 ## 1. El defecto que se repara

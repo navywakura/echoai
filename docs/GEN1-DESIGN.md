@@ -9,7 +9,7 @@ final y no declara GEN-1 verde.
 ¿Un hijo que nace con CAM, Q y T nuevas aprende a obtener alimento en menos
 episodios gracias a un único entero heredado de un progenitor seleccionado?
 
-Contrato previo: `CHATGPT_ECHO2_VERDICT.md`, punto 7 y tabla de fases:
+Antecedente del diseño de ECHO-2, punto 7 y tabla de fases:
 `b` opt-in, default 0, anillo default `[-12,+5,0]`, KPI
 `EpisodesToCriterion` menor que el naïf, sin copiar Q.
 

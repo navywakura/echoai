@@ -14,7 +14,7 @@ posterior está en el [registro de ejecución](ECHO45-S6-B24-RUN-20261009.md).
 describían B24 como plan el 8 de octubre; ese estado documental no sustituye
 la actualización actual. Aquí solo se preparan opciones de evaluación.
 
-La revisión leyó primero [CLAUDE](../CLAUDE.md) y el
+La revisión leyó primero el
 [spec NEXUS-0](05-NEXUS-0-SPEC.md), después estado, informes, resúmenes agregados
 y código de los adaptadores. Los resultados siguientes proceden de auditorías
 ya registradas: **no se repitieron experimentos ni se leyeron resultados por

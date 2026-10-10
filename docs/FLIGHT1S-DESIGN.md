@@ -7,7 +7,6 @@ archivo es el diseño y no se reescribe con el resultado. Lo medido está en
 Contrato superior: [ECHO-3-ACCEPTANCE.md](ECHO-3-ACCEPTANCE.md) §4, fase 2.
 Suelo experimental: [SIM3-DESIGN.md](SIM3-DESIGN.md),
 [SIM3-RESULTS.md](SIM3-RESULTS.md), [SIM3-RUNNERS.md](SIM3-RUNNERS.md).
-Relevo: [GPT-OPUS5-FLIGHT1S-PROMPT.md](GPT-OPUS5-FLIGHT1S-PROMPT.md).
 
 ## 1. Pregunta única
 

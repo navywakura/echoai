@@ -176,7 +176,6 @@ Quedan dos bloques superiores: S6 y cierre final; los verdes V3 mantienen
 su alcance sintético y la transferencia ARC sigue pendiente.
 [Investigación](ECHO45-S6-B19-FORENSICS.md) ·
 [Plan B20](ECHO45-S6-B20-PLAN.md) ·
-[Prompt de implementación](ECHO45-S6-B20-IMPLEMENTATION-PROMPT.md).
 <!-- S6B20-RESEARCH-END -->
 
 <!-- S6B19-BEGIN -->
@@ -600,7 +599,7 @@ S6-A se realizó sobre rejillas con trescientas propuestas por brazo. S6-B y las
 | PROBE1 auditoría independiente | Caché nueva y reconstrucción de originales | 480 partidas, cuatro candidatos y base; válida; fallo tupla/lista del comparador recuperado explícitamente |
 | PROBE2 | Buscar guardas HOLD 0/1 que conserven A53 sin pérdidas | DONE; dos propuestas V3, 383 niveles; B y examen sin abrir |
 
-Las revisiones y sus contratos/resultados están enlazados individualmente en el inventario documental al final. El [diagnóstico del 29 de septiembre](ECHO45-S6-DIAGNOSIS-20260929.md) y la [respuesta a Opus](ECHO45-S6-OPUS-RESPONSE-20260930.md) son interpretaciones de registros; las referencias bibliográficas no comprobadas de la respuesta de Opus conservan ese estatus y no respaldan afirmaciones nuevas aquí.
+Las revisiones y sus contratos/resultados están enlazados individualmente en el inventario documental al final. El [diagnóstico del 29 de septiembre](ECHO45-S6-DIAGNOSIS-20260929.md) y la [respuesta a Opus](ECHO45-S6-CAPACITY-ANALYSIS-20260930.md) son interpretaciones de registros; las referencias bibliográficas no comprobadas de la respuesta de Opus conservan ese estatus y no respaldan afirmaciones nuevas aquí.
 
 En B12 se exige V1 formato y seguridad; V2 ejecución y reproducción; V3 ganar al menos dos niveles A sin perder nivel ni score de ninguna partida; V4 conservar niveles y scores individuales B con tolerancia 1e-10. Desarrollo A: ochenta partidas, gym v2/v3, semillas 0–39 y dos mil decisiones por partida. B: cuarenta partidas protegidas, semillas 24920–24939, ya reutilizadas y declaradas. Solo su aceptación/rechazo vuelve al modelo. Seis rondas y cinco propuestas por brazo hacen sesenta propuestas de campaña. La política empieza vacía; no hereda el ganador del piloto. [Contrato B12](ECHO45-S6-B12-DESIGN.md).
 
@@ -643,11 +642,11 @@ La auditoría independiente repitió base y cuatro candidatos 2/31/77/178 en cac
 
 PROBE2 examina todas las 874 propuestas HOLD 0/1 legales que tocan A53. HOLD solo se lee en diez de las ochenta partidas A de la base. Las features variables relevantes eran level y world_events. El cribado ejecuta las cuatro a diez partidas tocadas por cada guarda; una muestra fija de cinco candidatos ejecuta las ochenta para contrastar el argumento de que las no tocadas quedan idénticas. No se considera equivalente en conducta una firma igual: se miden todos los representantes legales del plan, no solo las 126 firmas.
 
-Los controles 77/178 deben reproducir PROBE1 byte a byte. Un superviviente del cribado necesita medición completa de ochenta partidas y replay completo. Se reservan hasta treinta verificaciones y el tope total es 14.544 partidas. Cuatro procesos, Python 3.12, PLAN_SHA `a725b39f44d9fa1257ac0d621274b7c27a1494c927e354895061c021191be66b`. Una diferencia de replay, un efecto en partida supuestamente no tocada o control distinto detiene el instrumento. El presupuesto y las paradas no convierten instrumentación inválida en resultado negativo. [Código](../seed/s6probe2.py), [contrato](ECHO45-S6-PROBE2-DESIGN.md), [revisión](ECHO45-S6-PROBE2-CODEX-REVIEW.md).
+Los controles 77/178 deben reproducir PROBE1 byte a byte. Un superviviente del cribado necesita medición completa de ochenta partidas y replay completo. Se reservan hasta treinta verificaciones y el tope total es 14.544 partidas. Cuatro procesos, Python 3.12, PLAN_SHA `a725b39f44d9fa1257ac0d621274b7c27a1494c927e354895061c021191be66b`. Una diferencia de replay, un efecto en partida supuestamente no tocada o control distinto detiene el instrumento. El presupuesto y las paradas no convierten instrumentación inválida en resultado negativo. [Código](../seed/s6probe2.py), [contrato](ECHO45-S6-PROBE2-DESIGN.md), [revisión](ECHO45-S6-PROBE2-INDEPENDENT-REVIEW.md).
 
 El cierre del 2 de octubre midió las 874 propuestas y encontró dos supervivientes: ambos llegan a 383 niveles desde 378 con replay completo idéntico y ninguna pérdida de nivel o score por partida. Los 88 replays de cribado y las cinco muestras de solidez pasaron. Las 10.048 partidas pertenecen a A. El resultado demuestra capacidad de la gramática vigente bajo V3; no demuestra transferencia a B, automejora autónoma, éxito de campaña ni B1–B5. Las reglas halladas por búsqueda dirigida humana quedan fuera de los prompts de descubrimiento autónomo. [Resultado completo](ECHO45-S6-PROBE2-RESULTS.md).
 
-La [revisión del cierre](ECHO45-S6-PROBE2-CODEX-CLOSURE.md) reconstruyó los veredictos y comprobó los 10.048 digests de caché, sin jugar partidas nuevas. Su recibo válido confirma los archivos guardados; aún falta reproducción independiente en una caché distinta. El primer resultado de RSI1-R1 fue una respuesta con formato inválido, rechazada sin promoción. El transporte CPU terminó correctamente y el banco cerró posteriormente rojo bajo esos mismos criterios.
+La [revisión del cierre](ECHO45-S6-PROBE2-CLOSURE-REVIEW.md) reconstruyó los veredictos y comprobó los 10.048 digests de caché, sin jugar partidas nuevas. Su recibo válido confirma los archivos guardados; aún falta reproducción independiente en una caché distinta. El primer resultado de RSI1-R1 fue una respuesta con formato inválido, rechazada sin promoción. El transporte CPU terminó correctamente y el banco cerró posteriormente rojo bajo esos mismos criterios.
 
 La siguiente decisión depende de ese cierre. Si aparece una guarda con +4 sin pérdidas A, ya basta para V3 desde 378→382: no hace falta sumar A18. Sigue faltando V4 en otro contrato y que ECHO encuentre/verifique una solución sin recibir el parche obtenido por el humano. Si solo hay pares útiles, se diseña una condición de dos parches para todos los brazos. Si no aparece nada, se estudian features o familias nuevas mediante controles de desarrollo. La auditoría protege el resultado; no crea una mejora que el actor no produjo.
 
@@ -1459,7 +1458,6 @@ El inventario documental conserva cada contrato, resultado, recuperación y revi
 | [ECHO4-DREAM1-D-V2-DESIGN](ECHO4-DREAM1-D-V2-DESIGN.md) | Contrato, algoritmo y criterios de examen |
 | [ECHO4-DREAM1-D-V2-RESULTS](ECHO4-DREAM1-D-V2-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO4-DREAM1-D-V3-DESIGN](ECHO4-DREAM1-D-V3-DESIGN.md) | Contrato, algoritmo y criterios de examen |
-| [ECHO4-DREAM1-D-V3-HANDOFF](ECHO4-DREAM1-D-V3-HANDOFF.md) | Registro de desarrollo, operación o documentación del módulo |
 | [ECHO4-DREAM1-D-V3-RESULTS](ECHO4-DREAM1-D-V3-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO4-DREAM1-PLAN](ECHO4-DREAM1-PLAN.md) | Ruta de trabajo o propuesta pendiente de sus puertas |
 | [ECHO4-ECHO5-TIMELINE](ECHO4-ECHO5-TIMELINE.md) | Ruta de trabajo o propuesta pendiente de sus puertas |
@@ -1626,21 +1624,19 @@ El inventario documental conserva cada contrato, resultado, recuperación y revi
 | [ECHO45-S6-CAPACITY-RESULTS](ECHO45-S6-CAPACITY-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO45-S6-CONSUMPTION-DIAGNOSIS-20260929](ECHO45-S6-CONSUMPTION-DIAGNOSIS-20260929.md) | Diagnóstico, hipótesis y opciones de investigación |
 | [ECHO45-S6-DIAGNOSIS-20260929](ECHO45-S6-DIAGNOSIS-20260929.md) | Diagnóstico, hipótesis y opciones de investigación |
-| [ECHO45-S6-ENGINEERING-HANDOFF-20260930](ECHO45-S6-ENGINEERING-HANDOFF-20260930.md) | Registro de desarrollo, operación o documentación del módulo |
 | [ECHO45-S6-ESTADO-20260927](ECHO45-S6-ESTADO-20260927.md) | Registro de desarrollo, operación o documentación del módulo |
-| [ECHO45-S6-OPUS-RESPONSE-20260930](ECHO45-S6-OPUS-RESPONSE-20260930.md) | Diagnóstico, hipótesis y opciones de investigación |
+| [ECHO45-S6-CAPACITY-ANALYSIS-20260930](ECHO45-S6-CAPACITY-ANALYSIS-20260930.md) | Diagnóstico, hipótesis y opciones de investigación |
 | [ECHO45-S6-PRECISE-CONTROL](ECHO45-S6-PRECISE-CONTROL.md) | Registro de desarrollo, operación o documentación del módulo |
 | [ECHO45-S6-PRECISE-RESULTS](ECHO45-S6-PRECISE-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO45-S6-PROBE1-DESIGN](ECHO45-S6-PROBE1-DESIGN.md) | Contrato, algoritmo y criterios de examen |
 | [ECHO45-S6-PROBE1-RESULTS](ECHO45-S6-PROBE1-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO45-S6-PROBE1-REVIEW-20260930](ECHO45-S6-PROBE1-REVIEW-20260930.md) | Auditoría o revisión del instrumento |
-| [ECHO45-S6-PROBE2-CODEX-REVIEW](ECHO45-S6-PROBE2-CODEX-REVIEW.md) | Auditoría o revisión del instrumento |
+| [ECHO45-S6-PROBE2-INDEPENDENT-REVIEW](ECHO45-S6-PROBE2-INDEPENDENT-REVIEW.md) | Auditoría o revisión del instrumento |
 | [ECHO45-S6-PROBE2-DESIGN](ECHO45-S6-PROBE2-DESIGN.md) | Contrato, algoritmo y criterios de examen |
-| [ECHO45-S6-PROBE2-HANDOFF](ECHO45-S6-PROBE2-HANDOFF.md) | Registro de desarrollo, operación o documentación del módulo |
 | [ECHO45-S6-PROMPT-PILOT-RESULTS](ECHO45-S6-PROMPT-PILOT-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO45-S6-PROMPT-PILOT](ECHO45-S6-PROMPT-PILOT.md) | Registro de desarrollo, operación o documentación del módulo |
 | [ECHO45-S6-RECOVERY-NOTES](ECHO45-S6-RECOVERY-NOTES.md) | Recuperación declarada y conservación del intento anterior |
-| [ECHO45-S6-RESEARCH-BRIEF-20260930](ECHO45-S6-RESEARCH-BRIEF-20260930.md) | Diagnóstico, hipótesis y opciones de investigación |
+| [ECHO45-S6-RESEARCH-20260930](ECHO45-S6-RESEARCH-20260930.md) | Diagnóstico, hipótesis y opciones de investigación |
 | [ECHO45-S6-RESULTS](ECHO45-S6-RESULTS.md) | Medición, resultado o cierre con su alcance |
 | [ECHO45-S6-TRANSITION-CONTROL](ECHO45-S6-TRANSITION-CONTROL.md) | Registro de desarrollo, operación o documentación del módulo |
 | [ECHO45-S6-TRANSITION-RESULTS](ECHO45-S6-TRANSITION-RESULTS.md) | Medición, resultado o cierre con su alcance |

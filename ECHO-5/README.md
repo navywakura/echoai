@@ -15,7 +15,6 @@ cuando existan; por ahora informa de su ausencia y devuelve código 2.
 
 ```text
 ECHO-5/
-├── AGENTS.md          instrucciones para agentes de desarrollo
 ├── docs/              decisiones e integración futura
 ├── src/echo5/         namespace del nuevo código
 ├── tests/             futuras pruebas unittest

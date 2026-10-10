@@ -228,7 +228,6 @@ evaluación, retención global, auditoría y decisión de versión. ECHO-5, 5.1,
 y RSI son líneas posteriores, no módulos adicionales pendientes de 4.5.
 [Corte de módulos V3](ECHO45-RELATIONAL-V3-RESULTS.md).
 
-Siguiente paso: [diseño B20](ECHO45-S6-B20-PLAN.md) y
-[prompt de implementación](ECHO45-S6-B20-IMPLEMENTATION-PROMPT.md).
+Siguiente paso: [diseño B20](ECHO45-S6-B20-PLAN.md).
 Conocer varios fallos permite corregirlos y hacer mejores experimentos; no
 demuestra que ya conozcamos todos ni garantiza un resultado positivo futuro.

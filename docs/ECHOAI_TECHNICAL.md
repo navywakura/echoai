@@ -1,9 +1,7 @@
 # echoAI — Qué es, con detalle técnico
 
-**Rogex Laboratories / Knights Labs — Roger Navarro, con Grok 4.6 como
-co-worker de este árbol.**
 **Fecha:** 2026-09-03. **Córtex:** OFF. **Hardware:** ninguno.
-**Fuente:** `echoai/CLAUDE.md`, `echoai/docs/{02-INVARIANTS,03-HYPOTHESIS,
+**Fuente:** `echoai/docs/{02-INVARIANTS,03-HYPOTHESIS,
 05-NEXUS-0-SPEC,07-AKIDA,STATUS}.md`, `echoai/nexus0/*.py`, `echoai/README.md`.
 
 > echoAI no es un chatbot. No es "SNN + LLM". No es el unikernel
@@ -358,12 +356,11 @@ t_beats_ring                True
 El programa situado de este directorio **está cerrado**: no es el
 final de un sistema nervioso, es el final de esta tesis (NEXUS-0 →
 corredor, §6). Lo que sigue —sueño/consolidación, una LLM real detrás
-del firewall, un cuerpo, Akida— es otro proyecto, discutido en
-`echoai/docs/ECHOAI_FOR_GEMINI.md`. No se usa la palabra AGI como
+del firewall, un cuerpo, Akida— es una línea posterior del proyecto. No se usa la palabra AGI como
 objetivo en este árbol.
 
 ---
 
-*Generado a partir de `echoai/CLAUDE.md`, `echoai/README.md`,
+*Generado a partir de `echoai/README.md`,
 `echoai/docs/{02-INVARIANTS,03-HYPOTHESIS,05-NEXUS-0-SPEC,07-AKIDA,
 STATUS}.md` y lectura de `echoai/nexus0/*.py`. 2026-09-03.*

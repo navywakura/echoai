@@ -2,8 +2,7 @@
 
 **Estado:** verde en su alcance declarado. 21 de septiembre de 2026.
 **Fase padre:** METAVERSE-1 ([contrato](METAVERSE1-DESIGN.md)).
-**Reanuda desde:** [acta de congelado](METAVERSE1-FREEZE-20260920.md) §4 y
-[handoff](METAVERSE1-HANDOFF-20260921.md) §4, Etapa 0.
+**Reanuda desde:** [acta de congelado](METAVERSE1-FREEZE-20260920.md) §4.
 **No cierra DRONE-3 ni sube ECHO-3 de 14/15.** Esto es custodia de ficheros,
 no hardware y no física.
 

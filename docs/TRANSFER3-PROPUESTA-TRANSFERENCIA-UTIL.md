@@ -18,7 +18,7 @@ pero no ventaja suficiente. La feature 504 es una pista de fallo, no la
 definición de TRANSFER-3 ni una condición que obligue a continuar esa línea.
 
 No se reescriben esos rojos. El registro previo
-`TRANSFER3-CLAUDE-OPUS5-IMPLEMENTATION.md` se conserva como historial.
+`TRANSFER3-IMPLEMENTATION-20260918.md` se conserva como historial.
 
 La pregunta nueva es: **¿qué propiedad reutilizable del cuerpo o de sus
 habilidades necesita aprender el agente, y cómo ayuda ese conocimiento cuando

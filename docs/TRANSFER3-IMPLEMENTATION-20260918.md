@@ -1,8 +1,7 @@
-# TRANSFER-3 — implementación Claude Opus 5, sesión 2026-09-18
+# TRANSFER-3 — implementación y resultados del 18 de septiembre de 2026
 
-Registro de lo implementado, medido y **no** conseguido en una sesión. Continúa
-[la revisión](TRANSFER3-CLAUDE-REVIEW.md) del mismo autor y las reparaciones de
-[v5](TRANSFER3-REPAIR-V5.md), que no son suyas.
+Registro de lo implementado, medido y **no** conseguido en esta etapa. Continúa
+las reparaciones de [v5](TRANSFER3-REPAIR-V5.md).
 
 **TRANSFER-3 sigue en rojo. No hay candidato. ECHO-3 permanece en 13/15.**
 Nada de lo aquí descrito promueve un brazo, abre una confirmación reservada ni
@@ -220,7 +219,7 @@ env PYTHONPATH=.. python3 -m echoai.nexus0.transfer3.rooms_v8  audit lab/transfe
 `run` rechaza sobrescribir cualquier intento público. Ningún comando genera
 salas nuevas de campaña ni abre nada reservado.
 
-## Decisiones pendientes, todas de Roger
+## Decisiones pendientes
 
 1. **Cambio de representación.** El discriminador que falta es observable sin
    oráculo: longitud de tramo libre en cada dirección más allá del anillo
@@ -237,9 +236,6 @@ salas nuevas de campaña ni abre nada reservado.
    escuela aprenda algo. Ampliar debería añadir topología —más de una pared,
    más de un hueco, callejones—, no rectángulos mayores: subir width y height
    multiplica la cardinalidad sin aumentar la independencia.
-4. **Autoría concurrente.** v4, v5, `custody_v2` y el borrador de protocolo no
-   son de este autor y se escribieron durante esta misma sesión. Conviene saber
-   quién más escribe en el árbol antes de continuar.
 
 ## Lo que no se tocó
 

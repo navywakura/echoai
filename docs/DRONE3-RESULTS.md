@@ -1,7 +1,7 @@
 # DRONE-3 — resultados (SITL)
 
 2026-09-20. Contrato prospectivo: [DRONE3-DESIGN.md](DRONE3-DESIGN.md), escrito
-antes de abrir B. Hardware: [traspaso](DRONE3-HARDWARE-HANDOFF.md).
+antes de abrir B. Hardware: [traspaso](DRONE3-HARDWARE-GUIDE.md).
 **Este informe cubre sólo SITL.** No hay placa, dron, sensores reales ni jaula:
 `drone3_hil_green` y `drone3_cage_green` son `false` y por tanto `drone3_green`
 también. ECHO-3 sigue en 14/15 y DRONE-METAVERSE sigue cerrado.
