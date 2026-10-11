@@ -1,46 +1,71 @@
 # ECHO-5: checklist de cierre
 
-Nota de publicación: la tabla conserva el corte histórico indicado abajo.
-El [checkpoint del proyecto](../../docs/PROJECT-CHECKPOINT-20261011.md) es la
-referencia vigente; ECHO-5 sigue abierto y la calibración no está limpia.
+**Publicación 5.0.0: verde dentro del alcance validado.**
+[Release y límites](RELEASE-5.0.0.md) ·
+[Veredicto r3](../../research-archive/20261012/closure-verdict-20261011-r3/result.json).
+Los objetivos de investigación no demostrados permanecen abiertos y no se
+convierten en resultados positivos por esta publicación.
+
 
 <!-- ACTIVE-CLOSURE-STATUS -->
-Estado automático (2026-10-11T04:38:10+02:00): **Cadena detenida; ECHO-5 continúa pendiente de cierre.**
+Estado automático (2026-10-11T21:56:21+02:00): **Cadena verificada; consultar el veredicto de alcance antes de publicar.**
 Detalle y rutas: [estado de ejecución](CLOSURE-RUN-STATUS.md).
 <!-- END-ACTIVE-CLOSURE-STATUS -->
 
-Actualización de estado, 11 de octubre de 2026, 04:08 (Madrid). La tabla cita los
-recibos auditados de r1 y distingue la corrección r4 en ejecución; la implementación por sí
+La revisión posterior a r3 ya implementó y auditó los cinco instrumentos de
+remediación. Su [checklist separado](REMEDIATION-CHECKLIST.md) y
+[resultados](REMEDIATION-RESULTS-20261011.md) conservan los empates y límites de
+búsqueda encontrados. No modifican el verde acotado del cierre r3 ni extienden
+su alcance a S6. La tabla que sigue conserva las referencias históricas r1;
+para el cierre vigente manda el veredicto r3 enlazado en el estado de ejecución.
+
+Las [correcciones medidas el 12 de octubre](SEARCH-EFFICIENCY-RESULTS-20261012.md)
+mejoran esa revisión: 12/18 independientes y 9/9 plantillas, con cuatro auditorías
+válidas y presupuestos conservados. El [checklist de remediación](REMEDIATION-CHECKLIST.md)
+separa estos avances de los seis agotamientos pendientes y las hipótesis aún
+inconclusas. No se modifican los recibos ni el alcance del cierre histórico.
+
+Actualización de estado, 11 de octubre de 2026, 19:06 (Madrid). La tabla cita los
+recibos auditados de r1 y distingue la corrección de cierre del ULog en ejecución; la implementación por sí
 sola no cambia el estado científico. S6 queda fuera hasta después de 5.5.
 
 | Entrega | Programación | Validación requerida | Estado medido |
 |---|---|---|---|
-| Objetos, relaciones y familias nuevas | Programado | Transferencia y controles ambiguos o fuera del lenguaje | Confirmación r1 auditada: 48/48 compatibles y abstención 24/24 (12 ambiguous_rotation y 12 unsupported_color); alcance sintético reservado |
+| Objetos, relaciones y familias nuevas | Programado | Transferencia y controles de ambigüedad | Confirmación r1 auditada: 48/48 compatibles y abstención 24/24; alcance sintético reservado |
 | Conceptos adquiridos | Programado | Biblioteca vacía/fija/control del mismo tamaño, adquisición incluida | Confirmación r1 válida: 16,91 % menos trabajo que biblioteca vacía; 3,24 % más que fija, dentro del margen prerregistrado; no superioridad sobre biblioteca fija |
 | Composición profunda y caché | Programado | Nuevas profundidades, acierto y coste real | Confirmación r1 auditada: 57,79 % menos trabajo en prefijos reutilizados, sin cambiar respuestas |
 | MiniGrid/BabyAI e interacción | Programado | Observación parcial, controles, replay y evaluación externa | Confirmación r1 auditada: 54/56; fijo 0/56, pasivo 0/56, sin memoria 20/56, sin planificación 6/56 |
 | Contraejemplos adaptativos | Programado | 32 ejecuciones emparejadas, información igualada, incertidumbre y coste | Confirmación r1 auditada: 256/256 frente a 201/256 aleatorio y 152/256 secuencial; puertas científicas cumplidas |
 | MissionAgent completo | Programado, razonador nuevo conectado por defecto | Cadena software, regresiones y gates | Confirmación software r1 válida: 4/12 frente a 3/12 convencional; empate con horizonte 1; simulador físico pendiente |
-| Gazebo/PX4 nuevo | Programado; corrección de estimación y recuperación en prueba | ULog, poses, ACK, supervisor y auditoría; no hardware | Confirmación r1 fallida: 17/18 recibos válidos, ECHO 2/3 nominales frente a 3/3 convencional. Nueva calibración de seis vuelos en ejecución; cierre pendiente |
-| Panel local de decisiones | Programado | Navegador, controles, diario y límites de acceso | Validado en navegador de escritorio y móvil; misión nativa resuelta en 20 acciones |
+| Gazebo/PX4 nuevo | Programado; corrección de estimación y recuperación en prueba | ULog, poses, ACK, supervisor y auditoría; no hardware | Confirmación r1 fallida: 17/18 recibos válidos, ECHO 2/3 nominales frente a 3/3 convencional. Calibración previa: 5/6 criterios cumplidos, un ULog truncado. Cierre del logger corregido; seis casos repetidos en ejecución; cierre pendiente |
+| Panel local de decisiones | Programado | Navegador, controles, diario y límites de acceso | Validado previamente en navegador de escritorio y móvil; reiniciado a las 19:05 con fuentes actuales, HTTP 200; nueva regresión de navegador programada |
 | Diagnóstico LIF real | Programado | Frames iguales al módulo histórico; sin efecto en política | Tests y navegador válidos; diagnóstico de 256 neuronas, no controlador del episodio |
-| Custodia y runner en segundo plano | Programado | Tests, integridad, auditoría en proceso nuevo | Checks r4 válidos: 335 tests de núcleo (12 opcionales omitidos) y 32 de sandbox. Calibración y continuación con fuentes congeladas |
+| Custodia y runner en segundo plano | Programado | Tests, integridad, auditoría en proceso nuevo | Checks r6 válidos: 340 casos de núcleo (12 opcionales omitidos) y 32 de sandbox, con solapamiento. Calibración y continuación con fuentes congeladas |
 
-La autopsia de los dos fallos y la intervención están en
-[el diagnóstico de confirmación](SITL-CONFIRMATION-R1-DIAGNOSIS.md).
+El [diagnóstico del ULog](SITL-LOGGER-DIAGNOSIS-20261011.md) documenta la corrección actual.
+Los tres retornos de batería baja ya cumplen el contrato: no requieren alcanzar
+la meta ni activar el razonador. Los fallos anteriores de confirmación se conservan
+en [su diagnóstico](SITL-CONFIRMATION-R1-DIAGNOSIS.md).
 Los resultados cognitivos anteriores conservan su identidad de fuentes.
+La [revisión de transferencia y controles del 11 de octubre](REMEDIATION-AND-TRANSFER-20261011.md)
+añade límites de interpretación: algunos controles del sandbox tienen menos
+habilidades efectivas, el currículo compara costes con tablas compartidas y
+las misiones personalizadas comparten parser entre actor y evaluador. Se
+proponen comparaciones adicionales en una revisión separada; no cambian los
+umbrales ni los resultados del contrato activo.
 La nueva cadena repetirá esas suites como regresión; sólo la confirmación
 física usa semillas nuevas (971809–971814). S6 continúa fuera de alcance.
 Los párrafos históricos siguientes conservan la secuencia de incidencias;
-el estado vigente se consulta en el checkpoint del proyecto enlazado arriba.
+el estado vigente es la tabla y el recibo del coordinador enlazado arriba.
 
 Los resultados nuevos vivirán en `artifacts/closure-*`. Cada ejecución conserva
 las versiones previas y sus resultados. El panel lee `artifacts/closure-latest.json`.
 Los costes son operaciones lógicas y tiempos medidos; no se declaran julios.
 Una auditoría válida puede confirmar un resultado negativo.
 
-Recibo de software actual: `artifacts/closure-checks-20261011-r3/result.json`.
-Navegador actual: `artifacts/browser-20261011-preflight-r3/result.json`.
+Recibo de software actual: `artifacts/closure-checks-20261011-r6/result.json`.
+Navegador previo: `artifacts/browser-20261011-preflight-r3/result.json`; la nueva
+comprobación se ejecutará en `artifacts/browser-20261011-preflight-r6/`.
 Los últimos recibos de navegador y desarrollo CPU, anteriores al adaptador de
 parámetros IMU, son `artifacts/browser-20261010-r6/result.json` y
 `artifacts/closure-development-20261010-r5/audit.json`. Las pruebas base nuevas

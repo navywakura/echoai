@@ -1,0 +1,55 @@
+{
+  "schema": "echo5.efficiency.run.v1",
+  "stages": {
+    "search_development": {
+      "result_sha256": "4a63ecd8e5eebc56948048f08bd28894b3761e7693e4852c0027d4270286baef",
+      "audit_sha256": "4d7fd8e9818bc43f59ffe1d6877d994822af0c060da0b79a01b47a9bff2adec9",
+      "audit_valid": true,
+      "result": "<LAB_ECHO5>/artifacts/efficiency-pilot-20261012-r3/search_development/result.json"
+    },
+    "search_fresh": {
+      "result_sha256": "c567b5e7d3c9d15dfbe4ea5d1ec619d548c356da37d935e80740f47be27632c1",
+      "audit_sha256": "ee749a410d9a46d80515947b5cf486ad80009c3f0105bd52efa8d948427857d7",
+      "audit_valid": true,
+      "result": "<LAB_ECHO5>/artifacts/efficiency-pilot-20261012-r3/search_fresh/result.json"
+    },
+    "exploration": {
+      "result_sha256": "e3cb564f4989f81eda550eefb7248ed8f8d5fc219731d0fd97ace73a173cc5c4",
+      "audit_sha256": "4cfc797076d4e477b4c9467197820add11dd3f147212926edfb8c1c6b26f7c23",
+      "audit_valid": true,
+      "result": "<LAB_ECHO5>/artifacts/efficiency-pilot-20261012-r3/exploration/result.json"
+    },
+    "curriculum": {
+      "result_sha256": "1843f03dd84bde891fdbd66f39fb9909d9811b17969f1bec49141c58510d269f",
+      "audit_sha256": "92ec05107631d30dc0f7ab30f9761d8e5cda4073923892a973a468cdd79b0d89",
+      "audit_valid": true,
+      "result": "<LAB_ECHO5>/artifacts/efficiency-pilot-20261012-r3/curriculum/result.json"
+    }
+  },
+  "audits_valid": true,
+  "promotion": false,
+  "S6": "out_of_scope",
+  "source_sha256": "3c5d12a966910277953e050e1b8b2b44781b4b1e346a83f51b4d6d08e4131458",
+  "plan_sha256": "66318f7d6320ff109aef3ea0d44bd2ff701182add4613478a679ccf0f05a69f2",
+  "elapsed_seconds": 147.22811339900363,
+  "sources": {
+    "own": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "3c5d12a966910277953e050e1b8b2b44781b4b1e346a83f51b4d6d08e4131458",
+      "files": 107
+    },
+    "legacy": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "6883b9765077c984c8122349794db65169fc14402fc2d555621ece13dd2095e0",
+      "files": 714
+    },
+    "host": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "53faa217cad101a8ab0a0b6a44c1ac830cd4af550cd23d8fa72542df46720371",
+      "files": 6
+    }
+  }
+}

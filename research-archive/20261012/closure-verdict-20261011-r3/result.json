@@ -1,0 +1,47 @@
+{
+  "schema": "echo5.release-readiness.v1",
+  "status": "closure_verified",
+  "release_eligible": true,
+  "gates": {
+    "confirmation_campaign": true,
+    "independent_domain_audit": true,
+    "software_checks": true,
+    "browser_check": true,
+    "structural_transfer_memory_hierarchy": true,
+    "replicated_counterexamples": true,
+    "external_partial_observation": true,
+    "mission_agent_integration": true,
+    "new_sitl_confirmation": true,
+    "independent_sitl_validation": true
+  },
+  "sources_sha256": "3ffc0900d5670b95321f3c00ff55ef3ebe45c4978d894d44b1a368f809f1a77d",
+  "receipts": {
+    "campaign": "artifacts/closure-confirmation-20261011-r3",
+    "checks": "artifacts/closure-checks-20261011-r6",
+    "browser": "artifacts/browser-20261011-preflight-r6",
+    "sitl": "artifacts/sitl-confirmation-20261011-r3"
+  },
+  "receipt_hashes": {
+    "campaign": {
+      "result.json": "d105ed52bb40c79b891359329112233b0b1cbf5c90d57dd269b3fb72a01d6d71",
+      "audit.json": "632a5b306f105426a02bff3492eea23cb1176e754a47896e84b8f8c338c2100a"
+    },
+    "checks": {
+      "result.json": "4347b1c556deb112208ea010ade3df209a16e53ef66a90a4c95f2d90fdf071a3"
+    },
+    "browser": {
+      "result.json": "aa5059e72a6587aa0a98bdd0df253667ed3ee562c0acc87f2239f77e1cdf071c"
+    },
+    "sitl": {
+      "report.json": "e8b11eba89cad4ffa3ea1280e8eebf18b69966827365500f3a58be93f02304f4",
+      "audit.json": "1889805bc7b14c237c88d1f37f55a73c8deb9a405d16fcee61f9ad8f43881592"
+    }
+  },
+  "limits": [
+    "Synthetic structural transfer and native MiniGrid/BabyAI tasks within frozen contracts",
+    "Gazebo/PX4 simulation; no physical flight or hardware certification",
+    "Neural activity is an observation diagnostic, not a policy-performance claim",
+    "No claim of arbitrary problem solving, zero hallucinations, RSI or official ARC score"
+  ],
+  "s6_in_scope": false
+}

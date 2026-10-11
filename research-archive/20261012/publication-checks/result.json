@@ -1,0 +1,90 @@
+{
+  "schema": "echo5.required-checks.v2",
+  "valid": true,
+  "commands": [
+    {
+      "name": "environment",
+      "argv": [
+        "<PUBLIC_SOURCE>/ECHO-5/.venv/bin/python",
+        "-I",
+        "<PUBLIC_SOURCE>/ECHO-5/scripts/dev.py",
+        "check"
+      ],
+      "exit_code": 0,
+      "pid": 324063,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 0.4154965260095196
+    },
+    {
+      "name": "core_tests",
+      "argv": [
+        "<PUBLIC_SOURCE>/ECHO-5/.venv/bin/python",
+        "-I",
+        "<PUBLIC_SOURCE>/ECHO-5/scripts/dev.py",
+        "test"
+      ],
+      "exit_code": 0,
+      "pid": 324064,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 51.211012644009315
+    },
+    {
+      "name": "sandbox_tests",
+      "argv": [
+        "<PUBLIC_SOURCE>/ECHO-5/.venv-sandbox/bin/python",
+        "-I",
+        "<PUBLIC_SOURCE>/ECHO-5/scripts/closure.py",
+        "test-external"
+      ],
+      "exit_code": 0,
+      "pid": 324326,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 2.220083430991508
+    },
+    {
+      "name": "javascript_syntax",
+      "argv": [
+        "node",
+        "--check",
+        "<PUBLIC_SOURCE>/ECHO-5/src/echo5/web/app.js"
+      ],
+      "exit_code": 0,
+      "pid": 324339,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 0.11472084300476126
+    }
+  ],
+  "cpu_background": true,
+  "artifact_hashes": {
+    "environment.log": "deb301d0773d666e6e58c14848290251fc4dbde1b595f27ba1a6222f0cf1f1b8",
+    "core_tests.log": "1c218374d88f444619cafdf79e13b869572fa62aac1a2ec03a967d6e0c2960e7",
+    "sandbox_tests.log": "e14739774c837be40dc2c40e67c495ea0258c84f2d2a40c3925a26b55ee2fd68",
+    "javascript_syntax.log": "13ad0c376caaf7a7d5a3b2452637aa367c8abf734bc136e361cf6f34fd2de185"
+  },
+  "sources_sha256": "4b216878308e37bbfb4151f54c04dd06b1fc7d89d8817ca57269ce2d01d9947c",
+  "integrity": {
+    "own": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "4b216878308e37bbfb4151f54c04dd06b1fc7d89d8817ca57269ce2d01d9947c",
+      "files": 109
+    },
+    "legacy": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "80df0341986179ba942cb1705bf8426b79f48cb4b5b8f9476934b1db77f658f7",
+      "files": 714
+    },
+    "host": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "0c138882e79cc606a0b810722c61775bf31727b2a2b73abf27850d1bf493365e",
+      "files": 7
+    }
+  },
+  "error": null
+}

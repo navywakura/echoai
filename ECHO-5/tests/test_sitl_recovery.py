@@ -189,19 +189,21 @@ class RunnerAdapterTests(unittest.TestCase):
         main = next(n for n in ast.parse(source).body if isinstance(n, ast.FunctionDef) and n.name == 'main')
         return next(n for n in main.body if isinstance(n, ast.Try) and n.finalbody)
 
-    def test_only_exception_recovery_changes_and_frozen_bytes_are_preserved(self):
+    def test_only_recovery_and_logger_finalization_change_and_frozen_bytes_are_preserved(self):
         original = RUNNER.read_bytes()
         before = ast.parse(original)
         after = ast.parse(recovery.adapt_runner_source(original.decode()))
         old = self.outer(original)
         new = self.outer(ast.unparse(after))
+        # The original teardown is intact around the new post-flight logger stop.
         self.assertEqual(ast.dump(ast.Module(body=old.finalbody, type_ignores=[])),
-                         ast.dump(ast.Module(body=new.finalbody, type_ignores=[])))
-        # Restore just the exception handler: every other AST node must match.
+                         ast.dump(ast.Module(body=new.finalbody[:2]+new.finalbody[4:], type_ignores=[])))
+        # Restore the two authorized adaptations: every other AST node must match.
         main = next(n for n in after.body if isinstance(n, ast.FunctionDef) and n.name == 'main')
         outer = next(n for n in main.body if isinstance(n, ast.Try) and n.finalbody)
         self.assertNotEqual(ast.dump(old.handlers[0]), ast.dump(outer.handlers[0]))
         outer.handlers = old.handlers
+        outer.finalbody = old.finalbody
         self.assertEqual(ast.dump(before), ast.dump(after))
         self.assertEqual(RUNNER.read_bytes(), original)
 

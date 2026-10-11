@@ -114,18 +114,21 @@ def expand(proposal, *, library=None, budget):
     return tuple(output)
 
 
-def apply_step(step, rows, *, budget):
-    """Execute an already validated primitive; execution attempts always cost."""
+def apply_step(step, rows, *, budget, analysis=None):
+    """Execute a validated primitive, optionally reusing per-solve analysis."""
     budget.consume('execution_steps')
+    if analysis is not None:
+        analysis._check_budget(budget)
     if not isinstance(step, Step):
         raise ValueError('typed Step required')
     if step.op == 'relate':
         return grounding.apply_relation(rows, role=step.role, relation=step.relation,
-                                        effect=step.effect, budget=budget)
+                                        effect=step.effect, budget=budget, analysis=analysis)
     if step.op == 'object':
-        return grounding.transform_object(rows, role=step.role, effect=step.effect, budget=budget)
+        return grounding.transform_object(rows, role=step.role, effect=step.effect,
+                                          budget=budget, analysis=analysis)
     if step.op == 'pack':
-        return grounding.pack_objects(rows, axis=step.axis, budget=budget)
+        return grounding.pack_objects(rows, axis=step.axis, budget=budget, analysis=analysis)
     if step.op not in GEOMETRY:
         raise ValueError('expanded primitive required')
     # Reserve output work before geometry, including an overlarge failed result.

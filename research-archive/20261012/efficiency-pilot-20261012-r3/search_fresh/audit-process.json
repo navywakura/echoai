@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "<LAB_ECHO5>/.venv-sandbox/bin/python",
+    "-I",
+    "<LAB_ECHO5>/scripts/efficiency.py",
+    "worker",
+    "--output",
+    "<LAB_ECHO5>/artifacts/efficiency-pilot-20261012-r3/search_fresh",
+    "--stage",
+    "search_fresh",
+    "--action",
+    "audit"
+  ],
+  "exit_code": 0,
+  "pid": 318819,
+  "timed_out": false,
+  "process_group_cleanup_attempted": false,
+  "seconds": 42.981493860002956
+}

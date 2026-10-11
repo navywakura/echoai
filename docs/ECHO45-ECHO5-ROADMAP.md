@@ -1,4 +1,13 @@
-# Roadmap: ECHO-4.5 y ECHO-5 (actualizado 2026-10-11)
+# Roadmap: ECHO-4.5 y ECHO-5 (actualizado 2026-10-12)
+
+**12 de octubre · ECHO-5 5.0.0: verde oficial dentro del alcance validado.**
+Cierre r3 verificado, incluida confirmación Gazebo/PX4 en simulación. Correcciones
+posteriores auditadas: 12/18 independientes y 9/9 plantillas, 28/28 exploración,
+64/64 currículo. Seis tareas siguen abiertas; S6 se retoma después de 5.5.
+[Estado vigente](PROJECT-CHECKPOINT-20261012.md) ·
+[Release](../ECHO-5/docs/RELEASE-5.0.0.md).
+Los bloques siguientes conservan sus estados históricos; no son el estado vigente.
+
 
 **11 de octubre · ECHO-5 ya implementado; validación completa pendiente.**
 Objetos, relaciones, conceptos, composición, interacción, currículo adaptativo,

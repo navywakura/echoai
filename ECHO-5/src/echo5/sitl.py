@@ -96,8 +96,7 @@ def availability():
         out["podman_version"] = version.stdout.strip()
     except (OSError, subprocess.TimeoutExpired) as exc:
         out["blockers"].append(type(exc).__name__+": "+str(exc))
-    for path in [*ASSETS.values(), *CORE_FILES,
-                 *("nexus0/"+p for p in RUNNER_MODULES+ACTOR_MODULES)]:
+    for path in [*ASSETS.values(), *CORE_FILES, *("nexus0/"+p for p in RUNNER_MODULES+ACTOR_MODULES)]:
         if not (LEGACY_ROOT/path).is_file():
             out["blockers"].append("missing runtime source "+path)
     out["ready_to_attempt"] = not out["blockers"]
@@ -200,7 +199,7 @@ try:
         nonce=os.environ['ECHO5_RUN_NONCE'], original_sha256=sha(runner_path),
         adapter_sha256=sha('/flight/sitl_recovery.py'),
         effective_sha256=hashlib.sha256(adapted.encode()).hexdigest(),
-        scope='passive exceptional recovery; original errors remain failures'))
+        scope='passive exceptional recovery and post-flight logger shutdown; original errors remain failures'))
     sys.argv[0] = runner_path
     exec(compile(adapted, runner_path, 'exec'),
          dict(__name__='__main__', __file__=runner_path, __package__=None))
@@ -254,8 +253,6 @@ def _prepare(root, cfg, case, mode, nonce):
     imported = {}
     paths = dict(ASSETS)
     paths.update({"echoai/nexus0/"+name: "nexus0/"+name for name in RUNNER_MODULES})
-    # The transformed runner imports echoai.core.*. Stage the real package,
-    # including its transitive helpers, rather than recreating legacy names.
     paths.update({"echoai/"+name: name for name in ("__init__.py", *CORE_FILES)})
     for dest, src in paths.items():
         path = root/dest
@@ -898,6 +895,34 @@ def _independent_parameters(path, nonce, relative_file):
             raise ValueError('owned ULog extractor teardown failed: '+type(exc).__name__) from exc
 
 
+def _logger_shutdown_valid(trace, result):
+    """Reconcile post-disarm shutdown evidence with the final runner receipt."""
+    stops = [(i, r) for i, r in enumerate(trace) if r.get('kind') == 'logger_shutdown']
+    disarms = [(i, r) for i, r in enumerate(trace) if r.get('kind') == 'disarmed']
+    if len(stops) != 1 or not disarms or result.get('disarmed') is not True:
+        return False
+    i, stop = stops[0]
+    j, disarm = disarms[-1]
+    payload = {k: v for k, v in stop.items() if k not in ('kind', 'now_ns', 'mono_ns')}
+    if (payload != result.get('logger_shutdown') or payload.get('complete') is not True
+            or type(payload.get('returncode')) is not int or payload['returncode'] != 0
+            or payload.get('schema') != 'echo5.sitl.logger-shutdown.v1'
+            or payload.get('command') != [PX4_BINARY+'-logger', 'stop']
+            or 'error' in payload or 'log_error' in payload or i <= j):
+        return False
+    for name in ('stdout', 'stderr'):
+        if type(payload.get(name)) is not str or 'forcing stop' in payload[name]:
+            return False
+    for key in ('now_ns', 'mono_ns'):
+        if (type(stop.get(key)) is not int or type(disarm.get(key)) is not int
+                or stop[key] < disarm[key] or disarm[key] <= 0):
+            return False
+    return (type(payload.get('timeout_s')) in (int, float)
+            and 0 < payload['timeout_s'] <= 8
+            and type(payload.get('wall_s')) in (int, float)
+            and math.isfinite(payload['wall_s']) and payload['wall_s'] >= 0)
+
+
 def evaluate_episode(root):
     """Adjudicate raw receipts; agent.reached and runner.ok are not judges."""
     root = Path(root)
@@ -978,6 +1003,7 @@ def evaluate_episode(root):
             ("vehicle_local_position", "vehicle_status", "vehicle_land_detected")), "ulog_real_telemetry")
         check(2 in datasets["vehicle_status"]["arming_state"] and datasets["vehicle_land_detected"]["landed"][-1] == 1, "ulog_armed_then_landed")
         trace = list(_lines(root/"out/trace.jsonl"))
+        check(_logger_shutdown_valid(trace, _load(root/'out/result.json')), 'clean_logger_shutdown')
         # Include the entire preparation/long hover, through observed disarm.
         # 60 ms is the existing ULog telemetry binding tolerance.
         begin = min(r['now_ns'] for r in trace if r.get('now_ns', 0) > 0)

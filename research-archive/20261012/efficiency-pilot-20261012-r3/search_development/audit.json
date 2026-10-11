@@ -1,0 +1,14 @@
+{
+  "valid": true,
+  "fresh_process_reproduction": true,
+  "native_audit": {},
+  "result_sha256": "4a63ecd8e5eebc56948048f08bd28894b3761e7693e4852c0027d4270286baef",
+  "plan_sha256": "66318f7d6320ff109aef3ea0d44bd2ff701182add4613478a679ccf0f05a69f2",
+  "source_sha256": "3c5d12a966910277953e050e1b8b2b44781b4b1e346a83f51b4d6d08e4131458",
+  "journal": {
+    "events": 260,
+    "last_hash": "a903ef423e0431662cc836b05ee41e8f49c9ff61f19411870e635fec472338ef"
+  },
+  "promotion": false,
+  "scope": "receipt reproduction, with independent native/construction judges; not a universal proof"
+}

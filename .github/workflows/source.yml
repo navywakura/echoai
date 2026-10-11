@@ -12,3 +12,21 @@ jobs:
           python-version: '3.12'
       - run: python tools/source_setup.py verify
       - run: python tests/test_source_setup.py
+  echo5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.13'
+      - name: Set up isolated ECHO-5 environments
+        working-directory: ECHO-5
+        run: |
+          python3.12 -I scripts/dev.py setup
+          python3.12 -I scripts/setup_sandbox.py
+      - name: Core and native sandbox regressions
+        working-directory: ECHO-5
+        run: |
+          .venv/bin/python -I scripts/dev.py test
+          .venv-sandbox/bin/python -I scripts/closure.py test-external
+          node --check src/echo5/web/app.js

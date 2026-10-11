@@ -8,7 +8,8 @@ The supported 4.5 installer is install.sh; release1/ contains the historical 4.0
 
 The 11 October publication adds the implemented ECHO-5 research package under
 `ECHO-5/`, its local viewer, regression tests, contracts and documentation.
-It remains a research alpha and does not change the terminal's 4.5.0b1 release.
+The 12 October publication supersedes its research-alpha status with ECHO-5
+5.0.0, green within the validated scope, without changing the terminal's 4.5.0b1 release.
 Its legacy imports and frozen-source discovery are adapted to the public
 `core/` layout. Consequently, historical experiment source hashes identify
 the laboratory snapshots, not these adapted publication files.
@@ -23,3 +24,9 @@ publication. A complete re-run must freeze a new distribution-specific receipt.
 The Unity project is distributed separately at
 https://github.com/navywakura/echounity. It retains its own source integrity
 manifest and lists optional third-party artwork separately from its code.
+
+The [12 October archive](../research-archive/20261012/README.md) preserves selected
+closure and efficiency receipts, including full compressed result JSON and
+original/exported byte hashes. It is not a simulator image or a complete live
+environment. Public source checks have a separate receipt. See the
+[ECHO-5 release notes](../ECHO-5/docs/RELEASE-5.0.0.md) for scope and remaining failures.

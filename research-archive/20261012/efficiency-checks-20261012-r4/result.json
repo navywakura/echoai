@@ -1,0 +1,90 @@
+{
+  "schema": "echo5.required-checks.v2",
+  "valid": true,
+  "commands": [
+    {
+      "name": "environment",
+      "argv": [
+        "<LAB_ECHO5>/.venv/bin/python",
+        "-I",
+        "<LAB_ECHO5>/scripts/dev.py",
+        "check"
+      ],
+      "exit_code": 0,
+      "pid": 318013,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 0.36490264200256206
+    },
+    {
+      "name": "core_tests",
+      "argv": [
+        "<LAB_ECHO5>/.venv/bin/python",
+        "-I",
+        "<LAB_ECHO5>/scripts/dev.py",
+        "test"
+      ],
+      "exit_code": 0,
+      "pid": 318035,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 48.692271730993525
+    },
+    {
+      "name": "sandbox_tests",
+      "argv": [
+        "<LAB_ECHO5>/.venv-sandbox/bin/python",
+        "-I",
+        "<LAB_ECHO5>/scripts/closure.py",
+        "test-external"
+      ],
+      "exit_code": 0,
+      "pid": 318146,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 2.119842846004758
+    },
+    {
+      "name": "javascript_syntax",
+      "argv": [
+        "node",
+        "--check",
+        "<LAB_ECHO5>/src/echo5/web/app.js"
+      ],
+      "exit_code": 0,
+      "pid": 318164,
+      "timed_out": false,
+      "process_group_cleanup_attempted": false,
+      "seconds": 0.11474327300675213
+    }
+  ],
+  "cpu_background": true,
+  "artifact_hashes": {
+    "environment.log": "740fffa74475d5b3adad9b63156adbcd5168774e0d2e7d4178fe96f4c832d04b",
+    "core_tests.log": "8d27e85813dbc2896dd0a1407a4a6e973fb608ed719568cd5ca141d31f004fb9",
+    "sandbox_tests.log": "a1f2b20e9428b2e898d2e22ecd08702c2c90558c7b398f1d4669290e80d5c306",
+    "javascript_syntax.log": "a4151e07ad401051b420352a3f23280f3718276ba6272a255298f46fd4c65fca"
+  },
+  "sources_sha256": "3c5d12a966910277953e050e1b8b2b44781b4b1e346a83f51b4d6d08e4131458",
+  "integrity": {
+    "own": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "3c5d12a966910277953e050e1b8b2b44781b4b1e346a83f51b4d6d08e4131458",
+      "files": 107
+    },
+    "legacy": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "6883b9765077c984c8122349794db65169fc14402fc2d555621ece13dd2095e0",
+      "files": 714
+    },
+    "host": {
+      "unchanged": true,
+      "changed": [],
+      "sha256": "53faa217cad101a8ab0a0b6a44c1ac830cd4af550cd23d8fa72542df46720371",
+      "files": 6
+    }
+  },
+  "error": null
+}

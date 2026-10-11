@@ -1,0 +1,22 @@
+{
+  "schema": "echo5.remediation.pilot.v1",
+  "stage": "development_pilot_not_confirmation",
+  "source_baseline": "closure-verdict-20261011-r3",
+  "exploration": {
+    "seed": 1400000,
+    "cases_per_profile": 4,
+    "actions": 256,
+    "work": 750000,
+    "profiles": ["objects_small", "objects_medium", "objects_large", "key_small", "key_medium", "ordered_doors", "put_next"],
+    "modes": ["frontier_information", "frontier_nearest", "frontier_random"],
+    "policy_seed": 0,
+    "practical_success_difference": 0.1,
+    "confirmation": false
+  },
+  "semantics": {},
+  "transfer": {"seed": 2400000, "cases_per_family": 3, "budget": 2000000},
+  "search": {"seed": 3400000, "budget": 2000000, "beam_width": 24},
+  "curriculum": {"seed": 4400000, "runs": 4, "acquisition_steps": 4, "budget": 2000000},
+  "automatic_promotion": false,
+  "S6": "out_of_scope_until_after_5.5"
+}

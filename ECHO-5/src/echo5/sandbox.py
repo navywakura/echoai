@@ -20,6 +20,13 @@ PINS = {'minigrid': '3.0.0', 'gymnasium': '1.2.0', 'numpy': '2.2.6',
         'pygame': '2.6.1', 'cloudpickle': '3.1.1',
         'Farama-Notifications': '0.0.4', 'typing_extensions': '4.14.1'}
 MODES = ('informative', 'fixed', 'passive', 'no_memory', 'no_planning')
+# Separate opt-in research controls; historical campaign defaults stay fixed.
+EXPLORATION_MODES = ('frontier_information', 'frontier_nearest', 'frontier_random')
+EXPLORATION_OPTIONS = EXPLORATION_MODES + ('frontier_hybrid',)
+HYBRID_STAGNATION_STEPS = 8
+HYBRID_INFORMATION_STEPS = 4
+HYBRID_INFORMATION_SELECTIONS = 2
+HYBRID_COOLDOWN_STEPS = 8
 ACTIONS = ('left', 'right', 'forward', 'pickup', 'drop', 'toggle', 'done')
 TYPES = ('unseen', 'empty', 'wall', 'floor', 'door', 'key', 'ball', 'box',
          'goal', 'lava', 'agent')
@@ -217,7 +224,7 @@ class ObservationActor:
     """
 
     def __init__(self, *, mode='informative'):
-        if mode not in MODES:
+        if mode not in MODES + EXPLORATION_OPTIONS:
             raise ValueError('Unknown sandbox mode')
         self.mode = mode
         self.observation = None
@@ -235,6 +242,13 @@ class ObservationActor:
         self.motion = {'status': 'origin', 'alternatives': [[0, 0]]}
         self.transitions = Counter()
         self._rng = random.Random(0)  # constant policy seed, never the case seed
+        self._frontier_target = None
+        self._frontier_trace = None
+        self._hybrid_stagnant = 0
+        self._hybrid_information_until = 0
+        self._hybrid_cooldown_until = 0
+        self._hybrid_selections_left = 0
+        self._hybrid_started_at = None
         self._last_plan = []
         self.last_learning = None
 
@@ -305,6 +319,10 @@ class ObservationActor:
         projected = list(self._project(obs, position))
         # Reserve update work atomically so an exhausted observer stays coherent.
         budget.consume('map_update', len(projected) + 1)
+        if self.mode == 'frontier_hybrid':
+            budget.consume('hybrid_progress')
+            previous_progress = (len(self.cells), len(self.visits), len(self.completed),
+                                 self.hand if before is not None else None)
         old_position = self.position
         if before is not None:
             self.tick += 1
@@ -334,6 +352,10 @@ class ObservationActor:
             self.transitions[(action, position != old_position)] += 1
             self._update_subgoals(before, action)
         self.conflicts += len(changes)
+        if self.mode == 'frontier_hybrid':
+            progress = (len(self.cells), len(self.visits), len(self.completed), self.hand)
+            self._hybrid_stagnant = (0 if before is None or changes or progress != previous_progress
+                                    else min(HYBRID_STAGNATION_STEPS, self._hybrid_stagnant + 1))
         self.last_learning = {'tick': self.tick, 'observed_cells': len(projected),
             'map_changes': changes, 'motion': deepcopy(motion),
             'subgoals_supported': sorted(self.completed)}
@@ -537,6 +559,23 @@ class ObservationActor:
         return None, None
 
     def _explore(self, paths, budget):
+        if self.mode == 'frontier_hybrid':
+            return self._explore_hybrid(paths, budget)
+        if self.mode in EXPLORATION_MODES:
+            candidates = self._frontier_candidates(paths, budget)
+            # Every selector retains its target until reached or invalidated.
+            # A random frontier must not abandon its route at every action.
+            budget.consume('frontier_commitment_lookup', len(candidates))
+            selected = next((c for c in candidates if c[2] == self._frontier_target), None)
+            continued = selected is not None
+            if selected is None:
+                selected = self._select_frontier(candidates, budget)
+            self._frontier_target = selected[2] if selected else None
+            self._frontier_trace = {'status': 'predicted_not_observed', 'selector': self.mode,
+                'candidate_count': len(candidates), 'continued_target': continued,
+                'relative_target_pose': list(selected[2]) if selected else None,
+                'predicted_unknown_cells': selected[1] if selected else 0}
+            return list(selected[0]) if selected else None
         choices = []
         n = len(self.observation['image'])
         for state, path in paths.items():
@@ -565,6 +604,153 @@ class ObservationActor:
                     choices.append((-score, len(path), state, path))
         return min(choices)[3] if choices else None
 
+    def _unscored_frontier_candidates(self, paths, budget):
+        """Exact historical eligibility, stopping at the first unknown cell.
+
+        These charged visibility probes test existence, not information gain.
+        Worst case still inspects three view-length rays per unvisited pose;
+        neither this enumeration nor the shared path planner is constant-time.
+        """
+        candidates = []
+        n = len(self.observation['image'])
+        for state, path in sorted(paths.items()):
+            budget.consume('frontier_candidate')
+            x, y, direction = state
+            if not path or self.visits[((x, y), direction)]:
+                continue
+            forward, right = DIRS[direction], DIRS[(direction + 1) % 4]
+            unknown = False
+            for lateral in (-1, 0, 1):
+                for distance in range(1, n):
+                    budget.consume('frontier_visibility_probe')
+                    point = (x + forward[0]*distance + right[0]*lateral,
+                             y + forward[1]*distance + right[1]*lateral)
+                    cell = self._cell(point)
+                    if cell is None:
+                        unknown = True
+                        break
+                    if cell[0] == 2 or (cell[0] == 4 and cell[2] != 0):
+                        break
+                if unknown:
+                    break
+            if unknown:
+                candidates.append((tuple(path), None, state))
+        return candidates
+
+    def _hybrid_trigger(self, budget):
+        """Called only after the shared goal/prerequisite planner found no plan.
+
+        Missing targets alone and unrelated doors are not goal blockage. A known
+        active requirement without a supported plan is a map-relative signal,
+        not proof that the true world is unsolvable (planning is bounded).
+        """
+        budget.consume('hybrid_gate')
+        for index, step in enumerate(self.mission['steps']):
+            if index in self.completed:
+                continue
+            role = ('reference' if step['verb'] == 'putnext' and self.hand and
+                    self._matches(self.hand, step['target'], self.carried_from) else 'target')
+            positions = []
+            for point, value in self.cells.items():
+                budget.consume('hybrid_mission_match')
+                if self._matches(value['cell'], step[role], point):
+                    positions.append(list(point))
+            if positions:
+                return 'observed_mission_blockage', {
+                    'subgoal': index, 'required_role': role, 'positions': sorted(positions),
+                    'basis': 'no_plan_on_observed_map'}
+            if self.mission['order'] == 'sequence':
+                break
+        if self._hybrid_stagnant >= HYBRID_STAGNATION_STEPS:
+            return 'observation_stagnation', {
+                'stagnant_observations': self._hybrid_stagnant,
+                'basis': 'no_new_cells_poses_inventory_or_subgoal_support_and_no_cell_changes'}
+        return None, None
+
+    def _explore_hybrid(self, paths, budget):
+        trigger, evidence = self._hybrid_trigger(budget)
+        if trigger is None:
+            self._hybrid_selections_left = 0
+        elif self.tick >= self._hybrid_cooldown_until:
+            self._hybrid_started_at = self.tick
+            self._hybrid_information_until = self.tick + HYBRID_INFORMATION_STEPS
+            self._hybrid_cooldown_until = self._hybrid_information_until + HYBRID_COOLDOWN_STEPS
+            self._hybrid_selections_left = HYBRID_INFORMATION_SELECTIONS
+        information = (trigger is not None and self.tick < self._hybrid_information_until and
+                       self._hybrid_selections_left > 0)
+        # Written before charged work, so an exhausted decision still exports
+        # the actual gate via the existing sandbox_stop hypotheses event.
+        self._frontier_trace = {'status': 'predicted_not_observed', 'selector': self.mode,
+            'phase': 'information' if information else 'nearest', 'trigger': trigger,
+            'trigger_evidence': evidence, 'observation_tick': self.tick,
+            'information_phase_started_tick': self._hybrid_started_at,
+            'information_until_tick': self._hybrid_information_until,
+            'cooldown_until_tick': self._hybrid_cooldown_until,
+            'information_selections_remaining': self._hybrid_selections_left,
+            'information_scoring_attempted': False, 'information_scored': False}
+        candidates = self._unscored_frontier_candidates(paths, budget)
+        budget.consume('frontier_commitment_lookup', len(candidates))
+        selected = next((c for c in candidates if c[2] == self._frontier_target), None)
+        continued = selected is not None
+        if selected is None and candidates:
+            if information:
+                self._frontier_trace['information_scoring_attempted'] = True
+                candidates = self._frontier_candidates(paths, budget)
+                self._frontier_trace['information_scored'] = True
+                self._hybrid_selections_left -= 1
+            selected = self._select_frontier(candidates, budget, selector=(
+                'frontier_information' if information else 'frontier_nearest'))
+        self._frontier_target = selected[2] if selected else None
+        self._frontier_trace.update(candidate_count=len(candidates), continued_target=continued,
+            relative_target_pose=list(selected[2]) if selected else None,
+            predicted_unknown_cells=selected[1] if selected else None,
+            information_selections_remaining=self._hybrid_selections_left)
+        return list(selected[0]) if selected else None
+
+    def _frontier_candidates(self, paths, budget):
+        """Same observed-map candidates for all three matched selectors.
+
+        Exclude visited poses rather than using the informative score as an
+        eligibility gate. No environment, true position, reward or world seed.
+        The visibility estimate and its work are common to every arm.
+        """
+        candidates = []
+        n = len(self.observation['image'])
+        for state, path in sorted(paths.items()):
+            budget.consume('information_candidate')
+            x, y, direction = state
+            if not path or self.visits[((x, y), direction)]:
+                continue
+            forward, right = DIRS[direction], DIRS[(direction + 1) % 4]
+            unknown = 0
+            for lateral in (-1, 0, 1):
+                for distance in range(1, n):
+                    budget.consume('information_ray')
+                    point = (x + forward[0]*distance + right[0]*lateral,
+                             y + forward[1]*distance + right[1]*lateral)
+                    cell = self._cell(point)
+                    if cell is None:
+                        unknown += 1
+                    elif cell[0] == 2 or (cell[0] == 4 and cell[2] != 0):
+                        break
+            if unknown:
+                candidates.append((tuple(path), unknown, state))
+        return candidates
+
+    def _select_frontier(self, candidates, budget, *, selector=None):
+        if not candidates:
+            return None
+        selector = self.mode if selector is None else selector
+        # Linear ranking charge includes every compared alternative. Random
+        # selection pays its draw; enumeration has already been paid identically.
+        if selector == 'frontier_random':
+            budget.consume('frontier_random_draw')
+            return candidates[self._rng.randrange(len(candidates))]
+        budget.consume('frontier_rank', len(candidates))
+        if selector == 'frontier_nearest':
+            return min(candidates, key=lambda c: (len(c[0]), c[2]))
+        return min(candidates, key=lambda c: (-(c[1]*24//(len(c[0])+2)), len(c[0]), c[2]))
+
     def _unblock(self, paths):
         if self.hand:
             return self._drop_route(paths)
@@ -583,6 +769,7 @@ class ObservationActor:
         if self.observation is None:
             raise RuntimeError('Observe before choosing')
         budget.consume('decision')
+        self._frontier_trace = None
         if self.mode == 'fixed':
             action = (2, 2, 0, 2, 1, 3, 5, 4)[self.tick % 8]
             return self._decision([action], 'fixed_sequence')
@@ -605,8 +792,15 @@ class ObservationActor:
         self._planning_budget = budget
         paths = self._paths(budget)
         plan, reason = self._goal_plan(paths, budget)
+        if self.mode == 'frontier_hybrid' and plan is not None:
+            self._hybrid_selections_left = 0
+            self._frontier_trace = {'selector': self.mode, 'phase': 'goal', 'trigger': None,
+                'trigger_evidence': None, 'information_scoring_attempted': False,
+                'information_scored': False, 'observation_tick': self.tick}
         if plan is None:
             plan, reason = self._explore(paths, budget), 'expected_information_gain'
+            if self.mode in EXPLORATION_OPTIONS:
+                reason = self.mode
         if plan is None:
             # Goal-only empty rooms with dynamic obstacles cannot pick them up.
             can_unblock = self.mission['steps'][0]['verb'] != 'reach' or any(
@@ -619,6 +813,10 @@ class ObservationActor:
         return self._decision(plan, reason)
 
     def _decision(self, plan, reason):
+        if self.mode == 'frontier_hybrid' and reason == 'manual_public_action':
+            self._frontier_trace = {'selector': self.mode, 'phase': 'manual', 'trigger': None,
+                'trigger_evidence': None, 'information_scoring_attempted': False,
+                'information_scored': False, 'observation_tick': self.tick}
         self._last_plan = list(plan)
         action = plan[0]
         n = len(self.observation['image'])
@@ -627,9 +825,12 @@ class ObservationActor:
                       'front': decode_cell(front), 'expected':
                       ('advance' if _passable(front) else 'blocked_or_changed') if action == 2
                       else ACTIONS[action], 'not_evidence': True}
-        return {'action': action, 'action_name': ACTIONS[action], 'reason': reason,
+        result = {'action': action, 'action_name': ACTIONS[action], 'reason': reason,
                 'plan': list(plan), 'prediction': prediction,
                 'hypotheses': self.hypotheses()}
+        if self.mode in EXPLORATION_OPTIONS:
+            result['exploration'] = deepcopy(self._frontier_trace)
+        return result
 
     def hypotheses(self):
         targets = []
@@ -641,8 +842,11 @@ class ObservationActor:
                     'status': 'unobserved' if not positions else 'multiple_observed_matches'
                               if len(positions) > 1 else 'observed_description_match',
                     'unseen_alternatives_possible': True})
-        return {'targets': targets, 'pose': deepcopy(self.motion),
-                'plan_status': 'conditional_on_observed_map_and_native_mechanics'}
+        result = {'targets': targets, 'pose': deepcopy(self.motion),
+                  'plan_status': 'conditional_on_observed_map_and_native_mechanics'}
+        if self.mode in EXPLORATION_OPTIONS:
+            result['exploration'] = deepcopy(self._frontier_trace)
+        return result
 
     def memory_snapshot(self):
         return {'schema': 'echo5.sandbox.memory.v1', 'kind': 'observation_acquired_map',

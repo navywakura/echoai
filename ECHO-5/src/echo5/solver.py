@@ -1,4 +1,5 @@
 """Bounded demonstration search, exact disagreement detection, no query truth."""
+from bisect import insort
 from .budget import Budget, BudgetExceeded
 from .concepts import digest
 from . import grounding
@@ -47,6 +48,7 @@ class _Engine:
         self.relational, self.hierarchical = relational, hierarchical
         self.cache, self.seen = {}, set()
         self.cache_policy = cache_policy
+        self.acceleration = None
         self._input_ids, self._prefix_nodes, self._paths = {}, {}, {}
         self.stats = {'candidates': 0, 'invalid_candidates': 0, 'cache_hits': 0,
                       'consistent_programs': 0, 'unique_predictions': 0,
@@ -71,7 +73,7 @@ class _Engine:
                     result = value
                     continue
             try:
-                result = apply_step(step, result, budget=self.budget)
+                result = self._apply(step, result)
             except ValueError as exc:
                 if key is not None and len(self.cache) < MAX_CACHE:
                     self.budget.consume('cache_writes')
@@ -81,6 +83,11 @@ class _Engine:
                 self.budget.consume('cache_writes')
                 self.cache[key] = result
         return result
+
+    def _apply(self, step, rows):
+        if self.acceleration is not None:
+            return self.acceleration.step(step, rows)
+        return apply_step(step, rows, budget=self.budget)
 
     def _run_interned(self, steps, inp):
         """Hash public inputs once, then use bounded integer prefix/input keys.
@@ -137,7 +144,7 @@ class _Engine:
         for index in range(start, len(steps)):
             key = None if path[index] is None else (path[index], input_id)
             try:
-                result = apply_step(steps[index], result, budget=self.budget)
+                result = self._apply(steps[index], result)
             except ValueError as exc:
                 if key is not None and len(self.cache) < MAX_CACHE:
                     self.budget.consume('cache_writes')
@@ -184,6 +191,9 @@ def _emit(journal, **event):
 
 
 def _result(status, engine, start, *, predictions=(), program=None, alternatives=()):
+    if engine.acceleration is not None:
+        engine.stats['memoization'] = dict(engine.acceleration.stats)
+        engine.stats['operator_slots_checked'] = engine.budget.counts.get('signature_operator_checks', 0)
     snapshot = engine.budget.snapshot()
     metrics = {**snapshot, **engine.stats, 'task_used': engine.budget.used - start,
                'cortex_calls': 0}
@@ -194,7 +204,7 @@ def _result(status, engine, start, *, predictions=(), program=None, alternatives
 
 def solve(task, *, budget=DEFAULT_BUDGET, library=None, relational=True,
           hierarchical=True, learn=False, journal=None, synthesis=None,
-          cache_policy='legacy'):
+          cache_policy='legacy', diagnostic=False):
     """Compare every hypothesis in a completed tier; exhaustion always abstains.
 
     Tier 1: primitives, named concepts and supplied proposals. Only if no
@@ -207,7 +217,7 @@ def solve(task, *, budget=DEFAULT_BUDGET, library=None, relational=True,
         return _solve_synthesis(task, budget=budget, library=library,
                                 relational=relational, hierarchical=hierarchical,
                                 learn=learn, journal=journal, synthesis=synthesis,
-                                cache_policy=cache_policy)
+                                cache_policy=cache_policy, diagnostic=diagnostic)
     budget = Budget(budget) if type(budget) is int else budget
     start = budget.used
     engine = _Engine(budget, library, relational, hierarchical, cache_policy)
@@ -275,7 +285,7 @@ def solve(task, *, budget=DEFAULT_BUDGET, library=None, relational=True,
 
 def validate_synthesis(config):
     """Validate a public search contract without performing search or execution."""
-    if type(config) is not dict or set(config) - {'max_depth', 'beam_width', 'max_candidates', 'grammar'}:
+    if type(config) is not dict or set(config) - {'max_depth', 'beam_width', 'max_candidates', 'grammar', 'strategy', 'ranking_bound'}:
         raise ValueError('invalid synthesis config')
     limits = {'max_depth': (4, 8), 'beam_width': (24, 128), 'max_candidates': (12000, 100000)}
     result = {}
@@ -289,6 +299,14 @@ def validate_synthesis(config):
     if not atoms:
         raise ValueError('empty synthesis alphabet')
     result['grammar'] = config.get('grammar')
+    if 'strategy' in config:
+        if config['strategy'] not in ('baseline', 'memoized', 'certified'):
+            raise ValueError('unknown synthesis strategy')
+        result['strategy'] = config['strategy']
+    if 'ranking_bound' in config:
+        if type(config['ranking_bound']) is not bool:
+            raise ValueError('ranking_bound must be boolean')
+        result['ranking_bound'] = config['ranking_bound']
     return result
 
 
@@ -303,7 +321,7 @@ def _loss(actual, expected, budget):
 
 
 def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
-                     journal, synthesis, cache_policy):
+                     journal, synthesis, cache_policy, diagnostic=False):
     """Compose arbitrary retained prefixes with primitives or verified calls.
 
     Each tier is fully considered before emitting consensus. Ranking uses only
@@ -319,12 +337,29 @@ def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
                         search_space_exhaustive=False, search_limit_hit=False)
     matches, hypothesis = [], None
     status, predictions, chosen = 'unsolved', (), None
+    def observed_candidate(steps, depth, disposition, **facts):
+        # Passive diagnostic only: no witness, selection feedback or work credit.
+        if diagnostic and journal is not None:
+            _emit(journal, kind='synthesis_candidate', depth=depth,
+                  program=Program(steps).to_dict(), disposition=disposition,
+                  work=budget.used, **facts)
     try:
         try:
             budget.consume('synthesis_config_reads')
             config = validate_synthesis(synthesis)
         except (TypeError, ValueError):
             return _result('invalid_search', engine, start)
+        strategy = config.get('strategy', 'baseline')
+        bound_ranking = strategy == 'certified' and config.get('ranking_bound', False)
+        if strategy != 'baseline':
+            from .search_cache import (SearchCache, ordered_extensions, output_shape,
+                                       palette_preserving, prune_binding_aliases)
+            engine.acceleration = SearchCache(budget)
+            engine.stats.update(search_strategy=strategy, signature_pruned=0,
+                                verification_rejections=0, verification_candidates=0,
+                                priority_tickets=0, operator_slots_checked=0,
+                                binding_aliases_pruned=0, invalid_bindings_pruned=0,
+                                ranking_bound_pruned=0, ranking_bound_enabled=bound_ranking)
         try:
             demos, queries = _inputs(task, budget)
             proposals = task.get('proposals', [])
@@ -360,12 +395,42 @@ def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
                 if index >= len(atoms)-len(proposals):
                     engine.stats['rejected_proposals'] += 1
         # State: expanded program, symbolic chunks (preserving named calls).
+        palette_safe = False
+        if strategy == 'certified':
+            budget.consume('signature_alphabet_proofs', sum(len(steps) for _, steps in compiled))
+            palette_safe = all(palette_preserving(steps) for _, steps in compiled)
+            engine.stats['palette_pruning_sound_for_alphabet'] = palette_safe
         frontier = [((), ())]
+        if palette_safe and any(not engine.acceleration.can_reach_palette(inp, expected)
+                                for inp, expected in demos):
+            engine.stats['signature_pruned'] += 1
+            frontier = []
+            _emit(journal, kind='synthesis_impossibility', reason='required_color_absent_from_input',
+                  scope='palette_preserving_compiled_alphabet', test_verified=False)
         for depth in range(1, config['max_depth']+1):
             engine.stats.update(tier=depth, complete=False)
-            next_states, equivalent = [], set()
+            next_states, equivalent, representatives = [], set(), {}
+            beam_ranks = []
             for prefix, symbols in frontier:
-                for atom, extension in compiled:
+                parent_outputs = None
+                extensions = compiled
+                if strategy == 'certified':
+                    parent_outputs = tuple(engine.run(prefix, inp) for inp, _ in demos)
+                    parent_queries = []
+                    for inp in queries:
+                        try:
+                            parent_queries.append(engine.run(prefix, inp))
+                        except ValueError:
+                            parent_queries.append(None)
+                    extensions, discarded = prune_binding_aliases(compiled, parent_outputs,
+                                                                  tuple(parent_queries), engine.acceleration)
+                    engine.stats['binding_aliases_pruned'] += sum(d == 'binding_alias' for _, d, _ in discarded)
+                    engine.stats['invalid_bindings_pruned'] += sum(d == 'proven_inapplicable' for _, d, _ in discarded)
+                    for extension, disposition, representative in discarded:
+                        observed_candidate(prefix+extension, depth, disposition,
+                            **({'representative': Program(prefix+representative).to_dict()} if representative else {}))
+                    extensions = ordered_extensions(extensions, parent_outputs, demos, budget)
+                for atom, extension in extensions:
                     if engine.stats['candidates'] >= config['max_candidates']:
                         engine.stats['search_limit_hit'] = True
                         status = 'search_exhausted'
@@ -376,17 +441,74 @@ def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
                     steps = prefix + extension
                     if len(steps) > MAX_STEPS or len(symbols)+len(atom['steps']) > MAX_STEPS:
                         engine.stats['invalid_candidates'] += 1
+                        observed_candidate(steps, depth, 'step_limit')
                         continue
                     budget.consume('candidate_deduplications', len(steps))
                     if steps in engine.seen:
+                        observed_candidate(steps, depth, 'syntactic_duplicate')
                         continue
                     engine.seen.add(steps)
+                    verifying = strategy == 'certified' and (bool(matches) or depth == config['max_depth'])
+                    if verifying:
+                        engine.stats['verification_candidates'] += 1
                     try:
-                        outputs = tuple(engine.run(steps, inp) for inp, _ in demos)
-                    except ValueError:
+                        actuals, rejected, partial_loss = [], False, 0
+                        rejection_reason = 'counterexample_rejected'
+                        for demo_index, (inp, expected) in enumerate(demos):
+                            if verifying:
+                                parent = parent_outputs[demo_index]
+                                shape = output_shape((len(parent), len(parent[0])), extension, budget)
+                                if shape is not None and shape != (len(expected), len(expected[0])):
+                                    rejected = True
+                                    break
+                            elif bound_ranking and len(beam_ranks) == config['beam_width']:
+                                parent = parent_outputs[demo_index]
+                                shape = output_shape((len(parent), len(parent[0])), extension, budget)
+                                budget.consume('ranking_bound_shape_checks')
+                                if shape is not None:
+                                    h, w = shape
+                                    eh, ew = len(expected), len(expected[0])
+                                    minimum = partial_loss + abs(h-eh)*max(w, ew) + abs(w-ew)*max(h, eh)
+                                    if minimum > 0 and (minimum, len(steps), engine.stats['candidates']) >= beam_ranks[-1]:
+                                        engine.stats['ranking_bound_pruned'] += 1
+                                        rejected, rejection_reason = True, 'loss_bound_pruned'
+                                        break
+                            actual = engine.run(steps, inp)
+                            actuals.append(actual)
+                            if verifying:
+                                if engine.acceleration.loss(actual, expected, _loss):
+                                    rejected = True
+                                    break
+                            elif palette_safe and not engine.acceleration.can_reach_palette(actual, expected):
+                                engine.stats['signature_pruned'] += 1
+                                rejection_reason = 'irreversible_palette_loss'
+                                rejected = True
+                                break
+                            elif bound_ranking:
+                                partial_loss += engine.acceleration.loss(actual, expected, _loss)
+                                budget.consume('ranking_bound_checks')
+                                # Loss is nonnegative and additive. A later
+                                # equally ranked candidate cannot enter a full
+                                # beam, but every possible zero-loss fit must
+                                # still participate in consensus.
+                                if (partial_loss > 0 and len(beam_ranks) == config['beam_width']
+                                        and (partial_loss, len(steps), engine.stats['candidates']) >= beam_ranks[-1]):
+                                    engine.stats['ranking_bound_pruned'] += 1
+                                    rejected, rejection_reason = True, 'loss_bound_pruned'
+                                    break
+                        if rejected:
+                            if verifying:
+                                engine.stats['verification_rejections'] += 1
+                            observed_candidate(steps, depth, rejection_reason)
+                            continue
+                        outputs = tuple(actuals)
+                    except ValueError as exc:
                         engine.stats['invalid_candidates'] += 1
+                        observed_candidate(steps, depth, 'invalid_execution', error=str(exc))
                         continue
-                    loss = sum(_loss(actual, expected, budget) for actual, (_, expected) in zip(outputs, demos))
+                    loss = sum((engine.acceleration.loss(actual, expected, _loss)
+                                if engine.acceleration is not None else _loss(actual, expected, budget))
+                               for actual, (_, expected) in zip(outputs, demos))
                     query_outputs = []
                     for inp in queries:
                         try:
@@ -394,17 +516,32 @@ def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
                         except ValueError:
                             query_outputs.append(None)
                     query_outputs = tuple(query_outputs)
-                    budget.consume('state_hash_cells', sum(sum(map(len, out))
-                                   for out in (*outputs, *query_outputs) if out is not None))
+                    if engine.acceleration is None:
+                        budget.consume('state_hash_cells', sum(sum(map(len, out))
+                                       for out in (*outputs, *query_outputs) if out is not None))
                     budget.consume('state_lookups')
-                    signature = (len(steps), outputs, query_outputs)
+                    signature = ((len(steps), engine.acceleration.signature((*outputs, *query_outputs)))
+                                 if engine.acceleration is not None else (len(steps), outputs, query_outputs))
                     if signature in equivalent:
                         engine.stats['semantic_duplicates'] += 1
+                        if diagnostic:
+                            observed_candidate(steps, depth, 'semantic_duplicate',
+                                representative=Program(representatives[signature]).to_dict())
                         continue
                     budget.consume('state_writes')
                     equivalent.add(signature)
+                    if diagnostic:
+                        representatives[signature] = steps
                     symbolic = symbols + tuple(atom['steps'])
+                    observed_candidate(steps, depth, 'evaluated', loss=loss)
                     if loss == 0:
+                        if strategy == 'certified' and not matches:
+                            engine.stats['priority_tickets'] += 1
+                            engine.stats['verification_reserved_work'] = budget.remaining
+                            _emit(journal, kind='consensus_priority', depth=depth,
+                                  work_remaining=budget.remaining,
+                                  scope='all_remaining_extensions_of_retained_frontier',
+                                  partial_tier_acceptance=False)
                         engine.stats['consistent_programs'] += 1
                         pred = None if None in query_outputs else query_outputs
                         if pred is None:
@@ -416,6 +553,11 @@ def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
                               hypothesis=symbolic_program, train_verified=True,
                               test_verified=False, query_defined=pred is not None, depth=depth)
                     next_states.append((loss, len(steps), len(next_states), steps, symbolic))
+                    if bound_ranking and loss:
+                        budget.consume('ranking_bound_update', len(beam_ranks)+max(1, len(beam_ranks).bit_length()))
+                        insort(beam_ranks, (loss, len(steps), engine.stats['candidates']))
+                        if len(beam_ranks) > config['beam_width']:
+                            beam_ranks.pop()
                 if engine.stats['search_limit_hit']:
                     break
             if engine.stats['search_limit_hit']:
@@ -434,6 +576,10 @@ def _solve_synthesis(task, *, budget, library, relational, hierarchical, learn,
             next_states.sort(key=lambda item: item[:3])
             engine.stats['beam_pruned'] += max(0, len(next_states)-config['beam_width'])
             frontier = [(steps, symbols) for _, _, _, steps, symbols in next_states[:config['beam_width']]]
+            if diagnostic and journal is not None:
+                _emit(journal, kind='synthesis_selection', depth=depth,
+                      retained=[Program(steps).to_dict() for steps, _ in frontier],
+                      ranked_candidates=len(next_states), work=budget.used)
             engine.stats['frontier_peak'] = max(engine.stats['frontier_peak'], len(frontier))
             _emit(journal, kind='synthesis_frontier', depth=depth, retained=len(frontier),
                   beam_pruned=engine.stats['beam_pruned'], work=budget.used)

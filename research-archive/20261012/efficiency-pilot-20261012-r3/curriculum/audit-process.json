@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "<LAB_ECHO5>/.venv-sandbox/bin/python",
+    "-I",
+    "<LAB_ECHO5>/scripts/efficiency.py",
+    "worker",
+    "--output",
+    "<LAB_ECHO5>/artifacts/efficiency-pilot-20261012-r3/curriculum",
+    "--stage",
+    "curriculum",
+    "--action",
+    "audit"
+  ],
+  "exit_code": 0,
+  "pid": 319016,
+  "timed_out": false,
+  "process_group_cleanup_attempted": false,
+  "seconds": 2.1701033409917727
+}

@@ -8,6 +8,7 @@ Disarm evidence does not turn a failed mission into a successful mission.
 import ast
 import hashlib
 import math
+import subprocess
 import time
 
 
@@ -17,6 +18,43 @@ MAX_WALL_S = 900.0  # ECHO-5's outer episode maximum; caller passes remaining ti
 # Frozen nexus0/drone3/assets/runner.py. Unlike ast.dump, bytes are stable
 # across host/container Python versions. Deliberately reject even text drift.
 LEGACY_SOURCE_SHA256 = 'f10d83d7b750d4c15cef6ea008d688ad8e2c7e15c30af6b16ea3c652725e1c56'
+
+
+def stop_logger(px4, work, env, result, log, *, wall_timeout_s=8.0):
+    """Finish the logger's writer thread before terminating the autopilot.
+
+    Called only in finalization after mission/exception recovery and heartbeat
+    cancellation. The fixed local PX4 client talks to instance 0 inside the
+    disposable container. It cannot change a mission result. A failed flush
+    remains invalid evidence and must not prevent the existing process cleanup.
+    """
+    command = ['/opt/PX4-Autopilot/build/px4_sitl_default/bin/px4-logger', 'stop']
+    receipt = dict(schema='echo5.sitl.logger-shutdown.v1', command=command,
+                   complete=False, timeout_s=8, returncode=None)
+    started = time.monotonic()
+    try:
+        if (type(wall_timeout_s) not in (int, float)
+                or not math.isfinite(wall_timeout_s) or wall_timeout_s <= 0):
+            raise ValueError('positive finite shutdown time remaining required')
+        receipt['timeout_s'] = min(8.0, wall_timeout_s)
+        if px4.poll() is not None:
+            raise RuntimeError('PX4 exited before logger shutdown')
+        completed = subprocess.run(command, cwd=work, env=env,
+            stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=receipt['timeout_s'])
+        receipt.update(returncode=completed.returncode, stdout=completed.stdout[-2000:],
+                       stderr=completed.stderr[-2000:])
+        if completed.returncode != 0 or 'forcing stop' in completed.stdout + completed.stderr:
+            raise RuntimeError('PX4 logger did not stop cleanly')
+        receipt['complete'] = True
+    except Exception as exc:
+        receipt['error'] = repr(exc)
+    receipt['wall_s'] = time.monotonic() - started
+    result['logger_shutdown'] = receipt
+    try:
+        log('logger_shutdown', **receipt)
+    except Exception as exc:
+        receipt.update(complete=False, log_error=repr(exc))
+    return receipt
 
 
 def recover_exception(backend, driver, log, poll, result, *, wall_timeout_s=35.0,
@@ -97,8 +135,9 @@ def recover_exception(backend, driver, log, poll, result, *, wall_timeout_s=35.0
 def adapt_runner_source(source):
     """Return a guarded in-memory adaptation; reject all unknown code shapes.
 
-    The whole source is pinned, including passive poll, cancellation and final
-    teardown. Reapplying the adapter or changing the legacy source requires an
+    The whole source is pinned, including passive poll and cancellation. The
+    finalizer additionally waits for logger stop before the original teardown.
+    Reapplying the adapter or changing the legacy source requires an
     explicit new review and fingerprint. Copy this module alongside the runner
     before executing the returned source.
     """
@@ -117,4 +156,10 @@ from sitl_recovery import recover_exception as _echo5_recover_exception
 _echo5_recover_exception(backend, driver, log, poll, result,
     wall_timeout_s=max(0.0, started + cfg['timeouts']['episode_s'] - time.monotonic()))
 ''').body)
+    # After stop_pump / join, while the evidence ledger and PX4 are still open.
+    outer.finalbody[2:2] = ast.parse('''
+from sitl_recovery import stop_logger as _echo5_stop_logger
+_echo5_stop_logger(px4, work, pxenv, result, log,
+    wall_timeout_s=max(0.0, started + cfg['timeouts']['episode_s'] - time.monotonic()))
+''').body
     return ast.unparse(ast.fix_missing_locations(tree)) + '\n'

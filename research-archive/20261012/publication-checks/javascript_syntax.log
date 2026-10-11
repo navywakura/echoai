@@ -1,0 +1,1 @@
+{"argv": ["node", "--check", "<PUBLIC_SOURCE>/ECHO-5/src/echo5/web/app.js"], "name": "javascript_syntax", "pid": 324339, "schema": "echo5.check-log.v1", "sources_sha256": "4b216878308e37bbfb4151f54c04dd06b1fc7d89d8817ca57269ce2d01d9947c"}

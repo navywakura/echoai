@@ -1,11 +1,11 @@
 [project]
 name = "echoai5"
-version = "5.0.0a1"
+version = "5.0.0"
 description = "Experimental grounded reasoning, interaction and robotics integration"
 requires-python = "==3.12.13"
 dependencies = []
 
 [tool.echo5]
-stage = "experimental-integration"
+stage = "validated-scoped-release"
 python-version = "3.12.13"
 runtime-dependencies = "stdlib-only"

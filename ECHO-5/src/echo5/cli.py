@@ -116,7 +116,13 @@ def main(argv=None):
     solve.add_argument('--memory')
     solve.add_argument('--learn-to', help='guardar memoria adquirida en archivo NUEVO de desarrollo')
     solve.add_argument('--trace', help='diario nuevo de decisiones observadas')
+    solve.add_argument('--synthesis-strategy', choices=('baseline', 'memoized', 'certified'),
+                       help='síntesis profunda opcional; gramática completa, profundidad 4 y beam 24')
+    solve.add_argument('--ranking-bound', action='store_true',
+                       help='poda por cota de pérdida; requiere --synthesis-strategy certified')
     args = parser.parse_args(argv)
+    if args.command == 'solve' and args.ranking_bound and args.synthesis_strategy != 'certified':
+        parser.error('--ranking-bound requires --synthesis-strategy certified')
     try:
         if args.command == 'bench':
             bench(args.output, args.contract)
@@ -132,7 +138,10 @@ def main(argv=None):
             journal = Recorder(args.trace) if args.trace else None
             try:
                 result = infer(json.loads(Path(args.task).read_text()), budget=ledger,
-                               library=library, learn=bool(args.learn_to), journal=journal)
+                               library=library, learn=bool(args.learn_to), journal=journal,
+                               synthesis=({'strategy': args.synthesis_strategy, 'ranking_bound': args.ranking_bound}
+                                          if args.synthesis_strategy else None),
+                               cache_policy='interned' if args.synthesis_strategy else 'legacy')
                 if args.learn_to:
                     if Path(args.learn_to).exists():
                         raise FileExistsError(args.learn_to)

@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/brand/banner-echo5.jpg" width="100%" alt="ECHO-5" /></p>
 <p align="center">
-  <img src="https://img.shields.io/badge/ECHO--5-research_in_progress-d97706" alt="ECHO-5: research in progress" />
+  <img src="https://img.shields.io/badge/ECHO--5-5.0.0_scoped_green-15803d" alt="ECHO-5: validated within its declared scope" />
   <img src="https://img.shields.io/badge/terminal_release-4.5_beta-7c3aed" alt="Terminal release: 4.5 beta" />
   <img src="https://img.shields.io/badge/S6-under_investigation-f59e0b" alt="S6 under investigation" />
   <img src="https://img.shields.io/badge/core-deterministic-111827" alt="Deterministic core" />
@@ -17,15 +17,22 @@
 
 ECHO-AI studies object and relation representations, causal memory, program composition and planning through interaction. It combines a local cognitive core with an optional language adviser. This repository contains the core, research modules, development tests, `echo-dev`, the `echo-nexus` terminal and the new [ECHO-5 implementation](ECHO-5/README.md).
 
-> **ECHO-5 is under active research and has not passed its complete release criteria.** Cognitive experiments have produced audited results; Gazebo/PX4 confirmation still has unresolved failures. This source publication is not a green release. S6 remains open and its next investigation is deferred until after ECHO-5.5.
+> **ECHO-5 5.0.0 is officially green within its validated release scope.** The r3 closure verdict passed every declared gate, including Gazebo/PX4 simulation and independent-process audits. Subsequent search and cost experiments are published with their limits. S6 remains open and deferred until after ECHO-5.5; this is not a claim of general intelligence, hardware validation or universal error-free behavior.
 
-The [11 October checkpoint](docs/PROJECT-CHECKPOINT-20261011.md) records what is implemented, what was measured and what remains unresolved. [Selected receipts](research-archive/20261011/README.md) preserve positive and negative results with provenance. The [10 October archive](research-archive/20261010/README.md) retains the earlier B24/ARC work.
+The [12 October checkpoint](docs/PROJECT-CHECKPOINT-20261012.md), [release notes](ECHO-5/docs/RELEASE-5.0.0.md) and [selected evidence](research-archive/20261012/README.md) document this release. Earlier [11 October](research-archive/20261011/README.md) and [10 October](research-archive/20261010/README.md) snapshots retain their failures and original provenance.
+
+| Latest controlled experiment | Measured result | Limit |
+|---|---|---|
+| Full-language synthesis | 12/18 independent tasks versus 0/18; 9/9 templates versus 0/9 | Six independent tasks remain unsolved; 326 operators and 2,000,000 work units per task |
+| Hybrid exploration | 28/28, 4.45% less logical work than nearest frontier | Information trigger did not activate in this sample |
+| Efficient curriculum | 64/64 versus random 56/64; 49.23% less total work than previous adaptive selector | 21.16% more work than random; eight paired runs do not establish broad statistical superiority |
+
 
 ECHO-5 now includes typed object and relation programs, concept reuse, hierarchical search, bounded hypothesis testing, an adaptive counterexample curriculum, MiniGrid/BabyAI evaluation, a MissionAgent bridge and a local decision viewer. The curriculum is an empirical adversarial-learning experiment; it is not a trained generative adversarial network.
 
 The separate **[echounity sandbox](https://github.com/navywakura/echounity)** provides an isometric robot world, a first-person camera, an observed map and genuine recordings of its decisions. Its simulation results have their own scope and do not close ECHO-5.
 
-The existing terminal package remains **4.5.0b1**. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic). Installing either package does not install a validated ECHO-5 release.
+The existing terminal package remains **4.5.0b1**. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic). ECHO-5 5.0.0 is distributed as a source workspace in this repository; the terminal installer remains separate.
 
 ## Work on ECHO-5
 
@@ -46,7 +53,7 @@ echoai tui
 
 Python 3.12+, Linux or macOS, no administrator access required. The installer verifies every distributed source file, creates a private virtual environment, installs the included TUI and verifies the installed source again. It keeps an installation log and preserves existing non-symlink executables. Private repositories require GitHub authentication to clone. Windows users can run the source with Python; the shell installer requires WSL or a compatible shell.
 
-Downloadable packages and SHA-256 checksums are in [Releases](https://github.com/navywakura/echoai/releases). A release includes the wheel, complete source archive, bundled terminal harness and release evidence.
+Downloadable packages and SHA-256 checksums are in [Releases](https://github.com/navywakura/echoai/releases). The 4.5 terminal release includes its wheel and harness. The 5.0.0 release provides the ECHO-5 source workspace and its published evidence; it does not introduce a new terminal wheel.
 
 ## Connect the neocortex
 

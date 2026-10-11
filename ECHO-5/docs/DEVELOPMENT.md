@@ -1,13 +1,5 @@
 # Desarrollo
 
-En la distribución pública, consultar primero
-[PUBLICATION-PORTABILITY.md](PUBLICATION-PORTABILITY.md): los módulos host
-viven en `../core/` respecto a ECHO-5, y `make inventory` escribe un catálogo
-nuevo en `artifacts/inventory-publication/`, conservando el inventario histórico.
-Los resultados previos corresponden a otras fuentes y hashes. El
-[checkpoint del proyecto](../../docs/PROJECT-CHECKPOINT-20261011.md) conserva
-el estado vigente de investigación abierta.
-
 Integración experimental iniciada el 10 de octubre de 2026. El diseño actual
 está en [IMPLEMENTATION-DESIGN.md](IMPLEMENTATION-DESIGN.md). `make check`
 comprueba entorno y sintaxis; `make test` ejecuta pruebas funcionales.

@@ -1,0 +1,660 @@
+{
+  "valid": true,
+  "fresh_process_reproduction": true,
+  "native_audit": {
+    "valid": true,
+    "episodes_replayed": 112,
+    "replay_actions": 1343,
+    "replay_work": 1050520,
+    "receipt_validation_work": 112,
+    "summary": {
+      "complete_pairs": true,
+      "groups": {
+        "all": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 28,
+              "successes": 28,
+              "actions": 322,
+              "work": 264261,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 28,
+              "successes": 28,
+              "actions": 332,
+              "work": 248277,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 28,
+              "successes": 28,
+              "actions": 357,
+              "work": 300762,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 28,
+              "successes": 28,
+              "actions": 332,
+              "work": 237220,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 28,
+              "wins": 0,
+              "losses": 0,
+              "ties": 28,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -0.5847766205253108,
+                0.5847766205253108
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 15984
+            },
+            "frontier_random": {
+              "cases": 28,
+              "wins": 0,
+              "losses": 0,
+              "ties": 28,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -0.5847766205253108,
+                0.5847766205253108
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -36501
+            },
+            "frontier_hybrid": {
+              "cases": 28,
+              "wins": 0,
+              "losses": 0,
+              "ties": 28,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -0.5847766205253108,
+                0.5847766205253108
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 27041
+            }
+          }
+        },
+        "objects_small": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 13,
+              "work": 2470,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 13,
+              "work": 2470,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 13,
+              "work": 2470,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 13,
+              "work": 2487,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 0
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 0
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -17
+            }
+          }
+        },
+        "objects_medium": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 17,
+              "work": 13039,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 17,
+              "work": 13096,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 16,
+              "work": 9920,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 17,
+              "work": 11463,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -57
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 3119
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 1576
+            }
+          }
+        },
+        "objects_large": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 44,
+              "work": 72189,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 45,
+              "work": 54372,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 53,
+              "work": 83794,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 45,
+              "work": 50084,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 17817
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -11605
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 22105
+            }
+          }
+        },
+        "key_small": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 53,
+              "work": 16417,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 53,
+              "work": 16446,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 55,
+              "work": 16990,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 53,
+              "work": 15972,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -29
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -573
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 445
+            }
+          }
+        },
+        "key_medium": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 73,
+              "work": 51127,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 76,
+              "work": 51425,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 78,
+              "work": 54261,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 76,
+              "work": 50008,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -298
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -3134
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 1119
+            }
+          }
+        },
+        "ordered_doors": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 74,
+              "work": 70405,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 80,
+              "work": 71854,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 88,
+              "work": 84860,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 80,
+              "work": 69892,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -1449
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -14455
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 513
+            }
+          }
+        },
+        "put_next": {
+          "arms": {
+            "frontier_information": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 48,
+              "work": 38614,
+              "budget_exhausted": 0
+            },
+            "frontier_nearest": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 48,
+              "work": 38614,
+              "budget_exhausted": 0
+            },
+            "frontier_random": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 54,
+              "work": 48467,
+              "budget_exhausted": 0
+            },
+            "frontier_hybrid": {
+              "episodes": 4,
+              "successes": 4,
+              "actions": 48,
+              "work": 37314,
+              "budget_exhausted": 0
+            }
+          },
+          "comparisons": {
+            "frontier_nearest": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 0
+            },
+            "frontier_random": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": -9853
+            },
+            "frontier_hybrid": {
+              "cases": 4,
+              "wins": 0,
+              "losses": 0,
+              "ties": 4,
+              "success_difference": 0.0,
+              "discordance_exact_p_two_sided": 1.0,
+              "difference_interval": [
+                -1.0,
+                1.0
+              ],
+              "interval_method": "Hoeffding paired bounded differences; alpha=.016666666666666666",
+              "scope": "descriptive pilot; no promotion or equivalence claim",
+              "total_work_difference": 1300
+            }
+          }
+        }
+      },
+      "scientific_verdict": "pilot_only_confirmation_not_run",
+      "promotion": false
+    },
+    "promotion": false
+  },
+  "result_sha256": "e3cb564f4989f81eda550eefb7248ed8f8d5fc219731d0fd97ace73a173cc5c4",
+  "plan_sha256": "66318f7d6320ff109aef3ea0d44bd2ff701182add4613478a679ccf0f05a69f2",
+  "source_sha256": "3c5d12a966910277953e050e1b8b2b44781b4b1e346a83f51b4d6d08e4131458",
+  "journal": {
+    "events": 1681,
+    "last_hash": "d9d6b5599ad8e2038257e51ec811514e248063eb01dabc8ff2d2e4bfa9dc0ba5"
+  },
+  "promotion": false,
+  "scope": "receipt reproduction, with independent native/construction judges; not a universal proof"
+}

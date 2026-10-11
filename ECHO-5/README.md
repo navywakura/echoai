@@ -1,20 +1,15 @@
-# ECHO-5 · 5.0.0a1
-
-> **Research preview / NOT GREEN.** ECHO-5 sigue abierto: esta publicación
-> no certifica cierre científico, calibración limpia, S6 ni vuelo físico.
-> Estado vigente: [checkpoint del proyecto](../docs/PROJECT-CHECKPOINT-20261011.md).
-> El recibo de contradicción convencional de la calibración carece de
-> `ulog-parameters.json`; no permite declarar una calibración limpia.
-
-Esta es una exportación adaptada al repositorio público aplanado. **Sus bytes
-y hashes difieren de las fuentes originales auditadas**; las cifras históricas
-de abajo conservan su alcance original, no certifican esta exportación.
-[Frontera de adaptación, comandos y límites](docs/PUBLICATION-PORTABILITY.md).
+# ECHO-5 · 5.0.0
 
 Integración experimental en CPU: objetos y relaciones, programas compuestos,
 conceptos persistentes, aprendizaje por interacción y recuperación del control
 robótico anterior. El neocórtex está apagado en este banco. S6 mantiene su
-estado abierto; esta versión no declara puntuación ARC ni validación física nueva.
+estado abierto; esta versión no declara puntuación ARC ni validación en hardware real.
+
+**Estado oficial: verde dentro del alcance validado.** El cierre r3 pasó sus
+criterios, incluida la confirmación Gazebo/PX4 en simulación. Las mejoras de
+búsqueda y coste posteriores están auditadas, con seis tareas independientes
+sin resolver. [Release y límites](docs/RELEASE-5.0.0.md) ·
+[Recibos públicos](../research-archive/20261012/README.md).
 
 Primera ejecución histórica terminada y auditada: **93 pruebas pasaron**. La representación
 nueva alcanza 31/32 rejillas sintéticas y la memoria 32/32; las diferencias y
@@ -25,6 +20,36 @@ búsqueda profunda, MiniGrid/BabyAI, réplica de contraejemplos y MissionAgent c
 un ejecutor Gazebo/PX4. Su estado actual se mantiene en el
 [checklist de cierre](docs/CLOSURE-CHECKLIST.md); los resultados de la primera
 ejecución no certifican automáticamente estos cambios.
+
+La [revisión del 11 de octubre](docs/REMEDIATION-AND-TRANSFER-20261011.md)
+contrasta los límites de transferencia y distingue los resultados del sistema
+de las ventajas atribuibles a cada módulo. Propone controles con las mismas
+habilidades, otro generador de escenas y una referencia semántica independiente.
+La revisión experimental posterior a r3 implementa esos instrumentos en
+[un protocolo separado](docs/REMEDIATION-IMPLEMENTATION-20261011.md). No hereda
+el verde del cierre r3. El primer piloto y la autopsia posterior ya están
+[medidos y auditados](docs/REMEDIATION-RESULTS-20261011.md): empate de exploradores,
+referencias semánticas concordantes y límites de coste en búsqueda y currículo.
+Determinismo
+y trazabilidad no acreditan ausencia universal de errores ni generalización.
+
+La [corrección posterior de búsqueda y coste](docs/SEARCH-EFFICIENCY-RESULTS-20261012.md)
+ya está implementada y auditada: **12/18 tareas del generador independiente frente
+a 0/18, y 9/9 plantillas frente a 0/9**, conservando los 326 operadores y el
+presupuesto. El híbrido mantiene 28/28 y el currículo eficiente 64/64, con menor
+trabajo que sus referencias anteriores. Persisten seis agotamientos de búsqueda;
+la utilidad del disparador informativo y la superioridad general del currículo
+siguen abiertas. [Checklist actualizado](docs/REMEDIATION-CHECKLIST.md).
+
+Piloto CPU posterior a r3 (salida nueva, proceso separado y auditorías):
+
+```sh
+.venv-sandbox/bin/python -I scripts/remediation.py launch --output artifacts/remediation-mi-piloto
+```
+
+El plan fijo está en `docs/REMEDIATION-PILOT.json`. Ejecuta exploración pareada,
+referencias semánticas, transferencia independiente, diagnóstico de prefijos y
+currículo por demanda. No llama al LLM, no reabre S6 ni publica una versión.
 
 Para el panel y el entorno externo:
 
@@ -111,3 +136,6 @@ de pesos o automejora recursiva.
 - [Aprendizaje adversarial](docs/ADVERSARIAL-LEARNING-PROPOSAL.md).
 - [Inventario previo](docs/MODULE-INVENTORY.md).
 - [Desarrollo y reproducción](docs/DEVELOPMENT.md).
+- [Búsqueda con reutilización, firmas y verificación prioritaria](docs/SEARCH-EFFICIENCY.md).
+- [Exploración híbrida opcional](docs/EXPLORATION-HYBRID.md).
+- [Currículo con selección y actualización acotadas](docs/CURRICULUM-EFFICIENT.md).

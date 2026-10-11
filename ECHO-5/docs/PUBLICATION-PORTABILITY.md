@@ -1,9 +1,10 @@
 # Public source distribution boundary — 2026-10-11
 
-ECHO-5 is research, **not green**. The authoritative current status is the
-[project checkpoint](../../docs/PROJECT-CHECKPOINT-20261011.md). In particular,
-the conventional contradiction calibration receipt lacks `ulog-parameters.json`;
-completion of calibration jobs does not establish a clean calibration.
+ECHO-5 5.0.0 is officially green within its declared, validated scope.
+The [12 October checkpoint](../../docs/PROJECT-CHECKPOINT-20261012.md) supersedes
+the earlier calibration failure. The r3 closure and subsequent efficiency audits
+have separate frozen-source identities; publication checks validate this adapted
+source tree rather than retroactively changing those identities.
 
 This export contains the current implementation, scripts, tests, contracts,
 lockfile and historical reports. It excludes agent instructions, environments,

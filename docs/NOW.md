@@ -1,5 +1,14 @@
 # NOW — estado y registro técnico de ECHO
 
+**12 de octubre · ECHO-5 5.0.0: verde oficial dentro del alcance validado.**
+Cierre r3 verificado, incluida confirmación Gazebo/PX4 en simulación. Correcciones
+posteriores auditadas: 12/18 independientes y 9/9 plantillas, 28/28 exploración,
+64/64 currículo. Seis tareas siguen abiertas; S6 se retoma después de 5.5.
+[Estado vigente](PROJECT-CHECKPOINT-20261012.md) ·
+[Release](../ECHO-5/docs/RELEASE-5.0.0.md).
+Los bloques siguientes conservan sus estados históricos; no son el estado vigente.
+
+
 **11 de octubre · ECHO-5 implementado y en investigación; cierre pendiente.**
 Se publica el runtime de objetos y relaciones, conceptos, composición, planificación,
 currículo por contraejemplos, MiniGrid/BabyAI, MissionAgent y panel local.
@@ -266,7 +275,7 @@ El contexto general de echOS, echo-ai Edge, agentes LLM y echo-rsi se conserva
 en metadatos y llms.txt. No se publica el nombre personal ni Discord.
 El repositorio de la web `ROGEX-LABORATORIES` está privado. La web anterior y
 su historial se conservan fuera del árbol desplegable en
-`/home/roger/rxlabs-private-archive/20261003-130623/`.
+`<LAB_HOME>/rxlabs-private-archive/20261003-130623/`.
 Commit web `16199cf`, Vercel producción READY y verificación pública completa.
 Mantener privados los informes de investigación; una publicación técnica
 posterior requiere una nueva instrucción explícita. Los resultados y documentos

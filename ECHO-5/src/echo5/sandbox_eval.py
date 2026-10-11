@@ -14,7 +14,7 @@ import time
 
 from .budget import Budget
 from .interaction import _canonical, _integer, _keys, _unseal
-from .sandbox import (ACTIONS, COLORS, MODES, PINS, Session, UnsupportedMission,
+from .sandbox import (ACTIONS, COLORS, MODES, EXPLORATION_OPTIONS, PINS, Session, UnsupportedMission,
                       dependency_status, parse_mission, sanitize_observation)
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -68,7 +68,7 @@ def normalize_spec(spec):
         raise ValueError('Environment is outside the native allowlist')
     seed = _integer(spec.get('seed', 101), 0, 2**32 - 1, 'seed')
     mode = spec.get('mode', 'informative')
-    if mode not in MODES:
+    if mode not in MODES + EXPLORATION_OPTIONS:
         raise ValueError('Unknown mode')
     budget = spec.get('budget', {'actions': 192, 'work': 200000})
     if type(budget) is int:
