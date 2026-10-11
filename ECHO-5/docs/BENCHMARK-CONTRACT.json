@@ -1,0 +1,33 @@
+{
+  "schema": "echo5-integration-contract-v1",
+  "scope": "synthetic development transfer, not ARC or S6 certification",
+  "neocortex": "off",
+  "grid": {
+    "acquisition_seed": 17011,
+    "confirmation_seed": 29009,
+    "families": ["right_recolor", "above_recolor", "extract_rotate", "rotate"],
+    "acquisition_cases_per_family": 2,
+    "confirmation_cases_per_family": 8,
+    "work_per_case": 8000000,
+    "conditions": ["legacy_relations", "no_hierarchy", "new_empty", "new_memory"]
+  },
+  "curriculum": {
+    "seed": 60101,
+    "paired_runs": 8,
+    "rounds": 3,
+    "pool_per_round": 4,
+    "confirmation_cases_per_run": 8,
+    "work_per_arm": 2000000,
+    "query_work_per_case": 100000,
+    "conditions": ["reference", "random", "adaptive"]
+  },
+  "interaction": {"seed": 30791, "cases": 24, "budget": 10000},
+  "robotics": {"seed": 40813, "cases": 24, "budget": 10000},
+  "acceptance": {
+    "instrument": "tests pass; all witnesses valid; original sources unchanged; deterministic replay and independent arithmetic audit",
+    "module_advantage": "paired additional exact successes without regressions, or equal successes at lower total logical work including acquisition",
+    "uncertainty": "paired wins and losses, descriptive Wilson intervals; correlated families are not independent evidence of broad generalization",
+    "adversarial_advantage": "adaptive must improve over random at the same total work ceiling; ties and higher costs are negative or inconclusive",
+    "promotion": "none; neither S6 green nor official ECHO-5 scientific release follows automatically"
+  }
+}

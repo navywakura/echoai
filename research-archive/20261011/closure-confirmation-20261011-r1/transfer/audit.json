@@ -1,0 +1,765 @@
+{
+  "result": {
+    "schema": "echo5.transfer.audit.v2",
+    "valid": true,
+    "arithmetic_valid": true,
+    "evidence_valid": true,
+    "sources_match": true,
+    "status": "replayed",
+    "rows_checked": 504,
+    "training_checked": 6,
+    "replayed_rows": 504,
+    "replayed_training": 6,
+    "replayed_work": 631983049,
+    "regeneration_work": 1358899,
+    "audit_work": {
+      "limit": 100000000,
+      "used": 4424912,
+      "remaining": 95575088,
+      "counts": {
+        "audit_compare_cells": 57450,
+        "concept_acquisitions": 18,
+        "concept_enumeration": 18,
+        "concept_lookups": 178,
+        "concept_resolutions": 196,
+        "demonstration_compare_cells": 14780,
+        "demonstration_sets": 54,
+        "dependency_checks": 52,
+        "execution_steps": 3784,
+        "expansion_nodes": 4738,
+        "feature_cells": 40445,
+        "fill_box_cells": 5434,
+        "geometry_cells": 206565,
+        "grid_validation": 3598,
+        "hash_bytes": 1011651,
+        "json_characters": 186295,
+        "json_nodes": 404932,
+        "library_snapshot_records": 63,
+        "map_cells": 317,
+        "object_cell_index": 8235,
+        "object_pairs": 951,
+        "object_transform_attempts": 668,
+        "outline_neighbours": 19552,
+        "pack_attempts": 317,
+        "pack_copy_cells": 2784,
+        "pack_order_work": 1902,
+        "pack_render_cells": 8393,
+        "program_nodes": 6704,
+        "relation_attempts": 317,
+        "relational_attempts": 951,
+        "render_cells": 234257,
+        "role_attempts": 1619,
+        "role_objects": 7761,
+        "segment_cells": 495380,
+        "source_read_hash_bytes": 760408,
+        "validate_cells": 934145
+      }
+    },
+    "total_audit_work": 637766860,
+    "summary": {
+      "scope": "bounded synthetic structural transfer; no ARC score or general statistical independence",
+      "phase": "confirmation",
+      "arms": {
+        "learned": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 48,
+          "supported_successes": 48,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 2587406,
+          "preparation_work": 150228,
+          "evaluation_work": 71262204,
+          "common_work": 2121094,
+          "total_work": 76120932,
+          "semantic_work": 66166321,
+          "metadata_work": 9954611,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 2232973,
+              "metadata_work": 354433,
+              "total_work": 2587406
+            },
+            "preparation": {
+              "semantic_work": 0,
+              "metadata_work": 150228,
+              "total_work": 150228
+            },
+            "evaluation": {
+              "semantic_work": 63360852,
+              "metadata_work": 7901352,
+              "total_work": 71262204
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 6,
+          "library_expanded_steps": 8,
+          "library_serialized_bytes": 16604,
+          "statuses": {
+            "ambiguous": 12,
+            "solved": 48,
+            "unsolved": 12
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 12
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 12
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        },
+        "fixed": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 48,
+          "supported_successes": 48,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 102193,
+          "preparation_work": 136052,
+          "evaluation_work": 71369916,
+          "common_work": 2121094,
+          "total_work": 73729255,
+          "semantic_work": 64000313,
+          "metadata_work": 9728942,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 42150,
+              "metadata_work": 60043,
+              "total_work": 102193
+            },
+            "preparation": {
+              "semantic_work": 24815,
+              "metadata_work": 111237,
+              "total_work": 136052
+            },
+            "evaluation": {
+              "semantic_work": 63360852,
+              "metadata_work": 8009064,
+              "total_work": 71369916
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 6,
+          "library_expanded_steps": 8,
+          "library_serialized_bytes": 16834,
+          "statuses": {
+            "ambiguous": 12,
+            "solved": 48,
+            "unsolved": 12
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 12
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 12
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        },
+        "irrelevant": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 48,
+          "supported_successes": 48,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 2587406,
+          "preparation_work": 108260,
+          "evaluation_work": 101281504,
+          "common_work": 2121094,
+          "total_work": 106098264,
+          "semantic_work": 98185289,
+          "metadata_work": 7912975,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 2232973,
+              "metadata_work": 354433,
+              "total_work": 2587406
+            },
+            "preparation": {
+              "semantic_work": 25932,
+              "metadata_work": 82328,
+              "total_work": 108260
+            },
+            "evaluation": {
+              "semantic_work": 95353888,
+              "metadata_work": 5927616,
+              "total_work": 101281504
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 6,
+          "library_expanded_steps": 8,
+          "library_serialized_bytes": 19149,
+          "statuses": {
+            "ambiguous": 12,
+            "solved": 48,
+            "unsolved": 12
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 12
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 12
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        },
+        "empty": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 48,
+          "supported_successes": 48,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 0,
+          "preparation_work": 61,
+          "evaluation_work": 89488840,
+          "common_work": 2121094,
+          "total_work": 91609995,
+          "semantic_work": 90056944,
+          "metadata_work": 1553051,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 0,
+              "metadata_work": 0,
+              "total_work": 0
+            },
+            "preparation": {
+              "semantic_work": 0,
+              "metadata_work": 61,
+              "total_work": 61
+            },
+            "evaluation": {
+              "semantic_work": 89484448,
+              "metadata_work": 4392,
+              "total_work": 89488840
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 0,
+          "library_expanded_steps": 0,
+          "library_serialized_bytes": 112,
+          "statuses": {
+            "ambiguous": 12,
+            "solved": 48,
+            "unsolved": 12
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 12
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 12
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        },
+        "empty_uncached": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 48,
+          "supported_successes": 48,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 0,
+          "preparation_work": 61,
+          "evaluation_work": 214914190,
+          "common_work": 2121094,
+          "total_work": 217035345,
+          "semantic_work": 215482294,
+          "metadata_work": 1553051,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 0,
+              "metadata_work": 0,
+              "total_work": 0
+            },
+            "preparation": {
+              "semantic_work": 0,
+              "metadata_work": 61,
+              "total_work": 61
+            },
+            "evaluation": {
+              "semantic_work": 214909798,
+              "metadata_work": 4392,
+              "total_work": 214914190
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 0,
+          "library_expanded_steps": 0,
+          "library_serialized_bytes": 112,
+          "statuses": {
+            "ambiguous": 12,
+            "solved": 48,
+            "unsolved": 12
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 12
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 12
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 12
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        },
+        "empty_shallow": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 0,
+          "supported_successes": 0,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 0,
+          "preparation_work": 61,
+          "evaluation_work": 37330832,
+          "common_work": 2121094,
+          "total_work": 39451987,
+          "semantic_work": 37898936,
+          "metadata_work": 1553051,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 0,
+              "metadata_work": 0,
+              "total_work": 0
+            },
+            "preparation": {
+              "semantic_work": 0,
+              "metadata_work": 61,
+              "total_work": 61
+            },
+            "evaluation": {
+              "semantic_work": 37326440,
+              "metadata_work": 4392,
+              "total_work": 37330832
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 0,
+          "library_expanded_steps": 0,
+          "library_serialized_bytes": 112,
+          "statuses": {
+            "ambiguous": 12,
+            "unsolved": 60
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 0
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 0
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 0
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 0
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        },
+        "old_representation": {
+          "cases": 72,
+          "supported_cases": 48,
+          "successes": 0,
+          "supported_successes": 0,
+          "control_cases": 24,
+          "control_predictions": 0,
+          "training_work": 0,
+          "preparation_work": 61,
+          "evaluation_work": 42591361,
+          "common_work": 2121094,
+          "total_work": 44712516,
+          "semantic_work": 43159465,
+          "metadata_work": 1553051,
+          "cost_breakdown": {
+            "training": {
+              "semantic_work": 0,
+              "metadata_work": 0,
+              "total_work": 0
+            },
+            "preparation": {
+              "semantic_work": 0,
+              "metadata_work": 61,
+              "total_work": 61
+            },
+            "evaluation": {
+              "semantic_work": 42586969,
+              "metadata_work": 4392,
+              "total_work": 42591361
+            },
+            "common": {
+              "semantic_work": 572496,
+              "metadata_work": 1548598,
+              "total_work": 2121094
+            }
+          },
+          "library_records": 0,
+          "library_expanded_steps": 0,
+          "library_serialized_bytes": 112,
+          "statuses": {
+            "ambiguous": 12,
+            "unsolved": 60
+          },
+          "families": {
+            "outline_extract_scale": {
+              "cases": 12,
+              "successes": 0
+            },
+            "fill_extract_tile": {
+              "cases": 12,
+              "successes": 0
+            },
+            "pack_rotate_scale": {
+              "cases": 12,
+              "successes": 0
+            },
+            "inside_erase_crop": {
+              "cases": 12,
+              "successes": 0
+            },
+            "ambiguous_rotation": {
+              "cases": 12,
+              "successes": 0
+            },
+            "unsupported_color": {
+              "cases": 12,
+              "successes": 0
+            }
+          }
+        }
+      },
+      "comparisons": {
+        "learned_vs_empty": {
+          "available": true,
+          "cases": 48,
+          "wins": 0,
+          "losses": 0,
+          "control_total_work": 91609995,
+          "treatment_total_work": 76120932,
+          "control_semantic_work": 90056944,
+          "treatment_semantic_work": 66166321
+        },
+        "learned_vs_fixed": {
+          "available": true,
+          "cases": 48,
+          "wins": 0,
+          "losses": 0,
+          "control_total_work": 73729255,
+          "treatment_total_work": 76120932,
+          "control_semantic_work": 64000313,
+          "treatment_semantic_work": 66166321
+        },
+        "learned_vs_irrelevant": {
+          "available": true,
+          "cases": 48,
+          "wins": 0,
+          "losses": 0,
+          "control_total_work": 106098264,
+          "treatment_total_work": 76120932,
+          "control_semantic_work": 98185289,
+          "treatment_semantic_work": 66166321
+        },
+        "hierarchy": {
+          "available": true,
+          "cases": 48,
+          "wins": 48,
+          "losses": 0,
+          "control_total_work": 39451987,
+          "treatment_total_work": 91609995,
+          "control_semantic_work": 37898936,
+          "treatment_semantic_work": 90056944
+        },
+        "representation": {
+          "available": true,
+          "cases": 48,
+          "wins": 48,
+          "losses": 0,
+          "control_total_work": 44712516,
+          "treatment_total_work": 91609995,
+          "control_semantic_work": 43159465,
+          "treatment_semantic_work": 90056944
+        },
+        "prefix": {
+          "available": true,
+          "cases": 48,
+          "wins": 0,
+          "losses": 0,
+          "control_total_work": 217035345,
+          "treatment_total_work": 91609995,
+          "control_semantic_work": 215482294,
+          "treatment_semantic_work": 90056944,
+          "identical_search_results": true
+        }
+      },
+      "condition_roles": {
+        "fixed": "fixed_oracle_reference"
+      },
+      "required_gates": [
+        "supported_accuracy",
+        "abstention_controls",
+        "library_size_control",
+        "prefix_correctness",
+        "prefix_efficiency",
+        "hierarchy_benefit",
+        "representation_benefit",
+        "no_invalid_actor_results",
+        "learned_vs_empty",
+        "learned_vs_irrelevant",
+        "learned_vs_empty_semantic",
+        "learned_vs_irrelevant_semantic",
+        "fixed_accuracy_noninferiority",
+        "fixed_total_cost_noninferiority",
+        "confirmatory_config"
+      ],
+      "descriptive_gates": [
+        "learned_vs_fixed"
+      ],
+      "metadata_work_categories": [
+        "hash_bytes",
+        "json_characters",
+        "json_nodes",
+        "source_read_hash_bytes",
+        "library_snapshot_records"
+      ],
+      "metametric_differences": {
+        "learned_vs_empty": {
+          "available": true,
+          "sign": "treatment_minus_control",
+          "evaluation": {
+            "semantic_work": -26123596,
+            "metadata_work": 7896960,
+            "total_work": -18226636
+          },
+          "total": {
+            "semantic_work": -23890623,
+            "metadata_work": 8401560,
+            "total_work": -15489063
+          },
+          "evaluation_saving_is_metadata_only": false
+        },
+        "learned_vs_fixed": {
+          "available": true,
+          "sign": "treatment_minus_control",
+          "evaluation": {
+            "semantic_work": 0,
+            "metadata_work": -107712,
+            "total_work": -107712
+          },
+          "total": {
+            "semantic_work": 2166008,
+            "metadata_work": 225669,
+            "total_work": 2391677
+          },
+          "evaluation_saving_is_metadata_only": true
+        },
+        "learned_vs_irrelevant": {
+          "available": true,
+          "sign": "treatment_minus_control",
+          "evaluation": {
+            "semantic_work": -31993036,
+            "metadata_work": 1973736,
+            "total_work": -30019300
+          },
+          "total": {
+            "semantic_work": -32018968,
+            "metadata_work": 2041636,
+            "total_work": -29977332
+          },
+          "evaluation_saving_is_metadata_only": false
+        }
+      },
+      "closure_meaning": "Passing the explicit required_gates supports bounded structural transfer and memory efficiency versus empty/irrelevant controls, with accuracy and cost noninferiority to the manual oracle. It does not establish superiority to the manual oracle, an ARC score, general statistical independence or AGI.",
+      "prior_development": {
+        "path": "artifacts/closure-development-20261010-r1/transfer/result.json",
+        "contract_sha256": "e6a842d936408b1a060eafb8579ab256be1e8031475a741b42cecb6238c965df",
+        "version": 1,
+        "audit_valid": true,
+        "closure_candidate": false,
+        "learned_vs_empty": false,
+        "learned_vs_fixed": false,
+        "supported_successes": 7,
+        "supported_cases": 8,
+        "total_work": {
+          "learned": 18060854,
+          "fixed": 15579417,
+          "empty": 17190112
+        },
+        "interpretation": "Known negative under the original strict contract. A valid audit certifies its receipts, not scientific superiority. V2 is a later measurement decision, not a correction of this result."
+      },
+      "training_cases": 6,
+      "distinct_evaluation_cases": 72,
+      "distinct_public_tasks": 72,
+      "condition_rows": 504,
+      "physical_run_work": 633341948,
+      "common_work": 2121094,
+      "acquisition_search_work": 2485213,
+      "acquisition_generator_work": 102193,
+      "irrelevant_matching_includes_acquisition": true,
+      "official_arc_score": null,
+      "s6_green": false,
+      "verification": "pending_independent_replay"
+    },
+    "gates": {
+      "supported_accuracy": true,
+      "abstention_controls": true,
+      "library_size_control": true,
+      "prefix_correctness": true,
+      "prefix_efficiency": true,
+      "hierarchy_benefit": true,
+      "representation_benefit": true,
+      "no_invalid_actor_results": true,
+      "learned_vs_empty": true,
+      "learned_vs_fixed": false,
+      "learned_vs_irrelevant": true,
+      "learned_vs_empty_semantic": true,
+      "learned_vs_irrelevant_semantic": true,
+      "fixed_accuracy_noninferiority": true,
+      "fixed_total_cost_noninferiority": true,
+      "confirmatory_config": true,
+      "closure_candidate": true
+    },
+    "source_sha256": "3b250bf2bcdbbc38930bc5c3d5378f46cfca79371957364606691e2e1c15521e",
+    "wall_ns": 166908050507,
+    "process_ns": 166835964055
+  },
+  "domain": "transfer",
+  "split": "confirmation",
+  "campaign_id": "8984084e65787c8f8836851850ee3696",
+  "result_sha256": "df4855c308def297f6d2009341168f5e6966ad13ddc209a054ecd25189bf7ed9",
+  "config_sha256": "b28f23bd0b2783b09dddc13b847e736cafad4ad68b398026a5a8b59a3a44b4e8",
+  "result_config_sha256": "b28f23bd0b2783b09dddc13b847e736cafad4ad68b398026a5a8b59a3a44b4e8",
+  "receipt_sha256": "0b44d218a8d8ae315effb078cd7562bddddfdb64863a4b3cfe6f8b6b0ad88a4d",
+  "seconds": 168.06386917300188,
+  "journal": {
+    "events": 3722,
+    "last_hash": "10e6b5617c6131b63ea6d520cb358e8798a795e8a5c2c0f34c26bedbb92eb8ad"
+  }
+}

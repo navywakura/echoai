@@ -12,10 +12,11 @@ import tokenize
 
 WORK = Path(__file__).resolve().parents[1]
 SOURCE = WORK.parent
-ROOTS = ("nexus0", "echo4", "echo_arc", "seed", "gui4", "harness",
+ROOTS = ("core", "nexus0", "echo4", "echo_arc", "seed", "gui4", "harness",
          "metaverse1", "release1", "tests", "viz_tasks")
 SKIP = {"__pycache__", ".git", ".venv", "venv", "node_modules"}
-OUTPUT = WORK / "docs" / "inventory"
+# Preserve the historical pre-integration catalogue under docs/inventory.
+OUTPUT = WORK / "artifacts" / "inventory-publication"
 
 
 def files():
@@ -113,50 +114,8 @@ def main():
     for row in modules:
         for name in row["aliases"]:
             index[name].add(row["path"])
-    # Trace directly referenced host Python modules in the parent repository,
-    # then their own host imports. No other parent trees or credentials are read.
-    parent_rows = []
-    checked = set()
-    queue = list(modules)
-    release_tree = ast.parse((SOURCE / "release1/build.py").read_text())
-    packaged_host = []
-    for node in release_tree.body:
-        if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "NAVI"
-                                               for t in node.targets):
-            packaged_host = list(ast.literal_eval(node.value))
-    queue.append({"imports": [{"module": name} for name in packaged_host]})
-    while queue:
-        row = queue.pop()
-        for imp in row["imports"]:
-            name = imp["module"].split(".")[0]
-            if not name or name in checked or name in index or name in sys.stdlib_module_names:
-                continue
-            checked.add(name)
-            target = SOURCE.parent / (name + ".py")
-            if not target.is_file() or target.is_symlink():
-                continue
-            # parse() normally requires an in-root path; a small dedicated AST
-            # record keeps these dependencies explicit rather than relocating them.
-            data = target.read_bytes()
-            with tokenize.open(target) as f:
-                text = f.read()
-            tree = ast.parse(text, filename=str(target))
-            record = {"path": "../" + target.name, "sha256": hashlib.sha256(data).hexdigest(),
-                      "bytes": len(data), "aliases": [name], "role_hint": "parent-host-dependency",
-                      "docstring": ast.get_docstring(tree) or "", "imports": [],
-                      "definitions": [], "parse_error": None, "dynamic_imports": [],
-                      "sys_path_mutation_lines": [], "lines": len(text.splitlines())}
-            for n in ast.walk(tree):
-                if isinstance(n, ast.Import):
-                    record["imports"].extend({"module": a.name, "members": [], "line": n.lineno,
-                                              "relative": False} for a in n.names)
-                elif isinstance(n, ast.ImportFrom):
-                    record["imports"].append({"module": n.module or "", "members": [a.name for a in n.names],
-                                              "line": n.lineno, "relative": bool(n.level)})
-            parent_rows.append(record)
-            index[name].add(record["path"])
-            queue.append(record)
-    modules.extend(parent_rows)
+    # The published core is already inventoried inside SOURCE/core; never
+    # inspect unrelated Python modules in the checkout's parent directory.
     modules.sort(key=lambda x: x["path"])
     reverse = defaultdict(set)
     for row in modules:
@@ -195,7 +154,7 @@ def main():
                   "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                  for p in discovered if p.suffix in code_extensions and p.suffix != ".py"]
     result = {"generated_at": datetime.now(timezone.utc).isoformat(), "source_root": str(SOURCE),
-              "scope": list(ROOTS) + ["root *.py", "transitive explicitly imported parent *.py"],
+              "scope": list(ROOTS) + ["root *.py"],
               "excluded": ["lab (datasets, sealed results, snapshots, third-party tools)",
                            "ROGEX-LABORATORIES", "echo-discord", "ECHO-5", "binary assets", "environments"],
               "method": "AST only; all lexical imports including conditional/test imports; no execution",
@@ -203,8 +162,7 @@ def main():
                               "external_or_unresolved does not imply missing installation",
                               "doc mentions and test imports do not certify validation or coverage",
                               "dynamic/path-dependent imports require manual review",
-                              "non-Python sources are hashed, not AST-analyzed",
-                              "parent host entries have reduced metadata"],
+                              "non-Python sources are hashed, not AST-analyzed"],
               "counts": dict(groups), "python_files": len(modules),
               "parse_errors": [r["path"] for r in modules if r["parse_error"]],
               "source_set_sha256": hashlib.sha256(json.dumps([(r["path"], r["sha256"]) for r in modules],
@@ -212,8 +170,6 @@ def main():
               "external_or_unresolved_counts": dict(unresolved.most_common()),
               "identical_python_files": [v for v in duplicate_map.values() if len(v) > 1],
               "non_python_code_and_config": resources, "modules": modules}
-    result["scope"].append("parent host modules explicitly packaged by release1/build.py:NAVI")
-    result["packaged_host_modules"] = packaged_host
     result["support_file_paths"] = [p.relative_to(SOURCE).as_posix()
                                      for p in discovered if p.suffix != ".py"]
     result["alias_collisions"] = {name: sorted(paths) for name, paths in index.items()

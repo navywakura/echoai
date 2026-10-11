@@ -1,1 +1,3 @@
-"""ECHO-5 development namespace. No agent implementation is integrated yet."""
+"""ECHO-5 experimental integration; imports never launch an agent or a model."""
+
+__version__ = '5.0.0a1'

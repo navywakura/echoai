@@ -11,13 +11,18 @@ conversaciones y notas de coordinación quedan fuera de la distribución.
   [observación de decisiones reales](ECHO45-OBSERVABILITY.md).
 - [Resumen de conservación del 10 de octubre](PROJECT-CHECKPOINT-20261010.md)
   y [validaciones de la copia publicada](PRESERVATION-VALIDATION-20261010.md).
-- [Preparación de ECHO-5](../ECHO-5/README.md),
+- [Checkpoint de ECHO-5 del 11 de octubre](PROJECT-CHECKPOINT-20261011.md),
+  [recibos seleccionados](../research-archive/20261011/README.md) y
+  [sandbox Unity](https://github.com/navywakura/echounity).
+- [Comprobaciones de la nueva distribución pública](PUBLICATION-VALIDATION-20261011.md).
+- [Implementación de ECHO-5](../ECHO-5/README.md),
   [inventario de módulos](../ECHO-5/docs/MODULE-INVENTORY.md) y
   [propuesta de aprendizaje adversarial](../ECHO-5/docs/ADVERSARIAL-LEARNING-PROPOSAL.md).
 - [Archivo de evidencia y su manifiesto](../research-archive/20261010/README.md).
 
-ECHO-5 sigue en preparación; su implementación funcional no ha comenzado.
-S6 continúa abierto. Los documentos históricos conservan la fecha y el alcance
+ECHO-5 está implementado y en investigación; aún falta su cierre completo,
+incluida la confirmación Gazebo/PX4. S6 continúa abierto y se retomará después
+de ECHO-5.5. Los documentos históricos conservan la fecha y el alcance
 de sus resultados; las propuestas pendientes no acreditan capacidades.
 
 La limpieza editorial del 10 de octubre retira archivos de trabajo con

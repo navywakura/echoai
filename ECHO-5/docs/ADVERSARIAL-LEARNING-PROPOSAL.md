@@ -1,10 +1,13 @@
 # Aprendizaje adversarial para ECHO-5: propuesta de investigación
 
-Fecha: 10 de octubre de 2026. Estado: **idea documentada; sin implementación,
-entrenamiento ni ensayos nuevos**. El propietario pide conservar el trabajo
-antes de comenzar ECHO-5. La carpeta actual contiene preparación del entorno,
-inventario y documentación. Esta propuesta no modifica las condiciones de
-ECHO-4.5, B24 o S6.
+Fecha: 10 de octubre de 2026. Propuesta inicial conservada abajo.
+La primera adaptación está implementada en `src/echo5/adversarial.py`, con
+contrato en [BENCHMARK-CONTRACT.json](BENCHMARK-CONTRACT.json). Se estudia
+eliminación empírica de hipótesis mediante contraejemplos en un lenguaje
+finito, sin entrenar una GAN ni pesos de modelos. La referencia secuencial
+usa la misma reparación que los otros brazos; no representa una medición
+del ejecutable histórico ECHO-4.5. El resultado comparativo puede ser negativo.
+Esta integración no modifica ECHO-4.5, B24 o S6.
 
 La pregunta es si un componente que busque contraejemplos reproducibles puede
 ayudar a ECHO a aprender reglas con mejores condiciones de aplicación y a

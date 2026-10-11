@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECHO-5 · Control local</title><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="ECHO-5, inicio"><svg viewBox="0 0 42 42" aria-hidden="true"><path d="M8 9h26M8 21h20M8 33h26"/><circle cx="34" cy="21" r="3"/></svg><span>ECHO<span class="version">5</span></span></a>
+    <div class="page-title"><strong>Laboratorio de decisiones</strong><span>Objetos, hipótesis y consecuencias observadas</span></div>
+    <div class="connection"><i id="connection-dot"></i><span id="connection">Conectando</span><span class="local-tag">Local · CPU</span></div>
+  </header>
+  <main>
+    <aside class="setup">
+      <h1>Control de misión</h1>
+      <p class="intro">Observaciones, hipótesis y acciones registradas por ECHO.</p>
+      <form id="mission-form">
+        <label for="scenario">Mundo</label><select id="scenario" name="scenario"><option value="door_key">Llave y puerta</option></select>
+        <label for="strategy">Estrategia</label><select id="strategy"><option value="informative">Exploración informativa</option><option value="passive">Exploración pasiva</option><option value="no_memory">Sin memoria del mapa</option></select>
+        <div class="pair"><div><label for="seed">Semilla</label><input id="seed" type="number" min="0" max="2147483647" value="20261010"></div><div><label for="max-steps">Límite de pasos</label><input id="max-steps" type="number" min="16" max="512" value="256"></div></div>
+        <label for="neural-enabled">Diagnóstico LIF · nueva misión</label><select id="neural-enabled"><option value="on">Activado, sin dirigir acciones</option><option value="off">Desactivado</option></select>
+        <button class="primary" type="submit" id="new-mission">Crear misión</button>
+      </form>
+      <div class="control-row"><button id="play" disabled>▶ Continuar</button><button id="pause" disabled>Ⅱ Pausar</button><button id="step" disabled title="Ejecutar una decisión">Un paso</button></div>
+      <p id="error" class="error" role="alert" hidden></p>
+      <div class="mission-note"><span class="note-label">Objetivo observado</span><p id="mission-text">Crea una misión para recibir la observación inicial.</p></div>
+      <dl class="readings"><div><dt>Estado</dt><dd id="status">Preparado</dd></div><div><dt>Decisiones</dt><dd id="step-count">—</dd></div><div><dt>Trabajo restante</dt><dd id="remaining">—</dd></div><div><dt>Llamadas LLM</dt><dd id="llm">0</dd></div></dl>
+      <progress id="budget-bar" max="1" value="0" aria-label="Trabajo consumido"></progress>
+      <a class="download" href="/api/journal" download="thought.jsonl">Descargar diario de la sesión</a>
+      <details class="protocol"><summary>Qué muestra este panel</summary><p>El actor recibe observaciones parciales. Las hipótesis son propuestas; el resultado lo determina el entorno.</p><p>La red LIF es un diagnóstico del componente histórico, separado de la selección de acciones. Cada frame procede de una ejecución medida.</p><p>El diario es persistente. El visor no introduce instrucciones en el agente.</p></details>
+    </aside>
+    <section class="workspace" aria-label="Misión y actividad">
+      <div class="workspace-head"><div><h2 id="world-title">El mundo observado</h2><p id="session">Sin sesión activa</p></div><span class="state-pill" id="state-pill">En espera</span></div>
+      <div class="visuals">
+        <section class="world-pane"><div class="pane-heading"><h3>Percepción y mapa</h3><span id="known-cells">Sin observaciones</span></div><div class="canvas-wrap"><canvas id="world" aria-label="Mapa de celdas observadas"></canvas><div class="empty-overlay" id="world-empty"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 8h18v18H8zM38 8h18v18H38zM8 38h18v18H8zM38 38h18v18H38z"/></svg><p>El mapa aparecerá con la primera observación.</p></div></div><div class="legend"><span><i class="tile seen"></i>Observado</span><span><i class="tile unknown"></i>Desconocido</span><span><i class="tile agent"></i>ECHO</span><span><i class="tile goal"></i>Meta</span></div></section>
+        <section class="network-pane"><div class="pane-heading"><h3>Red LIF · Q8</h3><span>256 neuronas</span></div><canvas id="network" aria-label="Topología Q8, spikes y potenciales medidos"></canvas><div class="network-caption"><span id="neural-count">Sin actividad registrada</span><button id="rotate" aria-pressed="false">Rotar vista</button></div><label class="tick-label" for="tick">Tick medido <output id="tick-output">0 / 15</output></label><input id="tick" type="range" min="0" max="15" value="0"><p class="diagnostic-note">Diagnóstico de observación · no selecciona acciones</p><p id="diagnostic-status" class="diagnostic-note" role="status">Disponible al crear una misión.</p><p id="neuron-detail" class="neuron-detail">Selecciona una neurona para inspeccionar su potencial.</p></section>
+      </div>
+      <div class="decision-flow" aria-label="Flujo de la decisión"><span id="flow-observe">Observación</span><b>→</b><span id="flow-hypothesis">Hipótesis</span><b>→</b><span id="flow-predict">Predicción</span><b>→</b><span id="flow-action">Acción</span><b>→</b><span id="flow-result">Consecuencia</span></div>
+      <div class="evidence-grid">
+        <section><h3>Objetos identificados</h3><div id="objects" class="items empty">Todavía no hay objetos observados.</div></section>
+        <section><h3>Hipótesis y respaldo</h3><div id="hypotheses" class="items empty">Las propuestas aparecerán cuando el actor decida.</div></section>
+        <section><h3>Predicción y resultado</h3><div id="outcome" class="items empty">Ejecuta un paso para comparar.</div></section>
+        <section><h3>Memoria y descartes</h3><div id="memory" class="items empty">Sin recuerdos utilizados en esta sesión.</div></section>
+      </div>
+      <section class="timeline-section"><div class="section-heading"><h2>Registro de decisiones</h2><span id="event-count">0 eventos</span></div><div id="timeline" class="timeline"><p class="empty">Aquí se conservarán las observaciones, acciones y resultados emitidos.</p></div></section>
+      <details class="validation"><summary>Estado de la evaluación de ECHO-5</summary><div id="closure">Consultando recibos de evaluación…</div><p>La sesión interactiva es desarrollo. Su resultado no cambia los exámenes congelados.</p></details>
+    </section>
+  </main>
+  <footer><span>ECHO-5 · Instrumentación local</span><span id="provenance">Actividad con procedencia y presupuesto</span></footer>
+</body></html>

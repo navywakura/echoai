@@ -1,0 +1,435 @@
+{
+  "schema": "echo5.alpha-evidence.v1",
+  "version": "5.0.0a1",
+  "date": "2026-10-10",
+  "tests": {
+    "passed": 93,
+    "total": 93,
+    "log_sha256": "1d8dbd560851d6f17bb43b7104e267519c845c37d7c9e7f62e1a56bf77d7ba81"
+  },
+  "contract_sha256": "a9c6d0cb192e1b224c5edfda4114daf0ca374c49769a3c785bf262adcc03cd1e",
+  "sources_sha256": "ae2b810e0c44b53439b6ce014c4a4ad672dfee99cc150141d85265658cd823d2",
+  "benchmark_wall_seconds": 55.87670793399957,
+  "grid": {
+    "legacy_relations": {
+      "successes": 15,
+      "cases": 32,
+      "wilson95_descriptive": [
+        0.30869387108068835,
+        0.6355048288102536
+      ],
+      "evaluation_work": 19743614,
+      "acquisition_work": 0,
+      "total_work": 19743614,
+      "statuses": {
+        "unsolved": 16,
+        "solved": 15,
+        "ambiguous": 1
+      },
+      "families": {
+        "right_recolor": 0,
+        "above_recolor": 0,
+        "extract_rotate": 7,
+        "rotate": 8
+      }
+    },
+    "no_hierarchy": {
+      "successes": 31,
+      "cases": 32,
+      "wilson95_descriptive": [
+        0.8425573617998744,
+        0.9944621398359969
+      ],
+      "evaluation_work": 33889839,
+      "acquisition_work": 0,
+      "total_work": 33889839,
+      "statuses": {
+        "solved": 31,
+        "ambiguous": 1
+      },
+      "families": {
+        "right_recolor": 8,
+        "above_recolor": 8,
+        "extract_rotate": 7,
+        "rotate": 8
+      }
+    },
+    "new_empty": {
+      "successes": 31,
+      "cases": 32,
+      "wilson95_descriptive": [
+        0.8425573617998744,
+        0.9944621398359969
+      ],
+      "evaluation_work": 36065224,
+      "acquisition_work": 0,
+      "total_work": 36065224,
+      "statuses": {
+        "solved": 31,
+        "ambiguous": 1
+      },
+      "families": {
+        "right_recolor": 8,
+        "above_recolor": 8,
+        "extract_rotate": 7,
+        "rotate": 8
+      }
+    },
+    "new_memory": {
+      "successes": 32,
+      "cases": 32,
+      "wilson95_descriptive": [
+        0.8928208017449293,
+        1
+      ],
+      "evaluation_work": 11521851,
+      "acquisition_work": 3817020,
+      "total_work": 15338871,
+      "statuses": {
+        "solved": 32
+      },
+      "families": {
+        "right_recolor": 8,
+        "above_recolor": 8,
+        "extract_rotate": 8,
+        "rotate": 8
+      }
+    }
+  },
+  "grid_comparisons": {
+    "new_empty_vs_legacy_relations": {
+      "cases": 32,
+      "wins": 16,
+      "losses": 0,
+      "delta": 16,
+      "ties": 16,
+      "accuracy_advantage_without_regression": true,
+      "equal_accuracy_less_total_work": false,
+      "total_work_delta": 16321610
+    },
+    "new_empty_vs_no_hierarchy": {
+      "cases": 32,
+      "wins": 0,
+      "losses": 0,
+      "delta": 0,
+      "ties": 32,
+      "accuracy_advantage_without_regression": false,
+      "equal_accuracy_less_total_work": false,
+      "total_work_delta": 2175385
+    },
+    "new_memory_vs_new_empty": {
+      "cases": 32,
+      "wins": 1,
+      "losses": 0,
+      "delta": 1,
+      "ties": 31,
+      "accuracy_advantage_without_regression": true,
+      "equal_accuracy_less_total_work": false,
+      "total_work_delta": -20726353
+    }
+  },
+  "learned_concepts": 4,
+  "interaction": {
+    "passive": {
+      "cases": 24,
+      "successes": 24,
+      "actions": 600,
+      "total_work": 82240,
+      "exhausted": 0,
+      "by_split": {
+        "novel_layout": {
+          "cases": 8,
+          "successes": 8
+        },
+        "novel_goal": {
+          "cases": 8,
+          "successes": 8
+        },
+        "changed_dynamics": {
+          "cases": 8,
+          "successes": 8
+        }
+      }
+    },
+    "active": {
+      "cases": 24,
+      "successes": 24,
+      "actions": 588,
+      "total_work": 82751,
+      "exhausted": 0,
+      "by_split": {
+        "novel_layout": {
+          "cases": 8,
+          "successes": 8
+        },
+        "novel_goal": {
+          "cases": 8,
+          "successes": 8
+        },
+        "changed_dynamics": {
+          "cases": 8,
+          "successes": 8
+        }
+      }
+    },
+    "no_planning": {
+      "cases": 24,
+      "successes": 1,
+      "actions": 1504,
+      "total_work": 25776,
+      "exhausted": 0,
+      "by_split": {
+        "novel_layout": {
+          "cases": 8,
+          "successes": 0
+        },
+        "novel_goal": {
+          "cases": 8,
+          "successes": 1
+        },
+        "changed_dynamics": {
+          "cases": 8,
+          "successes": 0
+        }
+      }
+    }
+  },
+  "interaction_pairs": {
+    "passive": {
+      "success_wins": 0,
+      "success_losses": 0,
+      "success_ties": 24,
+      "equal_success_cost_wins": 5,
+      "equal_success_cost_losses": 19,
+      "equal_success_cost_ties": 0
+    },
+    "no_planning": {
+      "success_wins": 23,
+      "success_losses": 0,
+      "success_ties": 1,
+      "equal_success_cost_wins": 0,
+      "equal_success_cost_losses": 1,
+      "equal_success_cost_ties": 0
+    }
+  },
+  "robotics": {
+    "successes": 12,
+    "denominator": 24,
+    "collisions": 0,
+    "reserve_violations": 0,
+    "cost": 66279,
+    "statuses": {
+      "abandoned_at_home": 12,
+      "reached": 12
+    },
+    "sitl_executed": false
+  },
+  "robotics_controls": {
+    "one_step": {
+      "successes": 12,
+      "denominator": 24,
+      "cost": 67508,
+      "wins": 0,
+      "losses": 0
+    },
+    "conventional": {
+      "successes": 12,
+      "denominator": 24,
+      "cost": 66279,
+      "wins": 0,
+      "losses": 0
+    }
+  },
+  "curriculum": {
+    "reference": {
+      "successes": 0,
+      "cases": 64,
+      "acquisition_work": 1897299,
+      "evaluation_work": 859256,
+      "total_work": 2756555,
+      "acquisition_exhausted": 0
+    },
+    "random": {
+      "successes": 56,
+      "cases": 64,
+      "acquisition_work": 1730051,
+      "evaluation_work": 626119,
+      "total_work": 2356170,
+      "acquisition_exhausted": 0
+    },
+    "adaptive": {
+      "successes": 64,
+      "cases": 64,
+      "acquisition_work": 2007757,
+      "evaluation_work": 597093,
+      "total_work": 2604850,
+      "acquisition_exhausted": 0
+    }
+  },
+  "curriculum_pairs": {
+    "adaptive_vs_reference": {
+      "cases": 64,
+      "wins": 64,
+      "losses": 0,
+      "delta": 64,
+      "ties": 0,
+      "accuracy_advantage_without_regression": true,
+      "total_work_delta": -151705
+    },
+    "adaptive_vs_random": {
+      "cases": 64,
+      "wins": 8,
+      "losses": 0,
+      "delta": 8,
+      "ties": 56,
+      "accuracy_advantage_without_regression": true,
+      "total_work_delta": 248680
+    }
+  },
+  "curriculum_run_successes": {
+    "reference": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "random": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      0,
+      8
+    ],
+    "adaptive": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ]
+  },
+  "audit": {
+    "schema": "echo5.integration-audit.v1",
+    "valid": true,
+    "arithmetic_valid": true,
+    "status": "valid_with_replay",
+    "manifest_files": 11,
+    "legacy_files_unchanged": 714,
+    "host_files_unchanged": 6,
+    "journal_events": 13167,
+    "grid_rows": 128,
+    "curriculum_rows": 192,
+    "robotics_rows": 72,
+    "replay_performed": true,
+    "replays": [
+      {
+        "domain": "grid",
+        "id": "3feb24a9873e635bf7a704198fe2673d1ce3d999803a6ada7a0287cf95c26070",
+        "condition": "legacy_relations"
+      },
+      {
+        "domain": "grid",
+        "id": "a2b1241cf4dd211c6b30d97f53c91641a1c5f2b2a2853acd47af5ffd2d4d74d7",
+        "condition": "legacy_relations"
+      },
+      {
+        "domain": "grid",
+        "id": "da90f8e2d79a2f257ff9688fe95588793bfb90549173d21bcae6cd99e60b3a76",
+        "condition": "legacy_relations"
+      },
+      {
+        "domain": "grid",
+        "id": "1e481c843568fda519288ad400a90170012ead532f767632bed40a9e5e6e5288",
+        "condition": "legacy_relations"
+      },
+      {
+        "domain": "grid",
+        "id": "3feb24a9873e635bf7a704198fe2673d1ce3d999803a6ada7a0287cf95c26070",
+        "condition": "no_hierarchy"
+      },
+      {
+        "domain": "grid",
+        "id": "a2b1241cf4dd211c6b30d97f53c91641a1c5f2b2a2853acd47af5ffd2d4d74d7",
+        "condition": "no_hierarchy"
+      },
+      {
+        "domain": "grid",
+        "id": "da90f8e2d79a2f257ff9688fe95588793bfb90549173d21bcae6cd99e60b3a76",
+        "condition": "no_hierarchy"
+      },
+      {
+        "domain": "grid",
+        "id": "1e481c843568fda519288ad400a90170012ead532f767632bed40a9e5e6e5288",
+        "condition": "no_hierarchy"
+      },
+      {
+        "domain": "grid",
+        "id": "3feb24a9873e635bf7a704198fe2673d1ce3d999803a6ada7a0287cf95c26070",
+        "condition": "new_empty"
+      },
+      {
+        "domain": "grid",
+        "id": "a2b1241cf4dd211c6b30d97f53c91641a1c5f2b2a2853acd47af5ffd2d4d74d7",
+        "condition": "new_empty"
+      },
+      {
+        "domain": "grid",
+        "id": "da90f8e2d79a2f257ff9688fe95588793bfb90549173d21bcae6cd99e60b3a76",
+        "condition": "new_empty"
+      },
+      {
+        "domain": "grid",
+        "id": "1e481c843568fda519288ad400a90170012ead532f767632bed40a9e5e6e5288",
+        "condition": "new_empty"
+      },
+      {
+        "domain": "grid",
+        "id": "3feb24a9873e635bf7a704198fe2673d1ce3d999803a6ada7a0287cf95c26070",
+        "condition": "new_memory"
+      },
+      {
+        "domain": "grid",
+        "id": "a2b1241cf4dd211c6b30d97f53c91641a1c5f2b2a2853acd47af5ffd2d4d74d7",
+        "condition": "new_memory"
+      },
+      {
+        "domain": "grid",
+        "id": "da90f8e2d79a2f257ff9688fe95588793bfb90549173d21bcae6cd99e60b3a76",
+        "condition": "new_memory"
+      },
+      {
+        "domain": "grid",
+        "id": "1e481c843568fda519288ad400a90170012ead532f767632bed40a9e5e6e5288",
+        "condition": "new_memory"
+      },
+      {
+        "domain": "robotics",
+        "cases": 72
+      },
+      {
+        "domain": "interaction",
+        "paired_cases": 24
+      },
+      {
+        "domain": "curriculum",
+        "rows": 192
+      }
+    ],
+    "scope": "integrity, arithmetic and selected deterministic replay; not a sealed capability exam",
+    "s6_green": false
+  },
+  "s6_green": false,
+  "official_arc_score": null,
+  "llm_calls": 0,
+  "scope": "Finite synthetic transfer and discrete robotics integration; not a final scientific release."
+}

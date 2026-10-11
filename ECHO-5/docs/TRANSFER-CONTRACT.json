@@ -1,0 +1,106 @@
+{
+  "schema": "echo5.transfer.contract.v2",
+  "version": 2,
+  "frozen_before_confirmation": true,
+  "scope": "Synthetic structural transfer; exact32 is development only; no ARC or S6 claim",
+  "conditions": ["learned", "fixed", "irrelevant", "empty", "empty_uncached", "empty_shallow", "old_representation"],
+  "condition_roles": {
+    "fixed": "fixed_oracle_reference"
+  },
+  "families": ["outline_extract_scale", "fill_extract_tile", "pack_rotate_scale", "inside_erase_crop", "ambiguous_rotation", "unsupported_color"],
+  "training_families": ["outline", "fill", "pack", "inside_erase", "outline_extract", "fill_extract"],
+  "training_seeds": [530011, 530047, 530087, 530119, 530153, 530183],
+  "defaults": {
+    "work_per_case": 16000000,
+    "training_work_per_case": 16000000,
+    "preparation_work": 16000000,
+    "generator_work_per_case": 1000000,
+    "demonstrations": 3,
+    "queries": 2,
+    "synthesis": {
+      "max_depth": 4,
+      "beam_width": 24,
+      "max_candidates": 12000,
+      "grammar": {
+        "geometry": ["identity", "rot90", "fliplr", "crop", "up2", "tile1x2"],
+        "roles": ["largest", "smallest", "unique_shape"],
+        "relations": ["all", "inside", "same_size", "right", "above"],
+        "effects": ["erase", "extract"],
+        "object_effects": ["outline", "fill_box"],
+        "pack_axes": ["row", "column"]
+      }
+    }
+  },
+  "seeds": {
+    "development": [61013, 61027],
+    "confirmation": [91009, 91033, 91079, 91103, 91127, 91153, 91183, 91207, 91237, 91261, 91291, 91309],
+    "family_offset": 100000
+  },
+  "gates": {
+    "minimum_supported_success_percent": 75,
+    "minimum_memory_saving_percent": 5,
+    "maximum_fixed_total_cost_overhead_percent": 5,
+    "minimum_prefix_saving_percent": 1,
+    "minimum_hierarchy_wins": 1,
+    "minimum_representation_wins": 1,
+    "maximum_paired_losses": 0,
+    "maximum_false_predictions_on_controls": 0,
+    "require_equal_irrelevant_count": true,
+    "require_positive_learned_count": true
+  },
+  "required_gates": [
+    "supported_accuracy",
+    "abstention_controls",
+    "library_size_control",
+    "prefix_correctness",
+    "prefix_efficiency",
+    "hierarchy_benefit",
+    "representation_benefit",
+    "no_invalid_actor_results",
+    "learned_vs_empty",
+    "learned_vs_irrelevant",
+    "learned_vs_empty_semantic",
+    "learned_vs_irrelevant_semantic",
+    "fixed_accuracy_noninferiority",
+    "fixed_total_cost_noninferiority",
+    "confirmatory_config"
+  ],
+  "descriptive_gates": ["learned_vs_fixed"],
+  "metadata_work_categories": [
+    "hash_bytes", "json_characters", "json_nodes",
+    "source_read_hash_bytes", "library_snapshot_records"
+  ],
+  "methodology_v2": {
+    "decision_provenance": "Coordinator methodological decision after the r1 development result and before any confirmation evaluation. The owner requested comparison with a fixed library; this document does not attribute a promise of numerical thresholds to the owner.",
+    "fixed_reference": "The manual knowledge oracle supplies the same six target macros, demonstration support and dependency structure that acquisition aims to discover. The condition id remains fixed for API compatibility. It pays construction and verification costs. Its role is fixed_oracle_reference; it is not a learned system.",
+    "fixed_required": "Require zero paired supported-case accuracy regressions and learned total work <= 105% of fixed total work, including acquisition. These are separate required gates. Noninferiority permits at most 5% extra total cost; it is not superiority.",
+    "fixed_descriptive": "Retain learned_vs_fixed with its original strict >=5% total-work saving and zero paired-loss definition. Report it even when false. It is descriptive and is not a required closure gate in V2.",
+    "memory_required": "Against BOTH empty and the unchanged size-matched irrelevant semantic control, require >=5% total-work saving AND >=5% semantic-work saving, including acquisition and every accounting stage, with zero paired supported-case losses. Metadata-only savings cannot satisfy the semantic gates.",
+    "semantic_work": "Operational ledger partition, not a claim of abstract reasoning or CPU time: all charged work except the exact metadata_work_categories above. Search-state hashing, prefix indexes, execution, evidence replay, generation and comparison remain charged. Categories not explicitly listed remain semantic. Metadata work is still included in all total-cost gates.",
+    "metametric_differences": "Summary reports treatment-minus-control differences for evaluation and all-in semantic, metadata and total work, plus evaluation_saving_is_metadata_only. Negative means less learner work. The r1 difference of 1496 units per case versus fixed was entirely JSON/hash metadata, not less search or execution.",
+    "closure_meaning": "Passing the explicit required_gates supports bounded structural transfer and memory efficiency versus empty/irrelevant controls, with accuracy and cost noninferiority to the manual oracle. It does not establish superiority to the manual oracle, an ARC score, general statistical independence or AGI.",
+    "unchanged_execution": "No change to generators, cases, seeds, 72 confirmation cases / 504 condition rows, acquisition, libraries, verifications, grammar, beam, budgets, solver defaults or query-label isolation. V1 case identifiers are retained because execution and input generation are unchanged.",
+    "audit_and_history": "New reports and audits use v2 schemas and recompute the cost partition and explicit gate policy from raw receipts. Audit V1 reports with their archived V1 sources/contract; never reinterpret or overwrite r1 as V2. TRANSFER-CLOSURE.md describes the original V1 implementation; this section documents the V2 measurement amendment. Tests and CPU evaluation remain deferred to the parent background runner."
+  },
+  "prior_development": {
+    "path": "artifacts/closure-development-20261010-r1/transfer/result.json",
+    "contract_sha256": "e6a842d936408b1a060eafb8579ab256be1e8031475a741b42cecb6238c965df",
+    "version": 1,
+    "audit_valid": true,
+    "closure_candidate": false,
+    "learned_vs_empty": false,
+    "learned_vs_fixed": false,
+    "supported_successes": 7,
+    "supported_cases": 8,
+    "total_work": {"learned": 18060854, "fixed": 15579417, "empty": 17190112},
+    "interpretation": "Known negative under the original strict contract. A valid audit certifies its receipts, not scientific superiority. V2 is a later measurement decision, not a correction of this result."
+  },
+  "open_tasks": [{
+    "id": "pack_beam_limitation",
+    "status": "open",
+    "observation": "R1 pack_rotate_scale solved 1/2 development cases. Beam pruning and first-retained-tier consensus remain declared limitations; investigate in a later work item. This amendment adds no solution, hypothesis, search change or accuracy-threshold change."
+  }],
+  "accounting": "Per-arm total includes all acquisition attempts, construction, evidence revalidation, state freezing, search, failed work, input/state hashing and evaluator generation/verification. Shared evaluation generation is charged in full to each arm. Physical run work counts it once. Audit/replay work and wall/process time are reported separately; logical units are not FLOPs or energy.",
+  "selection": "All hypotheses in the first matching retained tier must agree on every query. Beam/state reduction is explicit and does not certify the entire DSL. Budget/candidate exhaustion always abstains. Library calls are learned priors, never query verification.",
+  "freeze_policy": "Write this file before evaluation. Confirmation accepts only these settings. Any change after seeing confirmation requires a new contract version and disjoint seeds; retain old receipts. Freeze full sources externally before invoking confirmation."
+}

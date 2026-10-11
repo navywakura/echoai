@@ -1,8 +1,18 @@
 # Desarrollo
 
-Setup creado el 10 de octubre de 2026. Alcance: carpeta, entorno Python
-aislado, comandos de comprobación e instrucciones. No integra todavía el
-agente, la GUI, robótica o neocórtex. No inicia pruebas científicas.
+En la distribución pública, consultar primero
+[PUBLICATION-PORTABILITY.md](PUBLICATION-PORTABILITY.md): los módulos host
+viven en `../core/` respecto a ECHO-5, y `make inventory` escribe un catálogo
+nuevo en `artifacts/inventory-publication/`, conservando el inventario histórico.
+Los resultados previos corresponden a otras fuentes y hashes. El
+[checkpoint del proyecto](../../docs/PROJECT-CHECKPOINT-20261011.md) conserva
+el estado vigente de investigación abierta.
+
+Integración experimental iniciada el 10 de octubre de 2026. El diseño actual
+está en [IMPLEMENTATION-DESIGN.md](IMPLEMENTATION-DESIGN.md). `make check`
+comprueba entorno y sintaxis; `make test` ejecuta pruebas funcionales.
+`make bench` mide el contrato sintético y `make audit` recalcula y reproduce
+resultados en otro proceso. Cada comando conserva su alcance.
 
 Se usa CPython 3.12.13 instalado en el host, con biblioteca estándar y una
 `.venv` propia sin paquetes globales ni pip. No se requiere acceso de red para
@@ -10,15 +20,15 @@ el setup. No se reutilizan entornos antiguos. Si el intérprete no está
 disponible en otra máquina, instalar esa versión antes de `make setup`.
 El setup puede ejecutarse de nuevo: valida el entorno existente sin borrarlo.
 
-`pyproject.toml` registra el espacio de desarrollo; aún no se ha definido
-un backend de empaquetado ni una distribución instalable. `src/echo5` reserva
-el namespace y el ejecutor de pruebas lo añade expresamente a su ruta.
+`pyproject.toml` registra la versión experimental 5.0.0a1; aún no se ha definido
+un backend de empaquetado ni una distribución instalable. `src/echo5` contiene
+la implementación y el ejecutor añade expresamente esa ruta bajo `-I`.
 La carpeta pertenece al repositorio Git padre; no tiene un repositorio anidado.
 
 El [inventario estático](MODULE-INVENTORY.md) está completado, con catálogo
 de archivos, dependencias y revisión documental. Se reproduce con
-`make inventory`; no ejecuta código del agente. El siguiente trabajo será
-definir el primer contrato de integración. Antecedentes a revisar:
+`make inventory`; no ejecuta código del agente. El contrato numérico vigente
+es [BENCHMARK-CONTRACT.json](BENCHMARK-CONTRACT.json). Antecedentes:
 
 - [Dirección acordada](../../docs/ECHO45-TO-ECHO5-DECISION-20261009.md).
 - [Robótica previa](../../docs/DRONE3-RESULTS.md): SITL validado;
@@ -33,3 +43,20 @@ definir el primer contrato de integración. Antecedentes a revisar:
 La limpieza futura requiere comprobar imports y referencias antes de mover
 archivos. Este setup conserva intactas las rutas existentes. B24 sigue bajo
 su gestor propio; el desarrollo de ECHO-5 no lo relanza ni lo cancela.
+
+Los resultados se guardan en `artifacts/`, excluido de Git. Cada banco conserva
+contrato, fuentes por hash, biblioteca adquirida, resultados por caso, costes,
+trazas y manifiesto. Un error del instrumento deja `instrument-error.json` y
+detiene la ejecución; no se convierte en un resultado negativo del agente.
+Una vez iniciada una ejecución no se editan sus fuentes. La auditoría con
+`--replay` se lanza desde un proceso nuevo y usa el mismo código congelado.
+
+Los presupuestos son unidades lógicas explícitas, no FLOPs, milisegundos ni
+julios. Su comparación requiere el mismo contrato. El banco de interacción
+permite nuevas observaciones durante la prueba, como define ADAPT; el banco
+de rejillas congela la biblioteca y no aprende de las consultas.
+
+La primera evaluación completa tiene [informe y recibos](RESULTS-20261010.md).
+El auditor sin `--replay` informa `arithmetic_only_pending_replay` y no emite
+`valid: true`; `make audit` incluye el replay. El ejemplo de memoria puede
+guardarse, cargarse en otro proceso y volver a verificarse sin llamadas al LLM.

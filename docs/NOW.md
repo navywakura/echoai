@@ -1,5 +1,18 @@
 # NOW — estado y registro técnico de ECHO
 
+**11 de octubre · ECHO-5 implementado y en investigación; cierre pendiente.**
+Se publica el runtime de objetos y relaciones, conceptos, composición, planificación,
+currículo por contraejemplos, MiniGrid/BabyAI, MissionAgent y panel local.
+La confirmación cognitiva r1 tiene auditoría independiente válida. La confirmación
+Gazebo/PX4 r1 conserva 17/18 recibos válidos y un resultado insuficiente; la
+corrección posterior sigue en validación y no autoriza un verde.
+S6 permanece abierto y se retomará después de ECHO-5.5.
+[Checkpoint y límites](PROJECT-CHECKPOINT-20261011.md) ·
+[Recibos publicados](../research-archive/20261011/README.md) ·
+[Sandbox Unity, código y capturas](https://github.com/navywakura/echounity).
+Los bloques siguientes son históricos; la preparación descrita el día 10 ya
+dio paso a implementación, sin convertir esta publicación en un release final.
+
 **10 de octubre · Guardado previo a ECHO-5; implementación todavía no iniciada.**
 Se conserva el setup, el inventario estático y una propuesta de aprendizaje
 adversarial inspirada en GAN, sin ejecutar nuevos ensayos. B24-R1 permanece

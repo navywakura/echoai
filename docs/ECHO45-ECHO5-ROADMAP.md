@@ -1,4 +1,20 @@
-# Roadmap: acabar ECHO-4.5 y hacer ECHO-5 (actualizado 2026-10-09)
+# Roadmap: ECHO-4.5 y ECHO-5 (actualizado 2026-10-11)
+
+**11 de octubre · ECHO-5 ya implementado; validación completa pendiente.**
+Objetos, relaciones, conceptos, composición, interacción, currículo adaptativo,
+MiniGrid/BabyAI, integración MissionAgent y panel local tienen implementación.
+La confirmación cognitiva r1 está auditada; la confirmación física Gazebo/PX4
+no pasó. Sigue abierta su corrección con nuevos recibos y casos de confirmación.
+La prioridad de cierre es resolver y medir esa integración, preservar los
+resultados negativos y ejecutar el finalizador con los criterios existentes.
+Unity se publica como sandbox complementario en
+[echounity](https://github.com/navywakura/echounity), con cámara, cartografía
+observada y aprendizaje acotado de los efectos del movimiento.
+La secuencia posterior mantiene ECHO-5.1 (colaboración), ECHO-5.5 (persistencia
+y sistema instalable) y la investigación RSI. S6 se retoma después de 5.5.
+[Checkpoint actual](PROJECT-CHECKPOINT-20261011.md) ·
+[Checklist de ECHO-5](../ECHO-5/docs/CLOSURE-CHECKLIST.md).
+Los hitos siguientes conservan la cronología anterior.
 
 **9 de octubre, 14:15 Madrid · decisión vigente, posterior a los bloques históricos.**
 Terminar B24, revisar sus recibos, conservar las mediciones ARC pendientes y

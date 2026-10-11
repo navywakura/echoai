@@ -16,6 +16,8 @@ PIN = (ROOT / ".python-version").read_text().strip()
 
 
 def check_environment():
+    if not sys.flags.isolated:
+        raise RuntimeError('Ejecuta Python con -I para excluir rutas y paquetes externos')
     if platform.python_version() != PIN:
         raise RuntimeError(f"Python requerido: {PIN}; actual: {platform.python_version()}")
     if Path(sys.prefix).resolve() != ENV.resolve() or sys.prefix == sys.base_prefix:
@@ -30,8 +32,9 @@ def check_environment():
                    for p in (ROOT / folder).rglob("*.py"))
     for path in files:
         ast.parse(path.read_text(), filename=str(path))
-    return {"stage": "development-setup", "python": platform.python_version(),
+    return {"stage": project["tool"]["echo5"]["stage"], "python": platform.python_version(),
             "environment": str(ENV), "syntax_files": len(files),
+            "checks": ["pinned isolated environment", "Python syntax"],
             "capabilities_validated": False}
 
 

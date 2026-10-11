@@ -1,0 +1,106 @@
+{
+  "schema": "echo5.sandbox.contract.v1",
+  "status": "implemented_unmeasured_tests_and_episodes_not_run",
+  "frozen_before_confirmation": true,
+  "python": "3.12.13",
+  "environment_directory": ".venv-sandbox",
+  "dependencies": {
+    "minigrid": "3.0.0",
+    "gymnasium": "1.2.0",
+    "numpy": "2.2.6",
+    "pygame": "2.6.1",
+    "cloudpickle": "3.1.1",
+    "Farama-Notifications": "0.0.4",
+    "typing_extensions": "4.14.1"
+  },
+  "dependency_lock": "requirements-sandbox.lock",
+  "native_environments_only": true,
+  "no_fallback_simulator": true,
+  "actor_inputs": ["partial_image", "direction", "mission"],
+  "actor_forbidden_inputs": ["seed", "environment_handle", "grid", "absolute_position", "reward", "success", "info", "native_verifier", "evaluator_result"],
+  "network_at_actor_runtime": false,
+  "llm_at_actor_runtime": false,
+  "modes": ["informative", "fixed", "passive", "no_memory", "no_planning"],
+  "budget": {"actions": 192, "work": 200000},
+  "budget_rules": {
+    "allocation": "identical native steps and logical-work limits per case per condition",
+    "work": "Budget.consume reservations: reset, validation, localization, map updates, decisions, planning edges/nodes, goal/route matching, candidate information rays and native steps",
+    "environment_cost": "native reset/step calls plus measured wall seconds; work units do not purport to count external-library CPU instructions",
+    "replay_cost": "separate identical execution limit per case/condition, plus separately reported receipt validation work and wall seconds",
+    "instrumentation": "snapshot polling and journal serialization are passive overhead, not actor work or policy input",
+    "exhaustion": "retain actual steps and native terminal outcomes; never drop an exhausted case or silently refund work",
+    "instrument_error": "journal and propagate; no conversion into agent failure or denominator exclusion"
+  },
+  "memory": {
+    "initial": "empty for every case and condition; no cross-case learning or holdout persistence",
+    "learning": "observation-acquired map, transition counts, observed contradictions, supported subgoals",
+    "pose": "relative to episode origin, estimated from actions and registration of visible static landmarks",
+    "unseen": "unknown; no full-grid rendering, no absolute hidden coordinates",
+    "no_memory": "discard prior map, visit counts and evidence on every observation; retain task progress and motor odometry",
+    "no_planning": "retain observed memory but use only local reactions, no graph or information search"
+  },
+  "mission_grammar": {
+    "max_characters": 512,
+    "max_atomic_instructions": 2,
+    "verbs": ["go to", "pick up", "open", "put ... next to ..."],
+    "object_types": ["ball", "box", "key", "door", "object"],
+    "colors": ["red", "green", "blue", "purple", "yellow", "grey"],
+    "locations": ["on your left", "on your right", "in front of you", "behind you"],
+    "connectives": [", then", "then", "after you", "and"],
+    "native_goal_phrases": ["get to the green goal square", "get to the goal", "use the key to open the door and then get to the goal"],
+    "location_scope": "initial agent frame; location-sensitive built-in profile is the single-room BabyAI-PickupLoc task",
+    "ambiguity": "record multiple observed candidates and unseen alternatives; any satisfying match is legal only if the external verifier agrees",
+    "unsupported": "reject unparsed or overlong instructions; no LLM or arbitrary code evaluation",
+    "operator_missions": "native BabyAI verifier bound to existing matching objects, or equivalent native MiniGrid goal; never relabel a different MiniGrid objective"
+  },
+  "splits": {
+    "development": {
+      "seed_start": 101,
+      "seed_end": 999999,
+      "families": {
+        "key_door": {"scenario": "door_key", "environment": "MiniGrid-DoorKey-6x6-v0"},
+        "described_object": {"scenario": "objects", "environment_options": {"room_size": 6, "num_dists": 3}},
+        "dynamic_block": {"scenario": "dynamic", "environment_options": {"n_obstacles": 2}},
+        "ambiguous_description": {"scenario": "ambiguous_objects", "environment_options": {"room_size": 6}}
+      }
+    },
+    "confirmation": {
+      "seed_start": 1000101,
+      "seed_end": 1999999,
+      "families": {
+        "new_layout": {"scenario": "door_key"},
+        "new_task_combination_unlock_object": {"scenario": "unlock_pickup"},
+        "new_task_combination_block_key_door_object": {"scenario": "blocked_door"},
+        "new_rule_ordered_doors": {"scenario": "ordered_doors"},
+        "new_rule_put_next": {"scenario": "put_next"},
+        "changed_dynamic_density": {"scenario": "dynamic", "environment_options": {"n_obstacles": 4}},
+        "ambiguous_description_larger_room": {"scenario": "ambiguous_objects", "environment_options": {"room_size": 8}}
+      }
+    }
+  },
+  "seed_rule": "base_seed + flat_case_index * 101; interval validated; never passed to actor; seed0 fixed for passive policy only",
+  "thresholds": {
+    "confirmation_cases_per_family": 8,
+    "informative_success_percent": 50,
+    "minimum_informative_successes_per_family": 1,
+    "minimum_paired_net_success_wins": 1
+  },
+  "gates": {
+    "correctness": ["complete_paired_cases", "external_adjudication_and_replay", "equal_action_and_work_limits"],
+    "measurement": ["family_coverage", "informative_success_threshold", "informative_success_each_family"],
+    "superiority": "informative success wins minus losses >= 1 versus EACH fixed/passive/no_memory/no_planning control; costs reported independently, no cost-only promotion",
+    "closure": "confirmation cohort, all families/modes, exact contract budget, >=8 cases/family, correctness and measured-success gates, all four superiority comparisons",
+    "failure_policy": "keep zeroes and negatives; no denominator changes, seed filtering, retries or thresholds changed after confirmation"
+  },
+  "replay": "new native environment, same pinned code/config/seed, full public observations, action decisions, evidence, logical costs and external verdict compared; timings excluded",
+  "journal": "existing echo5.trace.Recorder.write(kind=..., **facts); sandbox_reset, sandbox_step, sandbox_stop, sandbox_error, sandbox_case_start, sandbox_adjudication, sandbox_instrument_error",
+  "limitations": [
+    "No episodes or CPU tests executed during programming; no performance or closure result is claimed.",
+    "Explicit Python object ownership/data-flow boundary, not process isolation against hostile actor code.",
+    "Symbolic native mechanics and finite grammar are supplied; learned memory means accumulated observation evidence, not trained policy weights.",
+    "Pose ambiguity and moving obstacles can invalidate remembered spatial estimates; all map positions remain labelled estimates.",
+    "Candidate identity is descriptive and spatial; visually identical relocated objects are not assigned privileged native identities.",
+    "Confirmation holds out seeds, combinations and task rules from development; parser/mechanics deliberately implement those supported rule families beforehand.",
+    "Local native task adaptation is not an official MiniGrid/BabyAI benchmark score, general language understanding, physical validation or statistical superiority proof."
+  ]
+}

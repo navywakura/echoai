@@ -1,5 +1,16 @@
 # RXLABS_STATUS
 
+**11 de octubre · publicación de ECHO-5 en investigación y del sandbox Unity.**
+La línea ECHO-5 ya tiene código, controles, pruebas y resultados auditados en
+tareas acotadas. Queda por superar la confirmación robótica externa completa.
+Conservamos los fallos del simulador y la diferencia entre validar un registro
+y demostrar una capacidad. Las mediciones de CPU, las escenas Unity y los
+vuelos Gazebo/PX4 se documentan con sus denominadores y límites propios.
+El repositorio público incluye la implementación y recibos seleccionados;
+`navywakura/echounity` reúne el proyecto de simulación y capturas reales.
+S6 no está aprobado y su siguiente estudio se sitúa después de ECHO-5.5.
+[Estado técnico y evidencia](PROJECT-CHECKPOINT-20261011.md).
+
 **9 de octubre, 14:15 Madrid · dirección acordada para ECHO-5.**
 B24 continúa desde su checkpoint cuando Kaggle renueve cuota. Después se
 cerrará la etapa 4.5 con su evidencia real; S6 permanece sin pase y su nueva

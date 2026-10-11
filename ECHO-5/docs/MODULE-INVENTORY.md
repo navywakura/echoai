@@ -1,7 +1,9 @@
 # Inventario previo a la integración de ECHO-5
 
-10 de octubre de 2026. Revisión estática del árbol existente, con contraste
-documental de resultados. **No se ha integrado ni ejecutado ningún agente.**
+10 de octubre de 2026. Revisión estática previa a la integración, con contraste
+documental de resultados. **Este inventario por sí solo no ejecutó agentes.**
+La implementación posterior se describe en [el diseño](IMPLEMENTATION-DESIGN.md)
+y en el README de ECHO-5; los recuentos siguientes conservan su alcance histórico.
 Los certificados mencionados proceden de informes anteriores; esta revisión
 no repite experimentos, abre reservas ni convierte tests encontrados en tests
 aprobados. S6 sigue sin pase y B24 conserva su ejecución y su checkpoint.

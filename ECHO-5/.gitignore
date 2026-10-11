@@ -1,4 +1,6 @@
 /.venv/
+/.venv-sandbox/
+/.venv-tools/
 /artifacts/*
 !/artifacts/README.md
 __pycache__/

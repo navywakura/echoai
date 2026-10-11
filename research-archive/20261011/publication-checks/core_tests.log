@@ -1,0 +1,368 @@
+{"argv": ["<PUBLIC_ECHOAI>/ECHO-5/.venv/bin/python", "-I", "<PUBLIC_ECHOAI>/ECHO-5/scripts/dev.py", "test"], "name": "core_tests", "pid": 132627, "schema": "echo5.check-log.v1", "sources_sha256": "2e91f4425dfc44c0f1251f79c6599336e756f659d4423f530bd7c4550eddc03a"}
+test_invalid_worlds_cannot_earn_adversarial_credit (test_cases_adversarial.AdversarialTests.test_invalid_worlds_cannot_earn_adversarial_credit) ... ok
+test_public_hypothesis_does_not_receive_solution (test_cases_adversarial.AdversarialTests.test_public_hypothesis_does_not_receive_solution) ... ok
+test_repair_rechecks_children_and_retains_counterexample (test_cases_adversarial.AdversarialTests.test_repair_rechecks_children_and_retains_counterexample) ... ok
+test_all_families_have_executable_witnesses (test_cases_adversarial.CaseTests.test_all_families_have_executable_witnesses) ... ok
+test_easy_challenges_are_solvable_for_every_family (test_cases_adversarial.CaseTests.test_easy_challenges_are_solvable_for_every_family) ... ok
+test_forged_witness_or_answer_is_not_resolvable (test_cases_adversarial.CaseTests.test_forged_witness_or_answer_is_not_resolvable) ... ok
+test_generation_costs_are_not_free (test_cases_adversarial.CaseTests.test_generation_costs_are_not_free) ... ok
+test_oracle_is_deterministic_and_private (test_cases_adversarial.CaseTests.test_oracle_is_deterministic_and_private) ... ok
+test_manifest_rejects_modified_missing_and_escaping_receipts (test_closure.ClosureCustodyTests.test_manifest_rejects_modified_missing_and_escaping_receipts) ... ok
+test_measurements_are_not_overwritten_by_default (test_closure.ClosureCustodyTests.test_measurements_are_not_overwritten_by_default) ... ok
+test_source_archive_is_checked_by_bytes_not_names_only (test_closure.ClosureCustodyTests.test_source_archive_is_checked_by_bytes_not_names_only) ... ok
+test_checks_write_invalid_receipts_for_launch_and_freeze_failures (test_closure.ClosureFailureTests.test_checks_write_invalid_receipts_for_launch_and_freeze_failures) ... {"name": "environment", "exit_code": 127, "error": "FileNotFoundError"}
+{"name": "core_tests", "exit_code": 127, "error": "FileNotFoundError"}
+{"name": "sandbox_tests", "exit_code": 127, "error": "FileNotFoundError"}
+{"name": "javascript_syntax", "exit_code": 127, "error": "FileNotFoundError"}
+ok
+test_missing_executable_is_a_failed_launch_receipt (test_closure.ClosureFailureTests.test_missing_executable_is_a_failed_launch_receipt) ... ok
+test_start_and_freeze_error_replace_stale_success_with_new_campaign_id (test_closure.ClosureFailureTests.test_start_and_freeze_error_replace_stale_success_with_new_campaign_id) ... {"phase": "running", "updated_utc": "2026-10-11T02:36:54.540989+00:00", "campaign_id": "e2d26da0f6b369e365f8506d522a21d8", "split": "development", "completed": [], "workers": 4}
+{"phase": "instrument_error", "updated_utc": "2026-10-11T02:36:54.542186+00:00", "campaign_id": "e2d26da0f6b369e365f8506d522a21d8", "split": "development", "error": "ImportError: missing instrument"}
+ok
+test_timeout_kills_owned_group_even_when_leader_exits_after_term (test_closure.ClosureFailureTests.test_timeout_kills_owned_group_even_when_leader_exits_after_term) ... ok
+test_worker_records_config_and_import_exceptions (test_closure.ClosureFailureTests.test_worker_records_config_and_import_exceptions) ... {"phase": "instrument_error", "updated_utc": "2026-10-11T02:36:54.545902+00:00", "domain": "mission", "error": "bad config"}
+{"phase": "instrument_error", "updated_utc": "2026-10-11T02:36:54.547342+00:00", "domain": "mission", "error": "missing module"}
+ok
+test_audit_rejects_self_consistent_manifest_with_false_aggregate_gates (test_closure.ClosureReconciliationTests.test_audit_rejects_self_consistent_manifest_with_false_aggregate_gates) ... {"phase": "auditing", "updated_utc": "2026-10-11T02:36:54.555851+00:00", "campaign_id": "test-campaign", "split": "development", "completed": []}
+{"phase": "audit_failed", "updated_utc": "2026-10-11T02:36:54.562233+00:00", "campaign_id": "test-campaign", "split": "development", "audit_valid": false, "error": {"type": "ValueError", "message": "Closure reconciliation mismatch: aggregate domain gates", "traceback": "Traceback (most recent call last):\n  File \"<PUBLIC_ECHOAI>/ECHO-5/src/echo5/closure.py\", line 426, in audit_campaign\n    reports = _reconcile_campaign(folder, campaign, result, sources)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<PUBLIC_ECHOAI>/ECHO-5/src/echo5/closure.py\", line 304, in _reconcile_campaign\n    _same(result['gates'], {d: r['gates'] for d, r in reports.items()}, 'aggregate domain gates')\n  File \"<PUBLIC_ECHOAI>/ECHO-5/src/echo5/closure.py\", line 50, in _same\n    raise ValueError('Closure reconciliation mismatch: ' + description)\nValueError: Closure reconciliation mismatch: aggregate domain gates\n"}}
+ok
+test_auditor_must_return_recomputed_summary_and_gates (test_closure.ClosureReconciliationTests.test_auditor_must_return_recomputed_summary_and_gates) ... ok
+test_campaign_audit_binds_raw_audit_hashes_and_preserves_negative_gates (test_closure.ClosureReconciliationTests.test_campaign_audit_binds_raw_audit_hashes_and_preserves_negative_gates) ... {"phase": "auditing", "updated_utc": "2026-10-11T02:36:54.578644+00:00", "campaign_id": "test-campaign", "split": "development", "completed": []}
+{"phase": "auditing", "updated_utc": "2026-10-11T02:36:54.585801+00:00", "campaign_id": "test-campaign", "split": "development", "completed": [{"domain": "transfer", "exit_code": 0}]}
+{"phase": "auditing", "updated_utc": "2026-10-11T02:36:54.588898+00:00", "campaign_id": "test-campaign", "split": "development", "completed": [{"domain": "transfer", "exit_code": 0}, {"domain": "curriculum", "exit_code": 0}]}
+{"phase": "auditing", "updated_utc": "2026-10-11T02:36:54.590486+00:00", "campaign_id": "test-campaign", "split": "development", "completed": [{"domain": "transfer", "exit_code": 0}, {"domain": "curriculum", "exit_code": 0}, {"domain": "sandbox", "exit_code": 0}]}
+{"phase": "auditing", "updated_utc": "2026-10-11T02:36:54.592989+00:00", "campaign_id": "test-campaign", "split": "development", "completed": [{"domain": "transfer", "exit_code": 0}, {"domain": "curriculum", "exit_code": 0}, {"domain": "sandbox", "exit_code": 0}, {"domain": "mission", "exit_code": 0}]}
+{"phase": "audited", "updated_utc": "2026-10-11T02:36:54.600280+00:00", "campaign_id": "test-campaign", "split": "development", "audit_valid": true, "error": null}
+ok
+test_mission_requires_explicit_audit_report_without_producer_fallback (test_closure.ClosureReconciliationTests.test_mission_requires_explicit_audit_report_without_producer_fallback) ... {"phase": "audit_failed", "updated_utc": "2026-10-11T02:36:54.633958+00:00", "domain": "mission", "error": "Explicit independent auditor required: mission.audit_report"}
+ok
+test_reconciliation_rejects_aggregate_and_receipt_relabelling (test_closure.ClosureReconciliationTests.test_reconciliation_rejects_aggregate_and_receipt_relabelling) ... ok
+test_counterexample_quarantines_dependent_programs (test_concepts_solver.ConceptTests.test_counterexample_quarantines_dependent_programs) ... ok
+test_independent_demonstrations_required_and_mismatch_cannot_be_learned (test_concepts_solver.ConceptTests.test_independent_demonstrations_required_and_mismatch_cannot_be_learned) ... ok
+test_measured_counterexample_quarantines_and_survives_restore (test_concepts_solver.ConceptTests.test_measured_counterexample_quarantines_and_survives_restore) ... ok
+test_named_composition_reuses_verified_concept (test_concepts_solver.ConceptTests.test_named_composition_reuses_verified_concept) ... ok
+test_persistence_replays_evidence_and_detaches_mutable_state (test_concepts_solver.ConceptTests.test_persistence_replays_evidence_and_detaches_mutable_state) ... ok
+test_recomputed_hashes_do_not_certify_false_evidence (test_concepts_solver.ConceptTests.test_recomputed_hashes_do_not_certify_false_evidence) ... ok
+test_truth_is_never_cached_and_support_is_reverified_each_task (test_concepts_solver.ConceptTests.test_truth_is_never_cached_and_support_is_reverified_each_task) ... ok
+test_composed_transfer_and_equal_control_candidate_set (test_concepts_solver.SolverTests.test_composed_transfer_and_equal_control_candidate_set) ... ok
+test_consistent_programs_that_disagree_preserve_ambiguity (test_concepts_solver.SolverTests.test_consistent_programs_that_disagree_preserve_ambiguity) ... ok
+test_empty_task_and_contradictory_demos_fail_without_predictions (test_concepts_solver.SolverTests.test_empty_task_and_contradictory_demos_fail_without_predictions) ... ok
+test_invalid_proposals_are_rejected_without_influencing_search (test_concepts_solver.SolverTests.test_invalid_proposals_are_rejected_without_influencing_search) ... ok
+test_learning_stores_only_demonstrations_and_journal_is_passive (test_concepts_solver.SolverTests.test_learning_stores_only_demonstrations_and_journal_is_passive) ... ok
+test_poison_labels_and_new_palette (test_concepts_solver.SolverTests.test_poison_labels_and_new_palette) ... ok
+test_proposal_authority_is_rejected_and_no_model_is_called (test_concepts_solver.SolverTests.test_proposal_authority_is_rejected_and_no_model_is_called) ... ok
+test_query_role_tie_does_not_become_a_verified_prediction (test_concepts_solver.SolverTests.test_query_role_tie_does_not_become_a_verified_prediction) ... ok
+test_small_budget_abstains_with_exact_shared_cost (test_concepts_solver.SolverTests.test_small_budget_abstains_with_exact_shared_cost) ... ok
+test_spatial_rule_transfers_beyond_same_row_and_v3 (test_concepts_solver.SolverTests.test_spatial_rule_transfers_beyond_same_row_and_v3) ... ok
+test_bind_to_public_interfaces_is_rejected (test_control.ControlTests.test_bind_to_public_interfaces_is_rejected) ... ok
+test_http_requires_same_origin_and_token_and_has_no_file_traversal (test_control.ControlTests.test_http_requires_same_origin_and_token_and_has_no_file_traversal) ... 127.0.0.1 - - [11/Oct/2026 04:36:55] "GET /../../CLAUDE.md HTTP/1.1" 404 -
+127.0.0.1 - - [11/Oct/2026 04:36:55] "POST /api/session HTTP/1.1" 403 -
+127.0.0.1 - - [11/Oct/2026 04:36:55] "POST /api/session HTTP/1.1" 403 -
+127.0.0.1 - - [11/Oct/2026 04:36:55] "GET /api/state HTTP/1.1" 403 -
+127.0.0.1 - - [11/Oct/2026 04:36:55] "GET /api/result HTTP/1.1" 409 -
+127.0.0.1 - - [11/Oct/2026 04:36:55] "POST /api/control HTTP/1.1" 400 -
+ok
+test_http_source_drift_returns_409_and_preserves_boot_identity (test_control.ControlTests.test_http_source_drift_returns_409_and_preserves_boot_identity) ... 127.0.0.1 - - [11/Oct/2026 04:36:56] "GET /api/state HTTP/1.1" 409 -
+ok
+test_pause_step_terminal_and_observer_do_not_change_actor (test_control.ControlTests.test_pause_step_terminal_and_observer_do_not_change_actor) ... ok
+test_initial_terminal_state_also_gets_receipt_without_a_step (test_control.DiagnosticTests.test_initial_terminal_state_also_gets_receipt_without_a_step) ... ok
+test_invalid_diagnostic_setting_preserves_existing_session (test_control.DiagnosticTests.test_invalid_diagnostic_setting_preserves_existing_session) ... ok
+test_opt_out_never_initializes_probe_or_changes_actor_spec (test_control.DiagnosticTests.test_opt_out_never_initializes_probe_or_changes_actor_spec) ... ok
+test_probe_initialization_failure_is_recorded_without_stopping_actor (test_control.DiagnosticTests.test_probe_initialization_failure_is_recorded_without_stopping_actor) ... ok
+test_source_drift_stops_steps_and_requires_new_server (test_control.DiagnosticTests.test_source_drift_stops_steps_and_requires_new_server) ... ok
+test_terminal_result_is_on_disk_before_probe_failure_and_stale_frames_clear (test_control.DiagnosticTests.test_terminal_result_is_on_disk_before_probe_failure_and_stale_frames_clear) ... ok
+test_boot_identity_does_not_refresh_after_change_or_restore (test_control.SourceIdentityTests.test_boot_identity_does_not_refresh_after_change_or_restore) ... ok
+test_browser_rejects_wrong_boot_stale_sources_and_restart (test_control.SourceIdentityTests.test_browser_rejects_wrong_boot_stale_sources_and_restart) ... ok
+test_full_identity_detects_legacy_changes_with_identical_own_sources (test_control.SourceIdentityTests.test_full_identity_detects_legacy_changes_with_identical_own_sources) ... ok
+test_new_source_and_unreadable_source_require_restart (test_control.SourceIdentityTests.test_new_source_and_unreadable_source_require_restart) ... ok
+test_adaptive_scores_disagreement_and_updates_after_evidence (test_curriculum.CurriculumBoundaryTests.test_adaptive_scores_disagreement_and_updates_after_evidence) ... ok
+test_all_grammar_witnesses_solve_both_generation_styles (test_curriculum.CurriculumBoundaryTests.test_all_grammar_witnesses_solve_both_generation_styles) ... ok
+test_bad_configuration_is_rejected_before_agent_work (test_curriculum.CurriculumBoundaryTests.test_bad_configuration_is_rejected_before_agent_work) ... ok
+test_budget_exhaustion_is_an_instrument_failure_with_receipt (test_curriculum.CurriculumBoundaryTests.test_budget_exhaustion_is_an_instrument_failure_with_receipt) ... ok
+test_confirmation_contract_is_fixed_and_at_least_32_runs (test_curriculum.CurriculumBoundaryTests.test_confirmation_contract_is_fixed_and_at_least_32_runs) ... ok
+test_grammar_is_detached_and_uses_existing_finite_programs (test_curriculum.CurriculumBoundaryTests.test_grammar_is_detached_and_uses_existing_finite_programs) ... ok
+test_invalid_witness_cannot_receive_credit_or_be_silently_replaced (test_curriculum.CurriculumBoundaryTests.test_invalid_witness_cannot_receive_credit_or_be_silently_replaced) ... ok
+test_public_prediction_table_has_no_teacher_labels_or_identity_metadata (test_curriculum.CurriculumBoundaryTests.test_public_prediction_table_has_no_teacher_labels_or_identity_metadata) ... ok
+test_random_and_sequential_do_not_pad_cost_by_running_disagreement (test_curriculum.CurriculumBoundaryTests.test_random_and_sequential_do_not_pad_cost_by_running_disagreement) ... ok
+test_teacher_is_one_label_per_round_and_never_serves_evaluation (test_curriculum.CurriculumBoundaryTests.test_teacher_is_one_label_per_round_and_never_serves_evaluation) ... ok
+test_actual_tables_queries_and_comparisons_are_equal_without_private_execution (test_curriculum.CurriculumReportTests.test_actual_tables_queries_and_comparisons_are_equal_without_private_execution) ... ok
+test_audit_rejects_outputs_truth_cost_selection_and_coverage_tampering (test_curriculum.CurriculumReportTests.test_audit_rejects_outputs_truth_cost_selection_and_coverage_tampering) ... ok
+test_evaluation_predictions_and_verdicts_cannot_steer_later_acquisition (test_curriculum.CurriculumReportTests.test_evaluation_predictions_and_verdicts_cannot_steer_later_acquisition) ... ok
+test_every_prefix_records_the_same_queries_once_with_actual_work (test_curriculum.CurriculumReportTests.test_every_prefix_records_the_same_queries_once_with_actual_work) ... ok
+test_holdout_is_new_generation_style_and_not_fed_back_to_learning (test_curriculum.CurriculumReportTests.test_holdout_is_new_generation_style_and_not_fed_back_to_learning) ... ok
+test_journal_records_selection_before_evidence_and_does_not_change_outputs (test_curriculum.CurriculumReportTests.test_journal_records_selection_before_evidence_and_does_not_change_outputs) ... ok
+test_one_run_advantage_does_not_become_many_independent_observations (test_curriculum.CurriculumReportTests.test_one_run_advantage_does_not_become_many_independent_observations) ... ok
+test_regressions_and_cost_overhead_cannot_hide_in_accuracy_total (test_curriculum.CurriculumReportTests.test_regressions_and_cost_overhead_cannot_hide_in_accuracy_total) ... ok
+test_replay_survives_json_roundtrip_without_changing_frozen_actor (test_curriculum.CurriculumReportTests.test_replay_survives_json_roundtrip_without_changing_frozen_actor) ... ok
+test_ties_have_no_evidence_of_superiority_and_joint_cost_ci_is_deterministic (test_curriculum.CurriculumReportTests.test_ties_have_no_evidence_of_superiority_and_joint_cost_ci_is_deterministic) ... ok
+test_case_regression_at_a_prefix_cannot_be_hidden_by_positive_auc (test_curriculum.CurriculumUtilityTests.test_case_regression_at_a_prefix_cannot_be_hidden_by_positive_auc) ... ok
+test_one_winning_run_stays_one_despite_multiple_prefixes_and_cases (test_curriculum.CurriculumUtilityTests.test_one_winning_run_stays_one_despite_multiple_prefixes_and_cases) ... ok
+test_sequential_safeguard_is_mean_utility_plus_final_regressions (test_curriculum.CurriculumUtilityTests.test_sequential_safeguard_is_mean_utility_plus_final_regressions) ... ok
+test_utility_can_improve_with_equal_final_accuracy_without_relabelling_it (test_curriculum.CurriculumUtilityTests.test_utility_can_improve_with_equal_final_accuracy_without_relabelling_it) ... ok
+test_all_source_readers_bind_the_flat_core (test_distribution.DistributionTests.test_all_source_readers_bind_the_flat_core) ... ok
+test_core_imports_share_the_published_namespace (test_distribution.DistributionTests.test_core_imports_share_the_published_namespace) ... ok
+test_staged_runner_helpers_import_without_the_checkout (test_distribution.DistributionTests.test_staged_runner_helpers_import_without_the_checkout) ... ok
+test_auditor_rejects_forged_success (test_evaluation.EvaluationTests.test_auditor_rejects_forged_success) ... ok
+test_judge_ignores_claimed_success_and_requires_exact_output (test_evaluation.EvaluationTests.test_judge_ignores_claimed_success_and_requires_exact_output) ... ok
+test_paired_regression_cannot_hide_in_aggregate (test_evaluation.EvaluationTests.test_paired_regression_cannot_hide_in_aggregate) ... ok
+test_receipts_cannot_change_conditions_seeds_or_budget (test_evaluation.EvaluationTests.test_receipts_cannot_change_conditions_seeds_or_budget) ... ok
+test_source_snapshot_detects_change_and_addition (test_evaluation.EvaluationTests.test_source_snapshot_detects_change_and_addition) ... ok
+test_background_tie_and_invalid_cells_are_rejected (test_grounding.GroundingTests.test_background_tie_and_invalid_cells_are_rejected) ... ok
+test_budget_stops_before_segmentation (test_grounding.GroundingTests.test_budget_stops_before_segmentation) ... ok
+test_contextual_shape_role_is_not_an_alias_for_largest (test_grounding.GroundingTests.test_contextual_shape_role_is_not_an_alias_for_largest) ... ok
+test_distinctive_shape_survives_color_and_layout_change (test_grounding.GroundingTests.test_distinctive_shape_survives_color_and_layout_change) ... ok
+test_multiple_distinctive_shapes_are_not_a_unique_role (test_grounding.GroundingTests.test_multiple_distinctive_shapes_are_not_a_unique_role) ... ok
+test_recolor_reads_source_color_without_mutating_input (test_grounding.GroundingTests.test_recolor_reads_source_color_without_mutating_input) ... ok
+test_reuses_canonical_objects (test_grounding.GroundingTests.test_reuses_canonical_objects) ... ok
+test_strict_direction_is_from_source_to_target (test_grounding.GroundingTests.test_strict_direction_is_from_source_to_target) ... ok
+test_ties_abstain_and_cost_work (test_grounding.GroundingTests.test_ties_abstain_and_cost_work) ... ok
+test_budget_charges_before_overflow_and_rejects_invalid_units (test_infrastructure.InfrastructureTests.test_budget_charges_before_overflow_and_rejects_invalid_units) ... ok
+test_cli_starts_under_isolated_pinned_python (test_infrastructure.InfrastructureTests.test_cli_starts_under_isolated_pinned_python) ... ok
+test_existing_journal_detects_tampering_and_never_overwrites (test_infrastructure.InfrastructureTests.test_existing_journal_detects_tampering_and_never_overwrites) ... ok
+test_journal_envelope_cannot_be_overridden (test_infrastructure.InfrastructureTests.test_journal_envelope_cannot_be_overridden) ... ok
+test_legacy_has_single_identity_and_no_campaign_import (test_infrastructure.InfrastructureTests.test_legacy_has_single_identity_and_no_campaign_import) ... ok
+test_backward_plan_transfers_to_new_walls_and_reaches_goal (test_interaction.InteractionTests.test_backward_plan_transfers_to_new_walls_and_reaches_goal) ... ok
+test_blocked_actions_do_not_identify_a_unique_effect (test_interaction.InteractionTests.test_blocked_actions_do_not_identify_a_unique_effect) ... ok
+test_budget_exhaustion_precedes_world_mutation_and_abstains (test_interaction.InteractionTests.test_budget_exhaustion_precedes_world_mutation_and_abstains) ... ok
+test_checkpoint_rejects_tampering_even_with_recomputed_hash (test_interaction.InteractionTests.test_checkpoint_rejects_tampering_even_with_recomputed_hash) ... ok
+test_checkpoint_resume_across_a_dynamics_change_is_exact (test_interaction.InteractionTests.test_checkpoint_resume_across_a_dynamics_change_is_exact) ... ok
+test_checkpoint_round_trip_replays_evidence_and_future_decisions (test_interaction.InteractionTests.test_checkpoint_round_trip_replays_evidence_and_future_decisions) ... ok
+test_contradiction_invalidates_skill_then_replans_from_new_evidence (test_interaction.InteractionTests.test_contradiction_invalidates_skill_then_replans_from_new_evidence) ... ok
+test_disagreement_probes_an_unknown_action (test_interaction.InteractionTests.test_disagreement_probes_an_unknown_action) ... ok
+test_distinct_new_world_tick_zero_receipt_is_accepted_and_restored (test_interaction.InteractionTests.test_distinct_new_world_tick_zero_receipt_is_accepted_and_restored) ... ok
+test_empty_or_exhausted_benchmark_never_claims_success (test_interaction.InteractionTests.test_empty_or_exhausted_benchmark_never_claims_success) ... ok
+test_environment_seed_is_not_passed_to_actor_or_public_input (test_interaction.InteractionTests.test_environment_seed_is_not_passed_to_actor_or_public_input) ... ok
+test_episode_exact_replay_rejects_fabricated_observation (test_interaction.InteractionTests.test_episode_exact_replay_rejects_fabricated_observation) ... ok
+test_first_tick_zero_receipt_cannot_gain_credit_twice (test_interaction.InteractionTests.test_first_tick_zero_receipt_cannot_gain_credit_twice) ... ok
+test_invalid_transition_envelope_cannot_modify_agent (test_interaction.InteractionTests.test_invalid_transition_envelope_cannot_modify_agent) ... ok
+test_no_planning_ablation_never_builds_graph (test_interaction.InteractionTests.test_no_planning_ablation_never_builds_graph) ... ok
+test_out_of_class_transition_is_recorded_but_forces_abstention (test_interaction.InteractionTests.test_out_of_class_transition_is_recorded_but_forces_abstention) ... ok
+test_plan_depth_is_bounded_and_does_not_write_evidence (test_interaction.InteractionTests.test_plan_depth_is_bounded_and_does_not_write_evidence) ... ok
+test_public_schema_rejects_hidden_fields_labels_and_malformed_values (test_interaction.InteractionTests.test_public_schema_rejects_hidden_fields_labels_and_malformed_values) ... ok
+test_rehashed_checkpoint_cannot_change_integer_model_fields_to_booleans (test_interaction.InteractionTests.test_rehashed_checkpoint_cannot_change_integer_model_fields_to_booleans) ... ok
+test_repeated_or_discontinuous_tick_cannot_inflate_evidence (test_interaction.InteractionTests.test_repeated_or_discontinuous_tick_cannot_inflate_evidence) ... ok
+test_small_fixture_benchmark_pairs_caps_and_charges_all_phases (test_interaction.InteractionTests.test_small_fixture_benchmark_pairs_caps_and_charges_all_phases) ... ok
+test_tick_zero_replay_stays_rejected_after_later_evidence_and_restore (test_interaction.InteractionTests.test_tick_zero_replay_stays_rejected_after_later_evidence_and_restore) ... ok
+test_trace_records_actual_evidence_without_affecting_policy (test_interaction.InteractionTests.test_trace_records_actual_evidence_without_affecting_policy) ... ok
+test_world_secrets_and_input_mutation_cannot_change_initial_decision (test_interaction.InteractionTests.test_world_secrets_and_input_mutation_cannot_change_initial_decision) ... ok
+test_explicit_auditor_reconstructs_and_replays_in_a_new_process (test_mission.MissionAuditTests.test_explicit_auditor_reconstructs_and_replays_in_a_new_process) ... ok
+test_external_judge_rejects_a_claim_even_if_fake_replay_agrees (test_mission.MissionAuditTests.test_external_judge_rejects_a_claim_even_if_fake_replay_agrees) ... ok
+test_external_world_rejects_fabricated_motion_without_running_the_actor (test_mission.MissionAuditTests.test_external_world_rejects_fabricated_motion_without_running_the_actor) ... ok
+test_reduced_denominator_and_invented_reserve_fail (test_mission.MissionAuditTests.test_reduced_denominator_and_invented_reserve_fail) ... ok
+test_zero_budget_is_an_auditable_negative_not_a_missing_case (test_mission.MissionAuditTests.test_zero_budget_is_an_auditable_negative_not_a_missing_case) ... ok
+test_ack_does_not_mean_arrival_and_duplicate_samples_do_not_count (test_mission.MissionTests.test_ack_does_not_mean_arrival_and_duplicate_samples_do_not_count) ... ok
+test_budget_exhaustion_precedes_decision (test_mission.MissionTests.test_budget_exhaustion_precedes_decision) ... ok
+test_controls_keep_full_power_and_safety_path (test_mission.MissionTests.test_controls_keep_full_power_and_safety_path) ... ok
+test_fresh_raw_unknown_target_cannot_reuse_cached_admission (test_mission.MissionTests.test_fresh_raw_unknown_target_cannot_reuse_cached_admission) ... ok
+test_gateway_rejects_hallucinated_prediction_and_stale_source_binding (test_mission.MissionTests.test_gateway_rejects_hallucinated_prediction_and_stale_source_binding) ... ok
+test_goal_cannot_disable_return_marker_or_allow_hardware_coordinates (test_mission.MissionTests.test_goal_cannot_disable_return_marker_or_allow_hardware_coordinates) ... ok
+test_goal_coordinate_alone_is_not_a_fact (test_mission.MissionTests.test_goal_coordinate_alone_is_not_a_fact) ... ok
+test_goal_plan_power_action_return_and_stop (test_mission.MissionTests.test_goal_plan_power_action_return_and_stop) ... ok
+test_imports_full_mission_agent_power_and_composer (test_mission.MissionTests.test_imports_full_mission_agent_power_and_composer) ... ok
+test_journal_copies_actual_decisions_and_cannot_mutate_policy (test_mission.MissionTests.test_journal_copies_actual_decisions_and_cannot_mutate_policy) ... ok
+test_low_energy_power_guard_prevents_outbound_mission (test_mission.MissionTests.test_low_energy_power_guard_prevents_outbound_mission) ... ok
+test_plan_cannot_authorize_unknown_or_mismatched_state (test_mission.MissionTests.test_plan_cannot_authorize_unknown_or_mismatched_state) ... ok
+test_private_bad_and_stale_sensor_inputs_stop_before_agent (test_mission.MissionTests.test_private_bad_and_stale_sensor_inputs_stop_before_agent) ... ok
+test_raw_ttl_inclusive_and_never_refresh_capture (test_mission.MissionTests.test_raw_ttl_inclusive_and_never_refresh_capture) ... ok
+test_reasoning_plan_is_used_but_never_a_cam_fact (test_mission.MissionTests.test_reasoning_plan_is_used_but_never_a_cam_fact) ... ok
+test_repeated_sequence_latches_stop (test_mission.MissionTests.test_repeated_sequence_latches_stop) ... ok
+test_safe_sensor_and_authority_loss_are_latched (test_mission.MissionTests.test_safe_sensor_and_authority_loss_are_latched) ... ok
+test_software_denominator_costs_and_exact_replay_are_not_sitl (test_mission.MissionTests.test_software_denominator_costs_and_exact_replay_are_not_sitl) ... ok
+test_zero_budget_and_invalid_confirmation_do_not_hide_failures (test_mission.MissionTests.test_zero_budget_and_invalid_confirmation_do_not_hide_failures) ... ok
+test_ack_only_cannot_be_a_confirmed_consequence (test_mission.NewMissionReasoningTests.test_ack_only_cannot_be_a_confirmed_consequence) ... ok
+test_conventional_control_never_calls_new_planner (test_mission.NewMissionReasoningTests.test_conventional_control_never_calls_new_planner) ... ok
+test_independent_auditor_rejects_forged_new_reasoning_attribution (test_mission.NewMissionReasoningTests.test_independent_auditor_rejects_forged_new_reasoning_attribution) ... ok
+test_independent_auditor_rejects_imagined_as_executed (test_mission.NewMissionReasoningTests.test_independent_auditor_rejects_imagined_as_executed) ... ok
+test_normal_path_calls_shared_new_planner_without_an_external_plan (test_mission.NewMissionReasoningTests.test_normal_path_calls_shared_new_planner_without_an_external_plan) ... ok
+test_normal_path_projects_once_inside_full_inherited_agent (test_mission.NewMissionReasoningTests.test_normal_path_projects_once_inside_full_inherited_agent) ... ok
+test_power_land_preempts_new_reasoning (test_mission.NewMissionReasoningTests.test_power_land_preempts_new_reasoning) ... ok
+test_prior_is_never_fabricated_acquisition_evidence (test_mission.NewMissionReasoningTests.test_prior_is_never_fabricated_acquisition_evidence) ... ok
+test_projected_obstacle_requires_real_bounded_detour (test_mission.NewMissionReasoningTests.test_projected_obstacle_requires_real_bounded_detour) ... ok
+test_public_sitl_outcome_requires_send_ack_and_arrival (test_mission.NewMissionReasoningTests.test_public_sitl_outcome_requires_send_ack_and_arrival) ... ok
+test_reserved_confirmation_intervals_reject_any_intersection (test_mission.NewMissionReasoningTests.test_reserved_confirmation_intervals_reject_any_intersection) ... ok
+test_skipped_stale_proposal_is_not_execution_or_learning (test_mission.NewMissionReasoningTests.test_skipped_stale_proposal_is_not_execution_or_learning) ... ok
+test_unknown_or_conflicting_projection_never_becomes_a_path (test_mission.NewMissionReasoningTests.test_unknown_or_conflicting_projection_never_becomes_a_path) ... ok
+test_contract_coverage_and_external_audit_cannot_be_skipped (test_mission.SITLContractTests.test_contract_coverage_and_external_audit_cannot_be_skipped) ... ok
+test_fake_unit_fixture_cannot_be_a_real_receipt (test_mission.SITLContractTests.test_fake_unit_fixture_cannot_be_a_real_receipt) ... ok
+test_launch_is_local_isolated_bounded_and_no_mutable_image_tag (test_mission.SITLContractTests.test_launch_is_local_isolated_bounded_and_no_mutable_image_tag) ... ok
+test_missing_mission_process_output_cannot_be_green (test_mission.SITLContractTests.test_missing_mission_process_output_cannot_be_green) ... ok
+test_no_host_or_external_transport_override (test_mission.SITLContractTests.test_no_host_or_external_transport_override) ... ok
+test_read_only_availability_never_launches_a_container (test_mission.SITLContractTests.test_read_only_availability_never_launches_a_container) ... ok
+test_swept_collision_catches_a_wall_between_safe_endpoints (test_mission.SITLContractTests.test_swept_collision_catches_a_wall_between_safe_endpoints) ... ok
+test_auditor_rejects_unbounded_moving_or_fake_information_claim (test_mission_information.InformationProbeTests.test_auditor_rejects_unbounded_moving_or_fake_information_claim) ... ok
+test_four_views_are_bounded_and_no_progress_eventually_aborts (test_mission_information.InformationProbeTests.test_four_views_are_bounded_and_no_progress_eventually_aborts) ... ok
+test_missing_current_path_requests_new_observation_instead_of_claiming_free (test_mission_information.InformationProbeTests.test_missing_current_path_requests_new_observation_instead_of_claiming_free) ... ok
+test_new_evidence_resumes_planning_and_low_battery_still_stops (test_mission_information.InformationProbeTests.test_new_evidence_resumes_planning_and_low_battery_still_stops) ... ok
+test_power_stop_and_conventional_control_cannot_be_replaced (test_mission_information.InformationProbeTests.test_power_stop_and_conventional_control_cannot_be_replaced) ... ok
+test_input_provenance_and_true_hypercube_topology (test_neural_observer.NeuralObserverTests.test_input_provenance_and_true_hypercube_topology) ... ok
+test_measured_frames_match_historical_network_not_random_animation (test_neural_observer.NeuralObserverTests.test_measured_frames_match_historical_network_not_random_animation) ... ok
+test_exhaustion_is_not_converted_to_invalid_program (test_programs.ProgramTests.test_exhaustion_is_not_converted_to_invalid_program) ... ok
+test_expansion_rejects_cycles_and_limits (test_programs.ProgramTests.test_expansion_rejects_cycles_and_limits) ... ok
+test_geometry_composition (test_programs.ProgramTests.test_geometry_composition) ... ok
+test_relational_extract_then_geometry (test_programs.ProgramTests.test_relational_extract_then_geometry) ... ok
+test_serializable_proposal_roundtrip (test_programs.ProgramTests.test_serializable_proposal_roundtrip) ... ok
+test_unknown_concept_and_failed_execution_are_charged (test_programs.ProgramTests.test_unknown_concept_and_failed_execution_are_charged) ... ok
+test_unsupported_authority_fields_rejected_at_every_level (test_programs.ProgramTests.test_unsupported_authority_fields_rejected_at_every_level) ... ok
+test_aggregate_audit_belongs_to_the_same_campaign (test_release.ReleaseCampaignEvidenceTests.test_aggregate_audit_belongs_to_the_same_campaign) ... ok
+test_complete_synthetic_custody_accepts_matching_audits_without_replay (test_release.ReleaseCampaignEvidenceTests.test_complete_synthetic_custody_accepts_matching_audits_without_replay) ... ok
+test_development_cannot_be_relabelled_as_confirmation (test_release.ReleaseCampaignEvidenceTests.test_development_cannot_be_relabelled_as_confirmation) ... ok
+test_domain_audit_envelopes_and_recomputed_values_are_bound (test_release.ReleaseCampaignEvidenceTests.test_domain_audit_envelopes_and_recomputed_values_are_bound) ... ok
+test_every_required_receipt_remains_required_after_rehashing (test_release.ReleaseCampaignEvidenceTests.test_every_required_receipt_remains_required_after_rehashing) ... ok
+test_optional_auditor_report_hash_is_reconciled (test_release.ReleaseCampaignEvidenceTests.test_optional_auditor_report_hash_is_reconciled) ... ok
+test_valid_negative_audit_cannot_certify_rehashed_positive_report (test_release.ReleaseCampaignEvidenceTests.test_valid_negative_audit_cannot_certify_rehashed_positive_report) ... ok
+test_another_valid_domain_audit_cannot_replace_bound_bytes (test_release.ReleaseVerdictTests.test_another_valid_domain_audit_cannot_replace_bound_bytes) ... ok
+test_browser_cannot_omit_inherited_build_identity (test_release.ReleaseVerdictTests.test_browser_cannot_omit_inherited_build_identity) ... ok
+test_browser_neural_drawing_must_match_the_actual_network (test_release.ReleaseVerdictTests.test_browser_neural_drawing_must_match_the_actual_network) ... ok
+test_browser_receipt_cannot_certify_another_server_or_missing_evidence (test_release.ReleaseVerdictTests.test_browser_receipt_cannot_certify_another_server_or_missing_evidence) ... ok
+test_browser_snapshots_require_same_session_and_monotonic_steps (test_release.ReleaseVerdictTests.test_browser_snapshots_require_same_session_and_monotonic_steps) ... ok
+test_check_receipts_must_reconcile_all_commands_and_log_bytes (test_release.ReleaseVerdictTests.test_check_receipts_must_reconcile_all_commands_and_log_bytes) ... ok
+test_checks_reject_swapped_logs_all_skipped_and_misleading_earlier_summary (test_release.ReleaseVerdictTests.test_checks_reject_swapped_logs_all_skipped_and_misleading_earlier_summary) ... ok
+test_fabricated_green_sitl_without_rows_or_sources_is_rejected (test_release.ReleaseVerdictTests.test_fabricated_green_sitl_without_rows_or_sources_is_rejected) ... ok
+test_falsified_sitl_aggregate_cannot_promote_valid_negative_measurements (test_release.ReleaseVerdictTests.test_falsified_sitl_aggregate_cannot_promote_valid_negative_measurements) ... ok
+test_snapshots_reject_declared_hash_mismatch_and_reduced_coverage (test_release.ReleaseVerdictTests.test_snapshots_reject_declared_hash_mismatch_and_reduced_coverage) ... ok
+test_unmeasured_stale_and_development_receipts_fail_closed (test_release.ReleaseVerdictTests.test_unmeasured_stale_and_development_receipts_fail_closed) ... ok
+test_valid_audit_cannot_promote_negative_capability (test_release.ReleaseVerdictTests.test_valid_audit_cannot_promote_negative_capability) ... ok
+test_benchmark_reuses_simulation_and_reports_control_denominators (test_robotics.RoboticsTests.test_benchmark_reuses_simulation_and_reports_control_denominators) ... ok
+test_budget_exhaustion_never_runs_controller (test_robotics.RoboticsTests.test_budget_exhaustion_never_runs_controller) ... ok
+test_clean_restart_is_deterministic_and_does_not_load_campaigns (test_robotics.RoboticsTests.test_clean_restart_is_deterministic_and_does_not_load_campaigns) ... ok
+test_fusion_blocks_single_family_conflicting_and_skewed_evidence (test_robotics.RoboticsTests.test_fusion_blocks_single_family_conflicting_and_skewed_evidence) ... ok
+test_gate_vetoes_cached_free_target_missing_from_current_observation (test_robotics.RoboticsTests.test_gate_vetoes_cached_free_target_missing_from_current_observation) ... ok
+test_goal_coordinate_without_marker_does_not_certify_arrival (test_robotics.RoboticsTests.test_goal_coordinate_without_marker_does_not_certify_arrival) ... ok
+test_integer_benchmark_budget_is_per_case_per_mode (test_robotics.RoboticsTests.test_integer_benchmark_budget_is_per_case_per_mode) ... ok
+test_low_energy_retains_controller_reserve_stop (test_robotics.RoboticsTests.test_low_energy_retains_controller_reserve_stop) ... ok
+test_malformed_provenance_private_fields_and_stale_input_stop_before_controller (test_robotics.RoboticsTests.test_malformed_provenance_private_fields_and_stale_input_stop_before_controller) ... ok
+test_prediction_error_is_measured_from_next_public_odometry (test_robotics.RoboticsTests.test_prediction_error_is_measured_from_next_public_odometry) ... ok
+test_real_controller_predicts_executes_and_requires_observed_station (test_robotics.RoboticsTests.test_real_controller_predicts_executes_and_requires_observed_station) ... ok
+test_receiver_clock_enforces_exact_freshness_boundary (test_robotics.RoboticsTests.test_receiver_clock_enforces_exact_freshness_boundary) ... ok
+test_replayed_frame_and_expired_sensor_are_not_refreshed (test_robotics.RoboticsTests.test_replayed_frame_and_expired_sensor_are_not_refreshed) ... ok
+test_shared_ledger_is_charged_before_observer_sees_action (test_robotics.RoboticsTests.test_shared_ledger_is_charged_before_observer_sees_action) ... ok
+test_trace_uses_existing_recorder_without_changing_decisions (test_robotics.RoboticsTests.test_trace_uses_existing_recorder_without_changing_decisions) ... ok
+test_turn_limit_is_a_fail_closed_mission_bound (test_robotics.RoboticsTests.test_turn_limit_is_a_fail_closed_mission_bound) ... ok
+test_wrong_wsp_predicate_is_not_normalized_into_free_barrier_evidence (test_robotics.RoboticsTests.test_wrong_wsp_predicate_is_not_normalized_into_free_barrier_evidence) ... ok
+test_zero_benchmark_budget_keeps_requested_denominators (test_robotics.RoboticsTests.test_zero_benchmark_budget_keeps_requested_denominators) ... ok
+test_after_reverses_order_and_locations_are_bounded (test_sandbox.MissionContractTests.test_after_reverses_order_and_locations_are_bounded) ... ok
+test_basic_goal_types (test_sandbox.MissionContractTests.test_basic_goal_types) ... ok
+test_holdouts_are_disjoint_and_include_new_rules (test_sandbox.MissionContractTests.test_holdouts_are_disjoint_and_include_new_rules) ... ok
+test_normalized_configuration_can_be_reused (test_sandbox.MissionContractTests.test_normalized_configuration_can_be_reused) ... ok
+test_rejects_hidden_keys_and_bool_encoded_ids (test_sandbox.MissionContractTests.test_rejects_hidden_keys_and_bool_encoded_ids) ... ok
+test_rejects_unbounded_text_and_code (test_sandbox.MissionContractTests.test_rejects_unbounded_text_and_code) ... ok
+test_static_catalogue_and_options (test_sandbox.MissionContractTests.test_static_catalogue_and_options) ... ok
+test_structured_mission_has_same_meaning_as_text (test_sandbox.MissionContractTests.test_structured_mission_has_same_meaning_as_text) ... ok
+test_unmeasured_or_empty_rows_cannot_close (test_sandbox.MissionContractTests.test_unmeasured_or_empty_rows_cannot_close) ... ok
+test_validated_observation_is_detached (test_sandbox.MissionContractTests.test_validated_observation_is_detached) ... ok
+test_actor_completion_does_not_adjudicate_success (test_sandbox.NativeSandboxTests.test_actor_completion_does_not_adjudicate_success) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_actual_step_is_retained_if_learning_budget_exhausts (test_sandbox.NativeSandboxTests.test_actual_step_is_retained_if_learning_budget_exhausts) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_equal_budget_paired_report_and_independent_audit (test_sandbox.NativeSandboxTests.test_equal_budget_paired_report_and_independent_audit) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_manual_native_trace_replays_and_tampering_is_rejected (test_sandbox.NativeSandboxTests.test_manual_native_trace_replays_and_tampering_is_rejected) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_minigrid_does_not_silently_relabel_the_goal (test_sandbox.NativeSandboxTests.test_minigrid_does_not_silently_relabel_the_goal) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_native_babyai_navigation_is_goal_directed (test_sandbox.NativeSandboxTests.test_native_babyai_navigation_is_goal_directed) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_native_backend_partial_snapshot_and_public_boundary (test_sandbox.NativeSandboxTests.test_native_backend_partial_snapshot_and_public_boundary) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_native_dynamic_replay_is_deterministic (test_sandbox.NativeSandboxTests.test_native_dynamic_replay_is_deterministic) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_recorder_contains_factual_per_step_events (test_sandbox.NativeSandboxTests.test_recorder_contains_factual_per_step_events) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_reset_close_and_invalid_manual_actions (test_sandbox.NativeSandboxTests.test_reset_close_and_invalid_manual_actions) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_snapshot_polling_is_detached_and_cost_free (test_sandbox.NativeSandboxTests.test_snapshot_polling_is_detached_and_cost_free) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_user_mission_is_bound_to_native_babyai_verifier (test_sandbox.NativeSandboxTests.test_user_mission_is_bound_to_native_babyai_verifier) ... skipped 'Optional native suite needs pinned .venv-sandbox; no fallback'
+test_ambiguous_object_matches_remain_labelled_hypotheses (test_sandbox.ObservationActorTests.test_ambiguous_object_matches_remain_labelled_hypotheses) ... ok
+test_determinism_is_independent_of_environment_seed (test_sandbox.ObservationActorTests.test_determinism_is_independent_of_environment_seed) ... ok
+test_door_blocker_is_cleared_before_collecting_key (test_sandbox.ObservationActorTests.test_door_blocker_is_cleared_before_collecting_key) ... ok
+test_goal_directed_move_and_prediction_are_not_observed_facts (test_sandbox.ObservationActorTests.test_goal_directed_move_and_prediction_are_not_observed_facts) ... ok
+test_locked_door_precondition_uses_observed_key (test_sandbox.ObservationActorTests.test_locked_door_precondition_uses_observed_key) ... ok
+test_map_is_acquired_from_visible_cells_only (test_sandbox.ObservationActorTests.test_map_is_acquired_from_visible_cells_only) ... ok
+test_no_planning_ablation_does_not_search (test_sandbox.ObservationActorTests.test_no_planning_ablation_does_not_search) ... ok
+test_object_change_revises_memory_and_replans (test_sandbox.ObservationActorTests.test_object_change_revises_memory_and_replans) ... ok
+test_relational_target_is_retained_while_reference_is_unseen (test_sandbox.ObservationActorTests.test_relational_target_is_retained_while_reference_is_unseen) ... ok
+test_turn_retains_observed_map_but_no_memory_forgets (test_sandbox.ObservationActorTests.test_turn_retains_observed_map_but_no_memory_forgets) ... ok
+test_ack_alone_leaves_explicit_terminal_unresolved_without_credit (test_sitl_evidence.CommandEvidenceTests.test_ack_alone_leaves_explicit_terminal_unresolved_without_credit) ... ok
+test_ack_must_match_active_epoch_identity_and_follow_actual_send (test_sitl_evidence.CommandEvidenceTests.test_ack_must_match_active_epoch_identity_and_follow_actual_send) ... ok
+test_arrival_cannot_borrow_another_epoch_target_or_completion (test_sitl_evidence.CommandEvidenceTests.test_arrival_cannot_borrow_another_epoch_target_or_completion) ... ok
+test_dropping_middle_or_final_send_fails_even_with_other_arrivals (test_sitl_evidence.CommandEvidenceTests.test_dropping_middle_or_final_send_fails_even_with_other_arrivals) ... ok
+test_duplicate_accepted_ack_and_overlapping_commands_are_rejected (test_sitl_evidence.CommandEvidenceTests.test_duplicate_accepted_ack_and_overlapping_commands_are_rejected) ... ok
+test_send_must_be_unique_match_target_yaw_sequence_and_follow_approval (test_sitl_evidence.CommandEvidenceTests.test_send_must_be_unique_match_target_yaw_sequence_and_follow_approval) ... ok
+test_terminal_stale_is_retained_and_cannot_also_have_a_send (test_sitl_evidence.CommandEvidenceTests.test_terminal_stale_is_retained_and_cannot_also_have_a_send) ... ok
+test_three_claimed_samples_require_distinct_settled_telemetry (test_sitl_evidence.CommandEvidenceTests.test_three_claimed_samples_require_distinct_settled_telemetry) ... ok
+test_three_sample_arrival_is_bound_to_the_sent_command (test_sitl_evidence.CommandEvidenceTests.test_three_sample_arrival_is_bound_to_the_sent_command) ... ok
+test_unresolved_stages_preserve_negative_execution_evidence (test_sitl_evidence.CommandEvidenceTests.test_unresolved_stages_preserve_negative_execution_evidence) ... ok
+test_hang_label_cannot_hide_an_actual_request_timeout (test_sitl_evidence.LatencyEvidenceTests.test_hang_label_cannot_hide_an_actual_request_timeout) ... ok
+test_intentional_hang_without_a_worker_request_is_judged_separately (test_sitl_evidence.LatencyEvidenceTests.test_intentional_hang_without_a_worker_request_is_judged_separately) ... ok
+test_missing_or_duplicated_timeout_record_cannot_be_hidden_by_summary (test_sitl_evidence.LatencyEvidenceTests.test_missing_or_duplicated_timeout_record_cannot_be_hidden_by_summary) ... ok
+test_timeout_before_wall_deadline_is_not_a_successful_fast_call (test_sitl_evidence.LatencyEvidenceTests.test_timeout_before_wall_deadline_is_not_a_successful_fast_call) ... ok
+test_unexpected_timeout_is_counted_even_after_a_timely_reply (test_sitl_evidence.LatencyEvidenceTests.test_unexpected_timeout_is_counted_even_after_a_timely_reply) ... ok
+test_final_partial_line_is_not_silently_discarded (test_sitl_evidence.PublicReceiptTests.test_final_partial_line_is_not_silently_discarded) ... ok
+test_intended_fault_after_arrival_keeps_receipt_without_actor_delivery (test_sitl_evidence.PublicReceiptTests.test_intended_fault_after_arrival_keeps_receipt_without_actor_delivery) ... ok
+test_interrupted_move_remains_auditable_but_is_not_completed (test_sitl_evidence.PublicReceiptTests.test_interrupted_move_remains_auditable_but_is_not_completed) ... ok
+test_missing_final_arrival_cannot_be_relabelled_as_interrupted_motion (test_sitl_evidence.PublicReceiptTests.test_missing_final_arrival_cannot_be_relabelled_as_interrupted_motion) ... ok
+test_missing_middle_or_final_retained_consequence_fails (test_sitl_evidence.PublicReceiptTests.test_missing_middle_or_final_retained_consequence_fails) ... ok
+test_retained_receipt_cannot_claim_actor_delivery_without_reply (test_sitl_evidence.PublicReceiptTests.test_retained_receipt_cannot_claim_actor_delivery_without_reply) ... ok
+test_tail_preserves_earlier_delivery_and_final_receipt (test_sitl_evidence.PublicReceiptTests.test_tail_preserves_earlier_delivery_and_final_receipt) ... ok
+test_terminal_arrival_without_next_observation_is_retained_not_delivered (test_sitl_evidence.PublicReceiptTests.test_terminal_arrival_without_next_observation_is_retained_not_delivered) ... ok
+test_terminal_stale_without_next_observation_is_written_to_the_ledger (test_sitl_evidence.PublicReceiptTests.test_terminal_stale_without_next_observation_is_written_to_the_ledger) ... ok
+test_binary_framing_rejects_truncated_header_body_dropouts_and_appends (test_sitl_parameters.ParameterCalibrationTests.test_binary_framing_rejects_truncated_header_body_dropouts_and_appends) ... ok
+test_extension_preserves_inherited_allowlist_and_requires_known_driver (test_sitl_parameters.ParameterCalibrationTests.test_extension_preserves_inherited_allowlist_and_requires_known_driver) ... ok
+test_extractor_timeout_becomes_failed_evidence_and_cleans_only_owned_container (test_sitl_parameters.ParameterCalibrationTests.test_extractor_timeout_becomes_failed_evidence_and_cleans_only_owned_container) ... ok
+test_manifest_cannot_omit_parameter_extraction_or_binary (test_sitl_parameters.ParameterCalibrationTests.test_manifest_cannot_omit_parameter_extraction_or_binary) ... ok
+test_parameter_binding_rejects_substitution_even_with_matching_metadata (test_sitl_parameters.ParameterCalibrationTests.test_parameter_binding_rejects_substitution_even_with_matching_metadata) ... ok
+test_parameter_history_requires_coverage_and_clean_parser (test_sitl_parameters.ParameterCalibrationTests.test_parameter_history_requires_coverage_and_clean_parser) ... ok
+test_readback_accepts_float32_rounding_not_missing_or_wrong_values (test_sitl_parameters.ParameterCalibrationTests.test_readback_accepts_float32_rounding_not_missing_or_wrong_values) ... ok
+test_rejects_in_flight_change_even_when_it_returns_to_expected_value (test_sitl_parameters.ParameterCalibrationTests.test_rejects_in_flight_change_even_when_it_returns_to_expected_value) ... ok
+test_rejects_unbounded_unknown_boolean_string_or_nonfinite_request (test_sitl_parameters.ParameterCalibrationTests.test_rejects_unbounded_unknown_boolean_string_or_nonfinite_request) ... ok
+test_silently_stopped_parser_cannot_certify_clean_eof (test_sitl_parameters.ParameterCalibrationTests.test_silently_stopped_parser_cannot_certify_clean_eof) ... ok
+test_velocity_calibration_accepts_bounded_accelerometer_uncertainty (test_sitl_parameters.ParameterCalibrationTests.test_velocity_calibration_accepts_bounded_accelerometer_uncertainty) ... ok
+test_development_rejects_current_and_retired_holdouts (test_sitl_partitions.SitlPartitionTests.test_development_rejects_current_and_retired_holdouts) ... ok
+test_fresh_confirmation_uses_registered_interval (test_sitl_partitions.SitlPartitionTests.test_fresh_confirmation_uses_registered_interval) ... ok
+test_already_disarmed_requires_an_observed_heartbeat (test_sitl_recovery.RecoveryTests.test_already_disarmed_requires_an_observed_heartbeat) ... ok
+test_clock_regression_is_not_a_disarm (test_sitl_recovery.RecoveryTests.test_clock_regression_is_not_a_disarm) ... ok
+test_delayed_disarm_is_passive_and_keeps_original_failure (test_sitl_recovery.RecoveryTests.test_delayed_disarm_is_passive_and_keeps_original_failure) ... ok
+test_fresh_cached_disarm_is_not_new_independent_evidence (test_sitl_recovery.RecoveryTests.test_fresh_cached_disarm_is_not_new_independent_evidence) ... ok
+test_frozen_simulation_clock_stops_at_wall_deadline (test_sitl_recovery.RecoveryTests.test_frozen_simulation_clock_stops_at_wall_deadline) ... ok
+test_invalid_budget_or_backend_does_not_mask_original_failure (test_sitl_recovery.RecoveryTests.test_invalid_budget_or_backend_does_not_mask_original_failure) ... ok
+test_late_heartbeat_cannot_override_either_deadline (test_sitl_recovery.RecoveryTests.test_late_heartbeat_cannot_override_either_deadline) ... ok
+test_log_exception_does_not_mask_failure_or_observation (test_sitl_recovery.RecoveryTests.test_log_exception_does_not_mask_failure_or_observation) ... ok
+test_no_budget_does_not_poll (test_sitl_recovery.RecoveryTests.test_no_budget_does_not_poll) ... ok
+test_poll_exception_is_recorded_without_masking_original_error (test_sitl_recovery.RecoveryTests.test_poll_exception_is_recorded_without_masking_original_error) ... ok
+test_recovery_never_preserves_a_success_flag (test_sitl_recovery.RecoveryTests.test_recovery_never_preserves_a_success_flag) ... ok
+test_stale_missing_future_and_unreceived_heartbeats_cannot_claim_disarm (test_sitl_recovery.RecoveryTests.test_stale_missing_future_and_unreceived_heartbeats_cannot_claim_disarm) ... ok
+test_stale_post_start_heartbeat_is_not_disarm_evidence (test_sitl_recovery.RecoveryTests.test_stale_post_start_heartbeat_is_not_disarm_evidence) ... ok
+test_wall_budget_cannot_exceed_outer_episode_maximum (test_sitl_recovery.RecoveryTests.test_wall_budget_cannot_exceed_outer_episode_maximum) ... ok
+test_adapter_passes_only_remaining_episode_wall_time (test_sitl_recovery.RunnerAdapterTests.test_adapter_passes_only_remaining_episode_wall_time) ... ok
+test_failure_recovers_before_teardown_and_keeps_failure (test_sitl_recovery.RunnerAdapterTests.test_failure_recovers_before_teardown_and_keeps_failure) ... ok
+test_only_exception_recovery_changes_and_frozen_bytes_are_preserved (test_sitl_recovery.RunnerAdapterTests.test_only_exception_recovery_changes_and_frozen_bytes_are_preserved) ... ok
+test_rejects_changed_handler_and_double_application (test_sitl_recovery.RunnerAdapterTests.test_rejects_changed_handler_and_double_application) ... ok
+test_backend_callback_is_recorded_without_polling (test_sitl_truth.PoseRecorderTests.test_backend_callback_is_recorded_without_polling) ... ok
+test_capture_coverage_must_span_the_supervised_episode (test_sitl_truth.PoseRecorderTests.test_capture_coverage_must_span_the_supervised_episode) ... ok
+test_capture_uses_original_pose_time_and_drains_on_close (test_sitl_truth.PoseRecorderTests.test_capture_uses_original_pose_time_and_drains_on_close) ... ok
+test_gap_is_preserved_not_interpolated_or_relabelled (test_sitl_truth.PoseRecorderTests.test_gap_is_preserved_not_interpolated_or_relabelled) ... ok
+test_invalid_pose_fails_receipt_without_mutating_backend (test_sitl_truth.PoseRecorderTests.test_invalid_pose_fails_receipt_without_mutating_backend) ... ok
+test_missing_rows_and_forged_capture_timestamp_fail (test_sitl_truth.PoseRecorderTests.test_missing_rows_and_forged_capture_timestamp_fail) ... ok
+test_regression_cannot_be_silently_sorted (test_sitl_truth.PoseRecorderTests.test_regression_cannot_be_silently_sorted) ... ok
+test_wrong_run_incomplete_writer_and_overflow_fail (test_sitl_truth.PoseRecorderTests.test_wrong_run_incomplete_writer_and_overflow_fail) ... ok
+test_budget_exhaustion_abstains_and_ledger_still_adds_up (test_transfer.DeeperSynthesisTests.test_budget_exhaustion_abstains_and_ledger_still_adds_up) ... ok
+test_candidate_exhaustion_never_emits_a_partial_tier_prediction (test_transfer.DeeperSynthesisTests.test_candidate_exhaustion_never_emits_a_partial_tier_prediction) ... ok
+test_discovers_three_primitives_without_proposals_or_query_truth (test_transfer.DeeperSynthesisTests.test_discovers_three_primitives_without_proposals_or_query_truth) ... ok
+test_interned_and_uncached_frontiers_are_identical (test_transfer.DeeperSynthesisTests.test_interned_and_uncached_frontiers_are_identical) ... ok
+test_semantic_dedup_keeps_query_disagreement (test_transfer.DeeperSynthesisTests.test_semantic_dedup_keeps_query_disagreement) ... ok
+test_snapshot_is_detached_and_rechecks_support_on_next_task (test_transfer.DeeperSynthesisTests.test_snapshot_is_detached_and_rechecks_support_on_next_task) ... ok
+test_synthesis_acquires_a_parent_with_a_real_child_dependency (test_transfer.DeeperSynthesisTests.test_synthesis_acquires_a_parent_with_a_real_child_dependency) ... ok
+test_fill_refuses_to_overwrite_another_object (test_transfer.StructuralGroundingTests.test_fill_refuses_to_overwrite_another_object) ... ok
+test_new_ops_reject_authority_and_invalid_parameters (test_transfer.StructuralGroundingTests.test_new_ops_reject_authority_and_invalid_parameters) ... ok
+test_outline_removes_only_interior_and_keeps_other_objects (test_transfer.StructuralGroundingTests.test_outline_removes_only_interior_and_keeps_other_objects) ... ok
+test_pack_orders_by_area_and_refuses_ties (test_transfer.StructuralGroundingTests.test_pack_orders_by_area_and_refuses_ties) ... ok
+test_confirmation_overrides_and_overlapping_seeds_are_rejected (test_transfer.TransferEvidenceTests.test_confirmation_overrides_and_overlapping_seeds_are_rejected) ... ok
+test_controls_have_an_oracle_but_no_claimed_executable_witness (test_transfer.TransferEvidenceTests.test_controls_have_an_oracle_but_no_claimed_executable_witness) ... ok
+test_independent_generators_match_executable_witnesses (test_transfer.TransferEvidenceTests.test_independent_generators_match_executable_witnesses) ... ok
+test_report_recomputation_detects_forged_success_cost_and_missing_rows (test_transfer.TransferEvidenceTests.test_report_recomputation_detects_forged_success_cost_and_missing_rows) ... ok
+test_closure_uses_required_policy_when_strict_oracle_gate_is_false (test_transfer.TransferV2AccountingTests.test_closure_uses_required_policy_when_strict_oracle_gate_is_false) ... ok
+test_fixed_comparison_requires_a_present_paired_reference (test_transfer.TransferV2AccountingTests.test_fixed_comparison_requires_a_present_paired_reference) ... ok
+test_fixed_cost_tolerance_is_inclusive_and_counts_acquisition (test_transfer.TransferV2AccountingTests.test_fixed_cost_tolerance_is_inclusive_and_counts_acquisition) ... ok
+test_fixed_metadata_difference_is_not_reported_as_semantic_saving (test_transfer.TransferV2AccountingTests.test_fixed_metadata_difference_is_not_reported_as_semantic_saving) ... ok
+test_metadata_only_saving_cannot_satisfy_memory_improvement (test_transfer.TransferV2AccountingTests.test_metadata_only_saving_cannot_satisfy_memory_improvement) ... ok
+test_one_fixed_accuracy_regression_fails_even_if_costs_pass (test_transfer.TransferV2AccountingTests.test_one_fixed_accuracy_regression_fails_even_if_costs_pass) ... ok
+test_oracle_noninferiority_does_not_require_old_strict_superiority (test_transfer.TransferV2AccountingTests.test_oracle_noninferiority_does_not_require_old_strict_superiority) ... ok
+test_search_state_hashing_remains_semantic_work (test_transfer.TransferV2AccountingTests.test_search_state_hashing_remains_semantic_work) ... ok
+test_semantic_saving_cannot_hide_total_cost_regression (test_transfer.TransferV2AccountingTests.test_semantic_saving_cannot_hide_total_cost_regression) ... ok
+test_semantic_threshold_and_all_cost_stages_are_preserved (test_transfer.TransferV2AccountingTests.test_semantic_threshold_and_all_cost_stages_are_preserved) ... ok
+test_v1_report_requires_its_archived_auditor (test_transfer.TransferV2AccountingTests.test_v1_report_requires_its_archived_auditor) ... ok
+
+----------------------------------------------------------------------
+Ran 338 tests in 43.982s
+
+OK (skipped=12)

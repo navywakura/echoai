@@ -1,0 +1,69 @@
+{
+  "schema": "echo5-curriculum-contract-v2",
+  "status": "revised-after-development-before-confirmation",
+  "report_schema": "echo5-curriculum-closure-v2",
+  "scope": "finite largest-object directional recoloring grammar, optionally followed by rot90/fliplr/flipud; synthetic held-out scene styles, not ARC/S6 or open-ended invention",
+  "config": {
+    "phase": "confirmation",
+    "seed": 51020261010,
+    "paired_runs": 32,
+    "rounds": 3,
+    "pool_per_round": 6,
+    "confirmation_cases_per_run": 8,
+    "conditions": ["sequential", "random", "adaptive"],
+    "work_per_run": 20000000,
+    "bootstrap_samples": 4096
+  },
+  "development_seed": 51017,
+  "unit_of_inference": "independent acquisition run, with all three arms paired within run",
+  "learning_curve": {
+    "prefixes": [1, 2, 3],
+    "primary_endpoint": "mean_prefix_accuracy",
+    "utility": "For each arm and run, arithmetic mean of exact evaluation accuracy after each of the three teacher queries; normalized discrete AUC, no zero-query endpoint or trapezoidal weighting",
+    "pairing": "Reuse the same evaluation inputs at every prefix; cases and prefixes remain nested within one acquisition run, never independent replicates",
+    "feedback": "Prefix predictions use only the current frozen surviving hypotheses; evaluation labels and correctness never enter subsequent selection or learning",
+    "final_endpoint": "Final accuracy and final regressions remain safeguards; final accuracy gain is descriptive only and is not a V2 superiority claim"
+  },
+  "selection": {
+    "adaptive": "maximum number of disagreeing live hypothesis pairs; stable input-order tie break; no labels or witness",
+    "random": "uniform input index from a separate deterministic public selection stream",
+    "sequential": "first input in an IID, difficulty-unordered pool",
+    "teacher": "external to actor; selected acquisition label only, one query per round per arm"
+  },
+  "budget": {
+    "shared": "execute each hypothesis on every public input exactly once per paired run; immutable prediction table shared by all arms, physically charged once",
+    "matched": "identical actual hypothesis prediction tables, three label queries and full label-comparison opportunities; identical evaluation prediction/adjudication opportunities after every prefix; zero arm-specific hypothesis executions",
+    "unmatched": "actual selector overhead is counted, never padded or declared equal; bounded-overhead gate can fail",
+    "comparison": "per-arm standalone-equivalent cost = common preparation + that arm's actual work; physical total = common preparation + sum of arm work",
+    "units": "logical operations including rendered cells, DSL work, prediction serialization, label comparisons, selection, teacher copies and evaluation; not FLOPs, wall time or joules"
+  },
+  "acceptance": {
+    "minimum_paired_runs": 32,
+    "minimum_adaptive_final_accuracy": 0.95,
+    "minimum_mean_paired_utility_gain_vs_random": 0.1,
+    "minimum_winning_runs_vs_random": 6,
+    "minimum_mean_paired_utility_gain_vs_sequential": 0.0,
+    "maximum_prefix_case_regressions_vs_random": 0,
+    "maximum_final_losing_runs_vs_either_control": 0,
+    "maximum_final_case_regressions_vs_either_control": 0,
+    "paired_mean_gain_ci_lower_exclusive": 0.0,
+    "paired_sign_test_one_sided_maximum_p": 0.05,
+    "maximum_relative_total_work_overhead_per_run": 0.05,
+    "maximum_mean_relative_total_work_overhead": 0.05,
+    "maximum_relative_total_work_overhead_ci_upper": 0.05,
+    "confidence": 0.95,
+    "bootstrap": "deterministic paired-run percentile bootstrap; primary utility, absolute total-cost delta and relative overhead jointly resampled; all prefixes and cases remain within their run; final accuracy comparison is descriptive",
+    "zero_llm_calls": true,
+    "all_challenges_verified_solvable": true,
+    "deterministic_replay_and_independent_audit_required": true,
+    "promotion": "none; closure success requires every gate, including cost; do not tune on confirmation"
+  },
+  "preexecution_design_revision": "V1 replaced zero incremental cost with at most 5 percent total-work overhead after coordinator static review within authorized scope, before V1 execution. That numeric threshold was not an explicit user instruction. The earlier change was not post-result threshold tuning.",
+  "v2_revision": {
+    "authorized": "2026-10-10, after audited development r1 and before any confirmation execution",
+    "reason": "Development r1: all arms 16/16 final successes across four independent runs; eleven of twelve arms identified a single hypothesis after one query and the remaining arm after two. Final accuracy gain was zero; V1's final-superiority objective was not demonstrated and is refuted for this observed development cohort.",
+    "change": "Measure accuracy at every existing query prefix and gate learning utility rather than claim improved final precision. This is an explicitly outcome-informed development revision, not V1 preregistration or confirmation success.",
+    "preserved": "32 paired confirmation runs, three teacher queries, grammar, pools, generator, selection algorithms, seed partition and reserved uninspected confirmation seeds, work ceiling and five-percent overhead bounds",
+    "custody": "Retain archived V1 sources, contract, development report and valid audit; freeze V2 before new checks/campaigns. No seed search or pool redesign. No claim that V2 will pass."
+  }
+}
