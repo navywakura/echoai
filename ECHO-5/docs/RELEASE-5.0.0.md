@@ -41,7 +41,10 @@ negativos anteriores. Las comprobaciones de publicación tienen recibo propio.
 La suite del laboratorio ejecutó 499 pruebas, con 26 omisiones opcionales y
 sin fallos; el perfil externo requerido pasó 32/32. La copia pública pasó por separado **502 pruebas, 26 omisiones opcionales**,
 **32/32 externas**, sintaxis JavaScript y custodia sin cambios; los tres tests
-adicionales comprueban la adaptación de distribución. Gazebo/PX4 es SITL, **no hardware real**.
+adicionales comprueban la adaptación de distribución. La repetición del piloto en estas fuentes públicas pasó cuatro auditorías y
+conservó resultados, acciones y costes lógicos; solo cambiaron tiempos de reloj
+en exploración. Son los mismos casos, no una muestra científica nueva.
+Gazebo/PX4 es SITL, **no hardware real**.
 
 ## Límites y trabajo futuro
 

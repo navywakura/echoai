@@ -351,6 +351,96 @@
       "export_bytes": 239,
       "gzip": false,
       "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/result.json",
+      "original_byte_sha256": "4d41223d1ef3f8ef0651c56b498de7bec3c4b5c5f0a3c7522e2af524f6fc441c",
+      "export_path": "publication-reproduction/result.json",
+      "export_byte_sha256": "b0007a433436d30f2828c7ded41242e0fde8fd22906a5a0dd7b7533953559dc5",
+      "original_bytes": 2356,
+      "export_bytes": 2268,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/parity.json",
+      "original_byte_sha256": "a346bc94416f9c3f73899ec5fbb82282a8d819683e5e2064d709118b810e909f",
+      "export_path": "publication-reproduction/parity.json",
+      "export_byte_sha256": "a346bc94416f9c3f73899ec5fbb82282a8d819683e5e2064d709118b810e909f",
+      "original_bytes": 2657,
+      "export_bytes": 2657,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/sources.json",
+      "original_byte_sha256": "1ce5af4c108eb91d8fd82879da722542e27b1a5516221284ffa285383d226dc9",
+      "export_path": "publication-reproduction/sources.json",
+      "export_byte_sha256": "1ce5af4c108eb91d8fd82879da722542e27b1a5516221284ffa285383d226dc9",
+      "original_bytes": 86276,
+      "export_bytes": 86276,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/plan.json",
+      "original_byte_sha256": "645d7f3b16d7296fbc45b4f47e8203d9ac16b9a1c90cdd6f464fed3f4ffcdc0d",
+      "export_path": "publication-reproduction/plan.json",
+      "export_byte_sha256": "645d7f3b16d7296fbc45b4f47e8203d9ac16b9a1c90cdd6f464fed3f4ffcdc0d",
+      "original_bytes": 1702,
+      "export_bytes": 1702,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/search_development/audit.json",
+      "original_byte_sha256": "b82264e36a14f89534cb6079b35c8f18d0a32c0a0f5b5d8f49d1efd62d875e86",
+      "export_path": "publication-reproduction/search_development/audit.json",
+      "export_byte_sha256": "b82264e36a14f89534cb6079b35c8f18d0a32c0a0f5b5d8f49d1efd62d875e86",
+      "original_bytes": 587,
+      "export_bytes": 587,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/search_fresh/audit.json",
+      "original_byte_sha256": "f8470562611c88f5ea6665d66cc82034462e4a37b19217af7a79f8b683492cb3",
+      "export_path": "publication-reproduction/search_fresh/audit.json",
+      "export_byte_sha256": "f8470562611c88f5ea6665d66cc82034462e4a37b19217af7a79f8b683492cb3",
+      "original_bytes": 587,
+      "export_bytes": 587,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/exploration/audit.json",
+      "original_byte_sha256": "3847f241368bcf2ab455547abd05858655a5a2ec00f021a4ea26dcd7f30a7b84",
+      "export_path": "publication-reproduction/exploration/audit.json",
+      "export_byte_sha256": "3847f241368bcf2ab455547abd05858655a5a2ec00f021a4ea26dcd7f30a7b84",
+      "original_bytes": 21920,
+      "export_bytes": 21920,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/exploration/result.json",
+      "original_byte_sha256": "6b2f3424680306604a42fdcbe99dea17493246f3d7b9a5e90a43b34d4fe9b017",
+      "export_path": "publication-reproduction/exploration/result.json.gz",
+      "export_byte_sha256": "8736d111ff837e18de2bfc50fde7e70f4ef7208898ec684718721b3af98b1d75",
+      "original_bytes": 28653651,
+      "export_bytes": 615223,
+      "gzip": true,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
+    },
+    {
+      "original_relative_path": "ECHO-5/artifacts/publication-efficiency-20261012-r1/curriculum/audit.json",
+      "original_byte_sha256": "967f81c44251d40ef9140617ed73c70e0b4e035f9c3c27c17d339aff132476f7",
+      "export_path": "publication-reproduction/curriculum/audit.json",
+      "export_byte_sha256": "967f81c44251d40ef9140617ed73c70e0b4e035f9c3c27c17d339aff132476f7",
+      "original_bytes": 588,
+      "export_bytes": 588,
+      "gzip": false,
+      "normalization": "Public checkout absolute paths replaced; embedded original hashes retained"
     }
   ],
   "omitted": [

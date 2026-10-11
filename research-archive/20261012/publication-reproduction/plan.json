@@ -1,0 +1,38 @@
+{
+  "schema": "echo5.efficiency.pilot.v1",
+  "stage": "paired_development_and_fresh_probe",
+  "automatic_promotion": false,
+  "S6": "out_of_scope_until_after_5.5",
+  "stages": {
+    "search_development": {
+      "seed": 2400000,
+      "cases_per_family": 1
+    },
+    "search_fresh": {
+      "seed": 2800000,
+      "cases_per_family": 3
+    },
+    "exploration": {
+      "seed": 1440000,
+      "cases_per_profile": 4,
+      "modes": [
+        "frontier_information",
+        "frontier_nearest",
+        "frontier_random",
+        "frontier_hybrid"
+      ]
+    },
+    "curriculum": {
+      "seed": 4700000,
+      "runs": 8,
+      "acquisition_steps": 4,
+      "budget": 2000000
+    }
+  },
+  "claims": {
+    "search": "Full 326-atom grammar, depth 4, beam 24, 12000 expanded candidates, 2000000 work per case; baseline/memoized/certified/certified_bound on identical inputs. All pre-expansion operator checks are separately counted and charged. The fourth arm adds safe partial-loss bounds to the third. Seed 2700000 was measured in r2 and is now development; 2800000 is a fresh probe in known generator families, not external generalization.",
+    "exploration": "All preregistered profiles and all four arms; same perception, skills, memory, actions and budgets. No selecting successful maps after measuring.",
+    "curriculum": "Matched hypotheses, acquisition and heldout inputs. Include selection, acquisition, update, evaluation and preparation costs; no 90-percent-certainty shortcut.",
+    "safety": "Incomplete tiers abstain; query outputs never enter actor; native judgments and independent construction oracle remain authoritative. Audits validate receipts, not scientific superiority."
+  }
+}

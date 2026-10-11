@@ -13,3 +13,9 @@ El manifiesto de distribución identifica todas las fuentes distribuidas; el
 manifiesto de investigación distingue bytes originales y exportados.
 El release declara verde solo dentro del alcance definido, con seis tareas
 independientes pendientes y S6 abierto hasta después de ECHO-5.5.
+
+La repetición completa pasó sus cuatro auditorías y reprodujo los resultados del
+laboratorio. Tres hashes coinciden; en exploración solo difieren tiempos de reloj,
+no resultados, acciones ni trabajo lógico. Duró 147,49 segundos en CPU en segundo
+plano. [Comparación](../research-archive/20261012/publication-reproduction/parity.json).
+Son casos ya medidos, no una confirmación científica nueva.

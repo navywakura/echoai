@@ -32,3 +32,10 @@ una ventaja informativa no activada ni superioridad estadística general.
 sintaxis JavaScript y custodia de fuentes válidas. Los tres tests adicionales
 frente a los 499 del laboratorio comprueban la adaptación de distribución.
 Esta comprobación no ejecuta un nuevo vuelo ni reabre exámenes sellados.
+
+[Reproducción en fuentes públicas](publication-reproduction/result.json) y
+[comparación con el laboratorio](publication-reproduction/parity.json): las cuatro
+etapas terminaron auditadas en 147,49 segundos. Tres hashes de resultados coinciden
+exactamente; exploración conserva los mismos resultados, acciones y costes lógicos,
+con diferencias únicamente en los tiempos de reloj medidos. Su resultado completo
+se conserva comprimido. Es una repetición, no una muestra científica nueva.
