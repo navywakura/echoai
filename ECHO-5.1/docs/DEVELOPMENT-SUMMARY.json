@@ -1,0 +1,827 @@
+{
+  "schema": "pcworld.summary.v1",
+  "run": "development-20261012-r2",
+  "scientific_claim": false,
+  "provider": "fixture",
+  "sources_unchanged": true,
+  "llm_calls_charged": 0,
+  "arm_totals": {
+    "S": {
+      "accepted": 4,
+      "episodes": 4,
+      "tools": 58,
+      "cpu_us": 925370,
+      "host_cpu_us": 938730,
+      "wall_ms": 5374,
+      "fuel": 132,
+      "tokens": 0
+    },
+    "I2": {
+      "accepted": 4,
+      "episodes": 4,
+      "tools": 66,
+      "cpu_us": 945642,
+      "host_cpu_us": 1061213,
+      "wall_ms": 5867,
+      "fuel": 148,
+      "tokens": 0
+    },
+    "F": {
+      "accepted": 4,
+      "episodes": 4,
+      "tools": 58,
+      "cpu_us": 941414,
+      "host_cpu_us": 943701,
+      "wall_ms": 5880,
+      "fuel": 132,
+      "tokens": 0
+    },
+    "E": {
+      "accepted": 4,
+      "episodes": 4,
+      "tools": 58,
+      "cpu_us": 923462,
+      "host_cpu_us": 950159,
+      "wall_ms": 5834,
+      "fuel": 132,
+      "tokens": 0
+    }
+  },
+  "episodes": [
+    {
+      "task": "dev-sum_positive",
+      "arm": "S",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "64dcfeb441bb8895e44999ad5945f0ef80754e70caa9e4f8c6c66c5e1310fd56",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1227,
+      "host_cpu_us": 234798,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299759361,
+          "critic_calls": 2,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 240639,
+          "critic_calls": 0,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-sum_positive",
+      "arm": "I2",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "64dcfeb441bb8895e44999ad5945f0ef80754e70caa9e4f8c6c66c5e1310fd56",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1447,
+      "host_cpu_us": 253636,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299764058,
+          "critic_calls": 2,
+          "fuel": 90,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 33
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 235942,
+          "critic_calls": 0,
+          "fuel": 38,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 17
+        }
+      }
+    },
+    {
+      "task": "dev-sum_positive",
+      "arm": "F",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "64dcfeb441bb8895e44999ad5945f0ef80754e70caa9e4f8c6c66c5e1310fd56",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1469,
+      "host_cpu_us": 240740,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299743936,
+          "critic_calls": 1,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 256064,
+          "critic_calls": 1,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-sum_positive",
+      "arm": "E",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "64dcfeb441bb8895e44999ad5945f0ef80754e70caa9e4f8c6c66c5e1310fd56",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1396,
+      "host_cpu_us": 236855,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299763268,
+          "critic_calls": 1,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 236732,
+          "critic_calls": 1,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-unique_sorted",
+      "arm": "S",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "5928de6bc49334d8dbee7109f6f7916e0dc1ebf2c9a2ce28f4d799a9ee7679eb",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1391,
+      "host_cpu_us": 238854,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299760857,
+          "critic_calls": 2,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 239143,
+          "critic_calls": 0,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-unique_sorted",
+      "arm": "I2",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "5928de6bc49334d8dbee7109f6f7916e0dc1ebf2c9a2ce28f4d799a9ee7679eb",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1429,
+      "host_cpu_us": 270165,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299764376,
+          "critic_calls": 2,
+          "fuel": 90,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 33
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 235624,
+          "critic_calls": 0,
+          "fuel": 38,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 17
+        }
+      }
+    },
+    {
+      "task": "dev-unique_sorted",
+      "arm": "F",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "5928de6bc49334d8dbee7109f6f7916e0dc1ebf2c9a2ce28f4d799a9ee7679eb",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1555,
+      "host_cpu_us": 253150,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299759149,
+          "critic_calls": 1,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 240851,
+          "critic_calls": 1,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-unique_sorted",
+      "arm": "E",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "5928de6bc49334d8dbee7109f6f7916e0dc1ebf2c9a2ce28f4d799a9ee7679eb",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1623,
+      "host_cpu_us": 252239,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299759122,
+          "critic_calls": 1,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 240878,
+          "critic_calls": 1,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-mean_fraction",
+      "arm": "S",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "0137ffd0de6271b183c44e18df2011700adf4fe3a1de269dbaf9492f0678a54e",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1157,
+      "host_cpu_us": 201184,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299789568,
+          "critic_calls": 2,
+          "fuel": 98,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 37
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 210432,
+          "critic_calls": 0,
+          "fuel": 30,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 13
+        }
+      }
+    },
+    {
+      "task": "dev-mean_fraction",
+      "arm": "I2",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "0137ffd0de6271b183c44e18df2011700adf4fe3a1de269dbaf9492f0678a54e",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1397,
+      "host_cpu_us": 255007,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299778250,
+          "critic_calls": 2,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 221750,
+          "critic_calls": 0,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-mean_fraction",
+      "arm": "F",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "0137ffd0de6271b183c44e18df2011700adf4fe3a1de269dbaf9492f0678a54e",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1279,
+      "host_cpu_us": 211978,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299787689,
+          "critic_calls": 1,
+          "fuel": 98,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 37
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 212311,
+          "critic_calls": 1,
+          "fuel": 30,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 13
+        }
+      }
+    },
+    {
+      "task": "dev-mean_fraction",
+      "arm": "E",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "0137ffd0de6271b183c44e18df2011700adf4fe3a1de269dbaf9492f0678a54e",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1364,
+      "host_cpu_us": 221540,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299785855,
+          "critic_calls": 1,
+          "fuel": 98,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 37
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 214145,
+          "critic_calls": 1,
+          "fuel": 30,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 13
+        }
+      }
+    },
+    {
+      "task": "dev-count_distinct",
+      "arm": "S",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "a8a47af49c64ce2e2fb751191d0594e9bdab3eae53b0df72c2eb816584069dc4",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1599,
+      "host_cpu_us": 263894,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299764844,
+          "critic_calls": 2,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 235156,
+          "critic_calls": 0,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-count_distinct",
+      "arm": "I2",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "a8a47af49c64ce2e2fb751191d0594e9bdab3eae53b0df72c2eb816584069dc4",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1594,
+      "host_cpu_us": 282405,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299747674,
+          "critic_calls": 2,
+          "fuel": 90,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 33
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 252326,
+          "critic_calls": 0,
+          "fuel": 38,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 17
+        }
+      }
+    },
+    {
+      "task": "dev-count_distinct",
+      "arm": "F",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "a8a47af49c64ce2e2fb751191d0594e9bdab3eae53b0df72c2eb816584069dc4",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1577,
+      "host_cpu_us": 237833,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299767812,
+          "critic_calls": 1,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 232188,
+          "critic_calls": 1,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    },
+    {
+      "task": "dev-count_distinct",
+      "arm": "E",
+      "development_accepted": true,
+      "error": null,
+      "candidate": "a8a47af49c64ce2e2fb751191d0594e9bdab3eae53b0df72c2eb816584069dc4",
+      "llm_calls": 0,
+      "tokens": 0,
+      "wall_ms": 1451,
+      "host_cpu_us": 239525,
+      "budget": {
+        "frozen": false,
+        "limits": {
+          "cpu_us": 300000000,
+          "critic_calls": 2,
+          "fuel": 128,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 50
+        },
+        "overruns": [],
+        "pending": 0,
+        "remaining": {
+          "cpu_us": 299768293,
+          "critic_calls": 1,
+          "fuel": 94,
+          "llm_calls": 12,
+          "tokens": 25000,
+          "tools": 35
+        },
+        "reserved": {
+          "cpu_us": 0,
+          "critic_calls": 0,
+          "fuel": 0,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 0
+        },
+        "used": {
+          "cpu_us": 231707,
+          "critic_calls": 1,
+          "fuel": 34,
+          "llm_calls": 0,
+          "tokens": 0,
+          "tools": 15
+        }
+      }
+    }
+  ],
+  "evidence_hashes": {
+    "sources.json": "828b50268e470fd6f7a166e0e49a04b6908f0db8f6fe429e61ae8123ad69940a",
+    "contract.json": "68d98085a3156caf965cf1c4b3114fa482733df04b205796d938ff6d27a62d73",
+    "tasks.json": "3cf9b687ae0f47c1d612d701bc04728ce5f12d0ab34c18e1ddfce5709fd22040",
+    "provider.json": "de48324456b8f1a6eb3f5faa0f128f0c583086a22147fa3b3d3549b7b8424f57",
+    "result.json": "217e4b9d3297b1996a062b63acb9ca3f87d0b67d7dcf3817868cbed80f0d5512"
+  }
+}

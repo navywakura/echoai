@@ -1,0 +1,24 @@
+{
+  "pcworld-tests": {
+    "sha256": "6abea37cdd6872b83a585cb8d4f437314ca718c44cbbb65bb832c4ed1e9d4b26",
+    "log": "artifacts/development-20261012-r2/checks/pcworld-tests.log"
+  },
+  "selected-regressions": {
+    "sha256": "4aae1447d8a92d208819984a3864032595c36af9d26988af1eeaa004dcefb26f",
+    "log": "artifacts/development-20261012-r2/checks/selected-regressions.log"
+  },
+  "unchanged-base-lex": {
+    "sha256": "8f17928663ff28d56c9ff36db57e3cae1536f64bef78a12ce035924cb7f772b2",
+    "log": "artifacts/development-20261012-r2/checks/unchanged-base-lex.log"
+  },
+  "audit": {
+    "valid": true,
+    "records": 576,
+    "episodes": 16,
+    "errors": [],
+    "scope": "authenticated receipt and independent property replay; no new candidate execution",
+    "scientific_claim": false
+  },
+  "test_count": 138,
+  "selected_regression_count": 59
+}

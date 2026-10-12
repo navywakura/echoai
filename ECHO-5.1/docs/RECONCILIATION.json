@@ -1,0 +1,49 @@
+{
+  "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
+  "local_parent_commit": "a5b859c02941502e1656b17865cc6c1ca9d79291",
+  "differences": [
+    {
+      "path": "echo4/code_mcp.py",
+      "local_sha256": "ae793286b4595c88e8ec5ce2f922b01aaa64e6ccac92243096694f6595fb532b",
+      "public_sha256": "ae793286b4595c88e8ec5ce2f922b01aaa64e6ccac92243096694f6595fb532b",
+      "equal": true
+    },
+    {
+      "path": "echo4/code_memory.py",
+      "local_sha256": "0681718f6f4b4be1120e253386c28ef1693476b66ae949d62d7bd605eebd6094",
+      "public_sha256": "bf2fa72e638ec6abe49c5e57c01855aab6c6baec3e2c3df20db9278f0353b477",
+      "equal": false
+    },
+    {
+      "path": "echo4/code_gate.py",
+      "local_sha256": "b093cdeadde5be2312bca73810f3bfdfe1cef7354e1ea2bb34015743412c7e29",
+      "public_sha256": "b093cdeadde5be2312bca73810f3bfdfe1cef7354e1ea2bb34015743412c7e29",
+      "equal": true
+    },
+    {
+      "path": "harness/localdev/runner.py",
+      "local_sha256": "e7f24d132667645378242798c6e4e13a0be577ab07cd3819adf0018f65a073d2",
+      "public_sha256": "e7f24d132667645378242798c6e4e13a0be577ab07cd3819adf0018f65a073d2",
+      "equal": true
+    },
+    {
+      "path": "harness/localdev/worker.py",
+      "local_sha256": "8ef1575cb8a27c0e30191d91dddfe4c673aa11e2acd15660367bb1f00a9d47bd",
+      "public_sha256": "8ef1575cb8a27c0e30191d91dddfe4c673aa11e2acd15660367bb1f00a9d47bd",
+      "equal": true
+    },
+    {
+      "path": "ECHO-5/src/echo5/legacy.py",
+      "local_sha256": "2363b5801bd50d8c116957e6dafa81042e5096cccf7a55de1ac051f5a7ed6dbc",
+      "public_sha256": "6d11748a55567b9a8509bed3290ce7b28103e64cb84826d6193a0255c9570e6c",
+      "equal": false
+    },
+    {
+      "path": "ECHO-5/README.md",
+      "local_sha256": "a543586e01707bf5de0d15adda85c5883948d3838cb0400121d04e83b6ecac92",
+      "public_sha256": "75429ca8135234fcfa964e6804da435b1677eac204c665fa1f5e2b7fefd28255",
+      "equal": false
+    }
+  ],
+  "reason": "Public package imports core.*; local research uses historical parent modules. Historical runs untouched. Native worktree tool targets RXos rather than official echoai; explicit git worktree used for official repository."
+}

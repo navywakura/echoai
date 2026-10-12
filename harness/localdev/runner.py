@@ -1,205 +1,214 @@
-"""Bubblewrap execution with bounded output, wall time and recorded child resource use."""
+"""Developer test observations through the mandatory PCWorld execution boundary.
+
+Historical PASSED means only that a command exited zero or declared tests
+reported passing. Worker diagnostics, counts and coverage are UNTRUSTED: the
+candidate shares the worker's Python process and can forge every report. No
+localdev result verifies a property, certifies task success or opens a scientific
+gate. Snapshot custody, isolation and resource measurements belong to PCWorld.
+"""
 from __future__ import annotations
 
+import base64
 import json
-import os
+import math
 from pathlib import Path
 import re
-import selectors
-import shutil
-import signal
-import subprocess
+import tempfile
 import time
-from typing import Any, BinaryIO, cast
+from typing import Any
 
-from .common import TOOLS, digest, save
+from echoai.pcworld import runner as execution_backend
+from echoai.pcworld.snapshots import SnapshotStore
+
+from .common import digest, save
+from .worker import DETAILS_MARKER, WORKER_DIRECTORY
+
+
+def _scope() -> dict[str, Any]:
+    return {"status_scope": "developer_test_observations",
+            "status_meaning": "DEVELOPER TEST OBSERVATIONS: PASSED means only a zero-exit command "
+                              "or declared tests reporting pass; not semantic verification",
+            "attestation": "untrusted", "output_trust": "untrusted",
+            "details_scope": "untrusted worker-reported diagnostics, test counts and executed lines",
+            "claim_status": "unknown", "property_status": "unknown",
+            "task_success": False, "scientific_gate": False}
 
 
 def diagnostics(text: str) -> list[dict[str, Any]]:
+    """Extract untrusted traceback/compiler text for developer feedback only."""
+    # Treat implausibly large source positions as text, not integer input from
+    # a trusted compiler. The original text remains in the bounded logs.
     frames = [{"file": m[0], "line": int(m[1]), "function": m[2]}
-              for m in re.findall(r'File "([^"]+)", line (\d+), in ([^\n]+)', text)]
+              for m in re.findall(r'File "([^"]+)", line (\d{1,9}), in ([^\n]+)', text)]
     result: list[dict[str, Any]] = [{"kind": "traceback", "frames": frames}] if frames else []
-    for match in re.finditer(r"^(.+?):(\d+)(?::(\d+))?:\s*(error|warning|note):\s*(.+)$", text, re.M):
+    for match in re.finditer(r"^(.+?):(\d{1,9})(?::(\d{1,9}))?:\s*(error|warning|note):\s*(.+)$", text, re.M):
         result.append({"kind": "compiler", "file": match[1], "line": int(match[2]),
                        "column": int(match[3]) if match[3] else None,
                        "severity": match[4], "message": match[5]})
     return result
 
 
-def process_memory(pid: int) -> tuple[int, int]:
-    """Sample our process tree using host PIDs, without exposing process arguments."""
-    stack, seen = [pid], set()
-    maximum, total = 0, 0
-    while stack:
-        current = stack.pop()
-        if current in seen:
-            continue
-        seen.add(current)
-        base = Path("/proc") / str(current)
-        try:
-            data = base.joinpath("status").read_text()
-            rss = re.search(r"^VmRSS:\s+(\d+)", data, re.M)
-            high = re.search(r"^VmHWM:\s+(\d+)", data, re.M)
-            total += int(rss[1]) if rss else 0
-            maximum = max(maximum, int(high[1]) if high else 0)
-            stack.extend(int(n) for n in (base/"task"/str(current)/"children").read_text().split())
-        except (OSError, ValueError):
-            pass  # Process exit between reads is normal.
-    return maximum, total
+def _details(stdout: str, mode: str) -> tuple[dict[str, Any] | None, str | None]:
+    """Parse bounded output, never an attestation or candidate-created file.
+
+    The RECEIPT error names are retained for legacy callers; even a well-shaped
+    report remains untrusted. Reject shapes that would break engine feedback.
+    """
+    reports = [line[len(DETAILS_MARKER):] for line in stdout.splitlines()
+               if line.startswith(DETAILS_MARKER)]
+    if not reports:
+        return None, "MISSING_RECEIPT"
+    if len(reports) != 1:
+        return None, "INVALID_RECEIPT"
+    try:
+        value = json.loads(reports[0])
+        # Also reject non-finite JSON and excessive nesting before persistence.
+        json.dumps(value, allow_nan=False)
+        if not isinstance(value, dict) or value.get("mode") != mode:
+            raise ValueError("invalid diagnostic mode")
+        if mode == "unittest":
+            counts = ("tests_run", "failures", "errors", "skipped", "expected_failures", "unexpected_successes")
+            if any(type(value.get(k)) is not int or value[k] < 0 for k in counts):
+                raise ValueError("invalid reported test counts")
+            cases = value.get("cases")
+            if not isinstance(cases, list) or any(
+                    not isinstance(c, dict) or not isinstance(c.get("test"), str) or
+                    c.get("outcome") not in ("passed", "failed", "error", "skipped") for c in cases):
+                raise ValueError("invalid reported cases")
+        elif mode == "syntax":
+            if (type(value.get("files")) is not int or value["files"] < 0 or
+                    not isinstance(value.get("errors"), list) or
+                    any(not isinstance(error, dict) for error in value["errors"])):
+                raise ValueError("invalid syntax diagnostics")
+        elif type(value.get("child_exit_code")) is not int:
+            raise ValueError("invalid command diagnostics")
+    except (ValueError, TypeError, RecursionError):
+        return None, "INVALID_RECEIPT"
+    return value, None
 
 
 def execute(workspace: Path, job: Path, specification: dict[str, Any]) -> dict[str, Any]:
-    if not shutil.which("bwrap"):
-        raise RuntimeError("Bubblewrap required; no fallback to unsandboxed execution")
+    """Run a legacy profile; PASSED is a developer observation, never success.
+
+    The host copies its worker into a private snapshot using PCWorld's custody API.
+    The spec travels in argv and input in stdin; there are no extra mounts. All
+    candidate execution, including commands, crosses execution_backend.execute.
+    """
     if job.exists():
         raise ValueError("job directory already exists; preserve prior evidence")
-    job.mkdir(parents=True)
-    out, scratch = job / "out", job / "scratch"
-    out.mkdir()
-    scratch.mkdir()
+    if job.resolve().is_relative_to(workspace.resolve()):
+        raise ValueError("job evidence must be outside the candidate workspace")
     spec = {"timeout_s": 60, "memory_mb": 1536, "output_kb": 512, **specification}
-    if not 0 < spec["timeout_s"] <= 600 or not 64 <= spec["memory_mb"] <= 8192:
+    if (type(spec["timeout_s"]) not in (int, float) or not 0 < spec["timeout_s"] <= 600 or
+            type(spec["memory_mb"]) is not int or not 64 <= spec["memory_mb"] <= 2048):
         raise ValueError("invalid resource budget")
-    if not 1 <= spec["output_kb"] <= 4096:
+    if type(spec["output_kb"]) is not int or not 1 <= spec["output_kb"] <= 4096:
         raise ValueError("invalid output budget")
-    (workspace / "lab").mkdir(exist_ok=True)
-    save(job / "spec.json", spec)
-    worker = Path(__file__).parent / "worker.py"
-    trusted_worker = job / "worker.py"
-    trusted_worker.write_bytes(worker.read_bytes())
+    mode = "command" if spec.get("command") else spec.get("mode")
+    if mode not in ("command", "unittest", "syntax"):
+        raise ValueError("unsupported developer check mode")
+    if mode == "command" and (not isinstance(spec.get("command"), list) or not spec["command"] or
+                              any(not isinstance(arg, str) or "\0" in arg for arg in spec["command"])):
+        raise ValueError("command must be structured argv")
+    if mode == "unittest" and (not isinstance(spec.get("tests"), list) or not spec["tests"] or
+                               any(not isinstance(name, str) for name in spec["tests"])):
+        raise ValueError("explicit developer tests required")
+    spec["mode"] = mode
+    worker_spec = {key: spec[key] for key in ("mode", "command", "tests", "coverage") if key in spec}
+    encoded = base64.b64encode(json.dumps(worker_spec, allow_nan=False).encode()).decode("ascii")
+    if len(encoded) > 65536:
+        raise ValueError("worker specification exceeds argv budget")
     stdin = str(spec.get("stdin", "")).encode()
-    (job / "stdin.txt").write_bytes(stdin)
-    workdir = f"/work/{workspace.name}"
-    args = ["bwrap", "--unshare-all", "--unshare-user", "--die-with-parent", "--new-session", "--cap-drop", "ALL",
-            "--disable-userns", "--ro-bind", "/usr", "/usr", "--symlink", "usr/bin", "/bin",
-            "--symlink", "usr/lib", "/lib", "--symlink", "usr/lib64", "/lib64",
-            "--proc", "/proc", "--dev", "/dev", "--size", "67108864", "--tmpfs", "/tmp",
-            "--ro-bind", str(workspace.parent), "/work",
-            "--bind", str(scratch), workdir + "/lab", "--bind", str(out), "/out",
-            "--ro-bind", str(trusted_worker), "/worker.py",
-            "--ro-bind", str(job / "spec.json"), "/spec.json", "--chdir", workdir,
-            "--clearenv", "--setenv", "PATH", "/usr/bin:/bin", "--setenv", "HOME", "/tmp",
-            "--setenv", "TMPDIR", "/tmp", "--setenv", "LANG", "C.UTF-8", "--setenv", "TZ", "UTC",
-            "--setenv", "PYTHONPATH", "/work:" + workdir, "--setenv", "PYTHONHASHSEED", "0",
-            "--setenv", "PYTHONDONTWRITEBYTECODE", "1", "--setenv", "OMP_NUM_THREADS", "1",
-            "--setenv", "OPENBLAS_NUM_THREADS", "1", "--setenv", "LOCALDEV_IN_SANDBOX", "1"]
-    if TOOLS.is_dir():
-        args += ["--ro-bind", str(TOOLS), "/tools"]
-    args += ["--", "/usr/bin/python3", "/worker.py"]
+    limits = {"wall_ms": max(1, math.ceil(spec["timeout_s"] * 1000)),
+              "cpu_ms": spec.get("cpu_ms", max(1, math.ceil(spec["timeout_s"] * 1000))),
+              "memory_bytes": spec["memory_mb"] * 1048576, "output_bytes": spec["output_kb"] * 1024}
+    limits.update({key: spec[key] for key in ("pids", "disk_bytes") if key in spec})
+    worker = Path(__file__).with_name("worker.py").read_bytes()
+    worker_path = WORKER_DIRECTORY + "/worker.py"
     start = time.monotonic()
-    read_bytes, reason, usage, code = 0, None, None, None
-    sampled_max_rss, sampled_tree_rss = 0, 0
-    stdout_path, stderr_path = job / "stdout.log", job / "stderr.log"
-    with (job / "stdin.txt").open("rb") as input_file, stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
-        proc = subprocess.Popen(args, stdin=input_file, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                start_new_session=True)
-        selector = selectors.DefaultSelector()
-        assert proc.stdout is not None and proc.stderr is not None
-        for stream, target in ((proc.stdout, stdout), (proc.stderr, stderr)):
-            os.set_blocking(stream.fileno(), False)
-            selector.register(stream, selectors.EVENT_READ, target)
-        last_disk_check = start
-        last_memory_check = 0.0
-        while selector.get_map() or code is None:
-            now = time.monotonic()
-            if now - last_memory_check >= .1:
-                high, total = process_memory(proc.pid)
-                sampled_max_rss = max(sampled_max_rss, high)
-                sampled_tree_rss = max(sampled_tree_rss, total)
-                last_memory_check = now
-            if reason is None and now - start > spec["timeout_s"]:
-                reason = "TIMEOUT"
-            if reason is None and now - last_disk_check > 0.5:
-                sizes = []
-                for folder in (out, scratch):
-                    for path in folder.rglob("*"):
-                        try:
-                            if path.is_file() and not path.is_symlink():
-                                sizes.append(path.stat().st_size)
-                        except FileNotFoundError:
-                            pass
-                if len(sizes) > 2000 or sum(sizes) > 32 * 1048576:
-                    reason = "DISK_LIMIT"
-                last_disk_check = now
-            if reason is not None and code is None:
-                try:
-                    os.killpg(proc.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-            for key, _ in selector.select(0.05):
-                stream = cast(BinaryIO, key.fileobj)
-                chunk = os.read(stream.fileno(), 65536)
-                if not chunk:
-                    selector.unregister(key.fileobj)
-                    stream.close()
-                    continue
-                available = max(0, spec["output_kb"] * 1024 - read_bytes)
-                key.data.write(chunk[:available])
-                key.data.flush()
-                read_bytes += len(chunk)
-                if read_bytes > spec["output_kb"] * 1024 and reason is None:
-                    reason = "OUTPUT_LIMIT"
-            if code is None:
-                pid, status, current_usage = os.wait4(proc.pid, os.WNOHANG)
-                if pid:
-                    code = os.waitstatus_to_exitcode(status)
-                    proc.returncode = code
-                    usage = current_usage
-        selector.close()
-    detail_path = out / "details.json"
-    try:
-        details = json.loads(detail_path.read_text()) if detail_path.exists() else None
-        if details is not None and not isinstance(details, dict):
-            raise ValueError("invalid receipt")
-    except (ValueError, OSError):
-        details = None
-        reason = reason or "INVALID_RECEIPT"
-    if reason is None and spec.get("mode") in ("unittest", "syntax") and details is None:
-        reason = "MISSING_RECEIPT"
-    if reason is None and code == 0 and spec.get("mode") in ("unittest", "syntax"):
-        assert isinstance(details, dict)
-        if spec["mode"] == "unittest":
-            if (not isinstance(details.get("tests_run"), int) or details["tests_run"] <= 0 or
-                any(details.get(k) != 0 for k in ("failures", "errors", "skipped", "expected_failures", "unexpected_successes"))
-                or len(details.get("cases", [])) != details["tests_run"] or
-                any(c.get("outcome") != "passed" for c in details.get("cases", []))):
-                reason = "INVALID_RECEIPT"
-        elif not details.get("files") or details.get("errors") != []:
-            reason = "INVALID_RECEIPT"
-    verdict = reason or ("PASSED" if code == 0 else "FAILED")
-    measured = (details or {}).get("resources", {})
-    record = {"schema": 1, "status": verdict, "exit_code": code,
+    job.mkdir(parents=True)
+    save(job / "spec.json", spec)
+    with tempfile.TemporaryDirectory(prefix="echo-localdev-") as temporary:
+        store = SnapshotStore(Path(temporary) / "snapshots")
+        source = store.capture(workspace)
+        if WORKER_DIRECTORY in source.manifest["entries"]:
+            raise ValueError("reserved localdev worker directory in candidate")
+        candidate = store.apply(source, source.id,
+            [{"path": worker_path, "expected_sha256": None, "content": worker.decode("utf-8")}],
+            allowed_paths=(worker_path,))
+        observed = execution_backend.execute(candidate,
+            ["/usr/bin/python3", "-I", "-B", "/workspace/" + worker_path, encoded],
+            limits=limits, stdin=stdin)
+
+    # PCWorld bounds raw bytes. UTF-8 replacement can expand them, so also bound
+    # the persisted diagnostic text. These log hashes identify that text only.
+    remaining = limits["output_bytes"]
+    streams = {}
+    for name in ("stdout", "stderr"):
+        raw = observed[name].encode("utf-8")[:remaining].decode("utf-8", errors="ignore").encode("utf-8")
+        remaining -= len(raw)
+        (job / (name + ".log")).write_bytes(raw)
+        streams[name] = raw.decode("utf-8")
+    details, report_error = _details(streams["stdout"], mode)
+    status = observed["status"]
+    if status == "EXITED":
+        if observed["exit_code"] != 0:
+            status = "FAILED"
+        elif mode in ("unittest", "syntax") and report_error:
+            status = report_error
+        elif mode == "unittest" and details is not None and (
+                details["tests_run"] <= 0 or len(details["cases"]) != details["tests_run"] or
+                any(details[k] != 0 for k in ("failures", "errors", "skipped", "expected_failures", "unexpected_successes")) or
+                any(c["outcome"] != "passed" for c in details["cases"])):
+            status = "INVALID_RECEIPT"
+        elif mode == "syntax" and details is not None and (not details["files"] or details["errors"]):
+            status = "INVALID_RECEIPT"
+        else:
+            status = "PASSED"
+    measured = observed["resources"]
+    record = {"schema": 1, "status": status, "execution_status": observed["status"],
+              "exit_code": observed["exit_code"], "signal": observed.get("signal"),
               "wall_seconds": round(time.monotonic() - start, 6),
-              "cpu_seconds": measured.get("cpu_seconds"),
-              "supervisor_cpu_seconds": round(usage.ru_utime + usage.ru_stime, 6) if usage else None,
-              "max_process_rss_kib": max(sampled_max_rss, measured.get("max_process_rss_kib", 0)),
-              "peak_tree_rss_kib_sampled": sampled_tree_rss,
-              "rss_scope": "worker getrusage plus host /proc sampling every 100ms; tree sum is sampled, not an exact peak",
-              "stdout_sha256": digest(stdout_path.read_bytes()), "stderr_sha256": digest(stderr_path.read_bytes()),
-              "spec_sha256": digest((job / "spec.json").read_bytes()),
-              "worker_sha256": digest(trusted_worker.read_bytes()),
-              "details": details, "diagnostics": diagnostics(stdout_path.read_text(errors="replace") + "\n" + stderr_path.read_text(errors="replace")),
-              "isolation": {"backend": "bubblewrap", "network": False, "source_readonly": True,
-                            "home_mounted": False, "hardware_devices": False},
-              "declared_mocks": spec.get("mocks", []), "scientific_gate": False}
+              "cpu_seconds": measured["cpu_us"] / 1_000_000,
+              "cpu_scope": "PCWorld supervisor-observed cumulative cgroup CPU; not worker-reported",
+              "supervisor_cpu_seconds": None,  # Host supervisor CPU is not separately measured.
+              "max_process_rss_kib": measured["memory_peak_bytes"] // 1024,
+              "peak_tree_rss_kib_sampled": measured["memory_peak_bytes"] // 1024,
+              "rss_scope": "Legacy aliases of cgroup memory_peak_bytes / 1024, including charged tmpfs/cache; "
+                           "not per-process RSS or a sampled tree sum",
+              "resources": measured, "limits": observed["limits"],
+              "stdout": streams["stdout"], "stderr": streams["stderr"],
+              "stdout_sha256": digest((job / "stdout.log").read_bytes()),
+              "stderr_sha256": digest((job / "stderr.log").read_bytes()),
+              "execution_stdout_sha256": observed["stdout_sha256"],
+              "execution_stderr_sha256": observed["stderr_sha256"],
+              "spec_sha256": digest((job / "spec.json").read_bytes()), "worker_sha256": digest(worker),
+              "source_snapshot": source.id, "snapshot": observed["snapshot"],
+              "details": details, "details_status": report_error or "UNTRUSTED_REPORT",
+              "diagnostics": diagnostics(streams["stdout"] + "\n" + streams["stderr"]),
+              "isolation": observed["isolation"],
+              "observation_integrity": observed["observation_integrity"],
+              "declared_mocks": spec.get("mocks", []), **_scope()}
     save(job / "result.json", record)
-    print(json.dumps({"job": str(job), "status": verdict, "seconds": record["wall_seconds"]}), flush=True)
+    print(json.dumps({"job": str(job), "status": status, "seconds": record["wall_seconds"],
+                      "status_scope": record["status_scope"], "task_success": False}), flush=True)
     return record
 
 
 def validate(workspace: Path, output: Path, checks: list[dict[str, Any]],
              deadline: float | None = None) -> dict[str, Any]:
+    """Aggregate developer test observations; PASSED confers no semantic authority."""
     results = []
     for index, check in enumerate(checks):
         if deadline is not None:
             left = deadline - time.monotonic()
             if left <= 0:
-                results.append({"id": check["id"], "status": "BUDGET_EXHAUSTED"})
+                results.append({"id": check["id"], "status": "BUDGET_EXHAUSTED", **_scope()})
                 break
             check = {**check, "timeout_s": min(check.get("timeout_s", 60), left)}
         result = execute(workspace, output / f"{index:02d}-{check['id']}", check)
         results.append({"id": check["id"], **result})
     summary = {"status": "PASSED" if results and all(r["status"] == "PASSED" for r in results) else "FAILED",
-               "checks": results, "scientific_gate": False}
+               "checks": results, **_scope()}
     save(output / "result.json", summary)
     return summary

@@ -1,11 +1,16 @@
-"""Trusted worker, mounted read-only outside the candidate source tree."""
+"""Host-supplied diagnostic worker in a read-only private candidate snapshot.
+
+After candidate imports, this process and ALL its output are untrusted. Reports
+are developer test observations, never attestations, property checks or task
+success. The outside PCWorld supervisor owns resource limits and measurements.
+"""
 from __future__ import annotations
 
+import base64
+import importlib.util
 import json
-import math
 import os
 from pathlib import Path
-import resource
 import subprocess
 import sys
 import time
@@ -13,6 +18,14 @@ import trace
 import traceback
 import unittest
 from typing import Any, cast
+
+DETAILS_MARKER = "ECHO_LOCALDEV_DETAILS_V1:"
+WORKER_DIRECTORY = "__localdev_worker__"
+
+
+def report(details: dict[str, Any]) -> None:
+    """Emit forgeable diagnostics through the same bounded stdout as candidates."""
+    print("\n" + DETAILS_MARKER + json.dumps(details, separators=(",", ":")), flush=True)
 
 
 def failure(exc: tuple[Any, Any, Any]) -> dict[str, Any]:
@@ -23,34 +36,19 @@ def failure(exc: tuple[Any, Any, Any]) -> dict[str, Any]:
             "traceback": "".join(traceback.format_exception(kind, value, tb))}
 
 
-def resources() -> dict[str, Any]:
-    own = resource.getrusage(resource.RUSAGE_SELF)
-    children = resource.getrusage(resource.RUSAGE_CHILDREN)
-    return {"cpu_seconds": own.ru_utime + own.ru_stime + children.ru_utime + children.ru_stime,
-            "max_process_rss_kib": max(own.ru_maxrss, children.ru_maxrss),
-            "scope": "worker and reaped children; maximum process RSS, not simultaneous sum"}
-
-
 def main() -> int:
-    spec = json.loads(Path("/spec.json").read_text())
-    resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
-    resource.setrlimit(resource.RLIMIT_AS, (spec["memory_mb"] * 1048576,) * 2)
-    cpu = math.ceil(spec["timeout_s"]) + 1
-    resource.setrlimit(resource.RLIMIT_CPU, (cpu, cpu + 1))
-    resource.setrlimit(resource.RLIMIT_FSIZE, (16 * 1048576,) * 2)
-    resource.setrlimit(resource.RLIMIT_NOFILE, (128, 128))
-    resource.setrlimit(resource.RLIMIT_NPROC, (256, 256))
+    spec = json.loads(base64.b64decode(sys.argv[1], validate=True))
+    os.environ["LOCALDEV_IN_SANDBOX"] = "1"
     command = spec.get("command")
     if command:
         command_result = subprocess.run(command, check=False)
-        Path("/out/details.json").write_text(json.dumps({"mode": "command", "child_exit_code": command_result.returncode,
-                                                         "resources": resources()}))
+        report({"mode": "command", "child_exit_code": command_result.returncode})
         return command_result.returncode
     mode = spec["mode"]
     if mode == "syntax":
         files, errors = [], []
         for path in sorted(Path.cwd().rglob("*.py")):
-            if "lab" in path.relative_to(Path.cwd()).parts:
+            if any(part in ("lab", WORKER_DIRECTORY) for part in path.relative_to(Path.cwd()).parts):
                 continue
             files.append(str(path.relative_to(Path.cwd())))
             try:
@@ -58,10 +56,22 @@ def main() -> int:
             except (SyntaxError, ValueError) as exc:
                 errors.append({"file": str(path), "line": getattr(exc, "lineno", None),
                                "type": type(exc).__name__, "message": str(exc)})
-        Path("/out/details.json").write_text(json.dumps({"mode": mode, "files": len(files), "errors": errors,
-                                                         "resources": resources()}))
         print(f"Compiled {len(files)} Python files; errors {len(errors)}", flush=True)
+        report({"mode": mode, "files": len(files), "errors": errors})
         return int(bool(errors) or not files)
+
+    # Import candidates only after -I initialized the trusted worker's stdlib,
+    # and only inside the mandatory sandbox. Preserve flat and echoai.* tests
+    # without adding the host parent or any sibling package to sys.path.
+    root = Path.cwd()
+    sys.path.insert(0, str(root))
+    if (root / "__init__.py").is_file():
+        package_spec = importlib.util.spec_from_file_location("echoai", root / "__init__.py",
+                                                             submodule_search_locations=[str(root)])
+        assert package_spec is not None and package_spec.loader is not None
+        package = importlib.util.module_from_spec(package_spec)
+        sys.modules["echoai"] = package
+        package_spec.loader.exec_module(package)
 
     class Result(unittest.TextTestResult):
         records: list[dict[str, Any]]
@@ -112,7 +122,8 @@ def main() -> int:
         cwd = Path.cwd()
         for (filename, line), count in tracer.results().counts.items():
             path = Path(filename)
-            if path.is_relative_to(cwd) and "lab" not in path.relative_to(cwd).parts and count:
+            if (path.is_relative_to(cwd) and count and
+                    not any(part in ("lab", WORKER_DIRECTORY) for part in path.relative_to(cwd).parts)):
                 covered.setdefault(str(path.relative_to(cwd)), []).append(line)
     for filename in covered:
         covered[filename] = sorted(set(covered[filename]))
@@ -121,9 +132,9 @@ def main() -> int:
                "expected_failures": len(result.expectedFailures),
                "unexpected_successes": len(result.unexpectedSuccesses), "cases": result.records,
                "executed_lines": covered,
-               "coverage_scope": "executed Python lines in this profile; not branch coverage or project completion",
-               "resources": resources()}
-    Path("/out/details.json").write_text(json.dumps(details))
+               "coverage_scope": "untrusted reported Python lines in this profile; not branch coverage or project completion",
+               "counts_scope": "untrusted reported developer test counts; not semantic verification"}
+    report(details)
     return int(not result.wasSuccessful() or result.testsRun == 0 or bool(result.skipped)
                or bool(result.expectedFailures))
 

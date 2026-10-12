@@ -31,7 +31,8 @@ TOOLS = [
     {"name": "echo_run_check", "description": "ECHO runs an operator-declared check (e.g. the test suite) and "
      "records the exit code as a fact.", "inputSchema": _schema({"name": {"type": "string"}}, ["name"])},
     {"name": "echo_verify_claim", "description": "Classify a claim as supported, contradicted or unknown from "
-     "ECHO's own facts. Claim types: tests_pass{check}, symbol_defined{path,symbol}, "
+     "ECHO's own facts. check_exit_zero{check} verifies execution only; tests_pass remains unknown "
+     "without an independent checker. Other claim types: symbol_defined{path,symbol}, "
      "file_contains{path,text}, file_exists{path}.",
      "inputSchema": _schema({"claim": {"type": "object"}}, ["claim"])},
     {"name": "echo_check_action", "description": "Before running a shell command: OK, MODIFY (with a suggestion) "

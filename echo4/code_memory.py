@@ -14,7 +14,7 @@ import hashlib
 import json
 import os
 import re
-import subprocess
+import tempfile
 import time
 from pathlib import Path
 
@@ -133,17 +133,9 @@ class CodeMemory:
         return real
 
     def tree_sha(self):
-        h = hashlib.sha256()
-        for dirpath, dirnames, filenames in os.walk(self.root):
-            dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS)
-            for name in sorted(filenames):
-                p = Path(dirpath) / name
-                try:
-                    data = p.read_bytes()
-                except OSError:
-                    continue
-                h.update(p.relative_to(self.root).as_posix().encode() + b"\0" + hashlib.sha256(data).digest())
-        return h.hexdigest()
+        from echoai.pcworld.snapshots import SnapshotStore
+        with tempfile.TemporaryDirectory(prefix='echo-check-identity-') as tmp:
+            return SnapshotStore(Path(tmp)/'store').capture(self.root).id
 
     # ---------------------------------------------------------------- facts
 
@@ -152,10 +144,20 @@ class CodeMemory:
         if real is None:
             return {"ok": False, "reason": "outside the project"}
         rel = real.relative_to(self.root).as_posix()
-        if not real.is_file():
+        from echoai.pcworld.snapshots import SnapshotStore
+        try:
+            with tempfile.TemporaryDirectory(prefix='echo-read-capability-') as tmp:
+                store = SnapshotStore(Path(tmp)/'store')
+                snapshot = store.capture(self.root)
+                entry = snapshot.manifest['entries'].get(rel)
+                data = store.read(snapshot, rel) if entry and entry['type']=='file' else None
+        except (ValueError, OSError) as exc:
+            return {"ok": False, "reason": "file capability unavailable: " + str(exc)[:150]}
+        if data is None:
             rec = self._record("file", {"path": rel, "exists": False}, fact=True)
             return {"ok": True, "n": rec["n"], "path": rel, "exists": False}
-        data = real.read_bytes()[:MAX_FILE]
+        if len(data)>MAX_FILE:
+            return {"ok": False, "reason": "file exceeds observation budget"}
         body = {"path": rel, "exists": True, "sha256": sha(data), "symbols": symbols_of(real, data)}
         rec = self._record("file", body, fact=True)
         return {"ok": True, "n": rec["n"], **body}
@@ -174,17 +176,22 @@ class CodeMemory:
         argv = self.checks().get(name)
         if argv is None:
             return {"ok": False, "reason": "no check named %r declared by the operator" % name}
-        before = self.tree_sha()
-        started = time.monotonic()
-        try:
-            p = subprocess.run(argv, cwd=self.root, capture_output=True, timeout=timeout)
-            code, out = p.returncode, p.stdout + p.stderr
-        except subprocess.TimeoutExpired:
-            code, out = "timeout", b""
+        from echoai.pcworld.runner import execute, environment_identity
+        checks_sha = sha(canonical(self.checks()))
+        environment_sha = sha(canonical(environment_identity()))
+        result = execute(self.root, argv, limits={'wall_ms': min(600000, int(timeout*1000)),
+                                                  'cpu_ms': min(300000, int(timeout*1000))})
+        code = 'timeout' if result['status'] == 'TIMEOUT' else result['exit_code']
+        out = (result['stdout'] + result['stderr']).encode()
         body = {"name": name, "argv": argv, "exit": code, "output_sha256": sha(out),
-                "tree_sha256": before, "seconds": int(time.monotonic() - started)}
+                "tree_sha256": result['snapshot'], "seconds": result['resources']['wall_ms']//1000,
+                "checks_sha256": checks_sha,
+                "environment_sha256": environment_sha,
+                "execution": result, "claim_status": UNKNOWN, "task_success": False}
         rec = self._record("check", body, fact=True)
         return {"ok": True, "n": rec["n"], "exit": code, "passed": code == 0,
+                "passed_scope": "observed exit only; not test correctness or task success",
+                "claim_status": UNKNOWN, "task_success": False, "isolation": result['isolation'],
                 "output_tail": out.decode("utf-8", errors="replace")[-1500:]}
 
     # ---------------------------------------------------------------- testimony
@@ -217,12 +224,20 @@ class CodeMemory:
         self._record("testimony", {"source": source, "text": json.dumps(claim, sort_keys=True)}, fact=False)
         kind = claim["type"]
         if kind == "tests_pass":
+            return {"status": UNKNOWN, "reason": "Execution alone does not verify tests or task correctness; an independent property checker is required"}
+        if kind == "check_exit_zero":
             r = self._latest("check", "name", claim.get("check"))
             if r is None:
                 return {"status": UNKNOWN, "reason": "ECHO has never run this check"}
             if r["body"]["tree_sha256"] != self.tree_sha():
                 return {"status": UNKNOWN, "reason": "files changed since the last run; run the check again",
                         "evidence": r["n"]}
+            from echoai.pcworld.runner import environment_identity
+            if (r['body'].get('checks_sha256') != sha(canonical(self.checks())) or
+                r['body'].get('environment_sha256') != sha(canonical(environment_identity()))):
+                return {"status": UNKNOWN, "reason": "check or runtime changed"}
+            if r['body']['execution']['status'] not in ('EXITED', 'FAILED'):
+                return {"status": UNKNOWN, "reason": "execution incomplete"}
             passed = r["body"]["exit"] == 0
             return {"status": SUPPORTED if passed else CONTRADICTED, "evidence": r["n"],
                     "reason": "exit code %s when ECHO ran it" % r["body"]["exit"]}
@@ -241,8 +256,14 @@ class CodeMemory:
             text = claim.get("text")
             if not isinstance(text, str) or not text:
                 return {"status": UNKNOWN, "reason": "file_contains needs text"}
-            real = self._inside(claim["path"])
-            ok = text.encode() in real.read_bytes()[:MAX_FILE]
+            from echoai.pcworld.snapshots import SnapshotStore
+            with tempfile.TemporaryDirectory(prefix='echo-content-capability-') as tmp:
+                store = SnapshotStore(Path(tmp)/'store')
+                snap = store.capture(self.root)
+                data = store.read(snap, obs['path'])
+            if sha(data)!=obs['sha256']:
+                return {"status": UNKNOWN, "reason": "file changed during observation"}
+            ok = text.encode() in data
             return {"status": SUPPORTED if ok else CONTRADICTED, "evidence": obs["n"]}
         return {"status": UNKNOWN, "reason": "claim type not supported: %s" % kind}
 

@@ -1,4 +1,8 @@
-"""Engineering contracts; these tests neither open sealed exams nor call a model."""
+"""Developer test observations, never semantic verification or scientific gates.
+
+These engineering tests neither open sealed exams nor call a model. Historical
+PASSED only describes the declared developer checks and their untrusted reports.
+"""
 from contextlib import redirect_stdout
 import io
 import json
@@ -16,6 +20,8 @@ from harness.localdev.common import digest, safe_path, snapshot
 from harness.localdev.engine import allowed_paths, apply_proposal, bounded_proposal, demo, http_proposer, repair
 from harness.localdev.inventory import inspect_tree
 from harness.localdev.runner import diagnostics, execute, validate
+
+DETAILS_MARKER = "ECHO_LOCALDEV_DETAILS_V1:"
 
 
 class LocalDevelopment(unittest.TestCase):
@@ -128,8 +134,7 @@ time.sleep(30)
 ''', timeout_s=.2)
         self.assertEqual(result["status"], "TIMEOUT")
         self.assertLess(result["wall_seconds"], 3)
-        time.sleep(1.1)
-        self.assertFalse((self.root/"job/out/escaped").exists())
+        self.assertTrue(result["isolation"]["job_empty"])
 
     def test_output_is_bounded(self):
         result = self.command("print('x'*1000000)", output_kb=2)
@@ -139,24 +144,26 @@ time.sleep(30)
 
     def test_memory_limit_yields_real_failure(self):
         result = self.command("huge=bytearray(512*1024*1024)", memory_mb=256)
-        self.assertEqual(result["status"], "FAILED")
-        self.assertIn("MemoryError", (self.root/"job/stderr.log").read_text())
-        self.assertTrue(result["max_process_rss_kib"])
+        self.assertEqual(result["status"], "MEMORY_LIMIT", result)
+        self.assertNotEqual(result["exit_code"], 0)
+        self.assertGreater(result["resources"]["memory_peak_bytes"], 0)
+        self.assertTrue(result["isolation"]["job_empty"])
 
     def test_memory_metric_measures_worker_allocation(self):
         result = self.command("import time; data=bytearray(80*1024*1024); time.sleep(.25)", memory_mb=1024)
         self.assertEqual(result["status"], "PASSED")
-        self.assertGreater(result["max_process_rss_kib"], 80*1024)
-        self.assertGreater(result["peak_tree_rss_kib_sampled"], 80*1024)
+        self.assertGreater(result["resources"]["memory_peak_bytes"], 80*1024*1024)
+        self.assertEqual(result["max_process_rss_kib"], result["resources"]["memory_peak_bytes"] // 1024)
+        self.assertIn("cgroup", result["rss_scope"])
         self.assertGreater(result["cpu_seconds"], 0)
 
-    def test_aggregate_disk_limit_stops_worker(self):
+    def test_tmpfs_disk_limit_fails_without_host_output_mount(self):
         result = self.command('''from pathlib import Path
-import time
-for i in range(5): Path('/out/'+str(i)).write_bytes(b'x'*(8*1048576))
-time.sleep(10)
+for i in range(20): Path('/out/'+str(i)).write_bytes(b'x'*(8*1048576))
 ''')
-        self.assertEqual(result["status"], "DISK_LIMIT")
+        self.assertEqual(result["status"], "FAILED")
+        self.assertIn("No space left on device", (self.root/"job/stderr.log").read_text())
+        self.assertFalse((self.root/"job/out").exists())
 
     def test_structured_failure_and_executed_lines(self):
         self.put("test_case.py", "import unittest\nclass A(unittest.TestCase):\n def test_bad(self): self.assertEqual(1, 2)\n")
@@ -185,18 +192,18 @@ time.sleep(10)
         self.assertEqual(result["status"], "FAILED")
         self.assertEqual(result["details"]["expected_failures"], 1)
 
-    def test_exit_zero_without_receipt_cannot_pass(self):
+    def test_exit_zero_without_diagnostics_cannot_pass(self):
         self.put("test_case.py", "import os\nos._exit(0)\n")
         result = self.run_case({"mode": "unittest", "tests": ["test_case"]})
         self.assertEqual(result["status"], "MISSING_RECEIPT")
 
-    def test_malformed_receipt_cannot_pass(self):
-        self.put("test_case.py", "from pathlib import Path\nimport os\nPath('/out/details.json').write_text('{')\nos._exit(0)\n")
+    def test_malformed_diagnostics_cannot_pass(self):
+        self.put("test_case.py", f"import os\nprint({DETAILS_MARKER!r} + '{{', flush=True)\nos._exit(0)\n")
         result = self.run_case({"mode": "unittest", "tests": ["test_case"]})
         self.assertEqual(result["status"], "INVALID_RECEIPT")
 
     def test_zero_exit_with_empty_json_cannot_pass(self):
-        self.put("test_case.py", "from pathlib import Path\nimport os\nPath('/out/details.json').write_text('{}')\nos._exit(0)\n")
+        self.put("test_case.py", f"import os\nprint({DETAILS_MARKER!r} + '{{}}', flush=True)\nos._exit(0)\n")
         result = self.run_case({"mode": "unittest", "tests": ["test_case"]})
         self.assertEqual(result["status"], "INVALID_RECEIPT")
 

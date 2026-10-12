@@ -26,10 +26,10 @@ def project(broken=True):
 
 
 class Memory(unittest.TestCase):
-    def test_tests_pass_claim_follows_what_echo_ran(self):
+    def test_exit_claim_follows_observation_without_certifying_task(self):
         root = project(broken=True)
         m = CodeMemory(root)
-        claim = {"type": "tests_pass", "check": "unit"}
+        claim = {"type": "check_exit_zero", "check": "unit"}
         self.assertEqual(m.verify_claim(claim)["status"], UNKNOWN)          # never ran
         self.assertFalse(m.run_check("unit")["passed"])
         self.assertEqual(m.verify_claim(claim)["status"], CONTRADICTED)
@@ -37,6 +37,7 @@ class Memory(unittest.TestCase):
         self.assertEqual(m.verify_claim(claim)["status"], UNKNOWN)          # files changed since
         self.assertTrue(m.run_check("unit")["passed"])
         self.assertEqual(m.verify_claim(claim)["status"], SUPPORTED)
+        self.assertEqual(m.verify_claim({"type":"tests_pass","check":"unit"})["status"], UNKNOWN)
 
     def test_undeclared_check_cannot_run(self):
         m = CodeMemory(project())
