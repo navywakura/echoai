@@ -1,0 +1,52 @@
+{
+  "code_commit": "2b68216",
+  "checks": [
+    {
+      "command": "python3 -I -B ECHO-5.1/scripts/run.py test",
+      "passed": 162,
+      "failed": 0,
+      "log": "ECHO-5.1/artifacts/phase2-verification/pcworld-final.log",
+      "sha256": "ac0a3d02203af4a96c705336e9ce7d375defc0d56db926e24c01ea2d6475ee23"
+    },
+    {
+      "command": "python3 -I -B ECHO-5.1/scripts/run.py test echoai.tests.test_localdev echoai.tests.test_echo4_code1_memory echoai.tests.test_echo4_code1 echoai.tests.test_nexus0.TestWorld echoai.tests.test_nexus0.TestEncoder echoai.tests.test_nexus0.TestLex echoai.tests.test_nexus0.TestFallback",
+      "passed": 59,
+      "failed": 0,
+      "log": "ECHO-5.1/artifacts/phase2-verification/selected-regressions.log",
+      "sha256": "acdbeac0e36708452e732bd1f22bd7d5e4987967e56116a2599665b3e36d5b15"
+    }
+  ],
+  "source_manifest": {
+    "ECHO-5.1/docs/PCWORLD-1.json": "c391239751072ecaa97a63b2ff05fc5e3e6b105a496206c677c9d2c2ceab0473",
+    "core/cam.py": "152e8661e13ad8d1a667165e77b9eac91b4ec09bc172d839f2322ecdd5be5112",
+    "core/dag.py": "1a3d6239974b3ed4bd685c9a6e4333aa3d1bd38a06ff22ac890108eb49836156",
+    "core/qn.py": "9a8684626ea7031a3af1122aa99f17775f8ea03405b8052bf1d67680a99fd01c",
+    "core/spoke.py": "1ad63b54956ab793c1f0a83920c0fa2b7b8dc8b4807948ea12d85f92c8635e87",
+    "core/wsp.py": "d1a1be20a582244105c979e1b6b139bbb58fec2aae658fe790243067a10ef9c4",
+    "echo4/code_mcp.py": "f8ff9a7ba3594b2ede72eaf2d2c92e93a0d2db6bb3c3d12d919ca5a852440b0d",
+    "echo4/code_memory.py": "2604f3d2dfe70920e023e2dd8f756f575d7e534c2d5ebd315f96bd46242ee894",
+    "harness/localdev/runner.py": "3a0e30c4ab11ae404f72addd4a0bf88c2621baa8acab28397463a305d1fc2fac",
+    "harness/localdev/worker.py": "bbb68fb1929a393a676525a6c2581222614e4d8dfc841911801e37183a0563e0",
+    "nexus0/attend.py": "7295453e7d0f2b96c4c03a5b0ce4e66f667db4480d028eaf3912558b6eca4398",
+    "nexus0/constants.py": "dacdb3af78e652996ed189a729afc43c6f15982ace980136f16ba4d689b44680",
+    "nexus0/gate.py": "6bce5c3aceb9dc7b7bcf0baeee33576280a1635f8b3ea58edd3841f734221790",
+    "pcworld/__init__.py": "b90993ff3d4f2763f5f2b41920384b0fcaa6bfb04b66d1c86b57f6e140d5397d",
+    "pcworld/accounting.py": "e557cfcdf9af91b1da9a4a0af4882b656e33cbce351648e42f6d2288888d5073",
+    "pcworld/cli.py": "8b3c858157a7f9ca80bb94ddfd6d6535a1b08e0eb4d9402c6e6376eba67fe68c",
+    "pcworld/controller.py": "791de6ccd0594614d04687812412a72d2742c9acd69698d24782008fd5be4710",
+    "pcworld/memory.py": "179d79e518cdafd374743a9a025474d31634a425951356c80cb0b7b6d9d8d7c1",
+    "pcworld/pilot.py": "0e25f3a8c01919d7b88ca29ac5c7730531232cbea08b72646badf9e8542981b5",
+    "pcworld/property_cache.py": "81295c1a04c64b3ae0a6bca4fd956bd7ed6943f89c4467a064099c6fe6a8f1b1",
+    "pcworld/protocol.py": "3eaa61614083a9e5ee04a93198d6d4e93760111a9c6146e51f219f51d3e917ba",
+    "pcworld/provider.py": "cc805879ee53965b1899a7cf96c2283ee2d13f8b81a7801d96fe805faa2382a9",
+    "pcworld/receipts.py": "7900170a25e1bf66137e9b393b3eb455f807bbc8a2b25fc01a10a46386bbd8da",
+    "pcworld/repairs.py": "484f1da35b053b98d8ed7f08980d2e3f0401b0648b3c1da71a277e6ee6d71886",
+    "pcworld/runner.py": "882f79dca09dec8ffe5fffa5a673373dd0f9cb4f91dd4c9d8bf24b71584c07dd",
+    "pcworld/runtime.py": "e2e077f0f29d4abd68d41224c3abdc5ee8684a88e6d942d689c124d3921867e4",
+    "pcworld/snapshots.py": "0226f8d3da79039e04e9162856671a085edccd27ca981acbf4833a8839e76f30",
+    "pcworld/tasks.py": "31bd6e9697fe335c645a8a64b28eda97765bd5d3164df38035f2d31dc19c8166",
+    "pcworld/verifier.py": "0958a3c94ccdc6fb52319678c7a3c7f3c9e2563715e465f1de75a8e9f62d87e5"
+  },
+  "scope": "new PCWORLD-1 slice; not all historical ECHO suites",
+  "independent_review_important_fixed": 5
+}

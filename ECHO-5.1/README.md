@@ -4,10 +4,15 @@ Prototipo de investigación iniciado a partir del plan del 12 de octubre. Su
 primer contrato comprueba aislamiento, custodia y presupuesto. El verde de
 ECHO-5 no certifica este prototipo ni una ventaja multiagente.
 
-**Entrega de desarrollo validada:** 138 tests PCWorld y 59 regresiones
-seleccionadas pasaron; 16/16 episodios con respuestas programadas y una auditoría
-válida de 576 recibos. **ECHO-5.1 sigue en investigación:** no hay un ensayo de
-calidad con LLM ni un cierre científico. [Resultados y límites](docs/RESULTS.md).
+**Infraestructura ampliada:** 162 tests PCWorld y 59 regresiones seleccionadas.
+Runtime Python congelado, caché de propiedades puras, conector local Qwen 7B y
+seis familias nuevas de reparación. El primer piloto real terminó: **24/24
+episodios auditados, 2/6 tareas resueltas en cada brazo S/I2/F/E**. No se observó
+ventaja multiagente. Un diagnóstico separado sí completó el ciclo de
+contraejemplo, memoria, reparación y verificación con Qwen.
+**ECHO-5.1 sigue en investigación:** el cierre científico permanece pendiente.
+La entrega anterior validó 16/16 episodios programados y 576 recibos;
+[ese informe histórico](docs/RESULTS.md) no mide la capacidad de un LLM.
 
 El código está en `../pcworld/`; importa CAM, WSP16, ATTEND y gate existentes.
 No enciende un LLM en NEXUS-0. El router PCWorld inicial es una política entera
@@ -40,4 +45,9 @@ cerrada desde esta interfaz de desarrollo.
 - [Comandos, requisitos y conector opcional](docs/RUNBOOK.md).
 - [Costes y resultados por episodio](docs/DEVELOPMENT-SUMMARY.json).
 - [Plan y decisiones de implementación](docs/IMPLEMENTATION-PLAN.md).
+- [Continuación: runtime, modelo local y piloto](docs/PILOT-IMPLEMENTATION.md).
+- [Piloto real: resultados, costes y autopsia](docs/LOCAL-PILOT-20261013.md).
+- [Resumen por episodio y hashes de evidencia](docs/LOCAL-PILOT-SUMMARY.json).
+- [Checklist actualizado: verde y pendiente](docs/CLOSURE-CHECKLIST.md).
+- [Verificación de software de esta entrega](docs/PHASE2-VERIFICATION.json).
 - [Diferencias del checkout](docs/RECONCILIATION.json).

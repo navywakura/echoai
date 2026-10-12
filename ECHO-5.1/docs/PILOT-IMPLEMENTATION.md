@@ -43,11 +43,21 @@ Autoridad: RESEARCH.md §13 y continuación solicitada por el usuario. Base: 75e
 - Revisión independiente: cinco hallazgos importantes reproducidos y corregidos:
   metadatos TAR antes de límites, dependencias del checker en la identidad,
   unión null/list de topología, contabilidad incoherente y testigos de caché
-  ausentes. Pruebas focalizadas finales: 20/20. Suite completa final en marcha.
+  ausentes. Pruebas focalizadas finales: 20/20; suite PCWorld: 162/162;
+  regresiones seleccionadas: 59/59. Recibos de verificación en
+  `PHASE2-VERIFICATION.json`.
 - Se conserva el diagnóstico real que falló por envoltorio de input (332 tokens).
   La gramática ahora usa el dominio público. Otra calibración produjo un input
   elegible que no refutó el programa; no se presentó como contraejemplo.
-- Pendiente: piloto emparejado, auditoría y checklist de resultados.
+- Código congelado en `2b68216`. Diagnóstico sembrado: 1/1 aceptado,
+  1.704 tokens, auditoría válida de 51 recibos, ciclo de reparación observado.
+- Piloto emparejado: 24/24 completados, 2/6 aceptados en cada brazo; 22.412
+  tokens y 860 recibos auditados sin discrepancias. Sin contraejemplos retenidos:
+  15 críticas elegibles no refutaron, tres inputs de rutas fuera del dominio.
+  No hay mejora multiagente demostrada. Fuentes y contrato sin cambios.
+- Informe, costes, autopsia y checklist publicados en la documentación local:
+  `LOCAL-PILOT-20261013.md`, `LOCAL-PILOT-SUMMARY.json` y
+  `CLOSURE-CHECKLIST.md`. Pendientes científicos conservados explícitamente.
 
 Decisión T10: acotar caché a verificación pura; riesgo de una interpretación más
 amplia: no se acelera la ejecución de candidatos arbitrarios. Se mantiene prohibida.

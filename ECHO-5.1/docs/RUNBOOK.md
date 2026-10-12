@@ -165,10 +165,16 @@ al preparar el despliegue.
 
 ## Lo siguiente
 
-1. Revisar los resultados locales y ampliar tareas independientes por familias,
-   incluyendo repositorios reales y otras dependencias con contratos propios.
+El primer piloto local está [terminado y auditado](LOCAL-PILOT-20261013.md):
+todos los brazos empatan en 2/6. El [checklist](CLOSURE-CHECKLIST.md) distingue
+infraestructura comprobada de las obligaciones científicas pendientes.
+
+1. Investigar la generación de contraejemplos y la continuación ante una crítica
+   inválida. Ampliar tareas independientes por familias, incluyendo repositorios
+   reales y otras dependencias con contratos propios.
 2. Añadir las ablaciones de memoria, crítico y roles homogéneos.
-3. Dimensionar la confirmación con los pares discordantes del piloto y congelar
-   el contrato antes de abrir casos reservados.
+3. Dimensionar la confirmación con un piloto ampliado y congelar el contrato
+   antes de abrir casos reservados. Los seis pares actuales no tienen resultados
+   discordantes de acierto: no bastan para estimar una superioridad esperada.
 
 S6, publicación y promoción automática no son acciones de esta interfaz.
