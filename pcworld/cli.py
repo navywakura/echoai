@@ -11,7 +11,8 @@ def main(argv=None):
     pilot.add_argument('--tasks',type=int,default=4);pilot.add_argument('--repetitions',type=int,default=1)
     pilot.add_argument('--provider',choices=['fixture','http'],default='fixture')
     pilot.add_argument('--config',type=Path);pilot.add_argument('--output',type=Path)
-    pilot.add_argument('--suite',choices=['fixtures','repair-v1'],default='fixtures')
+    pilot.add_argument('--suite',choices=['fixtures','repair-v1','repair-v2'],default='fixtures')
+    pilot.add_argument('--task-seed',type=int,default=41)
     pilot.add_argument('--runtime',type=Path);pilot.add_argument('--cache-properties',action='store_true')
     pilot.add_argument('--arms',nargs='+',choices=['S','I2','F','E'],default=['S','I2','F','E'])
     pilot.add_argument('--seeded-diagnostic',action='store_true')
@@ -45,7 +46,8 @@ def main(argv=None):
     result=run_pilot(args.output,task_count=args.tasks,provider=args.provider,config=config,
         suite=args.suite,runtime=args.runtime,cache_properties=args.cache_properties,arms=args.arms,
         seeded_diagnostic=args.seeded_diagnostic,
-        model_evidence=json.loads(args.model_evidence.read_text()) if args.model_evidence else None)
+        model_evidence=json.loads(args.model_evidence.read_text()) if args.model_evidence else None,
+        task_seed=args.task_seed)
     print(json.dumps({'output':str(args.output),'episodes':len(result['episodes']),
                       'accepted':sum(r['development_accepted'] for r in result['episodes']),
                       'llm_calls':result['llm_calls'],'scientific_claim':False},indent=2))

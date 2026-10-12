@@ -35,6 +35,14 @@ class Pilot(unittest.TestCase):
             patches=[r for r in episode.receipts.records if r['body'].get('operation')=='apply_patch'
                      and r['body']['kind']=='observation']
             self.assertEqual(len(patches),3)
+
+    def test_repair_v2_counterbalances_arm_order_without_leaking_final_checks(self):
+        from echoai.pcworld.pilot import _task_arm_sequence
+        tasks=[{'id':f't{i}'} for i in range(8)]
+        sequence=_task_arm_sequence(tasks,('S','I2','F','E'),counterbalanced=True)
+        self.assertEqual([arm for task,arm in sequence[:4]],['S','I2','F','E'])
+        self.assertEqual([arm for task,arm in sequence[4:8]],['I2','F','E','S'])
+        self.assertEqual(len(sequence),len(tasks)*4)
     def test_audit_detects_provider_and_archived_source_changes(self):
         import json,os
         from echoai.pcworld.pilot import run_pilot,audit_run
@@ -85,7 +93,7 @@ class CounterexampleFlow(unittest.TestCase):
             self.assertIn('self_review',provider.roles)
             self.assertNotIn('critic',provider.roles)
             self.assertEqual(result['counterexamples'],[[-3,2,2]])
-    def test_critic_is_consulted_once_per_unchanged_candidate(self):
+    def test_legacy_fixture_critic_is_consulted_once_per_unchanged_candidate(self):
         from echoai.pcworld.pilot import Episode
         from echoai.pcworld.tasks import FixtureProvider,development_tasks
         class NoRepair(FixtureProvider):
@@ -145,6 +153,8 @@ class HermeticPilot(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             with self.assertRaisesRegex(ValueError,'pinned runtime'):
                 run_pilot(Path(d)/'run',suite='repair-v1',task_count=1)
+            with self.assertRaisesRegex(ValueError,'pinned runtime'):
+                run_pilot(Path(d)/'run2',suite='repair-v2',task_count=6)
     def test_pure_cache_repeats_candidate_and_invalidates_changed_input(self):
         from echoai.pcworld.pilot import Episode
         from echoai.pcworld.tasks import FixtureProvider,development_tasks

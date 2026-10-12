@@ -6,6 +6,7 @@ specification, the current candidate and previously observed counterexamples.
 import csv
 import io
 import itertools
+import random
 import re
 
 VERSION='pcworld-repair-reference-1'
@@ -118,3 +119,57 @@ def repair_tasks(count=6):
              'initial':_program(body),'public_inputs':public,'development_inputs':hidden,
              'split':'development','provenance':'induced defect, newly authored family; not a public issue benchmark'}
             for name,description,body,public,hidden in specs[:count]]
+
+def repair_task_variants(count=12,*,seed=41):
+    """Seeded value variants of the six exposed families, not new domains.
+
+    Only public examples reach model prompts. Evaluation cases are fixed in the
+    task manifest before launch and must never be used to tune this policy.
+    """
+    if type(count) is not int or not 1<=count<=24 or count%len(NAMES):
+        raise ValueError('task count must be a multiple of six, from 6 to 24')
+    if type(seed) is not int or not 0<=seed<=2**31-1: raise ValueError('invalid task seed')
+    base={task['family']:task for task in repair_tasks()}
+    rng=random.Random(seed);result=[];per_family=count//len(NAMES)
+    for variant in range(per_family):
+        labels=rng.sample('abcdefghijklmnopqrstuvwxyz',12)
+        values=[rng.randint(-5000,5000) for _ in range(24)]
+        for family in NAMES:
+            task=dict(base[family]);task['id']=f'repair-v2-{family}-{variant:02d}'
+            task['variant']=variant;task['variant_seed']=seed
+            task['split']='development'
+            task['provenance']='seeded value variant of an exposed repair-v1 family; not an independent bug-family confirmation'
+            a,b,c,d=labels[:4];n=values[variant*6:(variant+1)*6]
+            if family=='intervals':
+                lo,mid,hi=sorted(n[:3]);
+                if mid<=lo: mid=lo+1
+                if hi<=mid: hi=mid+2
+                task['public_inputs']=[[[lo,lo+1],[hi,hi+1]]]
+                task['development_inputs']=[[[lo,mid],[mid,hi]],[[lo,hi],[lo+1,mid]],[]]
+            elif family=='records':
+                task['public_inputs']=[[{'id':a,'value':n[0]},{'id':b,'value':n[1]}]]
+                task['development_inputs']=[ [{'id':a,'value':n[0]},{'id':a,'value':n[1]}],
+                    [{'id':b,'value':n[0]},{'id':a,'value':n[1]},{'id':b,'value':n[2]}], []]
+            elif family=='path':
+                task['public_inputs']=[f'/{a}/{b}']
+                task['development_inputs']=[f'/{a}/../{b}',f'/../../{a}',f'/{a}//./{b}/']
+            elif family=='csv':
+                task['public_inputs']=[f'{a},{b},{c}']
+                task['development_inputs']=[f'"{a},{b}",{c}',f'"{a}""{b}",{c}',
+                    f' {a} , {b} ',f'"{a}\n{b}",{c}']
+            elif family=='pagination':
+                items=[n[0],n[1],n[2],n[3]]
+                task['public_inputs']=[{'items':items,'offset':1,'limit':2}]
+                task['development_inputs']=[{'items':items,'offset':-1,'limit':2},
+                    {'items':items,'offset':1,'limit':-1},{'items':[],'offset':0,'limit':2},
+                    {'items':items,'offset':1,'limit':0}]
+            else:
+                nodes=sorted((a,b,c))
+                task['public_inputs']=[{'nodes':nodes,'edges':[[nodes[0],nodes[1]]]}]
+                task['development_inputs']=[
+                    {'nodes':[a],'edges':[[a,a]]},
+                    {'nodes':[a,b,c],'edges':[[a,b]]},
+                    {'nodes':[a,b,c],'edges':[[c,a],[a,b],[c,a]]},
+                    {'nodes':[a,b,c],'edges':[]}]
+            result.append(task)
+    return result

@@ -8,7 +8,7 @@ from echoai.core.wsp import pack
 from echoai.nexus0.gate import gate
 from echoai.nexus0.attend import attend
 
-LIMITS={'tokens':25000,'tools':50,'cpu_us':300000000,'llm_calls':12,'fuel':128,'critic_calls':2}
+LIMITS={'tokens':25000,'tools':50,'cpu_us':300000000,'llm_calls':12,'fuel':128,'critic_calls':6}
 TOOLS=('read_snapshot','apply_patch','run_python','check_property','submit_counterexample')
 
 def arm_profile(arm):

@@ -19,10 +19,11 @@ from .controller import LIMITS, arm_profile, choose, authorize
 from .memory import EpisodeMemory
 from .tasks import FixtureProvider, development_tasks
 from .provider import HTTPProvider, ProviderFailure
-from .verifier import check_observation, validate_challenge, VERSION
+from .verifier import check_observation, validate_challenge, in_domain, VERSION
 from .runtime import load_runtime, runtime_store
 from .property_cache import PropertyCache
-from .repairs import repair_tasks
+from .repairs import repair_tasks, repair_task_variants
+from .adversarial import choose_category, critic_instructions, matches_category
 
 ROOT=Path(__file__).resolve().parents[1]
 CONTRACT=ROOT/'ECHO-5.1/docs/PCWORLD-1.json'
@@ -77,7 +78,7 @@ class Episode:
         self.emit('decision',event)
         if not event['allowed']: raise BudgetExceeded('episode wall time')
         self.steps+=1
-    def call(self,role,snapshot,*,share=True,token_cap=None):
+    def call(self,role,snapshot,*,share=True,token_cap=None,probe=None):
         self.transition(role)
         available=max(0,LIMITS['tokens']-self.used_tokens)
         reserved_tokens=min(available,token_cap) if token_cap is not None else available
@@ -91,6 +92,7 @@ class Episode:
                  'sample_index':self.real_calls,
                  'evidence':self.last[-8:] if share else [],
                  'counterexamples':self.counterexamples if share else []}
+        if probe is not None: context['probe']=probe
         try:
             value,usage=self.provider.call(role,self.task,context,max_tokens=min(2048,reserved_tokens or 2048),
                                           total_token_budget=reserved_tokens,deadline=self.start+300)
@@ -106,8 +108,58 @@ class Episode:
         self.used_tokens+=actual['tokens'];self.real_calls+=actual['llm_calls']
         self.fixture_calls+=usage.get('fixture_calls',0)
         self.budget.settle(ticket,actual)
-        self.emit('proposal',{'role':role,'snapshot':snapshot.id,'payload':value,'usage':usage})
+        self.emit('proposal',{'role':role,'snapshot':snapshot.id,'payload':value,'usage':usage,
+                              **({'probe':probe} if probe is not None else {})})
         return value
+
+    def _probe(self,snapshot,category,*,max_invalid_retries=2):
+        """Ask for one typed, novel probe; reject malformed inputs and retry."""
+        seen_inputs=list(self.task['public_inputs'])+list(self.counterexamples)
+        for event in self.recall_memory('observation'):
+            body=event['body']
+            if (body.get('operation')=='probe_result' and body.get('snapshot')==snapshot.id
+                    and body.get('input') not in seen_inputs):
+                seen_inputs.append(body['input'])
+        rejection=None
+        for attempt in range(max_invalid_retries+1):
+            instructions=critic_instructions(self.task,category,seen_inputs=seen_inputs,
+                                                rejection=rejection)
+            reply=self.call('critic',snapshot,probe={'category':category,'attempt':attempt,
+                              'instructions':instructions,'rejection':rejection})
+            if not isinstance(reply,dict):
+                reason='RESPONSE_NOT_OBJECT'
+            elif reply.get('claim_id')!=self.task['property']:
+                reason='CLAIM_ID_MISMATCH'
+            elif not in_domain(self.task['property'],reply.get('input')):
+                reason='INPUT_OUT_OF_DOMAIN'
+            elif reply['input'] in seen_inputs:
+                reason='DUPLICATE_PROBE'
+            elif not matches_category(self.task,category,reply['input']):
+                reason='CHALLENGE_CATEGORY_MISMATCH'
+            else:
+                valid=validate_challenge(self.task['property'],reply)
+                if valid['status']=='eligible':
+                    prop=self.check(snapshot,valid['input'])
+                    seen_inputs.append(valid['input'])
+                    result={'eligible':True,'input':valid['input'],**prop}
+                    self.emit('observation',{'operation':'probe_result','category':category,
+                                              'snapshot':snapshot.id,'input':valid['input'],
+                                              'status':prop['status']})
+                    if prop['status']=='contradicted' and valid['input'] not in self.counterexamples:
+                        self.counterexamples.append(valid['input'])
+                    return result
+                reason='ORACLE_OR_PRECONDITION_MISMATCH'
+            rejection=reason+': return a value satisfying the task input JSON schema and preconditions.'
+            self.emit('failure',{'status':reason,'operation':'critic_probe','category':category,
+                                 'snapshot':snapshot.id,'attempt':attempt,'reason':rejection})
+        return {'eligible':False,'status':'unknown','reason':rejection}
+
+    def recall_memory(self,kind):
+        """Charge each CAM retrieval as a tool and expose its work count."""
+        self.transition('read_snapshot')
+        ticket=self.budget.reserve({'tools':1})
+        try: return self.memory.recall(kind)
+        finally: self.budget.settle(ticket,{'tools':1})
     def propose(self,snapshot,**kw):
         reply=self.call('propose',snapshot,**kw)
         return self.apply_content(snapshot,reply.get('content') if isinstance(reply,dict) else None)
@@ -167,7 +219,14 @@ class Episode:
             try:
                 for value in required: final.append(self.check(candidate,value,final=True))
             except (BudgetExceeded,RuntimeError,ValueError,OSError) as exc: error=type(exc).__name__+': '+str(exc)[:200]
-        accepted=bool(final) and len(final)==len(required) and all(p['status']=='supported' for p in final) and error is None
+        coverage_required=(self.arm in ('F','E') and not self.seeded_diagnostic
+                           and self.task['property'].startswith('repair.'))
+        probe_categories=sorted({event['body'].get('category') for event in self.memory.events
+                                 if event['body'].get('operation')=='probe_result'
+                                 and event['body'].get('snapshot')==(candidate.id if candidate else None)
+                                 and event['body'].get('status')=='supported'})
+        accepted=(bool(final) and len(final)==len(required) and all(p['status']=='supported' for p in final)
+                  and error is None and (not coverage_required or len(probe_categories)>=2))
         result={'task':self.task['id'],'arm':self.arm,'development_accepted':accepted,'error':error,
                 'candidate':candidate.id if candidate else None,'final_properties':final,'required_inputs':required,
                 'counterexamples':self.counterexamples,'llm_calls':self.real_calls,'fixture_calls':self.fixture_calls,
@@ -175,6 +234,7 @@ class Episode:
                 'host_cpu_us':(time.process_time_ns()-self.host_cpu_start)//1000,
                 'scientific_claim':False,'q_learning':False,'cortex_calls_native_nexus0':0,
                 'seeded_diagnostic':self.seeded_diagnostic,
+                'probe_categories':probe_categories,'memory_lookup_work':self.memory.lookup_work,
                 'destroyed':self.memory.cam.destroyed}
         self.emit('property',{'task_result':result,'scope':'finite development cases; no universal correctness claim'})
         save(self.path/'result.json',result)
@@ -204,6 +264,44 @@ class Episode:
                     if n==0:
                         current=self.apply_content(current,self.task['initial'])
                 candidate=max(options,key=lambda row:(row[0],row[1]))[2]
+            elif (self.arm in ('F','E') and not self.seeded_diagnostic
+                  and self.task['property'].startswith('repair.')):
+                # Two distinct, in-domain adversarial probes are required before
+                # either critic arm may accept a publicly passing candidate.
+                for _ in range(3):
+                    current=self.propose(current);candidate=current
+                    public=[self.check(current,v) for v in self.task['public_inputs']+self.counterexamples]
+                    if any(p['status']=='contradicted' for p in public):
+                        for value,prop in zip(self.task['public_inputs']+self.counterexamples,public):
+                            if prop['status']=='contradicted' and value not in self.counterexamples:
+                                self.counterexamples.append(value)
+                        continue
+                    source=self.store.read(current,'solution.py').decode()
+                    categories=[];attempted=[];found=False
+                    for _probe_index in range(6):
+                        if len(categories)>=2 or self.budget.report()['used']['critic_calls']>=LIMITS['critic_calls']:
+                            break
+                        if self.arm=='E':
+                            history=self.recall_memory('observation')
+                            seen=[e['body']['category'] for e in history
+                                  if e['body'].get('operation') in ('probe_result','critic_probe')
+                                  and e['body'].get('snapshot')==current.id]
+                        else:
+                            seen=attempted
+                        category=choose_category(self.arm,self.task,source,seen)
+                        if category is None: break
+                        attempted.append(category)
+                        result=self._probe(current,category)
+                        if result.get('status')=='contradicted':
+                            found=True;break
+                        if result.get('eligible') and result.get('status')=='supported':
+                            categories.append(category)
+                    if found:
+                        continue
+                    if len(categories)>=2:
+                        break
+                    # Invalid/abstaining critics do not count as review coverage.
+                    break
             else:
                 for attempt in range(3):
                     current=self.propose(current);candidate=current
@@ -246,6 +344,14 @@ def checker_identity():
     return {'code':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},
             'dependencies':host_dependencies(),'bindings':bindings}
 
+def _task_arm_sequence(tasks,arms,*,counterbalanced=False):
+    sequence=[]
+    for index,task in enumerate(tasks):
+        shift=index%len(arms) if counterbalanced else 0
+        order=tuple(arms[shift:])+tuple(arms[:shift])
+        sequence.extend((task,arm) for arm in order)
+    return sequence
+
 def property_key(snapshot,env,task,observed,value,policy):
     return {'runtime':env,'snapshot':snapshot,'input':value,'property':task['property'],
             'checker':checker_identity(),
@@ -253,15 +359,19 @@ def property_key(snapshot,env,task,observed,value,policy):
             'seed':0,'policy':digest(policy)}
 
 def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',split='development',config=None,
-              suite='fixtures',runtime=None,cache_properties=False,seeded_diagnostic=False,model_evidence=None):
+              suite='fixtures',runtime=None,cache_properties=False,seeded_diagnostic=False,
+              model_evidence=None,task_seed=41):
     if split!='development': raise ValueError('confirmation disabled; separate frozen contract required')
-    if suite not in ('fixtures','repair-v1'): raise ValueError('unknown task suite')
-    if suite=='repair-v1' and runtime is None: raise ValueError('repair pilot requires pinned runtime')
-    if suite=='repair-v1' and provider!='http': raise ValueError('repair pilot requires explicit real model')
+    if suite not in ('fixtures','repair-v1','repair-v2'): raise ValueError('unknown task suite')
+    if suite in ('repair-v1','repair-v2') and runtime is None: raise ValueError('repair pilot requires pinned runtime')
+    if suite in ('repair-v1','repair-v2') and provider!='http': raise ValueError('repair pilot requires explicit real model')
     if seeded_diagnostic and tuple(arms)!=('F',): raise ValueError('seeded diagnostic uses F only, separately')
-    tasks=development_tasks(task_count) if suite=='fixtures' else repair_tasks(task_count)
+    tasks=(development_tasks(task_count) if suite=='fixtures' else
+           repair_tasks(task_count) if suite=='repair-v1' else
+           repair_task_variants(task_count,seed=task_seed))
     for arm in arms: arm_profile(arm)
     if not arms or len(set(arms))!=len(arms): raise ValueError('distinct arms required')
+    sequence=_task_arm_sequence(tasks,arms,counterbalanced=suite=='repair-v2')
     if provider=='fixture': model=FixtureProvider()
     elif provider=='http' and config: model=HTTPProvider(config)
     else: raise ValueError('explicit provider and model config required')
@@ -277,17 +387,16 @@ def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',s
                        'local_evidence':model_evidence or {}}
     save(output/'provider.json',provider_manifest)
     root_receipts.append({'kind':'run_contract','tasks_sha256':digest(tasks),'sources_sha256':digest(manifest),
-                         'arms':list(arms),'episode_ids':[t['id']+'-'+a for t in tasks for a in arms],
+                         'arms':list(arms),'episode_ids':[t['id']+'-'+a for t,a in sequence],
                          'contract_sha256':digest(json.loads(CONTRACT.read_text())),
                          'suite':suite,'runtime_snapshot':runtime.id if runtime else None,
                          'cache_properties':cache_properties,'seeded_diagnostic':seeded_diagnostic,
                          'provider_sha256':digest(provider_manifest)})
     results=[]
-    for task in tasks:
-        for arm in arms:
-            if manifest!=source_manifest(): raise RuntimeError('SOURCES_CHANGED: stop development run')
-            results.append(Episode(output/(task['id']+'-'+arm),task,arm,model,runtime=runtime,
-                                   cache_properties=cache_properties,seeded_diagnostic=seeded_diagnostic).run())
+    for task,arm in sequence:
+        if manifest!=source_manifest(): raise RuntimeError('SOURCES_CHANGED: stop development run')
+        results.append(Episode(output/(task['id']+'-'+arm),task,arm,model,runtime=runtime,
+                               cache_properties=cache_properties,seeded_diagnostic=seeded_diagnostic).run())
     report={'schema':'pcworld.development.v1','provider':provider,'llm_calls':sum(r['llm_calls'] for r in results),
             'episodes':results,'scientific_claim':False,'scientific_result':'pending',
             'suite':suite,'seeded_diagnostic':seeded_diagnostic,
@@ -324,6 +433,10 @@ def _audit_run(output):
         errors.append({'reason':'source manifest changed or auditing code differs'})
     if contract['contract_sha256']!=digest(json.loads((output/'contract.json').read_text())):
         errors.append({'reason':'contract changed'})
+    expected_sequence=_task_arm_sequence(task_list,contract['arms'],
+                                          counterbalanced=contract.get('suite')=='repair-v2')
+    if contract['episode_ids']!=[t['id']+'-'+a for t,a in expected_sequence]:
+        errors.append({'reason':'contracted task/arm order differs'})
     if contract['episode_ids']!=[r['task']+'-'+r['arm'] for r in report['episodes']]:
         errors.append({'reason':'episode omitted, duplicated or reordered'})
     for episode in report['episodes']:
