@@ -29,8 +29,10 @@ canal que pueda tomar decisiones ni texto del visor que vuelva a la política.
 
 PCWorld, `echo4/code_mcp.py`/`CodeMemory.run_check` y `harness/localdev/runner.py`
 usan `pcworld.runner.execute`. Se copia únicamente el workspace autorizado;
-no se monta su padre ni `.echoai`. El hijo tiene `/usr` de sólo lectura, su
-snapshot de sólo lectura, `/proc` y `/dev` aislados, y `/tmp`/`/out` temporales.
+no se monta su padre ni `.echoai`. El piloto `repair-v1` monta un rootfs Python
+congelado, sin el `/usr` host. El modo histórico conserva `/usr` host de sólo
+lectura y se declara no hermético. Ambos tienen el snapshot de sólo lectura,
+`/proc` y `/dev` aislados, y `/tmp`/`/out` temporales.
 Red, PID, usuario y otros namespaces se separan mediante Bubblewrap. Un servicio
 transitorio systemd de usuario limita el árbol con cgroup v2. No hay fallback.
 
@@ -73,8 +75,10 @@ los brazos parten sin biblioteca aprendida. Los contrastes de transferencia y
 las tres ablaciones propuestas siguen pendientes.
 
 La similitud no elimina candidatos. Un contraejemplo se ejecuta nuevamente en
-cada versión. La caché exacta se prueba como API, pero no se usa para saltar
-ninguna ejecución: el runtime host `/usr` todavía no es hermético. CAM no
+cada versión. La caché persistente opcional sólo reutiliza comprobaciones puras
+con idénticos bytes observados, input, checker, política, semilla e identidades
+de runtime y candidato. No se usa para saltar ejecuciones; reloj y aleatoriedad
+siguen existiendo dentro de un rootfs fijo. El piloto principal la desactiva. CAM no
 certifica una receta nueva ni convierte una afirmación del LLM en un hecho.
 
 ## Contabilidad y reproducción
@@ -85,6 +89,9 @@ hijos, herramientas, consultas, tokens de entrada/salida y tiempo transcurrido.
 El coste CPU del supervisor se informa aparte. La limpieza y escritura del
 último recibo añaden tiempo después del deadline de trabajo; no se prometen
 límites de pared exactos sin esa sobrecarga. Tampoco se equipara CPU con julios.
+La cuota de CPU de 300 s corresponde al código candidato. El servidor LLM local
+es otro proceso: su CPU no está incluida en esa cifra y debe medirse aparte.
+Sus límites compartidos son tokens, llamadas y deadline del episodio.
 
 Las reservas HTTP requieren contar primero el prompt en el mismo servidor y
 reducir la salida máxima al saldo restante. Ese preflight cuenta como herramienta.
@@ -105,3 +112,9 @@ Referencias de implementación: [Bubblewrap](https://github.com/containers/bubbl
 [protocolo de tokenización de vLLM](https://docs.vllm.ai/en/v0.15.1/api/vllm/entrypoints/serve/tokenize/protocol/).
 No se afirma haber desplegado vLLM o reproducido el experimento multiagente de
 los artículos de la investigación.
+
+El adaptador llama.cpp aplica primero la plantilla y tokeniza, envía IDs exactos
+al servidor y comprueba sus contadores de uso. La generación restringida usa el
+esquema público de la entrada y los identificadores de protocolo; no entrega
+salidas esperadas ni casos de evaluación. Se conservan los fallos de calibración.
+Referencia: [API oficial de llama.cpp](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).

@@ -12,11 +12,17 @@ VERSION='pcworld-reference-1'
 PROPERTIES=('sum_positive','unique_sorted','mean_fraction','count_distinct')
 
 def in_domain(prop,value):
+    if prop.startswith('repair.'):
+        from .repairs import repair_domain
+        return repair_domain(prop,value)
     return (prop in PROPERTIES and isinstance(value,list) and len(value)<=64 and
             all(type(x) is int and -10000<=x<=10000 for x in value) and
             (prop!='mean_fraction' or bool(value)))
 
 def reference(prop,value):
+    if prop.startswith('repair.'):
+        from .repairs import repair_reference
+        return repair_reference(prop,value)
     if not in_domain(prop,value): raise ValueError('outside property domain')
     if prop=='sum_positive':
         total=0
@@ -44,12 +50,19 @@ def validate_challenge(prop,challenge):
         return {'status':'unknown','reason':challenge['abstention']}
     if challenge.get('claim_id')!=prop or not in_domain(prop,challenge.get('input')):
         return {'status':'unknown','reason':'unrecognized property or input outside contract'}
-    if challenge.get('oracle_reference')!=VERSION or challenge.get('preconditions')!=['integer-list']:
+    checker,preconditions=property_contract(prop)
+    if challenge.get('oracle_reference')!=checker or challenge.get('preconditions')!=preconditions:
         return {'status':'unknown','reason':'missing or incompatible oracle/preconditions'}
-    return {'status':'eligible','input':challenge['input'],'scope':prop,'checker':VERSION}
+    return {'status':'eligible','input':challenge['input'],'scope':prop,'checker':checker}
+
+def property_contract(prop):
+    if prop.startswith('repair.'):
+        from .repairs import VERSION as REPAIR_VERSION
+        return REPAIR_VERSION,['repair-'+prop.split('.')[1]+'-domain-v1']
+    return VERSION,['integer-list']
 
 def check_observation(prop,value,execution):
-    base={'scope':prop,'checker':VERSION,'snapshot':execution.get('snapshot'),'input':value}
+    base={'scope':prop,'checker':property_contract(prop)[0],'snapshot':execution.get('snapshot'),'input':value}
     if execution.get('status') not in ('EXITED','FAILED'):
         return {**base,'status':'unknown','reason':'incomplete execution'}
     if not in_domain(prop,value): return {**base,'status':'unknown','reason':'outside domain'}
@@ -61,11 +74,13 @@ def check_observation(prop,value,execution):
         return {**base,'status':'unknown','reason':'no valid output artifact'}
     expected=reference(prop,value)
     # Python bool equals int: use canonical typed JSON for this bounded domain.
-    if type(output) is not type(expected):
+    union_shape=(prop=='repair.dependencies' and (output is None or
+                 (type(output) is list and len(output)<=6 and all(type(n) is str for n in output))))
+    if type(output) is not type(expected) and not union_shape:
         return {**base,'status':'unknown','reason':'output schema mismatch'}
-    if isinstance(output,list) and (len(output)>64 or any(type(x) is not int for x in output)):
+    if not prop.startswith('repair.') and isinstance(output,list) and (len(output)>64 or any(type(x) is not int for x in output)):
         return {**base,'status':'unknown','reason':'output schema mismatch'}
-    if isinstance(output,dict) and (set(output)!=set(expected) or any(type(x) is not int for x in output.values())):
+    if not prop.startswith('repair.') and isinstance(output,dict) and (set(output)!=set(expected) or any(type(x) is not int for x in output.values())):
         return {**base,'status':'unknown','reason':'output schema mismatch'}
     same=json.dumps(output,sort_keys=True,allow_nan=False)==json.dumps(expected,sort_keys=True,allow_nan=False)
     return {**base,'status':'supported' if same else 'contradicted','expected':expected,

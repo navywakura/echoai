@@ -138,3 +138,60 @@ class CounterexampleFlow(unittest.TestCase):
             self.assertTrue(result['development_accepted'],result)
             self.assertEqual(result['counterexamples'],[[-3,2,2]])
             self.assertGreaterEqual(result['fixture_calls'],3)
+
+class HermeticPilot(unittest.TestCase):
+    def test_repair_suite_requires_runtime_and_real_provider(self):
+        from echoai.pcworld.pilot import run_pilot
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaisesRegex(ValueError,'pinned runtime'):
+                run_pilot(Path(d)/'run',suite='repair-v1',task_count=1)
+    def test_pure_cache_repeats_candidate_and_invalidates_changed_input(self):
+        from echoai.pcworld.pilot import Episode
+        from echoai.pcworld.tasks import FixtureProvider,development_tasks
+        from echoai.pcworld.runtime import build_runtime
+        from unittest.mock import patch
+        from echoai.pcworld.runner import execute
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);runtime=build_runtime(root/'runtime')
+            episode=Episode(root/'run',development_tasks(1)[0],'S',FixtureProvider(),runtime=runtime,cache_properties=True)
+            with patch('echoai.pcworld.pilot.execute',wraps=execute) as run:
+                episode.check(episode.base,[1,2]);episode.check(episode.base,[1,2]);episode.check(episode.base,[3])
+                self.assertEqual(run.call_count,3)
+            props=[r['body'] for r in episode.receipts.records if 'property_cache' in r['body']]
+            self.assertEqual([p['property_cache']['hit'] for p in props],[False,True,False])
+    def test_seeded_diagnostic_labels_fault_and_rechecks_repair(self):
+        from echoai.pcworld.pilot import Episode
+        from echoai.pcworld.tasks import FixtureProvider,development_tasks
+        with tempfile.TemporaryDirectory() as d:
+            episode=Episode(Path(d)/'run',development_tasks(1)[0],'F',FixtureProvider(),seeded_diagnostic=True)
+            result=episode.run()
+            self.assertTrue(result['seeded_diagnostic'])
+            self.assertEqual(result['counterexamples'],[[-3,2,2]])
+            self.assertTrue(result['development_accepted'])
+    def test_checker_identity_includes_native_and_python_dependencies(self):
+        from echoai.pcworld.pilot import checker_identity
+        identity=checker_identity()
+        names='\n'.join(identity['dependencies'])
+        self.assertIn('fractions.py',names)
+        self.assertIn('_csv.',names)
+        self.assertIn('json/decoder.py',names)
+        from unittest.mock import patch
+        import csv
+        before=identity
+        with patch.object(csv,'reader',lambda *a,**k:iter([['changed']])):
+            self.assertNotEqual(checker_identity(),before)
+    def test_audit_requires_existing_cache_and_referenced_receipts(self):
+        from echoai.pcworld.pilot import run_pilot,audit_run
+        from echoai.pcworld.runtime import build_runtime
+        from echoai.pcworld.property_cache import PropertyCache
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);runtime=build_runtime(root/'runtime')
+            out=root/'run'
+            result=run_pilot(out,task_count=1,arms=('S',),runtime=runtime,cache_properties=True)
+            self.assertTrue(result['episodes'][0]['development_accepted'])
+            self.assertTrue(audit_run(out)['valid'])
+            cache=out/'dev-sum_positive-S/property-cache';cache.rename(root/'saved-cache')
+            self.assertFalse(audit_run(out)['valid'])
+            self.assertFalse(cache.exists(),'audit must not recreate missing custody')
+            PropertyCache(cache)
+            self.assertFalse(audit_run(out)['valid'],'empty authenticated cache cannot witness past hits')

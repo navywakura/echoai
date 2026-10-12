@@ -7,6 +7,7 @@ The only writable filesystems are size-bounded tmpfs. No unsandboxed fallback.
 from __future__ import annotations
 
 import hashlib
+import errno
 import base64
 import json
 import math
@@ -52,7 +53,7 @@ def _stop(unit):
                        stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=3)
 
 
-def environment_identity():
+def environment_identity(runtime=None):
     """Versioned runtime declaration; actual dependency manifests must accompany tasks.
 
     /usr is a read-only HOST runtime, not a pinned image. Consequently the first
@@ -62,11 +63,19 @@ def environment_identity():
     for name in ('/usr/bin/python3','/usr/bin/bwrap','/usr/bin/systemd-run'):
         p=Path(name).resolve()
         files[str(p)]=hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None
+    if runtime is not None:
+        from .runtime import validate_runtime
+        validate_runtime(runtime)
+        return {'schema':2,'files':{k:v for k,v in files.items() if not Path(k).name.startswith('python')},
+                'kernel':os.uname().release,'machine':os.uname().machine,
+                'runtime':'pinned Python rootfs','runtime_snapshot':runtime.id,
+                'dependencies_pinned':True,'hermetic_cacheable':False,
+                'cache_scope':'pure checker only; arbitrary candidate execution never cached'}
     return {'schema':1,'files':files,'python':os.sys.version,'kernel':os.uname().release,
             'runtime':'host /usr read-only','hermetic_cacheable':False}
 
 
-def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'') -> dict:
+def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime=None) -> dict:
     """Run a structured operator-authorized argv, returning host observations.
 
     Copies regular files into a private, immutable candidate snapshot before
@@ -97,14 +106,19 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'') -> dict
     with tempfile.TemporaryDirectory(prefix='echo-pcworld-job-') as temp:
         store=SnapshotStore(Path(temp)/'snapshots')
         snapshot=store.capture(workspace if isinstance(workspace,Snapshot) else Path(workspace))
-        return _execute_snapshot(snapshot,argv,caps,stdin)
+        if runtime is not None:
+            from .runtime import validate_runtime
+            validate_runtime(runtime)
+        return _execute_snapshot(snapshot,argv,caps,stdin,runtime)
 
 
-def _execute_snapshot(snapshot,argv,caps,stdin):
+def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None):
     unit='echo-pcworld-'+uuid.uuid4().hex+'.service'
+    mounts=(['--ro-bind',str(runtime.root),'/'] if runtime is not None else
+            ['--ro-bind','/usr','/usr','--symlink','usr/bin','/bin',
+             '--symlink','usr/lib','/lib','--symlink','usr/lib64','/lib64'])
     bwrap=['/usr/bin/bwrap','--unshare-all','--unshare-user','--die-with-parent','--new-session',
-           '--cap-drop','ALL','--disable-userns','--ro-bind','/usr','/usr',
-           '--symlink','usr/bin','/bin','--symlink','usr/lib','/lib','--symlink','usr/lib64','/lib64',
+           '--cap-drop','ALL','--disable-userns',*mounts,
            '--proc','/proc','--dev','/dev','--size',str(caps['disk_bytes']//2),'--tmpfs','/tmp',
            '--size',str(caps['disk_bytes']//2),'--tmpfs','/out',
            '--ro-bind',str(snapshot.root),'/workspace','--chdir','/workspace',
@@ -151,7 +165,10 @@ def _execute_snapshot(snapshot,argv,caps,stdin):
                             try:
                                 for line in (cg/name).read_text().splitlines():
                                     key,val=line.split();events[name+'.'+key]=int(val)
-                            except FileNotFoundError: pass
+                            except OSError as exc:
+                                # A finished/removed cgroup can disappear between
+                                # is_dir and read, including ENODEV on kernfs.
+                                if exc.errno not in (errno.ENOENT,errno.ENODEV): raise
                     if cpu_us>=caps['cpu_ms']*1000: reason=reason or 'CPU_LIMIT'
                     if props.get('SubState') in ('exited','failed','dead'):
                         break
@@ -210,4 +227,5 @@ def _execute_snapshot(snapshot,argv,caps,stdin):
                          'measurement':'systemd cgroup v2 CPUUsageNSec/MemoryPeak; 50ms CPU watchdog',
                          'events':events},'limits':caps,
             'isolation':{'backend':'bubblewrap+cgroup-v2','unit':unit,'network_disabled':True,
+                         'host_usr_mounted':runtime is None,'runtime_snapshot':runtime.id if runtime else None,
                          'parent_mounted':False,'workspace_readonly':True,'job_empty':empty}}

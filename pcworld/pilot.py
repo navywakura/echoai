@@ -20,6 +20,9 @@ from .memory import EpisodeMemory
 from .tasks import FixtureProvider, development_tasks
 from .provider import HTTPProvider, ProviderFailure
 from .verifier import check_observation, validate_challenge, VERSION
+from .runtime import load_runtime, runtime_store
+from .property_cache import PropertyCache
+from .repairs import repair_tasks
 
 ROOT=Path(__file__).resolve().parents[1]
 CONTRACT=ROOT/'ECHO-5.1/docs/PCWORLD-1.json'
@@ -39,7 +42,7 @@ def estimate(*,tasks=60,repetitions=2):
             'implemented_fixtures':4,'independent_tasks_required':tasks}
 
 class Episode:
-    def __init__(self,path,task,arm,provider):
+    def __init__(self,path,task,arm,provider,*,runtime=None,cache_properties=False,seeded_diagnostic=False):
         self.path,self.task,self.arm,self.provider=path,task,arm,provider
         path.mkdir(parents=True,exist_ok=False)
         self.store=SnapshotStore(path/'snapshots')
@@ -49,12 +52,16 @@ class Episode:
         self.start=time.monotonic();self.counterexamples=[];self.last=[];self.steps=0
         self.reviewed_versions=set()
         self.host_cpu_start=time.process_time_ns()
-        self.env=environment_identity();self.contract=json.loads(CONTRACT.read_text())
+        self.runtime=runtime;self.seeded_diagnostic=seeded_diagnostic
+        if cache_properties and runtime is None: raise ValueError('pure cache requires pinned runtime identity')
+        self.property_cache=PropertyCache(path/'property-cache') if cache_properties else None
+        self.env=environment_identity(runtime);self.contract=json.loads(CONTRACT.read_text())
         initial=path/'initial';initial.mkdir();(initial/'solution.py').write_text(task['initial'])
         self.base=self.store.capture(initial)
         self.emit('observation',{'task':task['id'],'arm':arm,'snapshot':self.base.id,
                                 'contract_sha256':digest(self.contract),'model':provider.model,
                                 'task_sha256':digest(task),
+                                'seeded_diagnostic':seeded_diagnostic,'property_cache_enabled':cache_properties,
                                 'environment':self.env,'public_specification':task['description']})
     def emit(self,kind,body):
         rec=self.receipts.append({'kind':kind,**body})
@@ -75,11 +82,13 @@ class Episode:
         available=max(0,LIMITS['tokens']-self.used_tokens)
         reserved_tokens=min(available,token_cap) if token_cap is not None else available
         if self.provider.is_llm and reserved_tokens<256: raise BudgetExceeded('tokens')
+        preflight=getattr(self.provider,'preflight_tools',1) if self.provider.is_llm else 0
         request={'llm_calls':int(self.provider.is_llm),'tokens':reserved_tokens if self.provider.is_llm else 0,
-                 'tools':int(self.provider.is_llm)}  # Prompt tokenization is charged too.
+                 'tools':preflight}  # Template application and tokenization are charged too.
         if role=='critic': request['critic_calls']=1
         ticket=self.budget.reserve(request)
         context={'snapshot':snapshot.id,'source':self.store.read(snapshot,'solution.py').decode(),
+                 'sample_index':self.real_calls,
                  'evidence':self.last[-8:] if share else [],
                  'counterexamples':self.counterexamples if share else []}
         try:
@@ -92,7 +101,7 @@ class Episode:
             self.emit('failure',{'status':'PROVIDER_ERROR','charged':actual,'usage_known':bool(known)})
             self.budget.settle(ticket,actual)
             raise
-        actual={'tokens':usage['tokens'],'llm_calls':usage['llm_calls'],'tools':int(self.provider.is_llm)}
+        actual={'tokens':usage['tokens'],'llm_calls':usage['llm_calls'],'tools':preflight}
         if role=='critic': actual['critic_calls']=1
         self.used_tokens+=actual['tokens'];self.real_calls+=actual['llm_calls']
         self.fixture_calls+=usage.get('fixture_calls',0)
@@ -122,12 +131,12 @@ class Episode:
         ticket=self.budget.reserve({'tools':1,'cpu_us':DEFAULTS['cpu_ms']*1000})
         try:
             observed=execute(snapshot,['/usr/bin/python3','-I','/workspace/solution.py'],
-                             stdin=canonical(value),limits=execution_limits)
+                             stdin=canonical(value),limits=execution_limits,runtime=self.runtime)
         except Exception:
             self.budget.settle(ticket,{'tools':1,'cpu_us':DEFAULTS['cpu_ms']*1000})
             raise
         key=identity(snapshot_id=observed['snapshot'],environment=self.env,
-                     action={'argv':observed['argv'],'stdin':value},checks={'version':VERSION,'property':self.task['property']},
+                     action={'argv':observed['argv'],'stdin':value},checks={'version':self.task['checker'],'property':self.task['property']},
                      policy=self.contract,seed=0,dataset=None,task=self.task['id'])
         try:
             execution=self.emit('observation',{'status':observed['status'],'experiment_key':key,'execution':observed,
@@ -137,9 +146,15 @@ class Episode:
             # before the watchdog terminates the complete process tree.
             self.budget.settle(ticket,{'tools':1,'cpu_us':observed['resources']['cpu_us']})
         self.transition('check_property');ticket=self.budget.reserve({'tools':1})
-        try: prop=check_observation(self.task['property'],value,observed)
+        cache_meta={'hit':False,'scope':'disabled'}
+        try:
+            if self.property_cache:
+                pure_key=property_key(snapshot.id,self.env,self.task,observed,value,self.contract)
+                prop,cache_meta=self.property_cache.check(pure_key,lambda:check_observation(self.task['property'],value,observed))
+            else: prop=check_observation(self.task['property'],value,observed)
         finally: self.budget.settle(ticket,{'tools':1})
-        receipt=self.emit('property',{'property':prop,'execution_receipt':execution['sha256'],'final_evaluation':final})
+        receipt=self.emit('property',{'property':prop,'execution_receipt':execution['sha256'],'final_evaluation':final,
+                                      'property_cache':cache_meta})
         if not final: self.last.append({**prop,'receipt':receipt['sha256']})
         return prop
     def finish(self,candidate,*,error=None):
@@ -159,13 +174,24 @@ class Episode:
                 'tokens':self.used_tokens,'budget':self.budget.report(),'wall_ms':int((time.monotonic()-self.start)*1000),
                 'host_cpu_us':(time.process_time_ns()-self.host_cpu_start)//1000,
                 'scientific_claim':False,'q_learning':False,'cortex_calls_native_nexus0':0,
+                'seeded_diagnostic':self.seeded_diagnostic,
                 'destroyed':self.memory.cam.destroyed}
-        self.emit('property',{'task_result':result,'scope':'four public development properties only'})
+        self.emit('property',{'task_result':result,'scope':'finite development cases; no universal correctness claim'})
         save(self.path/'result.json',result)
         return result
     def run(self):
         current=self.base;candidate=None;error=None
         try:
+            if self.seeded_diagnostic:
+                # Diagnostic only: task's faulty code is an external seed, never
+                # attributed to a model proposal or pooled with the main arms.
+                self.emit('observation',{'operation':'seeded_fault','snapshot':current.id})
+                challenge=self.call('critic',current)
+                valid=validate_challenge(self.task['property'],challenge)
+                if valid['status']!='eligible': raise ValueError('diagnostic: no eligible counterexample')
+                prop=self.check(current,valid['input'])
+                if prop['status']!='contradicted': raise ValueError('diagnostic: seed not refuted by critic')
+                self.counterexamples.append(valid['input'])
             if self.arm=='I2':
                 # Two isolated initial contexts, shared total budget; selector sees
                 # only public checks. No final/hidden labels select a winner.
@@ -209,32 +235,63 @@ def source_manifest():
            ROOT/'nexus0/gate.py',ROOT/'nexus0/attend.py',ROOT/'nexus0/constants.py']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(names)}
 
-def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',split='development',config=None):
+def checker_identity():
+    import csv,fractions,marshal
+    from .runtime import host_dependencies
+    paths=[ROOT/'pcworld'/name for name in ('verifier.py','repairs.py','protocol.py')]
+    bindings={}
+    for name,fn in (('csv.reader',csv.reader),('json.loads',json.loads),('json.dumps',json.dumps),('Fraction',fractions.Fraction)):
+        bindings[name]={'module':fn.__module__,'name':fn.__qualname__}
+        if hasattr(fn,'__code__'): bindings[name]['code']=hashlib.sha256(marshal.dumps(fn.__code__)).hexdigest()
+    return {'code':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},
+            'dependencies':host_dependencies(),'bindings':bindings}
+
+def property_key(snapshot,env,task,observed,value,policy):
+    return {'runtime':env,'snapshot':snapshot,'input':value,'property':task['property'],
+            'checker':checker_identity(),
+            'observed':{k:observed[k] for k in ('status','exit_code','stdout_b64')},
+            'seed':0,'policy':digest(policy)}
+
+def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',split='development',config=None,
+              suite='fixtures',runtime=None,cache_properties=False,seeded_diagnostic=False,model_evidence=None):
     if split!='development': raise ValueError('confirmation disabled; separate frozen contract required')
-    tasks=development_tasks(task_count)
+    if suite not in ('fixtures','repair-v1'): raise ValueError('unknown task suite')
+    if suite=='repair-v1' and runtime is None: raise ValueError('repair pilot requires pinned runtime')
+    if suite=='repair-v1' and provider!='http': raise ValueError('repair pilot requires explicit real model')
+    if seeded_diagnostic and tuple(arms)!=('F',): raise ValueError('seeded diagnostic uses F only, separately')
+    tasks=development_tasks(task_count) if suite=='fixtures' else repair_tasks(task_count)
     for arm in arms: arm_profile(arm)
     if not arms or len(set(arms))!=len(arms): raise ValueError('distinct arms required')
     if provider=='fixture': model=FixtureProvider()
     elif provider=='http' and config: model=HTTPProvider(config)
     else: raise ValueError('explicit provider and model config required')
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
+    if runtime is not None:
+        if isinstance(runtime,(str,Path)): runtime=load_runtime(runtime)
+        runtime=runtime_store(output/'runtime').capture(runtime)
+        save(output/'runtime/runtime.json',{'schema':'pcworld.runtime.v1','snapshot':runtime.id})
     root_receipts=ReceiptStore(output/'receipts',output/'authority')
     manifest=source_manifest();save(output/'sources.json',manifest)
     save(output/'contract.json',json.loads(CONTRACT.read_text()));save(output/'tasks.json',tasks)
-    provider_manifest={'kind':provider,'model':model.model,'config':config or {},'contains_credentials':False}
+    provider_manifest={'kind':provider,'model':model.model,'config':config or {},'contains_credentials':False,
+                       'local_evidence':model_evidence or {}}
     save(output/'provider.json',provider_manifest)
     root_receipts.append({'kind':'run_contract','tasks_sha256':digest(tasks),'sources_sha256':digest(manifest),
                          'arms':list(arms),'episode_ids':[t['id']+'-'+a for t in tasks for a in arms],
                          'contract_sha256':digest(json.loads(CONTRACT.read_text())),
+                         'suite':suite,'runtime_snapshot':runtime.id if runtime else None,
+                         'cache_properties':cache_properties,'seeded_diagnostic':seeded_diagnostic,
                          'provider_sha256':digest(provider_manifest)})
     results=[]
     for task in tasks:
         for arm in arms:
             if manifest!=source_manifest(): raise RuntimeError('SOURCES_CHANGED: stop development run')
-            results.append(Episode(output/(task['id']+'-'+arm),task,arm,model).run())
+            results.append(Episode(output/(task['id']+'-'+arm),task,arm,model,runtime=runtime,
+                                   cache_properties=cache_properties,seeded_diagnostic=seeded_diagnostic).run())
     report={'schema':'pcworld.development.v1','provider':provider,'llm_calls':sum(r['llm_calls'] for r in results),
             'episodes':results,'scientific_claim':False,'scientific_result':'pending',
-            'E_minus_S':'not estimated from fixtures','E_minus_F':'not estimated from fixtures',
+            'suite':suite,'seeded_diagnostic':seeded_diagnostic,
+            'E_minus_S':'pilot descriptive only','E_minus_F':'pilot descriptive only',
             'sources_unchanged':manifest==source_manifest()}
     save(output/'result.json',report)
     root_receipts.append({'kind':'run_result','result_sha256':digest(report)})
@@ -256,6 +313,9 @@ def _audit_run(output):
     if (len(root_store.records)!=2 or root_store.records[1]['body'].get('result_sha256')!=digest(report)):
         errors.append({'reason':'run summary or root custody changed'})
     contract=root_store.records[0]['body']
+    if contract.get('runtime_snapshot'):
+        if load_runtime(output/'runtime').id!=contract['runtime_snapshot']:
+            errors.append({'reason':'runtime identity differs'})
     if contract['tasks_sha256']!=digest(task_list): errors.append({'reason':'task definitions changed'})
     if contract['provider_sha256']!=digest(json.loads((output/'provider.json').read_text())):
         errors.append({'reason':'provider configuration changed'})
@@ -271,6 +331,15 @@ def _audit_run(output):
         store=ReceiptStore(path/'receipts',path/'authority');audit=store.audit()
         if not audit.get('ok'): errors.append({'episode':path.name,'reason':'receipt custody failed'})
         records=store.records;bysha={r['sha256']:r for r in records};count+=len(records)
+        cache_records={}
+        if contract.get('cache_properties'):
+            cache_path=path/'property-cache'
+            for required in ('receipts/receipts.jsonl','authority/authority.json'):
+                if not (cache_path/required).is_file(): raise ValueError('missing existing property cache custody')
+            cache=PropertyCache(cache_path)
+            if not cache.store.audit()['ok']:
+                errors.append({'episode':path.name,'reason':'property cache custody differs'})
+            cache_records={r['sha256']:r for r in cache.store.records}
         snapshots=SnapshotStore(path/'snapshots');checked_snapshots=set()
         for record in records:
             body=record['body']
@@ -281,6 +350,10 @@ def _audit_run(output):
                     checked_snapshots.add(snapshot_id)
             if 'execution' in body:
                 execution=body['execution']
+                if (contract.get('runtime_snapshot') and
+                        (execution['isolation'].get('runtime_snapshot')!=contract['runtime_snapshot'] or
+                         execution['isolation'].get('host_usr_mounted') is not False)):
+                    errors.append({'episode':path.name,'reason':'unfrozen runtime used'})
                 if execution['snapshot']!=body['candidate_snapshot']:
                     errors.append({'episode':path.name,'reason':'executed snapshot identity differs'})
                 for stream in ('stdout','stderr'):
@@ -298,6 +371,16 @@ def _audit_run(output):
                 if 'execution' not in e: errors.append({'episode':path.name,'reason':'missing execution'});continue
                 expected=check_observation(tasks[episode['task']]['property'],e['input'],e['execution'])
                 if expected!=b['property']: errors.append({'episode':path.name,'reason':'property replay differs'})
+                if contract.get('cache_properties'):
+                    metadata=b.get('property_cache',{})
+                    witness=cache_records.get(metadata.get('receipt'),{}).get('body',{})
+                    key=property_key(e['candidate_snapshot'],records[0]['body']['environment'],
+                                     tasks[episode['task']],e['execution'],e['input'],
+                                     json.loads((output/'contract.json').read_text()))
+                    if (witness.get('identity')!=key or witness.get('key')!=digest(key) or
+                        witness.get('value')!=b['property'] or metadata.get('scope')!='pure property' or
+                        type(metadata.get('lookup_ns')) is not int or metadata['lookup_ns']<=0):
+                        errors.append({'episode':path.name,'reason':'missing or mismatched cache witness'})
                 if b.get('final_evaluation'): final.append(expected)
         anchored=[r['body']['task_result'] for r in records if 'task_result' in r['body']]
         if anchored!=[episode]: errors.append({'episode':path.name,'reason':'summary differs from protected receipt'})

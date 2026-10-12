@@ -69,3 +69,14 @@ class Boundary(unittest.TestCase):
         raw=base64.b64decode(result['stdout_b64'],validate=True)
         self.assertEqual(raw,b'\xff\x00\x80')
         self.assertEqual(hashlib.sha256(raw).hexdigest(),result['stdout_sha256'])
+    def test_finished_cgroup_disappearing_during_event_read(self):
+        import errno
+        original=Path.read_text
+        def read(path,*args,**kwargs):
+            if str(path).startswith('/sys/fs/cgroup/') and path.name=='memory.events':
+                raise OSError(errno.ENODEV,'No such device')
+            return original(path,*args,**kwargs)
+        with patch.object(Path,'read_text',read):
+            result=self.run_code("print('done')")
+        self.assertEqual(result['exit_code'],0,result)
+        self.assertTrue(result['isolation']['job_empty'])
