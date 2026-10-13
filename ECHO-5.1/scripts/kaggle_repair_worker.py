@@ -63,7 +63,8 @@ def main():
         with (ROOT/'llama-gpu.log').open('w') as log:
             server=subprocess.Popen([str(binary),'--model',str(model),'--alias','pcworld-qwen25-coder14b',
                 '--host','127.0.0.1','--port','8785','--ctx-size','4096','--parallel','1',
-                '--threads','4','--n-gpu-layers','99'],stdout=log,stderr=subprocess.STDOUT,env=env)
+                '--threads','4','--n-gpu-layers','99','--device','CUDA0','--verbosity','4'],
+                stdout=log,stderr=subprocess.STDOUT,env=env)
         ready=time.monotonic()+180
         while time.monotonic()<ready:
             if server.poll() is not None: raise RuntimeError('GPU server exited; see llama-gpu.log')
@@ -73,6 +74,10 @@ def main():
             except Exception: time.sleep(1)
         else: raise TimeoutError('GPU model load timeout')
         text=(ROOT/'llama-gpu.log').read_text()
+        report['gpu_loaded']=gpu_info()
+        report['compute_processes']=subprocess.check_output(
+            ['nvidia-smi','--query-compute-apps=pid,process_name,used_memory','--format=csv,noheader'],
+            text=True,timeout=15).strip()
         offload=re.findall(r'offloaded (\d+)/(\d+) layers to GPU',text)
         if not offload or not any(int(a)>0 for a,b in offload): raise RuntimeError('GPU offload not proven; no CPU fallback')
         report['gpu_offload']=offload;report['gpu_loaded']=gpu_info()

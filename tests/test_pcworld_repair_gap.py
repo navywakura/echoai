@@ -81,6 +81,7 @@ class RepairGap(unittest.TestCase):
             self.assertEqual(len(errors),1)
             self.assertIn('NameError',errors[0]['execution_error']['stderr'])
             self.assertNotIn('expected',errors[0])
+            self.assertEqual(feedback['public_examples'][0]['expected'],task['public_inputs'][0])
             self.assertEqual(feedback['feedback_code'],'REJECTED_REGRESSION')
             self.assertTrue(result['counterexamples_repaired'])
 

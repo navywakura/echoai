@@ -155,7 +155,7 @@ class Episode:
             witnesses.append(witness)
         public=[]
         for value in self.task['public_inputs']:
-            known=next((p for p in reversed(self.last) if p['input']==value),None)
+            known=next((p for p in reversed(self.last) if p['input']==value and 'expected' in p),None)
             public.append({'input':value,**({'expected':known['expected']} if known and 'expected' in known else {})})
         return {'instruction':'Repair the provided program to satisfy the specification and ALL witnessed cases. '
                     'The observed output is wrong; produce corrected complete solution.py, not a repeated faulty program. '
