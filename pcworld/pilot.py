@@ -209,6 +209,9 @@ class Episode:
                 if prop is None: prop=self.check(patch,b['input'])
                 self.emit('observation',{'operation':'probe_result','snapshot':patch.id,'input':b['input'],
                     'category':b['category'],'status':prop['status'],'replay_of':event['receipt_sha256']})
+            self.critic_frozen=False
+            self.emit('decision',{'operation':'post_repair_validation','snapshot':patch.id,
+                                  'critic_frozen':False,'policy':'repair-two-gate-v1'})
             return patch
         return parent
 
@@ -383,11 +386,15 @@ class Episode:
                                 self.counterexamples.append(value)
                         before=current
                         current=self.guarded_repair(current);candidate=current
-                        if self.arm=='E' or current.id==before.id: break
+                        if current.id==before.id: break
                         continue
                     if not all(p['status']=='supported' for p in public): break
                     source=self.store.read(current,'solution.py').decode()
-                    categories=[];attempted=[];found=False
+                    categories=sorted({e['body']['category'] for e in self.memory.events
+                        if e['body'].get('operation')=='probe_result'
+                        and e['body'].get('snapshot')==current.id
+                        and e['body'].get('status')=='supported'})
+                    attempted=list(categories);found=False
                     for _probe_index in range(6):
                         if len(categories)>=2 or self.budget.report()['used']['critic_calls']>=LIMITS['critic_calls']:
                             break
@@ -409,7 +416,7 @@ class Episode:
                     if found:
                         before=current
                         current=self.guarded_repair(current);candidate=current
-                        if self.arm=='E' or current.id==before.id: break
+                        if current.id==before.id: break
                         continue
                     if len(categories)>=2:
                         break

@@ -45,13 +45,18 @@ def prepare(run,output,slug):
             'jobs':jobs,'config':config}
     write_bundle(bundle,output,slug)
 
-def write_bundle(bundle,output,slug):
+def write_bundle(bundle,output,slug,*,extra_sources=None):
     output.mkdir(parents=True,exist_ok=False)
     sources={'repair-input.json':json.dumps(bundle,indent=2)+'\n',
              'connector/pcworld/__init__.py':'',
              'connector/pcworld/provider.py':(ROOT/'pcworld/provider.py').read_text(),
              'connector/pcworld/protocol.py':(ROOT/'pcworld/protocol.py').read_text(),
              'proposer-worker.py':Path(__file__).with_name('kaggle_repair_worker.py').read_text()}
+    if extra_sources:
+        for name,source in extra_sources.items():
+            if name in sources or Path(name).is_absolute() or '..' in Path(name).parts:
+                raise ValueError('invalid extra source path')
+            sources[name]=source
     encoded={k:base64.b64encode(v.encode()).decode() for k,v in sources.items()}
     wrapper='''import base64,json,os,signal,subprocess,sys
 from pathlib import Path

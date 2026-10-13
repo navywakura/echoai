@@ -12,11 +12,16 @@ REGRESSION = "import json,sys\nx=json.load(sys.stdin)\nprint(json.dumps([{'id':'
 
 class RepairProvider(FixtureProvider):
     def __init__(self, repairs):
-        self.repairs=iter(repairs);self.contexts=[];self.critics=0
+        self.repairs=iter(repairs);self.contexts=[];self.critics=0;self.categories=[]
     def call(self, role, task, context, **kwargs):
         usage={'tokens':0,'llm_calls':0,'fixture_calls':1}
         if role=='critic':
             self.critics+=1
+            category=context.get('probe',{}).get('category')
+            self.categories.append(category)
+            if category=='empty-singleton':
+                return {'claim_id':task['property'],'input':[],
+                        'preconditions':task['preconditions'],'oracle_reference':task['checker']},usage
             return {'claim_id':task['property'],'input':[{'id':'b','value':2},{'id':'b','value':3}],
                     'preconditions':task['preconditions'],'oracle_reference':task['checker']},usage
         self.contexts.append(context)
@@ -38,8 +43,9 @@ class RepairGap(unittest.TestCase):
             self.assertEqual(feedback['public_examples'][0]['input'],task['public_inputs'][0])
             self.assertTrue(result['counterexamples_repaired'])
             self.assertTrue(result['final_cases_passed'])
-            self.assertFalse(result['development_accepted'])  # single category stays insufficient
-            self.assertEqual(provider.critics,1)
+            self.assertTrue(result['development_accepted'])
+            self.assertEqual(provider.categories,['duplicate-keys','empty-singleton'])
+            self.assertEqual(provider.critics,2)
             self.assertEqual(len(provider.contexts),2)
             self.assertEqual(result['destroyed'],0)
             self.assertNotIn('development_inputs',feedback)
@@ -58,7 +64,7 @@ class RepairGap(unittest.TestCase):
             events=[x['body'] for x in ep.memory.events]
             rejected=[x for x in events if x.get('operation')=='repair_rejected']
             self.assertEqual(len(rejected),1)
-            self.assertEqual(provider.critics,1)
+            self.assertEqual(provider.critics,2)
 
     def test_two_failed_repairs_keep_old_candidate_and_never_reopen_critic(self):
         with tempfile.TemporaryDirectory() as d:
@@ -84,6 +90,43 @@ class RepairGap(unittest.TestCase):
             self.assertEqual(feedback['public_examples'][0]['expected'],task['public_inputs'][0])
             self.assertEqual(feedback['feedback_code'],'REJECTED_REGRESSION')
             self.assertTrue(result['counterexamples_repaired'])
+
+    def test_second_gate_refutation_is_repaired_before_acceptance(self):
+        class PathProvider(FixtureProvider):
+            def __init__(self): self.proposals=0;self.categories=[]
+            def call(self,role,task,context,**kwargs):
+                usage={'tokens':0,'llm_calls':0,'fixture_calls':1}
+                if role=='critic':
+                    category=context['probe']['category'];self.categories.append(category)
+                    value='/c/../d' if category=='dotdot-cancellation' else '/../../j'
+                    return {'claim_id':task['property'],'input':value,
+                            'preconditions':task['preconditions'],'oracle_reference':task['checker']},usage
+                self.proposals+=1
+                if self.proposals==1: code=task['initial']
+                elif self.proposals==2:
+                    code="import json,sys,posixpath\nx=json.load(sys.stdin)\nprint(json.dumps(x if x.startswith('/../') else posixpath.normpath(x)))"
+                else: code="import json,sys,posixpath\nprint(json.dumps(posixpath.normpath(json.load(sys.stdin))))"
+                return {'content':code},usage
+        with tempfile.TemporaryDirectory() as d:
+            provider=PathProvider();ep=Episode(Path(d)/'run',repair_tasks()[2],'E',provider)
+            result=ep.run()
+            self.assertEqual(provider.categories,['dotdot-cancellation','root-boundary'])
+            self.assertEqual(result['repair_attempts'],2)
+            self.assertTrue(result['development_accepted'],result['error'])
+            self.assertEqual(result['probe_categories'],['dotdot-cancellation','root-boundary'])
+
+    def test_invalid_second_probe_does_not_satisfy_coverage(self):
+        class DuplicateProvider(RepairProvider):
+            def call(self,role,task,context,**kwargs):
+                if role=='critic':
+                    context=dict(context,probe={'category':'duplicate-keys'})
+                return super().call(role,task,context,**kwargs)
+        with tempfile.TemporaryDirectory() as d:
+            ep=Episode(Path(d)/'run',repair_tasks()[1],'E',DuplicateProvider([FIXED]))
+            result=ep.run()
+            self.assertFalse(result['development_accepted'])
+            self.assertEqual(result['probe_categories'],['duplicate-keys'])
+            self.assertLessEqual(result['budget']['used']['critic_calls'],6)
 
     def test_explicit_wall_budget_controls_admission_and_still_expires(self):
         from echoai.pcworld.accounting import BudgetExceeded

@@ -51,6 +51,18 @@ class GPUHandoff(unittest.TestCase):
                 'connector/pcworld/provider.py','connector/pcworld/protocol.py','proposer-worker.py'})
             compile((out/'kernel.py').read_text(),'kernel.py','exec')
 
+    def test_private_worker_source_embedding_rejects_path_escape(self):
+        write=runpy.run_path(str(ROOT/'ECHO-5.1/scripts/prepare_kaggle_repair.py'))['write_bundle']
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);bundle={'jobs':[], 'config':{}}
+            write(bundle,root/'valid','owner/private-test',extra_sources={'inference_relay.py':'# transport only'})
+            manifest=json.loads((root/'valid/upload-manifest.json').read_text())
+            self.assertIn('inference_relay.py',manifest)
+            self.assertTrue(json.loads((root/'valid/kernel-metadata.json').read_text())['is_private'])
+            for i,name in enumerate(('../escape.py','/tmp/escape.py','proposer-worker.py')):
+                with self.assertRaises(ValueError):
+                    write(bundle,root/str(i),'owner/private-test',extra_sources={name:'bad'})
+
     def test_wrong_download_hash_is_not_promoted(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);source=root/'source';source.write_bytes(b'wrong bytes')

@@ -99,7 +99,7 @@ def repair_tasks(count=6):
        "result=list({p['id']:p for p in x}.values())",
        [[{'id':'a','value':1},{'id':'b','value':2}]],
        [[{'id':'b','value':2},{'id':'b','value':3}],[],[{'id':'b','value':0},{'id':'a','value':1},{'id':'b','value':2}]]),
-      ('path','Normalize an absolute POSIX path (<=512 characters, lowercase letters, dots and slashes only) lexically. Drop empty and dot components; dotdot removes the previous component without traversing above root. Do not touch the filesystem. Root is /; otherwise no trailing slash.',
+      ('path','Normalize an absolute POSIX path (<=512 characters, lowercase letters, dots and slashes only) lexically. Drop empty and dot components; dotdot removes the previous component without traversing above root. Absolute paths are anchored at /: a dotdot component at root has no effect, and must never remain in the output. Do not touch the filesystem. Root is /; otherwise no trailing slash.',
        "result='/'+'/'.join(p for p in x.split('/') if p and p!='.')",
        ['/a//./b/'], ['/a/../b','/../../x','/','/one/two/../../three']),
       ('csv','Parse one valid CSV record from a JSON string, <=512 characters and <=32 fields. Comma delimiter, double-quote quoting, doubled double-quotes inside quoted fields. Preserve field spaces and quoted newlines. Return the list of field strings.',

@@ -1,6 +1,6 @@
 {
   "schema": "pcworld.contract.v1",
-  "version": "0.4.0-development",
+  "version": "0.5.0-development",
   "status": "preliminary; scientific confirmation disabled",
   "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
   "scope": "Linux isolated workspaces, bounded Python input/output properties",
@@ -53,6 +53,6 @@
   "development_fixtures": "4 public properties; cannot stand in for 60 independent benchmark tasks",
   "automatic_publication": false,
   "s6": "not reopened",
-  "repair_policy": "Explicit witnessed CEGIS feedback for repairs; public and previous passing cases first; transactional rollback of rejected patches; at most two repairs. E freezes critic on first refutation and replays existing probes; coverage still requires two categories.",
+  "repair_policy": "repair-two-gate-v1: witnessed CEGIS; public and previous passing cases first; CAS rollback; at most two repair attempts per episode. E freezes critique while repairing and reopens it only after a verified commit. Replay actual previous probes on the new snapshot, then test an additional distinct category if needed. F and E require two supported categories on the final snapshot; final finite oracle checks remain mandatory.",
   "http_call_timeout_max_seconds": 600
 }

@@ -85,6 +85,13 @@ def main():
         sys.path.insert(0,str(ROOT/'connector'))
         from pcworld.provider import HTTPProvider
         config=bundle['config'];provider=HTTPProvider(config)
+        if bundle.get('relay'):
+            if not any(int(a)==int(b)==49 for a,b in offload):
+                raise RuntimeError('live pilot requires all 49 layers on GPU')
+            from inference_relay import run_worker
+            report['schema']='pcworld.gpu-inference-relay.v1'
+            (ROOT/'gpu-proposer-results.json').write_text(json.dumps(report,indent=2)+'\n')
+            report['relay_result']=run_worker(**bundle['relay'],ready_metadata={k:v for k,v in report.items() if k not in ('records','errors')})
         for job in bundle['jobs']:
             t=time.monotonic();record={'task':job['id'],'job_sha256':hashlib.sha256(
                 json.dumps(job,sort_keys=True,separators=(',',':')).encode()).hexdigest()}
