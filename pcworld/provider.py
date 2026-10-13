@@ -126,6 +126,10 @@ class HTTPProvider:
             parts = [
                 'Repair the incorrect program below. Return JSON with a single content field containing the complete corrected Python program.',
                 'Specification: ' + task['description'],
+                'Input JSON schema (one stdin value): ' + json.dumps(task.get('input_json_schema',
+                    task.get('input_schema','Use the input type specified by the contract above.'))),
+                'Output protocol: Return the expected value itself as one JSON value on stdout. '
+                'Do not wrap it in an input/output/expected object. The examples are tests, not the stdin envelope.',
                 ('Reconstruct the complete program from the specification and witnessed cases.'
                  if self.config.get('repair_source_mode')=='contract_only'
                  else 'Retained program to repair:\n' + context.get('source', '')),

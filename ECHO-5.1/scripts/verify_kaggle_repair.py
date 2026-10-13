@@ -61,7 +61,10 @@ def verify(run, inputs, downloaded, runtime_path, output):
         ep.emit('observation', {'operation': 'imported_gpu_proposal', 'remote_record': record,
                                'scope': 'fixed witnessed repair prompt; not a live E episode',
                                'origin': report.get('origin', 'Kaggle GPU')})
-        witnesses = job['context']['repair_feedback']['failures']
+        witnesses = [f for f in job['context']['repair_feedback']['failures']
+                     if 'observed' in f and 'expected' in f and f.get('status','contradicted')=='contradicted']
+        if not witnesses:
+            raise ValueError('no value counterexample bound to retained program')
         baseline = [ep.check(ep.base, f['input']) for f in witnesses]
         for witness, actual in zip(witnesses, baseline):
             if any(actual.get(k) != witness.get(k) for k in ('input', 'observed', 'expected')):

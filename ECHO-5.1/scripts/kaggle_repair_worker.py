@@ -90,7 +90,8 @@ def main():
                 json.dumps(job,sort_keys=True,separators=(',',':')).encode()).hexdigest()}
             try:
                 output,usage=provider.call('propose',job['task'],job['context'],
-                    max_tokens=768,total_token_budget=25000,deadline=time.monotonic()+300)
+                    max_tokens=768,total_token_budget=job.get('total_token_budget',25000),
+                    deadline=time.monotonic()+300)
                 record.update(output=output,usage=usage)
             except Exception as exc:
                 record.update(error=type(exc).__name__+': '+str(exc),usage=getattr(exc,'usage',None))

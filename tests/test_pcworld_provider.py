@@ -102,6 +102,8 @@ class ProviderContract(unittest.TestCase):
         self.assertNotIn('ORIGINAL_SOURCE_SENTINEL',message)
         self.assertIn('REJECTED_PATCH_SENTINEL',message)
         self.assertIn('NameError: undefined_name',message)
+        self.assertIn('Input JSON schema (one stdin value):',message)
+        self.assertIn('Return the expected value itself',message)
 
 class LlamaConnector(unittest.TestCase):
     def provider(self,**extra):

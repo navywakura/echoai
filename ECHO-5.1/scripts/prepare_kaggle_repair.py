@@ -43,6 +43,9 @@ def prepare(run,output,slug):
     bundle={'schema':'pcworld.gpu-repair-input.v1','scientific_claim':False,
             'local_run_result_sha256':hashlib.sha256((run/'result.json').read_bytes()).hexdigest(),
             'jobs':jobs,'config':config}
+    write_bundle(bundle,output,slug)
+
+def write_bundle(bundle,output,slug):
     output.mkdir(parents=True,exist_ok=False)
     sources={'repair-input.json':json.dumps(bundle,indent=2)+'\n',
              'connector/pcworld/__init__.py':'',
@@ -73,7 +76,7 @@ raise SystemExit(code)
     (output/'upload-manifest.json').write_text(json.dumps({k:hashlib.sha256(v.encode()).hexdigest()
                                                         for k,v in sources.items()},indent=2)+'\n')
     compile(wrapper,'kernel.py','exec')
-    print(json.dumps({'jobs':len(jobs),'private':True,'submission_performed':False,'path':str(output)}))
+    print(json.dumps({'jobs':len(bundle['jobs']),'private':True,'submission_performed':False,'path':str(output)}))
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('run',type=Path);p.add_argument('output',type=Path)
