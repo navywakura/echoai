@@ -1,0 +1,37 @@
+{
+  "schema_version": "repoworld.design-verification.v1",
+  "created_utc": "2026-10-13T18:02:05.195527+00:00",
+  "swebench_executed": false,
+  "repoworld_runtime_implemented": false,
+  "gpu_jobs_started": 0,
+  "checks": {
+    "pcworld": {
+      "passed": 255,
+      "seconds": 97.146,
+      "log_sha256": "1c53beedc27da72c59d7738ae694803877cf714dc7ff9a6e6819bd5ee823ebb2"
+    },
+    "analysis_tools": {
+      "passed": 13,
+      "seconds": 5.457,
+      "log_sha256": "65704ab12aac72ee98fd2bf12f0bb406c97ffbaad4fdd691500c526bc1208ae2"
+    },
+    "json_schemas_valid": 3,
+    "selection_reproduced_bytewise": true,
+    "independent_review": "four findings corrected; focused rereview reported no remaining actionable findings",
+    "pcworld_core_unchanged": true
+  },
+  "source_files": {
+    "ECHO-5.1/docs/SWE-BENCH-LITE-DESIGN-20261013.md": "9e6ec3504fe2b441189403224aba0c81c2ad24466be1f8270007f9f471f2095f",
+    "ECHO-5.1/docs/SWE-BENCH-LITE-PLAN-20261013.md": "fca1e68eec5ed23cfc8af152e949723b68337c5d4d1c7a267dc0c642af3f5ed0",
+    "ECHO-5.1/docs/SWE-CONTRACT.json": "95a792dfbaa97c888fcbb874e92e092068a65e5b3d80a1dfcf5183386d775017",
+    "ECHO-5.1/docs/swebench/SWE-LITE-PUBLIC-METADATA.json": "1f1de4f29dd514b3180197c539762021eeb5c4dc3a87e09d7237f89ca3f7a7da",
+    "ECHO-5.1/docs/swebench/SWE-RESULTS.schema.json": "16f3205e5f2b4bcfc03cb1db67801d8fc659dfd6d10d7e5478598f1b6aa168f8",
+    "ECHO-5.1/docs/swebench/SWE-RUN-LOCK.schema.json": "13efa11aac479e6399e385a39aa75e4e30deced2290c04777d0eac7e53e117a9",
+    "ECHO-5.1/docs/swebench/SWE-SAMPLE.json": "e6df5dc5e7f5619bc2692b40cb344019cf6e30087b124c1f92bc6c7e6765f128",
+    "ECHO-5.1/docs/swebench/SWE-TOOLS.schema.json": "ae9aebb4e3ac90b17ce6b0fe1ea540749461f4f9a5687709304e66930f3dd4c6",
+    "ECHO-5.1/docs/swebench/requirements-analysis.txt": "98ee78224b6810e79b8cd96fd1c8348265f274c6c4aa30852f645daedd176b5b",
+    "scripts/plot_swebench_results.py": "7ed3b3fba049c24a1c9747186a3b1f0a0b862ba63775f89bfe318f6948683872",
+    "scripts/select_swebench_subset.py": "0f3a5caea9927df5659ab1bf3175f9e57828999e95c3a6a8aa82daf9e7bcac76",
+    "tests/test_swebench_design_tools.py": "cf92baf236c8102f7b8a1b20464a9a4fde164e3206e3d11d77fbf515fd978677"
+  }
+}

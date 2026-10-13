@@ -1,0 +1,289 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "repoworld.analysis.v1"
+    },
+    "data_kind": {
+      "enum": [
+        "measured",
+        "synthetic"
+      ]
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "audit_report_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "primary_instances": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "minItems": 1,
+      "maxItems": 300,
+      "uniqueItems": true
+    },
+    "primary_seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "primary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "instance_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "repo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "arm": {
+            "enum": [
+              "S",
+              "I2",
+              "F",
+              "E"
+            ]
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "enum": [
+              "resolved",
+              "unresolved",
+              "budget_exhausted",
+              "provider_error",
+              "infrastructure_error",
+              "invalid_evidence",
+              "no_patch",
+              "not_started"
+            ]
+          },
+          "tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "proposed_patches": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "public_regressions": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "regressions_blocked": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "official_raw_resolved": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "echo_verified_resolved": {
+            "type": "boolean"
+          },
+          "validity_reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 512
+          }
+        },
+        "required": [
+          "instance_id",
+          "repo",
+          "arm",
+          "seed",
+          "status",
+          "tokens",
+          "wall_seconds",
+          "proposed_patches",
+          "public_regressions",
+          "regressions_blocked",
+          "official_raw_resolved",
+          "echo_verified_resolved",
+          "validity_reason"
+        ]
+      },
+      "minItems": 4,
+      "maxItems": 10000
+    },
+    "memory_chains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "chain_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "repo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "donor_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "donor_wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "target_instances": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "minItems": 1,
+            "maxItems": 16,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "chain_id",
+          "repo",
+          "donor_tokens",
+          "donor_wall_seconds",
+          "target_instances"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 30
+    },
+    "memory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "chain_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "instance_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 16
+          },
+          "condition": {
+            "enum": [
+              "empty",
+              "shared"
+            ]
+          },
+          "status": {
+            "enum": [
+              "resolved",
+              "unresolved",
+              "budget_exhausted",
+              "provider_error",
+              "infrastructure_error",
+              "invalid_evidence",
+              "no_patch",
+              "not_started"
+            ]
+          },
+          "tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "official_raw_resolved": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "echo_verified_resolved": {
+            "type": "boolean"
+          },
+          "validity_reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 512
+          }
+        },
+        "required": [
+          "chain_id",
+          "instance_id",
+          "position",
+          "condition",
+          "status",
+          "tokens",
+          "wall_seconds",
+          "official_raw_resolved",
+          "echo_verified_resolved",
+          "validity_reason"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "schema_version",
+    "data_kind",
+    "contract_sha256",
+    "audit_report_sha256",
+    "primary_instances",
+    "primary_seeds",
+    "primary",
+    "memory_chains",
+    "memory"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Sanitized post-audit export. Schema validity is not cryptographic authenticity. Costs include all attempts; no failure may be dropped."
+}

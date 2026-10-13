@@ -1,0 +1,154 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "repoworld.run-lock.v1"
+    },
+    "status": {
+      "const": "sealed"
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sample_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "code_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "prompt_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "model_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "llama_cpp_binary_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "tokenizer_template_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "harness_commit": {
+      "const": "726c5461e2ef52d83cf1ea2107870a8bb3328d57"
+    },
+    "runtime_tools_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "host_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "schedule_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "budget_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "custody_anchor_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "created_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "instance_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "base_commit": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "online_rootfs_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "online_tree_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "public_checks_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "official_image_digest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "official_eval_script_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "sealed_tests_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "empty_patch_resolved": {
+            "const": false
+          },
+          "gold_patch_resolved": {
+            "const": true
+          },
+          "preflight_valid": {
+            "const": true
+          }
+        },
+        "required": [
+          "instance_id",
+          "base_commit",
+          "online_rootfs_sha256",
+          "online_tree_sha256",
+          "public_checks_sha256",
+          "official_image_digest",
+          "official_eval_script_sha256",
+          "sealed_tests_sha256",
+          "empty_patch_resolved",
+          "gold_patch_resolved",
+          "preflight_valid"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 300
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "contract_sha256",
+    "sample_sha256",
+    "code_manifest_sha256",
+    "prompt_manifest_sha256",
+    "model_sha256",
+    "llama_cpp_binary_sha256",
+    "tokenizer_template_sha256",
+    "harness_commit",
+    "runtime_tools_manifest_sha256",
+    "host_manifest_sha256",
+    "schedule_sha256",
+    "budget_manifest_sha256",
+    "custody_anchor_sha256",
+    "created_utc",
+    "instances"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Private curator lock. Duplicate/missing IDs and semantic invariants checked by auditor; schema alone is insufficient."
+}

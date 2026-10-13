@@ -1,0 +1,343 @@
+{
+  "schema_version": "repoworld.sample.v1",
+  "seed": 20261013,
+  "metadata_sha256": "e6c4101d07742b1e659b86e18e99a17e9cc6b8b99cffeafbe271aaf3c5235c82",
+  "dataset": "princeton-nlp/SWE-bench_Lite",
+  "revision": "6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2",
+  "split": "test",
+  "selection": "one-per-repo-plus-Hamilton; SHA256 seed:purpose:instance_id",
+  "population_by_repo": {
+    "astropy/astropy": 6,
+    "django/django": 114,
+    "matplotlib/matplotlib": 23,
+    "mwaskom/seaborn": 4,
+    "pallets/flask": 3,
+    "psf/requests": 6,
+    "pydata/xarray": 5,
+    "pylint-dev/pylint": 6,
+    "pytest-dev/pytest": 17,
+    "scikit-learn/scikit-learn": 23,
+    "sphinx-doc/sphinx": 16,
+    "sympy/sympy": 77
+  },
+  "allocation_by_repo": {
+    "astropy/astropy": 1,
+    "django/django": 6,
+    "matplotlib/matplotlib": 2,
+    "mwaskom/seaborn": 1,
+    "pallets/flask": 1,
+    "psf/requests": 1,
+    "pydata/xarray": 1,
+    "pylint-dev/pylint": 1,
+    "pytest-dev/pytest": 2,
+    "scikit-learn/scikit-learn": 2,
+    "sphinx-doc/sphinx": 2,
+    "sympy/sympy": 4
+  },
+  "primary": [
+    {
+      "instance_id": "astropy__astropy-14365",
+      "repo": "astropy/astropy",
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "created_at": "2023-02-06T19:20:34Z",
+      "version": "5.1",
+      "environment_setup_commit": "5f74eacbcc7fff707a44d8eb58adaa514cb7dcb5"
+    },
+    {
+      "instance_id": "django__django-11179",
+      "repo": "django/django",
+      "base_commit": "19fc6376ce67d01ca37a91ef2f55ef769f50513a",
+      "created_at": "2019-04-05T15:54:39Z",
+      "version": "3.0",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27"
+    },
+    {
+      "instance_id": "django__django-13925",
+      "repo": "django/django",
+      "base_commit": "0c42cdf0d2422f4c080e93594d5d15381d6e955e",
+      "created_at": "2021-01-21T08:08:55Z",
+      "version": "4.0",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4"
+    },
+    {
+      "instance_id": "django__django-12747",
+      "repo": "django/django",
+      "base_commit": "c86201b6ed4f8256b0a0520c08aa674f623d4127",
+      "created_at": "2020-04-18T16:41:40Z",
+      "version": "3.1",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab"
+    },
+    {
+      "instance_id": "django__django-11797",
+      "repo": "django/django",
+      "base_commit": "3346b78a8a872286a245d1e77ef4718fc5e6be1a",
+      "created_at": "2019-09-20T02:23:19Z",
+      "version": "3.1",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab"
+    },
+    {
+      "instance_id": "django__django-14016",
+      "repo": "django/django",
+      "base_commit": "1710cdbe79c90665046034fe1700933d038d90ad",
+      "created_at": "2021-02-17T16:06:20Z",
+      "version": "4.0",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4"
+    },
+    {
+      "instance_id": "django__django-15400",
+      "repo": "django/django",
+      "base_commit": "4c76ffc2d6c77c850b4bef8d9acc197d11c47937",
+      "created_at": "2022-02-05T19:34:55Z",
+      "version": "4.1",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9"
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-18869",
+      "repo": "matplotlib/matplotlib",
+      "base_commit": "b7d05919865fc0c37a0164cf467d5d5513bd0ede",
+      "created_at": "2020-11-01T23:18:42Z",
+      "version": "3.3",
+      "environment_setup_commit": "28289122be81e0bc0a6ee0c4c5b7343a46ce2e4e"
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-26011",
+      "repo": "matplotlib/matplotlib",
+      "base_commit": "00afcc0c6d4d2e4390338127f05b8f4fdb4e7087",
+      "created_at": "2023-05-30T13:45:49Z",
+      "version": "3.7",
+      "environment_setup_commit": "0849036fd992a2dd133a0cffc3f84f58ccf1840f"
+    },
+    {
+      "instance_id": "mwaskom__seaborn-3407",
+      "repo": "mwaskom/seaborn",
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "created_at": "2023-06-27T23:17:29Z",
+      "version": "0.13",
+      "environment_setup_commit": "23860365816440b050e9211e1c395a966de3c403"
+    },
+    {
+      "instance_id": "pallets__flask-5063",
+      "repo": "pallets/flask",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "created_at": "2023-04-14T16:36:54Z",
+      "version": "2.3",
+      "environment_setup_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4"
+    },
+    {
+      "instance_id": "psf__requests-2674",
+      "repo": "psf/requests",
+      "base_commit": "0be38a0c37c59c4b66ce908731da15b401655113",
+      "created_at": "2015-07-17T08:33:52Z",
+      "version": "2.7",
+      "environment_setup_commit": "bf436ea0a49513bd4e49bb2d1645bd770e470d75"
+    },
+    {
+      "instance_id": "pydata__xarray-4248",
+      "repo": "pydata/xarray",
+      "base_commit": "98dc1f4ea18738492e074e9e51ddfed5cd30ab94",
+      "created_at": "2020-07-22T14:54:03Z",
+      "version": "0.12",
+      "environment_setup_commit": "1c198a191127c601d091213c4b3292a8bb3054e1"
+    },
+    {
+      "instance_id": "pylint-dev__pylint-7080",
+      "repo": "pylint-dev/pylint",
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "created_at": "2022-06-28T17:24:43Z",
+      "version": "2.15",
+      "environment_setup_commit": "e90702074e68e20dc8e5df5013ee3ecf22139c3e"
+    },
+    {
+      "instance_id": "pytest-dev__pytest-5495",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "1aefb24b37c30fba8fd79a744829ca16e252f340",
+      "created_at": "2019-06-25T23:41:16Z",
+      "version": "4.6",
+      "environment_setup_commit": "d5843f89d3c008ddcb431adbc335b080a79e617e"
+    },
+    {
+      "instance_id": "pytest-dev__pytest-5413",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "450d2646233c670654744d3d24330b69895bb9d2",
+      "created_at": "2019-06-06T15:21:20Z",
+      "version": "4.6",
+      "environment_setup_commit": "d5843f89d3c008ddcb431adbc335b080a79e617e"
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-25638",
+      "repo": "scikit-learn/scikit-learn",
+      "base_commit": "6adb209acd63825affc884abcd85381f148fb1b0",
+      "created_at": "2023-02-17T22:17:50Z",
+      "version": "1.3",
+      "environment_setup_commit": "1e8a5b833d1b58f3ab84099c4582239af854b23a"
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-13241",
+      "repo": "scikit-learn/scikit-learn",
+      "base_commit": "f8b108d0c6f2f82b2dc4e32a6793f9d9ac9cf2f4",
+      "created_at": "2019-02-25T11:27:41Z",
+      "version": "0.21",
+      "environment_setup_commit": "7813f7efb5b2012412888b69e73d76f2df2b50b6"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "repo": "sphinx-doc/sphinx",
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "created_at": "2020-05-17T14:09:10Z",
+      "version": "3.1",
+      "environment_setup_commit": "5afc77ee27fc01c57165ab260d3a76751f9ddb35"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8713",
+      "repo": "sphinx-doc/sphinx",
+      "base_commit": "3ed7590ed411bd93b26098faab4f23619cdb2267",
+      "created_at": "2021-01-20T14:24:12Z",
+      "version": "4.0",
+      "environment_setup_commit": "8939a75efaa911a12dbe6edccedf261e88bf7eef"
+    },
+    {
+      "instance_id": "sympy__sympy-20212",
+      "repo": "sympy/sympy",
+      "base_commit": "a106f4782a9dbe7f8fd16030f15401d977e03ae9",
+      "created_at": "2020-10-06T11:34:13Z",
+      "version": "1.7",
+      "environment_setup_commit": "cffd4e0f86fefd4802349a9f9b19ed70934ea354"
+    },
+    {
+      "instance_id": "sympy__sympy-24066",
+      "repo": "sympy/sympy",
+      "base_commit": "514579c655bf22e2af14f0743376ae1d7befe345",
+      "created_at": "2022-09-16T22:58:15Z",
+      "version": "1.12",
+      "environment_setup_commit": "c6cb7c5602fa48034ab1bd43c2347a7e8488f12e"
+    },
+    {
+      "instance_id": "sympy__sympy-13146",
+      "repo": "sympy/sympy",
+      "base_commit": "b678d8103e48fdb1af335dbf0080b3d5366f2d17",
+      "created_at": "2017-08-18T05:51:45Z",
+      "version": "1.1",
+      "environment_setup_commit": "ec9e3c0436fbff934fa84e22bf07f1b3ef5bfac3"
+    },
+    {
+      "instance_id": "sympy__sympy-15011",
+      "repo": "sympy/sympy",
+      "base_commit": "b7c5ba2bf3ffd5cf453b25af7c8ddd9a639800cb",
+      "created_at": "2018-08-02T12:54:02Z",
+      "version": "1.2",
+      "environment_setup_commit": "e53e809176de9aa0fb62e85689f8cdb669d4cacb"
+    }
+  ],
+  "calibration": [
+    {
+      "instance_id": "pallets__flask-4992",
+      "repo": "pallets/flask",
+      "base_commit": "4c288bc97ea371817199908d0d9b12de9dae327e",
+      "created_at": "2023-02-22T14:00:17Z",
+      "version": "2.3",
+      "environment_setup_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4"
+    },
+    {
+      "instance_id": "psf__requests-2148",
+      "repo": "psf/requests",
+      "base_commit": "fe693c492242ae532211e0c173324f09ca8cf227",
+      "created_at": "2014-07-24T21:03:03Z",
+      "version": "2.3",
+      "environment_setup_commit": "3eb69be879063de4803f7f0152b83738a1c95ca4"
+    },
+    {
+      "instance_id": "pytest-dev__pytest-7168",
+      "repo": "pytest-dev/pytest",
+      "base_commit": "4787fd64a4ca0dba5528b5651bddd254102fe9f3",
+      "created_at": "2020-05-05T22:23:38Z",
+      "version": "5.4",
+      "environment_setup_commit": "678c1a0745f1cf175c442c719906a1f13e496910"
+    },
+    {
+      "instance_id": "sympy__sympy-19007",
+      "repo": "sympy/sympy",
+      "base_commit": "f9e030b57623bebdc2efa7f297c1b5ede08fcebf",
+      "created_at": "2020-03-29T13:47:11Z",
+      "version": "1.6",
+      "environment_setup_commit": "28b41c73c12b70d6ad9f6e45109a80649c4456da"
+    }
+  ],
+  "memory_chains": [
+    {
+      "chain_id": "pytest-dev__pytest",
+      "donor": {
+        "instance_id": "pytest-dev__pytest-5103",
+        "repo": "pytest-dev/pytest",
+        "base_commit": "10ca84ffc56c2dd2d9dc4bd71b7b898e083500cd",
+        "created_at": "2019-04-13T16:17:45Z",
+        "version": "4.5",
+        "environment_setup_commit": "693c3b7f61d4d32f8927a74f34ce8ac56d63958e"
+      },
+      "targets": [
+        {
+          "instance_id": "pytest-dev__pytest-7220",
+          "repo": "pytest-dev/pytest",
+          "base_commit": "56bf819c2f4eaf8b36bd8c42c06bb59d5a3bfc0f",
+          "created_at": "2020-05-16T14:57:17Z",
+          "version": "5.4",
+          "environment_setup_commit": "678c1a0745f1cf175c442c719906a1f13e496910"
+        },
+        {
+          "instance_id": "pytest-dev__pytest-9359",
+          "repo": "pytest-dev/pytest",
+          "base_commit": "e2ee3144ed6e241dea8d96215fcdca18b3892551",
+          "created_at": "2021-12-01T14:31:38Z",
+          "version": "7.0",
+          "environment_setup_commit": "e2ee3144ed6e241dea8d96215fcdca18b3892551"
+        },
+        {
+          "instance_id": "pytest-dev__pytest-11148",
+          "repo": "pytest-dev/pytest",
+          "base_commit": "2f7415cfbc4b6ca62f9013f1abd27136f46b9653",
+          "created_at": "2023-06-29T00:04:33Z",
+          "version": "8.0",
+          "environment_setup_commit": "10056865d2a4784934ce043908a0e78d0578f677"
+        }
+      ]
+    },
+    {
+      "chain_id": "sympy__sympy",
+      "donor": {
+        "instance_id": "sympy__sympy-11400",
+        "repo": "sympy/sympy",
+        "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+        "created_at": "2016-07-15T21:40:49Z",
+        "version": "1.0",
+        "environment_setup_commit": "50b81f9f6be151014501ffac44e5dc6b2416938f"
+      },
+      "targets": [
+        {
+          "instance_id": "sympy__sympy-18698",
+          "repo": "sympy/sympy",
+          "base_commit": "3dff1b98a78f28c953ae2140b69356b8391e399c",
+          "created_at": "2020-02-21T05:46:56Z",
+          "version": "1.6",
+          "environment_setup_commit": "28b41c73c12b70d6ad9f6e45109a80649c4456da"
+        },
+        {
+          "instance_id": "sympy__sympy-20590",
+          "repo": "sympy/sympy",
+          "base_commit": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+          "created_at": "2020-12-12T18:18:38Z",
+          "version": "1.7",
+          "environment_setup_commit": "cffd4e0f86fefd4802349a9f9b19ed70934ea354"
+        },
+        {
+          "instance_id": "sympy__sympy-21171",
+          "repo": "sympy/sympy",
+          "base_commit": "aa22709cb7df2d7503803d4b2c0baa7aa21440b6",
+          "created_at": "2021-03-26T07:48:35Z",
+          "version": "1.8",
+          "environment_setup_commit": "3ac1464b8840d5f8b618a654f9fbf09c452fe969"
+        }
+      ]
+    }
+  ],
+  "replacements_allowed": false,
+  "environment_eligibility": "not yet executed"
+}
