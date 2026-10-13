@@ -26,7 +26,7 @@ multiagente siguen sin demostrarse; ver [informe](LOCAL-PILOT-20261013.md).
 | T17 | Límites reales de pared, CPU agregada, procesos, memoria, salida y tmpfs; hijos terminados | Comprobado en pruebas acotadas. El watchdog CPU tiene granularidad de 50 ms y se registra el exceso; MemoryPeak es cargo de cgroup, no RSS exacto ni energía eléctrica. |
 | T18 | S/I2/F/E con entradas, herramientas, cuotas y checker comunes; S con autorrevisión, crítico una vez por versión | Comprobado con fixtures y 24 episodios reales, 860 recibos auditados. Cada brazo: 2/6 tareas; E−S y E−F = 0. Compartir techo presupuestario no equivale a consumir lo mismo; costes publicados por brazo y episodio. No acredita superioridad. |
 | T19 | Control sin LLM; importación del CAM, WSP, ATTEND y gate existentes; replay lógico | Comprobado. El router es fijo, no una Q aprendida; las ejecuciones y tiempos no son reproducibles byte a byte. |
-| T20 | Registro de recetas con alcance y cuarentena; biblioteca principal vacía | Parcial: mecanismo unitario de metadatos. No hay extracción de conceptos, validación automática de su transferencia ni promoción de biblioteca. |
+| T20 | Biblioteca persistente de recetas reparadas y procedencia; registro antiguo de cuarentena | Parcial: 0.9 publica la reparación de A y tres receptores reutilizan el código en una variante del mismo contrato, pasando sin reparar. Restauración y custodia comprobadas; no hay abstracción parametrizada, promoción/cuarentena integrada ni transferencia general demostrada. Ver COLEARNING-RESULTS-20261013.md. |
 
 El criterio global de implementación de toda la investigación **no se declara
 verde** mientras las obligaciones parciales no se cierren o se delimite un

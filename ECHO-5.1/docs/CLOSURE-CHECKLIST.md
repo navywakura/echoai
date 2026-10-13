@@ -13,7 +13,7 @@ de cada fila; no equivale a una ventaja científica ni al cierre de ECHO-5.1.
 | Verde acotado | Crítico → contraejemplo → memoria → reparación → verificación | Un diagnóstico real sobre `sum_positive`: 1/1, 1.704 tokens, 51 recibos auditados. El defecto inicial es sembrado. |
 | Verde | Corpus nuevo de reparación | Seis familias distintas de las cuatro fixtures: intervalos, registros, rutas, CSV, paginación y dependencias. Bugs inducidos comprobados; no benchmark externo. |
 | Verde de ejecución; ventaja no demostrada | Comparación S/I2/F/E `repair-v2` | 48/48 episodios, auditoría válida de 2.049 recibos. S=4/12, I2=4/12, F=2/12, E=2/12. E no supera a F (10 empates, 2 pérdidas frente a S); produjo más contraejemplos que F, pero no más reparaciones aceptadas. 250.444 tokens totales. |
-| Verde | Software y revisión | 219 tests PCWorld tras corrección del prompt CSV, categoría inversa de grafos, señales AST, recuperación de rechazos y auditoría de sondeos; 59 regresiones seleccionadas en una tanda anterior. Revisión del nuevo ensayo completada antes de lanzar. |
+| Verde | Software y revisión | 240 tests PCWorld tras memoria persistente y transferencia A→B, además de corrección del prompt CSV, categoría inversa de grafos, señales AST, recuperación de rechazos y auditoría de sondeos; 59 regresiones seleccionadas en una tanda anterior. Revisión del nuevo ensayo completada antes de lanzar. |
 | Verde de ejecución; empate | Piloto 14B con dos puertas | 12/12 episodios y 580 recibos auditados. Todos 2/3. E=20.372 tokens; F=22.378; S=5.212; I2=2.352. Cuota de críticas agotada en Registros E/F; evaluación final no ejecutada allí. |
 | Verde de ejecución; ventaja limitada al piloto | Piloto 14B con evaluación común | 12/12 episodios, 619 recibos auditados y auditoría repetida válida. E=F=3/3 frente a S=I2=2/3. Registros pasa tras crítica y reparación en E/F; ambos completan dos categorías. E=16.174 tokens, F=16.049; no hay ventaja de E frente a F. Tres tareas conocidas, no confirmación independiente. |
 | Verde de implementación | Cobertura informativa y graduación del candidato | Criterio final común a los cuatro brazos, sin cambiar oráculos; agotamiento de críticas no implica corrección. Pruebas positivas y negativas del candidato graduado; no se reserva una séptima crítica. En 0.6 no se necesitó; en 0.7 F Rutas01 se graduó con una categoría y pasó 4/4. F CSV01 se graduó pero fue rechazado. |
@@ -30,7 +30,8 @@ de cada fila; no equivale a una ventaja científica ni al cierre de ECHO-5.1.
 | Pendiente | Semántica de categoría heredada | `disconnected-lex-order` exige un nodo aislado en su detector, pero la guía no lo explicita. Alinear definición y guía antes de atribuir ahorro al router; sin recalificar episodios ya congelados. |
 | Pendiente | Ablaciones de memoria, crítico y control basal | Mismo modelo, herramientas y presupuesto; aislar qué mecanismo aporta una mejora. |
 | Pendiente | Ampliación y confirmación independiente | Más tareas/familias y repeticiones, dimensionar muestra, fijar contrato y reservar casos nuevos. No reciclar este desarrollo como examen ciego. |
-| Parcial | T20: conceptos reutilizables | Registro y cuarentena unitarios; extracción, transferencia y promoción todavía sin demostración. Biblioteca del piloto vacía. |
+| Parcial; recetas transferidas | T20: conceptos reutilizables | En 0.9 se publica una receta de A con AST/procedencia y tres receptores la reutilizan sin reparar. Es el mismo contrato con otros valores y código idéntico; faltan abstracción, promoción/cuarentena integrada y transferencia a otras tareas. |
+| Parcial; evidencia inicial | H2: memoria compartida | 0.9: cooperativo 3/3 sin reparar frente a aislado 1/3. La pareja 73 ahorra 11,97% de tokens; dos controles copian el texto de formato y fallan temprano. Sin ahorro agregado; faltan controles fuertes y confirmación independiente. |
 | Pendiente | Release experimental reproducible en otra máquina | Probar instalación y restauración fuera de este host, publicar artefactos sin claves privadas y definir alcance de release. |
 | Aplazado | S6 | No se reabre; queda para después de ECHO-5.5. |
 
@@ -60,10 +61,19 @@ E=F=8/12, S=I2=6/12; 214 tests y 2.362 recibos válidos. Duración del worker:
 túnel apagados; 24,71 h GPU restantes. ECHO-5.1 continúa abierto para las
 hipótesis científicas. No se relanzó, publicó ni hizo push.
 
-Último piloto, protocolo 0.8: [sondeos CSV/grafos y checklist completo](PROBE-CONTENT-RESULTS-20261013.md).
+Piloto anterior, protocolo 0.8: [sondeos CSV/grafos y checklist completo](PROBE-CONTENT-RESULTS-20261013.md).
 E=F=8/12, S=I2=6/12. 219 tests, 48 episodios y 2.445 recibos válidos; auditoría
 repetida y 27 hashes conservados. 132.287 tokens; ningún error de episodio ni
 timeout. Worker 33 min 09 s; cuota total aproximada 0,59 h incluyendo corrección
 del empaquetado inicial. Kaggle COMPLETE, supervisor/broker/túnel apagados;
 24,12 h GPU restantes. Sin push ni publicación. H1/H4 y T20 siguen abiertos.
 El informe enlazado reúne qué está comprobado y cada obligación pendiente.
+
+Último piloto, protocolo 0.9: [co-learning A→B y checklist](COLEARNING-RESULTS-20261013.md).
+240 tests, siete episodios ejecutados, auditoría repetida válida sobre 347 recibos
+de episodios y custodia del estudio/bibliotecas. Treinta fuentes congeladas intactas.
+Receptores: compartido 3/3 sin reparación; aislado 1/3 con una reparación.
+Dos controles fallan por copiar `format.content`; no se atribuye toda la diferencia
+al aprendizaje de duplicados. 21.021 tokens totales y 0,14 h GPU aproximadas.
+Kaggle COMPLETE y servicios de cómputo apagados; 23,98 h GPU restantes.
+Recuperación persistente implementada, H2/T20 generales todavía parciales. Sin push.
