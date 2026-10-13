@@ -10,7 +10,7 @@ seis familias conocidas, cada una en los brazos S, I2, F y E. La aceptación
 exigía que el candidato pasara todas las pruebas públicas, los contraejemplos
 retenidos y las pruebas de desarrollo reservadas del episodio.
 
-| Brazo | Aceptaciones | Pruebas adversariales válidas | Episodios con contraejemplo | Tokens | Llamadas LLM | Pared acumulada |
+| Brazo | Aceptaciones | Pruebas adversariales válidas | Episodios con contraejemplo | Tokens contabilizados | Llamadas LLM | Pared acumulada |
 |---|---:|---:|---:|---:|---:|---:|
 | S | 4/12 | No aplica | 2/12 | 17.490 | 28 | 1.312 s |
 | I2 | 4/12 | No aplica | 0/12 | 8.252 | 24 | 684 s |
@@ -45,7 +45,11 @@ Todos los brazos usaron el mismo Qwen2.5-Coder-7B-Instruct Q4_K_M local, el
 mismo runtime hermético, tareas, verificadores y límites. Se consumieron
 250.444 tokens de los presupuestos por episodio. F fue el brazo más caro
 (146.988 tokens); E consumió menos que F, pero 4,4 veces lo de S y 9,4 veces
-lo de I2 en esta ejecución. El tiempo acumulado de inferencia del proceso
+lo de I2 en esta ejecución. Estas cifras incluyen reservas cobradas por fallos:
+**no equivalen a tokens de inferencia observados**. En respuestas completadas,
+F registró 34.346 tokens y E 33.810; los cargos por fallos fueron 112.642 y
+43.904, respectivamente. Por tanto, no puede atribuirse al router un ahorro de
+inferencia del 47 % comparando los totales. El tiempo acumulado de inferencia del proceso
 llama.cpp fue 28.351 segundos de CPU y el pico de memoria del servicio fue
 6,47 GB. La campaña duró 7.247 segundos de pared; energía eléctrica no medida.
 No hubo coste de API pagada.

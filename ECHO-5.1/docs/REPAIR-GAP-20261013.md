@@ -28,3 +28,16 @@ todas las reparaciones fallaran por regresión. Intervalos perdió en E por plaz
 del proveedor. F registró 34.346 tokens observados + 112.642 reservados por
 fallos; E, 33.810 + 43.904. La diferencia entre totales no acredita por sí sola
 ahorro de inferencia. HMAC y replay válidos no prueban aislamiento inexpugnable.
+
+## Microensayo local r1 y revisión r2
+
+r1 terminó 2/2, sin errores del proveedor, con 0 reparaciones y 0 pases finales.
+Auditoría válida: 140 recibos. Registros repitió la sustitución de duplicados;
+Rutas eliminó componentes sin resolver correctamente la relación con el padre.
+Los dos intentos fallidos se conservaron sin sustituir el candidato retenido.
+
+r2 cambia exclusivamente la presentación del prompt de reparación: secciones
+explícitas de contrato, programa retenido, entrada, salida observada, esperada
+y ejemplos públicos. Mismos dos casos/semilla, modelo, límites y verificadores.
+Es desarrollo sobre casos conocidos, no confirmación independiente. No se
+añade la solución ni se divulgan entradas de evaluación reservadas al modelo.

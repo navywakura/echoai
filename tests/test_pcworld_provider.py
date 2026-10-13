@@ -12,6 +12,31 @@ CONFIG={'endpoint':'http://127.0.0.1:8000/v1/chat/completions',
         'tokenizer':'test-tokenizer','max_output_tokens':2048,'timeout_seconds':5}
 
 class ProviderContract(unittest.TestCase):
+    def test_repair_prompt_labels_witnessed_outputs_and_preserves_public_cases(self):
+        import json
+        provider=HTTPProvider(CONFIG);sent=[]
+        context={'source':'retained program', 'repair_feedback':{
+            'feedback_code':'REJECTED_REGRESSION',
+            'failures':[{'input':[1,-2], 'observed':-1, 'expected':1}],
+            'public_examples':[{'input':[3], 'expected':3}],
+            'rejected_source':'rejected program'}}
+        def post(endpoint,payload,**kwargs):
+            sent.append(payload)
+            if endpoint.endswith('/tokenize'): return {'count':500}
+            return {'model':'test-model','usage':{'prompt_tokens':500,'completion_tokens':10,'total_tokens':510},
+                    'choices':[{'message':{'content':'{"content":"pass"}'}}]}
+        with patch.object(provider,'_post',side_effect=post):
+            provider.call('propose',development_tasks(1)[0],context,total_token_budget=1000)
+        message=sent[0]['messages'][1]['content']
+        for label in ('Failing input:', 'Your observed WRONG output:',
+                      'Expected output required by the contract:', 'Public non-regression examples:',
+                      'Retained program to repair:', 'Rejected patch (do not adopt):'):
+            self.assertIn(label,message)
+        self.assertIn(json.dumps([1,-2]),message)
+        self.assertIn('REJECTED_REGRESSION',message)
+        self.assertIn('retained program',message)
+        self.assertIn('rejected program',message)
+        self.assertEqual(sent[0]['messages'],sent[1]['messages'])
     def test_prompt_count_is_reserved_before_generation(self):
         provider=HTTPProvider(CONFIG);sent=[]
         def post(endpoint,payload,**kwargs):
