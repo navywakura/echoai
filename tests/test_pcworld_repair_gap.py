@@ -124,9 +124,52 @@ class RepairGap(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             ep=Episode(Path(d)/'run',repair_tasks()[1],'E',DuplicateProvider([FIXED]))
             result=ep.run()
-            self.assertFalse(result['development_accepted'])
+            self.assertTrue(result['development_accepted'])
+            self.assertIsNone(result['error'])
+            self.assertEqual(result['graduation']['status'],'GRADUADO_POR_SUPERVIVENCIA')
+            self.assertFalse(result['graduation']['verified'])
+            self.assertFalse(result['coverage_complete'])
             self.assertEqual(result['probe_categories'],['duplicate-keys'])
             self.assertLessEqual(result['budget']['used']['critic_calls'],6)
+
+    def test_graduation_never_substitutes_for_failing_final_oracle(self):
+        class DuplicateProvider(RepairProvider):
+            def call(self,role,task,context,**kwargs):
+                if role=='critic':context=dict(context,probe={'category':'duplicate-keys'})
+                return super().call(role,task,context,**kwargs)
+        with tempfile.TemporaryDirectory() as d:
+            task=repair_tasks()[1]
+            task['development_inputs'].append([{'id':c,'value':i} for i,c in enumerate('wxyz')])
+            incomplete=FIXED.replace('print(json.dumps(result))','print(json.dumps([] if len(x)>3 else result))')
+            result=Episode(Path(d)/'run',task,'E',DuplicateProvider([incomplete])).run()
+            self.assertIsNone(result['error'])
+            self.assertTrue(result['counterexamples_repaired'])
+            self.assertEqual(result['graduation']['status'],'GRADUADO_POR_SUPERVIVENCIA')
+            self.assertFalse(result['development_accepted'])
+            self.assertFalse(result['final_cases_passed'])
+            self.assertTrue(result['final_properties'])
+
+    def test_final_oracle_acceptance_is_identical_for_all_four_arms(self):
+        for arm in ('S','I2','F','E'):
+            with self.subTest(arm=arm),tempfile.TemporaryDirectory() as d:
+                ep=Episode(Path(d)/'run',repair_tasks()[1],arm,FixtureProvider())
+                candidate=ep.apply_content(ep.base,FIXED)
+                result=ep.finish(candidate)
+                self.assertTrue(result['development_accepted'])
+                self.assertFalse(result['coverage_complete'])
+                self.assertFalse(result['graduation']['verified'])
+                self.assertEqual(result['acceptance_policy'],'common-final-oracle-v1')
+
+    def test_probe_stops_before_seventh_call_in_both_critic_arms(self):
+        for arm in ('F','E'):
+            with self.subTest(arm=arm),tempfile.TemporaryDirectory() as d:
+                provider=RepairProvider([])
+                ep=Episode(Path(d)/'run',repair_tasks()[1],arm,provider)
+                ticket=ep.budget.reserve({'critic_calls':5});ep.budget.settle(ticket,{'critic_calls':5})
+                outcome=ep._probe(ep.base,'first-occurrence-order')
+                self.assertEqual(outcome['reason'],'critic_calls_exhausted')
+                self.assertEqual(provider.critics,1)
+                self.assertEqual(ep.budget.report()['used']['critic_calls'],6)
 
     def test_explicit_wall_budget_controls_admission_and_still_expires(self):
         from echoai.pcworld.accounting import BudgetExceeded

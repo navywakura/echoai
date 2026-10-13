@@ -1,6 +1,6 @@
 {
   "schema": "pcworld.contract.v1",
-  "version": "0.5.0-development",
+  "version": "0.6.0-development",
   "status": "preliminary; scientific confirmation disabled",
   "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
   "scope": "Linux isolated workspaces, bounded Python input/output properties",
@@ -41,7 +41,7 @@
   "model_sampling": "configured seed + call index; shared sampling policy across arms; replayed observations deterministic, new model samples not guaranteed byte-identical",
   "local_pilot": "repair-v1 six-family result is development-only; repair-v2 uses seeded value variants for mechanism calibration, not independent bug-family confirmation; 25k token ceiling and all failures retained",
   "repair_v2_seed": 41,
-  "repair_v2_primary_mechanism": "E fixed symbolic source-risk and CAM-history routing versus F fixed category order; both require two distinct validated probes. This bounded policy is not a learned controller.",
+  "repair_v2_primary_mechanism": "E symbolic source-risk and CAM routing versus F fixed category order; seek two validated categories but record coverage as informative for all arms. All arms use identical finite final-case acceptance.",
   "oracle": "pcworld-reference-1 and pcworld-repair-reference-1; supervisor only, finite relation checks",
   "primary_contrast_proposed": {
     "contrast": "E-S",
@@ -53,6 +53,6 @@
   "development_fixtures": "4 public properties; cannot stand in for 60 independent benchmark tasks",
   "automatic_publication": false,
   "s6": "not reopened",
-  "repair_policy": "repair-two-gate-v1: witnessed CEGIS; public and previous passing cases first; CAS rollback; at most two repair attempts per episode. E freezes critique while repairing and reopens it only after a verified commit. Replay actual previous probes on the new snapshot, then test an additional distinct category if needed. F and E require two supported categories on the final snapshot; final finite oracle checks remain mandatory.",
+  "repair_policy": "common-final-oracle-v1: witnessed CEGIS and at most two guarded repairs. Stop before exceeding critic-call quota. Freeze candidate and evaluate under remaining original budgets regardless of category coverage. GRADUADO_POR_SUPERVIVENCIA is an unverified candidate eligibility label, never correctness proof. Final public, retained counterexample and reserved development cases must all pass. Prior 0.5 results remain unchanged.",
   "http_call_timeout_max_seconds": 600
 }

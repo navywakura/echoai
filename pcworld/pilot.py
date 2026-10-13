@@ -15,7 +15,7 @@ from .accounting import Budget, BudgetExceeded
 from .receipts import ReceiptStore, canonical, digest
 from .snapshots import SnapshotStore, identity
 from .runner import execute, environment_identity, DEFAULTS
-from .controller import LIMITS, arm_profile, choose, authorize
+from .controller import LIMITS, arm_profile, choose, authorize, candidate_graduation
 from .memory import EpisodeMemory
 from .tasks import FixtureProvider, development_tasks
 from .provider import HTTPProvider, ProviderFailure
@@ -225,6 +225,10 @@ class Episode:
                 seen_inputs.append(body['input'])
         rejection=None
         for attempt in range(max_invalid_retries+1):
+            if self.budget.report()['used']['critic_calls']>=LIMITS['critic_calls']:
+                self.emit('observation',{'operation':'critic_stopped','snapshot':snapshot.id,
+                    'reason':'critic_calls_exhausted','coverage_complete':False})
+                return {'eligible':False,'status':'unknown','reason':'critic_calls_exhausted'}
             instructions=critic_instructions(self.task,category,seen_inputs=seen_inputs,
                                                 rejection=rejection)
             reply=self.call('critic',snapshot,probe={'category':category,'attempt':attempt,
@@ -318,21 +322,26 @@ class Episode:
         final=[];required=[]
         for value in self.task['public_inputs']+self.counterexamples+self.task['development_inputs']:
             if value not in required: required.append(value)
-        if candidate is not None and error is None:
-            try:
-                for value in required: final.append(self.check(candidate,value,final=True))
-            except (BudgetExceeded,RuntimeError,ValueError,OSError) as exc: error=type(exc).__name__+': '+str(exc)[:200]
-        coverage_required=(self.arm in ('F','E') and not self.seeded_diagnostic
-                           and self.task['property'].startswith('repair.'))
         probe_categories=sorted({event['body'].get('category') for event in self.memory.events
                                  if event['body'].get('operation')=='probe_result'
                                  and event['body'].get('snapshot')==(candidate.id if candidate else None)
                                  and event['body'].get('status')=='supported'})
-        final_passed=bool(final) and len(final)==len(required) and all(p['status']=='supported' for p in final) and error is None
-        accepted=final_passed and (not coverage_required or len(probe_categories)>=2)
-        repaired=bool(candidate and self.counterexamples and self.repair_attempts and all(
+        coverage_complete=len(probe_categories)>=2
+        committed=bool(candidate and any(e['body'].get('operation')=='repair_committed'
+                            and e['body'].get('snapshot')==candidate.id for e in self.memory.events))
+        repaired=bool(committed and self.counterexamples and all(
             any(p.get('snapshot')==candidate.id and p['input']==v and p['status']=='supported' for p in self.last)
-            for v in self.counterexamples))
+            for v in self.task['public_inputs']+self.counterexamples))
+        graduation=candidate_graduation(has_candidate=candidate is not None,
+            repair_verified=repaired,coverage_complete=coverage_complete)
+        self.emit('observation',{'operation':'candidate_frozen','snapshot':candidate.id if candidate else None,
+                                'graduation':graduation,'probe_categories':probe_categories})
+        if candidate is not None and error is None:
+            try:
+                for value in required: final.append(self.check(candidate,value,final=True))
+            except (BudgetExceeded,RuntimeError,ValueError,OSError) as exc: error=type(exc).__name__+': '+str(exc)[:200]
+        final_passed=bool(final) and len(final)==len(required) and all(p['status']=='supported' for p in final) and error is None
+        accepted=final_passed
         result={'task':self.task['id'],'arm':self.arm,'development_accepted':accepted,'error':error,
                 'candidate':candidate.id if candidate else None,'final_properties':final,'required_inputs':required,
                 'counterexamples':self.counterexamples,'llm_calls':self.real_calls,'fixture_calls':self.fixture_calls,
@@ -343,7 +352,8 @@ class Episode:
                 'seeded_diagnostic':self.seeded_diagnostic,
                 'episode_wall_seconds':self.episode_wall_seconds,'repair_attempts':self.repair_attempts,
                 'counterexamples_repaired':repaired,'final_cases_passed':final_passed,
-                'probe_categories':probe_categories,'memory_lookup_work':self.memory.lookup_work,
+                'probe_categories':probe_categories,'coverage_complete':coverage_complete,'graduation':graduation,
+                'acceptance_policy':'common-final-oracle-v1','memory_lookup_work':self.memory.lookup_work,
                 'destroyed':self.memory.cam.destroyed}
         self.emit('property',{'task_result':result,'scope':'finite development cases; no universal correctness claim'})
         save(self.path/'result.json',result)
@@ -375,8 +385,8 @@ class Episode:
                 candidate=max(options,key=lambda row:(row[0],row[1]))[2]
             elif (self.arm in ('F','E') and not self.seeded_diagnostic
                   and self.task['property'].startswith('repair.')):
-                # Two distinct, in-domain adversarial probes are required before
-                # either critic arm may accept a publicly passing candidate.
+                # Seek two distinct probes, but report coverage independently of
+                # common final evaluation. Invalid critiques never count as proof.
                 current=self.propose(current);candidate=current
                 for _ in range(3):
                     public=[self.check(current,v) for v in self.task['public_inputs']+self.counterexamples]
@@ -634,8 +644,21 @@ def _audit_run(output):
             passed=bool(final) and len(final)==len(episode['required_inputs']) and all(p['status']=='supported' for p in final) and episode['error'] is None
             categories={r['body'].get('category') for r in records if r['body'].get('operation')=='probe_result'
                         and r['body'].get('snapshot')==episode['candidate'] and r['body'].get('status')=='supported'}
-            coverage_required=episode['arm'] in ('F','E') and not episode['seeded_diagnostic'] and tasks[episode['task']]['property'].startswith('repair.')
-            accepted=passed and (not coverage_required or len(categories)>=2)
+            accepted=passed
+            evidence=[r['body']['property'] for r in records if 'property' in r['body']
+                      and r['body'].get('kind')=='property' and not r['body'].get('final_evaluation')]
+            committed=any(r['body'].get('operation')=='repair_committed'
+                          and r['body'].get('snapshot')==episode['candidate'] for r in records)
+            repaired=bool(committed and episode['counterexamples'] and all(
+                any(p.get('snapshot')==episode['candidate'] and p['input']==v and p['status']=='supported' for p in evidence)
+                for v in tasks[episode['task']]['public_inputs']+episode['counterexamples']))
+            expected_graduation=candidate_graduation(has_candidate=episode['candidate'] is not None,
+                repair_verified=repaired,coverage_complete=len(categories)>=2)
+            if (episode.get('coverage_complete')!=(len(categories)>=2) or
+                episode.get('counterexamples_repaired')!=repaired or
+                episode.get('graduation')!=expected_graduation or
+                episode.get('acceptance_policy')!='common-final-oracle-v1'):
+                errors.append({'episode':path.name,'reason':'graduation or coverage evidence differs'})
             if episode['final_cases_passed']!=passed or episode['development_accepted']!=accepted:
                 errors.append({'episode':path.name,'reason':'acceptance or coverage differs from evidence'})
             if episode['episode_wall_seconds']!=contract.get('episode_wall_seconds',300):

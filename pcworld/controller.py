@@ -46,3 +46,12 @@ def authorize(operation,*,eligible=True):
                           proposed=2,inhibit=not eligible)
     return {'operation':operation,'wsp':wsp.hex(),'gate':decision,'flags':flags,
             'allowed':decision==0,'policy':'pcworld-fixed-attend-v1'}
+
+
+def candidate_graduation(*,has_candidate,repair_verified,coverage_complete):
+    """Eligibility label only: unsuccessful critique never proves correctness."""
+    status=('NO_CANDIDATE' if not has_candidate else
+            'GRADUADO_POR_SUPERVIVENCIA' if repair_verified and not coverage_complete else
+            'CANDIDATO_PARA_EVALUACION')
+    return {'status':status,'verified':False,'scope':'candidate awaiting final finite-case evaluation',
+            'coverage_is_informative':True}

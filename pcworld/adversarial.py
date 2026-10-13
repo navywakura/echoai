@@ -28,7 +28,7 @@ FIXED_ORDER={
 GUIDANCE={
     'touching-endpoints':'Try intervals that meet at exactly one endpoint and a nested interval.',
     'nested-transitive':'Try nested and transitively overlapping intervals in a different order.',
-    'empty-singleton':'Try empty input and one-element input.',
+    'empty-singleton':'The input MUST be a JSON list with exactly zero or one elements: [] or [one valid element]. NEVER include multiple elements in this category.',
     'duplicate-keys':'Use the same key twice with different values; check which occurrence must survive.',
     'first-occurrence-order':'Use repeated keys interleaved with another key; check stable order.',
     'dotdot-cancellation':'Use a path containing /../ and verify lexical cancellation.',
@@ -132,9 +132,11 @@ def critic_instructions(task,category,*,seen_inputs=(),rejection=None):
     if category not in ATTACKS[family]: raise ValueError('category does not match repair family')
     prior=json.dumps(list(seen_inputs),ensure_ascii=True,separators=(',',':'))
     if len(prior)>2048: raise ValueError('probe history exceeds prompt budget')
+    example=(' For records, valid syntax examples are [] or [{\"id\": \"x\", \"value\": 1}].'
+             if family=='records' and category=='empty-singleton' else '')
     message=(
         f'Generate exactly one new, valid test input in category /{category}. '
-        f'{GUIDANCE[category]} The input must follow the declared JSON input schema '
+        f'{GUIDANCE[category]}{example} The input must follow the declared JSON input schema '
         'and preconditions. Do not repeat an earlier input or the public example. '
         'Do not copy the task description into input. Return NO_COUNTEREXAMPLE_FOUND '
         'only if this category has no valid test; never invent an oracle or a property.'

@@ -131,7 +131,7 @@ class AdversarialRouting(unittest.TestCase):
             self.assertEqual(result['probe_categories'],provider.categories)
             self.assertTrue(result['development_accepted'])
 
-    def test_critic_arm_cannot_accept_without_two_confirmed_categories(self):
+    def test_critic_arm_cannot_accept_incorrect_code_regardless_of_coverage(self):
         import tempfile
         from pathlib import Path
         from echoai.pcworld.pilot import Episode
@@ -146,3 +146,12 @@ class AdversarialRouting(unittest.TestCase):
             self.assertFalse(result['development_accepted'])
             self.assertEqual(result['probe_categories'],[])
 
+
+class EmptyCategoryInstructions(unittest.TestCase):
+    def test_records_empty_or_singleton_uses_actual_contract_fields(self):
+        from echoai.pcworld.adversarial import critic_instructions
+        text=critic_instructions({'property':'repair.records'},'empty-singleton')
+        self.assertIn('exactly zero or one',text)
+        self.assertIn('[]',text)
+        self.assertIn('"value": 1',text)
+        self.assertNotIn('"val":',text)
