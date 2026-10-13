@@ -495,8 +495,8 @@ def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',s
               suite='fixtures',runtime=None,cache_properties=False,seeded_diagnostic=False,
               model_evidence=None,task_seed=41,task_families=None,episode_wall_seconds=300,
               probe_catalog='legacy-v1',probe_order_seed=20261013):
-    if probe_catalog not in ('legacy-v1','expanded-v1'):raise ValueError('unknown probe catalog')
-    if probe_catalog=='expanded-v1' and suite!='repair-v2':raise ValueError('expanded catalog requires repair-v2')
+    if probe_catalog not in ('legacy-v1','expanded-v1','expanded-v2'):raise ValueError('unknown probe catalog')
+    if probe_catalog in ('expanded-v1','expanded-v2') and suite!='repair-v2':raise ValueError('expanded catalog requires repair-v2')
     if type(probe_order_seed) is not int or not 0<=probe_order_seed<=2**31-1:raise ValueError('invalid probe order seed')
     if type(episode_wall_seconds) is not int or not 30<=episode_wall_seconds<=3600:
         raise ValueError('episode wall budget must be 30..3600 seconds')
@@ -513,7 +513,7 @@ def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',s
         if suite=='fixtures' or not set(task_families)<=set(NAMES): raise ValueError('invalid repair family filter')
         tasks=[t for t in tasks if t['family'] in task_families]
         if not tasks: raise ValueError('empty task selection')
-    if probe_catalog=='expanded-v1':
+    if probe_catalog in ('expanded-v1','expanded-v2'):
         from .adversarial import fixed_order
         tasks=[dict(t,probe_catalog=probe_catalog,probe_order_seed=probe_order_seed) for t in tasks]
         for task in tasks:task['fixed_probe_order']=list(fixed_order(task))

@@ -120,6 +120,18 @@ class HTTPProvider:
                               'abstention': 'optional NO_COUNTEREXAMPLE_FOUND or SPEC_AMBIGUOUS'}
                              if role in ('critic', 'self_review') else
                              {'content': 'complete solution.py reading JSON from stdin and writing one JSON value'})}
+        if role in ('critic', 'self_review') and task['property']=='repair.csv':
+            # A format illustration is data, never the prose domain description.
+            # Neutral single-record syntax is shared by every experimental arm.
+            prompt['format']['input']='alpha,beta'
+            prompt['input_json_schema']=task['input_json_schema']
+            prompt['input_instructions']=(
+                'Generate one CSV record as the input JSON string, not a description of CSV. '
+                'The format input is only a syntax illustration; choose a new record matching '
+                'the requested probe category. Do not copy the illustration or specification. '
+                'CSV quotes inside fields are doubled; encode the resulting record as a JSON '
+                'string with JSON escaping. A newline is allowed only inside a quoted field, '
+                'not as a second record. Return the record itself, not the decoded field list.')
         content = json.dumps(prompt, ensure_ascii=True)
         if role == 'propose' and context.get('repair_feedback'):
             feedback = context['repair_feedback']

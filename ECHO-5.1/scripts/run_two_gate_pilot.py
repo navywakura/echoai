@@ -25,7 +25,7 @@ def main():
     p.add_argument('--tasks',type=int,default=6)
     p.add_argument('--task-seed',type=int,default=47)
     p.add_argument('--families',nargs='+',default=['records','path','pagination'])
-    p.add_argument('--probe-catalog',choices=['legacy-v1','expanded-v1'],default='legacy-v1')
+    p.add_argument('--probe-catalog',choices=['legacy-v1','expanded-v1','expanded-v2'],default='legacy-v1')
     p.add_argument('--probe-order-seed',type=int,default=20261013)
     a=p.parse_args();secrets=json.loads((a.control/'relay-secrets.json').read_text())
     os.environ['ECHO51_RELAY_CLIENT_TOKEN']=secrets['client_token']

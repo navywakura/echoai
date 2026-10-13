@@ -66,6 +66,7 @@ GUIDANCE={
     'extreme-items':'Use at least one item exactly -10000 or 10000 and valid offset and limit.',
     'linear-chain':'Use at least two nodes connected as a single directed chain covering every node, without cycles or repeated edges.',
     'edgeless':'Use at least two distinct nodes and an empty edges list.',
+    'reverse-alphabetical-edges':'Use an acyclic graph with at least one edge [before, after] where before is lexicographically greater than after. The input object has nodes and edges fields, never deps. Choose node labels whose dependency order contradicts alphabetic sorting.',
 }
 
 def _family(task):
@@ -78,8 +79,10 @@ def _family(task):
 
 def categories_for(task):
     family=_family(task);catalog=task.get('probe_catalog','legacy-v1')
-    if catalog not in ('legacy-v1','expanded-v1'): raise ValueError('unknown probe catalog')
-    return ATTACKS[family]+(EXTRA_CATEGORIES[family] if catalog=='expanded-v1' else ())
+    if catalog not in ('legacy-v1','expanded-v1','expanded-v2'): raise ValueError('unknown probe catalog')
+    extra=EXTRA_CATEGORIES[family] if catalog!='legacy-v1' else ()
+    reverse=('reverse-alphabetical-edges',) if catalog=='expanded-v2' and family=='dependencies' else ()
+    return ATTACKS[family]+extra+reverse
 
 def fixed_order(task):
     """Precommitted permutation, independent of candidate, oracle and bug labels."""
@@ -110,6 +113,11 @@ def source_risks(task,source):
                         any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='sorted'
                             for n in nodes) else None),
     }
+    if family=='dependencies' and task.get('probe_catalog')=='expanded-v2':
+        sort_call=any(isinstance(n,ast.Call) and
+                      ((isinstance(n.func,ast.Name) and n.func.id=='sorted') or
+                       (isinstance(n.func,ast.Attribute) and n.func.attr=='sort')) for n in nodes)
+        if sort_call:return ('reverse-alphabetical-edges',)
     return (cues[family],) if cues[family] else ()
 
 def choose_category(arm,task,source,seen):
@@ -157,6 +165,20 @@ def matches_category(task,category,value):
         return len(fields)==1 if category=='single-field' else '' in fields
     if category=='in-range':return value['offset']>=0 and value['limit']>0 and value['offset']+value['limit']<=len(value['items'])
     if category=='extreme-items':return any(abs(v)==10000 for v in value['items'])
+    if category=='reverse-alphabetical-edges':
+        if not any(x>y for x,y in value['edges']):return False
+        # A reverse edge in a cycle tests cycle detection, not topological order.
+        graph={n:set() for n in value['nodes']}
+        incoming={n:0 for n in graph}
+        for x,y in value['edges']:
+            if y not in graph[x]:graph[x].add(y);incoming[y]+=1
+        ready=[n for n in graph if incoming[n]==0];visited=0
+        while ready:
+            n=ready.pop();visited+=1
+            for child in graph[n]:
+                incoming[child]-=1
+                if incoming[child]==0:ready.append(child)
+        return visited==len(graph)
     if category=='edgeless':return len(value['nodes'])>=2 and not value['edges']
     if category=='linear-chain':
         nodes=value['nodes'];edges=value['edges']
@@ -245,7 +267,7 @@ def audit_probe_records(task,arm,records,source_for):
     Property semantics and snapshot custody are independently replayed by the
     caller. This adds eligibility, selection order and per-category call limits.
     """
-    if task.get('probe_catalog')!='expanded-v1':return []
+    if task.get('probe_catalog') not in ('expanded-v1','expanded-v2'):return []
     errors=[];seen={};attempts={};properties=[];sources={};proposals={};prior={};results=[]
     for record in records:
         b=record['body'];snapshot=b.get('snapshot');category=b.get('category')

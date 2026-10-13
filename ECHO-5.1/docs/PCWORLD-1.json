@@ -1,6 +1,6 @@
 {
   "schema": "pcworld.contract.v1",
-  "version": "0.7.0-development",
+  "version": "0.8.0-development",
   "status": "preliminary; scientific confirmation disabled",
   "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
   "scope": "Linux isolated workspaces, bounded Python input/output properties",
@@ -29,7 +29,7 @@
   "episode_wall_seconds": "explicit per-run option 30..3600; default 300; local repair calibration 900",
   "deadline_scope": "work admitted and each execution/HTTP call bounded by remaining deadline; supervisor cleanup and receipt persistence reported separately within elapsed time",
   "max_proposals_per_context": 3,
-  "review": "F and E seek two distinct supported categories; coverage is informative and not an acceptance gate. Up to two retries per category within six critic calls. S retains self-review; I2 independent proposals. expanded-v1 uses five valid categories per family and candidate-independent seeded fixed order; E may prioritize visible AST cues, with the same fallback order.",
+  "review": "F and E seek two distinct supported categories; coverage is informative and not an acceptance gate. Up to two retries per category within six critic calls. S retains self-review; I2 independent proposals. expanded-v1 uses five valid categories per family and candidate-independent seeded fixed order; E may prioritize visible AST cues, with the same fallback order. expanded-v2 adds reverse-alphabetical-edges to dependencies for both F/E (six categories there; five elsewhere), with an acyclic in-domain validator. E prioritizes this risk for sorted()/sort() AST calls. CSV critic/self-review format uses neutral single-record data instead of domain prose, separate from its JSON schema.",
   "role_context_bytes": 32768,
   "memory_events": 4096,
   "library": "empty and frozen in principal comparison",

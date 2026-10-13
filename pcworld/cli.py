@@ -14,7 +14,7 @@ def main(argv=None):
     pilot.add_argument('--suite',choices=['fixtures','repair-v1','repair-v2'],default='fixtures')
     pilot.add_argument('--task-seed',type=int,default=41)
     pilot.add_argument('--task-families',nargs='+')
-    pilot.add_argument('--probe-catalog',choices=['legacy-v1','expanded-v1'],default='legacy-v1')
+    pilot.add_argument('--probe-catalog',choices=['legacy-v1','expanded-v1','expanded-v2'],default='legacy-v1')
     pilot.add_argument('--probe-order-seed',type=int,default=20261013)
     pilot.add_argument('--episode-wall-seconds',type=int,default=300)
     pilot.add_argument('--runtime',type=Path);pilot.add_argument('--cache-properties',action='store_true')
