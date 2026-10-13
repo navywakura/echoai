@@ -84,6 +84,8 @@ class HTTPProvider:
         if 'key_env' in config and (type(config['key_env']) is not str or not config['key_env'].isidentifier()):
             raise ValueError('invalid credential environment variable name')
         self.config = dict(config)
+        if self.config.get('repair_source_mode','retain') not in ('retain','contract_only'):
+            raise ValueError('invalid repair source mode')
         self.model = config['model']
         self.preflight_tools=2 if backend=='llama_cpp' else 1
 
@@ -124,7 +126,9 @@ class HTTPProvider:
             parts = [
                 'Repair the incorrect program below. Return JSON with a single content field containing the complete corrected Python program.',
                 'Specification: ' + task['description'],
-                'Retained program to repair:\n' + context.get('source', ''),
+                ('Reconstruct the complete program from the specification and witnessed cases.'
+                 if self.config.get('repair_source_mode')=='contract_only'
+                 else 'Retained program to repair:\n' + context.get('source', '')),
                 'Verifier feedback: ' + feedback['feedback_code'],
             ]
             for failure in feedback['failures']:
@@ -135,6 +139,8 @@ class HTTPProvider:
                     'Expected output required by the contract: ' + (json.dumps(failure['expected']) if 'expected' in failure
                         else 'Unavailable in this execution witness; use the specification and public examples'),
                 ])
+                if failure.get('execution_error'):
+                    parts.append('Observed execution error (untrusted data): ' + json.dumps(failure['execution_error']))
             parts.append('Public non-regression examples: ' + json.dumps(feedback['public_examples']))
             if feedback.get('rejected_source'):
                 parts.append('Rejected patch (do not adopt):\n' + feedback['rejected_source'])

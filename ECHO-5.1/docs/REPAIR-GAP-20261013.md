@@ -55,3 +55,10 @@ pero no el código defectuoso. No se aportan soluciones ni datos reservados.
 Esto prueba reconstrucción desde especificación frente a posible anclaje en
 el programa previo; no se agrupa con los brazos S/I2/F/E. Se verificará el
 parche contra los mismos casos y en el mismo sandbox. No se abre una campaña.
+
+La reconstrucción sin fuente cambió los algoritmos, pero los dos programas
+fallaron en ejecución. Diagnóstico adicional fijado: reejecutar los testigos
+originales en el sandbox y usar `guarded_repair` con dos intentos por tarea,
+modo `contract_only` y errores de ejecución vinculados a recibos. No se
+modifica código candidato a mano. No hay crítico activo ni mérito por
+descubrimiento: `seeded_diagnostic=true` conserva ese alcance explícito.

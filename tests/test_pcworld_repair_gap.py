@@ -71,6 +71,19 @@ class RepairGap(unittest.TestCase):
             self.assertFalse(result['counterexamples_repaired'])
             self.assertFalse(result['development_accepted'])
 
+    def test_runtime_error_is_exposed_as_execution_evidence_for_second_repair(self):
+        with tempfile.TemporaryDirectory() as d:
+            provider=RepairProvider(['print(undefined_name)',FIXED]);task=repair_tasks()[1]
+            ep=Episode(Path(d)/'run',task,'E',provider)
+            result=ep.run()
+            feedback=provider.contexts[2]['repair_feedback']
+            errors=[f for f in feedback['failures'] if f['status']=='unknown']
+            self.assertEqual(len(errors),1)
+            self.assertIn('NameError',errors[0]['execution_error']['stderr'])
+            self.assertNotIn('expected',errors[0])
+            self.assertEqual(feedback['feedback_code'],'REJECTED_REGRESSION')
+            self.assertTrue(result['counterexamples_repaired'])
+
     def test_explicit_wall_budget_controls_admission_and_still_expires(self):
         from echoai.pcworld.accounting import BudgetExceeded
         with tempfile.TemporaryDirectory() as d:
