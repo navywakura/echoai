@@ -1,9 +1,10 @@
 # PCWORLD-1 · aceptación y límites
 
-Este cuadro incorpora la continuación del 13 de octubre. «Comprobado» significa
-que pasó la realización descrita, no una garantía universal. El piloto local
-terminó: S/I2/F/E empatan en 2/6. La transferencia general y la superioridad
-multiagente siguen sin demostrarse; ver [informe](LOCAL-PILOT-20261013.md).
+Actualizado tras el ensayo 0.10 del 13 de octubre. «Comprobado» significa que
+pasó la realización descrita, no una garantía universal. El piloto local 7B
+terminó con S/I2/F/E=2/6; se conserva su [informe](LOCAL-PILOT-20261013.md).
+Con 32B, S=F=E=E_shared=12/12 e I2=10/12. La transferencia general y la ventaja
+multiagente siguen abiertas; ver [resultados y límites](SCALING32-RESULTS-20261013.md).
 
 | ID | Realización | Estado y alcance |
 |---|---|---|
@@ -18,15 +19,15 @@ multiagente siguen sin demostrarse; ver [informe](LOCAL-PILOT-20261013.md).
 | T09 | Reparación posterior a un fallo similar y reproducción del caso en la nueva versión | Comprobado: recuperar un recuerdo no bloquea ni certifica la nueva solución. |
 | T10 | Caché persistente exacta, precondiciones, dependencias del checker, custodia y coste de consulta | Comprobado para propiedades puras sobre resultados observados. Reinicio conserva los aciertos; cambio de identidad invalida; ausencia de testigos hace fallar auditoría. Se repite siempre el código candidato; no se presupone determinismo de Python arbitrario. |
 | T11 | Propiedad inventada, dominio inválido, oráculo/precondiciones incompatibles y abstención del crítico | Comprobado; no se convierten en contraejemplos válidos. |
-| T12 | Fallo numérico real, conservación del input, nueva ejecución en la reparación y aceptación que incluye todos los casos retenidos | Comprobado con procesos aislados y un diagnóstico sembrado con Qwen: 1/1, 51 recibos auditados. El piloto independiente no encontró contraejemplos. No se implementó minimización automática del contraejemplo. |
+| T12 | Fallo numérico real, conservación del input, nueva ejecución en la reparación y aceptación que incluye todos los casos retenidos | Comprobado con procesos aislados: diagnóstico sembrado Qwen 1/1 y 51 recibos; en 0.10 hay 14 episodios con reparación verificada, sin inyectar la propuesta inicial. Son bugs inducidos de desarrollo, no confirmación independiente. No hay minimización automática del contraejemplo. |
 | T13 | Dos reservas concurrentes sobre el último saldo; liquidaciones y costes que exceden reserva | Comprobado con un único supervisor y su objeto `Budget` compartido. No es contabilidad distribuida entre supervisores. |
 | T14 | Parsing inválido, vacíos, reintentos, fuel finito, cuotas y deadlines | Comprobado en pruebas y 24 episodios reales de Qwen: plantilla/tokenización exactas, esquema de salida y contabilidad. Tres inputs del crítico quedaron fuera del dominio; no se ejecutaron como contraejemplos. Los fallos con uso incoherente cargan toda la reserva o más si el servidor informa exceso. |
 | T15 | Capacidad 4096 de recibos; identificadores WSP mayores de 255; escrituras interrumpidas y recuperación | Comprobado en las realizaciones unitarias. El piloto no agota físicamente CAM. No se ofrece reanudación de episodios a mitad de una operación ni persistencia general de usuario. |
 | T16 | Barrera con orden determinista y replay WSP exacto de cada episodio | Comprobado para supervisor secuencial. La barrera se prueba por separado; no se ha ensayado un scheduler distribuido. |
 | T17 | Límites reales de pared, CPU agregada, procesos, memoria, salida y tmpfs; hijos terminados | Comprobado en pruebas acotadas. El watchdog CPU tiene granularidad de 50 ms y se registra el exceso; MemoryPeak es cargo de cgroup, no RSS exacto ni energía eléctrica. |
-| T18 | S/I2/F/E con entradas, herramientas, cuotas y checker comunes; S con autorrevisión, crítico una vez por versión | Comprobado con fixtures y 24 episodios reales, 860 recibos auditados. Cada brazo: 2/6 tareas; E−S y E−F = 0. Compartir techo presupuestario no equivale a consumir lo mismo; costes publicados por brazo y episodio. No acredita superioridad. |
+| T18 | S/I2/F/E con entradas, herramientas, cuotas y checker comunes; S con autorrevisión y crítica F/E acotada por contrato | Comprobado en fixtures y pilotos reales. El piloto local histórico tiene 24 episodios y 860 recibos, todos 2/6. En 0.10 se añade E_shared: 66 episodios, S=F=E=E_shared=12/12 e I2=10/12. La consulta se cobra a todos los receptores; la adquisición adicional se informa aparte. Compartir techo por receptor no equivale a gastar lo mismo ni a tener igual techo global con adquisición. No acredita superioridad general. |
 | T19 | Control sin LLM; importación del CAM, WSP, ATTEND y gate existentes; replay lógico | Comprobado. El router es fijo, no una Q aprendida; las ejecuciones y tiempos no son reproducibles byte a byte. |
-| T20 | Biblioteca persistente de recetas reparadas y procedencia; registro antiguo de cuarentena | Parcial: 0.9 publica la reparación de A y tres receptores reutilizan el código en una variante del mismo contrato, pasando sin reparar. Restauración y custodia comprobadas; no hay abstracción parametrizada, promoción/cuarentena integrada ni transferencia general demostrada. Ver COLEARNING-RESULTS-20261013.md. |
+| T20 | Biblioteca persistente de recetas reparadas y procedencia; registro antiguo de cuarentena | Parcial: 0.10 publica dos recetas reparadas y cuatro receptores compatibles pasan sin reparar. Restauración y procedencia comprobadas; reutilización literal/mismo AST entre variantes del mismo contrato. No hay abstracción parametrizada, promoción/cuarentena integrada ni transferencia general; adquisición aún no amortizada. Ver SCALING32-RESULTS-20261013.md. |
 
 El criterio global de implementación de toda la investigación **no se declara
 verde** mientras las obligaciones parciales no se cierren o se delimite un
