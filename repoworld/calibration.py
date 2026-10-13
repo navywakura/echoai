@@ -51,8 +51,10 @@ def calibration_verdict(rows,expected_ids):
 def source_manifest():
     root=Path(__file__).resolve().parents[1]
     files=list((root/'repoworld').glob('*.py'))
-    files += [root/'pcworld'/name for name in ('runner.py','repo_launcher.py','runtime.py','snapshots.py','receipts.py','accounting.py','memory.py')]
-    files += [root/'ECHO-5.1/scripts/run_repoworld.py',root/'ECHO-5.1/docs/swebench/SWE-TOOLS.schema.json']
+    files += list((root/'pcworld').glob('*.py'))+list((root/'core').glob('*.py'))
+    files += list((root/'tests').glob('test_repoworld_*.py'))
+    files += [root/'ECHO-5.1/scripts/run_repoworld.py',root/'ECHO-5.1/scripts/inference_relay.py',root/'scripts/plot_swebench_results.py']
+    files += [root/'ECHO-5.1/docs/swebench'/name for name in ('SWE-TOOLS.schema.json','SWE-RUN-LOCK.schema.json','SWE-RESULTS.schema.json')]
     return {str(path.relative_to(root)):sha256_file(path) for path in sorted(files)}
 
 

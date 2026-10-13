@@ -36,7 +36,26 @@ def _allowed(path):
     return path
 
 
-def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS):
+def production_path(repo,path):
+    _allowed(path)
+    from .checks import CATALOG
+    if repo in CATALOG:
+        roots=CATALOG[repo][1]
+        if not any(path.startswith(p) if p.endswith('/') else path==p for p in roots):
+            raise ValueError('only declared production source paths may be patched')
+    return True
+
+
+def protected_paths(entries):
+    result=[]
+    for path in sorted(entries,key=lambda s:(len(s.split('/')),s)):
+        if path=='.' or any(path==p or path.startswith(p+'/') for p in result): continue
+        try: _allowed(path)
+        except ValueError: result.append(path)
+    return result
+
+
+def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS,probe=False):
     max_bytes,max_files,max_lines=limits
     if type(diff) is not str or not diff or len(diff.encode('utf-8'))>max_bytes or '\0' in diff:
         raise ValueError('invalid or oversized text diff')
@@ -51,7 +70,10 @@ def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS):
         old=lines[i][4:].rstrip('\n');new=lines[i+1][4:].rstrip('\n');i+=2
         if old!='/dev/null' and not old.startswith('a/'): raise ValueError('old path prefix')
         if new!='/dev/null' and not new.startswith('b/'): raise ValueError('new path prefix')
-        path=_allowed((new if old=='/dev/null' else old)[2:])
+        path=(new if old=='/dev/null' else old)[2:]
+        if probe:
+            if old!='/dev/null' or not re.fullmatch(r'\.repoworld-probes/[A-Za-z0-9_-]{1,64}\.py',path):raise ValueError('probe must create an isolated Python test')
+        else:path=_allowed(path)
         if old!='/dev/null' and new!='/dev/null' and old[2:]!=new[2:]: raise ValueError('renames unsupported')
         if path in seen or len(seen)>=max_files: raise ValueError('duplicate/excess patch files')
         seen.add(path);entry=current.manifest['entries'].get(path)
@@ -97,11 +119,26 @@ def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS):
     return edits
 
 
+def stage_probe(session,diff):
+    import ast
+    edits=_parse_diff(session.store,session.current,diff,limits=(12000,1,150),probe=True)
+    source=edits[0]['content']
+    if source is None or len(source.encode())>8192:raise ValueError('probe source capacity')
+    try:ast.parse(source)
+    except SyntaxError as exc:raise ValueError('invalid proposed Python syntax') from exc
+    identity=hashlib.sha256(source.encode()).hexdigest()
+    if not any(r['body'].get('event')=='repoworld.probe-proposal' and r['body'].get('probe_id')==identity for r in session.receipts.records):
+        session.receipts.append(dict(event='repoworld.probe-proposal',probe_id=identity,source=source,
+            author='model',scope='proposed-test',property_status='unknown'))
+    return identity
+
+
 def stage_patch(base,current,diff,*,expected_snapshot_id,purpose):
     if purpose!='solution': raise ValueError('probe namespace requires the public-check adapter (task 4)')
     if expected_snapshot_id!=current.id: raise ValueError('STALE_BASE')
     store=repo_store(current.root.parent.parent);store.validate(current)
     edits=_parse_diff(store,current,diff)
+    for edit in edits: production_path(base.task.repo,edit['path'])
     result=store.apply(current,current.id,edits,allowed_paths=tuple(e['path'] for e in edits),advance=False)
     digest=hashlib.sha256(diff.encode()).hexdigest()
     operation=hashlib.sha256(canonical(dict(base=base.snapshot.id,source=current.id,patch=digest,purpose=purpose))).hexdigest()

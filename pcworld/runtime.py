@@ -28,7 +28,11 @@ def runtime_store(directory):
 
 def validate_runtime(snapshot):
     # Validate the existing content store, not an unverified mount path.
-    store=SnapshotStore(snapshot.root.parent.parent,max_bytes=MAX_BYTES)
+    # Explicit dependency images have a separate bounded profile. Never extend
+    # the default PCWorld workspace/candidate bounds.
+    dependencies=snapshot.manifest['entries'].get('etc/repoworld-dependencies.json')
+    store=(SnapshotStore(snapshot.root.parent.parent,max_bytes=2*1024**3,max_files=60000,max_entries=100000,streaming=True)
+           if dependencies else SnapshotStore(snapshot.root.parent.parent,max_bytes=MAX_BYTES,streaming=True))
     store.validate(snapshot)
     spec=json.loads((snapshot.root/'etc/pcworld-runtime.json').read_text())
     if spec.get('schema')!='pcworld.python-rootfs.v1': raise ValueError('unsupported runtime')

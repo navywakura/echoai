@@ -15,10 +15,17 @@ import sys
 
 def main():
     request=json.loads(Path('/runner/request.json').read_text())
-    shutil.copytree('/candidate','/work',dirs_exist_ok=True,copy_function=shutil.copyfile)
+    protected=set(request.get('protected',[]))
+    def ignore(directory,names):
+        parent=Path(directory).relative_to('/candidate')
+        return [name for name in names if (parent/name).as_posix() in protected]
+    shutil.copytree('/candidate','/work',dirs_exist_ok=True,copy_function=shutil.copyfile,ignore=ignore)
     for parent,dirs,files in os.walk('/work'):
+        rel=Path(parent).relative_to('/work')
+        dirs[:]=[d for d in dirs if (rel/d).as_posix() not in protected]
         os.chmod(parent,0o755)
         for name in files:
+            if (rel/name).as_posix() in protected: continue
             source=Path('/candidate')/Path(parent).relative_to('/work')/name
             os.chmod(Path(parent)/name,0o644 | (source.stat().st_mode & 0o111))
     for name in ('.tmp','.home','.out'):

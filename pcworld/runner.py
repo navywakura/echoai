@@ -77,7 +77,7 @@ def environment_identity(runtime=None):
 
 def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime=None,
             profile='pcworld', snapshot_limits=None, repo_base=None, cwd='.', env=None,
-            check_artifacts=()) -> dict:
+            check_artifacts=(),probe_source=None) -> dict:
     """Run a structured operator-authorized argv, returning host observations.
 
     Copies regular files into a private, immutable candidate snapshot before
@@ -94,7 +94,7 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
     repo = profile == 'repoworld'
     if repo and (runtime is None or repo_base is None):
         raise ValueError('RepoWorld requires pinned runtime and base capabilities')
-    if not repo and (snapshot_limits is not None or repo_base is not None or cwd!='.' or env or check_artifacts):
+    if not repo and (snapshot_limits is not None or repo_base is not None or cwd!='.' or env or check_artifacts or probe_source is not None):
         raise ValueError('repository options require the explicit profile')
     caps={**DEFAULTS,**({'disk_bytes':128*1024*1024} if repo else {}),**(limits or {})}
     if set(caps)!=set(DEFAULTS) or any(type(v) is not int or v<=0 for v in caps.values()):
@@ -133,8 +133,26 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
                 raise ValueError('bounded artifact capabilities required')
             for path in check_artifacts: _parts(path)
             config=Path(temp)/'launcher';config.mkdir()
+            if probe_source is not None:
+                if type(probe_source) is not str or len(probe_source.encode())>8192 or '\0' in probe_source:raise ValueError('bounded probe source required')
+                (config/'probe.py').write_text(probe_source)
+            from ..repoworld.workspace import protected_paths
+            protected=protected_paths(repo_base.manifest['entries'])
+            for path,entry in repo_base.manifest['entries'].items():
+                if any(path==p or path.startswith(p+'/') for p in protected) and snapshot.manifest['entries'].get(path)!=entry:
+                    raise ValueError('candidate changed protected public test inputs')
+            # The store seals files 0444/directories 0555. Tests using copytree
+            # must see their original modes, while the mount still enforces
+            # immutability. Materialize only public inputs in this private job.
+            public=config/'public-inputs';public.mkdir()
+            for path,entry in sorted(repo_base.manifest['entries'].items(),key=lambda item:(item[0].count('/'),item[0])):
+                if not any(path==p or path.startswith(p+'/') for p in protected):continue
+                dest=public/path;dest.parent.mkdir(parents=True,exist_ok=True)
+                if entry['type']=='directory':dest.mkdir(exist_ok=True)
+                else:shutil.copyfile(repo_base.root/path,dest)
+                dest.chmod(entry['mode'])
             shutil.copyfile(Path(__file__).with_name('repo_launcher.py'),config/'launch.py')
-            (config/'request.json').write_text(json.dumps(dict(argv=argv,cwd=cwd,env=env or {},artifacts=check_artifacts)))
+            (config/'request.json').write_text(json.dumps(dict(argv=argv,cwd=cwd,env=env or {},artifacts=check_artifacts,protected=protected)))
         result=_execute_snapshot(snapshot,argv,caps,stdin,runtime,repo_base=repo_base,launcher=config)
         if repo:
             result['artifacts']={}
@@ -167,6 +185,9 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
                  '--size',str(caps['disk_bytes']//2),'--tmpfs','/out',
                  '--ro-bind',str(snapshot.root),'/workspace','--chdir','/workspace'])
     run_argv=['/usr/bin/python3','-I','/runner/launch.py'] if launcher else argv
+    if launcher:
+        for path in json.loads((launcher/'request.json').read_text())['protected']:
+            writable.extend(['--ro-bind',str(launcher/'public-inputs'/path),'/work/'+path])
     bwrap=['/usr/bin/bwrap','--unshare-all','--unshare-user','--die-with-parent','--new-session',
            '--cap-drop','ALL','--disable-userns',*mounts,
            '--proc','/proc','--dev','/dev',*writable,

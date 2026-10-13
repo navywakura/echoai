@@ -234,15 +234,15 @@ def public_regressions(before: PublicCheckReport,
                        after: PublicCheckReport) -> tuple[str,...]: ...
 ```
 
-- [ ] Fixtures independientes: un patch arregla bug pero rompe un test previo;
+- [x] Fixtures independientes: un patch arregla bug pero rompe un test previo;
   otro repara ambos. En guard activo, comprobar conservación/reemplazo correcto.
-- [ ] Repetir BASE dos veces; test flaky o ya fallido queda identificado, no se
+- [x] Repetir BASE dos veces; test flaky o ya fallido queda identificado, no se
   convierte en una regresión nueva. Pass→skip, colección cero y test ausente
   producen invalidez o regresión según contrato; no se aceptan silenciosamente.
 - [ ] Intentos de forjar líneas PASSED, cambiar plugins, editar tests/checker y
   exit contradictorio deben producir evidencia rechazada; documentar límite
   de amenaza del ejecutor Python, sin proclamar prueba formal universal.
-- [ ] Registrar test del crítico primero como propuesta. Testigos no justificados
+- [x] Registrar test del crítico primero como propuesta. Testigos no justificados
   por contrato público no adquieren `PUBLIC_COUNTEREXAMPLE`. Fixture de un
   crítico que exige una salida errónea: no debe convertirse en FACT.
 - [ ] Implementar recibos con blobs acotados, identidad del check y candidato,
@@ -266,11 +266,11 @@ def run_episode(base: RepoBase, arm: str, seed: int, *,
   editar, fallar test y reparar. Las pruebas de control no requieren un LLM.
 - [ ] Afirmar que mensajes formateados+respuesta reservada nunca exceden 4096;
   páginas y ledger reordenados no pierden hash/procedencia. No resumen inventado.
-- [ ] S puede hacer la misma reparación que F/E. I2 comparte una sola cuenta;
+- [x] S puede hacer la misma reparación que F/E. I2 comparte una sola cuenta;
   dos ramas nunca reciben 25k cada una. Selector no puede consultar final score.
-- [ ] F/E tienen mismo catálogo y guard; E_no_guard solo cambia retención
+- [x] F/E tienen mismo catálogo y guard; E_no_guard solo cambia retención
   automática. Probar que se ejecutan/cobran los mismos checks comunes.
-- [ ] Refutación activa suspende críticas y permite dos reparaciones. Cuota de
+- [x] Refutación activa suspende críticas y permite dos reparaciones. Cuota de
   críticas agotada congela el candidato; no inventa RESOLVED ni impide examen.
 - [ ] Deadline de proveedor/relay coherente. Si hay generación remota pendiente,
   registrar estado y cancelar/esperar con límite; no iniciar una duplicada
@@ -334,7 +334,7 @@ def audit_study(run_dir: Path, lock: dict, *, export: Path | None) -> dict: ...
   puede mezclar dos diffs. Verificar imagen/eval-script por digest.
 - [ ] Curador valida negativo/gold, pero ningún byte de esos controles vuelve al
   actor. Probar sentinelas en stdout, filesystem, prompts y memoria.
-- [ ] Barrera global: intentar consultar un final mientras quede una entrega
+- [x] Barrera global: intentar consultar un final mientras quede una entrega
   principal/guard/memoria sin congelar debe fallar. Auditor no crea claves ausentes.
 - [ ] Comprobar cadena, artefactos, presupuesto, todos los roles, schedule, hashes
   de fuente, modelo, base/runtime y tests. JSON Schema valida estructura; las
@@ -351,7 +351,7 @@ def audit_study(run_dir: Path, lock: dict, *, export: Path | None) -> dict: ...
 
 - [ ] CLI `prepare`, `preflight`, `calibrate`, `seal`, `run`, `audit`, `status`.
   `run` exige lock sellado; un contrato draft debe rechazarse antes de asignar GPU.
-- [ ] Registrar calendario completo por ID/brazo/seed. Reanudación solo de celdas
+- [x] Registrar calendario completo por ID/brazo/seed. Reanudación solo de celdas
   no comenzadas o transacciones recuperables con misma identidad; no re-muestreo.
 - [ ] Pruebas de caída entre token reserve/settle, snapshot/receipt, submit/eval;
   recuperar sin cobrar dos veces ni olvidar trabajo realmente consumido.
@@ -400,3 +400,12 @@ cmp /tmp/SWE-SAMPLE.reproduced.json ECHO-5.1/docs/swebench/SWE-SAMPLE.json
 Esos comandos no descargan modelos, no lanzan Docker/Kaggle y no constituyen
 ejecución de SWE-bench. La calibración local y los tests del nuevo runtime se
 harán después de implementar las tareas correspondientes.
+
+## Continuación: tareas 4–8, compuertas locales
+
+Checks, protocolo, contabilidad duradera, curador, CLI y auditor se implementaron
+en la continuación de `e0a1a6d`. La evidencia y los límites están en
+[REPOWORLD-EXECUTION-20261013.md](REPOWORLD-EXECUTION-20261013.md).
+Las casillas sin marcar mantienen obligaciones completas pendientes, aunque
+haya implementación parcial. El preflight de entornos y los controles oficiales
+no han pasado; Kaggle no se ha iniciado y el contrato permanece en diseño.

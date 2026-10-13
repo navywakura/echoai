@@ -21,6 +21,7 @@ REPO_LIMITS = dict(max_files=50000, max_bytes=512*1024*1024, max_entries=100000,
 POLICY = dict(schema='repoworld.environment-policy.v1', network=False, host_usr=False,
               scratch='single-tmpfs', scope='stdlib-calibration', dependencies='Python stdlib only',
               max_bytes=REPO_LIMITS['max_bytes'])
+DEPENDENCY_POLICY={**POLICY,'scope':'public-dependencies','dependencies':'frozen read-only /deps inventory'}
 
 
 def repo_store(path):
@@ -28,24 +29,35 @@ def repo_store(path):
 
 
 def environment_ref(runtime, *, scope):
-    if scope != 'stdlib-calibration':
+    if scope not in ('stdlib-calibration','public-dependencies'):
         raise ValueError('dependency environments require a separately validated profile')
     validate_runtime(runtime)
     if any(runtime.manifest['entries'].get(name,{}).get('type')!='directory'
            for name in ('work','candidate','repo-base','runner')):
         raise ValueError('derive repository_runtime with required mount points first')
     # Exact inventory is the snapshot manifest. A scope claim cannot add dependencies.
-    return EnvironmentRef(runtime.id, hashlib.sha256(canonical(POLICY)).hexdigest(), runtime.root)
+    policy=POLICY
+    if scope=='public-dependencies':
+        spec=json.loads((runtime.root/'etc/repoworld-dependencies.json').read_bytes())
+        if spec.get('schema')!='repoworld.dependencies.v1' or spec.get('scope')!=scope or not spec.get('files'):
+            raise ValueError('dependency image provenance missing')
+        policy=DEPENDENCY_POLICY
+    return EnvironmentRef(runtime.id, hashlib.sha256(canonical(policy)).hexdigest(), runtime.root)
 
 
 def runtime_for(ref):
-    if ref.policy_sha256 != hashlib.sha256(canonical(POLICY)).hexdigest():
+    policies={hashlib.sha256(canonical(p)).hexdigest():p for p in (POLICY,DEPENDENCY_POLICY)}
+    if ref.policy_sha256 not in policies:
         raise ValueError('unrecognized environment policy')
-    store=SnapshotStore(ref.root.parent.parent, max_bytes=256*1024*1024, streaming=True)
+    from .dependencies import image_store
+    store=(image_store(ref.root.parent.parent) if policies[ref.policy_sha256]==DEPENDENCY_POLICY else
+           SnapshotStore(ref.root.parent.parent, max_bytes=256*1024*1024, streaming=True))
     snapshot=store.get(ref.rootfs_sha256)
     if snapshot.root != ref.root:
         raise ValueError('runtime capability mismatch')
     validate_runtime(snapshot)
+    if environment_ref(snapshot,scope=policies[ref.policy_sha256]['scope'])!=ref:
+        raise ValueError('environment provenance mismatch')
     return snapshot
 
 
@@ -112,9 +124,9 @@ def prepare_repo(task, source: Path, environment: EnvironmentRef, expected_commi
 
 
 def execute_repo(base: RepoBase, candidate, check_argv: tuple[str,...], *, limits: dict,
-                 check_artifacts: tuple[str,...], cwd='.', env=None):
+                 check_artifacts: tuple[str,...], cwd='.', env=None,probe_source=None):
     runtime=runtime_for(base.environment)
     repo_store(base.snapshot.root.parent.parent).validate(base.snapshot)
     return execute(candidate,list(check_argv),limits=limits,runtime=runtime,profile='repoworld',
                    snapshot_limits=REPO_LIMITS,repo_base=base.snapshot,cwd=cwd,
-                   env=env,check_artifacts=check_artifacts)
+                   env=env,check_artifacts=check_artifacts,probe_source=probe_source)

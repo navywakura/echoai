@@ -94,6 +94,18 @@ Siguiente ensayo diseñado: [RepoWorld / SWE-bench Lite](SWE-BENCH-LITE-DESIGN-2
 y [plan de implementación](SWE-BENCH-LITE-PLAN-20261013.md). El contrato está en
 estado `design`, con lanzamiento deshabilitado. Los 24 issues y sus commits
 están fijados. La [calibración local de infraestructura](REPOWORLD-LOCAL-CALIBRATION-20261013.md)
-ya pasó en los cuatro casos de desarrollo. Faltan entornos con dependencias,
-evaluación real, contabilidad persistente y lock. No hay puntuación SWE-bench
-ni gasto nuevo de GPU en esta entrega.
+ya pasó en los cuatro casos de desarrollo. La continuación implementa checks,
+roles, contabilidad persistente, relay con IDs duraderos, curador y CLI:
+[ejecución y compuertas](REPOWORLD-EXECUTION-20261013.md).
+
+| Estado RepoWorld | Obligación | Evidencia / pendiente |
+|---|---|---|
+| Verde local acotado | Parche → regresión → retención/rollback → auditoría | Smoke sobre tests reales de SymPy con proveedor simulado; recuperación sin nueva generación. No resuelve el issue. |
+| Verde local acotado | S/I2/F/E/E_no_guard, contabilidad y recuperación | Pruebas de ramas, reservas, respuesta tardía, cambio de lock, entorno ajeno, agotamientos y firma de entregas. Calibración real pendiente. |
+| Rojo | Gate 1: entorno por instancia | 7/36 pasan el preflight de desarrollo, 6/12 repos; faltan dependencias/builds/enlaces y 20 entradas de entorno. |
+| Rojo | Control del evaluador oficial | Requests-2148 vacío/referencia no pasan con aislamiento de red; 35 imágenes ausentes. No se permite gastar GPU. |
+| Pendiente | Gate 3 y lock científico | Sin calibración nueva de 32B, consulta nueva de cuota ni `SWE-RUN-LOCK` habilitado. |
+| Pendiente | Campaña SWE, evaluación común y cuatro gráficas medidas | Conservar 24 issues por brazo; principal 96, más controles y memoria: 150 celdas registradas. |
+| Abierto | H1/H2/H3/H4/T20 y cierre general de ECHO-5.1 | Infraestructura verificada no demuestra ventaja científica; faltan resultados y confirmación independiente. |
+
+No hay puntuación SWE-bench ni gasto nuevo de GPU. Rama local, sin push.

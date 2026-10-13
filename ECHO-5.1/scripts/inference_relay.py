@@ -9,6 +9,8 @@ import hmac
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import math
+import os
+import re
 from pathlib import Path
 import secrets
 import threading
@@ -35,9 +37,52 @@ def parsed(raw):
     if not isinstance(value,dict):raise ValueError('JSON object required')
     return value
 
+
+class DurableJobs:
+    """Bounded authenticated replay cache. Delivered-but-lost work stays pending.
+
+    It is never redelivered automatically after a broker/worker crash. That
+    ambiguity needs a late worker result or explicit episode termination; this
+    provides at-most-once dispatch, not distributed exactly-once computation.
+    """
+    def __init__(self,directory,key):
+        self.root=Path(directory);self.root.mkdir(mode=0o700,parents=True,exist_ok=True)
+        if self.root.is_symlink() or self.root.stat().st_mode&0o077: raise ValueError('private replay directory required')
+        self.key=key.encode()
+    def path(self,identifier):
+        if not isinstance(identifier,str) or not re.fullmatch('[A-Za-z0-9_-]{1,180}',identifier): raise ValueError('invalid request ID')
+        return self.root/(hashlib.sha256(identifier.encode()).hexdigest()+'.json')
+    def load(self,identifier):
+        p=self.path(identifier)
+        if not p.exists(): return None
+        if p.is_symlink() or p.stat().st_size>3*MAX_BYTES: raise ValueError('invalid replay record')
+        envelope=parsed(p.read_bytes());raw=encoded(envelope['value'])
+        if not hmac.compare_digest(envelope['hmac'],hmac.new(self.key,raw,'sha256').hexdigest()): raise ValueError('replay authentication failed')
+        if envelope['value']['job']['id']!=identifier: raise ValueError('replay identity mismatch')
+        return envelope['value']
+    def save(self,item):
+        p=self.path(item['job']['id']);raw=encoded(item)
+        files=list(self.root.glob('*.json'))
+        if (len(files)>=10000 and not p.exists()) or sum(f.stat().st_size for f in files)+len(raw)>512*1024**2:
+            raise ValueError('replay cache capacity exhausted')
+        envelope=encoded({'value':item,'hmac':hmac.new(self.key,raw,'sha256').hexdigest()})
+        temp=self.root/(p.name+'.'+secrets.token_hex(8)+'.tmp')
+        fd=os.open(temp,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+        with os.fdopen(fd,'wb') as f:f.write(envelope);f.flush();os.fsync(f.fileno())
+        os.replace(temp,p);fd=os.open(self.root,os.O_RDONLY|os.O_DIRECTORY)
+        try:os.fsync(fd)
+        finally:os.close(fd)
+    def pending(self):
+        found=[]
+        for p in self.root.glob('*.json'):
+            item=parsed(p.read_bytes())['value'];item=self.load(item['job']['id'])
+            if item['result'] is None: found.append(item)
+        if len(found)>1: raise ValueError('multiple unresolved relay jobs')
+        return found[0] if found else None
+
 class RelayServer(ThreadingHTTPServer):
     daemon_threads=True
-    def __init__(self,address,*,client_token,worker_token,request_timeout=300,poll_timeout=15,audit_log=None):
+    def __init__(self,address,*,client_token,worker_token,request_timeout=300,poll_timeout=15,audit_log=None,journal_dir=None):
         if address[0]!='127.0.0.1':raise ValueError('loopback bind required')
         for token in (client_token,worker_token):
             if not isinstance(token,str) or not 32<=len(token)<=256 or not token.isascii():raise ValueError('invalid credential')
@@ -48,9 +93,14 @@ class RelayServer(ThreadingHTTPServer):
         self.request_timeout=request_timeout;self.poll_timeout=poll_timeout
         self.audit_log=Path(audit_log) if audit_log else None
         self.condition=threading.Condition();self.pending=None;self.stopped=False;self.ready=None
+        self.jobs=DurableJobs(journal_dir,client_token) if journal_dir else None
+        if self.jobs:self.pending=self.jobs.pending()
         super().__init__(address,Handler)
     def stop_work(self):
-        with self.condition:self.stopped=True;self.pending=None;self.condition.notify_all()
+        with self.condition:
+            self.stopped=True
+            if self.pending is not None and not self.pending.get('durable'):self.pending=None
+            self.condition.notify_all()
 
 class Handler(BaseHTTPRequestHandler):
     def setup(self):
@@ -95,7 +145,7 @@ class Handler(BaseHTTPRequestHandler):
         data=self.body() if method=='POST' else None
         if method=='POST' and data is None:return
         if path=='/health':
-            with s.condition:self.reply(200,{'worker_ready':s.ready is not None,'metadata':s.ready,'stopped':s.stopped})
+            with s.condition:self.reply(200,{'worker_ready':s.ready is not None,'metadata':s.ready,'stopped':s.stopped,'durable_request_ids':s.jobs is not None})
         elif path=='/stop':s.stop_work();self.reply(200,{'status':'stop'})
         elif path=='/worker/ready':
             with s.condition:
@@ -112,31 +162,55 @@ class Handler(BaseHTTPRequestHandler):
                 if s.stopped:self.reply(200,{'status':'stop'});return
                 if s.pending is None or s.pending['delivered']:
                     self.reply(200,{'status':'idle'});return
-                s.pending['delivered']=True;self.reply(200,s.pending['job'])
+                s.pending['delivered']=True
+                if s.jobs and s.pending.get('durable'):s.jobs.save(s.pending)
+                self.reply(200,s.pending['job'])
         elif path=='/worker/result':
             if set(data)!={'id','status','data'} or not isinstance(data['data'],dict) or type(data['status']) is not int or not (200<=data['status']<=299 or 400<=data['status']<=599):
                 self.reply(400,{'error':'invalid result'});return
             with s.condition:
                 item=s.pending
-                if s.stopped or item is None or item['job']['id']!=data['id'] or not item['delivered'] or item['result'] is not None:
+                if s.jobs:
+                    cached=s.jobs.load(data['id'])
+                    if cached and cached['result'] is not None:
+                        self.reply(200 if cached['result']==[data['status'],data['data']] else 409,{'status':'replayed-result'});return
+                if (s.stopped and not(item and item.get('durable'))) or item is None or item['job']['id']!=data['id'] or not item['delivered'] or item['result'] is not None:
                     self.reply(409,{'error':'expired or duplicate result'});return
-                item['result']=(data['status'],data['data']);s.condition.notify_all()
+                item['result']=[data['status'],data['data']]
+                if s.jobs and item.get('durable'):s.jobs.save(item)
+                if item.get('durable') and s.pending is item:s.pending=None
+                s.condition.notify_all()
             self.reply(200,{'status':'received'})
         else:
+            identifier=data.pop('request_id',None)
+            if identifier is not None and not s.jobs:self.reply(412,{'error':'durable replay required'});return
             if data.get('stream',False) is not False:self.reply(400,{'error':'streaming disabled'});return
             started=time.monotonic();sha=hashlib.sha256(encoded({'path':path,'data':data})).hexdigest()
-            item={'job':{'id':secrets.token_hex(24),'path':path,'data':data,'request_sha256':sha},'delivered':False,'result':None}
+            item={'job':{'id':identifier or secrets.token_hex(24),'path':path,'data':data,'request_sha256':sha},'delivered':False,'result':None}
+            if identifier is not None:item['durable']=True
             with s.condition:
                 if s.stopped:self.reply(503,{'error':'stopped'});return
-                if s.pending is not None:self.reply(429,{'error':'one request at a time'});return
-                s.pending=item;s.condition.notify_all()
+                if identifier is not None:
+                    try:cached=s.jobs.load(identifier)
+                    except ValueError:self.reply(409,{'error':'invalid replay record/identity'});return
+                    if cached:
+                        if cached['job']['request_sha256']!=sha:self.reply(409,{'error':'request ID payload conflict'});return
+                        if cached['result'] is not None:self.reply(*cached['result']);return
+                        if s.pending is None:s.pending=cached
+                if s.pending is not None:
+                    if identifier is None or s.pending['job']['id']!=identifier:self.reply(429,{'error':'one request at a time'});return
+                    item=s.pending
+                else:
+                    if identifier is not None:s.jobs.save(item)
+                    s.pending=item
+                s.condition.notify_all()
                 until=started+s.request_timeout
                 while item['result'] is None and not s.stopped:
                     remaining=until-time.monotonic()
                     if remaining<=0:break
                     s.condition.wait(remaining)
                 status,result=item['result'] or (503 if s.stopped else 504,{'error':'stopped' if s.stopped else 'relay timeout'})
-                if s.pending is item:s.pending=None
+                if s.pending is item and (not item.get('durable') or item['result'] is not None):s.pending=None
                 s.condition.notify_all()
                 if s.audit_log:
                     row={'request_sha256':sha,'response_sha256':hashlib.sha256(encoded(result)).hexdigest(),
@@ -165,13 +239,24 @@ def fetch(url,*,token=None,data=None,timeout=30):
         except ValueError:body={'error':'upstream HTTP error'}
         return exc.code,body
 
+def deliver_worker_message(url,*,token,data,until):
+    """Retry an idempotent acknowledgement, never rerun local inference."""
+    for attempt in range(4):
+        try:
+            status,value=fetch(url,token=token,data=data,timeout=min(30,max(.1,until-time.monotonic())))
+            if status not in (429,502,503,504):return status,value
+        except (OSError,TimeoutError):pass
+        if attempt==3 or time.monotonic()>=until:raise RuntimeError('relay delivery deadline; generated result not recomputed')
+        time.sleep(min(2**attempt,max(0,until-time.monotonic())))
+
+
 def run_worker(broker_url,worker_token,*,max_seconds=2700,ready_metadata=None):
     url=urllib.parse.urlsplit(broker_url)
     if url.scheme!='https' or not url.hostname or url.username or url.password or url.query or url.fragment or url.path not in ('','/'):
         raise ValueError('HTTPS broker origin required')
     if type(max_seconds) is not int or not 1<=max_seconds<=8400:raise ValueError('invalid worker duration')
     base=broker_url.rstrip('/');until=time.monotonic()+max_seconds;count=0
-    status,_=fetch(base+'/worker/ready',token=worker_token,data=ready_metadata or {'ready':True})
+    status,_=deliver_worker_message(base+'/worker/ready',token=worker_token,data=ready_metadata or {'ready':True},until=until)
     if status!=200:raise RuntimeError('relay readiness refused')
     while time.monotonic()<until:
         status,job=fetch(base+'/worker/next',token=worker_token,timeout=25)
@@ -186,14 +271,14 @@ def run_worker(broker_url,worker_token,*,max_seconds=2700,ready_metadata=None):
             code,result=fetch('http://127.0.0.1:8785'+job['path'],data=job['data'],timeout=min(280,max(1,until-time.monotonic())))
             if not(200<=code<=299 or 400<=code<=599):code,result=502,{'error':'unsupported upstream status'}
         except (ValueError,OSError,TimeoutError):code,result=502,{'error':'local inference failure'}
-        status,_=fetch(base+'/worker/result',token=worker_token,data={'id':job['id'],'status':code,'data':result})
+        status,_=deliver_worker_message(base+'/worker/result',token=worker_token,data={'id':job['id'],'status':code,'data':result},until=until)
         if status not in (200,409):raise RuntimeError('relay result delivery failed')
         count+=1
     return {'requests':count,'stopped':False,'deadline':True}
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('secrets',type=Path);p.add_argument('--log',type=Path);p.add_argument('--port',type=int,default=8786)
+    p=argparse.ArgumentParser();p.add_argument('secrets',type=Path);p.add_argument('--log',type=Path);p.add_argument('--port',type=int,default=8786);p.add_argument('--journal',type=Path)
     a=p.parse_args();credentials=json.loads(a.secrets.read_text())
-    server=RelayServer(('127.0.0.1',a.port),client_token=credentials['client_token'],worker_token=credentials['worker_token'],audit_log=a.log)
+    server=RelayServer(('127.0.0.1',a.port),client_token=credentials['client_token'],worker_token=credentials['worker_token'],audit_log=a.log,journal_dir=a.journal)
     try:server.serve_forever()
     finally:server.stop_work();server.server_close()

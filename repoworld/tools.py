@@ -176,15 +176,25 @@ def dispatch_tool(request: dict,*,session):
         if tool=='file_view': reply=_view(session,request)
         elif tool=='repo_search': reply=_search(session,request)
         elif tool=='patch_apply':
-            candidate=session.stage(request['diff'],request['expected_snapshot_id'],request['purpose'])
-            reply=dict(candidate_id=candidate.snapshot.id,operation_id=candidate.operation_id,
-                       retained=False,claim_status='unknown')
+            if request['purpose']=='probe':
+                if request['expected_snapshot_id']!=session.current.id:raise ValueError('STALE_BASE')
+                from .workspace import stage_probe
+                reply=dict(probe_id=stage_probe(session,request['diff']),retained=False,claim_status='unknown')
+            else:
+                candidate=session.stage(request['diff'],request['expected_snapshot_id'],request['purpose'])
+                reply=dict(candidate_id=candidate.snapshot.id,operation_id=candidate.operation_id,
+                           retained=False,claim_status='unknown')
         elif tool=='test_run':
             check=session.checks.get(request['check_id'])
-            if check is None or request['probe_id'] is not None:
+            probe=None
+            if request['probe_id'] is not None:
+                probe=next((r['body'] for r in session.receipts.records if r['body'].get('event')=='repoworld.probe-proposal' and r['body']['probe_id']==request['probe_id']),None)
+            if check is None or (request['probe_id'] is not None and probe is None):
                 raise ValueError('check/probe capability not registered')
             snap=session.snapshot(request['candidate_id'])
-            execution=execute_repo(session.base,snap,tuple(check['argv']),limits=check.get('limits',{}),check_artifacts=())
+            argv=('/usr/bin/python3','/runner/probe.py') if probe else tuple(check['argv'])
+            execution=execute_repo(session.base,snap,argv,limits=check.get('limits',{}),env=check.get('env'),
+                                   check_artifacts=(),probe_source=probe['source'] if probe else None)
             candidate_cpu=execution['resources']['cpu_us']
             # Full bounded logs remain in supervisor receipts; model gets a small
             # observation reference. Task 4 must interpret/check, never this tool.
@@ -192,6 +202,11 @@ def dispatch_tool(request: dict,*,session):
                         check_id=request['check_id'],observation=execution))
             reply=dict(execution_receipt=observed['sha256'],status=execution['status'],
                        exit_code=execution['exit_code'],claim_status='unknown',task_success=False)
+            from .checks import sanitize_output
+            reply['summary']=sanitize_output(execution['stdout']+'\n'+execution['stderr'])
+            # Preserve the trace/exception under both byte and tool-envelope caps.
+            while not _fits_reply(session,reply) and reply['summary']:
+                reply['summary']=reply['summary'][len(reply['summary'])//4+1:]
         receipt=session.receipts.append(dict(event='repoworld.tool',request_sha256=hashlib.sha256(canonical(request)).hexdigest(),
                         tool=tool,response_sha256=hashlib.sha256(canonical(reply)).hexdigest()))
         reply['receipt_id']=receipt['sha256'];reply['output_tokens']=0
