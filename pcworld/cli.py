@@ -13,6 +13,8 @@ def main(argv=None):
     pilot.add_argument('--config',type=Path);pilot.add_argument('--output',type=Path)
     pilot.add_argument('--suite',choices=['fixtures','repair-v1','repair-v2'],default='fixtures')
     pilot.add_argument('--task-seed',type=int,default=41)
+    pilot.add_argument('--task-families',nargs='+')
+    pilot.add_argument('--episode-wall-seconds',type=int,default=300)
     pilot.add_argument('--runtime',type=Path);pilot.add_argument('--cache-properties',action='store_true')
     pilot.add_argument('--arms',nargs='+',choices=['S','I2','F','E'],default=['S','I2','F','E'])
     pilot.add_argument('--seeded-diagnostic',action='store_true')
@@ -38,7 +40,14 @@ def main(argv=None):
     if args.action=='audit':
         result=audit_run(args.directory);print(json.dumps(result,indent=2));return int(not result['valid'])
     if args.dry_run:
-        print(json.dumps(estimate(tasks=args.tasks,repetitions=args.repetitions),indent=2));return 0
+        count=args.tasks
+        if args.task_families:
+            from .repairs import repair_tasks,repair_task_variants,NAMES
+            if args.suite=='fixtures' or not set(args.task_families)<=set(NAMES): ap.error('invalid repair family filter')
+            tasks=repair_task_variants(count,seed=args.task_seed) if args.suite=='repair-v2' else repair_tasks(count)
+            count=sum(t['family'] in args.task_families for t in tasks)
+        print(json.dumps(estimate(tasks=count,repetitions=args.repetitions,arms=len(args.arms),
+                                 episode_wall_seconds=args.episode_wall_seconds),indent=2));return 0
     if args.output is None: ap.error('execution needs a new --output directory')
     if args.repetitions!=1: ap.error('repetitions beyond development dry-run need the scientific pilot contract')
     config=json.loads(args.config.read_text()) if args.config else None
@@ -47,7 +56,7 @@ def main(argv=None):
         suite=args.suite,runtime=args.runtime,cache_properties=args.cache_properties,arms=args.arms,
         seeded_diagnostic=args.seeded_diagnostic,
         model_evidence=json.loads(args.model_evidence.read_text()) if args.model_evidence else None,
-        task_seed=args.task_seed)
+        task_seed=args.task_seed,task_families=args.task_families,episode_wall_seconds=args.episode_wall_seconds)
     print(json.dumps({'output':str(args.output),'episodes':len(result['episodes']),
                       'accepted':sum(r['development_accepted'] for r in result['episodes']),
                       'llm_calls':result['llm_calls'],'scientific_claim':False},indent=2))

@@ -1,13 +1,32 @@
 {
   "schema": "pcworld.contract.v1",
-  "version": "0.3.0-development",
+  "version": "0.4.0-development",
   "status": "preliminary; scientific confirmation disabled",
   "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
   "scope": "Linux isolated workspaces, bounded Python input/output properties",
-  "arms": ["S", "I2", "F", "E"],
-  "limits_per_arm": {"tokens": 25000, "tools": 50, "cpu_us": 300000000, "llm_calls": 12, "fuel": 128, "critic_calls": 6},
-  "limits_per_execution": {"wall_ms": 5000, "cpu_ms": 3000, "memory_bytes": 268435456, "pids": 32, "output_bytes": 65536, "disk_bytes": 16777216},
-  "episode_wall_seconds": 300,
+  "arms": [
+    "S",
+    "I2",
+    "F",
+    "E"
+  ],
+  "limits_per_arm": {
+    "tokens": 25000,
+    "tools": 50,
+    "cpu_us": 300000000,
+    "llm_calls": 12,
+    "fuel": 128,
+    "critic_calls": 6
+  },
+  "limits_per_execution": {
+    "wall_ms": 5000,
+    "cpu_ms": 3000,
+    "memory_bytes": 268435456,
+    "pids": 32,
+    "output_bytes": 65536,
+    "disk_bytes": 16777216
+  },
+  "episode_wall_seconds": "explicit per-run option 30..3600; default 300; local repair calibration 900",
   "deadline_scope": "work admitted and each execution/HTTP call bounded by remaining deadline; supervisor cleanup and receipt persistence reported separately within elapsed time",
   "max_proposals_per_context": 3,
   "review": "For repair-v2, F and E require two distinct eligible probes per accepted candidate; each category may retry up to two invalid/duplicate challenges, within six critic calls. CAM recall and lookup work are measured. S retains self-review; I2 retains independent proposals.",
@@ -24,10 +43,16 @@
   "repair_v2_seed": 41,
   "repair_v2_primary_mechanism": "E fixed symbolic source-risk and CAM-history routing versus F fixed category order; both require two distinct validated probes. This bounded policy is not a learned controller.",
   "oracle": "pcworld-reference-1 and pcworld-repair-reference-1; supervisor only, finite relation checks",
-  "primary_contrast_proposed": {"contrast": "E-S", "min_point_gain_percentage_points": 5, "lower_95_ci_must_exceed": 0},
+  "primary_contrast_proposed": {
+    "contrast": "E-S",
+    "min_point_gain_percentage_points": 5,
+    "lower_95_ci_must_exceed": 0
+  },
   "secondary_contrast_proposed": "E-F, hierarchical after primary",
   "scientific_sample": "not frozen; select independent tasks and power from a real pilot",
   "development_fixtures": "4 public properties; cannot stand in for 60 independent benchmark tasks",
   "automatic_publication": false,
-  "s6": "not reopened"
+  "s6": "not reopened",
+  "repair_policy": "Explicit witnessed CEGIS feedback for repairs; public and previous passing cases first; transactional rollback of rejected patches; at most two repairs. E freezes critic on first refutation and replays existing probes; coverage still requires two categories.",
+  "http_call_timeout_max_seconds": 600
 }
