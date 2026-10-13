@@ -80,3 +80,15 @@ independiente.
   sembrado y el piloto `repair-v1` no se mezclan con `repair-v2`.
 - S6 sigue aplazado. El verde de infraestructura no implica superioridad
   científica.
+
+## Resultado del piloto preregistrado
+
+La ejecución completa de 48 episodios y su resultado están documentados en
+[ADVERSARIAL-ROUTING-RESULTS-20261013.md](ADVERSARIAL-ROUTING-RESULTS-20261013.md).
+E y F aceptaron 2/12 tareas cada uno; S e I2, 4/12 cada uno. E produjo seis
+contraejemplos verificados frente a dos de F, pero no convirtió esa detección
+en más reparaciones aceptadas. La ventaja de ECHO no quedó demostrada. La
+auditoría autenticó 2.049 recibos; el piloto registró siete fallos de plazo del
+proveedor, todos contabilizados como fallos. Estos resultados son descriptivos
+de seis familias conocidas y no constituyen confirmación ni transferencia a
+dominios nuevos.
