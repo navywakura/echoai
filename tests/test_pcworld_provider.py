@@ -84,6 +84,25 @@ class ProviderContract(unittest.TestCase):
         with self.assertRaises(ValueError):
             HTTPProvider({**CONFIG,'tokenize_endpoint':'https://unrelated.invalid/tokenize'})
 
+    def test_contract_only_repair_withholds_original_but_keeps_rejected_patch(self):
+        provider=HTTPProvider({**CONFIG,'repair_source_mode':'contract_only'});sent=[]
+        context={'source':'ORIGINAL_SOURCE_SENTINEL','repair_feedback':{
+            'feedback_code':'REJECTED_REGRESSION','public_examples':[],
+            'failures':[{'input':[3],'status':'unknown','reason':'failed execution',
+                         'execution_error':{'stderr':'NameError: undefined_name'}}],
+            'rejected_source':'REJECTED_PATCH_SENTINEL'}}
+        def post(endpoint,payload,**kwargs):
+            sent.append(payload)
+            if endpoint.endswith('/tokenize'): return {'count':500}
+            return {'model':'test-model','usage':{'prompt_tokens':500,'completion_tokens':10,'total_tokens':510},
+                    'choices':[{'message':{'content':'{"content":"pass"}'}}]}
+        with patch.object(provider,'_post',side_effect=post):
+            provider.call('propose',development_tasks(1)[0],context,total_token_budget=1000)
+        message=sent[0]['messages'][1]['content']
+        self.assertNotIn('ORIGINAL_SOURCE_SENTINEL',message)
+        self.assertIn('REJECTED_PATCH_SENTINEL',message)
+        self.assertIn('NameError: undefined_name',message)
+
 class LlamaConnector(unittest.TestCase):
     def provider(self,**extra):
         return HTTPProvider({**CONFIG,'backend':'llama_cpp',

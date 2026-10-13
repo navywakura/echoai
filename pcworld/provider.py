@@ -52,7 +52,7 @@ class HTTPProvider:
     def __init__(self, config):
         required = ('endpoint', 'tokenize_endpoint', 'model', 'revision', 'quantization',
                     'tokenizer', 'max_output_tokens', 'timeout_seconds')
-        optional={'key_env','backend','template_endpoint','context_tokens','seed','temperature_milli'}
+        optional={'key_env','backend','template_endpoint','context_tokens','seed','temperature_milli','repair_source_mode'}
         if not isinstance(config, dict) or set(config) - set(required) - optional:
             raise ValueError('unknown provider fields; use only a credential environment variable name')
         if any(not config.get(k) for k in required):
