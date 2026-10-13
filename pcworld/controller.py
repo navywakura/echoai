@@ -14,7 +14,7 @@ TOOLS=('read_snapshot','apply_patch','run_python','check_property','submit_count
 def arm_profile(arm):
     if arm not in ('S','I2','F','E'): raise ValueError('unknown arm')
     return {'arm':arm,'tools':list(TOOLS),'limits':dict(LIMITS),'checker':'pcworld-reference-1',
-            'permanent_library':'frozen-empty','model':'must be pinned by pilot config'}
+            'permanent_library':'empty by default; optional frozen recipe library declared in run contract','model':'must be pinned by pilot config'}
 
 def barrier(responses):
     ids=[r['dispatch_id'] for r in responses]

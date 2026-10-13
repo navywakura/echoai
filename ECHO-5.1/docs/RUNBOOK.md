@@ -178,3 +178,25 @@ infraestructura comprobada de las obligaciones científicas pendientes.
    discordantes de acierto: no bastan para estimar una superioridad esperada.
 
 S6, publicación y promoción automática no son acciones de esta interfaz.
+
+## Transferencia A → B de recetas (desarrollo 0.9)
+
+`pcworld.shared.SharedConceptLibrary` publica únicamente una reparación aceptada
+con recibos y snapshot verificables. Los datos persistidos incluyen AST normalizado,
+ámbito público, autor atestiguado por el supervisor y contraejemplo no final. La
+consulta devuelve como máximo una receta candidata. No sirve para omitir el
+verificador de la tarea receptora. El donante y su custodia deben conservarse;
+esta primera implementación admite una sola generación, no cadenas recursivas.
+
+El supervisor `ECHO-5.1/scripts/run_transfer_pilot.py CONTROL OUTPUT --runtime RUNTIME`
+espera el worker GPU del broker existente y ejecuta el plan de
+[co-learning](COLEARNING-PLAN-20261013.md). CONTROL contiene `provider.json` sin
+credenciales y `relay-secrets.json` privado (0600). El worker recibe solo solicitudes
+de inferencia; candidatos y oráculos permanecen en Linux/Bubblewrap. El supervisor
+solicita el apagado del worker incluso si falla el ensayo.
+
+La auditoría se realiza mediante `pcworld.transfer.audit_transfer(OUTPUT)` con las
+mismas fuentes congeladas. Comprueba los subensayos, la lección y su donante exacto,
+el orden emparejado, configuraciones del modelo y runtime/plazos comunes. No hay
+reanálisis de pruebas reservadas durante adaptación ni publicación automática de
+lecciones del receptor. Los resultados son de desarrollo en una familia conocida.
