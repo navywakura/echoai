@@ -201,9 +201,9 @@ class RelayTests(unittest.TestCase):
 
     def test_extended_development_worker_remains_bounded_and_stoppable(self):
         with patch.object(relay,'fetch',side_effect=[(200,{}),(200,{'status':'stop'})]):
-            self.assertEqual(relay.run_worker('https://broker.example',WORKER,max_seconds=4800),
+            self.assertEqual(relay.run_worker('https://broker.example',WORKER,max_seconds=7800),
                              {'requests':0,'stopped':True})
-        for duration in (True,0,5401,float('inf')):
+        for duration in (True,0,8401,float('inf')):
             with self.assertRaises(ValueError):
                 relay.run_worker('https://broker.example',WORKER,max_seconds=duration)
 

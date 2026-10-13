@@ -46,8 +46,8 @@ def prepare(run,output,slug):
     write_bundle(bundle,output,slug)
 
 def write_bundle(bundle,output,slug,*,extra_sources=None,timeout_seconds=3000):
-    if type(timeout_seconds) is not int or not 300<=timeout_seconds<=5400:
-        raise ValueError('GPU worker ceiling must be 300..5400 seconds')
+    if type(timeout_seconds) is not int or not 300<=timeout_seconds<=9000:
+        raise ValueError('GPU worker ceiling must be 300..9000 seconds')
     output.mkdir(parents=True,exist_ok=False)
     sources={'repair-input.json':json.dumps(bundle,indent=2)+'\n',
              'connector/pcworld/__init__.py':'',

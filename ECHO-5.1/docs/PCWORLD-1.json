@@ -1,6 +1,6 @@
 {
   "schema": "pcworld.contract.v1",
-  "version": "0.9.0-development",
+  "version": "0.10.0-development",
   "status": "preliminary; scientific confirmation disabled",
   "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
   "scope": "Linux isolated workspaces, bounded Python input/output properties",
@@ -55,5 +55,6 @@
   "s6": "not reopened",
   "repair_policy": "common-final-oracle-v1: witnessed CEGIS and at most two guarded repairs. Stop before exceeding critic-call quota. Freeze candidate and evaluate under remaining original budgets regardless of category coverage. GRADUADO_POR_SUPERVIVENCIA is an unverified candidate eligibility label, never correctness proof. Final public, retained counterexample and reserved development cases must all pass. Prior 0.5 results remain unchanged.",
   "http_call_timeout_max_seconds": 600,
-  "probe_catalog": "legacy-v1 remains default; expanded-v1 selected explicitly in run manifest, order_seed=20261013 for discrimination pilot. No deliberately distractor-first control; categories can refute other defects."
+  "probe_catalog": "legacy-v1 remains default; expanded-v1 selected explicitly in run manifest, order_seed=20261013 for discrimination pilot. No deliberately distractor-first control; categories can refute other defects.",
+  "model_scaling": "explicit 32B pinned multi-GPU development profile; six donor variant03 tasks and twelve known variant00/01 targets with S/I2/F/E/optional shared E. Query empty library in controls; count acquisition and publication. No prompt, verifier or acceptance relaxation."
 }

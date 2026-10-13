@@ -169,7 +169,7 @@ def run_worker(broker_url,worker_token,*,max_seconds=2700,ready_metadata=None):
     url=urllib.parse.urlsplit(broker_url)
     if url.scheme!='https' or not url.hostname or url.username or url.password or url.query or url.fragment or url.path not in ('','/'):
         raise ValueError('HTTPS broker origin required')
-    if type(max_seconds) is not int or not 1<=max_seconds<=5400:raise ValueError('invalid worker duration')
+    if type(max_seconds) is not int or not 1<=max_seconds<=8400:raise ValueError('invalid worker duration')
     base=broker_url.rstrip('/');until=time.monotonic()+max_seconds;count=0
     status,_=fetch(base+'/worker/ready',token=worker_token,data=ready_metadata or {'ready':True})
     if status!=200:raise RuntimeError('relay readiness refused')
