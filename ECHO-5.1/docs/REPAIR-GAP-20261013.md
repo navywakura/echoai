@@ -62,3 +62,7 @@ originales en el sandbox y usar `guarded_repair` con dos intentos por tarea,
 modo `contract_only` y errores de ejecución vinculados a recibos. No se
 modifica código candidato a mano. No hay crítico activo ni mérito por
 descubrimiento: `seeded_diagnostic=true` conserva ese alcance explícito.
+
+Cierre de esta tanda: [resultados completos](REPAIR-GAP-RESULTS-20261013.md).
+El diagnóstico de reparación aislada logró 1/2 en CPU y 1/2 completo en GPU;
+Rutas reparó el testigo pero falló otro caso. No se inició la matriz completa.
