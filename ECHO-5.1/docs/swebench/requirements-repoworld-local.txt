@@ -1,0 +1,4 @@
+# Curator/supervisor only; never installed into a candidate or NEXUS-0.
+# Use a separately managed tools venv when not already available.
+pyarrow==24.0.0
+jsonschema==4.23.0

@@ -35,7 +35,9 @@ de cada fila; no equivale a una ventaja científica ni al cierre de ECHO-5.1.
 | Verde de ejecución; empate con control único | Escalado 32B y memoria, protocolo 0.10 | 255 tests, 66 episodios, dos auditorías válidas y 32 fuentes intactas. 65/65 capas en ambas T4; S=F=E=E_shared=12/12, I2=10/12. Kaggle COMPLETE y servicios de cómputo apagados; 22,94 h GPU restantes. [Resultados y checklist](SCALING32-RESULTS-20261013.md). No cierra ECHO-5.1. |
 | Pendiente | Release experimental reproducible en otra máquina | Probar instalación y restauración fuera de este host, publicar artefactos sin claves privadas y definir alcance de release. |
 | Aplazado | S6 | No se reabre; queda para después de ECHO-5.5. |
-| Preparado; no ejecutado | RepoWorld / SWE-bench Lite | [Diseño y contrato](SWE-BENCH-LITE-DESIGN-20261013.md), 24 issues seleccionados por metadatos, plan S/I2/F/E + ablación del rollback + memoria disjunta. Selector y cuatro figuras implementados; runtime, entornos y campaña pendientes. No cierra H1–H4. |
+| Verde de infraestructura local | RepoWorld: datos, entorno y herramientas | Proyección pública estricta, perfil Bubblewrap con scratch acotado, snapshots por streaming, navegación paginada y parches stage/retain/CAS. 35 tests RepoWorld + 255 PCWorld + 13 de diseño. [Entrega local](REPOWORLD-LOCAL-CALIBRATION-20261013.md). |
+| Verde acotado | Calibración local RepoWorld | Cuatro commits reales (Flask/Requests/pytest/SymPy), 28 sondas, cuatro transacciones y 56 recibos auditados; cero LLM/GPU. Rootfs stdlib: no se ejecutaron suites completas ni se resolvieron los issues. |
+| Pendiente | RepoWorld / campaña SWE-bench Lite | Dependencias, checks públicos y sondas del crítico, proveedor/brazos, memoria, presupuesto persistente, evaluador sellado y preflight/lock. Contrato `design`, lanzamiento deshabilitado; no cierra H1–H4. |
 
 Detalles: [piloto local](LOCAL-PILOT-20261013.md),
 [T01–T20](ACCEPTANCE.md), [verificación](PHASE2-VERIFICATION.json) y
@@ -91,5 +93,7 @@ servicios de cómputo apagados; sin push ni publicación. H1–H4 y T20 generale
 Siguiente ensayo diseñado: [RepoWorld / SWE-bench Lite](SWE-BENCH-LITE-DESIGN-20261013.md)
 y [plan de implementación](SWE-BENCH-LITE-PLAN-20261013.md). El contrato está en
 estado `design`, con lanzamiento deshabilitado. Los 24 issues y sus commits
-están fijados, pero falta comprobar entornos, calibrar costes y sellar el lock
-de ejecución. No hay resultados SWE-bench ni gasto nuevo de GPU en esta entrega.
+están fijados. La [calibración local de infraestructura](REPOWORLD-LOCAL-CALIBRATION-20261013.md)
+ya pasó en los cuatro casos de desarrollo. Faltan entornos con dependencias,
+evaluación real, contabilidad persistente y lock. No hay puntuación SWE-bench
+ni gasto nuevo de GPU en esta entrega.

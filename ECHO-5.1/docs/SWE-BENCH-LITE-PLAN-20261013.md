@@ -61,7 +61,9 @@ solo para análisis. Sin dependencias nuevas en NEXUS-0.
   completos, costes de fallos, coste de adquisición, marca de agua sintética.
 - [x] `tests/test_swebench_design_tools.py`: validación/análisis/selección/export.
 
-Los apartados siguientes permanecen pendientes. No ejecutar comandos `run`
+Las tareas 1–3 tienen una implementación local y calibración de infraestructura;
+los entornos con dependencias y las tareas 4–9 siguen pendientes. Véase
+[la entrega local](REPOWORLD-LOCAL-CALIBRATION-20261013.md). No ejecutar comandos `run`
 hasta completar preflight, lock y revisión. Las pruebas de CPU van en segundo
 plano con logs; se monitorizan fallos y no se relanzan selectivamente.
 
@@ -121,16 +123,16 @@ def public_task(row: dict) -> PublicTask: ...
 def read_fixed_dataset(path: Path, expected_sha256: str) -> list[dict]: ...
 ```
 
-- [ ] Crear fixture con issue y sentinelas distintos en cada campo sellado.
+- [x] Crear fixture con issue y sentinelas distintos en cada campo sellado.
   Afirmar `asdict(public_task(row))` exactamente igual a los cuatro campos
   permitidos; no filtrar por lista de claves prohibidas incompleta.
-- [ ] Añadir rechazo de IDs duplicados, commit inválido, schema incompatible,
+- [x] Añadir rechazo de IDs duplicados, commit inválido, schema incompatible,
   hash de dataset alterado y roster incompleto. No hacer inferencia en tests.
-- [ ] Ejecutar `python3 -m unittest discover -s tests -p test_repoworld_dataset.py`
+- [x] Ejecutar `python3 -m unittest discover -s tests -p test_repoworld_dataset.py`
   y confirmar el fallo por interfaz ausente; implementar lectura/proyección.
 - [ ] Cargar solo metadatos al selector. Guardar catálogo sellado en directorio
   privado con autoridad independiente. Nunca serializarlo en `PublicTask`.
-- [ ] Añadir rechazo de cualquier arranque con contrato `design`, lock ausente
+- [x] Añadir rechazo de cualquier arranque con contrato `design`, lock ausente
   o hashes/IDs divergentes. Pasar tests y revisión de frontera antes de commit local.
 
 ## Tarea 2 · Entorno hermético para repositorios
@@ -147,22 +149,23 @@ def execute_repo(base: RepoBase, candidate: Snapshot, check_argv: tuple[str,...]
                  *, limits: dict, check_artifacts: tuple[str,...]) -> dict: ...
 ```
 
-- [ ] Tests con programa que intenta leer sentinelas host, red, claves y otros
+- [x] Tests con programa que intenta leer sentinelas host, red, claves y otros
   episodios; ninguno debe aparecer en stdout. Test de escritura en scratch
   seguida de comprobación de que BASE/candidato conservan sus hashes.
-- [ ] Tests de memoria/PIDs/CPU/tmpfs y terminación de hijos. No aceptar fallback
+- [x] Tests de memoria/PIDs/CPU/tmpfs y terminación de hijos. No aceptar fallback
   sin Bubblewrap/cgroup. Los límites totales de tmpfs no se multiplican por mount.
 - [ ] Ensamblar rootfs específico desde dependencias fijadas; conservar kernel,
   CPU/arquitectura, toolchain e inventario como datos de entorno. Prohibir host
   `/usr`. No ejecutar instalación/colección dentro del supervisor.
-- [ ] Conservar rutas/semántica del runner PCWorld bajo el perfil anterior;
+- [x] Conservar rutas/semántica del runner PCWorld bajo el perfil anterior;
   el nuevo acepta cwd/entorno y extracción acotada de artefactos por capacidades.
 - [ ] Inspeccionar contenido completo del rootfs online para gold, eval scripts,
   caches/historial Git y sentinelas sellados. Un directorio no listado no es seguro.
-- [ ] Medir una preparación pequeña sin GPU: bytes de imagen/rootfs, scratch,
+- [x] Medir una preparación pequeña sin GPU: bytes de imagen/rootfs, scratch,
   RAM pico y tiempo. Registrar límite de almacenamiento y limpieza solo de
   objetos creados por esta campaña; no `docker system prune -a` indiscriminado.
-- [ ] Pasar tests específicos más suite PCWorld en segundo plano; commit local.
+- [x] Pasar tests específicos más suite PCWorld en segundo plano; evidencia
+  en la entrega local (35 RepoWorld, 255 PCWorld, 13 diseño/análisis).
 
 ## Tarea 3 · Navegación y parches transaccionales
 
@@ -186,19 +189,27 @@ def retain(candidate: PatchCandidate, *, expected_head: str,
 def dispatch_tool(request: dict, *, session) -> dict: ...
 ```
 
-- [ ] Fixtures: dos archivos donde el segundo hunk falla; árbol/puntero idénticos
+- [x] Fixtures: dos archivos donde el segundo hunk falla; árbol/puntero idénticos
   antes/después. Rechazar stale CAS, absolute/`..`, symlink/hardlink, extensión
   de permisos, configuración Git maliciosa y diff >65.536 bytes.
-- [ ] Verificar que stage crea candidato, pero no cambia `retained_candidate`;
+- [x] Verificar que stage crea candidato, pero no cambia `retained_candidate`;
   recuperar crash antes/después de recibo y CAS con el mismo `operation_id`.
-- [ ] Adaptar captura/lectura por streaming con límites explícitos transmitidos
+- [x] Adaptar captura/lectura por streaming con límites explícitos transmitidos
   por toda la cadena; evitar que el runner recapture con defaults de 64 MiB.
 - [ ] Implementar four-tool dispatcher con schemas entregados, cursores
   autenticados al snapshot, argv fijo y límites de bytes/tokens. No shell libre.
-- [ ] Prueba `file_view`: Unicode, línea >8 KiB, rango fuera de archivo,
+- [x] Prueba `file_view`: Unicode, línea >8 KiB, rango fuera de archivo,
   líneas originales tras paginar y presupuesto insuficiente. AST solo indexa.
-- [ ] Generar diff final desde BASE y snapshot retenido con Git aislado;
-  roundtrip en árbol nuevo debe producir el mismo hash. Pasar tests/commit.
+- [x] Generar diff final desde BASE y snapshot retenido; roundtrip exige el mismo
+  hash. Se usa difflib + parser exacto en vez de Git: elimina hooks/configuración
+  del proceso de edición. Git solo exporta blobs fijados durante la preparación.
+
+**Estado de las capacidades locales:** `repo_search`, `file_view` y
+`patch_apply` implementados; `test_run` despacha únicamente checks registrados
+por el supervisor y conserva resultado desconocido. Falta el namespace de
+sondeos y la semántica de aceptación de pruebas de la tarea 4. La imagen de
+calibración contiene stdlib y no acredita dependencias SWE. El catálogo sellado
+no se serializa en esta entrega: permanece fuera de la vista online.
 
 ## Tarea 4 · Evidencia pública y rollback
 

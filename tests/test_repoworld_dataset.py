@@ -68,3 +68,29 @@ class DatasetTests(unittest.TestCase):
             rows=read_fixed_dataset(p,hashlib.sha256(p.read_bytes()).hexdigest())
             self.assertEqual(rows,[dataclasses.asdict(public_task(row()))])
             self.assertNotIn('SECRET',json.dumps(rows))
+
+    def test_sealed_lock_rejects_missing_duplicate_and_changed_commits(self):
+        from echoai.repoworld.dataset import sample_roster
+        import copy
+        contract=json.loads((ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json').read_text())
+        contract.update(status='sealed',launch_enabled=True)
+        sample=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json'
+        schema=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-RUN-LOCK.schema.json').read_text())
+        lock={key: spec.get('const','1'*64) for key,spec in schema['properties'].items() if key!='instances'}
+        lock.update(contract_sha256='2'*64,sample_sha256=hashlib.sha256(sample.read_bytes()).hexdigest(),
+                    model_sha256=contract['model']['sha256'],created_utc='2026-10-13T00:00:00Z')
+        item_schema=schema['properties']['instances']['items']['properties']
+        lock['instances']=[]
+        for ref in sample_roster(json.loads(sample.read_bytes())):
+            item={key:spec.get('const','1'*64) for key,spec in item_schema.items()}
+            item.update(instance_id=ref['instance_id'],base_commit=ref['base_commit'],official_image_digest='sha256:'+'1'*64)
+            lock['instances'].append(item)
+        self.assertTrue(validate_launch(contract,sample,lock,contract_sha256='2'*64))
+        for variant in ('missing','duplicate','commit','sample','contract'):
+            changed=copy.deepcopy(lock)
+            if variant=='missing': changed['instances'].pop()
+            if variant=='duplicate': changed['instances'].append(changed['instances'][0])
+            if variant=='commit': changed['instances'][0]['base_commit']='0'*40
+            if variant=='sample': changed['sample_sha256']='0'*64
+            if variant=='contract': changed['contract_sha256']='0'*64
+            with self.assertRaises(ValueError): validate_launch(contract,sample,changed,contract_sha256='2'*64)

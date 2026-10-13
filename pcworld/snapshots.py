@@ -46,6 +46,7 @@ import math
 import os
 from pathlib import Path
 import stat
+import tempfile
 import uuid
 
 try:
@@ -114,7 +115,58 @@ def _canonical(value) -> bytes:
 
 
 def _digest(data: bytes) -> str:
+    if isinstance(data, _Blob):
+        return data.digest
     return hashlib.sha256(data).hexdigest()
+
+
+class _Blob:
+    """Slice of one private temporary spool; bounded streaming, no source alias."""
+    def __init__(self, arena, offset, size, digest):
+        self.arena, self.offset, self.size, self.digest = arena, offset, size, digest
+
+    def __len__(self):
+        return self.size
+
+    def blocks(self):
+        self.arena.seek(self.offset)
+        remaining = self.size
+        while remaining:
+            data = self.arena.read(min(_CHUNK, remaining))
+            if not data:
+                raise SnapshotError('CORRUPT_SNAPSHOT', 'short private spool')
+            remaining -= len(data)
+            yield data
+
+    def read(self):
+        return b''.join(self.blocks())
+
+
+class _Arena:
+    def __init__(self):
+        self.file = tempfile.TemporaryFile()
+
+    def __getattr__(self, name):
+        return getattr(self.file, name)
+
+    def __del__(self):
+        self.file.close()
+
+
+def _spool(fd, before, arena):
+    offset = arena.tell(); digest = hashlib.sha256(); size = 0
+    while True:
+        chunk = os.read(fd, min(_CHUNK, before.st_size - size + 1))
+        if not chunk:
+            break
+        size += len(chunk)
+        if size > before.st_size:
+            raise SnapshotError('RACE_DETECTED', 'file grew during spool')
+        arena.write(chunk); digest.update(chunk)
+    _same(before, os.fstat(fd))
+    if size != before.st_size:
+        raise SnapshotError('RACE_DETECTED', 'file shrank during spool')
+    return _Blob(arena, offset, size, digest.hexdigest())
 
 
 def _hash(value):
@@ -258,12 +310,13 @@ def _write_new(parent, name, data, mode):
     fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC,
                  0o600, dir_fd=parent)
     try:
-        remaining = memoryview(data)
-        while remaining:
-            written = os.write(fd, remaining)
-            if written <= 0:
-                raise OSError("short snapshot write")
-            remaining = remaining[written:]
+        for block in data.blocks() if isinstance(data, _Blob) else (data,):
+            remaining = memoryview(block)
+            while remaining:
+                written = os.write(fd, remaining)
+                if written <= 0:
+                    raise OSError("short snapshot write")
+                remaining = remaining[written:]
         os.fchmod(fd, mode)
         os.fsync(fd)
     finally:
@@ -288,7 +341,7 @@ def _remove_staging(parent, name):
 
 class SnapshotStore:
     def __init__(self, directory: Path, *, max_files=10_000, max_bytes=64 * 1024 * 1024,
-                 max_entries=20_000, max_depth=64):
+                 max_entries=20_000, max_depth=64, streaming=False):
         if fcntl is None or any(not hasattr(os, flag) for flag in ("O_NOFOLLOW", "O_DIRECTORY")):
             raise SnapshotError("UNSUPPORTED_ENVIRONMENT", "POSIX descriptor operations and flock required")
         for value in (max_files, max_bytes, max_entries, max_depth):
@@ -299,6 +352,7 @@ class SnapshotStore:
         self.directory = _absolute(directory)
         self.max_files, self.max_bytes = max_files, max_bytes
         self.max_entries, self.max_depth = max_entries, max_depth
+        self.streaming = bool(streaming)
         try:
             with _directory(self.directory, create=True) as fd:
                 info = os.fstat(fd)
@@ -346,6 +400,7 @@ class SnapshotStore:
 
     def _scan(self, root, exclude=(), *, collect=True):
         entries, contents, stamps = {}, {}, {}
+        arena = _Arena() if collect and self.streaming else None
         count = files = byte_count = 0
         device = os.fstat(root).st_dev
 
@@ -386,7 +441,8 @@ class SnapshotStore:
                             if byte_count > self.max_bytes:
                                 raise SnapshotError("LIMIT_EXCEEDED", "tree byte limit exceeded")
                             if collect:
-                                data = _read_bytes(child, info, self.max_bytes - byte_count + info.st_size)
+                                data = (_spool(child, info, arena) if arena is not None else
+                                        _read_bytes(child, info, self.max_bytes - byte_count + info.st_size))
                                 contents[relative] = data
                                 entries[relative] = {"type": "file", "mode": stat.S_IMODE(info.st_mode),
                                                      "size": len(data), "sha256": _digest(data)}
@@ -527,7 +583,7 @@ class SnapshotStore:
             except FileNotFoundError:
                 pass
 
-    def _publish(self, store, manifest, contents):
+    def _publish(self, store, manifest, contents, *, advance=True):
         raw = self._check_manifest(manifest)
         identifier = _digest(raw)
         try:
@@ -569,7 +625,8 @@ class SnapshotStore:
                     pass
         # Validate even existing objects; no cache can bless tampered bytes.
         snapshot, _ = self._load(store, identifier)
-        self._advance(store, identifier)
+        if advance:
+            self._advance(store, identifier)
         return snapshot
 
     def capture(self, source: Path | Snapshot, *, exclude: tuple[str, ...] = _DEFAULT_EXCLUDE) -> Snapshot:
@@ -608,14 +665,30 @@ class SnapshotStore:
                 raise SnapshotError("CORRUPT_SNAPSHOT", "capability manifest mismatch")
             if relative not in contents:
                 raise SnapshotError("UNSAFE_PATH", "path is not an included regular file")
-            return contents[relative]
+            data = contents[relative]
+            return data.read() if isinstance(data, _Blob) else data
+
+    def read_range(self, snapshot: Snapshot, relative: str, *, offset: int, size: int) -> bytes:
+        """Bounded byte window, after full integrity validation (streaming profile)."""
+        _parts(relative); self._bound(snapshot)
+        if type(offset) is not int or offset < 0 or type(size) is not int or not 0 <= size <= 1024*1024:
+            raise SnapshotError('LIMIT_EXCEEDED', 'invalid read window')
+        with self._locked() as store:
+            verified, contents = self._load(store, snapshot.id)
+            if verified.manifest != snapshot.manifest or relative not in contents:
+                raise SnapshotError('CORRUPT_SNAPSHOT', 'invalid file capability')
+            data = contents[relative]
+            if isinstance(data, _Blob):
+                data.arena.seek(data.offset + min(offset, len(data)))
+                return data.arena.read(min(size, max(0, len(data)-offset)))
+            return data[offset:offset+size]
 
     def apply(self, base: Snapshot, expected_base: str, edits: list[dict], *,
-              allowed_paths: tuple[str, ...]) -> Snapshot:
+              allowed_paths: tuple[str, ...], advance=True) -> Snapshot:
         """Atomically replace the current version; stale proposals never rebase."""
         self._bound(base)
         with self._locked() as store:
-            if expected_base != base.id or self._current(store) != expected_base:
+            if expected_base != base.id or (advance and self._current(store) != expected_base):
                 raise SnapshotError("STALE_BASE", "expected base is not this store's current version")
             verified, contents = self._load(store, base.id)
             if verified.manifest != base.manifest:
@@ -682,4 +755,4 @@ class SnapshotStore:
                 contents[path] = data
                 entries[path] = {"type": "file", "mode": previous["mode"] if previous else 0o644,
                                  "size": len(data), "sha256": _digest(data)}
-            return self._publish(store, manifest, contents)
+            return self._publish(store, manifest, contents, advance=advance)

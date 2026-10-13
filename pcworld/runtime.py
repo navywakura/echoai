@@ -13,6 +13,7 @@ import platform
 import subprocess
 import sys
 import sysconfig
+import shutil
 import tarfile
 import tempfile
 
@@ -44,6 +45,23 @@ def load_runtime(directory):
     record=json.loads((Path(directory)/'runtime.json').read_text())
     if record.get('schema')!='pcworld.runtime.v1': raise ValueError('unsupported runtime record')
     return validate_runtime(runtime_store(directory).get(record['snapshot']))
+
+
+def repository_runtime(snapshot, directory):
+    """Derive an exact-byte stdlib image with mount points; no SWE dependencies.
+
+    Never changes the input image or its manifest. RepoWorld must not try to
+    create mount points inside an already read-only root bind.
+    """
+    validate_runtime(snapshot)
+    with tempfile.TemporaryDirectory(prefix='pcworld-repo-runtime-') as temp:
+        root=Path(temp)/'root'
+        shutil.copytree(snapshot.root,root)
+        for path,entry in snapshot.manifest['entries'].items():
+            (root if path=='.' else root/path).chmod(entry['mode'])
+        for name in ('work','candidate','repo-base','runner'):
+            (root/name).mkdir(mode=0o755,exist_ok=True)
+        return _publish(directory,root)
 
 def build_runtime(directory):
     """Freeze the current trusted Python plus stdlib and ELF dependency closure."""

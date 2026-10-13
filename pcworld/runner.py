@@ -75,7 +75,9 @@ def environment_identity(runtime=None):
             'runtime':'host /usr read-only','hermetic_cacheable':False}
 
 
-def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime=None) -> dict:
+def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime=None,
+            profile='pcworld', snapshot_limits=None, repo_base=None, cwd='.', env=None,
+            check_artifacts=()) -> dict:
     """Run a structured operator-authorized argv, returning host observations.
 
     Copies regular files into a private, immutable candidate snapshot before
@@ -87,12 +89,19 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
             raise RuntimeError('UNSUPPORTED_ENVIRONMENT: '+command+' required; no fallback')
     if not Path('/sys/fs/cgroup/cgroup.controllers').is_file():
         raise RuntimeError('UNSUPPORTED_ENVIRONMENT: cgroup v2 required')
-    caps={**DEFAULTS,**(limits or {})}
+    if profile not in ('pcworld','repoworld'):
+        raise ValueError('unknown execution profile')
+    repo = profile == 'repoworld'
+    if repo and (runtime is None or repo_base is None):
+        raise ValueError('RepoWorld requires pinned runtime and base capabilities')
+    if not repo and (snapshot_limits is not None or repo_base is not None or cwd!='.' or env or check_artifacts):
+        raise ValueError('repository options require the explicit profile')
+    caps={**DEFAULTS,**({'disk_bytes':128*1024*1024} if repo else {}),**(limits or {})}
     if set(caps)!=set(DEFAULTS) or any(type(v) is not int or v<=0 for v in caps.values()):
         raise ValueError('invalid integer limits')
     if (caps['wall_ms']>600000 or caps['cpu_ms']>600000 or
-        not 32*1024*1024<=caps['memory_bytes']<=2*1024**3 or
-        not 4<=caps['pids']<=128 or caps['output_bytes']>4*1024**2 or caps['disk_bytes']>64*1024**2):
+        not 32*1024*1024<=caps['memory_bytes']<=(4 if repo else 2)*1024**3 or
+        not 4<=caps['pids']<=128 or caps['output_bytes']>4*1024**2 or caps['disk_bytes']>(1024 if repo else 64)*1024**2):
         raise ValueError('limits outside PCWORLD-1 development bounds')
     if (not isinstance(argv,list) or not argv or len(argv)>128 or
         any(not isinstance(a,str) or '\0' in a or len(a)>65536 for a in argv) or
@@ -104,29 +113,68 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
     # including legacy MCP, crosses this exact backend and capability copier.
     from .snapshots import SnapshotStore, Snapshot
     with tempfile.TemporaryDirectory(prefix='echo-pcworld-job-') as temp:
-        store=SnapshotStore(Path(temp)/'snapshots')
+        store=SnapshotStore(Path(temp)/'snapshots',**(snapshot_limits or {}))
         snapshot=store.capture(workspace if isinstance(workspace,Snapshot) else Path(workspace))
         if runtime is not None:
             from .runtime import validate_runtime
             validate_runtime(runtime)
-        return _execute_snapshot(snapshot,argv,caps,stdin,runtime)
+        config=None
+        if repo:
+            from .snapshots import _parts
+            store.validate(repo_base)
+            if cwd != '.': _parts(cwd)
+            if cwd!='.' and snapshot.manifest['entries'].get(cwd,{}).get('type')!='directory':
+                raise ValueError('cwd is not a candidate directory')
+            if type(env or {}) is not dict or set(env or {}) - {'PYTHONPATH','PYTHONWARNINGS','PYTEST_DISABLE_PLUGIN_AUTOLOAD'}:
+                raise ValueError('environment outside project allowlist')
+            if any(type(v) is not str or '\0' in v or len(v)>4096 for v in (env or {}).values()):
+                raise ValueError('invalid project environment')
+            if not isinstance(check_artifacts,tuple) or len(check_artifacts)>8:
+                raise ValueError('bounded artifact capabilities required')
+            for path in check_artifacts: _parts(path)
+            config=Path(temp)/'launcher';config.mkdir()
+            shutil.copyfile(Path(__file__).with_name('repo_launcher.py'),config/'launch.py')
+            (config/'request.json').write_text(json.dumps(dict(argv=argv,cwd=cwd,env=env or {},artifacts=check_artifacts)))
+        result=_execute_snapshot(snapshot,argv,caps,stdin,runtime,repo_base=repo_base,launcher=config)
+        if repo:
+            result['artifacts']={}
+            # Candidate-controlled data; even the launcher's trailer is NOT an oracle.
+            marker='\nREPOWORLD_ARTIFACTS_V1 '
+            if marker in result['stdout']:
+                try:
+                    value=json.loads(result['stdout'].rsplit(marker,1)[1])
+                    for name,encoded in value.items():
+                        if name not in check_artifacts or type(encoded) is not str: continue
+                        raw=base64.b64decode(encoded,validate=True)
+                        if len(raw)>65536 or sum(x['bytes'] for x in result['artifacts'].values())+len(raw)>65536: continue
+                        result['artifacts'][name]=dict(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw),
+                            data_b64=encoded,authority='candidate_output_untrusted')
+                except (ValueError,TypeError,AttributeError): pass
+        return result
 
 
-def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None):
+def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,launcher=None):
     unit='echo-pcworld-'+uuid.uuid4().hex+'.service'
     mounts=(['--ro-bind',str(runtime.root),'/'] if runtime is not None else
             ['--ro-bind','/usr','/usr','--symlink','usr/bin','/bin',
              '--symlink','usr/lib','/lib','--symlink','usr/lib64','/lib64'])
+    writable = (['--size',str(caps['disk_bytes']),'--tmpfs','/work',
+                 '--ro-bind',str(snapshot.root),'/candidate',
+                 '--ro-bind',str(repo_base.root),'/repo-base',
+                 '--ro-bind',str(launcher),'/runner','--remount-ro','/dev',
+                 '--chdir','/work'] if launcher else
+                ['--size',str(caps['disk_bytes']//2),'--tmpfs','/tmp',
+                 '--size',str(caps['disk_bytes']//2),'--tmpfs','/out',
+                 '--ro-bind',str(snapshot.root),'/workspace','--chdir','/workspace'])
+    run_argv=['/usr/bin/python3','-I','/runner/launch.py'] if launcher else argv
     bwrap=['/usr/bin/bwrap','--unshare-all','--unshare-user','--die-with-parent','--new-session',
            '--cap-drop','ALL','--disable-userns',*mounts,
-           '--proc','/proc','--dev','/dev','--size',str(caps['disk_bytes']//2),'--tmpfs','/tmp',
-           '--size',str(caps['disk_bytes']//2),'--tmpfs','/out',
-           '--ro-bind',str(snapshot.root),'/workspace','--chdir','/workspace',
-           '--clearenv','--setenv','PATH','/usr/bin:/bin','--setenv','HOME','/tmp',
-           '--setenv','TMPDIR','/tmp','--setenv','LANG','C.UTF-8','--setenv','TZ','UTC',
+           '--proc','/proc','--dev','/dev',*writable,
+           '--clearenv','--setenv','PATH','/usr/bin:/bin','--setenv','HOME','/work/.home' if launcher else '/tmp',
+           '--setenv','TMPDIR','/work/.tmp' if launcher else '/tmp','--setenv','LANG','C.UTF-8','--setenv','TZ','UTC',
            '--setenv','PYTHONDONTWRITEBYTECODE','1','--setenv','PYTHONHASHSEED','0',
            '--setenv','OMP_NUM_THREADS','1','--setenv','OPENBLAS_NUM_THREADS','1',
-           '--',*argv]
+           '--',*run_argv]
     # RemainAfterExit keeps the service accounting available until this supervisor
     # has copied it. RuntimeMaxSec is an independent wall watchdog if we disappear.
     args=['/usr/bin/systemd-run','--user','--quiet','--pipe','--unit='+unit,
@@ -228,4 +276,7 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None):
                          'events':events},'limits':caps,
             'isolation':{'backend':'bubblewrap+cgroup-v2','unit':unit,'network_disabled':True,
                          'host_usr_mounted':runtime is None,'runtime_snapshot':runtime.id if runtime else None,
-                         'parent_mounted':False,'workspace_readonly':True,'job_empty':empty}}
+                         'parent_mounted':False,'workspace_readonly':True,'job_empty':empty,
+                         'profile':'repoworld' if launcher else 'pcworld',
+                         'scratch_writable':bool(launcher),
+                         'scratch_quota_bytes':caps['disk_bytes'] if launcher else None}}
