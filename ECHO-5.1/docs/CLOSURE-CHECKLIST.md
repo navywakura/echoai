@@ -102,10 +102,24 @@ roles, contabilidad persistente, relay con IDs duraderos, curador y CLI:
 |---|---|---|
 | Verde local acotado | Parche → regresión → retención/rollback → auditoría | Smoke sobre tests reales de SymPy con proveedor simulado; recuperación sin nueva generación. No resuelve el issue. |
 | Verde local acotado | S/I2/F/E/E_no_guard, contabilidad y recuperación | Pruebas de ramas, reservas, respuesta tardía, cambio de lock, entorno ajeno, agotamientos y firma de entregas. Calibración real pendiente. |
-| Rojo | Gate 1: entorno por instancia | 7/36 pasan el preflight de desarrollo, 6/12 repos; faltan dependencias/builds/enlaces y 20 entradas de entorno. |
-| Rojo | Control del evaluador oficial | Requests-2148 vacío/referencia no pasan con aislamiento de red; 35 imágenes ausentes. No se permite gastar GPU. |
+| Verde local acotado | Gate 1: entorno por instancia | 36/36 instancias, 12/12 repos, dos ejecuciones públicas coincidentes; dependencias y suplementos BASE fijados. Una omisión Python 2 declarada, no contada como pase. [Evidencia Opción B](REPOWORLD-ENVIRONMENTS-COMPLETE-20261013.md). |
+| Verde en calibración; pendiente campaña completa | Control del evaluador oficial | 4/4 controles vacío/referencia válidos, Requests-2148 mediante httpbin loopback sin red externa. Faltan los controles oficiales del resto de las 36 instancias; el gate de calibración no habilita la campaña. |
 | Pendiente | Gate 3 y lock científico | Sin calibración nueva de 32B, consulta nueva de cuota ni `SWE-RUN-LOCK` habilitado. |
 | Pendiente | Campaña SWE, evaluación común y cuatro gráficas medidas | Conservar 24 issues por brazo; principal 96, más controles y memoria: 150 celdas registradas. |
 | Abierto | H1/H2/H3/H4/T20 y cierre general de ECHO-5.1 | Infraestructura verificada no demuestra ventaja científica; faltan resultados y confirmación independiente. |
 
 No hay puntuación SWE-bench ni gasto nuevo de GPU. Rama local, sin push.
+
+### Actualización local de entornos · 14 de octubre de 2026
+
+- [x] Gate 1: 36/36 instancias públicas, sin reducir el registro.
+- [x] Gate 2: smoke con rollback y replay; 68 recibos auditados.
+- [x] Cuatro controles oficiales de calibración, incluidos Requests y Pytest.
+- [x] 415 pruebas de software pasadas y dos integraciones explícitas pasadas aparte.
+- [x] Revisión independiente; corrección del reemplazo de alias nativos probada en sandbox.
+- [x] Sin nuevas llamadas LLM/GPU; contrato en `design`; sin push.
+- [ ] Controles oficiales de todas las instancias exigidas por el lock.
+- [ ] Calibración remota, revisión de cuota real y sellado.
+- [ ] Campaña científica, evaluación separada y confirmación de hipótesis.
+
+La infraestructura local en verde no cierra científicamente ECHO-5.1.

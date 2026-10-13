@@ -98,6 +98,16 @@
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
           },
+          "service_manifest_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "Pinned public loopback service bundle used for both controls and final evaluation; absent when no service is required."
+          },
+          "reporting_profile_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "Pinned failure-report rendering profile shared by controls and final evaluation; absent when no override is required."
+          },
           "sealed_tests_sha256": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"

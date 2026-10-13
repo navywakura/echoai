@@ -61,13 +61,16 @@ def require_gate(directory,kind):
 
 def load_registry(path,contract,sample_path):
     registry=json.loads(Path(path).read_bytes())
-    if set(registry)!={'schema','dataset','entries'} or registry['schema']!='repoworld.environment-registry.v1':raise ValueError('environment registry schema')
+    if set(registry)!={'schema','dataset','entries'} or registry['schema'] not in ('repoworld.environment-registry.v1','repoworld.environment-registry.v2'):raise ValueError('environment registry schema')
     rows=read_fixed_dataset(Path(registry['dataset']),expected_sha256=contract['dataset']['parquet_sha256'])
     tasks={r['instance_id']:public_task(r) for r in rows}
     registered={r['instance_id']:r for r in sample_roster(json.loads(Path(sample_path).read_bytes()))}
     entries={}
     for row in registry['entries']:
-        if set(row)!={'instance_id','source','runtime','check_plan'}:raise ValueError('registry entry fields')
+        fields={'instance_id','source','runtime','check_plan'}
+        if registry['schema']=='repoworld.environment-registry.v2' and 'supplement' in row:
+            fields.add('supplement');validate_supplement_descriptor(row['supplement'])
+        if set(row)!=fields:raise ValueError('registry entry fields')
         key=row['instance_id']
         if key not in registered or key in entries or tasks[key].base_commit!=registered[key]['base_commit']:raise ValueError('registry identity mismatch')
         if row['check_plan']['repo']!=tasks[key].repo:raise ValueError('check plan repo mismatch')
@@ -75,9 +78,30 @@ def load_registry(path,contract,sample_path):
     return tasks,entries,registered
 
 
+def validate_supplement_descriptor(value):
+    from ..pcworld.snapshots import _hash
+    if not isinstance(value,dict) or set(value)!={'directory','manifest','manifest_sha256'}:
+        raise ValueError('supplement descriptor fields')
+    for key in ('directory','manifest'):
+        if type(value[key]) is not str or not value[key] or '\0' in value[key]:
+            raise ValueError('supplement descriptor path')
+    _hash(value['manifest_sha256'])
+
+
 def prepare_entry(task,entry,output):
+    manifest=None
+    if 'supplement' in entry:
+        descriptor=entry['supplement'];validate_supplement_descriptor(descriptor)
+        path=Path(descriptor['manifest'])
+        if path.stat().st_size>4*1024*1024:raise ValueError('supplement manifest too large')
+        manifest=json.loads(path.read_bytes())
+        if hashlib.sha256(canonical(manifest)).hexdigest()!=descriptor['manifest_sha256']:
+            raise ValueError('supplement manifest authorization hash mismatch')
     environment=environment_ref(load_image(entry['runtime']),scope='public-dependencies')
     base=prepare_repo(task,Path(entry['source']),environment,task.base_commit,store_dir=Path(output)/'base')
+    if manifest is not None:
+        from .supplements import apply_supplement
+        base=apply_supplement(base,descriptor['directory'],manifest,descriptor['manifest_sha256'])
     return base
 
 
@@ -195,6 +219,15 @@ def validate_seal(directory,sample_path):
     return seal
 
 
+def validate_curator_binding(row,control):
+    for field in ('official_image_digest','official_eval_script_sha256','sealed_tests_sha256','empty_patch_resolved','gold_patch_resolved'):
+        if row[field]!=control[field]:raise ValueError('lock differs from curator controls: '+field)
+    if row.get('service_manifest_sha256')!=control.get('service_manifest_sha256'):
+        raise ValueError('lock differs from curator service profile')
+    if row.get('reporting_profile_sha256')!=control.get('reporting_profile_sha256'):
+        raise ValueError('lock differs from curator reporting profile')
+
+
 def seal(contract_path,sample_path,materials,*,preflight_dir,curator_dir,smoke_dir,calibration_dir,verification_dir,output):
     # Evidence is bound to the CURRENT source bytes, not a boolean edited by an actor.
     offline=require_gate(preflight_dir,'offline-preflight');require_gate(smoke_dir,'mock-smoke')
@@ -213,8 +246,7 @@ def seal(contract_path,sample_path,materials,*,preflight_dir,curator_dir,smoke_d
     for row in lock['instances']:
         for field in ('online_rootfs_sha256','online_tree_sha256','public_checks_sha256','base_commit'):
             if row[field]!=ready[row['instance_id']][field]:raise ValueError('lock differs from tested environment: '+field)
-        for field in ('official_image_digest','official_eval_script_sha256','sealed_tests_sha256','empty_patch_resolved','gold_patch_resolved'):
-            if row[field]!=official[row['instance_id']][field]:raise ValueError('lock differs from curator controls: '+field)
+        validate_curator_binding(row,official[row['instance_id']])
     output=Path(output);output.mkdir(parents=True,exist_ok=False,mode=0o700)
     _atomic_write(output/'SWE-CONTRACT.json',contract_bytes);_atomic_write(output/'SWE-RUN-LOCK.json',canonical(lock))
     _atomic_write(output/'schedule.json',canonical(schedule));_atomic_write(output/'source-manifest.json',canonical(source_manifest()))
@@ -253,7 +285,13 @@ def calibrate_remote(registry,contract,sample_path,*,preflight_dir,curator_dir,s
         official_evaluation=False,worker_metadata=metadata,model_config_sha256=hashlib.sha256(canonical(provider_identity(provider_config))).hexdigest()),source_before=sources)
 
 
-def curator_preflight(cap,contract,sample_path,output,*,allow_pull=False):
+def curator_scope(sample,scope):
+    if scope == 'all':return 'official-controls', sample_roster(sample)
+    if scope == 'calibration':return 'official-calibration-controls', sample['calibration']
+    raise ValueError('unsupported curator scope')
+
+
+def curator_preflight(cap,contract,sample_path,output,*,allow_pull=False,scope='all'):
     """No model, no GPU: only the curator can read the reference implementation."""
     import subprocess,os
     from .evaluator import HARNESS_COMMIT,curator_command
@@ -263,8 +301,9 @@ def curator_preflight(cap,contract,sample_path,output,*,allow_pull=False):
     commit=subprocess.check_output(['git','-C',str(cap.harness),'rev-parse','HEAD'],text=True,timeout=10).strip()
     dirty=subprocess.check_output(['git','-C',str(cap.harness),'status','--porcelain','--untracked-files=no'],timeout=10)
     if commit!=HARNESS_COMMIT or dirty:raise ValueError('clean pinned official harness required')
+    kind,selected=curator_scope(json.loads(Path(sample_path).read_bytes()),scope)
     request=dict(harness=str(cap.harness.resolve()),dataset=str(cap.dataset.resolve()),dataset_sha256=contract['dataset']['parquet_sha256'],
-        instances=[{k:r[k] for k in ('instance_id','base_commit')} for r in sample_roster(json.loads(Path(sample_path).read_bytes()))],allow_pull=allow_pull)
+        instances=[{k:r[k] for k in ('instance_id','base_commit')} for r in selected],allow_pull=allow_pull)
     _atomic_write(output/'request.json',canonical(request))
     env=dict(os.environ)
     if cap.docker_host:env['DOCKER_HOST']=cap.docker_host
@@ -275,7 +314,7 @@ def curator_preflight(cap,contract,sample_path,output,*,allow_pull=False):
         results=[dict(instance_id=r['instance_id'],valid=False,error='curator_process_failed') for r in request['instances']]
     else:results=json.loads((output/'controls.json').read_bytes())
     valid=process.returncode==0 and {r['instance_id'] for r in results}=={r['instance_id'] for r in request['instances']} and all(r['valid'] for r in results)
-    return write_gate(output,dict(kind='official-controls',valid=valid,results=results,gpu_hours=0,
+    return write_gate(output,dict(kind=kind,scope=scope,valid=valid,results=results,gpu_hours=0,
         harness_commit=commit,dataset_sha256=contract['dataset']['parquet_sha256'],
         private_log_sha256=sha256_file(output/'curator-private.log'),sample_sha256=sha256_file(sample_path)),source_before=sources)
 

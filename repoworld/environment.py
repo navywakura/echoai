@@ -17,9 +17,12 @@ from .types import EnvironmentRef, RepoBase
 from .dataset import public_task
 from dataclasses import asdict
 
-REPO_LIMITS = dict(max_files=50000, max_bytes=512*1024*1024, max_entries=100000, max_depth=64, streaming=True)
-POLICY = dict(schema='repoworld.environment-policy.v1', network=False, host_usr=False,
-              scratch='single-tmpfs', scope='stdlib-calibration', dependencies='Python stdlib only',
+REPO_LIMITS = dict(max_files=50000, max_bytes=512*1024*1024, max_entries=100000, max_depth=64, streaming=True, internal_symlinks=True)
+POLICY = dict(schema='repoworld.environment-policy.v2', network=False, host_usr=False,
+              scratch='partitioned-tmpfs-work-3-tmp-1-total-capped', scope='stdlib-calibration', dependencies='Python stdlib only',
+              symlinks='relative-internal-manifest-v2', shared_memory='within-scratch-quota',
+              directory_ancestors='landlock-abi2-remove-dir-scratch-only',
+              exported_artifact_bytes=512*1024,
               max_bytes=REPO_LIMITS['max_bytes'])
 DEPENDENCY_POLICY={**POLICY,'scope':'public-dependencies','dependencies':'frozen read-only /deps inventory'}
 
@@ -93,12 +96,12 @@ def prepare_repo(task, source: Path, environment: EnvironmentRef, expected_commi
         metadata, raw_path=record.split(b'\t',1)
         mode,kind,oid,size=metadata.decode('ascii').split()
         name=raw_path.decode('utf-8'); parts=_parts(name)
-        if any(p in ('.git','.echoai') for p in parts) or mode not in ('100644','100755') or kind!='blob':
+        if any(p in ('.git','.echoai') for p in parts) or mode not in ('100644','100755','120000') or kind!='blob':
             raise ValueError('unsupported Git entry: links/submodules/special modes forbidden')
         total+=int(size)
         if total>REPO_LIMITS['max_bytes'] or len(entries)>=REPO_LIMITS['max_files']:
             raise ValueError('repository exceeds profile')
-        entries.append((name,oid,int(size),int(mode,8)&0o777))
+        entries.append((name,oid,int(size),int(mode,8)))
     if not entries: raise ValueError('empty base tree')
     store=repo_store(store_dir or (source.parent/(task.instance_id+'-snapshots')))
     with tempfile.TemporaryDirectory(prefix='repoworld-export-') as tmp, tempfile.TemporaryFile() as objects:
@@ -106,19 +109,28 @@ def prepare_repo(task, source: Path, environment: EnvironmentRef, expected_commi
         subprocess.run([*argv,'cat-file','--batch'], input=('\n'.join(e[1] for e in entries)+'\n').encode(),
                        stdout=objects,stderr=subprocess.PIPE,check=True,env=git_env(),timeout=120)
         objects.seek(0); root=Path(tmp);root.chmod(0o755)
+        links=[]
         for name,oid,size,mode in entries:
             if objects.readline().decode().strip()!=f'{oid} blob {size}':
                 raise ValueError('Git object mismatch')
             path=root/name;path.parent.mkdir(parents=True,exist_ok=True,mode=0o755)
+            if mode == 0o120000:
+                if size > 4096: raise ValueError('oversized Git symlink')
+                target=objects.read(size).decode('utf-8')
+                links.append((path,target))
+                if objects.read(1)!=b'\n': raise ValueError('invalid symlink object boundary')
+                continue
             left=size
             with path.open('xb') as out:
                 while left:
                     data=objects.read(min(65536,left))
                     if not data: raise ValueError('truncated object')
                     out.write(data);left-=len(data)
-            path.chmod(mode)
+            path.chmod(mode & 0o777)
             if objects.read(1)!=b'\n': raise ValueError('invalid object boundary')
         if objects.read(1): raise ValueError('extra object bytes')
+        # Links are created last; no blob path can traverse a link during export.
+        for path,target in links: path.symlink_to(target)
         snapshot=store.capture(root,exclude=('.git',))
     return RepoBase(task,snapshot,environment)
 

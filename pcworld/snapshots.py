@@ -12,7 +12,10 @@ Exclusions are exact basenames at every depth, recorded in the manifest;
 but their bytes are never read. Owners, timestamps, ACLs and xattrs are not
 reproduced: the supervisor owns copies, and only POSIX permission modes describe
 the source. Symlinks, hardlinks, devices, sockets, FIFOs and cross-device trees
-are rejected. All pathname components are opened with dir_fd and O_NOFOLLOW.
+are rejected by default. The explicit RepoWorld profile permits relative
+symlinks whose full chain resolves inside the manifest; it preserves links
+without following them during capture. All other pathname components are
+opened with dir_fd and O_NOFOLLOW.
 
 Defaults: 10,000 regular files, 64 MiB included bytes, 20,000 tree entries,
 depth 64, 16 MiB manifest. Excluded entries count toward traversal/file limits.
@@ -198,6 +201,40 @@ def _parts(relative):
     return parts
 
 
+def _resolve_internal_link(entries, path):
+    """Resolve against the manifest only, applying POSIX link/.. order.
+
+    No host path is opened. Dangling links, escapes, cycles and file traversal
+    fail closed. This is available only in the explicit repository profile.
+    """
+    pending = path.split('/'); resolved = []; followed = 0
+    while pending:
+        part = pending.pop(0)
+        if part in ('', '.'):
+            continue
+        if part == '..':
+            if not resolved:
+                raise SnapshotError('UNSAFE_PATH', 'symlink escapes tree')
+            resolved.pop(); continue
+        name = '/'.join(resolved + [part])
+        entry = entries.get(name)
+        if entry is None:
+            raise SnapshotError('UNSAFE_PATH', 'dangling symlink')
+        if entry['type'] == 'symlink':
+            followed += 1
+            if followed > 40:
+                raise SnapshotError('UNSAFE_PATH', 'cyclic/excessive symlink chain')
+            target = entry['target']
+            if target.startswith('/') or '\\' in target or '\0' in target:
+                raise SnapshotError('UNSAFE_PATH', 'noninternal symlink')
+            pending = target.split('/') + pending
+        else:
+            if pending and entry['type'] != 'directory':
+                raise SnapshotError('UNSAFE_PATH', 'symlink traverses a regular file')
+            resolved.append(part)
+    return '/'.join(resolved) or '.'
+
+
 def _absolute(path):
     path = Path(path)
     if ".." in path.parts or "\0" in str(path):
@@ -341,7 +378,7 @@ def _remove_staging(parent, name):
 
 class SnapshotStore:
     def __init__(self, directory: Path, *, max_files=10_000, max_bytes=64 * 1024 * 1024,
-                 max_entries=20_000, max_depth=64, streaming=False):
+                 max_entries=20_000, max_depth=64, streaming=False, internal_symlinks=False):
         if fcntl is None or any(not hasattr(os, flag) for flag in ("O_NOFOLLOW", "O_DIRECTORY")):
             raise SnapshotError("UNSUPPORTED_ENVIRONMENT", "POSIX descriptor operations and flock required")
         for value in (max_files, max_bytes, max_entries, max_depth):
@@ -353,6 +390,7 @@ class SnapshotStore:
         self.max_files, self.max_bytes = max_files, max_bytes
         self.max_entries, self.max_depth = max_entries, max_depth
         self.streaming = bool(streaming)
+        self.internal_symlinks = bool(internal_symlinks)
         try:
             with _directory(self.directory, create=True) as fd:
                 info = os.fstat(fd)
@@ -426,6 +464,18 @@ class SnapshotStore:
                 if depth + 1 > self.max_depth:
                     raise SnapshotError("LIMIT_EXCEEDED", "tree depth limit exceeded")
                 omit = hidden or name in exclude
+                link_info = os.stat(name, dir_fd=fd, follow_symlinks=False)
+                if stat.S_ISLNK(link_info.st_mode) and self.internal_symlinks:
+                    if omit or link_info.st_dev != device or link_info.st_nlink != 1:
+                        raise SnapshotError('UNSAFE_PATH', 'excluded/cross-device/hardlinked symlink')
+                    target = os.readlink(name, dir_fd=fd)
+                    _same(link_info, os.stat(name, dir_fd=fd, follow_symlinks=False))
+                    files += 1; byte_count += len(os.fsencode(target))
+                    if files > self.max_files or byte_count > self.max_bytes:
+                        raise SnapshotError('LIMIT_EXCEEDED', 'symlink count/bytes exceeded')
+                    stamps[relative] = _stamp(link_info)
+                    entries[relative] = dict(type='symlink', mode=0o777, target=target)
+                    continue
                 with _checked(fd, name) as (child, info):
                     if info.st_dev != device:
                         raise SnapshotError("UNSAFE_PATH", "cross-device entry")
@@ -460,7 +510,7 @@ class SnapshotStore:
     def _check_manifest(self, manifest):
         if not isinstance(manifest, dict) or set(manifest) != {"version", "exclude", "entries"}:
             raise SnapshotError("CORRUPT_SNAPSHOT", "invalid manifest shape")
-        if type(manifest["version"]) is not int or manifest["version"] != 1:
+        if type(manifest["version"]) is not int or manifest["version"] not in ((1, 2) if self.internal_symlinks else (1,)):
             raise SnapshotError("CORRUPT_SNAPSHOT", "unknown manifest version")
         exclude = self._exclusions(manifest["exclude"])
         if tuple(exclude) != tuple(manifest["exclude"]):
@@ -477,13 +527,22 @@ class SnapshotStore:
                 raise SnapshotError("LIMIT_EXCEEDED", "manifest depth limit exceeded")
             if any(part in exclude for part in parts):
                 raise SnapshotError("CORRUPT_SNAPSHOT", "excluded path in manifest")
-            if not isinstance(entry, dict) or entry.get("type") not in ("directory", "file"):
+            kinds = ('directory', 'file', 'symlink') if self.internal_symlinks and manifest['version'] == 2 else ('directory', 'file')
+            if not isinstance(entry, dict) or entry.get("type") not in kinds:
                 raise SnapshotError("CORRUPT_SNAPSHOT", "invalid entry type")
             if type(entry.get("mode")) is not int or not 0 <= entry["mode"] <= 0o7777:
                 raise SnapshotError("CORRUPT_SNAPSHOT", "invalid source mode")
             if entry["type"] == "directory":
                 if set(entry) != {"type", "mode"}:
                     raise SnapshotError("CORRUPT_SNAPSHOT", "invalid directory metadata")
+            elif entry['type'] == 'symlink':
+                if path == '.' or set(entry) != {'type', 'mode', 'target'} or entry['mode'] != 0o777:
+                    raise SnapshotError('CORRUPT_SNAPSHOT', 'invalid symlink metadata')
+                target = entry['target']
+                if (type(target) is not str or not target or target.startswith('/')
+                        or '\\' in target or '\0' in target or len(os.fsencode(target)) > 4096):
+                    raise SnapshotError('UNSAFE_PATH', 'invalid relative symlink')
+                files += 1; total += len(os.fsencode(target))
             else:
                 if path == "." or set(entry) != {"type", "mode", "size", "sha256"}:
                     raise SnapshotError("CORRUPT_SNAPSHOT", "invalid file metadata")
@@ -498,6 +557,9 @@ class SnapshotStore:
                     raise SnapshotError("CORRUPT_SNAPSHOT", "missing directory parent")
         if files > self.max_files or total > self.max_bytes:
             raise SnapshotError("LIMIT_EXCEEDED", "manifest file/byte limit exceeded")
+        for path, entry in entries.items():
+            if entry['type'] == 'symlink':
+                _resolve_internal_link(entries, path)
         raw = _canonical(manifest)
         if len(raw) > _MANIFEST_BYTES:
             raise SnapshotError("LIMIT_EXCEEDED", "manifest byte limit exceeded")
@@ -508,7 +570,8 @@ class SnapshotStore:
         expected = {}
         for path, entry in manifest["entries"].items():
             expected[path] = dict(entry)
-            expected[path]["mode"] = 0o555 if entry["type"] == "directory" else 0o444 | (entry["mode"] & 0o111)
+            expected[path]["mode"] = (0o777 if entry['type'] == 'symlink' else
+                                      0o555 if entry["type"] == "directory" else 0o444 | (entry["mode"] & 0o111))
         if actual != expected:
             raise SnapshotError("CORRUPT_SNAPSHOT", "stored bytes, names, types or sealed modes differ")
         return contents
@@ -607,6 +670,11 @@ class SnapshotStore:
                             parts = _parts(path)
                             with _descend(root, parts[:-1]) as parent:
                                 _write_new(parent, parts[-1], data, 0o444 | (entries[path]["mode"] & 0o111))
+                        for path, entry in entries.items():
+                            if entry['type'] == 'symlink':
+                                parts = _parts(path)
+                                with _descend(root, parts[:-1]) as parent:
+                                    os.symlink(entry['target'], parts[-1], dir_fd=parent)
                         for path in reversed(directories):
                             with _descend(root, _parts(path)) as fd:
                                 os.fchmod(fd, 0o555)
@@ -645,7 +713,8 @@ class SnapshotStore:
                 entries, contents = self._stable_tree(root, exclusions)
                 with _directory(path) as reopened:
                     _same(before, os.fstat(reopened))
-            return self._publish(store, {"version": 1, "exclude": exclusions, "entries": entries}, contents)
+            version = 2 if any(e['type'] == 'symlink' for e in entries.values()) else 1
+            return self._publish(store, {"version": version, "exclude": exclusions, "entries": entries}, contents)
 
     def _bound(self, snapshot):
         if not isinstance(snapshot, Snapshot):

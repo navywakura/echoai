@@ -10,6 +10,41 @@ from echoai.repoworld.study import schedule_for,write_gate,require_gate,require_
 
 
 class StudyTests(unittest.TestCase):
+    def test_seal_binds_offline_service_in_addition_to_official_image(self):
+        from echoai.repoworld.study import validate_curator_binding
+        row={k:'a'*64 for k in ('official_image_digest','official_eval_script_sha256','sealed_tests_sha256')}
+        row.update(empty_patch_resolved=False,gold_patch_resolved=True)
+        validate_curator_binding(row,row)
+        served={**row,'service_manifest_sha256':'b'*64}
+        validate_curator_binding(served,served)
+        for changed in (row,{**served,'service_manifest_sha256':'c'*64}):
+            with self.assertRaisesRegex(ValueError,'service'):
+                validate_curator_binding(changed,served)
+
+    def test_curator_calibration_scope_cannot_satisfy_full_controls_gate(self):
+        from echoai.repoworld.study import curator_scope
+        sample=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json').read_bytes())
+        kind,rows=curator_scope(sample,'calibration')
+        self.assertEqual(kind,'official-calibration-controls')
+        self.assertEqual({r['instance_id'] for r in rows},{r['instance_id'] for r in sample['calibration']})
+        self.assertEqual(len(rows),4)
+        full_kind,full_rows=curator_scope(sample,'all')
+        self.assertEqual(full_kind,'official-controls');self.assertEqual(len(full_rows),36)
+        with tempfile.TemporaryDirectory() as tmp:
+            write_gate(tmp,{'kind':kind,'valid':True,'results':rows})
+            with self.assertRaises(ValueError):require_gate(tmp,'official-controls')
+        with self.assertRaises(ValueError):curator_scope(sample,'primary')
+
+    def test_seal_binds_reporting_profile_including_its_absence(self):
+        from echoai.repoworld.study import validate_curator_binding
+        row={k:'a'*64 for k in ('official_image_digest','official_eval_script_sha256','sealed_tests_sha256')}
+        row.update(empty_patch_resolved=False,gold_patch_resolved=True)
+        reported={**row,'reporting_profile_sha256':'b'*64}
+        validate_curator_binding(reported,reported)
+        for left,right in ((row,reported),(reported,row),({**reported,'reporting_profile_sha256':'c'*64},reported)):
+            with self.assertRaisesRegex(ValueError,'reporting'):
+                validate_curator_binding(left,right)
+
     def test_unstarted_rows_remain_in_frozen_denominator_and_cannot_hide_attempts(self):
         from echoai.repoworld.study import record_not_started
         from echoai.repoworld.evaluator import freeze_set,validate_frozen_set

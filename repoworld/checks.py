@@ -6,7 +6,7 @@ ordinary tampering and broken environments; arbitrary in-process monkeypatching
 of the test framework remains outside this evidence's assurance claim.
 """
 import base64
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import hashlib
 import json
 import re
@@ -22,7 +22,7 @@ CATALOG = {
     'pallets/flask': ('pytest', ['src/flask/', 'flask/'], ['tests/test_basic.py']),
     'psf/requests': ('pytest', ['requests/', 'src/requests/'], ['test_requests.py']),
     'pydata/xarray': ('pytest', ['xarray/'], ['xarray/tests/test_utils.py']),
-    'pylint-dev/pylint': ('pytest', ['pylint/'], ['tests/test_utils.py']),
+    'pylint-dev/pylint': ('pytest', ['pylint/'], ['tests/lint/test_utils.py']),
     'pytest-dev/pytest': ('pytest', ['src/_pytest/', 'src/pytest.py', '_pytest/'], ['testing/test_assertion.py']),
     'scikit-learn/scikit-learn': ('pytest', ['sklearn/'], ['sklearn/utils/tests/test_validation.py']),
     'sphinx-doc/sphinx': ('pytest', ['sphinx/'], ['tests/test_util.py']),
@@ -37,7 +37,7 @@ def catalog_for(repo):
             'sympy': ['/usr/bin/python3', 'bin/test', '-C', '--verbose']}[runner]
     return dict(schema='repoworld.public-plan.v1', repo=repo, parser=runner,
                 argv=argv, public_targets=list(targets), production_roots=list(roots),
-                env={'PYTHONPATH':'/work/src:/work:/deps', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1'},
+                env={'PYTHONPATH':('/work/lib:' if repo=='matplotlib/matplotlib' else '')+'/work/src:/work:/deps', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1'},
                 limits={'wall_ms':180000,'cpu_ms':240000,'memory_bytes':4*1024**3,
                         'disk_bytes':1024**3,'pids':128,'output_bytes':1024*1024})
 
@@ -57,26 +57,28 @@ def sanitize_output(value):
     return raw.decode('utf-8','ignore')
 
 
-def parse_junit(text, *, exit_code):
+def parse_junit(text, *, exit_code, include_skip_reasons=False):
     if isinstance(text, bytes): text=text.decode('utf-8')
-    if len(text.encode())>65536 or '<!' in text: raise ValueError('unsafe or oversized test report')
+    if len(text.encode())>512*1024 or '<!' in text: raise ValueError('unsafe or oversized test report')
     try: root=ET.fromstring(text)
     except ET.ParseError as exc: raise ValueError('malformed test report') from exc
     if root.tag not in ('testsuite','testsuites'): raise ValueError('test report root')
-    states={}
+    states={};skip_reasons={}
     for node in root.iter('testcase'):
         name=node.get('classname','')+'::'+node.get('name','')
         if name=='::' or name in states: raise ValueError('missing/duplicate test identity')
         kinds=[s.tag for s in node if s.tag in ('error','failure','skipped')]
         if len(kinds)>1: raise ValueError('contradictory test outcomes')
         states[name]={'error':'ERROR','failure':'FAILED','skipped':'SKIPPED'}.get(kinds[0] if kinds else '', 'PASSED')
+        if states[name]=='SKIPPED':
+            skip_reasons[name]=node.find('skipped').get('message','')
     if not states: raise ValueError('zero collected tests')
     suites=list(root.iter('testsuite'))
     if not suites or sum(int(s.get('tests','-1')) for s in suites)!=len(states):
         raise ValueError('collection count mismatch')
     failed=any(s in ('FAILED','ERROR') for s in states.values())
     if exit_code != int(failed): raise ValueError('exit contradicts test observations')
-    return states
+    return (states,skip_reasons) if include_skip_reasons else states
 
 
 def parse_native(text, *, runner, exit_code):
@@ -123,19 +125,51 @@ class PublicCheckReport:
     valid: bool
     summary: str = ''
     cpu_us: int = 0
+    skip_reasons: dict = field(default_factory=dict)
 
 
 def validate_plan(plan):
     allowed={'schema','repo','parser','argv','public_targets','production_roots','env','limits'}
-    if set(plan)!=allowed or plan['schema']!='repoworld.public-plan.v1': raise ValueError('public check plan fields')
+    if plan.get('schema')=='repoworld.public-plan.v2':
+        allowed.add('expected_skips')
+        skips=plan.get('expected_skips')
+        if (type(skips) is not dict or not 1<=len(skips)<=64 or any(
+            type(key) is not str or not key.strip() or len(key)>500 or '\0' in key
+            or type(reason) is not str or not reason.strip() or len(reason)>500
+            for key,reason in skips.items())):
+            raise ValueError('public expected skips require exact identities and reasons')
+    elif plan.get('schema')!='repoworld.public-plan.v1': raise ValueError('public check plan schema')
+    if set(plan)!=allowed: raise ValueError('public check plan fields')
     expected=catalog_for(plan['repo'])
     if plan['argv']!=expected['argv'] or plan['parser']!=expected['parser'] or plan['production_roots']!=expected['production_roots']:
         raise ValueError('runner/catalog mismatch')
     targets=plan['public_targets']
-    if not targets or len(targets)>64 or any(type(t) is not str or not re.fullmatch(r'[A-Za-z0-9_./:\[\]-]+',t) or t.startswith(('-', '/')) or '..' in t for t in targets):
+    if (not targets or len(targets)>128
+            or any(type(t) is not str or not re.fullmatch(r'[A-Za-z0-9_./:\[\]-]+',t) or t.startswith(('-', '/')) or '..' in t for t in targets)
+            or sum(len(t.encode('utf-8')) for t in targets)>16384):
         raise ValueError('invalid supervisor test target')
-    if set(plan['env'])-{'PYTHONPATH','PYTHONWARNINGS','PYTEST_DISABLE_PLUGIN_AUTOLOAD'}: raise ValueError('invalid test environment')
+    if set(plan['env'])-{'PYTHONPATH','PYTHONWARNINGS','PYTEST_DISABLE_PLUGIN_AUTOLOAD','SKLEARN_SITE_JOBLIB'}: raise ValueError('invalid test environment')
+    if 'SKLEARN_SITE_JOBLIB' in plan['env'] and (plan['repo']!='scikit-learn/scikit-learn' or plan['env']['SKLEARN_SITE_JOBLIB']!='1'):
+        raise ValueError('site joblib requires the explicit sklearn profile')
     return hashlib.sha256(canonical(plan)).hexdigest()
+
+
+def public_skips_match(states, skip_reasons, check_plan):
+    """Match observed skip identities and exact JUnit messages to operator policy."""
+    return (type(states) is dict and type(skip_reasons) is dict
+            and {name for name,state in states.items() if state=='SKIPPED'}==set(skip_reasons)
+            and skip_reasons==check_plan.get('expected_skips',{}))
+
+
+def baseline_pair_valid(first, second, check_plan):
+    """One policy for fresh preflight, protocol startup and checkpoint restore."""
+    return (first.valid is True and second.valid is True
+            and first.candidate_id==second.candidate_id
+            and first.check_plan_sha256==second.check_plan_sha256
+            and first.states==second.states and first.skip_reasons==second.skip_reasons
+            and public_skips_match(first.states,first.skip_reasons,check_plan)
+            and any(state=='PASSED' for state in first.states.values())
+            and all(state in ('PASSED','XFAIL','SKIPPED') for state in first.states.values()))
 
 
 def run_public_checks(base, candidate, check_plan, *, receipts, execute_fn=execute_repo):
@@ -145,33 +179,40 @@ def run_public_checks(base, candidate, check_plan, *, receipts, execute_fn=execu
                         limits=check_plan['limits'],env=check_plan['env'],
                         check_artifacts=('public.xml',) if check_plan['parser']=='pytest' else ())
     logs=observed.get('stdout','').split('\nREPOWORLD_ARTIFACTS_V1 ',1)[0]+'\n'+observed.get('stderr','')
-    states={};valid=False;reason='execution not complete'
+    states={};skip_reasons={};valid=False;reason='execution not complete'
     if observed.get('status') in ('EXITED','FAILED') and observed.get('isolation',{}).get('job_empty'):
         try:
             if check_plan['parser']=='pytest':
                 artifact=observed['artifacts']['public.xml']
                 raw=base64.b64decode(artifact['data_b64'],validate=True)
                 if hashlib.sha256(raw).hexdigest()!=artifact['sha256']: raise ValueError('artifact hash')
-                states=parse_junit(raw,exit_code=observed['exit_code'])
+                states,skip_reasons=parse_junit(raw,exit_code=observed['exit_code'],include_skip_reasons=True)
             else: states=parse_native(logs,runner=check_plan['parser'],exit_code=observed['exit_code'])
+            # Exact message evidence is required before any arm can retain a
+            # candidate. Native parsers cannot authorize skips without reasons.
+            if not public_skips_match(states,skip_reasons,check_plan):
+                raise ValueError('public skips differ from declared identities/reasons')
             valid=True;reason='scoped public observation'
         except (KeyError,ValueError,ET.ParseError) as exc: reason=str(exc)
     evidence=hashlib.sha256(canonical(observed)).hexdigest()
     receipt=receipts.append(dict(event='repoworld.public-check',candidate=snapshot.id,check_plan_sha256=plan_sha,
-        evidence_blob_sha256=evidence,observation=observed,states=states,valid=valid,reason=reason,scope='public',task_success=False))
+        evidence_blob_sha256=evidence,observation=observed,states=states,skip_reasons=skip_reasons,
+        valid=valid,reason=reason,scope='public',task_success=False))
     return PublicCheckReport(snapshot.id,plan_sha,states,evidence,receipt['sha256'],valid,
-                             sanitize_output(reason+'\n'+logs),observed['resources']['cpu_us'])
+                             sanitize_output(reason+'\n'+logs),observed['resources']['cpu_us'],skip_reasons)
 
 
 def collect_public_baseline(base, check_plan, *, receipts, execute_fn=execute_repo):
     first=run_public_checks(base,base.snapshot,check_plan,receipts=receipts,execute_fn=execute_fn)
     second=run_public_checks(base,base.snapshot,check_plan,receipts=receipts,execute_fn=execute_fn)
-    valid=first.valid and second.valid and first.states==second.states and bool(first.states) and all(v in ('PASSED','XFAIL') for v in first.states.values())
+    expected=check_plan.get('expected_skips',{})
+    valid=baseline_pair_valid(first,second,check_plan)
     r=receipts.append(dict(event='repoworld.public-baseline',candidate=base.snapshot.id,
         check_plan_sha256=first.check_plan_sha256,runs=[first.receipt_id,second.receipt_id],valid=valid,
-        states=second.states,scope='public',reason='two identical passing runs' if valid else 'invalid/failing/flaky baseline'))
+        states=second.states,skip_reasons=second.skip_reasons,expected_public_skips=expected,scope='public',
+        reason=('two identical public runs; declared skips remain uncovered' if expected else 'two identical passing runs') if valid else 'invalid/failing/flaky baseline'))
     return PublicCheckReport(base.snapshot.id,first.check_plan_sha256,second.states,
-        second.evidence_blob_sha256,r['sha256'],valid,second.summary,first.cpu_us+second.cpu_us)
+        second.evidence_blob_sha256,r['sha256'],valid,second.summary,first.cpu_us+second.cpu_us,second.skip_reasons)
 
 
 def public_regressions(before, after):

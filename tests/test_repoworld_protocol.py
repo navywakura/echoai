@@ -12,6 +12,122 @@ from echoai.pcworld.receipts import ReceiptStore
 from echoai.repoworld.provider import generate_repo, ContextOverflow
 
 
+class ProtocolSkipBaselineTests(unittest.TestCase):
+    """Synthetic public reports and resumable checkpoints; no model or runtime."""
+    def setUp(self):
+        import base64
+        import hashlib
+        from tests.test_repoworld_arms import fixture
+        from echoai.repoworld.checks import catalog_for, run_public_checks
+        temp=tempfile.TemporaryDirectory(prefix='protocol-skip-test-')
+        self.addCleanup(temp.cleanup)
+        self.root=Path(temp.name)
+        self.base=fixture(self.root)
+        self.output=self.root/'episode'
+        self.skip_id='public::python2_only'
+        self.reason='requires Python 2'
+        self.plan=catalog_for('pytest-dev/pytest')
+        self.plan.update(schema='repoworld.public-plan.v2',
+                         expected_skips={self.skip_id:self.reason})
+        self.check_calls=0
+        raw=b'<testsuite tests="2"><testcase classname="public" name="good"/><testcase classname="public" name="python2_only"><skipped message="requires Python 2"/></testcase></testsuite>'
+        observed=dict(status='EXITED',exit_code=0,isolation={'job_empty':True},
+            stdout='',stderr='',resources={'cpu_us':1},
+            artifacts={'public.xml':dict(data_b64=base64.b64encode(raw).decode(),
+                                        sha256=hashlib.sha256(raw).hexdigest())})
+        def checks(base,snapshot,plan,*,receipts):
+            self.check_calls+=1
+            return run_public_checks(base,snapshot,plan,receipts=receipts,
+                                     execute_fn=lambda *a,**k:observed)
+        self.checks=checks
+        class Provider:
+            is_llm=False
+            pending=False
+            calls=0
+            def prepare(self,*a):return 'public fixture',[1]*100
+            def complete(self,*a,**kw):
+                from echoai.repoworld.provider import InferencePending
+                self.calls+=1
+                if self.pending:raise InferencePending('fixture pause')
+                return dict(content='{"action":"finish","arguments":{}}',
+                            tokens_evaluated=100,tokens_predicted=10)
+        self.provider=Provider()
+
+    def run_episode(self):
+        from echoai.repoworld.protocol import run_episode
+        return run_episode(self.base,'S',73,provider=self.provider,output=self.output,
+                           check_plan=self.plan,check_fn=self.checks)
+
+    def checkpoint(self):
+        """Persist two charged checks and the resulting pre-generation state."""
+        from dataclasses import asdict
+        import time
+        from echoai.repoworld.protocol import once, _check
+        from echoai.repoworld.workspace import Workspace
+        session=Workspace(self.output/'main',self.base)
+        budget_store=ReceiptStore(self.output/'receipts',self.output/'authority')
+        session.budget=DurableBudget(budget_store,LIMITS)
+        reports=[once(session.receipts,session.budget,'baseline-'+str(i),
+                      lambda:asdict(_check(session,self.base.snapshot,self.plan,self.checks)))
+                 for i in (1,2)]
+        state=dict(event='repoworld.protocol-state',step=0,phase='generate',
+            status='active',started=time.time(),baseline=reports[1],
+            localization=0,repairs=0,feedback={},command=None,branch_tokens=0,
+            role='agent',branch_id='main',namespace='public-fixture',refutation=False)
+        session.receipts.append(state)
+        return session.receipts,state
+
+    def test_v2_baseline_starts_and_resumes_without_repeating_checks(self):
+        from echoai.repoworld.provider import InferencePending
+        self.provider.pending=True
+        with self.assertRaises(InferencePending):self.run_episode()
+        self.assertEqual(self.check_calls,2)
+        self.provider.pending=False
+        result=self.run_episode()
+        self.assertEqual(result['status'],'finished')
+        self.assertEqual(result['budget']['used']['tests'],2)
+        self.assertEqual(self.check_calls,2)
+        self.assertEqual(self.provider.calls,2)
+
+    def test_valid_v2_checkpoint_restores(self):
+        self.checkpoint()
+        result=self.run_episode()
+        self.assertEqual(result['status'],'finished')
+        self.assertEqual(result['budget']['used']['tests'],2)
+        self.assertEqual(self.check_calls,2)
+
+    def test_checkpoint_rejects_changed_or_missing_skip_evidence(self):
+        import copy
+        for case in ('changed reason','missing reason','missing field','missing test','missing baseline'):
+            with self.subTest(case=case):
+                self.output=self.root/case.replace(' ','-')
+                records,state=self.checkpoint()
+                state=copy.deepcopy(state)
+                if case=='changed reason':state['baseline']['skip_reasons'][self.skip_id]='missing dependency'
+                elif case=='missing reason':state['baseline']['skip_reasons']={}
+                elif case=='missing field':state['baseline'].pop('skip_reasons')
+                elif case=='missing test':state['baseline']['states'].pop(self.skip_id)
+                else:state['baseline']=None
+                records.append(state)
+                checks_before=self.check_calls
+                with self.assertRaisesRegex(ValueError,'baseline'):self.run_episode()
+                self.assertEqual(self.check_calls,checks_before)
+                self.assertEqual(self.provider.calls,0)
+
+    def test_checkpoint_revalidates_both_saved_baseline_runs(self):
+        import copy
+        records,state=self.checkpoint()
+        first=next(r['body'] for r in records.records
+                   if r['body'].get('event')=='repoworld.operation-result'
+                   and r['body'].get('operation_id')=='baseline-1')
+        changed=copy.deepcopy(first)
+        changed['result']['skip_reasons'][self.skip_id]='missing dependency'
+        records.append(changed)
+        with self.assertRaisesRegex(ValueError,'baseline'):self.run_episode()
+        self.assertEqual(self.check_calls,2)
+        self.assertEqual(self.provider.calls,0)
+
+
 class ProtocolTests(unittest.TestCase):
     def test_crash_after_generation_reservation_does_not_lose_remaining_budget(self):
         class Provider:

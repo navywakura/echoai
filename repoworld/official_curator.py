@@ -1,21 +1,167 @@
 """Separate process entry point. Never import this module in the online actor."""
 import hashlib
 import json
+import os
 from pathlib import Path
+import re
 import subprocess
 import sys
+import time
 
 NAMESPACE='swebench'
+SERVICE_ROOT='/opt/repoworld-httpbin'
+SERVICE_PYTHON='/opt/miniconda3/envs/testbed/bin/python'
+SERVICE_TRUST='/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/certifi/cacert.pem'
+
+
+def pytest_reporting_profile(image):
+    """Pin rendering only; failed assertions must still produce FAILED states.
+
+    Public BASE can crash while rendering a failed assertion's traceback. The
+    upstream --tb=no option avoids that rendering, retaining the official -rA
+    result summaries. This changes neither test inputs nor validity criteria.
+    """
+    image=str(image).removeprefix('docker.io/')
+    if image!='swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-7168:latest':return None
+    profile=dict(schema='repoworld.pytest-reporting.v1',image=image,
+        image_digest='sha256:fa2614449afb464c272c3bd0c5ebc66d7cd6a046b4a98ac65ee1b0df2594a9ff',
+        environment={'PYTEST_ADDOPTS':'--tb=no'})
+    raw=json.dumps(profile,sort_keys=True,separators=(',',':')).encode()
+    return {**profile,'sha256':hashlib.sha256(raw).hexdigest()}
+
+
+def validate_reporting_lock(profile,locked):
+    if locked.get('reporting_profile_sha256')!=(profile['sha256'] if profile else None):
+        raise ValueError('final reporting profile differs from locked preflight')
+
+
+def httpbin_profile(image):
+    """An operator-pinned, public dependency; never selected from sealed tests.
+
+    Requests' public BASE uses both HTTPBIN_URL and literal httpbin.org URLs.
+    Both resolve to the real upstream httpbin application inside network=none.
+    No test content, reference patch or expected result enters this profile.
+    """
+    image=str(image).removeprefix('docker.io/')
+    if not image.startswith('swebench/sweb.eval.x86_64.psf_1776_requests-'):
+        return None
+    path=os.environ.get('REPOWORLD_CURATOR_SERVICES')
+    digest=os.environ.get('REPOWORLD_CURATOR_SERVICES_SHA256','')
+    if not path or not re.fullmatch('[0-9a-f]{64}',digest):
+        raise ValueError('pinned Requests service manifest required')
+    raw=Path(path).read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=digest:raise ValueError('service manifest changed')
+    profile=json.loads(raw)
+    if profile.get('schema')!='repoworld.curator-httpbin.v1' or profile.get('image')!=image:
+        raise ValueError('service image/profile mismatch')
+    bundle=Path(profile['bundle'])
+    if not bundle.is_absolute() or bundle.is_symlink() or not bundle.is_dir():
+        raise ValueError('private absolute service bundle required')
+    files=profile['files'];actual={}
+    for file in bundle.rglob('*'):
+        if file.is_symlink():raise ValueError('service links forbidden')
+        if file.is_file():actual[str(file.relative_to(bundle))]=hashlib.sha256(file.read_bytes()).hexdigest()
+        elif not file.is_dir():raise ValueError('service special files forbidden')
+    if actual!=files or not {'ca.pem','key.pem','trust.pem','lib/httpbin/core.py'}<=set(files):
+        raise ValueError('service bundle bytes changed or incomplete')
+    if profile.get('trust_store')!=SERVICE_TRUST or profile.get('off_host_redirect_alias')!='www.google.co.uk':
+        raise ValueError('service trust/redirect profile mismatch')
+    return {**profile,'manifest_sha256':digest}
+
+
+# Only a process supervisor: all HTTP behavior belongs to the pinned upstream
+# WSGI application. Separate interpreters keep service dependencies out of tests.
+HTTPBIN_SERVER=r'''
+import os, subprocess, sys, time
+env={'PATH':'/usr/bin:/bin','PYTHONPATH':'/opt/repoworld-httpbin/lib',
+     'PYTHONDONTWRITEBYTECODE':'1','HOME':'/tmp','LANG':'C.UTF-8'}
+base=[sys.executable,'-m','gunicorn','--workers','2','--threads','4',
+      '--access-logfile','/dev/null','--error-logfile','/tmp/repoworld-httpbin.log']
+children=[]
+try:
+    children.append(subprocess.Popen(base+['--bind','127.0.0.1:80','httpbin:app'],env=env,cwd='/'))
+    children.append(subprocess.Popen(base+['--bind','127.0.0.1:443',
+        '--certfile','/opt/repoworld-httpbin/ca.pem','--keyfile','/opt/repoworld-httpbin/key.pem',
+        'httpbin:app'],env=env,cwd='/'))
+    while all(p.poll() is None for p in children):time.sleep(.2)
+finally:
+    for p in children:
+        if p.poll() is None:p.terminate()
+    for p in children:
+        try:p.wait(timeout=5)
+        except subprocess.TimeoutExpired:p.kill();p.wait()
+'''
+
+HTTPBIN_READY=r'''
+import ssl, urllib.request
+opener=urllib.request.build_opener(urllib.request.ProxyHandler({}),
+    urllib.request.HTTPSHandler(context=ssl.create_default_context(cafile='/opt/repoworld-httpbin/ca.pem')))
+for scheme in ('http','https'):
+    with opener.open(scheme+'://httpbin.org/status/204',timeout=1) as r:assert r.status==204
+'''
+
+
+def start_httpbin(container):
+    container.exec_run([SERVICE_PYTHON,'-I','-c',HTTPBIN_SERVER],workdir='/',detach=True)
+    deadline=time.monotonic()+30
+    while time.monotonic()<deadline:
+        result=container.exec_run([SERVICE_PYTHON,'-I','-c',HTTPBIN_READY],workdir='/')
+        if result.exit_code==0:return
+        time.sleep(.2)
+    raise RuntimeError('loopback_httpbin_not_ready')
+
+
+def validate_service_lock(profile,locked):
+    expected=profile['manifest_sha256'] if profile else None
+    if locked.get('service_manifest_sha256')!=expected:
+        raise ValueError('final service differs from locked preflight')
 
 
 def restrict_containers():
     """Same official grader/image, explicit offline resource policy for all arms."""
-    from docker.models.containers import ContainerCollection
+    from docker.models.containers import ContainerCollection,Container
+    if getattr(ContainerCollection,'_repoworld_offline',False):return
     original=ContainerCollection.create
+    original_start=Container.start
     def create(self,*args,**kwargs):
+        image=kwargs.get('image',args[0] if args else '')
+        profile=httpbin_profile(image)
+        reporting=pytest_reporting_profile(image)
         kwargs.update(network_mode='none',mem_limit=4*1024**3,pids_limit=128,cap_drop=['ALL'])
-        return original(self,*args,**kwargs)
+        if reporting:
+            if self.client.images.get(image).id!=reporting['image_digest']:raise ValueError('reporting runtime image changed')
+            environment=kwargs.get('environment') or {}
+            if isinstance(environment,list):environment=dict(v.split('=',1) for v in environment)
+            kwargs['environment']={**environment,**reporting['environment']}
+        if profile:
+            if self.client.images.get(image).id!=profile['image_digest']:raise ValueError('service runtime image changed')
+            kwargs.setdefault('volumes',{})[profile['bundle']]={'bind':SERVICE_ROOT,'mode':'ro,Z'}
+            # Public BASE's direct Session.send bypasses REQUESTS_CA_BUNDLE.
+            # Add our CA to certifi's original roots, outside candidate sources.
+            kwargs['volumes'][str(Path(profile['bundle'])/'trust.pem')]={'bind':SERVICE_TRUST,'mode':'ro,Z'}
+            kwargs.setdefault('extra_hosts',{})['httpbin.org']='127.0.0.1'
+            # Public BASE uses this second authority solely as a redirect target.
+            # Real upstream httpbin serves it; Requests still handles the redirect
+            # and strips credentials based on the distinct authority itself.
+            kwargs['extra_hosts']['www.google.co.uk']='127.0.0.1'
+            kwargs.setdefault('sysctls',{})['net.ipv4.ip_unprivileged_port_start']='0'
+            environment=kwargs.get('environment') or {}
+            if isinstance(environment,list):environment=dict(v.split('=',1) for v in environment)
+            kwargs['environment']={**environment,'HTTPBIN_URL':'http://httpbin.org/',
+                'REQUESTS_CA_BUNDLE':SERVICE_ROOT+'/ca.pem','CURL_CA_BUNDLE':SERVICE_ROOT+'/ca.pem',
+                'HTTP_PROXY':'','HTTPS_PROXY':'','ALL_PROXY':'','NO_PROXY':'*',
+                'http_proxy':'','https_proxy':'','all_proxy':'','no_proxy':'*'}
+        container=original(self,*args,**kwargs)
+        container._repoworld_httpbin=profile
+        container._repoworld_reporting=reporting
+        return container
+    def start(self,*args,**kwargs):
+        result=original_start(self,*args,**kwargs)
+        if getattr(self,'_repoworld_httpbin',None):start_httpbin(self)
+        return result
     ContainerCollection.create=create
+    Container.start=start
+    ContainerCollection._repoworld_offline=True
 
 
 def controls(request_path):
@@ -57,6 +203,10 @@ def controls(request_path):
                 try:
                     run_id='echo-controls-'+kind+'-'+hashlib.sha256((identifier+image.id).encode()).hexdigest()[:16]
                     container=build_container(spec,client,run_id,logger,False,False);container.start()
+                    profile=getattr(container,'_repoworld_httpbin',None)
+                    if profile:entry['service_manifest_sha256']=profile['manifest_sha256']
+                    reporting=getattr(container,'_repoworld_reporting',None)
+                    if reporting:entry['reporting_profile_sha256']=reporting['sha256']
                     patch=row['patch'] if kind=='gold' else ''
                     if patch:
                         file=folder/'model.patch';file.write_text(patch);copy_to_container(container,file,PurePosixPath('/tmp/model.patch'))
@@ -127,6 +277,8 @@ def main(request_path):
     client=docker.from_env();specs={};images={}
     for lock in request['instances']:
         row=selected[lock['instance_id']];spec=make_test_spec(row,namespace=NAMESPACE);specs[lock['instance_id']]=spec
+        validate_service_lock(httpbin_profile(spec.instance_image_key),lock)
+        validate_reporting_lock(pytest_reporting_profile(spec.instance_image_key),lock)
         image=client.images.get(spec.instance_image_key)
         if image.id!=lock['official_image_digest']:raise ValueError('official image digest mismatch')
         images[lock['instance_id']]=image.id

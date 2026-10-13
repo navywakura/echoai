@@ -1,5 +1,9 @@
 # RepoWorld: ejecución, recuperación y compuertas
 
+> Informe histórico de `9e4fde0`. La continuación de entornos se documenta en
+> [Opción B](REPOWORLD-ENVIRONMENTS-COMPLETE-20261013.md); los recuentos siguientes
+> describen aquella entrega, no el estado más reciente.
+
 Continuación local de `e0a1a6d` en `research/echo-5.1-pcworld1`.
 **El benchmark todavía no se ha lanzado.** La compuerta de entornos sigue
 fallando; no se ha iniciado Kaggle ni consumido GPU en esta entrega. El

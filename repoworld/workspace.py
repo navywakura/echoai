@@ -21,7 +21,7 @@ from .environment import repo_store
 from .types import PatchCandidate, RepoBase, PublicTask, EnvironmentRef
 
 PROTECTED = {'.git','.echoai','.github','tests','test','testing','__pycache__',
-             'conftest.py','pytest.ini','tox.ini','.repoworld-probes'}
+             'conftest.py','pytest.ini','tox.ini','.repoworld-probes','.repoworld-build.json'}
 PROPOSAL_LIMITS = (65536, 8, 800)
 # Final export can contain eight proposals; a per-call limit is not a run limit.
 EXPORT_LIMITS = (8*65536, 64, 6400)
@@ -36,8 +36,11 @@ def _allowed(path):
     return path
 
 
-def production_path(repo,path):
+def production_path(repo,path,*,allow_native=False):
     _allowed(path)
+    from .supplements import native_only_path
+    if not allow_native and native_only_path(path):
+        raise ValueError('native/build inputs require a new supervised build')
     from .checks import CATALOG
     if repo in CATALOG:
         roots=CATALOG[repo][1]
@@ -46,13 +49,27 @@ def production_path(repo,path):
     return True
 
 
-def protected_paths(entries):
-    result=[]
-    for path in sorted(entries,key=lambda s:(len(s.split('/')),s)):
-        if path=='.' or any(path==p or path.startswith(p+'/') for p in result): continue
+def _frozen_paths(entries,*,snapshot=None):
+    from .supplements import native_only_path, supplement_protected_paths, protected_path_closure
+    frozen=set(supplement_protected_paths(snapshot)) if snapshot is not None else set()
+    protected_links=[]
+    for path,entry in entries.items():
+        if path=='.': continue
+        if native_only_path(path): frozen.add(path)
         try: _allowed(path)
-        except ValueError: result.append(path)
+        except ValueError:
+            frozen.add(path)
+            if entry.get('type')=='symlink': protected_links.append(path)
+    result=protected_path_closure(entries,frozen)
+    for path in protected_links:
+        if not any(path.startswith(p+'/') and entries.get(p,{}).get('type')=='directory' for p in result):
+            raise ValueError('protected symlink requires protected ancestor')
     return result
+
+
+def protected_paths(entries,*,snapshot=None):
+    """Real read-only mount roots; same transitive policy used by staging."""
+    return [p for p in _frozen_paths(entries,snapshot=snapshot) if p in entries]
 
 
 def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS,probe=False):
@@ -138,7 +155,11 @@ def stage_patch(base,current,diff,*,expected_snapshot_id,purpose):
     if expected_snapshot_id!=current.id: raise ValueError('STALE_BASE')
     store=repo_store(current.root.parent.parent);store.validate(current)
     edits=_parse_diff(store,current,diff)
-    for edit in edits: production_path(base.task.repo,edit['path'])
+    frozen=_frozen_paths(base.snapshot.manifest['entries'],snapshot=base.snapshot)
+    for edit in edits:
+        production_path(base.task.repo,edit['path'])
+        if any(edit['path']==p or edit['path'].startswith(p+'/') for p in frozen):
+            raise ValueError('frozen supplement/native input path')
     result=store.apply(current,current.id,edits,allowed_paths=tuple(e['path'] for e in edits),advance=False)
     digest=hashlib.sha256(diff.encode()).hexdigest()
     operation=hashlib.sha256(canonical(dict(base=base.snapshot.id,source=current.id,patch=digest,purpose=purpose))).hexdigest()

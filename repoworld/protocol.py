@@ -17,7 +17,7 @@ from .accounting import DurableBudget, LIMITS
 from .workspace import Workspace
 from .types import PatchCandidate
 from .provider import generate_repo, InferencePending, ContextOverflow,provider_identity,close_pending_generations
-from .checks import collect_public_baseline, run_public_checks, decide_candidate, sanitize_output, PublicCheckReport
+from .checks import baseline_pair_valid, run_public_checks, decide_candidate, sanitize_output, PublicCheckReport
 from .tools import dispatch_tool
 
 ARMS=('S','I2','F','E','E_no_guard')
@@ -82,6 +82,26 @@ def _trace(session,task,arm):
     return {'events':len(memory.events),'destroyed':memory.cam.destroyed}
 
 
+def _checkpoint_baseline(records,state,plan,base_id):
+    """Revalidate saved evidence without executing or charging another check."""
+    try:
+        first_data=(_latest(records,'repoworld.operation-result',operation_id='baseline-1') or {}).get('result',{})
+        second_data=(_latest(records,'repoworld.operation-result',operation_id='baseline-2') or {}).get('result',{})
+        if (state.get('baseline') is None
+                and state['status'] in ('budget_stopped','infrastructure_error')
+                and (first_data.get('error') or second_data.get('error'))):
+            return None
+        baseline=PublicCheckReport(**state['baseline'])
+        first=PublicCheckReport(**first_data)
+        second=PublicCheckReport(**second_data)
+    except (KeyError,TypeError,AttributeError) as exc:
+        raise ValueError('public checkpoint baseline missing or malformed; no inference allowed') from exc
+    if (not baseline_pair_valid(first,second,plan)
+            or first.candidate_id!=base_id or baseline!=second):
+        raise ValueError('public checkpoint baseline invalid; no inference allowed')
+    return baseline
+
+
 def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_calls=24,max_tokens=25000,
             check_fn=run_public_checks,lessons=(),episode_started=None):
     session=Workspace(output,base);session.budget=budget
@@ -94,13 +114,13 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
         error=first_data.get('error') or second_data.get('error')
         first=PublicCheckReport(**first_data) if not error else None
         second=PublicCheckReport(**second_data) if not error else None
-        if not error and not(first.valid and second.valid and first.states==second.states and first.states and all(v in ('PASSED','XFAIL') for v in first.states.values())):
+        if not error and not baseline_pair_valid(first,second,plan):
             raise ValueError('public environment baseline invalid; no inference allowed')
         state=dict(event='repoworld.protocol-state',step=0,phase='generate',status=('budget_stopped' if error=='BudgetExceeded' else 'infrastructure_error') if error else 'active',started=episode_started or time.time(),
             baseline=asdict(second) if second else None,localization=0,repairs=0,feedback={},command=None,
             branch_tokens=0,role='agent' if arm=='S' else 'locator',branch_id=branch_id,namespace=uuid.uuid4().hex,refutation=False)
         records.append(state)
-    baseline=PublicCheckReport(**state['baseline']) if state['baseline'] else None
+    baseline=_checkpoint_baseline(records,state,plan,session.base.snapshot.id)
     while state['status']=='active' and state['step']<max_calls:
         if time.time()-state['started']>=1800 or state['branch_tokens']>=max_tokens:
             state['status']='budget_stopped';records.append(state);break

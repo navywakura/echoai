@@ -22,7 +22,7 @@ import uuid
 
 DEFAULTS = dict(wall_ms=5000, cpu_ms=3000, memory_bytes=256*1024*1024,
                 pids=32, output_bytes=65536, disk_bytes=16*1024*1024)
-_PROPERTIES = ('ActiveState','SubState','ExecMainStatus','ExecMainCode','CPUUsageNSec',
+_PROPERTIES = ('LoadState','ActiveState','SubState','ExecMainStatus','ExecMainCode','CPUUsageNSec',
                'MemoryPeak','ControlGroup','Result','MemoryMax','TasksMax')
 
 
@@ -103,7 +103,7 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
         not 32*1024*1024<=caps['memory_bytes']<=(4 if repo else 2)*1024**3 or
         not 4<=caps['pids']<=128 or caps['output_bytes']>4*1024**2 or caps['disk_bytes']>(1024 if repo else 64)*1024**2):
         raise ValueError('limits outside PCWORLD-1 development bounds')
-    if (not isinstance(argv,list) or not argv or len(argv)>128 or
+    if (not isinstance(argv,list) or not argv or len(argv)>(256 if repo else 128) or
         any(not isinstance(a,str) or '\0' in a or len(a)>65536 for a in argv) or
         not argv[0].startswith(('/usr/bin/','/bin/'))):
         raise ValueError('structured argv with an explicit runtime executable required')
@@ -122,11 +122,17 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
         if repo:
             from .snapshots import _parts
             store.validate(repo_base)
+            reserved={'.tmp','.home','.out','.shm'}
+            for tree in (repo_base,snapshot):
+                if any(p.split('/',1)[0] in reserved for p in tree.manifest['entries']):
+                    raise ValueError('repository collides with reserved scratch roots')
             if cwd != '.': _parts(cwd)
             if cwd!='.' and snapshot.manifest['entries'].get(cwd,{}).get('type')!='directory':
                 raise ValueError('cwd is not a candidate directory')
-            if type(env or {}) is not dict or set(env or {}) - {'PYTHONPATH','PYTHONWARNINGS','PYTEST_DISABLE_PLUGIN_AUTOLOAD'}:
+            if type(env or {}) is not dict or set(env or {}) - {'PYTHONPATH','PYTHONWARNINGS','PYTEST_DISABLE_PLUGIN_AUTOLOAD','SKLEARN_SITE_JOBLIB'}:
                 raise ValueError('environment outside project allowlist')
+            if 'SKLEARN_SITE_JOBLIB' in (env or {}) and env['SKLEARN_SITE_JOBLIB']!='1':
+                raise ValueError('site joblib profile must be explicitly enabled')
             if any(type(v) is not str or '\0' in v or len(v)>4096 for v in (env or {}).values()):
                 raise ValueError('invalid project environment')
             if not isinstance(check_artifacts,tuple) or len(check_artifacts)>8:
@@ -137,7 +143,9 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
                 if type(probe_source) is not str or len(probe_source.encode())>8192 or '\0' in probe_source:raise ValueError('bounded probe source required')
                 (config/'probe.py').write_text(probe_source)
             from ..repoworld.workspace import protected_paths
-            protected=protected_paths(repo_base.manifest['entries'])
+            protected=protected_paths(repo_base.manifest['entries'],snapshot=repo_base)
+            if any(repo_base.manifest['entries'][p]['type']=='symlink' for p in protected):
+                raise ValueError('protected symlink requires a protected directory mount')
             for path,entry in repo_base.manifest['entries'].items():
                 if any(path==p or path.startswith(p+'/') for p in protected) and snapshot.manifest['entries'].get(path)!=entry:
                     raise ValueError('candidate changed protected public test inputs')
@@ -149,6 +157,8 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
                 if not any(path==p or path.startswith(p+'/') for p in protected):continue
                 dest=public/path;dest.parent.mkdir(parents=True,exist_ok=True)
                 if entry['type']=='directory':dest.mkdir(exist_ok=True)
+                elif entry['type']=='symlink':
+                    dest.symlink_to(entry['target']);continue
                 else:shutil.copyfile(repo_base.root/path,dest)
                 dest.chmod(entry['mode'])
             shutil.copyfile(Path(__file__).with_name('repo_launcher.py'),config/'launch.py')
@@ -164,7 +174,7 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
                     for name,encoded in value.items():
                         if name not in check_artifacts or type(encoded) is not str: continue
                         raw=base64.b64decode(encoded,validate=True)
-                        if len(raw)>65536 or sum(x['bytes'] for x in result['artifacts'].values())+len(raw)>65536: continue
+                        if len(raw)>512*1024 or sum(x['bytes'] for x in result['artifacts'].values())+len(raw)>512*1024: continue
                         result['artifacts'][name]=dict(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw),
                             data_b64=encoded,authority='candidate_output_untrusted')
                 except (ValueError,TypeError,AttributeError): pass
@@ -173,13 +183,20 @@ def execute(workspace: Path, argv: list[str], *, limits=None, stdin=b'', runtime
 
 def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,launcher=None):
     unit='echo-pcworld-'+uuid.uuid4().hex+'.service'
+    page=os.sysconf('SC_PAGESIZE')
+    pages=caps['disk_bytes']//page
+    if launcher and pages<2: raise ValueError('RepoWorld scratch requires two filesystem pages')
+    temporary_bytes=max(1,pages//4)*page
+    work_bytes=pages*page-temporary_bytes
     mounts=(['--ro-bind',str(runtime.root),'/'] if runtime is not None else
             ['--ro-bind','/usr','/usr','--symlink','usr/bin','/bin',
              '--symlink','usr/lib','/lib','--symlink','usr/lib64','/lib64'])
-    writable = (['--size',str(caps['disk_bytes']),'--tmpfs','/work',
+    writable = (['--size',str(work_bytes),'--tmpfs','/work',
+                 '--size',str(temporary_bytes),'--tmpfs','/tmp',
                  '--ro-bind',str(snapshot.root),'/candidate',
                  '--ro-bind',str(repo_base.root),'/repo-base',
-                 '--ro-bind',str(launcher),'/runner','--remount-ro','/dev',
+                 '--ro-bind',str(launcher),'/runner',
+                 '--symlink','/work/.shm','/dev/shm','--remount-ro','/dev',
                  '--chdir','/work'] if launcher else
                 ['--size',str(caps['disk_bytes']//2),'--tmpfs','/tmp',
                  '--size',str(caps['disk_bytes']//2),'--tmpfs','/out',
@@ -188,11 +205,21 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
     if launcher:
         for path in json.loads((launcher/'request.json').read_text())['protected']:
             writable.extend(['--ro-bind',str(launcher/'public-inputs'/path),'/work/'+path])
+    # bwrap --dev creates a separate /dev/shm directory. A minimal read-only
+    # device tree lets POSIX semaphores share /work's single aggregate quota.
+    devices=['--dev','/dev']
+    if launcher:
+        devices=['--tmpfs','/dev']
+        for name in ('null','zero','random','urandom','full','tty'):
+            devices.extend(['--dev-bind','/dev/'+name,'/dev/'+name])
+        for name,target in (('fd','/proc/self/fd'),('stdin','/proc/self/fd/0'),
+                            ('stdout','/proc/self/fd/1'),('stderr','/proc/self/fd/2')):
+            devices.extend(['--symlink',target,'/dev/'+name])
     bwrap=['/usr/bin/bwrap','--unshare-all','--unshare-user','--die-with-parent','--new-session',
            '--cap-drop','ALL','--disable-userns',*mounts,
-           '--proc','/proc','--dev','/dev',*writable,
+           '--proc','/proc',*devices,*writable,
            '--clearenv','--setenv','PATH','/usr/bin:/bin','--setenv','HOME','/work/.home' if launcher else '/tmp',
-           '--setenv','TMPDIR','/work/.tmp' if launcher else '/tmp','--setenv','LANG','C.UTF-8','--setenv','TZ','UTC',
+           '--setenv','TMPDIR','/tmp','--setenv','LANG','C.UTF-8','--setenv','TZ','UTC',
            '--setenv','PYTHONDONTWRITEBYTECODE','1','--setenv','PYTHONHASHSEED','0',
            '--setenv','OMP_NUM_THREADS','1','--setenv','OPENBLAS_NUM_THREADS','1',
            '--',*run_argv]
@@ -205,7 +232,7 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
           '-p',f'TasksMax={caps["pids"]}','-p','MemoryAccounting=yes',
           '-p','LimitCORE=0','-p','LimitNOFILE=128',*bwrap]
     started=time.monotonic_ns();out=bytearray();err=bytearray();reason=None;props={};cg=None
-    cpu_us=peak=0;events={};proc=None
+    cpu_us=peak=0;events={};proc=None;registered=False
     try:
         with tempfile.TemporaryFile() as input_file:
             input_file.write(stdin);input_file.seek(0)
@@ -225,6 +252,7 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
                     if len(chunk)>available: reason=reason or 'OUTPUT_LIMIT'
                 if elapsed>=next_poll:
                     props=_show(unit);next_poll=elapsed+50
+                    registered |= props.get('LoadState')=='loaded'
                     cpu_us=max(cpu_us,_integer(props.get('CPUUsageNSec'))//1000)
                     peak=max(peak,_integer(props.get('MemoryPeak')))
                     if props.get('ControlGroup'):
@@ -239,14 +267,17 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
                                 # is_dir and read, including ENODEV on kernfs.
                                 if exc.errno not in (errno.ENOENT,errno.ENODEV): raise
                     if cpu_us>=caps['cpu_ms']*1000: reason=reason or 'CPU_LIMIT'
-                    if props.get('SubState') in ('exited','failed','dead'):
+                    # Unknown transient units report inactive/dead before
+                    # systemd-run has registered them. That is not completion.
+                    if (props.get('LoadState')=='loaded' and props.get('SubState') in ('exited','failed','dead')
+                            and (props.get('ExecMainCode') not in (None,'0') or props.get('Result') not in (None,'success'))):
                         break
                 if elapsed>=caps['wall_ms']: reason=reason or 'TIMEOUT'
                 if reason: break
                 if proc.poll() is not None:
                     # Failure to construct the sandbox is an environment error;
                     # nothing retries the candidate outside the boundary.
-                    if not props or props.get('ActiveState')=='inactive': break
+                    if not props or props.get('LoadState')=='not-found' or props.get('ActiveState')=='inactive': break
             # Drain available output; never block on a descendant's open pipe.
             for _ in range(16):
                 ready=selector.select(0)
@@ -261,21 +292,44 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
             selector.close()
     finally:
         try:
-            final=_show(unit)
+            # Reap the frontend BEFORE stopping its unit: it must not submit a
+            # new StartTransientUnit after our stop has reported not-found.
+            if proc is not None:
+                if proc.poll() is None: proc.kill()
+                proc.wait(timeout=3)
         finally:
-            stopped=_stop(unit)
-        cpu_us=max(cpu_us,_integer(stopped.get('CPUUsageNSec'))//1000)
-        peak=max(peak,_integer(stopped.get('MemoryPeak')))
-        cpu_us=max(cpu_us,_integer(final.get('CPUUsageNSec'))//1000)
-        peak=max(peak,_integer(final.get('MemoryPeak')))
-        if final.get('ExecMainCode') not in (None,'0'): props=final
-        if proc is not None:
-            try: proc.wait(timeout=3)
-            except subprocess.TimeoutExpired: proc.kill();proc.wait()
-            for stream in (proc.stdout,proc.stderr):
-                if stream is not None: stream.close()
-        subprocess.run(['/usr/bin/systemctl','--user','reset-failed',unit],
-                       stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=3)
+            try:
+                # A manager request already in flight can outlive the frontend.
+                # Catch bounded late registration, then confirm the unit stopped.
+                # Never certify an unobserved unit merely because cg is None.
+                deadline=time.monotonic()+1
+                while True:
+                    try:
+                        final=_show(unit)
+                    finally:
+                        stopped=_stop(unit)
+                    after=_show(unit)
+                    for state in (final,stopped,after):
+                        registered |= state.get('LoadState')=='loaded'
+                        if state.get('ControlGroup'):
+                            cg=Path('/sys/fs/cgroup'+state['ControlGroup'])
+                        cpu_us=max(cpu_us,_integer(state.get('CPUUsageNSec'))//1000)
+                        peak=max(peak,_integer(state.get('MemoryPeak')))
+                    if final.get('ExecMainCode') not in (None,'0'): props=final
+                    if (registered and after.get('LoadState') in ('loaded','not-found')
+                            and after.get('ActiveState') in ('inactive','failed')
+                            and after.get('SubState') in ('dead','failed')):
+                        break
+                    if time.monotonic()>=deadline:
+                        detail='startup cancellation unconfirmed' if not registered else 'unit stop unconfirmed'
+                        raise RuntimeError('ISOLATION_FAILURE: '+detail)
+                    time.sleep(.02)
+            finally:
+                if proc is not None:
+                    for stream in (proc.stdout,proc.stderr):
+                        if stream is not None: stream.close()
+                subprocess.run(['/usr/bin/systemctl','--user','reset-failed',unit],
+                               stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=3)
     empty=cg is None or not cg.exists() or not (cg/'cgroup.procs').read_text().strip()
     if not empty: raise RuntimeError('ISOLATION_FAILURE: surviving job processes')
     exit_code=_integer(props.get('ExecMainStatus')) if props.get('ExecMainCode')=='1' else None
@@ -300,4 +354,5 @@ def _execute_snapshot(snapshot,argv,caps,stdin,runtime=None,*,repo_base=None,lau
                          'parent_mounted':False,'workspace_readonly':True,'job_empty':empty,
                          'profile':'repoworld' if launcher else 'pcworld',
                          'scratch_writable':bool(launcher),
+                         'scratch_partitions':{'work':work_bytes,'tmp':temporary_bytes} if launcher else None,
                          'scratch_quota_bytes':caps['disk_bytes'] if launcher else None}}

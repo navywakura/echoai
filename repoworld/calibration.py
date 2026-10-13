@@ -53,6 +53,7 @@ def source_manifest():
     files=list((root/'repoworld').glob('*.py'))
     files += list((root/'pcworld').glob('*.py'))+list((root/'core').glob('*.py'))
     files += list((root/'tests').glob('test_repoworld_*.py'))
+    files += list((root/'tests').glob('test_pcworld*.py'))
     files += [root/'ECHO-5.1/scripts/run_repoworld.py',root/'ECHO-5.1/scripts/inference_relay.py',root/'scripts/plot_swebench_results.py']
     files += [root/'ECHO-5.1/docs/swebench'/name for name in ('SWE-TOOLS.schema.json','SWE-RUN-LOCK.schema.json','SWE-RESULTS.schema.json')]
     return {str(path.relative_to(root)):sha256_file(path) for path in sorted(files)}

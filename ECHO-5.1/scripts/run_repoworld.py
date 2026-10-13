@@ -33,6 +33,7 @@ def main():
     q=sub.add_parser('curator-preflight')
     for key in ('contract','sample','curator','output'):q.add_argument('--'+key,type=Path,required=True)
     q.add_argument('--allow-pull',action='store_true')
+    q.add_argument('--scope',choices=['all','calibration'],default='all')
     q=sub.add_parser('run')
     for key in ('sealed','registry','sample','provider','output'):q.add_argument('--'+key,type=Path,required=True)
     q.add_argument('--phase',choices=['calibration','primary','guard_ablation','memory_donor','memory'])
@@ -64,7 +65,7 @@ def main():
             from echoai.repoworld.evaluator import CuratorCapability
             cap=json.loads(args.curator.read_bytes())
             for k in ('python','harness','dataset','output'):cap[k]=Path(cap[k])
-            result=study.curator_preflight(CuratorCapability(**cap),json.loads(args.contract.read_bytes()),args.sample,args.output,allow_pull=args.allow_pull)
+            result=study.curator_preflight(CuratorCapability(**cap),json.loads(args.contract.read_bytes()),args.sample,args.output,allow_pull=args.allow_pull,scope=args.scope)
         elif args.command=='run':result=study.run_study(args.sealed,args.registry,args.sample,json.loads(args.provider.read_bytes()),args.output,phase=args.phase)
         elif args.command=='verify':
             import subprocess,time,hashlib
