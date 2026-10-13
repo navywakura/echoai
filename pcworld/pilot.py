@@ -23,7 +23,7 @@ from .verifier import check_observation, validate_challenge, in_domain, VERSION
 from .runtime import load_runtime, runtime_store
 from .property_cache import PropertyCache
 from .repairs import repair_tasks, repair_task_variants
-from .adversarial import choose_category, critic_instructions, matches_category
+from .adversarial import choose_category, critic_instructions, matches_category, audit_probe_records
 
 ROOT=Path(__file__).resolve().parents[1]
 CONTRACT=ROOT/'ECHO-5.1/docs/PCWORLD-1.json'
@@ -409,7 +409,7 @@ class Episode:
                         if len(categories)>=2 or self.budget.report()['used']['critic_calls']>=LIMITS['critic_calls']:
                             break
                         if self.arm=='E':
-                            history=self.recall_memory('observation')
+                            history=self.recall_memory(('observation','failure'))
                             seen=[e['body']['category'] for e in history
                                   if e['body'].get('operation') in ('probe_result','critic_probe')
                                   and e['body'].get('snapshot')==current.id]
@@ -493,7 +493,11 @@ def property_key(snapshot,env,task,observed,value,policy):
 
 def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',split='development',config=None,
               suite='fixtures',runtime=None,cache_properties=False,seeded_diagnostic=False,
-              model_evidence=None,task_seed=41,task_families=None,episode_wall_seconds=300):
+              model_evidence=None,task_seed=41,task_families=None,episode_wall_seconds=300,
+              probe_catalog='legacy-v1',probe_order_seed=20261013):
+    if probe_catalog not in ('legacy-v1','expanded-v1'):raise ValueError('unknown probe catalog')
+    if probe_catalog=='expanded-v1' and suite!='repair-v2':raise ValueError('expanded catalog requires repair-v2')
+    if type(probe_order_seed) is not int or not 0<=probe_order_seed<=2**31-1:raise ValueError('invalid probe order seed')
     if type(episode_wall_seconds) is not int or not 30<=episode_wall_seconds<=3600:
         raise ValueError('episode wall budget must be 30..3600 seconds')
     if split!='development': raise ValueError('confirmation disabled; separate frozen contract required')
@@ -509,6 +513,10 @@ def run_pilot(output,*,task_count=4,arms=('S','I2','F','E'),provider='fixture',s
         if suite=='fixtures' or not set(task_families)<=set(NAMES): raise ValueError('invalid repair family filter')
         tasks=[t for t in tasks if t['family'] in task_families]
         if not tasks: raise ValueError('empty task selection')
+    if probe_catalog=='expanded-v1':
+        from .adversarial import fixed_order
+        tasks=[dict(t,probe_catalog=probe_catalog,probe_order_seed=probe_order_seed) for t in tasks]
+        for task in tasks:task['fixed_probe_order']=list(fixed_order(task))
     for arm in arms: arm_profile(arm)
     if not arms or len(set(arms))!=len(arms): raise ValueError('distinct arms required')
     sequence=_task_arm_sequence(tasks,arms,counterbalanced=suite=='repair-v2')
@@ -618,6 +626,9 @@ def _audit_run(output):
                         errors.append({'episode':path.name,'reason':'output bytes or digest differ'})
         if records[0]['body'].get('task_sha256')!=digest(tasks[episode['task']]):
             errors.append({'episode':path.name,'reason':'task identity mismatch'})
+        for reason in audit_probe_records(tasks[episode['task']],episode['arm'],records,
+                lambda sid:snapshots.read(snapshots.get(sid),'solution.py').decode()):
+            errors.append({'episode':path.name,'reason':reason})
         final=[]
         for rec in records:
             b=rec['body']

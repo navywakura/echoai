@@ -199,6 +199,14 @@ class RelayTests(unittest.TestCase):
                 with self.assertRaises(ValueError):relay.run_worker('https://broker.example',WORKER,max_seconds=10)
                 self.assertEqual(call.call_count,2)
 
+    def test_extended_development_worker_remains_bounded_and_stoppable(self):
+        with patch.object(relay,'fetch',side_effect=[(200,{}),(200,{'status':'stop'})]):
+            self.assertEqual(relay.run_worker('https://broker.example',WORKER,max_seconds=4800),
+                             {'requests':0,'stopped':True})
+        for duration in (True,0,5401,float('inf')):
+            with self.assertRaises(ValueError):
+                relay.run_worker('https://broker.example',WORKER,max_seconds=duration)
+
     def test_configuration_rejects_unbounded_or_shared_credentials(self):
         for overrides in ({'request_timeout': 301}, {'request_timeout': float('nan')},
                           {'poll_timeout': 21}, {'client_token': WORKER},

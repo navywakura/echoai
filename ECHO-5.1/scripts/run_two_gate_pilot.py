@@ -22,6 +22,11 @@ from echoai.pcworld.pilot import run_pilot,audit_run,save
 def main():
     p=argparse.ArgumentParser();p.add_argument('control',type=Path);p.add_argument('output',type=Path)
     p.add_argument('--runtime',type=Path,required=True)
+    p.add_argument('--tasks',type=int,default=6)
+    p.add_argument('--task-seed',type=int,default=47)
+    p.add_argument('--families',nargs='+',default=['records','path','pagination'])
+    p.add_argument('--probe-catalog',choices=['legacy-v1','expanded-v1'],default='legacy-v1')
+    p.add_argument('--probe-order-seed',type=int,default=20261013)
     a=p.parse_args();secrets=json.loads((a.control/'relay-secrets.json').read_text())
     os.environ['ECHO51_RELAY_CLIENT_TOKEN']=secrets['client_token']
     config=json.loads((a.control/'provider.json').read_text())
@@ -38,11 +43,12 @@ def main():
             time.sleep(2)
         else:raise TimeoutError('GPU worker not ready within ten minutes; no pilot started')
         save(a.control/'gpu-ready.json',health)
-        print('GPU ready; launching 12 development episodes',flush=True)
-        report=run_pilot(a.output,task_count=6,arms=('S','I2','F','E'),provider='http',
-            config=config,suite='repair-v2',runtime=a.runtime,task_seed=47,
-            task_families=['records','path','pagination'],episode_wall_seconds=900,
-            model_evidence=health)
+        print('GPU ready; launching development matrix: '+json.dumps({
+            'tasks_before_filter':a.tasks,'families':a.families,'probe_catalog':a.probe_catalog}),flush=True)
+        report=run_pilot(a.output,task_count=a.tasks,arms=('S','I2','F','E'),provider='http',
+            config=config,suite='repair-v2',runtime=a.runtime,task_seed=a.task_seed,
+            task_families=a.families,episode_wall_seconds=900,
+            model_evidence=health,probe_catalog=a.probe_catalog,probe_order_seed=a.probe_order_seed)
         audit=audit_run(a.output);save(a.output/'audit.json',audit)
         print(json.dumps({'completed':len(report['episodes']),'audit':audit,'scientific_claim':False}),flush=True)
         return int(not audit['valid'])

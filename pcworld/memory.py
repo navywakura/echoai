@@ -38,7 +38,8 @@ class EpisodeMemory:
         self.events.append(event);return event
     def recall(self,kind):
         self.lookup_work+=len(self.events)
-        return [e for e in self.events if e['kind']==kind]
+        kinds=(kind,) if isinstance(kind,str) else tuple(kind)
+        return [e for e in self.events if e['kind'] in kinds]
     def cache(self,key,preconditions,value,*,cacheable=False):
         if not cacheable: return
         if len(self.exact)>=4096 and key not in self.exact: raise RuntimeError('CACHE_FULL')

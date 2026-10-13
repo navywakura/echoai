@@ -45,7 +45,9 @@ def prepare(run,output,slug):
             'jobs':jobs,'config':config}
     write_bundle(bundle,output,slug)
 
-def write_bundle(bundle,output,slug,*,extra_sources=None):
+def write_bundle(bundle,output,slug,*,extra_sources=None,timeout_seconds=3000):
+    if type(timeout_seconds) is not int or not 300<=timeout_seconds<=5400:
+        raise ValueError('GPU worker ceiling must be 300..5400 seconds')
     output.mkdir(parents=True,exist_ok=False)
     sources={'repair-input.json':json.dumps(bundle,indent=2)+'\n',
              'connector/pcworld/__init__.py':'',
@@ -65,12 +67,12 @@ for name,data in EMBEDDED.items():
     path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(base64.b64decode(data))
 process=subprocess.Popen([sys.executable,str(root/'proposer-worker.py')],start_new_session=True)
 try:
-    code=process.wait(timeout=3000)
+    code=process.wait(timeout=WORKER_CEILING)
 except subprocess.TimeoutExpired:
     os.killpg(process.pid,signal.SIGKILL);process.wait()
-    raise RuntimeError('GPU diagnostic exceeded 50-minute total ceiling')
+    raise RuntimeError('GPU diagnostic exceeded configured total ceiling')
 raise SystemExit(code)
-'''.replace('EMBEDDED',repr(encoded))
+'''.replace('EMBEDDED',repr(encoded)).replace('WORKER_CEILING',str(timeout_seconds))
     (output/'kernel.py').write_text(wrapper)
     meta={'id':slug,'title':slug.split('/')[-1],'code_file':'kernel.py','language':'python',
           'kernel_type':'script','is_private':True,'enable_gpu':True,'enable_tpu':False,

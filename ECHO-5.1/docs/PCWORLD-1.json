@@ -1,6 +1,6 @@
 {
   "schema": "pcworld.contract.v1",
-  "version": "0.6.0-development",
+  "version": "0.7.0-development",
   "status": "preliminary; scientific confirmation disabled",
   "base_commit": "f6062de0462a523296eb2cbb704472f4faa4a022",
   "scope": "Linux isolated workspaces, bounded Python input/output properties",
@@ -29,7 +29,7 @@
   "episode_wall_seconds": "explicit per-run option 30..3600; default 300; local repair calibration 900",
   "deadline_scope": "work admitted and each execution/HTTP call bounded by remaining deadline; supervisor cleanup and receipt persistence reported separately within elapsed time",
   "max_proposals_per_context": 3,
-  "review": "For repair-v2, F and E require two distinct eligible probes per accepted candidate; each category may retry up to two invalid/duplicate challenges, within six critic calls. CAM recall and lookup work are measured. S retains self-review; I2 retains independent proposals.",
+  "review": "F and E seek two distinct supported categories; coverage is informative and not an acceptance gate. Up to two retries per category within six critic calls. S retains self-review; I2 independent proposals. expanded-v1 uses five valid categories per family and candidate-independent seeded fixed order; E may prioritize visible AST cues, with the same fallback order.",
   "role_context_bytes": 32768,
   "memory_events": 4096,
   "library": "empty and frozen in principal comparison",
@@ -54,5 +54,6 @@
   "automatic_publication": false,
   "s6": "not reopened",
   "repair_policy": "common-final-oracle-v1: witnessed CEGIS and at most two guarded repairs. Stop before exceeding critic-call quota. Freeze candidate and evaluate under remaining original budgets regardless of category coverage. GRADUADO_POR_SUPERVIVENCIA is an unverified candidate eligibility label, never correctness proof. Final public, retained counterexample and reserved development cases must all pass. Prior 0.5 results remain unchanged.",
-  "http_call_timeout_max_seconds": 600
+  "http_call_timeout_max_seconds": 600,
+  "probe_catalog": "legacy-v1 remains default; expanded-v1 selected explicitly in run manifest, order_seed=20261013 for discrimination pilot. No deliberately distractor-first control; categories can refute other defects."
 }
