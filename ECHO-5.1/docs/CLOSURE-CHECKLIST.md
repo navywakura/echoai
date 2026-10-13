@@ -13,9 +13,11 @@ de cada fila; no equivale a una ventaja científica ni al cierre de ECHO-5.1.
 | Verde acotado | Crítico → contraejemplo → memoria → reparación → verificación | Un diagnóstico real sobre `sum_positive`: 1/1, 1.704 tokens, 51 recibos auditados. El defecto inicial es sembrado. |
 | Verde | Corpus nuevo de reparación | Seis familias distintas de las cuatro fixtures: intervalos, registros, rutas, CSV, paginación y dependencias. Bugs inducidos comprobados; no benchmark externo. |
 | Verde de ejecución; ventaja no demostrada | Comparación S/I2/F/E `repair-v2` | 48/48 episodios, auditoría válida de 2.049 recibos. S=4/12, I2=4/12, F=2/12, E=2/12. E no supera a F (10 empates, 2 pérdidas frente a S); produjo más contraejemplos que F, pero no más reparaciones aceptadas. 250.444 tokens totales. |
-| Verde | Software y revisión | 198 tests PCWorld tras dos puertas y transporte GPU interactivo; 59 regresiones seleccionadas en la tanda anterior; cinco hallazgos importantes reproducidos y corregidos. |
+| Verde | Software y revisión | 202 tests PCWorld tras aceptación común, graduación informativa y parada del crítico por cuota; 59 regresiones seleccionadas en una tanda anterior; cinco hallazgos importantes reproducidos y corregidos. |
 | Verde de ejecución; empate | Piloto 14B con dos puertas | 12/12 episodios y 580 recibos auditados. Todos 2/3. E=20.372 tokens; F=22.378; S=5.212; I2=2.352. Cuota de críticas agotada en Registros E/F; evaluación final no ejecutada allí. |
-| Pendiente | Superioridad o ahorro atribuibles a ECHO | `repair-v2` no demuestra superioridad: E empata con F en aceptación y queda por debajo de S/I2. El resultado es descriptivo (dos variantes por familia), no una confirmación estadística. |
+| Verde de ejecución; ventaja limitada al piloto | Piloto 14B con evaluación común | 12/12 episodios, 619 recibos auditados y auditoría repetida válida. E=F=3/3 frente a S=I2=2/3. Registros pasa tras crítica y reparación en E/F; ambos completan dos categorías. E=16.174 tokens, F=16.049; no hay ventaja de E frente a F. Tres tareas conocidas, no confirmación independiente. |
+| Verde de implementación | Cobertura informativa y graduación del candidato | Criterio final común a los cuatro brazos, sin cambiar oráculos; agotamiento de críticas no implica corrección. Pruebas positivas y negativas del candidato graduado; no se reserva una séptima crítica. Ningún episodio del nuevo piloto necesitó graduar por cobertura incompleta. |
+| Pendiente | Superioridad o ahorro atribuibles a ECHO | El piloto 14B más reciente mejora sobre S/I2 en una de tres tareas conocidas, pero E empata con F y gasta ligeramente más tokens. Faltan independencia, repeticiones y ablaciones; se conservan los resultados negativos de los pilotos anteriores. |
 | Verde de implementación | Reparación con testigos y rechazo de regresiones | Feedback explícito con esquema de I/O y stderr observado, dos intentos, restauración transaccional del candidato retenido; E congela el crítico durante la reparación y lo reabre tras un parche comprobado para completar dos categorías. Pruebas de software; no implica ventaja del modelo. |
 | Negativo en desarrollo | Microensayo local de reparación r1 | Registros y Rutas: 0/2 reparaciones, 0/2 pases finales, sin timeout; 140 recibos auditados. r2 también 0/2, con 154 recibos válidos. |
 | Parcial; cerrado el diagnóstico | Microensayo 14B en Kaggle | GPU 49/49 capas, 1/2 tareas completas. Registros 5/5 a la primera; Rutas 4/5 tras el segundo intento, rechazada por un caso final. Auditorías locales válidas. No demuestra ventaja S/I2/F/E. |
@@ -37,6 +39,13 @@ plazo explícito de episodio. Detalle de la remediación: [brecha de reparación
 
 Resultados de remediación: [informe de reparación](REPAIR-GAP-RESULTS-20261013.md).
 
-La brecha de reparación sigue parcialmente abierta. Los diagnósticos locales y Kaggle terminaron; no se publicó ni se hizo push a GitHub.
+La reparación funciona en los casos de desarrollo descritos; su transferencia y ventaja específica siguen abiertas. Los diagnósticos locales y Kaggle terminaron; no se publicó ni se hizo push a GitHub.
 
-Piloto 14B terminado: [dos puertas](TWO-GATE-RESULTS-20261013.md). S=I2=F=E=2/3, 580 recibos válidos, sin timeouts. Reparación + dos categorías comprobadas en Rutas; allí el fallo inicial fue público. En Registros, el crítico descubrió y E reparó, pero faltó la segunda categoría. Superioridad no demostrada; no cierra ECHO-5.1. GPU, supervisor y túnel apagados; 25,54 h GPU restantes.
+Piloto anterior, protocolo 0.5: [dos puertas](TWO-GATE-RESULTS-20261013.md).
+S=I2=F=E=2/3 y 580 recibos válidos. Se conserva esa puntuación histórica.
+
+Último piloto, protocolo 0.6: [evaluación común](GRADUATION-RESULTS-20261013.md).
+E=F=3/3, S=I2=2/3; 619 recibos válidos. Registros reparado y evaluado;
+sin errores de episodio ni timeouts. 202 tests pasan. ECHO-5.1 sigue abierto
+para confirmación independiente. GPU, supervisor, broker y túnel apagados;
+25,33 h GPU restantes al terminar.
