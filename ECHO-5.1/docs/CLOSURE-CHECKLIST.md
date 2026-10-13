@@ -13,16 +13,20 @@ de cada fila; no equivale a una ventaja científica ni al cierre de ECHO-5.1.
 | Verde acotado | Crítico → contraejemplo → memoria → reparación → verificación | Un diagnóstico real sobre `sum_positive`: 1/1, 1.704 tokens, 51 recibos auditados. El defecto inicial es sembrado. |
 | Verde | Corpus nuevo de reparación | Seis familias distintas de las cuatro fixtures: intervalos, registros, rutas, CSV, paginación y dependencias. Bugs inducidos comprobados; no benchmark externo. |
 | Verde de ejecución; ventaja no demostrada | Comparación S/I2/F/E `repair-v2` | 48/48 episodios, auditoría válida de 2.049 recibos. S=4/12, I2=4/12, F=2/12, E=2/12. E no supera a F (10 empates, 2 pérdidas frente a S); produjo más contraejemplos que F, pero no más reparaciones aceptadas. 250.444 tokens totales. |
-| Verde | Software y revisión | 202 tests PCWorld tras aceptación común, graduación informativa y parada del crítico por cuota; 59 regresiones seleccionadas en una tanda anterior; cinco hallazgos importantes reproducidos y corregidos. |
+| Verde | Software y revisión | 214 tests PCWorld tras catálogo ampliado, señales AST, recuperación de rechazos y auditoría de sondeos; 59 regresiones seleccionadas en una tanda anterior. Revisión del nuevo ensayo completada antes de lanzar. |
 | Verde de ejecución; empate | Piloto 14B con dos puertas | 12/12 episodios y 580 recibos auditados. Todos 2/3. E=20.372 tokens; F=22.378; S=5.212; I2=2.352. Cuota de críticas agotada en Registros E/F; evaluación final no ejecutada allí. |
 | Verde de ejecución; ventaja limitada al piloto | Piloto 14B con evaluación común | 12/12 episodios, 619 recibos auditados y auditoría repetida válida. E=F=3/3 frente a S=I2=2/3. Registros pasa tras crítica y reparación en E/F; ambos completan dos categorías. E=16.174 tokens, F=16.049; no hay ventaja de E frente a F. Tres tareas conocidas, no confirmación independiente. |
-| Verde de implementación | Cobertura informativa y graduación del candidato | Criterio final común a los cuatro brazos, sin cambiar oráculos; agotamiento de críticas no implica corrección. Pruebas positivas y negativas del candidato graduado; no se reserva una séptima crítica. Ningún episodio del nuevo piloto necesitó graduar por cobertura incompleta. |
-| Pendiente | Superioridad o ahorro atribuibles a ECHO | El piloto 14B más reciente mejora sobre S/I2 en una de tres tareas conocidas, pero E empata con F y gasta ligeramente más tokens. Faltan independencia, repeticiones y ablaciones; se conservan los resultados negativos de los pilotos anteriores. |
+| Verde de implementación | Cobertura informativa y graduación del candidato | Criterio final común a los cuatro brazos, sin cambiar oráculos; agotamiento de críticas no implica corrección. Pruebas positivas y negativas del candidato graduado; no se reserva una séptima crítica. En 0.6 no se necesitó; en 0.7 F Rutas01 se graduó con una categoría y pasó 4/4. F CSV01 se graduó pero fue rechazado. |
+| Verde de ejecución; resultado parcial | Cinco categorías y seis familias, protocolo 0.7 | 48/48 episodios, 2.362 recibos auditados. E=F=8/12 frente a S=I2=6/12. Ambos ganan en Registros; CSV y Dependencias siguen fallando. E gasta 54.310 tokens frente a 66.993 de F; un error de presupuesto de herramientas en CSV01 F. Sin timeouts. |
+| Verde de implementación | Memoria de críticas rechazadas y auditoría del catálogo | E recupera observaciones y fallos en una sola consulta cobrada; avanza de categoría tras tres rechazos. La auditoría comprueba orden, reintentos, etiquetas, novedad y vínculo con propuesta o replay. El orden F se fija por semilla, sin colocarlo deliberadamente en desventaja. |
+| Pendiente | Superioridad o ahorro atribuibles a ECHO | El último piloto mejora sobre S/I2 solo en dos variantes de Registros y empata con F en las doce tareas. E usa 18,93% menos tokens que F, pero 82,67% de la diferencia viene de un CSV fallido y usa más herramientas. Faltan familias independientes, repeticiones y ablaciones; no confirma H1 ni H4 en general. |
 | Verde de implementación | Reparación con testigos y rechazo de regresiones | Feedback explícito con esquema de I/O y stderr observado, dos intentos, restauración transaccional del candidato retenido; E congela el crítico durante la reparación y lo reabre tras un parche comprobado para completar dos categorías. Pruebas de software; no implica ventaja del modelo. |
 | Negativo en desarrollo | Microensayo local de reparación r1 | Registros y Rutas: 0/2 reparaciones, 0/2 pases finales, sin timeout; 140 recibos auditados. r2 también 0/2, con 154 recibos válidos. |
 | Parcial; cerrado el diagnóstico | Microensayo 14B en Kaggle | GPU 49/49 capas, 1/2 tareas completas. Registros 5/5 a la primera; Rutas 4/5 tras el segundo intento, rechazada por un caso final. Auditorías locales válidas. No demuestra ventaja S/I2/F/E. |
 | Verde acotado | Reparación desde contrato y error observado | Registros pasa tras dos propuestas del 7B; Rutas falla. 1/2, 108 recibos auditados. Testigos suministrados, sin mérito de descubrimiento del crítico. |
 | Parcial | Crítica adversarial y reparación | E retuvo 6 contraejemplos válidos frente a 2 de F, pero la aceptación fue 2/12 para ambos; siete episodios agotaron el plazo del proveedor (F=5, E=2). Hubo respuestas de categoría incorrecta y duplicados (F=11/6; E=1/3), sin entradas fuera de dominio. Hace falta mejorar la conversión de refutaciones en reparación y repetir en una muestra nueva. |
+| Pendiente | Contenido de los sondeos y reparación completa de CSV | El crítico copia el enunciado dentro de `input`; en una variante se rechaza por categoría y en otra sí refuta espacios. E rechaza ambos parches de esta última; F repara ese testigo pero falla comillas y agota herramientas. Separar plantilla de salida del esquema es una intervención propuesta, todavía no medida. |
+| Pendiente | Sondeos discriminantes dentro de categorías de grafos | Los ejemplos generados pasan pero no descubren fallos de orden topológico. Tener dos etiquetas válidas no acredita corrección ni cobertura exhaustiva. |
 | Pendiente | Ablaciones de memoria, crítico y control basal | Mismo modelo, herramientas y presupuesto; aislar qué mecanismo aporta una mejora. |
 | Pendiente | Ampliación y confirmación independiente | Más tareas/familias y repeticiones, dimensionar muestra, fijar contrato y reservar casos nuevos. No reciclar este desarrollo como examen ciego. |
 | Parcial | T20: conceptos reutilizables | Registro y cuarentena unitarios; extracción, transferencia y promoción todavía sin demostración. Biblioteca del piloto vacía. |
@@ -44,8 +48,13 @@ La reparación funciona en los casos de desarrollo descritos; su transferencia y
 Piloto anterior, protocolo 0.5: [dos puertas](TWO-GATE-RESULTS-20261013.md).
 S=I2=F=E=2/3 y 580 recibos válidos. Se conserva esa puntuación histórica.
 
-Último piloto, protocolo 0.6: [evaluación común](GRADUATION-RESULTS-20261013.md).
+Piloto anterior, protocolo 0.6: [evaluación común](GRADUATION-RESULTS-20261013.md).
 E=F=3/3, S=I2=2/3; 619 recibos válidos. Registros reparado y evaluado;
 sin errores de episodio ni timeouts. 202 tests pasan. ECHO-5.1 sigue abierto
-para confirmación independiente. GPU, supervisor, broker y túnel apagados;
-25,33 h GPU restantes al terminar.
+para confirmación independiente. Quedaron 25,33 h GPU al terminar ese piloto.
+
+Último piloto, protocolo 0.7: [discriminación de categorías](CATEGORY-DISCRIMINATION-RESULTS-20261013.md).
+E=F=8/12, S=I2=6/12; 214 tests y 2.362 recibos válidos. Duración del worker:
+37 min 13 s; consumo de cuota aproximado 0,62 h. GPU, supervisor, broker y
+túnel apagados; 24,71 h GPU restantes. ECHO-5.1 continúa abierto para las
+hipótesis científicas. No se relanzó, publicó ni hizo push.
