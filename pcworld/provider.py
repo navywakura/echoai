@@ -130,8 +130,10 @@ class HTTPProvider:
             for failure in feedback['failures']:
                 parts.extend([
                     'Failing input: ' + json.dumps(failure['input']),
-                    'Your observed WRONG output: ' + json.dumps(failure['observed']),
-                    'Expected output required by the contract: ' + json.dumps(failure['expected']),
+                    'Your observed WRONG output: ' + (json.dumps(failure['observed']) if 'observed' in failure
+                        else 'Unavailable: ' + failure.get('reason', 'execution did not yield a verified value')),
+                    'Expected output required by the contract: ' + (json.dumps(failure['expected']) if 'expected' in failure
+                        else 'Unavailable in this execution witness; use the specification and public examples'),
                 ])
             parts.append('Public non-regression examples: ' + json.dumps(feedback['public_examples']))
             if feedback.get('rejected_source'):

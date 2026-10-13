@@ -41,3 +41,17 @@ explícitas de contrato, programa retenido, entrada, salida observada, esperada
 y ejemplos públicos. Mismos dos casos/semilla, modelo, límites y verificadores.
 Es desarrollo sobre casos conocidos, no confirmación independiente. No se
 añade la solución ni se divulgan entradas de evaluación reservadas al modelo.
+
+## Resultado r2 y último diagnóstico local acotado
+
+r2 también terminó 2/2 sin errores ni reparaciones; auditoría válida de 154
+recibos. No hay evidencia de beneficio de cambiar solo la presentación.
+La trayectoria del crítico varió (Registros repitió cuatro sondeos antes de
+refutar), por lo que los episodios no aíslan causalmente el efecto del prompt.
+
+Se fija ahora un diagnóstico de dos propuestas, una por testigo inicial de r1.
+El modelo recibe contrato, entradas/salidas comprobadas y ejemplo público,
+pero no el código defectuoso. No se aportan soluciones ni datos reservados.
+Esto prueba reconstrucción desde especificación frente a posible anclaje en
+el programa previo; no se agrupa con los brazos S/I2/F/E. Se verificará el
+parche contra los mismos casos y en el mismo sandbox. No se abre una campaña.

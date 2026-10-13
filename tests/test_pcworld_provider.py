@@ -55,6 +55,22 @@ class ProviderContract(unittest.TestCase):
             with self.assertRaises(ProviderFailure):
                 provider.call('propose',development_tasks(1)[0],{},total_token_budget=1000)
         self.assertEqual(post.call_count,1)
+    def test_repair_of_execution_failure_does_not_invent_observed_or_expected_values(self):
+        provider=HTTPProvider(CONFIG);sent=[]
+        context={'source':'raise RuntimeError()', 'repair_feedback':{
+            'feedback_code':'REJECTED_REGRESSION',
+            'failures':[{'input':[3], 'status':'unknown', 'reason':'failed execution'}],
+            'public_examples':[{'input':[3], 'expected':3}]}}
+        def post(endpoint,payload,**kwargs):
+            sent.append(payload)
+            if endpoint.endswith('/tokenize'): return {'count':500}
+            return {'model':'test-model','usage':{'prompt_tokens':500,'completion_tokens':10,'total_tokens':510},
+                    'choices':[{'message':{'content':'{"content":"pass"}'}}]}
+        with patch.object(provider,'_post',side_effect=post):
+            provider.call('propose',development_tasks(1)[0],context,total_token_budget=1000)
+        content=sent[0]['messages'][1]['content']
+        self.assertIn('Unavailable',content)
+        self.assertIn('failed execution',content)
     def test_deadline_bounds_inflight_call(self):
         provider=HTTPProvider(CONFIG)
         def slow(*args,**kwargs): time.sleep(.2);return {'count':50}
