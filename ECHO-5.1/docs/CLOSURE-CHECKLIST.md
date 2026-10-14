@@ -163,3 +163,16 @@ LLM/GPU. No hay puntuación SWE-bench ni cierre científico de ECHO-5.1.
 
 [Informe final](REPOWORLD-CURATOR-ALL-20261014.md) y
 [enmienda de Requests](swebench/REQUESTS-REPLACEMENT-20261014.md).
+
+## Calibración remota del 14 de octubre
+
+- [x] Gate remoto técnico: 65/65 capas, 17 llamadas, 15.698 tokens,
+  251 recibos auditados; Kaggle COMPLETE y parada confirmada.
+- [x] Contrato y run-lock sellados en los artefactos del intento 2.
+- [ ] Resultado útil en la calibración: el agente agotó ocho intentos de
+  parche y entregó diff vacío. No hay resolución oficial demostrada.
+- [ ] Campaña primaria (96), controles adicionales y evaluación oficial.
+- [ ] Confirmación de H1–H4 y cierre científico de ECHO-5.1.
+
+Cuota observada al terminar: 22,62 h. No quedan workers GPU activos de esta
+entrega. [Informe y hashes](REPOWORLD-REMOTE-RESULTS-20261014.md).

@@ -1,6 +1,9 @@
 # Gate 3: una instancia, inferencia remota y parada
 
-Este procedimiento está preparado, **no ejecutado**. No lanzar Kaggle hasta que
+El primer intento remoto se ejecutó el 14 de octubre: cargó el modelo, pero la
+preparación local rechazó la identidad del entorno antes de solicitar inferencia.
+El segundo intento pasó el gate técnico y se selló el contrato; véase
+[resultado y límites](REPOWORLD-REMOTE-RESULTS-20261014.md). No lanzar Kaggle hasta que
 `offline-preflight`, `mock-smoke` y `official-controls` (36/36) sean válidos y
 correspondan a las fuentes actuales. El contrato continúa en `design`.
 `calibrate-remote` es un alias de `calibrate`, con las mismas comprobaciones.
@@ -10,7 +13,7 @@ pasaron 36/36 tras sustituir Requests-2674 por 2317 según la política registra
 Los informes antiguos `controls-r4` y su recuperación conservan el fallo previo;
 no utilizarlos como gates actuales. Se ha comprobado offline que la calibración
 alcanza la construcción del proveedor, interceptada antes de cualquier conexión.
-**La calibración remota sigue pendiente.** Véase el [informe](REPOWORLD-CURATOR-ALL-20261014.md).
+**Actualización posterior: calibración técnica y sellado completados; diff vacío.** Véase el [informe](REPOWORLD-CURATOR-ALL-20261014.md).
 
 ## Preparación local (sin GPU)
 
@@ -148,3 +151,14 @@ y su ruta dummy forman parte del entorno fijado; no intercambiar manifiestos.
 Detener solo este servicio propio después de la ejecución. Gate 3 ejecuta el
 repositorio con Bubblewrap; el servicio del curador no necesita estar activo
 para inferencia/calibración.
+
+## Permisos reproducibles del lanzador
+
+La preparación de repositorios debe ejecutarse con `umask 022`, igual que el
+preflight original. El primer lanzador privado aplicaba `umask 077` también al
+subproceso de calibración: 209 directorios de SymPy quedaron en 0700 en lugar
+de 0755 y su snapshot fue correctamente rechazado. Mantener el directorio
+externo de ejecución en 0700 y los secretos en 0600; fijar `umask=0o022` en
+`subprocess.run` para la preparación/calibración, sin cambiar las huellas
+esperadas ni relajar las comprobaciones. Antes de encender GPU, reproducir las
+huellas de árbol, runtime y plan público de las 36 entradas con ese lanzador.
