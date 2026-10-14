@@ -78,6 +78,31 @@ class WorkspaceTests(unittest.TestCase):
             recovered.retain(candidate,expected_head=old,public_receipt_ids=(receipt['sha256'],))
             self.assertEqual(len([r for r in recovered.receipts.records if r['body'].get('event')=='repoworld.retain']),1)
 
+    def test_cursor_reset_cross_tool_and_snapshot_but_not_forgery(self):
+        from echoai.repoworld.tools import _cursor
+        current=self.session.current.id
+        search=dict(tool='repo_search',snapshot_id=current,pattern='value',path='.',literal=True,cursor=None)
+        token=_cursor(self.session,search,100)
+        view=dict(tool='file_view',snapshot_id=current,path='a.py',start_line=1,line_count=1,cursor=token)
+        self.assertIn('value = 1',self.request(**view)['lines'][0]['text'])
+        view_token=_cursor(self.session,dict(view,cursor=None),[999,1])
+        self.assertEqual(len(self.request(**dict(search,cursor=view_token))['matches']),2)
+        candidate=self.session.stage(diff('a.py','value = 1\n','value = 3\n'),current)
+        self.assertIn('value = 3',self.request(**dict(view,snapshot_id=candidate.snapshot.id,cursor=view_token))['lines'][0]['text'])
+        forged=token[:-1]+('0' if token[-1]!='0' else '1')
+        with self.assertRaisesRegex(ValueError,'authentication'):
+            self.request(**dict(view,cursor=forged))
+        events=[r['body'] for r in self.session.receipts.records]
+        self.assertEqual(sum(r.get('event')=='repoworld.cursor-reset' for r in events),3)
+
+    def test_mismatch_eof_is_bounded_and_does_not_mutate(self):
+        current=self.session.current.id
+        text='--- a/a.py\n+++ b/a.py\n@@ -1,2 +1,2 @@\n value = 1\n-'+('é'*4000)+'\n+x\n'
+        with self.assertRaisesRegex(ValueError,"expected '<EOF>'") as caught:
+            self.session.stage(text,current)
+        self.assertLess(len(str(caught.exception).encode()),800)
+        self.assertEqual(self.session.current.id,current)
+
     def test_unicode_long_line_paging_and_cursor_binding(self):
         request=dict(tool='file_view',snapshot_id=self.session.current.id,path='unicode.txt',start_line=1,line_count=2,cursor=None)
         text='';numbers=[]
@@ -90,7 +115,7 @@ class WorkspaceTests(unittest.TestCase):
             if not cursor: break
             if request['cursor'] is None:
                 bad=dict(request,cursor=cursor,path='a.py')
-                with self.assertRaises(ValueError): self.request(**bad)
+                self.assertEqual(self.request(**bad)["lines"][0]["number"],1)
             request['cursor']=cursor
         else: self.fail('pagination did not terminate')
         self.assertEqual(text,'á'*12000+'\nsecond\n')

@@ -72,6 +72,10 @@ def protected_paths(entries,*,snapshot=None):
     return [p for p in _frozen_paths(entries,snapshot=snapshot) if p in entries]
 
 
+class PatchFormatError(ValueError):
+    """Rejected diff syntax/context; permits bounded, charged rescue reading."""
+
+
 def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS,probe=False):
     max_bytes,max_files,max_lines=limits
     if type(diff) is not str or not diff or len(diff.encode('utf-8'))>max_bytes or '\0' in diff:
@@ -83,7 +87,7 @@ def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS,probe=False):
         if lines[i].startswith('diff --git '): i+=1
         if i<len(lines) and re.fullmatch(r'index [0-9a-f]+\.\.[0-9a-f]+(?: 100(?:644|755))?\n',lines[i]): i+=1
         if i+1>=len(lines) or not lines[i].startswith('--- ') or not lines[i+1].startswith('+++ '):
-            raise ValueError('strict unified diff headers required')
+            raise PatchFormatError('strict unified diff headers required')
         old=lines[i][4:].rstrip('\n');new=lines[i+1][4:].rstrip('\n');i+=2
         if old!='/dev/null' and not old.startswith('a/'): raise ValueError('old path prefix')
         if new!='/dev/null' and not new.startswith('b/'): raise ValueError('new path prefix')
@@ -105,29 +109,34 @@ def _parse_diff(store,current,diff,*,limits=PROPOSAL_LIMITS,probe=False):
         result=[];old_at=0;hunks=0
         while i<len(lines) and lines[i].startswith('@@ '):
             header=re.fullmatch(r'@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@[^\n]*\n',lines[i])
-            if not header: raise ValueError('invalid hunk header')
+            if not header: raise PatchFormatError('invalid hunk header')
             os_,oc,ns,nc=(int(v) if v is not None else 1 for v in header.groups())
             start=os_-1 if oc else os_
-            if start<old_at or start>len(before): raise ValueError('invalid hunk position')
+            if start<old_at or start>len(before): raise PatchFormatError('invalid hunk position')
             result.extend(before[old_at:start]);old_at=start
             target_start=ns-1 if nc else ns
-            if target_start!=len(result): raise ValueError('new hunk position mismatch')
+            if target_start!=len(result): raise PatchFormatError('new hunk position mismatch')
             i+=1;used_old=used_new=0
             while used_old<oc or used_new<nc:
-                if i>=len(lines) or lines[i][:1] not in (' ','+','-'): raise ValueError('truncated hunk')
+                if i>=len(lines) or lines[i][:1] not in (' ','+','-'): raise PatchFormatError('truncated hunk')
                 op=lines[i][0];text=lines[i][1:];i+=1
                 if i<len(lines) and lines[i].startswith('\\ No newline at end of file'):
-                    if not text.endswith('\n'): raise ValueError('invalid newline marker')
+                    if not text.endswith('\n'): raise PatchFormatError('invalid newline marker')
                     text=text[:-1];i+=1
                 if op in (' ','-'):
-                    if old_at>=len(before) or before[old_at]!=text: raise ValueError('hunk context mismatch (no fuzz)')
+                    if old_at>=len(before) or before[old_at]!=text:
+                        actual=before[old_at].rstrip() if old_at<len(before) else '<EOF>'
+                        # Bound untrusted source/hunk text before constructing feedback.
+                        actual=actual.encode('utf-8')[:240].decode('utf-8','ignore')
+                        provided=text.rstrip().encode('utf-8')[:240].decode('utf-8','ignore')
+                        raise PatchFormatError(f"hunk context mismatch at line {old_at + 1}: expected {actual!r}, hunk provided {provided!r} (no fuzz)")
                     old_at+=1;used_old+=1
                 if op in (' ','+'):
                     result.append(text);used_new+=1
                 if op in ('+','-'): changed+=1
-                if used_old>oc or used_new>nc or changed>max_lines: raise ValueError('hunk count/patch line limit')
+                if used_old>oc or used_new>nc or changed>max_lines: raise PatchFormatError('hunk count/patch line limit')
             hunks+=1
-        if not hunks: raise ValueError('no hunks')
+        if not hunks: raise PatchFormatError('no hunks')
         result.extend(before[old_at:]);content=''.join(result)
         if new=='/dev/null':
             if content: raise ValueError('deletion leaves content')

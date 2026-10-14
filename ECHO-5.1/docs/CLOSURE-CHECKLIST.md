@@ -176,3 +176,17 @@ LLM/GPU. No hay puntuación SWE-bench ni cierre científico de ECHO-5.1.
 
 Cuota observada al terminar: 22,62 h. No quedan workers GPU activos de esta
 entrega. [Informe y hashes](REPOWORLD-REMOTE-RESULTS-20261014.md).
+
+## Remediación de usabilidad posterior a `12dec48`
+
+- [x] Reinicio de cursores auténticos incompatibles, con recibo; firmas
+  falsificadas y snapshots no autorizados siguen rechazados.
+- [x] Feedback acotado de mismatch con línea real, línea propuesta y EOF.
+- [x] Dos lecturas de rescate contabilizadas tras error de formato/contexto,
+  sin renovar ilimitadamente búsquedas tras parches fallidos.
+- [x] Mock de recuperación: feedback, lecturas, límite y parche corregido.
+- [x] Suite local: 423 pasados, 3 integraciones opcionales omitidas, cero fallos.
+- [ ] Renovar gates y sellado para estas fuentes antes de otra campaña.
+- [ ] Medir con el modelo real si mejora la calibración; sin GPU en esta entrega.
+
+Detalle: [usabilidad y alcance](REPOWORLD-USABILITY-20261014.md).

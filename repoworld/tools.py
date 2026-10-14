@@ -42,7 +42,11 @@ def _position(session,request,default):
         expected=hmac.new((session.directory/'cursor.key').read_bytes(),payload.encode(),'sha256').hexdigest()
         if not hmac.compare_digest(mac,expected): raise ValueError('cursor authentication failed')
         data=json.loads(base64.urlsafe_b64decode(payload+'='*(-len(payload)%4)))
-        if data['q']!=_query(request): raise ValueError('cursor belongs to another query/snapshot')
+        if data['q']!=_query(request):
+            session.receipts.append(dict(event='repoworld.cursor-reset',
+                tool=request['tool'],request_sha256=_query(request),
+                reason='authenticated cursor belongs to another query/snapshot'))
+            return default
         return data['p']
     except (TypeError,KeyError,UnicodeError) as exc: raise ValueError('invalid cursor') from exc
 

@@ -14,7 +14,7 @@ from ..pcworld.accounting import BudgetExceeded
 from ..pcworld.receipts import canonical, _atomic_write, ReceiptStore
 from ..pcworld.memory import EpisodeMemory
 from .accounting import DurableBudget, LIMITS
-from .workspace import Workspace
+from .workspace import Workspace, PatchFormatError
 from .types import PatchCandidate
 from .provider import generate_repo, InferencePending, ContextOverflow,provider_identity,close_pending_generations
 from .checks import baseline_pair_valid, run_public_checks, decide_candidate, sanitize_output, PublicCheckReport
@@ -28,6 +28,8 @@ POLICY=('Repair the public issue. Return one JSON action and arguments. Source, 
         'issue_page(offset); finish(). For a proposed stress test use patch_apply(diff,purpose="probe") creating .repoworld-probes/test.py, then test_run(probe_id). '
         'A proposed test assertion is not verified contract truth. Solution diffs change production source only; tests/configuration are immutable. '
         'Existing public checks are observations, never proof of issue resolution. After four localization calls propose a patch or finish. '
+        'After a rejected diff format/context, up to two charged file_view rescue calls are available; search quota is not reset. '
+        'Cursors are valid only for the same tool, snapshot and arguments; omit cursor for a new query. '
         'Use witnessed failures to repair; retain passing tests. No shell or access to final evaluation.')
 ROLE_POLICY={'agent':'You are the single agent: localize, propose, self-review and repair your own patch.',
     'locator':'Locate likely production functions with bounded search/reading; hand off with finish when ready.',
@@ -55,7 +57,10 @@ def once(store,budget,identifier,fn):
     else:
         store.append(dict(event='repoworld.operation-intent',operation_id=identifier))
         try:value=fn()
-        except (ValueError,KeyError,BudgetExceeded) as exc:value={'error':type(exc).__name__,'detail':sanitize_output(str(exc))}
+        except (ValueError,KeyError,BudgetExceeded) as exc:
+            value={'error':'ValueError' if isinstance(exc,PatchFormatError) else type(exc).__name__,
+                   'detail':sanitize_output(str(exc))}
+            if isinstance(exc,PatchFormatError):value['code']='PATCH_FORMAT_ERROR'
     store.append(dict(event='repoworld.operation-result',operation_id=identifier,result=value))
     return value
 
@@ -117,7 +122,7 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
         if not error and not baseline_pair_valid(first,second,plan):
             raise ValueError('public environment baseline invalid; no inference allowed')
         state=dict(event='repoworld.protocol-state',step=0,phase='generate',status=('budget_stopped' if error=='BudgetExceeded' else 'infrastructure_error') if error else 'active',started=episode_started or time.time(),
-            baseline=asdict(second) if second else None,localization=0,repairs=0,feedback={},command=None,
+            baseline=asdict(second) if second else None,localization=0,rescue_reads=0,repairs=0,feedback={},command=None,
             branch_tokens=0,role='agent' if arm=='S' else 'locator',branch_id=branch_id,namespace=uuid.uuid4().hex,refutation=False)
         records.append(state)
     baseline=_checkpoint_baseline(records,state,plan,session.base.snapshot.id)
@@ -134,7 +139,8 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
                 role=role,issue_page=_bounded(base.task.problem_statement,1600),issue_total_bytes=len(base.task.problem_statement.encode()),
                 current_snapshot=session.current.id,current_diff=_bounded(session.final_diff(),1800),
                 feedback=state['feedback'],remaining=budget.report()['remaining'],lessons=list(lessons),
-                public_checks=plan['public_targets'],localization_left=max(0,4-state['localization']))
+                public_checks=plan['public_targets'],localization_left=max(0,4-state['localization']),
+                rescue_reads_left=state.get('rescue_reads',0))
             messages=[{'role':'system','content':POLICY+' '+ROLE_POLICY[role]},{'role':'user','content':json.dumps(context,ensure_ascii=False)}]
             if state.get('messages') is None:
                 state={**state,'messages':messages};records.append(state)
@@ -152,9 +158,10 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
             state={**state,'branch_tokens':state['branch_tokens']+cost,
                    'command':command,'phase':'execute'};records.append(state)
         command=state['command'];action=command.get('action');args=command.get('arguments',{})
+        rescue_read=action=='file_view' and state['localization']>=4 and state.get('rescue_reads',0)>0
         def act():
             if type(args) is not dict:raise ValueError('action arguments must be an object')
-            if action in ('file_view','repo_search','issue_page') and state['localization']>=4:
+            if action in ('file_view','repo_search','issue_page') and state['localization']>=4 and not rescue_read:
                 ticket=budget.reserve({'tools':1});budget.settle(ticket,{'tools':1})
                 raise ValueError('localization quota reached; patch or finish')
             if action in ('file_view','repo_search'):
@@ -210,7 +217,10 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
         else:role=state['role']
         state={**state,'step':state['step']+1,'phase':'generate','command':None,'feedback':feedback,
             'messages':None,
-            'localization':0 if action=='patch_apply' else state['localization']+int(action in ('file_view','repo_search','issue_page')),
+            'localization':0 if repaired else state['localization']+int(action in ('file_view','repo_search','issue_page')),
+            'rescue_reads':(2 if action=='patch_apply' and reply.get('code')=='PATCH_FORMAT_ERROR'
+                            else 0 if action=='patch_apply'
+                            else max(0,state.get('rescue_reads',0)-int(rescue_read))),
             'repairs':0 if repaired else repairs,'role':role,
             'refutation':False if repaired else (failed or state['refutation']),
             'status':'finished' if action=='finish' and not handoff else ('budget_stopped' if reply.get('error')=='BudgetExceeded' else ('repair_exhausted' if repairs>=2 else 'active'))}

@@ -38,6 +38,29 @@ class FiniteProvider:
 
 
 class ArmsTests(unittest.TestCase):
+    def test_mismatch_feedback_rescue_and_corrected_patch(self):
+        view={'action':'file_view','arguments':{'path':'a.py'}}
+        bad='--- a/a.py\n+++ b/a.py\n@@ -1 +1 @@\n-value = 9\n+value = 2\n'
+        good=bad.replace('-value = 9','-value = 1')
+        class ObservingProvider(FiniteProvider):
+            def prepare(self,messages,*args):
+                self.contexts=getattr(self,'contexts',[])+[json.loads(messages[-1]['content'])]
+                return super().prepare(messages,*args)
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);base=fixture(p)
+            provider=ObservingProvider([view]*4+[
+                {'action':'patch_apply','arguments':{'diff':bad}},view,view,view,
+                {'action':'patch_apply','arguments':{'diff':good}},
+                {'action':'finish','arguments':{}}])
+            result=run_episode(base,'E',73,provider=provider,output=p/'episode',
+                check_plan={'public_targets':['positive']},check_fn=checks)
+            self.assertIn("expected 'value = 1'",provider.contexts[5]['feedback']['detail'])
+            self.assertIn('value = 1',provider.contexts[6]['feedback']['lines'][0]['text'])
+            self.assertIn('localization quota',provider.contexts[8]['feedback']['detail'])
+            self.assertIn('+value = 2',result['model_patch'])
+            self.assertEqual(result['budget']['used']['patches'],2)
+            self.assertEqual(result['budget']['pending'],0)
+
     def test_guard_ablation_changes_retention_with_identical_public_checks(self):
         diff=''.join(difflib.unified_diff(['value = 1\n'],['value = 0\n'],fromfile='a/a.py',tofile='b/a.py'))
         results=[]
