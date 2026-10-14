@@ -204,3 +204,14 @@ Detalle: [usabilidad y alcance](REPOWORLD-USABILITY-20261014.md).
 - [ ] Calibración remota v2, nuevo sellado y campaña.
 
 [Rutas, comandos y hashes](REPOWORLD-GATES-V2-20261014.md).
+
+## Calibración v2 en T4: alcance medido
+
+- [x] Gate técnico remoto válido: 65/65 capas, 21 llamadas, 21.980 tokens.
+- [x] Auditoría válida: 304 recibos, cero reservas pendientes.
+- [x] Un reinicio de cursor y ocho lecturas de rescate efectivas.
+- [x] Kaggle COMPLETE y procesos propios detenidos; 22,37 h restantes.
+- [ ] Resultado útil: ocho diffs rechazados por contexto; entrega vacía.
+- [ ] Nuevo sellado/campaña y evaluación oficial: no realizados.
+
+La calibración técnica no cierra ECHO-5.1. [Resultado y diagnóstico](REPOWORLD-REMOTE-V2-RESULTS-20261014.md).

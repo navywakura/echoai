@@ -118,3 +118,11 @@ medir. No iniciar la campaña con el lock de la calibración anterior.
 - `official-controls/report.json`: `eae1dc5f87f05c557cada0eea6f7ac76e4a6ec1a67c53150a182e3c00e663522`.
 - `official-controls/link-provenance.json`: `28032c3e01fe517c27f9e76a489cb865f286083aee12ab6cdad0fd9cdd1e27fd`.
 - `readiness.json`: `33df092df76c8f364edc6e30c18c2548f60f1d7ac7b2910d7628a6fff745cf6d`.
+
+## Actualización posterior: calibración ejecutada
+
+La entrega local descrita arriba fue 0 GPU. Posteriormente, con autorización,
+se ejecutó la calibración en T4: gate técnico y auditoría válidos, diff vacío,
+worker apagado y 22,37 h restantes. Véase
+[resultado remoto v2](REPOWORLD-REMOTE-V2-RESULTS-20261014.md).
+No se generó un nuevo lock ni se inició campaña.
