@@ -92,3 +92,50 @@ class InterfaceV2Tests(unittest.TestCase):
             {'action':'finish','arguments':{}}])
         result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
         self.assertIn('+value = 2',result['model_patch'])
+
+    def test_v2_locator_repeated_reads_warn_and_hand_off_to_editor(self):
+        from echoai.repoworld.protocol import run_episode
+        view={'action':'file_view','arguments':{'path':'a.py'}}
+        edit={'action':'patch_apply','arguments':{'path':'a.py','search':'value = 1\n','replace':'value = 2\n'}}
+        p=FiniteProvider([view,view,view,edit,{'action':'finish','arguments':{}}])
+        result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertIn('+value = 2',result['model_patch'])
+
+    def test_v2_locator_quota_with_locus_hands_off_to_editor(self):
+        from echoai.repoworld.protocol import run_episode
+        # 1 initial view, then 7 outline calls to reach 8 localization calls total
+        view={'action':'file_view','arguments':{'path':'a.py'}}
+        outline={'action':'file_outline','arguments':{'path':'a.py'}}
+        edit={'action':'patch_apply','arguments':{'path':'a.py','search':'value = 1\n','replace':'value = 2\n'}}
+        p=FiniteProvider([view]+[outline]*7+[edit,{'action':'finish','arguments':{}}])
+        result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertIn('+value = 2',result['model_patch'])
+
+    def test_v2_locator_quota_without_locus_abandons(self):
+        from echoai.repoworld.protocol import run_episode
+        # 8 issue_page calls with no observed source file locus
+        page={'action':'issue_page','arguments':{'offset':0}}
+        p=FiniteProvider([page]*8)
+        result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertEqual(result['status'],'finished')
+        self.assertEqual(result['model_patch'],'')
+
+    def test_v2_locator_token_budget_cap_reserves_editor_tokens(self):
+        from echoai.repoworld.protocol import run_episode
+        view={'action':'file_view','arguments':{'path':'a.py'}}
+        edit={'action':'patch_apply','arguments':{'path':'a.py','search':'value = 1\n','replace':'value = 2\n'}}
+        class HeavyLocatorProvider(FiniteProvider):
+            def __init__(self,actions):
+                super().__init__(actions);self.last_count=100;self.views=0
+            def prepare(self,messages,*args):
+                self.last_count=2700 if self.views<3 else 100
+                return json.dumps(messages),[1]*self.last_count
+            def complete(self,*args,**kw):
+                act=next(self.actions)
+                if act['action']=='file_view':self.views+=1
+                return dict(content=json.dumps(act),tokens_evaluated=self.last_count,tokens_predicted=200)
+        # 3 views: 3 * 2900 = 8700 tokens >= 8000 -> triggers automatic handoff to editor!
+        p=HeavyLocatorProvider([view,view,view,edit,{'action':'finish','arguments':{}}])
+        result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertIn('+value = 2',result['model_patch'])
+        self.assertGreater(result['budget']['remaining']['tokens'],10000)

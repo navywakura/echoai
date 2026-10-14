@@ -48,8 +48,11 @@ def file_bytes(session,snapshot,path):
 
 def record_view(session,request,reply):
     raw=file_bytes(session,request['snapshot_id'],request['path'])
+    existing=observed_lines(session,request['path'],raw)
+    is_redundant=bool(existing and reply.get('lines') and all(x['number'] in existing for x in reply['lines']))
+    reply['redundant']=is_redundant
     return session.receipts.append(dict(event='repoworld.source-observation',path=request['path'],
-        snapshot=request['snapshot_id'],file_sha256=hashlib.sha256(raw).hexdigest(),lines=reply['lines']))
+        snapshot=request['snapshot_id'],file_sha256=hashlib.sha256(raw).hexdigest(),lines=reply['lines'],redundant=is_redundant))
 
 def observed_lines(session,path,raw):
     digest=hashlib.sha256(raw).hexdigest();lines={}

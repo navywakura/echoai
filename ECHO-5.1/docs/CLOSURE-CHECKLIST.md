@@ -275,3 +275,16 @@ presupuesto: 0 parches. Gate técnico válido, objetivo funcional pendiente.
 Quedan corregir el traspaso y reserva de edición, medir un parche útil,
 evaluarlo oficialmente y comparar brazos antes de cerrar ECHO-5.1.
 Kaggle COMPLETE, relay/túnel apagados; cuota restante 21,94 h. Sin campaña ni push.
+
+## Traspaso locator→editor y reserva presupuestaria (2026-10-15)
+
+- [x] Directrices explícitas en `ROLE_POLICY_V2`, `POLICY_V2` y `context['feedback']['guidance']`.
+- [x] Detección de lecturas redundantes en `source_evidence.py` y feedback accionable.
+- [x] Ruptura mecánica tras 2 redundancias: traspaso automático al editor con locus observado.
+- [x] Techo del localizador a 8.000 tokens; reserva de $\ge 17.000$ tokens para el editor.
+- [x] Terminación limpia (`status = 'finished'`) si la cuota vence sin locus; sin forzar alucinaciones.
+- [x] 445 pruebas pasadas (175 RepoWorld, 257 PCWorld, 13 diseño), 3 omitidas, 0 fallos.
+- [x] Smoke hermético de SymPy en Bubblewrap: `valid: true`, replay y rollback auditados.
+- [ ] Renovación de compuertas locales y nueva calibración reservada con el 32B.
+
+[Informe de implementación y evidencia](REPOWORLD-LOCATOR-HANDOFF-20261015.md).
