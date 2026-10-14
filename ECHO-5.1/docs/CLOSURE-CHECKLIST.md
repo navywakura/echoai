@@ -190,3 +190,17 @@ entrega. [Informe y hashes](REPOWORLD-REMOTE-RESULTS-20261014.md).
 - [ ] Medir con el modelo real si mejora la calibración; sin GPU en esta entrega.
 
 Detalle: [usabilidad y alcance](REPOWORLD-USABILITY-20261014.md).
+
+## Gates v2 renovados — 14 de octubre
+
+- [x] Verify actualizado: 423 pasados, 3 opcionales omitidos, cero fallos.
+- [x] Nuevo smoke con rescate, regresión bloqueada y replay; 173 recibos válidos.
+- [x] Nuevo preflight de 36/36 instancias y 12 repositorios.
+- [x] Enlace auditado de 36/36 controles oficiales históricos, sin reejecución;
+  origen y 72 logs verificados, curador sin cambios.
+- [x] Cuatro gates válidos para las fuentes actuales; recorrido de calibración
+  comprobado offline hasta el constructor del proveedor.
+- [x] Configuración/claves y comando remoto preparados; 0 GPU y 0 llamadas LLM.
+- [ ] Calibración remota v2, nuevo sellado y campaña.
+
+[Rutas, comandos y hashes](REPOWORLD-GATES-V2-20261014.md).
