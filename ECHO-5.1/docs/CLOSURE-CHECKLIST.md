@@ -241,3 +241,15 @@ La calibración técnica no cierra ECHO-5.1. [Resultado y diagnóstico](REPOWORL
 - [ ] Calibración v3 con modelo real, auditoría, nuevo sellado y campaña.
 
 [Resultados, rutas, hashes y limitaciones](REPOWORLD-GATES-V3-20261014.md).
+
+## Calibración remota v3: técnica válida, reparación fallida
+
+- [x] 2 T4, 65/65 capas del modelo fijado; 20 llamadas y 24.498 tokens.
+- [x] Auditoría válida: 294 recibos, sin excesos ni reservas pendientes.
+- [x] 302 líneas devueltas contrastadas íntegramente con el snapshot.
+- [x] Kaggle COMPLETE; worker detenido y servicios locales cerrados.
+- [ ] Parche útil de SymPy: ocho intentos rechazados, diff vacío; nunca leyó `_entry()`.
+- [ ] Corregir/verificar localización y edición antes de otra calibración.
+- [ ] Sellado nuevo y campaña oficial; no realizados.
+
+[Resultados y autopsia v3](REPOWORLD-REMOTE-V3-RESULTS-20261014.md).
