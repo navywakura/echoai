@@ -5,6 +5,12 @@ Este procedimiento está preparado, **no ejecutado**. No lanzar Kaggle hasta que
 correspondan a las fuentes actuales. El contrato continúa en `design`.
 `calibrate-remote` es un alias de `calibrate`, con las mismas comprobaciones.
 
+**Bloqueo verificado el 14 de octubre:** Requests-2674 no supera el control
+negativo. No utilizar los informes `controls-r4` o su recuperación como gate
+aprobado. Una invocación local de `calibrate-remote` con proveedor deshabilitado
+fue rechazada con `official-controls has not passed`, sin crear el directorio
+de calibración. Véase el [diagnóstico](REPOWORLD-CURATOR-ALL-20261014.md).
+
 ## Preparación local (sin GPU)
 
 Desde la raíz del worktree, elegir un directorio privado nuevo `RUN` bajo
@@ -112,3 +118,29 @@ cada archivo en `/tmp`, únicamente cuando su directorio de destino no exista.
 Así se recupera la misma ruta y autoridad. Las copias de consulta en la carpeta
 de evidencia no son gates trasladables. `require_gate` vuelve a autenticar el
 contenido y a comparar las fuentes antes de iniciar inferencia.
+
+## Curador local: perfil de Podman de esta entrega
+
+Tras recuperar el espacio de metadatos de Btrfs, el curador usa un servicio
+rootless propio, iniciado con esta opción explícita de extracción:
+
+```bash
+podman --storage-opt overlay.ignore_chown_errors=true system service \
+  --time=0 unix:///tmp/repoworld-docker-api/api.sock
+```
+
+La opción evita que los propietarios de archivos de qhull, fuera del rango
+subordinado disponible, impidan descargar las imágenes oficiales de Matplotlib.
+Puede modificar propietarios durante la extracción; los contenidos y los
+identificadores de imagen siguen fijados. Los controles vacío/referencia deben
+validarse con este mismo perfil antes de usarlo en la evaluación final.
+No se modifica `~/.config/containers/storage.conf`.
+
+El perfil operativo, la orden de arranque y las identidades de las imágenes se
+conservan en `curator-runtime-r4.json` y `rootless-unpack-policy.json` dentro de
+la carpeta de evidencia. Para repetir los controles usar el `curator-config.json`
+de esa carpeta y exportar `REPOWORLD_CURATOR_SERVICES` con la ruta absoluta de
+`services.json`, junto con su SHA-256 en `REPOWORLD_CURATOR_SERVICES_SHA256`.
+Detener solo este servicio propio después de la ejecución. Gate 3 ejecuta el
+repositorio con Bubblewrap; el servicio del curador no necesita estar activo
+para inferencia/calibración.

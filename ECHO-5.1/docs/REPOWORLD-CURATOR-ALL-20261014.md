@@ -1,113 +1,138 @@
-# RepoWorld · controles oficiales completos · 14 de octubre de 2026
+# RepoWorld · controles oficiales · 14 de octubre de 2026
 
-## Alcance y estado
+## Resultado
 
-Entrega parcial, bloqueada por almacenamiento local. El objetivo es validar las 36 instancias mediante
-controles vacío/referencia con SWE-bench v4.1.0 en Podman rootless. **No hay
-calibración remota ni nueva puntuación científica.** Kaggle no se ha iniciado y
-no se han efectuado llamadas LLM. El contrato permanece en `design`.
+**36 instancias comprobadas; 35 controles vacío/referencia válidos.** El único
+bloqueo es `psf__requests-2674`. El informe agregado está autenticado, pero el
+gate `official-controls` permanece **inválido**. No hay puntuación científica
+de ECHO, calibración remota ni cierre de ECHO-5.1. El contrato sigue en `design`.
+**0 horas nuevas de GPU y 0 llamadas LLM.**
 
-## Cambios
+La tanda y su repetición ya finalizaron. Se detuvo el API Podman propio de la
+tarea y no quedaron contenedores de evaluación activos.
 
-- `calibrate-remote` es alias de `calibrate`, sin eludir gates, registro ni modelo.
-- Adquisición secuencial de imágenes con descarte opcional: solo se retiran IDs
-  que no existían antes de descargar. Una etiqueta nueva no otorga propiedad
-  sobre una imagen anterior. No se poda el almacén global de Podman.
-- La evaluación final puede recuperar imágenes retiradas, comprueba el digest
-  fijado y ejecuta el harness por instancia. Su plazo agregado de 6.900 segundos
-  queda por debajo del supervisor de 7.200 segundos.
-- Manifiesto HTTP local multiperfil: Requests-2148 usa certifi; Requests-2674 usa
-  su CA vendorizada. Se conserva la CA pública de cada imagen y se agrega el
-  certificado local. Solo se admiten esas rutas de certificados, no archivos de
-  implementación ni tests. El bundle y la imagen quedan fijados por hash.
-- Se conserva el perfil de presentación de Pytest-7168 y los mismos criterios
-  estrictos del curador: el parche vacío debe fallar, el de referencia pasar y
-  los estados obligatorios deben estar presentes.
+La tanda `controls-r4` terminó 34/36. Seaborn-3407 falló por un contenedor
+residual de la interrupción anterior; tras retirar exclusivamente ese contenedor,
+sus dos controles pasaron. `controls-r4-recovered` conserva los 36 intentos
+originales y esa repetición de infraestructura. No se repitió ni se promovió
+el fallo evaluado de Requests.
 
-## Incidencia de almacenamiento
+## Recuperación de almacenamiento y entornos
 
-Las primeras tandas encontraron `ENOSPC` en Btrfs pese a mostrar unos 57 GiB
-libres de datos. El dispositivo estaba completamente asignado y los metadatos
-DUP rondaban 6,49/7 GiB. Django-11179 pasó primero y falló durante esa incidencia
-con errores de espacio tanto en vacío como en referencia; no se atribuye ese
-resultado a una regresión del repositorio.
-
-Se conservaron logs/recibos y se retiraron únicamente cachés BASE regenerables
-de las ejecuciones abortadas y las imágenes de un almacén VFS temporal aislado
-creado durante la preparación anterior. Dicho almacén no tenía contenedores ni
-referencias en el registro activo. No se borraron runtimes, suplementos,
-repositorios ni imágenes del usuario. No se ejecutó balance con privilegios.
-Después pasaron 1.000 escrituras atómicas de prueba. Las repeticiones públicas
-y de software usan `/tmp` para reducir presión sobre Btrfs.
-
-Las tandas `controls-r1` y `controls-r2` son diagnósticos interrumpidos, no gates
-válidos. No se mezclan sus éxitos para declarar 36/36.
-
-## Verificación
-
-- Software: 419 pruebas pasadas; dos integraciones omitidas explícitamente en
-  esa ejecución y después ejecutadas aparte con pase 2/2.
-- Smoke simulado con fuentes actuales: gate válido, regresión, rollback y replay;
-  no es resolución científica de SymPy.
-- Preflight público actualizado: 36/36, gate autenticado y fuentes coincidentes.
-- Curador `controls-r3`: 11/36 intentados, 7 válidos; tanda interrumpida por ENOSPC. No existe un gate `official-controls` completo válido.
-- Revisión independiente: corregidas propiedad de imágenes y recuperación
-  después de su descarte; añadido límite agregado de evaluación.
-
-Evidencia privada local: `ECHO-5.1/artifacts/repoworld-curator-all-20261014/`.
-No publicar certificados privados, autoridades HMAC, tests reservados o parches
-oficiales de referencia. El manifiesto público final debe contener solo hashes,
-identidades y veredictos agregados.
-
-## Siguiente gate
-
-[Procedimiento de calibración remota](REPOWORLD-REMOTE-CALIBRATION.md): relay con
-IDs duraderos, worker 32B fijado y un solo episodio `sympy__sympy-19007`.
-No iniciarlo hasta disponer de los tres gates válidos con las mismas fuentes.
-Diez minutos es un objetivo de inferencia, no una garantía de cuota total: la
-carga y descarga del modelo también consumen tiempo de GPU.
-
-- [x] Alias y procedimiento de Gate 3 preparados.
-- [x] Suite de software y dos integraciones verificadas.
-- [x] 0 GPU y 0 llamadas LLM durante esta entrega.
-- [ ] Gate `official-controls` válido 36/36.
-- [x] Preflight público actualizado 36/36.
-- [ ] Calibración remota, confirmación de parada y lock científico.
-- [ ] Campaña y evaluación científica independiente.
-
-## Punto de recuperación tras la interrupción
-
-Los cambios siguen en la rama `research/echo-5.1-pcworld1`; los tres gates
-locales se han vuelto a autenticar y sus archivos completos se han comprobado
-con `tar -tzf`. [Manifiesto público de progreso](swebench/REPOWORLD-CURATOR-PROGRESS-20261014.json)
-contiene los hashes de los archivos, sin claves ni contenido reservado.
-Las autoridades no se pueden trasladar: restaurar los archivos en sus rutas
-originales `/tmp/echo-curator-{software,smoke,preflight}-r2` cuando haga falta.
-Las copias de consulta bajo `artifacts/` no sustituyen esos gates.
-
-La limpieza de cachés permitió reanudar temporalmente, pero no resolvió la
-asignación de espacio de Btrfs: Seaborn y Flask volvieron a fallar con ENOSPC.
-Quedan aproximadamente 54 GiB libres dentro de bloques ya asignados, solo 1 MiB
-sin asignar y 6,49/7 GiB de metadatos DUP usados. No relanzar la tanda hasta
-verificar que vuelve a ser posible extraer y crear contenedores de forma estable.
-Se solicitó al usuario el primer mantenimiento con privilegios:
-`sudo btrfs balance start -dusage=0 /home`, seguido de
-`sudo btrfs filesystem usage /home`. El primer comando recupera grupos de datos
-vacíos, pero puede resultar insuficiente; revisar la salida antes de continuar.
+El primer balance del usuario, `-dusage=0`, no recuperó grupos. El segundo,
+`sudo btrfs balance start -dusage=50,limit=2 /home`, reubicó dos grupos, dejó
+1 GiB sin asignar y permitió ampliar metadatos de 7 a 7,5 GiB. Se comprobaron
+creación de contenedores y escrituras antes de reanudar. No se necesitaron más
+privilegios ni se borraron archivos personales o imágenes ajenas.
 La [documentación de Btrfs](https://btrfs.readthedocs.io/en/latest/btrfs-balance.html)
-describe ese filtro para casos ENOSPC. Aquí `sudo` requiere contraseña y no se
-ha ejecutado dicho mantenimiento.
+describe los filtros de uso y límite utilizados.
 
-Matplotlib-18869 y Matplotlib-26011 fallaron al extraer archivos de qhull con
-UID/GID 197609:197121, fuera de los 65.536 IDs subordinados disponibles.
-La opción de descarga `--storage-opt overlay.ignore_chown_errors=true` permitió
-extraer 18869; la descarga de 26011 volvió a fallar por ENOSPC. No se cambió la
-configuración global. Esta opción puede cambiar propietarios y **no cuenta como
-validación de los controles**; su alcance está registrado en
-`rootless-unpack-policy.json` de la evidencia privada. Véase la
-[documentación de Podman](https://docs.podman.io/en/latest/markdown/podman.1.html).
+La tarea usa un API Podman rootless propio con
+`--storage-opt overlay.ignore_chown_errors=true`. Resuelve la extracción de
+archivos de qhull cuyos UID/GID exceden el rango subordinado disponible. Ambos
+controles de Matplotlib pasan. Se conserva el digest oficial de imagen, pero
+**se declara la adaptación de propietarios**; no equivale a reproducir los UID
+de rootful. No se modificó la configuración global de Podman. Véase su
+[documentación](https://docs.podman.io/en/latest/markdown/podman.1.html).
 
-Próximo trabajo: resolver almacenamiento, completar y fijar el perfil rootless,
-repetir los controles de las 36 instancias y autenticar el gate completo. Después
-podrá ejecutarse la calibración remota; no se ha autorizado automáticamente una
-campaña completa por estos resultados parciales.
+La adquisición de imágenes es secuencial. El descarte opcional solo elimina
+IDs ausentes antes de adquirirlos; nunca se poda el almacén global. La evaluación
+final puede recuperarlas y vuelve a comprobar el digest fijado. Se conservan
+los perfiles de httpbin loopback de Requests y de presentación de Pytest-7168.
+Los ensayos interrumpidos r1/r2/r3 permanecen como diagnóstico, no como pases.
+
+## Requests-2674: entorno corregible, control negativo no discriminante
+
+Los controles originales de r4 fallan tanto en vacío como en referencia.
+La inspección del BASE público identifica dos incompatibilidades ambientales:
+
+1. Las pruebas de conexión esperan timeout contra `10.255.255.1`, mientras
+   `network=none` devuelve inmediatamente `ENETUNREACH`.
+2. El BASE usa la API histórica `pytest.raises(..., "código")`; la imagen
+   incluye pytest 7.4.4, que ya no la admite. La eliminación está
+   [documentada por pytest](https://docs.pytest.org/en/9.0.x/deprecations.html).
+
+Un diagnóstico separado incorpora un dispositivo `dummy` y una ruta `/32`
+solo dentro del namespace del contenedor. El destino descarta paquetes y produce
+un timeout real sin internet; no cambia la red del host ni concede capacidades
+administrativas al código probado. También usa pytest 4.6.11 y dependencias
+fijadas en un suplemento de solo lectura, su entrypoint compatible y
+`--assert=plain`. Las aserciones siguen ejecutándose y no se modifican tests.
+La suite pública BASE obtiene **160 pasadas y 1 XPASS**. El suplemento es
+experimental; no se incorporó silenciosamente al curador congelado.
+
+La reparación ambiental no permite validar la instancia:
+
+| Configuración | Control | F2P | P2P | `raw_resolved` | Control estricto |
+|---|---|---|---|---|---|
+| Imagen/perfil de r4 | Vacío | 12/12 pasan | 140/142 pasan | false | Inválido |
+| Imagen/perfil de r4 | Referencia | 12/12 pasan | 140/142 pasan | false | Inválido |
+| Diagnóstico corregido | Vacío | 12/12 pasan | 142/142 pasan | true | Inválido |
+| Diagnóstico corregido | Referencia | 12/12 pasan | 142/142 pasan | true | Válido solo el positivo |
+
+Con el entorno corregido ambos controles también presentan una prueba fallida
+fuera de las listas F2P/P2P oficiales. El resumen exporta únicamente cantidades,
+no nombres/contenido de pruebas reservadas ni el parche de referencia.
+
+**Esta instancia no discrimina vacío/referencia bajo los entornos comprobados.**
+Ni contar únicamente el positivo, ni cambiar las listas del oráculo, ni retirar
+la instancia sin revisar el diseño serviría para acreditar el 36/36 solicitado.
+El siguiente paso requiere investigar la procedencia de esas listas o preparar
+una revisión explícita del registro con una regla de sustitución previa a
+cualquier LLM, conservando estos resultados. No se ha aplicado una sustitución.
+
+## Evidencia y verificación
+
+- Preflight público: **36/36**, gate autenticado y fuentes coincidentes.
+- Software: **419 pruebas pasadas**, dos integraciones omitidas explícitamente
+  en esa suite y ejecutadas después aparte con pase **2/2**. El código de esas
+  pruebas y del ejecutor no cambió durante r4.
+- Utilidad administrativa de recuperación: **4 pruebas pasadas**, incluyendo
+  rechazo de manipulación, deriva de fuentes y conservación de fallos evaluados.
+- Smoke simulado: gate válido con regresión, rollback y replay; no resuelve
+  científicamente el issue de SymPy.
+- Curador: **35/36 válidos**, tras 36 intentos originales y una repetición de
+  infraestructura. Los diagnósticos ambientales de Requests son experimentos
+  separados y no se incluyen como pases del gate.
+- Auditoría final: autenticación y hashes de todos los logs retenidos válidos;
+  fuentes del núcleo sin cambios. `custody_valid: true`,
+  `official_gate_valid: false`.
+- Protección de cuota: una invocación de `calibrate-remote` con proveedor
+  deshabilitado se rechazó con `official-controls has not passed`, antes de
+  crear el directorio de calibración o contactar con un modelo.
+
+`retry_curator_infrastructure.py` comprueba fuentes, dataset, harness, imagen y
+logs antes de repetir exclusivamente errores de infraestructura. Firma el nuevo
+intento y el agregado, enlazando el recibo original. Un fallo evaluado permanece
+sin cambios y mantiene el agregado inválido. La utilidad y sus pruebas tienen
+hashes propios, separados del manifiesto del ejecutor congelado.
+
+Evidencia privada: `ECHO-5.1/artifacts/repoworld-curator-all-20261014/`:
+`controls-r4/`, `controls-r4-recovered/`, `requests-diagnostic-receipt/`,
+`requests-environment-diagnostic.json`, `retry-tool-tests/` y
+`final-evidence-audit.json`. No publicar autoridades HMAC, certificados privados,
+pruebas reservadas ni parches oficiales. El
+[manifiesto público](swebench/REPOWORLD-CURATOR-PROGRESS-20261014.json)
+solo contiene identidades, hashes y resultados agregados.
+
+Los gates locales `/tmp/echo-curator-{software,smoke,preflight}-r2` tienen archivos
+completos de recuperación y hashes comprobados. Restaurarlos únicamente en esas
+rutas originales si desaparecen: sus autoridades no son trasladables. Las copias
+de consulta bajo `artifacts/` no sustituyen a los gates autenticados.
+
+## Checklist de esta entrega
+
+- [x] Recuperar el progreso y completar las 36 instancias del registro.
+- [x] Resolver almacenamiento, extracción rootless y contenedor residual.
+- [x] Mantener preflight 36/36, software, integraciones y smoke válidos.
+- [x] Conservar fallos originales, repetir solo infraestructura y auditar hashes.
+- [x] Preparar alias, comando, relay y parada de calibración remota.
+- [x] Comprobar que el gate inválido impide iniciar inferencia.
+- [x] Mantener 0 GPU / 0 LLM; entrega local sin push.
+- [ ] Gate `official-controls` válido 36/36: bloqueado por Requests-2674.
+- [ ] Calibración remota y lock científico, después de resolver ese bloqueo.
+- [ ] Campaña, evaluación independiente y cierre científico de ECHO-5.1.
+
+[Procedimiento de Gate 3](REPOWORLD-REMOTE-CALIBRATION.md), preparado y **no
+habilitado**. Diez minutos es un objetivo de inferencia, no una garantía de cuota
+total: descargar y cargar el modelo también consume tiempo de GPU.

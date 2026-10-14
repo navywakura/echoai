@@ -103,7 +103,7 @@ roles, contabilidad persistente, relay con IDs duraderos, curador y CLI:
 | Verde local acotado | Parche → regresión → retención/rollback → auditoría | Smoke sobre tests reales de SymPy con proveedor simulado; recuperación sin nueva generación. No resuelve el issue. |
 | Verde local acotado | S/I2/F/E/E_no_guard, contabilidad y recuperación | Pruebas de ramas, reservas, respuesta tardía, cambio de lock, entorno ajeno, agotamientos y firma de entregas. Calibración real pendiente. |
 | Verde local acotado | Gate 1: entorno por instancia | 36/36 instancias, 12/12 repos, dos ejecuciones públicas coincidentes; dependencias y suplementos BASE fijados. Una omisión Python 2 declarada, no contada como pase. [Evidencia Opción B](REPOWORLD-ENVIRONMENTS-COMPLETE-20261013.md). |
-| Verde en calibración; pendiente campaña completa | Control del evaluador oficial | 4/4 controles vacío/referencia válidos, Requests-2148 mediante httpbin loopback sin red externa. Faltan los controles oficiales del resto de las 36 instancias; el gate de calibración no habilita la campaña. |
+| Parcial: 35/36 | Control del evaluador oficial | Las 36 instancias ya se comprobaron. Seaborn recuperado tras fallo de infraestructura; Requests-2674 no discrimina vacío/referencia en el diagnóstico corregido. Gate completo inválido; no habilita GPU. |
 | Pendiente | Gate 3 y lock científico | Sin calibración nueva de 32B, consulta nueva de cuota ni `SWE-RUN-LOCK` habilitado. |
 | Pendiente | Campaña SWE, evaluación común y cuatro gráficas medidas | Conservar 24 issues por brazo; principal 96, más controles y memoria: 150 celdas registradas. |
 | Abierto | H1/H2/H3/H4/T20 y cierre general de ECHO-5.1 | Infraestructura verificada no demuestra ventaja científica; faltan resultados y confirmación independiente. |
@@ -131,8 +131,12 @@ La infraestructura local en verde no cierra científicamente ECHO-5.1.
 - [x] 419 pruebas de software pasadas; dos integraciones reales pasadas aparte.
 - [x] Alias `calibrate-remote` y procedimiento de relay/parada preparados.
 - [x] Evidencia archivada, hashes y autenticación comprobados tras la interrupción.
-- [ ] `official-controls` 36/36: 7 válidos de 11 intentados en la última tanda;
-  bloqueos de almacenamiento Btrfs y extracción rootless de Matplotlib.
+- [x] Las 36 instancias comprobadas; almacenamiento, Matplotlib y Seaborn recuperados.
+- [x] Auditoría de firmas y logs válida; fuentes del ejecutor sin cambios.
+- [x] Cuatro pruebas adicionales de recuperación administrativa pasadas.
+- [x] Calibración remota rechazada antes del LLM por el gate inválido.
+- [ ] `official-controls` 36/36: **35 válidos**, Requests-2674 sigue bloqueado;
+  sus F2P pasan también con parche vacío. No se han cambiado el registro ni el oráculo.
 - [ ] Gate 3: no ejecutar hasta resolver y verificar los controles completos.
 
 [Informe y recuperación](REPOWORLD-CURATOR-ALL-20261014.md). Cero nuevas llamadas
