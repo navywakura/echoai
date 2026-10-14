@@ -7,6 +7,7 @@ import re
 import subprocess
 import sys
 import time
+from contextlib import contextmanager
 
 NAMESPACE='swebench'
 SERVICE_ROOT='/opt/repoworld-httpbin'
@@ -52,6 +53,8 @@ def httpbin_profile(image):
     raw=Path(path).read_bytes()
     if hashlib.sha256(raw).hexdigest()!=digest:raise ValueError('service manifest changed')
     profile=json.loads(raw)
+    if profile.get('schema')=='repoworld.curator-httpbin-set.v1':
+        profile=profile.get('profiles',{}).get(image,{})
     if profile.get('schema')!='repoworld.curator-httpbin.v1' or profile.get('image')!=image:
         raise ValueError('service image/profile mismatch')
     bundle=Path(profile['bundle'])
@@ -64,7 +67,8 @@ def httpbin_profile(image):
         elif not file.is_dir():raise ValueError('service special files forbidden')
     if actual!=files or not {'ca.pem','key.pem','trust.pem','lib/httpbin/core.py'}<=set(files):
         raise ValueError('service bundle bytes changed or incomplete')
-    if profile.get('trust_store')!=SERVICE_TRUST or profile.get('off_host_redirect_alias')!='www.google.co.uk':
+    expected_trust=('/testbed/requests/cacert.pem' if image=='swebench/sweb.eval.x86_64.psf_1776_requests-2674:latest' else SERVICE_TRUST)
+    if profile.get('trust_store')!=expected_trust or profile.get('off_host_redirect_alias')!='www.google.co.uk':
         raise ValueError('service trust/redirect profile mismatch')
     return {**profile,'manifest_sha256':digest}
 
@@ -138,7 +142,7 @@ def restrict_containers():
             kwargs.setdefault('volumes',{})[profile['bundle']]={'bind':SERVICE_ROOT,'mode':'ro,Z'}
             # Public BASE's direct Session.send bypasses REQUESTS_CA_BUNDLE.
             # Add our CA to certifi's original roots, outside candidate sources.
-            kwargs['volumes'][str(Path(profile['bundle'])/'trust.pem')]={'bind':SERVICE_TRUST,'mode':'ro,Z'}
+            kwargs['volumes'][str(Path(profile['bundle'])/'trust.pem')]={'bind':profile['trust_store'],'mode':'ro,Z'}
             kwargs.setdefault('extra_hosts',{})['httpbin.org']='127.0.0.1'
             # Public BASE uses this second authority solely as a redirect target.
             # Real upstream httpbin serves it; Requests still handles the redirect
@@ -164,6 +168,23 @@ def restrict_containers():
     ContainerCollection._repoworld_offline=True
 
 
+@contextmanager
+def control_image(client, key, *, allow_pull=False, evict=False):
+    """Bound disk growth; never remove an image that predated this acquisition."""
+    import docker, shutil
+    if type(evict) is not bool:raise ValueError('evict_pulled_images must be boolean')
+    pulled=False
+    try:image=client.images.get(key)
+    except docker.errors.ImageNotFound:
+        if not allow_pull:raise RuntimeError('official_image_missing')
+        if shutil.disk_usage('.').free<12*1024**3:raise RuntimeError('insufficient_free_disk_for_image')
+        existing_ids={value.id for value in client.images.list(all=True)}
+        image=client.images.pull(key);pulled=image.id not in existing_ids
+    try:yield image
+    finally:
+        if pulled and evict:client.images.remove(image.id,force=False)
+
+
 def controls(request_path):
     """Curator-only empty/gold environment controls BEFORE any actor is run."""
     request=json.loads(Path(request_path).read_bytes());sys.path.insert(0,request['harness'])
@@ -186,55 +207,52 @@ def controls(request_path):
         row=rows[identifier];entry=dict(instance_id=identifier,base_commit=row['base_commit'],valid=False)
         try:
             spec=make_test_spec(row,namespace=NAMESPACE)
-            try:image=client.images.get(spec.instance_image_key)
-            except docker.errors.ImageNotFound:
-                if not request.get('allow_pull'):raise RuntimeError('official_image_missing')
-                if shutil.disk_usage('.').free<12*1024**3:raise RuntimeError('insufficient_free_disk_for_image')
-                image=client.images.pull(spec.instance_image_key)
-            entry['official_image_digest']=image.id
-            entry['official_eval_script_sha256']=hashlib.sha256(spec.eval_script.encode()).hexdigest()
-            fields={k:row[k] for k in ('test_patch','FAIL_TO_PASS','PASS_TO_PASS')}
-            entry['sealed_tests_sha256']=hashlib.sha256(json.dumps(fields,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()
-            if not spec.FAIL_TO_PASS:raise RuntimeError('zero_FAIL_TO_PASS')
-            observed={}
-            for kind in ('empty','gold'):
-                folder=Path(identifier)/kind;folder.mkdir(parents=True,exist_ok=True)
-                logger=setup_logger(identifier+'-'+kind,folder/'control.log');container=None
-                try:
-                    run_id='echo-controls-'+kind+'-'+hashlib.sha256((identifier+image.id).encode()).hexdigest()[:16]
-                    container=build_container(spec,client,run_id,logger,False,False);container.start()
-                    profile=getattr(container,'_repoworld_httpbin',None)
-                    if profile:entry['service_manifest_sha256']=profile['manifest_sha256']
-                    reporting=getattr(container,'_repoworld_reporting',None)
-                    if reporting:entry['reporting_profile_sha256']=reporting['sha256']
-                    patch=row['patch'] if kind=='gold' else ''
-                    if patch:
-                        file=folder/'model.patch';file.write_text(patch);copy_to_container(container,file,PurePosixPath('/tmp/model.patch'))
-                        applied=container.exec_run(['git','apply','/tmp/model.patch'],workdir='/testbed',user='root')
-                        if applied.exit_code:raise RuntimeError('gold_patch_did_not_apply')
-                    file=folder/'eval.sh';file.write_text(spec.eval_script);copy_to_container(container,file,PurePosixPath('/eval.sh'))
-                    text,timed_out,elapsed=exec_run_with_timeout(container,'/bin/bash /eval.sh',600)
-                    if timed_out:raise RuntimeError('control_timeout')
-                    if len(text.encode())>4*1024**2:raise RuntimeError('control_output_limit')
-                    log=folder/'test_output.txt';log.write_text(text)
-                    prediction=dict(instance_id=identifier,model_name_or_path='environment-control',model_patch=patch)
-                    report=get_eval_report(spec,prediction,str(log),include_tests_status=True)[identifier]
-                    states,found=get_logs_eval(spec,str(log))
-                    present=all(t in states and states[t] not in ('SKIPPED',) for t in spec.FAIL_TO_PASS+spec.PASS_TO_PASS)
-                    p2p=all(states.get(t) in ('PASSED','XFAIL') for t in spec.PASS_TO_PASS)
-                    f2p=all(states.get(t) in ('PASSED','XFAIL') for t in spec.FAIL_TO_PASS)
-                    observed[kind]=dict(raw_resolved=report['resolved'],valid=found and present and p2p and (f2p if kind=='gold' else not f2p),
-                        log_sha256=hashlib.sha256(log.read_bytes()).hexdigest(),elapsed_seconds=elapsed)
-                    (folder/'report.json').write_text(json.dumps(report))
-                finally:
-                    if container is not None:cleanup_container(client,container,logger)
-                    close_logger(logger)
-            if client.images.get(spec.instance_image_key).id!=image.id:raise RuntimeError('official_image_changed')
-            entry.update(empty_patch_resolved=observed['empty']['raw_resolved'],gold_patch_resolved=observed['gold']['raw_resolved'],
-                valid=all(v['valid'] for v in observed.values()) and not observed['empty']['raw_resolved'] and observed['gold']['raw_resolved'],controls=observed)
+            with control_image(client,spec.instance_image_key,allow_pull=request.get('allow_pull',False),evict=request.get('evict_pulled_images',False)) as image:
+                entry['official_image_digest']=image.id
+                entry['official_eval_script_sha256']=hashlib.sha256(spec.eval_script.encode()).hexdigest()
+                fields={k:row[k] for k in ('test_patch','FAIL_TO_PASS','PASS_TO_PASS')}
+                entry['sealed_tests_sha256']=hashlib.sha256(json.dumps(fields,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()
+                if not spec.FAIL_TO_PASS:raise RuntimeError('zero_FAIL_TO_PASS')
+                observed={}
+                for kind in ('empty','gold'):
+                    folder=Path(identifier)/kind;folder.mkdir(parents=True,exist_ok=True)
+                    logger=setup_logger(identifier+'-'+kind,folder/'control.log');container=None
+                    try:
+                        run_id='echo-controls-'+kind+'-'+hashlib.sha256((identifier+image.id).encode()).hexdigest()[:16]
+                        container=build_container(spec,client,run_id,logger,False,False);container.start()
+                        profile=getattr(container,'_repoworld_httpbin',None)
+                        if profile:entry['service_manifest_sha256']=profile['manifest_sha256']
+                        reporting=getattr(container,'_repoworld_reporting',None)
+                        if reporting:entry['reporting_profile_sha256']=reporting['sha256']
+                        patch=row['patch'] if kind=='gold' else ''
+                        if patch:
+                            file=folder/'model.patch';file.write_text(patch);copy_to_container(container,file,PurePosixPath('/tmp/model.patch'))
+                            applied=container.exec_run(['git','apply','/tmp/model.patch'],workdir='/testbed',user='root')
+                            if applied.exit_code:raise RuntimeError('gold_patch_did_not_apply')
+                        file=folder/'eval.sh';file.write_text(spec.eval_script);copy_to_container(container,file,PurePosixPath('/eval.sh'))
+                        text,timed_out,elapsed=exec_run_with_timeout(container,'/bin/bash /eval.sh',600)
+                        if timed_out:raise RuntimeError('control_timeout')
+                        if len(text.encode())>4*1024**2:raise RuntimeError('control_output_limit')
+                        log=folder/'test_output.txt';log.write_text(text)
+                        prediction=dict(instance_id=identifier,model_name_or_path='environment-control',model_patch=patch)
+                        report=get_eval_report(spec,prediction,str(log),include_tests_status=True)[identifier]
+                        states,found=get_logs_eval(spec,str(log))
+                        present=all(t in states and states[t] not in ('SKIPPED',) for t in spec.FAIL_TO_PASS+spec.PASS_TO_PASS)
+                        p2p=all(states.get(t) in ('PASSED','XFAIL') for t in spec.PASS_TO_PASS)
+                        f2p=all(states.get(t) in ('PASSED','XFAIL') for t in spec.FAIL_TO_PASS)
+                        observed[kind]=dict(raw_resolved=report['resolved'],valid=found and present and p2p and (f2p if kind=='gold' else not f2p),
+                            log_sha256=hashlib.sha256(log.read_bytes()).hexdigest(),elapsed_seconds=elapsed)
+                        (folder/'report.json').write_text(json.dumps(report))
+                    finally:
+                        if container is not None:cleanup_container(client,container,logger)
+                        close_logger(logger)
+                if client.images.get(spec.instance_image_key).id!=image.id:raise RuntimeError('official_image_changed')
+                entry.update(empty_patch_resolved=observed['empty']['raw_resolved'],gold_patch_resolved=observed['gold']['raw_resolved'],
+                    valid=all(v['valid'] for v in observed.values()) and not observed['empty']['raw_resolved'] and observed['gold']['raw_resolved'],controls=observed)
         except Exception as exc:
             # Export only an error class/code; never a traceback containing sealed
             # tests, expected answers or reference implementation into online use.
+            entry['valid']=False
             entry['error']=str(exc) if isinstance(exc,RuntimeError) else type(exc).__name__
         result.append(entry);Path('controls.json').write_text(json.dumps(result,indent=2)+'\n')
     return result
@@ -258,6 +276,7 @@ def collect_result(spec,folder,patch,parser):
 
 
 def main(request_path):
+    deadline=time.monotonic()+6900  # Aggregate bound below the supervisor's 7200 s.
     request=json.loads(Path(request_path).read_bytes())
     path=Path(request['dataset'])
     with path.open('rb') as f:
@@ -279,9 +298,7 @@ def main(request_path):
         row=selected[lock['instance_id']];spec=make_test_spec(row,namespace=NAMESPACE);specs[lock['instance_id']]=spec
         validate_service_lock(httpbin_profile(spec.instance_image_key),lock)
         validate_reporting_lock(pytest_reporting_profile(spec.instance_image_key),lock)
-        image=client.images.get(spec.instance_image_key)
-        if image.id!=lock['official_image_digest']:raise ValueError('official image digest mismatch')
-        images[lock['instance_id']]=image.id
+        images[lock['instance_id']]=lock['official_image_digest']
         if hashlib.sha256(spec.eval_script.encode()).hexdigest()!=lock['official_eval_script_sha256']:raise ValueError('eval script mismatch')
         sealed={k:row[k] for k in ('test_patch','FAIL_TO_PASS','PASS_TO_PASS')}
         raw=json.dumps(sealed,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
@@ -294,14 +311,20 @@ def main(request_path):
     code=('import sys,runpy;sys.path.insert(0,sys.argv.pop(1));'
           'helper=runpy.run_path(sys.argv.pop(1));helper["restrict_containers"]();'
           'runpy.run_module("swebench.harness.run_evaluation",run_name="__main__")')
-    process=subprocess.run([sys.executable,'-I','-c',code,request['harness'],str(Path(__file__).resolve()),*args],check=False,timeout=7000)
     predictions={r['instance_id']:r['model_patch'] for r in (json.loads(line) for line in Path(request['predictions']).read_text().splitlines())}
     result={}
     for identifier,spec in specs.items():
-        if client.images.get(spec.instance_image_key).id!=images[identifier]:raise ValueError('image changed during evaluation')
-        folder=Path('logs/run_evaluation')/request['run_id']/request['run_id']/identifier
-        result[identifier]=collect_result(spec,folder,predictions[identifier],get_logs_eval)
-        result[identifier]['harness_exit_code']=process.returncode
+        with control_image(client,spec.instance_image_key,
+                allow_pull=request.get('evict_pulled_images',False),evict=request.get('evict_pulled_images',False)) as image:
+            if image.id!=images[identifier]:raise ValueError('official image digest mismatch')
+            remaining=deadline-time.monotonic()
+            if remaining<=0:raise RuntimeError('curator_aggregate_deadline')
+            process=subprocess.run([sys.executable,'-I','-c',code,request['harness'],str(Path(__file__).resolve()),*args,
+                '--instance_ids',identifier],check=False,timeout=remaining)
+            if client.images.get(spec.instance_image_key).id!=images[identifier]:raise ValueError('image changed during evaluation')
+            folder=Path('logs/run_evaluation')/request['run_id']/request['run_id']/identifier
+            result[identifier]=collect_result(spec,folder,predictions[identifier],get_logs_eval)
+            result[identifier]['harness_exit_code']=process.returncode
     Path('verdicts.json').write_text(json.dumps(result,indent=2)+'\n')
 
 

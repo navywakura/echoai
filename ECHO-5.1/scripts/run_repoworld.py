@@ -20,7 +20,7 @@ def main():
     for name in ('dataset','runtime','sources','output'): p.add_argument('--'+name,required=True,type=Path)
     p.add_argument('--sample',type=Path,default=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json')
     for name in ('preflight','smoke','calibrate'):
-        q=sub.add_parser(name)
+        q=sub.add_parser(name,aliases=["calibrate-remote"] if name=="calibrate" else [])
         q.add_argument('--registry',type=Path,required=True);q.add_argument('--output',type=Path,required=True)
         q.add_argument('--contract',type=Path,default=ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json')
         q.add_argument('--sample',type=Path,default=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json')
@@ -46,6 +46,7 @@ def main():
     q=sub.add_parser('verify');q.add_argument('--output',type=Path,required=True)
     q=sub.add_parser('status');q.add_argument('directory',type=Path)
     args=parser.parse_args()
+    if args.command=="calibrate-remote":args.command="calibrate"
     if args.command=='test':
         import unittest
         suite=unittest.defaultTestLoader.discover(str(ROOT/'tests'),pattern='test_repoworld_*.py',top_level_dir=str(ROOT))

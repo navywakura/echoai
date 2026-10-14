@@ -303,7 +303,7 @@ def curator_preflight(cap,contract,sample_path,output,*,allow_pull=False,scope='
     if commit!=HARNESS_COMMIT or dirty:raise ValueError('clean pinned official harness required')
     kind,selected=curator_scope(json.loads(Path(sample_path).read_bytes()),scope)
     request=dict(harness=str(cap.harness.resolve()),dataset=str(cap.dataset.resolve()),dataset_sha256=contract['dataset']['parquet_sha256'],
-        instances=[{k:r[k] for k in ('instance_id','base_commit')} for r in selected],allow_pull=allow_pull)
+        instances=[{k:r[k] for k in ('instance_id','base_commit')} for r in selected],allow_pull=allow_pull,evict_pulled_images=cap.evict_pulled_images)
     _atomic_write(output/'request.json',canonical(request))
     env=dict(os.environ)
     if cap.docker_host:env['DOCKER_HOST']=cap.docker_host

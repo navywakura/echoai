@@ -123,3 +123,17 @@ No hay puntuación SWE-bench ni gasto nuevo de GPU. Rama local, sin push.
 - [ ] Campaña científica, evaluación separada y confirmación de hipótesis.
 
 La infraestructura local en verde no cierra científicamente ECHO-5.1.
+
+
+### Curador completo · punto de recuperación del 14 de octubre de 2026
+
+- [x] Preflight repetido 36/36 y smoke autenticado bajo las fuentes actuales.
+- [x] 419 pruebas de software pasadas; dos integraciones reales pasadas aparte.
+- [x] Alias `calibrate-remote` y procedimiento de relay/parada preparados.
+- [x] Evidencia archivada, hashes y autenticación comprobados tras la interrupción.
+- [ ] `official-controls` 36/36: 7 válidos de 11 intentados en la última tanda;
+  bloqueos de almacenamiento Btrfs y extracción rootless de Matplotlib.
+- [ ] Gate 3: no ejecutar hasta resolver y verificar los controles completos.
+
+[Informe y recuperación](REPOWORLD-CURATOR-ALL-20261014.md). Cero nuevas llamadas
+LLM/GPU. No hay puntuación SWE-bench ni cierre científico de ECHO-5.1.

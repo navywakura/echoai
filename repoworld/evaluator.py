@@ -72,6 +72,7 @@ class CuratorCapability:
     dataset_sha256: str
     output: Path
     docker_host: str | None = None
+    evict_pulled_images: bool = False
 
 
 def curator_command(python,*arguments):
@@ -115,7 +116,7 @@ def evaluate_sealed(directory,schedule,*,curator_capability,run_lock):
             model_patch=(directory/'patches'/(r['cell_id']+'.diff')).read_text()) for r in rows]
         _atomic_write(destination/'predictions.jsonl',b''.join(canonical(r)+b'\n' for r in predictions))
         request=dict(harness=str(cap.harness.resolve()),dataset=str(cap.dataset.resolve()),dataset_sha256=cap.dataset_sha256,
-                     predictions=str((destination/'predictions.jsonl').resolve()),run_id=run_id,
+                     predictions=str((destination/'predictions.jsonl').resolve()),run_id=run_id,evict_pulled_images=cap.evict_pulled_images,
                      instances=[r for r in run_lock['instances'] if r['instance_id'] in {v['instance_id'] for v in rows}])
         _atomic_write(destination/'request.json',canonical(request))
         with (destination/'curator.log').open('ab') as log:

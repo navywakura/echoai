@@ -70,6 +70,19 @@ class ServiceManifestTests(unittest.TestCase):
                 'REPOWORLD_CURATOR_SERVICES_SHA256': digest,
             }):
                 self.assertIsNotNone(curator.httpbin_profile(IMAGE))
+                second='swebench/sweb.eval.x86_64.psf_1776_requests-2674:latest'
+                first=json.loads(manifest.read_bytes())
+                other={**first,'image':second,'trust_store':'/testbed/requests/cacert.pem'}
+                profiles=dict(schema='repoworld.curator-httpbin-set.v1',profiles={IMAGE:first,second:other})
+                manifest.write_text(json.dumps(profiles))
+                os.environ['REPOWORLD_CURATOR_SERVICES_SHA256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
+                self.assertEqual(curator.httpbin_profile(second)['trust_store'],'/testbed/requests/cacert.pem')
+                self.assertEqual(curator.httpbin_profile(IMAGE)['trust_store'],curator.SERVICE_TRUST)
+                other['trust_store']='/testbed/requests/api.py'
+                manifest.write_text(json.dumps(profiles))
+                os.environ['REPOWORLD_CURATOR_SERVICES_SHA256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
+                with self.assertRaisesRegex(ValueError,'trust'):
+                    curator.httpbin_profile(second)
                 (bundle / 'dependency.py').write_text('changed\n')
                 with self.assertRaisesRegex(ValueError, 'service'):
                     curator.httpbin_profile(IMAGE)

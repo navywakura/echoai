@@ -1,0 +1,100 @@
+{
+  "schema": "repoworld.curator-progress.v1",
+  "complete": false,
+  "gpu_hours": 0,
+  "llm_calls": 0,
+  "gates": {
+    "software": {
+      "valid": true,
+      "source_unchanged": true
+    },
+    "smoke": {
+      "valid": true,
+      "source_unchanged": true
+    },
+    "preflight": {
+      "valid": true,
+      "source_unchanged": true
+    }
+  },
+  "official_attempted": 11,
+  "official_valid": 7,
+  "official_total": 36,
+  "official_rows": [
+    {
+      "instance_id": "astropy__astropy-14365",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:186d28b0d249e6d87d9d65aaada7688fc0e2cf4f8d70dfef591dfdfaaa283492"
+    },
+    {
+      "instance_id": "django__django-11179",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:584cf75b0e885e804ddc7f386b02d5b10e4a5eac4b1ac568964ebd13a56cf65d"
+    },
+    {
+      "instance_id": "django__django-11797",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:1efa1ccc2a92de8124e10073bb079a6a6a4679f453802fc40e8ad042254f027b"
+    },
+    {
+      "instance_id": "django__django-12747",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:225538590170e81cf4736e3ed7297d15e368e4e88b1820a2a98cac3f4e6b0549"
+    },
+    {
+      "instance_id": "django__django-13925",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:c08d4a51e5a5c8aee7ce9b06c8f01ff0c67da737d328525c66232bda661eff9f"
+    },
+    {
+      "instance_id": "django__django-14016",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:a463e2c78e49bf8e7ed85ac45ce539da1fdee91f482bc53b8fbc59b31c974320"
+    },
+    {
+      "instance_id": "django__django-15400",
+      "valid": true,
+      "error": null,
+      "image_digest": "sha256:8a748e59ff83837f698fd1476e14b179d8ab0e6898aa624f74fc1b33512cc969"
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-18869",
+      "valid": false,
+      "error": "ImageNotFound",
+      "image_digest": null
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-26011",
+      "valid": false,
+      "error": "ImageNotFound",
+      "image_digest": null
+    },
+    {
+      "instance_id": "mwaskom__seaborn-3407",
+      "valid": false,
+      "error": "APIError",
+      "image_digest": "sha256:3158ed1b4a82070fe39efe3a776d59b7688bdedb09b9ac477b68d2ec4798bb82"
+    },
+    {
+      "instance_id": "pallets__flask-4992",
+      "valid": false,
+      "error": "BuildImageError",
+      "image_digest": "sha256:b6943616922659ca12ba82ca60561483c40f00d80a3a11045d2d0b6b000fb253"
+    }
+  ],
+  "archives_sha256": {
+    "software-full-evidence.tar.gz": "e76ac17e4954d22140a315c2810a2b61714c9cf41a2568cf8679bea2a646745b",
+    "smoke-full-evidence.tar.gz": "dad24c7cb7c15dc603ba1aa0a03650587905f08b0fb4f24a7b5bfd3c48101c47",
+    "preflight-full-evidence.tar.gz": "13350a15263dbbdf5bedfc37e26b53de93acbb7a170a37d895790a43c35b1d41"
+  },
+  "blockers": [
+    "Btrfs ENOSPC in container extraction and creation",
+    "Matplotlib image UID/GID outside rootless subordinate range; extraction workaround not yet validated by controls"
+  ]
+}
