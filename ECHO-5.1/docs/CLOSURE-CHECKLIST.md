@@ -288,3 +288,14 @@ Kaggle COMPLETE, relay/túnel apagados; cuota restante 21,94 h. Sin campaña ni 
 - [ ] Renovación de compuertas locales y nueva calibración reservada con el 32B.
 
 [Informe de implementación y evidencia](REPOWORLD-LOCATOR-HANDOFF-20261015.md).
+
+## Calibración v4 del traspaso (2026-10-15)
+
+[Informe y checklist v4](REPOWORLD-V4-CALIBRATION-20261015.md): código
+`ec57aa1`, compuertas renovadas; verify real **443 pasadas, 3 omitidas**
+(corrige el recuento previo de 445). Smoke válido; preflight y controles
+36/36 reatestados. Calibración 32B/2 T4: 8 llamadas, 7.027 tokens, 120 recibos
+válidos, cero parches. Repite una búsqueda con barra final y el validador
+la rechaza; abandona sin código observado conservando 17.973 tokens.
+El abandono funciona, pero traspaso y reparación reales siguen sin probarse.
+Kaggle COMPLETE y servicios apagados; 21,80 h restantes. Sin campaña ni push.

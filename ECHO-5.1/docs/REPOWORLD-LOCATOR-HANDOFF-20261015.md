@@ -57,3 +57,13 @@ La calibración remota V2 sobre `sympy__sympy-19007` (2× Tesla T4, Qwen2.5-Code
 1. Renovar las compuertas locales (`software`, `smoke`, enlace de `official-controls` y `preflight`) bajo el nuevo manifiesto de fuentes.
 2. Comprobar la frontera del proveedor con `operate.py check` offline.
 3. Iniciar el entorno en Kaggle (2× T4) y ejecutar la calibración v4 reservada sobre `sympy__sympy-19007` para observar la generación real de un parche por el modelo 32B.
+
+## Verificación posterior y calibración v4
+
+La [ejecución v4](REPOWORLD-V4-CALIBRATION-20261015.md) renueva la evidencia
+y corrige el recuento: 176 tests RepoWorld ejecutados (173 pasados, 3 omitidos),
+257 PCWorld y 13 de diseño; total 443 pasados, 3 omitidos. El umbral de
+8.000 tokens se evalúa entre llamadas y no garantiza una reserva exacta
+de 17.000. La calibración real verificó abandono seguro sin locus, pero no
+alcanzó el editor: ocho búsquedas rechazadas por una barra final en la ruta.
+Los resultados y pendientes completos están en el informe enlazado.
