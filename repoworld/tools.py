@@ -57,23 +57,28 @@ def _path(snapshot,path):
     return snapshot.root if path=='.' else snapshot.root/path
 
 
-def _fits_reply(session,reply):
+FILE_VIEW_SOURCE_BYTES=2500
+FILE_VIEW_OUTPUT_UNITS=6000
+
+
+def _fits_reply(session,reply,*,output_limit=1000):
     # Count JSON escaping, receipt and cursor overhead before committing a page.
-    rendered=json.dumps(dict(reply,receipt_id='0'*64,output_tokens=1000),ensure_ascii=False)
+    rendered=json.dumps(dict(reply,receipt_id='0'*64,output_tokens=output_limit),ensure_ascii=False)
     counter=getattr(session,'token_counter',lambda s:len(s.encode('utf-8')))
     count=counter(rendered)
     if type(count) is not int or count<0: raise ValueError('invalid tokenizer count')
     # Leave room for tokenizer differences between the placeholder digest/count
     # and the real hexadecimal receipt. Byte accounting is already exact.
-    return len(rendered.encode())<=8192 and count<=900
+    return len(rendered.encode())<=8192 and count<=output_limit-100
 
 
 def _view(session,request):
     snap=session.snapshot(request['snapshot_id']);path=_path(snap,request['path'])
     if snap.manifest['entries'][request['path']]['type']!='file': raise ValueError('file required')
     end=request['start_line']+request['line_count']-1
-    # Cursor carries byte offset inside long UTF-8 lines, not just a line number.
-    position=_position(session,request,None);rows=[];capacity=380
+    # Cursors only point at complete-line boundaries. Never return a fragment
+    # as though it were an entire source line.
+    position=_position(session,request,None);rows=[];used=0
     with path.open('rb') as f:
         if position is None:
             number=1
@@ -83,40 +88,28 @@ def _view(session,request):
                 if chunk.endswith(b'\n'): number+=1
         else:
             offset,number=position;f.seek(offset)
-        while number<=end and capacity>8:
-            beginning=f.tell()
-            raw=f.readline(min(capacity,8192))
+            if offset:
+                f.seek(offset-1)
+                if f.read(1)!=b'\n': raise ValueError('cursor is not a complete-line boundary')
+                f.seek(offset)
+        while number<=end:
+            beginning=f.tell();raw=f.readline(FILE_VIEW_SOURCE_BYTES+1)
             if not raw: break
             if b'\0' in raw: raise ValueError('binary file')
-            # Trim only an incomplete trailing UTF-8 code point; invalid interior
-            # bytes are rejected. Position always points to a code point boundary.
-            try: text=raw.decode('utf-8');used=len(raw)
-            except UnicodeDecodeError as error:
-                if error.reason!='unexpected end of data' or error.start==0: raise ValueError('invalid UTF-8 file') from error
-                used=error.start;text=raw[:used].decode('utf-8');f.seek(used-len(raw),1)
-            def preview(length):
-                prefix=text[:length];offset=beginning+len(prefix.encode('utf-8'))
-                following=number+int(prefix.endswith('\n'))
-                cursor=(_cursor(session,request,[offset,following])
-                        if following<=end and offset<path.stat().st_size else None)
-                return dict(lines=rows+[dict(number=number,text=prefix)],cursor=cursor)
-            if not _fits_reply(session,preview(len(text))):
-                low,high=0,len(text)
-                while low<high:
-                    mid=(low+high+1)//2
-                    if _fits_reply(session,preview(mid)): low=mid
-                    else: high=mid-1
-                if not low:
-                    f.seek(beginning)
-                    if not rows: raise ValueError('metadata exceeds page budget')
-                    break
-                text=text[:low];used=len(text.encode('utf-8'));f.seek(beginning+used)
-                rows.append(dict(number=number,text=text))
-                if text.endswith('\n'): number+=1
+            if len(raw)>FILE_VIEW_SOURCE_BYTES:
+                f.seek(beginning)
+                if rows: break
+                raise ValueError(f'complete line {number} exceeds page budget; request a later start_line explicitly')
+            try: text=raw.decode('utf-8')
+            except UnicodeDecodeError as error: raise ValueError('invalid UTF-8 file') from error
+            following=number+1;offset=f.tell()
+            candidate=dict(lines=rows+[dict(number=number,text=text)],
+                cursor=_cursor(session,request,[offset,following]) if following<=end and offset<path.stat().st_size else None)
+            if used+len(raw)>FILE_VIEW_SOURCE_BYTES or not _fits_reply(session,candidate,output_limit=FILE_VIEW_OUTPUT_UNITS):
+                f.seek(beginning)
+                if not rows: raise ValueError(f'complete line {number} exceeds encoded page budget; request a later start_line explicitly')
                 break
-            rows.append(dict(number=number,text=text))
-            capacity-=used+32
-            if text.endswith('\n'): number+=1
+            rows.append(dict(number=number,text=text));used+=len(raw);number=following
         offset=f.tell();more=number<=end and offset<path.stat().st_size
     return dict(lines=rows,cursor=_cursor(session,request,[offset,number]) if more else None)
 
@@ -169,7 +162,8 @@ def _search(session,request):
 def dispatch_tool(request: dict,*,session):
     # Reservations happen before validation, including failed/forged requests.
     remaining=session.budget.report()['remaining'].get('cpu_us',0)
-    ticket=session.budget.reserve({'tools':1,'output_tokens':1000,'cpu_us':remaining})
+    output_limit=FILE_VIEW_OUTPUT_UNITS if request.get('tool')=='file_view' else 1000
+    ticket=session.budget.reserve({'tools':1,'output_tokens':output_limit,'cpu_us':remaining})
     reply=None;candidate_cpu=0;started=time.process_time_ns()
     child_start=resource.getrusage(resource.RUSAGE_CHILDREN)
     try:
@@ -221,7 +215,7 @@ def dispatch_tool(request: dict,*,session):
             if type(count) is not int or count<0: raise ValueError('invalid tokenizer count')
             if count==reply['output_tokens']: break
             reply['output_tokens']=count
-        if len(rendered.encode())>8192 or count>1000: raise ValueError('tool output budget exceeded')
+        if len(rendered.encode())>8192 or count>output_limit: raise ValueError('tool output budget exceeded')
         return reply
     except Exception as error:
         try: request_hash=hashlib.sha256(canonical(request)).hexdigest()

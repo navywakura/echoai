@@ -215,3 +215,16 @@ Detalle: [usabilidad y alcance](REPOWORLD-USABILITY-20261014.md).
 - [ ] Nuevo sellado/campaña y evaluación oficial: no realizados.
 
 La calibración técnica no cierra ECHO-5.1. [Resultado y diagnóstico](REPOWORLD-REMOTE-V2-RESULTS-20261014.md).
+
+## Corrección de páginas atómicas (posterior a calibración v2)
+
+- [x] Líneas completas, páginas de hasta 2.500 bytes de código y cursores
+  alineados; error explícito para una línea que no cabe.
+- [x] Feedback de código intacto hasta el siguiente prompt; techo de 3.200
+  tokens conservado por validación exacta del proveedor.
+- [x] Archivo real: 220–259 con 40 líneas, 220–260 con 41; `Matrix([` y
+  `_entry()` visibles sin recorte.
+- [x] Verify: 427 pasados, 3 opcionales omitidos, cero fallos; 0 GPU/LLM.
+- [ ] Renovar gates y calibrar el modelo antes de otro sellado o campaña.
+
+[Detalle, contabilidad y evidencia](REPOWORLD-TOOLS-FIX-20261014.md).

@@ -140,7 +140,10 @@
     "template_slack_tokens_min": 128,
     "line_window_max": 100,
     "preflight": "exact llama.cpp tokenizer on full formatted prompt; evict/re-page before reservation; no silent truncation",
-    "ast": "optional indexed navigation; original source remains authority; no semantic pruning"
+    "ast": "optional indexed navigation; original source remains authority; no semantic pruning",
+    "file_view_source_bytes_max": 2500,
+    "file_view_output_accounting_units_max": 6000,
+    "file_view_accounting": "Exception to generic tool observation cap: conservative UTF-8 JSON bytes (or injected tokenizer); exact full prompt must still fit 3200 model tokens before generation; no partial source lines."
   },
   "visibility": {
     "actor_fields": [

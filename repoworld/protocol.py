@@ -201,7 +201,7 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
         reply=once(records,budget,identifier+'-action',act)
         # No transcript of private model reasoning. Only actual tool decisions.
         feedback=json.loads(canonical(reply))
-        if len(canonical(feedback))>1800:
+        if len(canonical(feedback))>1800 and not (action=='file_view' and 'lines' in feedback):
             feedback=dict(summary=sanitize_output(json.dumps(feedback)),receipt_id=reply.get('receipt_id'))
         failed=reply.get('status')=='PUBLIC_REGRESSION'
         repaired=action=='patch_apply' and reply.get('retained')

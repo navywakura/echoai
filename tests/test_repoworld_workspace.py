@@ -23,7 +23,7 @@ class WorkspaceTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name);source=self.root/'source';source.mkdir()
-        for name,value in {'a.py':'value = 1\n','b.py':'value = 2\n','unicode.txt':'á'*12000+'\nsecond\n','tests/test_a.py':'assert True\n'}.items():
+        for name,value in {'a.py':'value = 1\n','b.py':'value = 2\n','unicode.txt':('á'*80+'\n')*120+'second\n','tests/test_a.py':'assert True\n'}.items():
             (source/name).parent.mkdir(parents=True,exist_ok=True);(source/name).write_text(value)
         snap=repo_store(self.root/'base').capture(source)
         base=RepoBase(PublicTask('x__y-1','x/y','a'*40,'fixture'),snap,EnvironmentRef('b'*64,'c'*64,self.root/'unused'))
@@ -103,13 +103,13 @@ class WorkspaceTests(unittest.TestCase):
         self.assertLess(len(str(caught.exception).encode()),800)
         self.assertEqual(self.session.current.id,current)
 
-    def test_unicode_long_line_paging_and_cursor_binding(self):
-        request=dict(tool='file_view',snapshot_id=self.session.current.id,path='unicode.txt',start_line=1,line_count=2,cursor=None)
+    def test_unicode_atomic_line_paging_and_cursor_binding(self):
+        request=dict(tool='file_view',snapshot_id=self.session.current.id,path='unicode.txt',start_line=1,line_count=100,cursor=None)
         text='';numbers=[]
         for _ in range(200):
             response=self.request(**request)
             self.assertLessEqual(len(json.dumps(response,ensure_ascii=False).encode()),8192)
-            self.assertLessEqual(response['output_tokens'],1000)
+            self.assertLessEqual(response['output_tokens'],6000)
             text+=''.join(r['text'] for r in response['lines']);numbers += [r['number'] for r in response['lines']]
             cursor=response['cursor']
             if not cursor: break
@@ -118,8 +118,8 @@ class WorkspaceTests(unittest.TestCase):
                 self.assertEqual(self.request(**bad)["lines"][0]["number"],1)
             request['cursor']=cursor
         else: self.fail('pagination did not terminate')
-        self.assertEqual(text,'á'*12000+'\nsecond\n')
-        self.assertEqual(numbers[-1],2)
+        self.assertEqual(text,('á'*80+'\n')*100)
+        self.assertEqual(numbers[-1],100)
         self.assertIn(1,numbers)
         with self.assertRaises(ValueError): self.request(**dict(request,line_count=101))
 
@@ -187,10 +187,15 @@ class WorkspaceTests(unittest.TestCase):
         for text in ('"'*2000, '\x01'*2000, '\\'*2000):
             proposal=diff('a.py','value = 1\n',text+'\n')
             candidate=self.session.stage(proposal,self.session.current.id)
-            result=self.request(tool='file_view',snapshot_id=candidate.snapshot.id,path='a.py',start_line=1,line_count=1,cursor=None)
-            self.assertLessEqual(result['output_tokens'],1000)
+            request=dict(tool='file_view',snapshot_id=candidate.snapshot.id,path='a.py',start_line=1,line_count=1,cursor=None)
+            if text.startswith('\x01'):
+                with self.assertRaisesRegex(ValueError,'complete line.*page budget'):
+                    self.request(**request)
+            else:
+                result=self.request(**request)
+                self.assertLessEqual(result['output_tokens'],6000)
+                self.assertEqual(result['lines'][0]['text'],text+'\n')
             self.assertFalse(self.session.budget.report()['frozen'])
-            self.assertTrue(result['lines'])
 
     def test_cumulative_export_supports_multiple_bounded_proposals(self):
         for names in ([f'file{i}.py' for i in range(8)],['file8.py']):
