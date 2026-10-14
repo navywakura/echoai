@@ -228,3 +228,16 @@ La calibración técnica no cierra ECHO-5.1. [Resultado y diagnóstico](REPOWORL
 - [ ] Renovar gates y calibrar el modelo antes de otro sellado o campaña.
 
 [Detalle, contabilidad y evidencia](REPOWORLD-TOOLS-FIX-20261014.md).
+
+## Renovación v3: compuertas locales comprobadas
+
+- [x] Smoke conservado auditado: 173 recibos, regresión bloqueada, lectura 220–259 íntegra.
+- [x] Preflight nuevo: 36/36 instancias, 12 repositorios.
+- [x] Verify secuencial: 427 pasados y 3 opcionales omitidos.
+- [x] Controles históricos 36/36 enlazados con procedencia, sin reejecución.
+- [x] `check_ready.py` y `operate.py check`: válidos con el manifiesto actual.
+- [x] Helper/configuración y claves v3 preparados; 0 GPU/LLM.
+- [ ] Investigar intermitencia del test de cancelación bajo concurrencia; el pase secuencial no constituye una corrección.
+- [ ] Calibración v3 con modelo real, auditoría, nuevo sellado y campaña.
+
+[Resultados, rutas, hashes y limitaciones](REPOWORLD-GATES-V3-20261014.md).
