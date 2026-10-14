@@ -1,0 +1,1012 @@
+{
+  "schema": "repoworld.curator-complete-public.v1",
+  "kind": "infrastructure_controls_not_model_scores",
+  "audit": {
+    "schema": "repoworld.replacement-audit.v1",
+    "valid": true,
+    "custody_valid": true,
+    "official_controls": 36,
+    "public_preflight": 36,
+    "sample_sha256": "e29a514c797a9ac79ecd23a10bfca5030c2a062291cab835d57d58f30d8f3c4b",
+    "contract_sha256": "51443fac03e85982a8bbcf787af9fca345f1edc6c59cabae19f8683628f3e5ee",
+    "registry_sha256": "9505f6044fbdb0c8ed0b123f6ef20b69de9a11319963bb1c7b09794a63eea0b3",
+    "replacement": "psf__requests-2317",
+    "excluded": "psf__requests-2674",
+    "unchanged_rows": 35,
+    "calibration_local_boundary_ready": true,
+    "remote_calibration_performed": false,
+    "gpu_hours": 0,
+    "llm_calls": 0,
+    "gates": {
+      "software": {
+        "kind": "software-verification",
+        "report_sha256": "97b9b8d79a72d903beeab04f5dd801f5245409d504deef5e203696bd0bf1a870"
+      },
+      "preflight": {
+        "kind": "offline-preflight",
+        "report_sha256": "8cac53e7ce9d3d46ec252fee05a28b0e5d59e23b3bb7ef9d30753eba80c68669"
+      },
+      "smoke": {
+        "kind": "mock-smoke",
+        "report_sha256": "aa2a53e72ba6b8b465e09ca6439f4163fdf592c3f454dfd850e39733622e4b4f"
+      },
+      "official-controls": {
+        "kind": "official-controls",
+        "report_sha256": "4ed6cef903cf101036f87309b76aede160db21dda51ffad942a9c1b998c2e130"
+      }
+    }
+  },
+  "audit_file_sha256": "ee80ae31aecaafa88977e61a0b0e52a69b0517017fad0227dbd6835e08b14e96",
+  "policy_file_sha256": "ce5be5957eb30ef10fe8562a52e79c34f3b56c89f8b6dcb7ddff0b7b4b176b17",
+  "code_manifest": {
+    "ECHO-5.1/docs/swebench/SWE-RESULTS.schema.json": "16f3205e5f2b4bcfc03cb1db67801d8fc659dfd6d10d7e5478598f1b6aa168f8",
+    "ECHO-5.1/docs/swebench/SWE-RUN-LOCK.schema.json": "ff6a3ba1e31c61806d205b12f2c3bfccef873f2c12abafaa6c8db7142d9381cf",
+    "ECHO-5.1/docs/swebench/SWE-TOOLS.schema.json": "ae9aebb4e3ac90b17ce6b0fe1ea540749461f4f9a5687709304e66930f3dd4c6",
+    "ECHO-5.1/scripts/inference_relay.py": "7338407bafdffaf9810afe23298ea541036009a7326306688992ed79e1242a74",
+    "ECHO-5.1/scripts/run_repoworld.py": "177f1994ed964b9f4ce115e894e652eafacbe7caa184fdcfc119b001fc6a1a66",
+    "core/__init__.py": "d2ae5e6acc1fa1d60b46cec38f08255a2e068982760654b9afb50c9c0bd17d06",
+    "core/cam.py": "152e8661e13ad8d1a667165e77b9eac91b4ec09bc172d839f2322ecdd5be5112",
+    "core/dag.py": "1a3d6239974b3ed4bd685c9a6e4333aa3d1bd38a06ff22ac890108eb49836156",
+    "core/qn.py": "9a8684626ea7031a3af1122aa99f17775f8ea03405b8052bf1d67680a99fd01c",
+    "core/spoke.py": "1ad63b54956ab793c1f0a83920c0fa2b7b8dc8b4807948ea12d85f92c8635e87",
+    "core/stdp.py": "0adffcbf8456104eeb8c4e60e121d791f415688070ef89b839c5d1a47f9fea27",
+    "core/wsp.py": "d1a1be20a582244105c979e1b6b139bbb58fec2aae658fe790243067a10ef9c4",
+    "pcworld/__init__.py": "b90993ff3d4f2763f5f2b41920384b0fcaa6bfb04b66d1c86b57f6e140d5397d",
+    "pcworld/accounting.py": "e557cfcdf9af91b1da9a4a0af4882b656e33cbce351648e42f6d2288888d5073",
+    "pcworld/adversarial.py": "32165e1e9239261ad92c0c348602a2cb100199f17e238f95bac765a66be8e9aa",
+    "pcworld/cli.py": "0c2c1b890073836f09f786054a28a4697e67910ae43daf015cfa2db87ba1c483",
+    "pcworld/controller.py": "fdaed1f952dc5db747803e0023c07e16f34643bb11e65f4b336c87d37f661a6e",
+    "pcworld/memory.py": "e91cca9b6ab1a6247a63ed4ab11df5dd43878a1111c9021d6953c9a485b6d3ec",
+    "pcworld/pilot.py": "3a9582aa80bd4ae9706caad7e621221d05bc49201b68bb0a1833ab74c5e2b23c",
+    "pcworld/property_cache.py": "81295c1a04c64b3ae0a6bca4fd956bd7ed6943f89c4467a064099c6fe6a8f1b1",
+    "pcworld/protocol.py": "3eaa61614083a9e5ee04a93198d6d4e93760111a9c6146e51f219f51d3e917ba",
+    "pcworld/provider.py": "1cb5391c31e2b347f289a45b5c16b088b4323cb15197842a53f82e3627de200c",
+    "pcworld/receipts.py": "7900170a25e1bf66137e9b393b3eb455f807bbc8a2b25fc01a10a46386bbd8da",
+    "pcworld/repairs.py": "d941b306969aa0df8d06d0d557790f3c7534a727fb29e7703d902a097425b11a",
+    "pcworld/repo_launcher.py": "04110bf13a421f78da978325285941c17316d03803193b411b20e1d0be34c43e",
+    "pcworld/runner.py": "0000dcabe01c7533d18740fd7ac08bf8265f55607bcbf904fba0c323c2dae51b",
+    "pcworld/runtime.py": "d4cd9614a6f34a326431a6f9f6287ece503189fc0e3ef7d4b928f24d509b6ec3",
+    "pcworld/scaling.py": "69dffa66bab37954b61d9144c9df4cfaa6b5c1ab7069ec6fc1200de22a11db9d",
+    "pcworld/shared.py": "42935c0b5d3567abfa7fac958a7da9d3db8e86ec80c4e86c5c9a744c6942aafc",
+    "pcworld/snapshots.py": "e2dcf9c55a22e5aead53a5b08ce09c68ec4b880001288a41468b285bba0378f4",
+    "pcworld/tasks.py": "31bd6e9697fe335c645a8a64b28eda97765bd5d3164df38035f2d31dc19c8166",
+    "pcworld/transfer.py": "62c18ca33dc9fe90e2f346c0f2d1a0aaacbfbde0c59ba4ca7dae45cb90b9271a",
+    "pcworld/verifier.py": "0958a3c94ccdc6fb52319678c7a3c7f3c9e2563715e465f1de75a8e9f62d87e5",
+    "repoworld/__init__.py": "d6aeffe17cf0b3868dc93dcde33acb9595e0b8642ddc19595e68a4473c3d18c6",
+    "repoworld/accounting.py": "2358fcf407fe4d9987c5de245cc898d58c35af9be3bc65d97db0effd219982da",
+    "repoworld/audit.py": "406b518d70aedb5dc84537a66584f65b0b090b3803d541d2cb5f30683736f5fc",
+    "repoworld/calibration.py": "6a08e6ff64cd585ca1229240c1192c833e53915a0fafd075ecff0c4302d0a7c1",
+    "repoworld/checks.py": "24bf5c14e08456b33046a289c124b6d15e2616fb8bda83e3848c33ef870c4b25",
+    "repoworld/dataset.py": "d1a6d620df25a3ce79713023d385bf498e53d93baa67798f728ba1fe94cb7555",
+    "repoworld/dependencies.py": "2bce0c2c2e66af980717b9349c91fc8fd61d4fe5ea7532a407d75b473961941b",
+    "repoworld/environment.py": "d9c00e245510125d2d863e53800c5a7aee846939d7e7401b96b00f7dd8a6c2f0",
+    "repoworld/evaluator.py": "bd10d931eb33028866694a1a687fdb4d33332260f17cb912a3bca01d379be5ad",
+    "repoworld/memory.py": "2d9bdf0f1595d1dd3b1a176c3cd1cedfecc716c359de28b29ec5129a632ed0ba",
+    "repoworld/official_curator.py": "e9c9b139871df1c6afc0d7f6ef35697fcd8de690651009d0919ef1dae93e8676",
+    "repoworld/protocol.py": "9018d331e734db52dc9aa4b74a8f8dc304ef38652536b4952d769d89ff2182f0",
+    "repoworld/provider.py": "0ff9e85b169b4ae4437ba2d721c38c7a303d2f9e1bac5a76c0502ff7b582cfb7",
+    "repoworld/study.py": "fd915e4bb68e5fdc23f526de597fc9b3f4ffd0512c0cbfabef512942ec2fb2a9",
+    "repoworld/supplements.py": "9521daf7c388cae7feddff3ecdac53ab59d969fb2400e335fc9f9a7f8bda8652",
+    "repoworld/tools.py": "07458adebbd59b9b6f733c304e83ec73ed3ea5b15f7a7e13f74611e17929ac6a",
+    "repoworld/types.py": "aa1a455e893409b77b41db1ba69080f55312b8ff0c49b81ad91e24a1d2b0d593",
+    "repoworld/workspace.py": "3c063335743fb7094c00cba8089008496b8cf7f7bb5d3b474b819f3a8ddbc883",
+    "scripts/plot_swebench_results.py": "7ed3b3fba049c24a1c9747186a3b1f0a0b862ba63775f89bfe318f6948683872",
+    "tests/test_pcworld_accounting.py": "1a99c7cb78ee6050e7699a5c230e02fa76703787f27781a9a30add624030ff56",
+    "tests/test_pcworld_adversarial.py": "5a0d0020549cc0f2be73bfbd2d287212238a6a03fa75f6df3e998ad5af1d6486",
+    "tests/test_pcworld_category_pool.py": "e1d13ca92caef288cf3a9270bf93ae0fadc5846ef1ff69adc296145c7a12a039",
+    "tests/test_pcworld_gpu_handoff.py": "f50fa5cddc87a1a5784eaba2e2bdc081203cc00ff5f700cf7d5d648d3d0baa12",
+    "tests/test_pcworld_gpu_scaling.py": "5a3a3d1d081bb9b779bd3cf305c36a313e9fdaa754ffadf4ed194fb952cfa375",
+    "tests/test_pcworld_inference_relay.py": "5c9303177e8d2949f91b5436da1c3ab0d559acbea98034be7b6b5959d7e2fb82",
+    "tests/test_pcworld_legacy_runner.py": "283345ce3f5fd85e05d7d7c9a369934cc4eba7077d19495ebe9d50e338f18976",
+    "tests/test_pcworld_mcp.py": "5d11fa0aa0dbbc20685da63f10024da6f407be6cc0b8c47db9bc6e728128821f",
+    "tests/test_pcworld_pilot.py": "ed8e8859a9e5c8ce520942a83845cb1fcf911e0bf2c65a5c667c23db01dde3fc",
+    "tests/test_pcworld_probe_content.py": "0c3deb750512cf4465f75f16117f2eb41f75bcb62b99f6195aa5e0b6519a7d88",
+    "tests/test_pcworld_property_cache.py": "3e4482e16d4df796f8475d65142d4ab2dde36851efb7f67e2cc6b62e8ba7824e",
+    "tests/test_pcworld_provider.py": "c8c08f21c54390559a6568bc6f403cab4416e13160dd0176d9970d8134d77846",
+    "tests/test_pcworld_reasoning.py": "0b1cca211099557cae8235417bf2816c675116b6e9988a58b614319893008521",
+    "tests/test_pcworld_receipts.py": "1193a58dd7555f6ddac7d0fddea6e21f4eeb20770eeb5960e278ef25a3c166b8",
+    "tests/test_pcworld_repair_gap.py": "2b25fe33df02ddfbfd25c0a2f0fa00f7eb3f66d1a128c6217d535b8b56fd9825",
+    "tests/test_pcworld_repairs.py": "9bcaa5db9ee13c03df008566c9dacf1a293ee1efc678e75c5dd5719f2ab9401b",
+    "tests/test_pcworld_runner.py": "c883bc8d4e11aa190f6910edeab904a8ac81881cf775930c8ea2b93b2ebb2ab1",
+    "tests/test_pcworld_runtime.py": "a866d4dad363bccd9c0e512f230cda65b0daf0f9b43a41cc287343f3aaaefb06",
+    "tests/test_pcworld_scaling.py": "26d5d61da6879b718c3797c0a95bc8a30ab213dfde835638b6e9e7e19c8619a0",
+    "tests/test_pcworld_shared.py": "872f64e3bc513082848b678792383375af06d681c32b603a205af4f4093a99cb",
+    "tests/test_pcworld_snapshots.py": "c624ba170321a94af74c4a28314f2aa92f090a27a35dd1311c29999076f14104",
+    "tests/test_pcworld_startup_cleanup.py": "161f725040a760049413a73feba59fe116cf856ab17dc8299ed5f6f5c072e70a",
+    "tests/test_pcworld_transfer.py": "25ce39e6c6ba6aef6502536e96d8334410dcfca8a0ab39c331039f17bcf87a92",
+    "tests/test_repoworld_arms.py": "883a68bc17dcb0257332f05bf46cfe5224fae67ad20ea6767ee08b5c264023ac",
+    "tests/test_repoworld_calibration.py": "9701b886d9ddcdb473096a0cd1b0cdda0a1ae31c22127f9fa9979661e5b4422e",
+    "tests/test_repoworld_checks.py": "c59850c61ea1e14d942a18e1d7c8c61c3f6bc62a72e0079b785a760066776c8f",
+    "tests/test_repoworld_curator_lifecycle.py": "623960cc97a8825de4e4e1e1334f0786ea561cc703652767a430aa7f26f7cc09",
+    "tests/test_repoworld_curator_reporting.py": "83c7dbbb6dd3db30dfd07d04a6523824a9188d8242b5e790694b34a20d7ff553",
+    "tests/test_repoworld_curator_services.py": "923a99a5fbefac06f355292c43f967df4a647350c965b2c2ddd1306fc3309ef0",
+    "tests/test_repoworld_dataset.py": "10677b818b9be79467ae835b92041a35afd0ec379858a11b77b5d9585652839e",
+    "tests/test_repoworld_dependencies.py": "554f0c8bf17ebd9ecbe1bdf18181587983f37cde8450bde0904c76365514952a",
+    "tests/test_repoworld_directory_protection.py": "19c4497a2425392094061739a515ffafb84e3c1e997c622d4b0705b12d02e8de",
+    "tests/test_repoworld_environment.py": "dbca9fa48fef82c8595fc8007551d5c939df0c2c071e7d1f92d11bded74fc99f",
+    "tests/test_repoworld_evaluator.py": "517a83a7fe4c8c54a91d969e8065f7b1784befb1dbe8ac6f2a798b74d77e7c5d",
+    "tests/test_repoworld_protocol.py": "05a66e076af83dc232b70c717d1ca7bc3508590ae0380167620263d6cc9c077e",
+    "tests/test_repoworld_public_skips.py": "3e24f3bf3d49444a4b42391c9456358220c1803889184bafc523f094895c2b3e",
+    "tests/test_repoworld_relay.py": "d8a89c9816b9239b65b973084b2a6cd266f0bb4514a7e0300dda096a04ca7fdf",
+    "tests/test_repoworld_study.py": "66c3e6e2b3eb0fdfd24a8ea66a5c56f3a1f256e7ba10938941e24a1ddb48e22c",
+    "tests/test_repoworld_supplement_integration.py": "1dc649a72e611fecc5080b9f9bddea8516de3ffa05ee3842565e38f32cebd137",
+    "tests/test_repoworld_supplement_registry.py": "864d3c26a9b91c2f08f41650c7c2ffbc8e93bf414a07346b1e40dc20e57b4313",
+    "tests/test_repoworld_supplements.py": "88ef9f969307752dcb64d3fe004edef426afd479159c5a49414b6acda2e23dac",
+    "tests/test_repoworld_symlinks.py": "5c419dabcb1d0be8385534aae170f3d1bd29b6fe4bfed608cc8d847f64bcafd5",
+    "tests/test_repoworld_workspace.py": "20b9e2fc2826b712ce0cccebfaebb309647cf9e67e2db0908574336359f12d8b"
+  },
+  "review_sha256": "20fdab209fe3ae3dafce16dcff63fc1799cbf8873a3651029c3e19364e57b6cc",
+  "software_passed": 420,
+  "integration_passed": 3,
+  "service_manifest_sha256": "2b1dabfbc3b4bab7483e0ac1acd37f2fb9e9f0d2dada12935ac67fde0e7849ee",
+  "evidence_directory": "ECHO-5.1/artifacts/repoworld-requests-replacement-20261014",
+  "instances": [
+    {
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 12.41638970375061,
+          "log_sha256": "b8bad5105c0cda023816de757a04877d3e773ee94583ec987c18c81ddeff1a1a",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 12.236805200576782,
+          "log_sha256": "14a59c59da872153fc929a5545ad14a253c707c2969e488c2b06833a587efce2",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "astropy__astropy-14365",
+      "official_eval_script_sha256": "bd7699563c7f58f5cfd1f97f7f0e906f752a3e9a3851f1d84c9179d0499fd3cf",
+      "official_image_digest": "sha256:186d28b0d249e6d87d9d65aaada7688fc0e2cf4f8d70dfef591dfdfaaa283492",
+      "sealed_tests_sha256": "bf84cd9c65f6e03791c2f67507ae6320c8e29837f631fc25504ec8c615ae74a4",
+      "valid": true
+    },
+    {
+      "base_commit": "19fc6376ce67d01ca37a91ef2f55ef769f50513a",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.634297370910645,
+          "log_sha256": "f4c5c545266bd60899ff2611a656be29d33ffef5e0b793758a23ce0ec5a6fefe",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 8.51022219657898,
+          "log_sha256": "79c6ba6cfa0d049179ac80a0edf5a4005e4eb859ca45583f1e319a96a8c763a7",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "django__django-11179",
+      "official_eval_script_sha256": "d3bf4398d8d0dd9f37dc9603cbbc2abc4d36cbad5ebd249eacc9dd28f2be08dc",
+      "official_image_digest": "sha256:584cf75b0e885e804ddc7f386b02d5b10e4a5eac4b1ac568964ebd13a56cf65d",
+      "sealed_tests_sha256": "21ec65887ab10fe04b63437c9964c2e0308580a0c58a765d0bc0372ae71e9792",
+      "valid": true
+    },
+    {
+      "base_commit": "3346b78a8a872286a245d1e77ef4718fc5e6be1a",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 8.361918687820435,
+          "log_sha256": "cfdc9aaa7055bec52323b480b0f898447c0d17c76933fb59b8d67546c33e99b4",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 7.903111457824707,
+          "log_sha256": "e0a4c06fbcf49bcd3ddd90605ac3d115509f6203bb4af03b9edac47dd214ac4e",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "django__django-11797",
+      "official_eval_script_sha256": "cdf3f96b1608906f02971ff721f7bc4fecdddc5740cb5af9d39841d159ec3248",
+      "official_image_digest": "sha256:1efa1ccc2a92de8124e10073bb079a6a6a4679f453802fc40e8ad042254f027b",
+      "sealed_tests_sha256": "333e2ddc5bbc55e3315571a0fb03a7d1c503af49f834296fec555e674f5dbdca",
+      "valid": true
+    },
+    {
+      "base_commit": "c86201b6ed4f8256b0a0520c08aa674f623d4127",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.489230394363403,
+          "log_sha256": "9413ac91d4eb4f009ce0bde94938a2d85822678c4af878aac335a50614a8c2e1",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 9.887637615203857,
+          "log_sha256": "f1965692a6c9ba1bbf46494e04c8a0782649533d3cf61dfedc9c4fd87ea45237",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "django__django-12747",
+      "official_eval_script_sha256": "fbf9eb8eb7c618db2baad9b834bb04e8fbc04e39982469c1bc8f933fa1c9484f",
+      "official_image_digest": "sha256:225538590170e81cf4736e3ed7297d15e368e4e88b1820a2a98cac3f4e6b0549",
+      "sealed_tests_sha256": "d481ae04787aedb5883beccf2344e7e1621413d8f01fa7f29bcbf1595cf2d353",
+      "valid": true
+    },
+    {
+      "base_commit": "0c42cdf0d2422f4c080e93594d5d15381d6e955e",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 4.790885925292969,
+          "log_sha256": "2aebe38c2a00c107f65dc0c6c147b6e0e787cbdefd2fc3b297c3809e9a3a11e5",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 4.581101417541504,
+          "log_sha256": "1f8b08e55bbd1c6f0853d542bb1c55d674557296f52290667a1a4817de5fe39c",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "django__django-13925",
+      "official_eval_script_sha256": "6b1e07f108f286249d3f7a30df83af4451e29b7ac4fcc93596b9dbc63e2d93a4",
+      "official_image_digest": "sha256:c08d4a51e5a5c8aee7ce9b06c8f01ff0c67da737d328525c66232bda661eff9f",
+      "sealed_tests_sha256": "c315969cb2ded12666227c2d9aa3c815e0375994a36bcc0db40829283eb16ee3",
+      "valid": true
+    },
+    {
+      "base_commit": "1710cdbe79c90665046034fe1700933d038d90ad",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 11.133260488510132,
+          "log_sha256": "e52cc10e161f9df15be351c71d95ab8f88174b64fe04cc6113679ade8ae6ecc6",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 11.185290098190308,
+          "log_sha256": "7260ccb5621a3749a9831e2f8d49f5b591cc565580e6b5d9fb18c18de8dfa16b",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "django__django-14016",
+      "official_eval_script_sha256": "1eb61e164357f41c8c9225354a08a85c1cfa894fe151e24ff3c9906f913203db",
+      "official_image_digest": "sha256:a463e2c78e49bf8e7ed85ac45ce539da1fdee91f482bc53b8fbc59b31c974320",
+      "sealed_tests_sha256": "2de188f2e80f88788683a3b3fd1391beeaea8aad41708e51f412c87d6cd3a3ca",
+      "valid": true
+    },
+    {
+      "base_commit": "4c76ffc2d6c77c850b4bef8d9acc197d11c47937",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 11.144203424453735,
+          "log_sha256": "8666fbd9d4990d4f84827a2ca71d66f70827f8b7c43d8eaeffd0453f068872ae",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 10.99007534980774,
+          "log_sha256": "55b01c5089b1d6d4e9bb9cbcfc50e0d2431710fca4cb17ad5823fd4faf47a8c4",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "django__django-15400",
+      "official_eval_script_sha256": "64d0b716f9f05b1285414ec04f3c3aaa4dfee364c868d5a218aa1ffbad9bde66",
+      "official_image_digest": "sha256:8a748e59ff83837f698fd1476e14b179d8ab0e6898aa624f74fc1b33512cc969",
+      "sealed_tests_sha256": "f0bacbb6b86f446f51808c0ab00ed58209706e679665619b3b47f0808f28d371",
+      "valid": true
+    },
+    {
+      "base_commit": "b7d05919865fc0c37a0164cf467d5d5513bd0ede",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 14.885446310043335,
+          "log_sha256": "993553f6bcdf9ec28cbfb962e0e97f5eee8f2a4c9e3ebb2f4728fe3e35a26f81",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 12.913384199142456,
+          "log_sha256": "6efed6610bb2d30b81e137bb65a11a49a8203885e5aea7b12b6589ace945c6cb",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "matplotlib__matplotlib-18869",
+      "official_eval_script_sha256": "c1b2733efe0a080e1b41c3cf26c3a1114a0ec4f29e8af1464ca0e590352d30ec",
+      "official_image_digest": "sha256:c8ba332ecbc176982c4b2df89690be4961199029a5227e8e5122329b1879a1ae",
+      "sealed_tests_sha256": "ca6695f4fa2fe0ee8dfe3462874fa37493f5d0934362ce573d368751393d6b0a",
+      "valid": true
+    },
+    {
+      "base_commit": "00afcc0c6d4d2e4390338127f05b8f4fdb4e7087",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 84.94546580314636,
+          "log_sha256": "91cba671c83505e332e3715b1305f63bea1f0a79fa36c4efc9c2e44888a8b86c",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 82.65209770202637,
+          "log_sha256": "c5e21793e3d0184aedcc3dfe4f7c3c72e2e8a99452b3438ca05f67d5f36c2540",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "matplotlib__matplotlib-26011",
+      "official_eval_script_sha256": "e9ac65883000070c99b4f2bcee3a155336106b408e75b72c12f782934cd67804",
+      "official_image_digest": "sha256:b49d6b9652c2a7b2168e730227e53627dcc8284732992b9f5a0c3981a6cc8d88",
+      "sealed_tests_sha256": "81f52ccb149696b3c58d7fdc3bc81a3d7708dd5994fc9f3cb4350fe8487743ed",
+      "valid": true
+    },
+    {
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 81.23062324523926,
+          "log_sha256": "a859c53d13337ea73917eb712f1cbb8b29f70ab3c3590072edb07c925c871afc",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 79.51474905014038,
+          "log_sha256": "5e79caebbfe741f3d5a22cb71e4957e15276c5fac09c381f3c9dee092c139784",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "mwaskom__seaborn-3407",
+      "official_eval_script_sha256": "6cb3e6e683bfd410f19581f0363687c284d5f06307d92f9561cd7d6d839eff15",
+      "official_image_digest": "sha256:3158ed1b4a82070fe39efe3a776d59b7688bdedb09b9ac477b68d2ec4798bb82",
+      "sealed_tests_sha256": "4b352950eba5b8c4d341c21a479570814109f44b53c5515a57b68746dd1c8268",
+      "valid": true
+    },
+    {
+      "base_commit": "4c288bc97ea371817199908d0d9b12de9dae327e",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.529277086257935,
+          "log_sha256": "70382adbbff0bf105b930c51180e6d054b8ed2b17ae1fdd6ef9bacca79126be6",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 9.193053722381592,
+          "log_sha256": "ae9b24a29755756377595c7a41f687ed2783bf2a9688a91eec752ffbd8c876aa",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pallets__flask-4992",
+      "official_eval_script_sha256": "5f432c7e0488aec11a69de3fce2192496c85d48bcdf8919c7da4303816203a28",
+      "official_image_digest": "sha256:b6943616922659ca12ba82ca60561483c40f00d80a3a11045d2d0b6b000fb253",
+      "sealed_tests_sha256": "e657c44bccf2986e0487be3c6e3cecb1cd91121c471504e204f3c67779ecc3fd",
+      "valid": true
+    },
+    {
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.406562566757202,
+          "log_sha256": "fe01d5d44be08beb3d0d018d033d8061a4fc484122a09d5a2da648b469e2c67a",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 9.404545307159424,
+          "log_sha256": "4e7d345865a2bf0535a675ed30a6dfb62d7f2b5b0a66a6576a1fb01a55e4eb5f",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pallets__flask-5063",
+      "official_eval_script_sha256": "23266f774bc2a958d1cad661209e7cb69d3485969db4b63f8b56e6312db9be3c",
+      "official_image_digest": "sha256:c253a21fce4f73b6b2f78c79aa60f401c4d2facca34133a4fe661fb50ed41856",
+      "sealed_tests_sha256": "a9d8d99da6fabd2b981bb106aa239dded8c4ba00d21d7bff2ba38bfc85c00d83",
+      "valid": true
+    },
+    {
+      "base_commit": "fe693c492242ae532211e0c173324f09ca8cf227",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 8.073347091674805,
+          "log_sha256": "ab0d6354394bec8693cb1021e47904c9be4e661add7e8a5c48655301a7973a60",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 7.816476106643677,
+          "log_sha256": "79fe10abdd76c19a741e37d265a7c95fa47a86fe92d2ee23c859ef8752fbc490",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "psf__requests-2148",
+      "official_eval_script_sha256": "6f329da18bd136552c1e7ca122e2b0a66d5a9bb89ffd128375ed9079a93f247b",
+      "official_image_digest": "sha256:98917950f24c65799c8a15fd50af114a488aa797010a6af13c36938d3bd0512d",
+      "sealed_tests_sha256": "122fd57ce0c59a444bda3077a03ab521bbddb53918ee03be19948b211aaa1e5a",
+      "service_manifest_sha256": "2b1dabfbc3b4bab7483e0ac1acd37f2fb9e9f0d2dada12935ac67fde0e7849ee",
+      "valid": true
+    },
+    {
+      "base_commit": "091991be0da19de9108dbe5e3752917fea3d7fdc",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 5.537482976913452,
+          "log_sha256": "ad7a37c66ddf351e099ef31b1debc441f0f3ebe7a70b561e28d5dbfc48d6f8b3",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 5.3299689292907715,
+          "log_sha256": "a6b81ecc0f0b39c5f494cf661a75bc5bdf8a8a4a8578cc013069b9cc05a1a6ec",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "psf__requests-2317",
+      "official_eval_script_sha256": "19463dafdf337e9a53475d8c15341f8666cfd699e099437aee6bfdc62dd4be50",
+      "official_image_digest": "sha256:3c49e39da2143fc51599f096a7c959ea5f3c9fd97d22899d977ac92d6dc360b6",
+      "sealed_tests_sha256": "c14d7c00d1f0894a7178ab8b4e7edc00ae52f9a5975b2fd0c7c0841591dedd03",
+      "service_manifest_sha256": "2b1dabfbc3b4bab7483e0ac1acd37f2fb9e9f0d2dada12935ac67fde0e7849ee",
+      "valid": true
+    },
+    {
+      "base_commit": "98dc1f4ea18738492e074e9e51ddfed5cd30ab94",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 7.691314220428467,
+          "log_sha256": "896260e1a31c5ef120a4bc7812ad1c579221bc0ae9befbbd6fa61ff0d44f0efe",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 6.177574396133423,
+          "log_sha256": "7fff9f3bf87abca51f72cd9880a633347871398e6793436471f82f6858d36dff",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pydata__xarray-4248",
+      "official_eval_script_sha256": "98631c57186574f644045037aeb10898a774dc4176b8a315c534ffe95bf5edd3",
+      "official_image_digest": "sha256:3ecda11cf117b27fd6f3fa5261e651102270eb9e35fe6b6fa8e1d260fffae5d2",
+      "sealed_tests_sha256": "a2f9d86e2ca053504906f3160ad6754b1f331697cb3b12274785355f960d2f3b",
+      "valid": true
+    },
+    {
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 24.824783086776733,
+          "log_sha256": "a8530e4b016334093dc6f963f2c300813c427ada92a840d3d7b43907ccbacdfc",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 24.662954330444336,
+          "log_sha256": "42071a3ed9e2ffe115510ddc64d351de3668be8dce37b5b2d8940023e1e781a6",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pylint-dev__pylint-7080",
+      "official_eval_script_sha256": "f19f19799be3225727fe3c1024f0613619db73cd31895de9482365b7923b20ae",
+      "official_image_digest": "sha256:947026ad5ca54dbbf6cc676543bf6c2299484dd9f50e746b8e027f46c44f4da4",
+      "sealed_tests_sha256": "fc00b719e321218706a45ee948d02f78ec5042729ca95586d73d15ff4dd12cf1",
+      "valid": true
+    },
+    {
+      "base_commit": "2f7415cfbc4b6ca62f9013f1abd27136f46b9653",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 14.854975700378418,
+          "log_sha256": "a5b991b2bf76646261061ff2fe03018a810a2a5e50932a3dab6da4ed5adf8881",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 14.76134729385376,
+          "log_sha256": "ce815b17d3fa66d354edda7ac1bf09a8ca70394f9a930f8ab58170a45b123c38",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-11148",
+      "official_eval_script_sha256": "f721e7ac16791dd108e44bed5c87fd005d43257fcf06f39cb4d7d3cd617cc460",
+      "official_image_digest": "sha256:f8dd3321c4ba63b37be1870c22372168800e748ec709b59315b332efa8bee800",
+      "sealed_tests_sha256": "5da821980606f002ee62c8150d16b64a4f6e78e210acbf50e444b79aa55a68c7",
+      "valid": true
+    },
+    {
+      "base_commit": "10ca84ffc56c2dd2d9dc4bd71b7b898e083500cd",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 12.834178924560547,
+          "log_sha256": "57ea287181b77ef9903d1c6689aee1eee2333fb5c97ecb8a864e721666476b2f",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 12.750560283660889,
+          "log_sha256": "994130946d58829aefbb9423e2869eaf47e0087d7ad6f580b9f0cd6bd9167a4e",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-5103",
+      "official_eval_script_sha256": "4fb5a5c9fb54a596c6dd720e30afbca905336730c2d656a3b6062e5bb4a82307",
+      "official_image_digest": "sha256:6685f236ddea92e412c046f1276f178d34895e4efbda2830ac3ab81903364787",
+      "sealed_tests_sha256": "59c7f0cf09fc466ee6d76eb85ddecf6e8a34f22000fbaf0c2232d1e5aae01b6b",
+      "valid": true
+    },
+    {
+      "base_commit": "450d2646233c670654744d3d24330b69895bb9d2",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 10.668874263763428,
+          "log_sha256": "0612babe40ac60196eaf61423bef6111549ef3663f1d4090bf0c050bd2ad5539",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 10.66852355003357,
+          "log_sha256": "d9cc273dc9f4dcb58e9544fd3bd82a77c953d852bea48595580d1007cb323404",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-5413",
+      "official_eval_script_sha256": "4e99e99ee01e0f38e76595aa1de7a96f17479db173f7a990517d7689d66b649d",
+      "official_image_digest": "sha256:0a2dd74c05b6462ff21d37706e332ceb6e10235c7fb941b7e5fd0b86bbed01c4",
+      "sealed_tests_sha256": "9d87cebb4e389a9d8b5c3e13a83e4a3ca0da0493e14c7dc68b69f4b4a8667348",
+      "valid": true
+    },
+    {
+      "base_commit": "1aefb24b37c30fba8fd79a744829ca16e252f340",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 13.813639879226685,
+          "log_sha256": "75141c6a0dcf748c076983b54a45a9ab1e00ca2f092b2fd52d79bf6a28d502f2",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 13.653749942779541,
+          "log_sha256": "0d575ec21832a4d2cd5afa06e3f85edc052deb0c0838c8568793d1bbb88a09be",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-5495",
+      "official_eval_script_sha256": "b6d79c09b101ab0a28f5fbc28796ea5f20e9b6696a1bbc4a7cec0e691f7d13bf",
+      "official_image_digest": "sha256:406d089ce0106bd620d5ffb1189555bf7279863ae882953717b0f1eb0502a432",
+      "sealed_tests_sha256": "e7f3a8d755ce471b5e4ff8a6ae229d1a364927f43f4f7e404d1708638b8d70f8",
+      "valid": true
+    },
+    {
+      "base_commit": "4787fd64a4ca0dba5528b5651bddd254102fe9f3",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.509011030197144,
+          "log_sha256": "4c8f575232b7efcd30df0acf32caa37970b1ddf7b479f545980e5e8352868a34",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 9.21200966835022,
+          "log_sha256": "0803fce33fd921228973344803d15c644c83a29f34fa2aa4eb50ad0b4a41b9fc",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-7168",
+      "official_eval_script_sha256": "6f1ed6c381c37c2396f2ddef95a831d0a909fcdf4f8c46f058d9f97c43b07bf5",
+      "official_image_digest": "sha256:fa2614449afb464c272c3bd0c5ebc66d7cd6a046b4a98ac65ee1b0df2594a9ff",
+      "reporting_profile_sha256": "fdfb6c1eb14cfd4e3b2ae536e371f1b5664b0c4ab597c97ace435cf669f06479",
+      "sealed_tests_sha256": "54b9695f023783a7d152bcf8ce5de41976a8c587bc7a125c174fd48369b75558",
+      "valid": true
+    },
+    {
+      "base_commit": "56bf819c2f4eaf8b36bd8c42c06bb59d5a3bfc0f",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.289195775985718,
+          "log_sha256": "fc68fce63be7c9bf826eb97ef5f2b4ecf9fd430bd3e84e23381f846e0ef427f9",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 9.256761074066162,
+          "log_sha256": "f5b78b4bd2fe38f2d47176371fad7ceba550632b999c57e2f78c0801acaf4707",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-7220",
+      "official_eval_script_sha256": "41cfd3ac88e3fe90fb2cb715eb830964508775cc7108d4488a45b34c64cdcf68",
+      "official_image_digest": "sha256:65ff4c5a51960541672995c1f94a5ace98e570c186cd00fa001fc44986c61bb9",
+      "sealed_tests_sha256": "2bb6b320f3984673c77e3fb9bad4c7c0e4af38cdd07b98abfca9ec234d37c082",
+      "valid": true
+    },
+    {
+      "base_commit": "e2ee3144ed6e241dea8d96215fcdca18b3892551",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.396316528320312,
+          "log_sha256": "033dc960aa302ddb852181517f063bd0967c9fe36a43c747fcce81191fa1a1a6",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 9.3952476978302,
+          "log_sha256": "9209103ab9f86b9049040522c184ff8dcc5fe6c9cdde846b703290818c901bbe",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "pytest-dev__pytest-9359",
+      "official_eval_script_sha256": "ac2b4da9c77c3aaa4823094192987bb50a06cdcb563441012bc69fc2f9f5473c",
+      "official_image_digest": "sha256:7a372a3ffe63785579bbebd3e11e71998144a8f12a0ebb8272342077bcbe2f1d",
+      "sealed_tests_sha256": "8bcbff5b4aea80aa72019a8d513b38eec091120ea5879f2e322dfce08337f8c4",
+      "valid": true
+    },
+    {
+      "base_commit": "f8b108d0c6f2f82b2dc4e32a6793f9d9ac9cf2f4",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 4.985627889633179,
+          "log_sha256": "ab659736a36ce84cd212b5ab503b5cc6eee1189745286372fb9bbb008adc8462",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 4.374300956726074,
+          "log_sha256": "5864114c246b233795455a74159583e520365eb0d7150acb172de298d9377f39",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "scikit-learn__scikit-learn-13241",
+      "official_eval_script_sha256": "b5bc3efe49b94850ebdfb238f44aa377f23451e94e1410f99116db05ba831bf0",
+      "official_image_digest": "sha256:11e72ba99781d0ccc04ce5f114ededf36a56b6d61ffb3d7850cd3cbdebcca4eb",
+      "sealed_tests_sha256": "aeaf8f971228c5b60d26ea4cd2578e3812046964540a6496ec184c5c52d2c20b",
+      "valid": true
+    },
+    {
+      "base_commit": "6adb209acd63825affc884abcd85381f148fb1b0",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 8.626119375228882,
+          "log_sha256": "4dd09adf15ff7026dcf9adb4ddd67c8798f9f02a8803879207914c887593626d",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 7.657526731491089,
+          "log_sha256": "01fc7e7577ab90f19b312e5cbaa95346c9ac3e37d1e7140cf2a0c262ff37407b",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "scikit-learn__scikit-learn-25638",
+      "official_eval_script_sha256": "96ecaffe2db84ca40a7c38a444bad90c143da1f9f425dadc5f3e8958ced65f0c",
+      "official_image_digest": "sha256:98d2d70edcaea5dbeba708e289d23d10e4ec6390b57966328dc324f5f155253c",
+      "sealed_tests_sha256": "8aac728e93d2f6c781a0b1e1dc37ab470afd33cd6298e9ff1e0d4eb527f0ef94",
+      "valid": true
+    },
+    {
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 5.55753493309021,
+          "log_sha256": "8fcdce4d38b044fbc57366c14a0f45bd75f6b997e5e186648c975e4ea3fa115a",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 5.357832193374634,
+          "log_sha256": "6947813abddd2687bbd0b112eba619c0f906f541703f0f58b98fe8e529886ca4",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "official_eval_script_sha256": "ae91d8b56e92f4bc2de853c477bffa2d5fd5d743e9af0d56996119e3c7640cbb",
+      "official_image_digest": "sha256:2abc5678be8ce1d6cef9e0fa498d0a3dfd6684dfbebc9519ad865323d96841c8",
+      "sealed_tests_sha256": "b016c8c99de4e3fbb420be1b1caa130163075ddee99b19ab8e85beb5f4211f11",
+      "valid": true
+    },
+    {
+      "base_commit": "3ed7590ed411bd93b26098faab4f23619cdb2267",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 4.237274885177612,
+          "log_sha256": "25959f7adb904638d4e2b78e736e3eccd752a4cc123199429a7e84374bb1c787",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 3.998850107192993,
+          "log_sha256": "d414bbf85415b2f7311f55a7f9c76d75fd8df9d7db9c07d3c6a19f08744f567d",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sphinx-doc__sphinx-8713",
+      "official_eval_script_sha256": "897fc798a82fc64713730c57426031cb6db2fbc78d0979e0a19330591fa96587",
+      "official_image_digest": "sha256:fd484ae673a0907554b9dbee5a9032ebea325907d411907c47e234d84699a88e",
+      "sealed_tests_sha256": "0dfcf33f2c43ff399c9964e492051d699a0da6c84123b433032a01c55aee9503",
+      "valid": true
+    },
+    {
+      "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 3.63516902923584,
+          "log_sha256": "c4e2066c711a8b2a42ea3775468e6f04cb9de36a2c5d12ea7b198f7443909bed",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 3.4070465564727783,
+          "log_sha256": "2f0e95dc94253a4eda50a3b9c6bb4d923c177fe4e24979f8c5255566516ed85e",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-11400",
+      "official_eval_script_sha256": "5c047935e8abda60a8ec1caddbf5291a5272a9f021f8c99747a8a8fd5d58440b",
+      "official_image_digest": "sha256:694e41d09e3262a8e21d90f0f8ad60188a6a38bf0b2ae70c1510a9046e92edd8",
+      "sealed_tests_sha256": "c73067c66f3970cac967658720160a9fc48921530a4adca77cf3c9f5649d2d11",
+      "valid": true
+    },
+    {
+      "base_commit": "b678d8103e48fdb1af335dbf0080b3d5366f2d17",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 9.41267728805542,
+          "log_sha256": "068cc106724199e8fe2a6500351857af4e2398ab0143139a72b7bc9040a67935",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 8.881858825683594,
+          "log_sha256": "d2bd6d05d3e5162eeb74074688fdd1501f57558dd9747b11df3db925e6c14e2e",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-13146",
+      "official_eval_script_sha256": "ece0874486dc5c611355403786be3e1055627735501afb5132fc6911e0dc1c3a",
+      "official_image_digest": "sha256:59f0c04f1a417bc9c7bb972593cb18ada50fcc599e615de3eb2fab0bdfd0d709",
+      "sealed_tests_sha256": "96a15d0ff1147de8886256a63f6f20b657318e6faf18bae0adad0f366783daab",
+      "valid": true
+    },
+    {
+      "base_commit": "b7c5ba2bf3ffd5cf453b25af7c8ddd9a639800cb",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 5.353655815124512,
+          "log_sha256": "2b6832fdf1a7fc2cc53a322fac1eae2564787395e5f3b12f26703ac161d26d97",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 5.3251800537109375,
+          "log_sha256": "3ead0927fe16a6b97e1c0c7e97456e5126a477767d2103b82c3e7163fbd8ffee",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-15011",
+      "official_eval_script_sha256": "47b19971150363273b07a219bfb16135cffb185c79a14676e6ee8f2b56c1c9b2",
+      "official_image_digest": "sha256:455841082096bc0313f2f444270ed70e8970e671c56358a7e26555a3d11b0c58",
+      "sealed_tests_sha256": "f07237f60de88dda8f7fa72003d069c6cf431b3572a0dfe7de74742acac3302e",
+      "valid": true
+    },
+    {
+      "base_commit": "3dff1b98a78f28c953ae2140b69356b8391e399c",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 14.7830650806427,
+          "log_sha256": "37b67419f68a4cb68c0693f69df7bcb4992ad0d9406100790113c73aa2e2a151",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 14.92277455329895,
+          "log_sha256": "626a4e8c443fba6e164fb07deb3ed13fe7f07dc0e450c778f217e13d99710c72",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-18698",
+      "official_eval_script_sha256": "ecbe7e932c6696c66cf386661ad560c6caca5f01002569864640c3134c0f64c4",
+      "official_image_digest": "sha256:9051a6ce84b159a836d1a0d6db9ed986b9337ee613508be55afd2ffa7df19ae4",
+      "sealed_tests_sha256": "c2fbcc7b50e8308a023c3c6b7281bc54b2ac6e334132880d05845961a5ac8670",
+      "valid": true
+    },
+    {
+      "base_commit": "f9e030b57623bebdc2efa7f297c1b5ede08fcebf",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 4.601763010025024,
+          "log_sha256": "8ae73a7443343d167098b25483013151425172737f69241a86309518f74a1f46",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 4.561757326126099,
+          "log_sha256": "782642fddb145d63a8e974d592052f54f3cbb6f6c8bf85fabc75dceea4a17eaf",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-19007",
+      "official_eval_script_sha256": "60610209bfa6c017fdc6a61a2fd2bc8ade4ff07855611ebf48df692f2cc7c581",
+      "official_image_digest": "sha256:0d19f9addfb84761728e0da707d729a9082cd3caf597f89c7b61519d5b7ef607",
+      "sealed_tests_sha256": "587b8aa548fd9d95b27ba6b4e1fbceaa02062d6701cb77a0592f0b8149af9013",
+      "valid": true
+    },
+    {
+      "base_commit": "a106f4782a9dbe7f8fd16030f15401d977e03ae9",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 24.403377294540405,
+          "log_sha256": "272284be7f3cf0d816419b046c568b6a814b95c907e8e866d850c63d89dfbd85",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 24.747523069381714,
+          "log_sha256": "a9314d535131a2996947118914e9a31a9e38ecbddfb74394c77fc04fe0076d98",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-20212",
+      "official_eval_script_sha256": "f02c25869d39be3920f5edaf166916a1eb43be70366cc632c50368a5ec12fece",
+      "official_image_digest": "sha256:95d456bfbccf33f8cfa63d410bd7df2e73da60fb286d4c411d9c51fb73ffc27f",
+      "sealed_tests_sha256": "3ef05548b0d6f8b622f2aefd226e510303b22b1edecea0f4e307501738e18d6b",
+      "valid": true
+    },
+    {
+      "base_commit": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 4.00915789604187,
+          "log_sha256": "700e319fc892f4c3bba414a731fce5332aed4a3e84e3017be45d9fbed3a5bbca",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 3.9896492958068848,
+          "log_sha256": "3f5671ee66430623d863f3e7588a315378f9e07c30c540d4edf167946d1e87a3",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-20590",
+      "official_eval_script_sha256": "035a9b5db713e7f4635e4d338eb74438b26ae3e5ccb3c81312fedf6d12207224",
+      "official_image_digest": "sha256:fcfe2aec281d3a1af6a71bedef4637a446bcb076e0acdec6fec03b9b25a346f2",
+      "sealed_tests_sha256": "08af3af9949a44c6ce13bb169e508f7ac63ca6bcebd7e7c87c14a0778ed24c2d",
+      "valid": true
+    },
+    {
+      "base_commit": "aa22709cb7df2d7503803d4b2c0baa7aa21440b6",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 6.503328800201416,
+          "log_sha256": "6d63588640225b30ef01bb0476657dacb6cb8a61e26bd11f9b085893b01f41e8",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 6.53462815284729,
+          "log_sha256": "853a1527b882c7dc2b0156fc7da893e6a20cbfd10b25d7fe3148a89790599900",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-21171",
+      "official_eval_script_sha256": "85b62fd81241576c35821c0813a20bce99e520bb9e24937d993efc1ccdcb1589",
+      "official_image_digest": "sha256:af4544f1efb869fa7911312cf613a802c687f8dadf15446edb7dd9a2f769d412",
+      "sealed_tests_sha256": "9fc15cc27c707d3f04913b60aa4fe259c5c9e9ef63dcd9f0fded0d6b6113bebe",
+      "valid": true
+    },
+    {
+      "base_commit": "514579c655bf22e2af14f0743376ae1d7befe345",
+      "controls": {
+        "empty": {
+          "elapsed_seconds": 5.433525085449219,
+          "log_sha256": "95dad451ce849f23545805ece6fe3828f3bdf4dfb1a0111220b09ae86d52a894",
+          "raw_resolved": false,
+          "valid": true
+        },
+        "gold": {
+          "elapsed_seconds": 5.590700387954712,
+          "log_sha256": "64ce6c2c12797d6ffa39f417440880d99fe4ab85905cb39a02b98b75ea17719c",
+          "raw_resolved": true,
+          "valid": true
+        }
+      },
+      "empty_patch_resolved": false,
+      "gold_patch_resolved": true,
+      "instance_id": "sympy__sympy-24066",
+      "official_eval_script_sha256": "ba7d0c7b69f2bd6969a7f4cca0fc9b66cd58fc5d81f7e428678a24ec1060165f",
+      "official_image_digest": "sha256:740efc23835b3348bbb35d3ac5ff055a7873aac5ee46ed353743930b764f0c81",
+      "sealed_tests_sha256": "3a987bf774354ad64fa6d64f3d9d541fd9e52d7926b486a4a2c17be1f3ff2d32",
+      "valid": true
+    }
+  ]
+}

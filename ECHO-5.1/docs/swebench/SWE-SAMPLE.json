@@ -124,12 +124,12 @@
       "environment_setup_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4"
     },
     {
-      "instance_id": "psf__requests-2674",
+      "instance_id": "psf__requests-2317",
       "repo": "psf/requests",
-      "base_commit": "0be38a0c37c59c4b66ce908731da15b401655113",
-      "created_at": "2015-07-17T08:33:52Z",
-      "version": "2.7",
-      "environment_setup_commit": "bf436ea0a49513bd4e49bb2d1645bd770e470d75"
+      "base_commit": "091991be0da19de9108dbe5e3752917fea3d7fdc",
+      "created_at": "2014-11-01T02:20:16Z",
+      "version": "2.4",
+      "environment_setup_commit": "091991be0da19de9108dbe5e3752917fea3d7fdc"
     },
     {
       "instance_id": "pydata__xarray-4248",
@@ -339,5 +339,17 @@
     }
   ],
   "replacements_allowed": false,
-  "environment_eligibility": "not yet executed"
+  "environment_eligibility": "not yet executed",
+  "pre_inference_amendments": [
+    {
+      "policy_file": "swebench/REQUESTS-REPLACEMENT-POLICY-20261014.json",
+      "policy_sha256": "ce5be5957eb30ef10fe8562a52e79c34f3b56c89f8b6dcb7ddff0b7b4b176b17",
+      "excluded_instance": "psf__requests-2674",
+      "replacement_instance": "psf__requests-2317",
+      "reason": "pre-inference exclusion after non-discriminating official empty control; first eligible unused candidate in preregistered metadata rank",
+      "original_sample_sha256": "e6df5dc5e7f5619bc2692b40cb344019cf6e30087b124c1f92bc6c7e6765f128",
+      "gpu_hours": 0,
+      "llm_calls": 0
+    }
+  ]
 }

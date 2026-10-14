@@ -15,6 +15,17 @@ IMAGE = 'swebench/sweb.eval.x86_64.psf_1776_requests-2148:latest'
 
 
 class ServiceManifestTests(unittest.TestCase):
+    def test_timeout_fixture_rejects_host_network_namespace(self):
+        from types import SimpleNamespace
+        self.assertTrue(callable(getattr(curator,'start_connect_timeout_fixture',None)))
+        container=SimpleNamespace(reload=lambda:None,attrs={
+            'HostConfig':{'NetworkMode':'none'},'State':{'Pid':os.getpid()}})
+        with self.assertRaisesRegex(ValueError,'namespace'):
+            curator.start_connect_timeout_fixture(container)
+        container.attrs['HostConfig']['NetworkMode']='host'
+        with self.assertRaisesRegex(ValueError,'network'):
+            curator.start_connect_timeout_fixture(container)
+
     def test_run_lock_can_pin_service_without_requiring_one_for_other_repos(self):
         import jsonschema
         schema=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-RUN-LOCK.schema.json').read_bytes())['properties']['instances']['items']
@@ -78,6 +89,18 @@ class ServiceManifestTests(unittest.TestCase):
                 os.environ['REPOWORLD_CURATOR_SERVICES_SHA256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
                 self.assertEqual(curator.httpbin_profile(second)['trust_store'],'/testbed/requests/cacert.pem')
                 self.assertEqual(curator.httpbin_profile(IMAGE)['trust_store'],curator.SERVICE_TRUST)
+                replacement='swebench/sweb.eval.x86_64.psf_1776_requests-2317:latest'
+                profiles['profiles'][replacement]={**other,'image':replacement}
+                manifest.write_text(json.dumps(profiles))
+                os.environ['REPOWORLD_CURATOR_SERVICES_SHA256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
+                self.assertEqual(curator.httpbin_profile(replacement)['trust_store'],
+                                 '/testbed/requests/cacert.pem')
+                profiles['profiles'][replacement]['connect_timeout_fixture']='0.0.0.0/0'
+                manifest.write_text(json.dumps(profiles))
+                os.environ['REPOWORLD_CURATOR_SERVICES_SHA256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
+                with self.assertRaisesRegex(ValueError,'timeout'):
+                    curator.httpbin_profile(replacement)
+                del profiles['profiles'][replacement]['connect_timeout_fixture']
                 other['trust_store']='/testbed/requests/api.py'
                 manifest.write_text(json.dumps(profiles))
                 os.environ['REPOWORLD_CURATOR_SERVICES_SHA256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
@@ -92,6 +115,37 @@ class ServiceManifestTests(unittest.TestCase):
                      and os.environ.get('REPOWORLD_CURATOR_SERVICES'),
                      'requires explicit curator integration flag, bundle and Docker SDK')
 class LoopbackServiceTests(unittest.TestCase):
+    @unittest.skipUnless(os.environ.get('REPOWORLD_CURATOR_LEGACY_IMAGE'),
+                         'requires explicit legacy Requests image')
+    def test_legacy_runner_and_timeout_fixture_preserve_offline_isolation(self):
+        import docker
+        curator.restrict_containers()
+        client=docker.from_env()
+        container=client.containers.create(os.environ['REPOWORLD_CURATOR_LEGACY_IMAGE'],
+                                           command='sleep 90',detach=True)
+        try:
+            container.start()
+            probe=r'''
+import socket, pytest, requests
+assert pytest.__version__ == '4.6.11'
+pytest.raises(ValueError, "raise ValueError('public fixture')")
+try: requests.get('http://10.255.255.1', timeout=(.1, .1))
+except requests.exceptions.ConnectTimeout: pass
+else: raise AssertionError('timeout fixture did not produce a connect timeout')
+assert requests.get('http://httpbin.org/get').status_code == 200
+assert not any(line.split()[1]=='00000000' for line in open('/proc/net/route').readlines()[1:])
+caps=next(line.split()[1] for line in open('/proc/self/status') if line.startswith('CapEff:'))
+assert int(caps,16)==0
+s=socket.socket();s.settimeout(.1)
+try: s.connect(('1.1.1.1',80))
+except OSError: pass
+else: raise AssertionError('external network reachable')
+finally:s.close()
+'''
+            result=container.exec_run([curator.SERVICE_PYTHON,'-c',probe],workdir='/testbed')
+            self.assertEqual(result.exit_code,0,result.output.decode(errors='replace'))
+        finally:container.remove(force=True)
+
     def test_real_httpbin_http_tls_semantics_and_network_isolation(self):
         """Fails if startup, TLS trust, upstream routes or isolation are missing."""
         import docker

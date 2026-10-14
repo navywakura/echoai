@@ -67,9 +67,17 @@ def httpbin_profile(image):
         elif not file.is_dir():raise ValueError('service special files forbidden')
     if actual!=files or not {'ca.pem','key.pem','trust.pem','lib/httpbin/core.py'}<=set(files):
         raise ValueError('service bundle bytes changed or incomplete')
-    expected_trust=('/testbed/requests/cacert.pem' if image=='swebench/sweb.eval.x86_64.psf_1776_requests-2674:latest' else SERVICE_TRUST)
-    if profile.get('trust_store')!=expected_trust or profile.get('off_host_redirect_alias')!='www.google.co.uk':
+    # Historical Requests images may use their vendored roots or certifi.
+    # The operator pins the image and original trust bytes in the manifest;
+    # only certificate data paths are mountable, never implementation/tests.
+    if profile.get('trust_store') not in {SERVICE_TRUST,'/testbed/requests/cacert.pem'} or profile.get('off_host_redirect_alias')!='www.google.co.uk':
         raise ValueError('service trust/redirect profile mismatch')
+    if profile.get('connect_timeout_fixture') not in (None,'10.255.255.1/32'):
+        raise ValueError('unsupported connect timeout fixture')
+    if profile.get('legacy_pytest') not in (None,'4.6.11'):
+        raise ValueError('unsupported legacy pytest profile')
+    if profile.get('legacy_pytest') and not {'legacy/pytest','legacy/lib/pytest.py'}<=set(files):
+        raise ValueError('legacy pytest bundle incomplete')
     return {**profile,'manifest_sha256':digest}
 
 
@@ -115,6 +123,36 @@ def start_httpbin(container):
     raise RuntimeError('loopback_httpbin_not_ready')
 
 
+def start_connect_timeout_fixture(container):
+    """Public BASE's unreachable TARPIT must time out, not return ENETUNREACH.
+
+    The rootless operator creates a dummy device in this isolated namespace.
+    Tests keep cap_drop=ALL. No default route, forwarding, host interface or
+    external connectivity is added. Hold and recheck the namespace identity
+    before each operation; the container is still running its trusted idle command.
+    """
+    container.reload()
+    if container.attrs['HostConfig']['NetworkMode']!='none':
+        raise ValueError('timeout fixture requires isolated network')
+    pid=container.attrs['State']['Pid']
+    if type(pid) is not int or pid<=1:raise ValueError('invalid container namespace PID')
+    fd=os.open(f'/proc/{pid}/ns/net',os.O_RDONLY)
+    try:
+        target=os.fstat(fd);host=os.stat('/proc/self/ns/net')
+        if (target.st_dev,target.st_ino)==(host.st_dev,host.st_ino):
+            raise ValueError('host network namespace refused')
+        namespace=f'/proc/{pid}/ns/net'
+        for command in (['link','add','echo-tarpit','type','dummy'],
+                        ['link','set','echo-tarpit','up'],
+                        ['route','add','10.255.255.1/32','dev','echo-tarpit']):
+            current=os.stat(namespace)
+            if (current.st_dev,current.st_ino)!=(target.st_dev,target.st_ino):
+                raise ValueError('container network namespace changed')
+            subprocess.run(['podman','unshare','nsenter','--net='+namespace,'ip',*command],
+                           capture_output=True,check=True,timeout=10)
+    finally:os.close(fd)
+
+
 def validate_service_lock(profile,locked):
     expected=profile['manifest_sha256'] if profile else None
     if locked.get('service_manifest_sha256')!=expected:
@@ -155,13 +193,21 @@ def restrict_containers():
                 'REQUESTS_CA_BUNDLE':SERVICE_ROOT+'/ca.pem','CURL_CA_BUNDLE':SERVICE_ROOT+'/ca.pem',
                 'HTTP_PROXY':'','HTTPS_PROXY':'','ALL_PROXY':'','NO_PROXY':'*',
                 'http_proxy':'','https_proxy':'','all_proxy':'','no_proxy':'*'}
+            if profile.get('legacy_pytest'):
+                kwargs['volumes'][str(Path(profile['bundle'])/'legacy/pytest')]={
+                    'bind':'/opt/miniconda3/envs/testbed/bin/pytest','mode':'ro,Z'}
+                kwargs['environment'].update(PYTHONPATH=SERVICE_ROOT+'/legacy/lib',
+                    PYTEST_DISABLE_PLUGIN_AUTOLOAD='1',PYTEST_ADDOPTS='--assert=plain')
         container=original(self,*args,**kwargs)
         container._repoworld_httpbin=profile
         container._repoworld_reporting=reporting
         return container
     def start(self,*args,**kwargs):
         result=original_start(self,*args,**kwargs)
-        if getattr(self,'_repoworld_httpbin',None):start_httpbin(self)
+        profile=getattr(self,'_repoworld_httpbin',None)
+        if profile:
+            if profile.get('connect_timeout_fixture'):start_connect_timeout_fixture(self)
+            start_httpbin(self)
         return result
     ContainerCollection.create=create
     Container.start=start

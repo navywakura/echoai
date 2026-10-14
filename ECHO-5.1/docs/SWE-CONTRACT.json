@@ -12,9 +12,21 @@
     "parquet_sha256": "7a21f37b8bc179c7db5beeb14e88ac538ba283455c776e6b2535bbfb6e3551b4",
     "population": 300,
     "sample_file": "swebench/SWE-SAMPLE.json",
-    "sample_sha256": "e6df5dc5e7f5619bc2692b40cb344019cf6e30087b124c1f92bc6c7e6765f128",
+    "sample_sha256": "e29a514c797a9ac79ecd23a10bfca5030c2a062291cab835d57d58f30d8f3c4b",
     "seed": 20261013,
-    "replace_failed_instances": false
+    "replace_failed_instances": false,
+    "pre_inference_amendments": [
+      {
+        "policy_file": "swebench/REQUESTS-REPLACEMENT-POLICY-20261014.json",
+        "policy_sha256": "ce5be5957eb30ef10fe8562a52e79c34f3b56c89f8b6dcb7ddff0b7b4b176b17",
+        "excluded_instance": "psf__requests-2674",
+        "replacement_instance": "psf__requests-2317",
+        "reason": "pre-inference exclusion after non-discriminating official empty control; first eligible unused candidate in preregistered metadata rank",
+        "original_sample_sha256": "e6df5dc5e7f5619bc2692b40cb344019cf6e30087b124c1f92bc6c7e6765f128",
+        "gpu_hours": 0,
+        "llm_calls": 0
+      }
+    ]
   },
   "harness": {
     "repo": "https://github.com/SWE-bench/SWE-bench",

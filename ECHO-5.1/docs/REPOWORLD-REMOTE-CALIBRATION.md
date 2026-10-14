@@ -5,11 +5,12 @@ Este procedimiento está preparado, **no ejecutado**. No lanzar Kaggle hasta que
 correspondan a las fuentes actuales. El contrato continúa en `design`.
 `calibrate-remote` es un alias de `calibrate`, con las mismas comprobaciones.
 
-**Bloqueo verificado el 14 de octubre:** Requests-2674 no supera el control
-negativo. No utilizar los informes `controls-r4` o su recuperación como gate
-aprobado. Una invocación local de `calibrate-remote` con proveedor deshabilitado
-fue rechazada con `official-controls has not passed`, sin crear el directorio
-de calibración. Véase el [diagnóstico](REPOWORLD-CURATOR-ALL-20261014.md).
+**Estado local final del 14 de octubre:** los controles oficiales y públicos
+pasaron 36/36 tras sustituir Requests-2674 por 2317 según la política registrada.
+Los informes antiguos `controls-r4` y su recuperación conservan el fallo previo;
+no utilizarlos como gates actuales. Se ha comprobado offline que la calibración
+alcanza la construcción del proveedor, interceptada antes de cualquier conexión.
+**La calibración remota sigue pendiente.** Véase el [informe](REPOWORLD-CURATOR-ALL-20261014.md).
 
 ## Preparación local (sin GPU)
 
@@ -99,25 +100,25 @@ Auditar el episodio con `run_repoworld.py audit-episode`. Registrar latencia,
 contabilidad y cierre del worker. Este gate comprueba el pipeline, no demuestra
 resolución oficial de SWE-bench ni autoriza por sí solo la campaña completa.
 
-## Gates locales de esta entrega y restauración
+## Gates locales actuales
 
-Los gates autenticados locales están en:
+Desde la raíz del worktree:
 
 ```bash
-REGISTRY=ECHO-5.1/artifacts/repoworld-option-b-20261014/registry.json
-PREFLIGHT=/tmp/echo-curator-preflight-r2
-SMOKE=/tmp/echo-curator-smoke-r2
+EVIDENCE=ECHO-5.1/artifacts/repoworld-requests-replacement-20261014
+REGISTRY="$EVIDENCE/registry.json"
+PREFLIGHT="$EVIDENCE/preflight"
+SMOKE="$EVIDENCE/smoke"
+CURATOR="$EVIDENCE/official-controls"
+VERIFICATION="$EVIDENCE/software"
 ```
 
-La autoridad HMAC vincula cada diario a su ruta absoluta: no usar una copia
-movida como gate ni editar `authority.json`. Se conservan archivos completos
-`preflight-full-evidence.tar.gz`, `smoke-full-evidence.tar.gz` y
-`software-full-evidence.tar.gz` en la carpeta de evidencia de esta entrega.
-Si `/tmp` se ha limpiado, comprobar primero los hashes del manifiesto y restaurar
-cada archivo en `/tmp`, únicamente cuando su directorio de destino no exista.
-Así se recupera la misma ruta y autoridad. Las copias de consulta en la carpeta
-de evidencia no son gates trasladables. `require_gate` vuelve a autenticar el
-contenido y a comparar las fuentes antes de iniciar inferencia.
+La autoridad HMAC vincula cada diario a su ruta absoluta: conservar estos gates
+en su ubicación original, no usar copias movidas ni editar `authority.json`.
+Son directorios persistentes del worktree. `verify_final.py` en la misma carpeta
+recomprueba firmas, fuentes, muestra y hashes de logs sin contactar un modelo.
+Los archivos históricos de recuperación de `/tmp/echo-curator-*-r2` corresponden
+a las fuentes anteriores y no sustituyen a estos gates.
 
 ## Curador local: perfil de Podman de esta entrega
 
@@ -138,9 +139,12 @@ No se modifica `~/.config/containers/storage.conf`.
 
 El perfil operativo, la orden de arranque y las identidades de las imágenes se
 conservan en `curator-runtime-r4.json` y `rootless-unpack-policy.json` dentro de
-la carpeta de evidencia. Para repetir los controles usar el `curator-config.json`
-de esa carpeta y exportar `REPOWORLD_CURATOR_SERVICES` con la ruta absoluta de
-`services.json`, junto con su SHA-256 en `REPOWORLD_CURATOR_SERVICES_SHA256`.
+la carpeta de evidencia. Para repetir los controles usar el `curator-config.json` de
+`ECHO-5.1/artifacts/repoworld-curator-all-20261014/` y exportar
+`REPOWORLD_CURATOR_SERVICES` con la ruta absoluta del nuevo
+`ECHO-5.1/artifacts/repoworld-requests-replacement-20261014/services.json`, junto con su
+SHA-256 en `REPOWORLD_CURATOR_SERVICES_SHA256`. El perfil histórico de Requests
+y su ruta dummy forman parte del entorno fijado; no intercambiar manifiestos.
 Detener solo este servicio propio después de la ejecución. Gate 3 ejecuta el
 repositorio con Bubblewrap; el servicio del curador no necesita estar activo
 para inferencia/calibración.
