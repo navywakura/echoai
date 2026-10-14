@@ -253,3 +253,14 @@ La calibración técnica no cierra ECHO-5.1. [Resultado y diagnóstico](REPOWORL
 - [ ] Sellado nuevo y campaña oficial; no realizados.
 
 [Resultados y autopsia v3](REPOWORLD-REMOTE-V3-RESULTS-20261014.md).
+
+## ECHO-5.1-V2 · interfaz local verificada (2026-10-15)
+
+- [x] Outline AST, edición SEARCH/REPLACE exacta, diff generado y validado internamente.
+- [x] Observación completa por contenido, recuperación tras rollback y rechazo repetido contextual.
+- [x] Interfaz versionada en el contrato y en todos los brazos; cuotas globales conservadas.
+- [x] 439 pruebas pasadas, 3 omitidas; smoke real programado con 127 recibos auditados.
+- [ ] Renovación de gates restantes y calibración real V2; 0 GPU en esta entrega.
+- [ ] Mejora científica medida frente a controles y cierre oficial.
+
+[Implementación, límites y reproducción](ECHO-5.1-V2-IMPLEMENTATION-20261015.md).

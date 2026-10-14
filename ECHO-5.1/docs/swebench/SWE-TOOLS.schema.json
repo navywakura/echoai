@@ -148,6 +148,80 @@
         "check_id",
         "probe_id"
       ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool": {
+          "const": "file_outline"
+        },
+        "snapshot_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "cursor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256
+        },
+        "class_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "tool",
+        "snapshot_id",
+        "path",
+        "cursor"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool": {
+          "const": "patch_apply"
+        },
+        "expected_snapshot_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "purpose": {
+          "const": "solution"
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "search": {
+          "type": "string",
+          "maxLength": 32768
+        },
+        "replace": {
+          "type": "string",
+          "maxLength": 32768
+        }
+      },
+      "required": [
+        "tool",
+        "expected_snapshot_id",
+        "purpose",
+        "path",
+        "search",
+        "replace"
+      ]
     }
   ],
   "description": "Structured requests, not shell commands. Supervisor validates snapshot/path capabilities and byte/token ceilings separately."

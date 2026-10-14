@@ -321,3 +321,44 @@ class Workspace:
 def retain(candidate,*,expected_head,public_receipt_ids):
     return Workspace(candidate.snapshot.root.parent.parent.parent).retain(candidate,
                       expected_head=expected_head,public_receipt_ids=public_receipt_ids)
+
+
+def search_replace_diff(session,path,search,replace,expected_snapshot_id):
+    """Compile one exact observed whole-line edit; stage through existing CAS."""
+    from .source_evidence import file_bytes, observed_lines, parse_symbols
+    if expected_snapshot_id!=session.current.id:raise ValueError('STALE_BASE')
+    production_path(session.base.task.repo,path)
+    if not isinstance(search,str) or not isinstance(replace,str) or not search or search==replace:
+        raise PatchFormatError('EMPTY_OR_NOOP_SEARCH')
+    if len(search.encode())+len(replace.encode())>65536:raise PatchFormatError('edit size limit')
+    raw=file_bytes(session,expected_snapshot_id,path);text=raw.decode('utf-8')
+    before=text.splitlines(True);needle=search.splitlines(True)
+    hits=[i for i in range(len(before)-len(needle)+1) if before[i:i+len(needle)]==needle]
+    if len(hits)>1:raise PatchFormatError('AMBIGUOUS_SEARCH_BLOCK at lines '+str([i+1 for i in hits[:8]]))
+    if not hits:
+        # Diagnostic only: bounded anchor candidates, never fuzzy application.
+        anchor=next((x.strip() for x in needle if x.strip()),'')
+        candidates=[i for i,x in enumerate(before) if anchor and anchor.split('(')[0] in x][:32]
+        best=max(candidates,key=lambda i:difflib.SequenceMatcher(None,search,''.join(before[i:i+len(needle)]),autojunk=False).quick_ratio(),default=0)
+        snippet=[];size=0
+        for i in range(max(0,best-2),min(len(before),best+8)):
+            line=f'L{i+1}: '+before[i];cost=len(line.encode())
+            if size+cost>900:break
+            snippet.append(line);size+=cost
+        raise PatchFormatError('SEARCH_BLOCK_NOT_FOUND; diagnostic only, read exact source:\n'+''.join(snippet))
+    at=hits[0];known=observed_lines(session,path,raw)
+    if any(known.get(i+1)!=before[i] for i in range(at,at+len(needle))):
+        raise ValueError(f'UNOBSERVED_SEARCH: file_view {path} lines {at+1}-{at+len(needle)} first')
+    after=before[:at]+replace.splitlines(True)+before[at+len(needle):]
+    content=''.join(after)
+    if path.endswith('.py'):
+        try:parse_symbols(content.encode())
+        except ValueError as exc:raise PatchFormatError('PATCH_AST_SYNTAX_OR_RESOURCE_ERROR') from exc
+    chunks=difflib.unified_diff(before,content.splitlines(True),fromfile='a/'+path,tofile='b/'+path)
+    diff=''.join(x if x.endswith('\n') else x+'\n\\ No newline at end of file\n' for x in chunks)
+    edits=_parse_diff(session.store,session.current,diff)
+    if len(edits)!=1 or edits[0]['content']!=content:raise ValueError('compiled diff roundtrip failed')
+    session.receipts.append(dict(event='repoworld.exact-edit-compiled',source=expected_snapshot_id,path=path,
+        file_sha256=hashlib.sha256(raw).hexdigest(),search_sha256=hashlib.sha256(search.encode()).hexdigest(),
+        replace_sha256=hashlib.sha256(replace.encode()).hexdigest(),diff_sha256=hashlib.sha256(diff.encode()).hexdigest(),start=at+1,end=at+len(needle)))
+    return diff

@@ -114,6 +114,24 @@ def _view(session,request):
     return dict(lines=rows,cursor=_cursor(session,request,[offset,number]) if more else None)
 
 
+def _outline(session,request):
+    from .source_evidence import file_bytes,parse_symbols
+    raw=file_bytes(session,request['snapshot_id'],request['path'])
+    symbols=parse_symbols(raw);name=request.get('class_name')
+    if name:symbols=[x for x in symbols if x['symbol']==name or x['symbol'].startswith(name+'.')]
+    offset=_position(session,request,0)
+    if type(offset) is not int or not 0<=offset<=len(symbols):raise ValueError('invalid outline offset')
+    rows=[];reply=dict(path=request['path'],file_sha256=hashlib.sha256(raw).hexdigest(),symbols=[],cursor=None)
+    for row in symbols[offset:]:
+        next_offset=offset+len(rows)+1
+        candidate={**reply,'symbols':rows+[row],'cursor':_cursor(session,request,next_offset) if next_offset<len(symbols) else None}
+        if not _fits_reply(session,candidate,output_limit=FILE_VIEW_OUTPUT_UNITS):break
+        rows.append(row);reply=candidate
+    if offset<len(symbols) and not rows:raise ValueError('outline symbol exceeds page budget')
+    session.receipts.append(dict(event='repoworld.outline-observation',snapshot=request['snapshot_id'],**reply))
+    return reply
+
+
 def _search(session,request):
     snap=session.snapshot(request['snapshot_id']);_path(snap,request['path'])
     skip=_position(session,request,0)
@@ -162,7 +180,7 @@ def _search(session,request):
 def dispatch_tool(request: dict,*,session):
     # Reservations happen before validation, including failed/forged requests.
     remaining=session.budget.report()['remaining'].get('cpu_us',0)
-    output_limit=FILE_VIEW_OUTPUT_UNITS if request.get('tool')=='file_view' else 1000
+    output_limit=FILE_VIEW_OUTPUT_UNITS if request.get('tool') in ('file_view','file_outline') else 1000
     ticket=session.budget.reserve({'tools':1,'output_tokens':output_limit,'cpu_us':remaining})
     reply=None;candidate_cpu=0;started=time.process_time_ns()
     child_start=resource.getrusage(resource.RUSAGE_CHILDREN)
@@ -171,7 +189,11 @@ def dispatch_tool(request: dict,*,session):
         try: jsonschema.Draft202012Validator(json.loads(SCHEMA.read_text())).validate(request)
         except jsonschema.ValidationError as exc: raise ValueError('invalid tool request') from exc
         tool=request['tool']
-        if tool=='file_view': reply=_view(session,request)
+        if tool=='file_view':
+            reply=_view(session,request)
+            from .source_evidence import record_view
+            record_view(session,request,reply)
+        elif tool=='file_outline':reply=_outline(session,request)
         elif tool=='repo_search': reply=_search(session,request)
         elif tool=='patch_apply':
             if request['purpose']=='probe':
@@ -179,7 +201,11 @@ def dispatch_tool(request: dict,*,session):
                 from .workspace import stage_probe
                 reply=dict(probe_id=stage_probe(session,request['diff']),retained=False,claim_status='unknown')
             else:
-                candidate=session.stage(request['diff'],request['expected_snapshot_id'],request['purpose'])
+                if 'search' in request:
+                    from .workspace import search_replace_diff
+                    diff=search_replace_diff(session,request['path'],request['search'],request['replace'],request['expected_snapshot_id'])
+                else:diff=request['diff']
+                candidate=session.stage(diff,request['expected_snapshot_id'],request['purpose'])
                 reply=dict(candidate_id=candidate.snapshot.id,operation_id=candidate.operation_id,
                            retained=False,claim_status='unknown')
         elif tool=='test_run':

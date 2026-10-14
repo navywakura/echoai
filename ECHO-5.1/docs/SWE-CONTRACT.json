@@ -143,7 +143,10 @@
     "ast": "optional indexed navigation; original source remains authority; no semantic pruning",
     "file_view_source_bytes_max": 2500,
     "file_view_output_accounting_units_max": 6000,
-    "file_view_accounting": "Exception to generic tool observation cap: conservative UTF-8 JSON bytes (or injected tokenizer); exact full prompt must still fit 3200 model tokens before generation; no partial source lines."
+    "file_view_accounting": "Exception to generic tool observation cap: conservative UTF-8 JSON bytes (or injected tokenizer); exact full prompt must still fit 3200 model tokens before generation; no partial source lines.",
+    "file_outline_output_accounting_units_max": 6000,
+    "localization_calls_max": 8,
+    "solution_edit_format": "exact whole-line search/replace; observed current-content search required; internally compiled zero-fuzz diff"
   },
   "visibility": {
     "actor_fields": [
@@ -257,5 +260,7 @@
     "raw_secrets": false,
     "claim_general_correctness": false,
     "s6": "out of scope"
-  }
+  },
+  "interface_version": 2,
+  "interface_revision": "ECHO-5.1-V2"
 }

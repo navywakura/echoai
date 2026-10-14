@@ -152,8 +152,8 @@ def smoke(registry,contract,sample_path,*,instance_id,actions,output):
     if instance_id not in calibration:raise ValueError('smoke restricted to reserved calibration issues')
     output=Path(output);base=prepare_entry(tasks[instance_id],entries[instance_id],output/'prepared')
     provider=ScriptedProvider(actions)
-    result=run_episode(base,'E',73,provider=provider,output=output/'episode',check_plan=entries[instance_id]['check_plan'])
-    replay=run_episode(base,'E',73,provider=provider,output=output/'episode',check_plan=entries[instance_id]['check_plan'])
+    result=run_episode(base,'E',73,provider=provider,output=output/'episode',check_plan=entries[instance_id]['check_plan'],interface_version=contract.get('interface_version',1))
+    replay=run_episode(base,'E',73,provider=provider,output=output/'episode',check_plan=entries[instance_id]['check_plan'],interface_version=contract.get('interface_version',1))
     store=existing_receipts(output/'episode/main')
     decisions=[r['body'] for r in store.records if r['body'].get('event')=='repoworld.public-decision']
     valid=result==replay and bool(result['model_patch']) and any(r['status']=='PUBLIC_REGRESSION' and not r['retain'] for r in decisions) and any(r['status']=='PUBLIC_CHECKS_PASSED' and r['retain'] for r in decisions)
@@ -277,7 +277,7 @@ def calibrate_remote(registry,contract,sample_path,*,preflight_dir,curator_dir,s
     provider=RepoProvider(provider_config);start=time.monotonic()
     try:
         metadata=provider.verify_worker(contract)
-        result=run_episode(base,'E',73,provider=provider,output=output/'episode',check_plan=entries[instance_id]['check_plan'])
+        result=run_episode(base,'E',73,provider=provider,output=output/'episode',check_plan=entries[instance_id]['check_plan'],interface_version=contract.get('interface_version',1))
     finally:_atomic_write(output/'worker-stop.json',canonical(provider.stop()))
     valid=result['is_llm'] and result['budget']['used']['llm_calls']>0 and not result['budget']['pending']
     return write_gate(output,dict(kind='remote-calibration',valid=bool(valid),instance_id=instance_id,
@@ -391,7 +391,7 @@ def _run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=No
             store.append(dict(event='repoworld.cell-start',cell_id=cell['cell_id'],utc=time.time()))
             try:
                 result=run_episode(base,cell['arm'],cell['seed'],provider=provider,output=target,
-                    check_plan=entries[cell['instance_id']]['check_plan'],library=library)
+                    check_plan=entries[cell['instance_id']]['check_plan'],library=library,interface_version=contract.get('interface_version',1))
                 store.append(dict(event='repoworld.cell-completed',cell_id=cell['cell_id'],submission_sha256=hashlib.sha256(canonical(result)).hexdigest()))
                 print(json.dumps(dict(cell_id=cell['cell_id'],instance_id=cell['instance_id'],arm=cell['arm'],status=result['status'])),flush=True)
             finally:
