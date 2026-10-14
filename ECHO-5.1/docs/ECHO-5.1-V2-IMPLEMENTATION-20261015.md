@@ -127,3 +127,11 @@ proyecciones por rol del briefing. Ambas extensiones requieren su propia ablaci�
 - `software-final/report.json`: `641585fb14ff545e1c4dfd3b1e467acd540b4dc1676a402eab13e7b3d56630ec`.
 - `smoke-final/report.json`: `51af02fe37cf43f5b94598d0623fd99854765d2045b5c2f121680cb108c689c8`.
 - `audit-final.json`: `9a20415e7ad7530ff7f5bf61e7274e31c511e61cd313751def2bb5a091f7c151`.
+
+## Continuación: renovación y modelo real
+
+La fase posterior ya renovó las 36 instancias y enlazó los controles oficiales.
+La [calibración V2](REPOWORLD-V2-CALIBRATION-20261015.md) confirma navegación
+y lecturas íntegras, pero no generó parches por un bucle de localización.
+El checklist histórico anterior corresponde a la entrega de código sin GPU;
+el informe enlazado contiene el estado actual y las obligaciones pendientes.

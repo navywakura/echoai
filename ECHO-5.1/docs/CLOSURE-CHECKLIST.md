@@ -264,3 +264,14 @@ La calibración técnica no cierra ECHO-5.1. [Resultado y diagnóstico](REPOWORL
 - [ ] Mejora científica medida frente a controles y cierre oficial.
 
 [Implementación, límites y reproducción](ECHO-5.1-V2-IMPLEMENTATION-20261015.md).
+
+## Calibración ECHO-5.1-V2 (2026-10-15)
+
+[Resultados y checklist](REPOWORLD-V2-CALIBRATION-20261015.md): compuertas
+locales renovadas, 36/36 entornos y controles oficiales; 439 tests pasados/3
+omitidos. Calibración real con 32B/2 T4, 223 recibos válidos, 24.155 tokens.
+El modelo observó `_entry` íntegramente, pero repitió lecturas hasta agotar
+presupuesto: 0 parches. Gate técnico válido, objetivo funcional pendiente.
+Quedan corregir el traspaso y reserva de edición, medir un parche útil,
+evaluarlo oficialmente y comparar brazos antes de cerrar ECHO-5.1.
+Kaggle COMPLETE, relay/túnel apagados; cuota restante 21,94 h. Sin campaña ni push.
