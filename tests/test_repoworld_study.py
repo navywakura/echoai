@@ -1,7 +1,11 @@
 import json
+import hashlib
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import Mock, patch
 try:
     from .repoworld_support import ROOT
 except ImportError:
@@ -10,6 +14,96 @@ from echoai.repoworld.study import schedule_for,write_gate,require_gate,require_
 
 
 class StudyTests(unittest.TestCase):
+    @contextmanager
+    def bounded_campaign(self, *, episode_seconds=0, phase_hours=6):
+        """Real orchestration/ledger/freezing, simulated gates, model and repos."""
+        from echoai.repoworld import study
+        from echoai.pcworld.receipts import canonical
+        with tempfile.TemporaryDirectory() as tmp, ExitStack() as stack:
+            root=Path(tmp);sealed=root/'sealed';sealed.mkdir();clock=[0.0]
+            registry=root/'registry.json';registry.write_text('{}')
+            sample=root/'sample.json';sample.write_text('{}')
+            schedule=[dict(cell_id=f'cell-{i}',instance_id=f'fixture__repo-{i}',repo='fixture/repo',
+                           arm='E',seed=73,phase='primary') for i in range(3)]
+            contract={'gpu_budget':{'total_cap_hours':18,'phase_caps_hours':{'primary':phase_hours}}}
+            lock={'code_manifest_sha256':hashlib.sha256(canonical({})).hexdigest(),
+                  'schedule_sha256':hashlib.sha256(canonical(schedule)).hexdigest(),
+                  'instances':[dict(instance_id=c['instance_id'],online_tree_sha256='tree',
+                      online_rootfs_sha256='runtime',public_checks_sha256='checks') for c in schedule]}
+            for name,data in [('SWE-CONTRACT.json',contract),('SWE-RUN-LOCK.json',lock),('schedule.json',schedule)]:
+                (sealed/name).write_bytes(canonical(data))
+            gate={'registry_sha256':hashlib.sha256(registry.read_bytes()).hexdigest(),
+                  'model_config_sha256':hashlib.sha256(canonical(study.provider_identity({}))).hexdigest()}
+            tasks={c['instance_id']:SimpleNamespace(instance_id=c['instance_id']) for c in schedule}
+            entries={k:{'check_plan':{}} for k in tasks}
+            executed=[];provider=Mock();provider.stop.return_value={'stopped':True};provider.verify_worker.return_value={}
+            def prepare(task,entry,output):
+                return SimpleNamespace(task=task,snapshot=SimpleNamespace(id='tree'),
+                                       environment=SimpleNamespace(rootfs_sha256='runtime'))
+            def episode(base,arm,seed,**kwargs):
+                executed.append(base.task.instance_id);clock[0]+=episode_seconds
+                value=dict(instance_id=base.task.instance_id,arm=arm,seed=seed,status='finished',model_patch='')
+                p=kwargs['output'];p.mkdir(parents=True,exist_ok=True);(p/'mock-result.json').write_bytes(canonical(value))
+                return value
+            replacements={'validate_seal':{'gates':{k:{'directory':root} for k in ('offline-preflight','remote-calibration')}},
+                'require_gate':gate,'validate_model_config':None,'require_launch':None,'source_manifest':{},
+                'load_registry':(tasks,entries,{}),'validate_plan':'checks','RepoProvider':provider}
+            for name,value in replacements.items():stack.enter_context(patch.object(study,name,return_value=value))
+            stack.enter_context(patch.object(study,'prepare_entry',side_effect=prepare))
+            stack.enter_context(patch.object(study,'run_episode',side_effect=episode))
+            stack.enter_context(patch.object(study.time,'monotonic',side_effect=lambda:clock[0]))
+            stack.enter_context(patch.object(study.time,'time',side_effect=lambda:10000+clock[0]))
+            stack.enter_context(patch('echoai.repoworld.audit.audit_episode',side_effect=lambda p:
+                {'result':json.loads((Path(p)/'mock-result.json').read_bytes())}))
+            yield SimpleNamespace(run=lambda **kw:study.run_study(sealed,registry,sample,{},root/'run',phase='primary',**kw),
+                root=root,executed=executed,provider=provider)
+
+    def test_batch_limit_pauses_before_next_cell_and_resumes_without_reexecution(self):
+        from echoai.repoworld.evaluator import existing_receipts
+        with self.bounded_campaign() as c:
+            first=c.run(max_episodes=1)
+            self.assertTrue(first['paused']);self.assertFalse(first['phase_complete'])
+            self.assertEqual(first['completed'],1);self.assertEqual(first['not_started'],0)
+            self.assertEqual(first['phase_remaining'],2);self.assertFalse(first['frozen'])
+            rows=[r['body'] for r in existing_receipts(c.root/'run').records]
+            self.assertEqual(sum(r['event']=='repoworld.cell-start' for r in rows),1)
+            self.assertEqual(sum(r['event']=='repoworld.gpu-window-start' for r in rows),1)
+            self.assertEqual(sum(r['event']=='repoworld.gpu-window-end' for r in rows),1)
+            self.assertEqual(sum(r['event']=='repoworld.batch-paused' for r in rows),1)
+            self.assertFalse((c.root/'run/frozen/freeze.json').exists())
+            second=c.run(max_episodes=2)
+            self.assertFalse(second['paused']);self.assertTrue(second['phase_complete']);self.assertTrue(second['frozen'])
+            self.assertEqual(second['completed'],3);self.assertEqual(second['batch_completed'],2)
+            self.assertEqual(c.executed,['fixture__repo-0','fixture__repo-1','fixture__repo-2'])
+            third=c.run(max_episodes=1)
+            self.assertEqual(third['batch_completed'],0);self.assertEqual(len(c.executed),3)
+            self.assertEqual(c.provider.stop.call_count,3)
+
+    def test_batch_wall_limit_reserves_episode_room_and_preserves_global_time(self):
+        from echoai.repoworld.evaluator import existing_receipts
+        with self.bounded_campaign(episode_seconds=1900) as c:
+            result=c.run(batch_seconds=3600)
+            self.assertTrue(result['paused']);self.assertEqual(result['completed'],1)
+            self.assertEqual(result['not_started'],0)
+            resumed=c.run(batch_seconds=3600)
+            self.assertTrue(resumed['paused']);self.assertEqual(resumed['completed'],2)
+            windows=[r['body'] for r in existing_receipts(c.root/'run').records if r['body']['event']=='repoworld.gpu-window-end']
+            self.assertEqual(sum(r['seconds'] for r in windows),3800)
+
+    def test_registered_cap_still_accounts_unstarted_cells_instead_of_batch_retry(self):
+        with self.bounded_campaign(episode_seconds=1900,phase_hours=1) as c:
+            result=c.run(batch_seconds=3600)
+            self.assertFalse(result['paused']);self.assertTrue(result['phase_complete'])
+            self.assertEqual((result['completed'],result['not_started']),(1,2));self.assertTrue(result['frozen'])
+
+    def test_invalid_batch_limits_fail_before_provider_or_filesystem_access(self):
+        from echoai.repoworld.study import run_study
+        for options in ({'max_episodes':0},{'max_episodes':True},{'batch_seconds':1800},
+                        {'batch_seconds':8400},{'batch_seconds':True}):
+            with self.subTest(options=options),patch('echoai.repoworld.study.RepoProvider',side_effect=AssertionError('no provider')):
+                with self.assertRaisesRegex(ValueError,'batch'):
+                    run_study(None,None,None,{},None,**options)
+
     def test_seal_binds_offline_service_in_addition_to_official_image(self):
         from echoai.repoworld.study import validate_curator_binding
         row={k:'a'*64 for k in ('official_image_digest','official_eval_script_sha256','sealed_tests_sha256')}

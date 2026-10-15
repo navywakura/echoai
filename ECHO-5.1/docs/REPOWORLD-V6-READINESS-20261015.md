@@ -84,3 +84,28 @@ resultados primarios. `campaign_driver.py` ejecuta fases, apaga cada worker,
 congela todas las entregas, llama al curador y genera export/gráficas. Sus topes
 son límites de gasto, no garantías de completar todas las celdas; las no iniciadas
 por falta de presupuesto permanecen en el denominador.
+
+## Observaciones durante la campaña sellada
+
+La celda de calibración `140446d796d7abc783327a445434f989` (Flask-4992,
+brazo S) agotó 24 llamadas y entregó un diff vacío con 23.960 tokens y cero
+reservas pendientes. El resultado conserva `status=active`: el bucle termina
+por `max_calls` sin actualizar esa etiqueta, aunque el recibo `branch-frozen`
+y la entrega final existen. Es un defecto de clasificación terminal que se
+debe corregir en una revisión posterior; no se modifica el código sellado.
+La auditoría/evaluación usa la entrega congelada y no considera `active` una
+resolución. Los recibos muestran búsquedas repetidas de la ruta inexistente
+`flask/config.py`; no hubo un fallo del relay en esa celda. No se relanza ni
+se elimina ese resultado.
+
+El lote V6 cerró 11 episodios de calibración y dejó cinco `not_started` por
+el límite registrado de tiempo. Worker COMPLETE, 2.259,909 s, cuota
+21,41 → 20,78 h. Antes de iniciar el panel primario, el empaquetador rechazó
+un timeout de 22.500 s: admite hasta 9.000 s y el relay hasta 8.400 s.
+El intento de arranque primario no encendió ninguna GPU. Relay y túnel locales
+quedaron apagados. No hubo episodios primarios ni evaluación del oráculo final.
+
+Se conserva este estudio parcial y su lock original. La corrección de sesiones
+acotadas cambia el manifiesto y requiere compuertas/sello nuevos; los resultados
+V6 no se trasladan al panel primario ni se reescriben. Continuación:
+[V7 por lotes](REPOWORLD-V7-BATCHES-20261015.md).

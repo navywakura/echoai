@@ -37,6 +37,8 @@ def main():
     q=sub.add_parser('run')
     for key in ('sealed','registry','sample','provider','output'):q.add_argument('--'+key,type=Path,required=True)
     q.add_argument('--phase',choices=['calibration','primary','guard_ablation','memory_donor','memory'])
+    q.add_argument('--batch-seconds',type=int,default=6000,help='1801..6600; pause between episodes with 1800 seconds of room reserved')
+    q.add_argument('--max-episodes',type=int,help='optional per-session limit; pending cells remain resumable')
     q=sub.add_parser('audit')
     for key in ('directory','sealed','sample'):q.add_argument('--'+key,type=Path,required=True)
     q.add_argument('--export',type=Path)
@@ -67,7 +69,8 @@ def main():
             cap=json.loads(args.curator.read_bytes())
             for k in ('python','harness','dataset','output'):cap[k]=Path(cap[k])
             result=study.curator_preflight(CuratorCapability(**cap),json.loads(args.contract.read_bytes()),args.sample,args.output,allow_pull=args.allow_pull,scope=args.scope)
-        elif args.command=='run':result=study.run_study(args.sealed,args.registry,args.sample,json.loads(args.provider.read_bytes()),args.output,phase=args.phase)
+        elif args.command=='run':result=study.run_study(args.sealed,args.registry,args.sample,json.loads(args.provider.read_bytes()),args.output,
+            phase=args.phase,batch_seconds=args.batch_seconds,max_episodes=args.max_episodes)
         elif args.command=='verify':
             import subprocess,time,hashlib
             sources=study.source_manifest()

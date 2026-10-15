@@ -319,15 +319,23 @@ def curator_preflight(cap,contract,sample_path,output,*,allow_pull=False,scope='
         private_log_sha256=sha256_file(output/'curator-private.log'),sample_sha256=sha256_file(sample_path)),source_before=sources)
 
 
-def run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=None):
+def run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=None,batch_seconds=6000,max_episodes=None):
+    # A worker session is shorter than a phase. Pausing a batch must not mark
+    # untouched cells as failures or reset the authenticated cumulative budget.
+    if type(batch_seconds) is not int or not 1800<batch_seconds<=6600:
+        raise ValueError('batch_seconds must be an integer in 1801..6600')
+    if max_episodes is not None and (type(max_episodes) is not int or max_episodes<1):
+        raise ValueError('batch max_episodes must be a positive integer')
     holder={}
-    try:return _run_study(sealed_dir,registry,sample_path,provider_config,output,phase=phase,holder=holder)
+    try:return _run_study(sealed_dir,registry,sample_path,provider_config,output,phase=phase,holder=holder,
+                          batch_seconds=batch_seconds,max_episodes=max_episodes)
     finally:
         if holder.get('provider') is not None:
             _atomic_write(Path(output)/'worker-stop.json',canonical(holder['provider'].stop()))
 
 
-def _run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=None,holder):
+def _run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=None,holder,batch_seconds,max_episodes):
+    batch_started=time.monotonic();batch_completed=0;pause_reason=None
     sealed_dir=Path(sealed_dir);output=Path(output);output.mkdir(parents=True,exist_ok=True,mode=0o700)
     contract=json.loads((sealed_dir/'SWE-CONTRACT.json').read_bytes());lock=json.loads((sealed_dir/'SWE-RUN-LOCK.json').read_bytes())
     seal=validate_seal(sealed_dir,sample_path)
@@ -373,6 +381,13 @@ def _run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=No
                 if any(r['body'].get('event')=='repoworld.cell-start' and r['body']['cell_id']==cell['cell_id'] for r in store.records):break
                 record_not_started(store,cell,'registered GPU wall cap: insufficient room for one bounded episode')
                 continue
+            elapsed=time.monotonic()-batch_started
+            if (max_episodes is not None and batch_completed>=max_episodes) or elapsed+1800>batch_seconds:
+                pause_reason='batch episode limit' if max_episodes is not None and batch_completed>=max_episodes else 'batch wall allowance'
+                store.append(dict(event='repoworld.batch-paused',phase=phase,next_cell_id=cell['cell_id'],
+                    reason=pause_reason,elapsed_seconds=elapsed,batch_seconds=batch_seconds,
+                    max_episodes=max_episodes,completed_in_batch=batch_completed))
+                break
             # Includes local preparation/waiting while a worker may be loaded.
             import uuid
             window=uuid.uuid4().hex;window_start=time.time()
@@ -393,6 +408,7 @@ def _run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=No
                 result=run_episode(base,cell['arm'],cell['seed'],provider=provider,output=target,
                     check_plan=entries[cell['instance_id']]['check_plan'],library=library,interface_version=contract.get('interface_version',1))
                 store.append(dict(event='repoworld.cell-completed',cell_id=cell['cell_id'],submission_sha256=hashlib.sha256(canonical(result)).hexdigest()))
+                batch_completed+=1
                 print(json.dumps(dict(cell_id=cell['cell_id'],instance_id=cell['instance_id'],arm=cell['arm'],status=result['status'])),flush=True)
             finally:
                 store.append(dict(event='repoworld.cell-time',cell_id=cell['cell_id'],elapsed_seconds=time.monotonic()-started))
@@ -403,4 +419,9 @@ def _run_study(sealed_dir,registry,sample_path,provider_config,output,*,phase=No
         if completed|set(unstarted)=={r['cell_id'] for r in schedule}:
             submissions={r['cell_id']:unstarted[r['cell_id']] if r['cell_id'] in unstarted else audit_episode(output/'episodes'/r['cell_id'])['result'] for r in schedule}
             freeze_set(output/'frozen',schedule,submissions,lock_sha256=hashlib.sha256(canonical(lock)).hexdigest())
-    return dict(completed=len(completed),not_started=len(unstarted),registered=len(schedule),frozen=completed|set(unstarted)=={r['cell_id'] for r in schedule})
+    accounted=completed|set(unstarted)
+    remaining={r['cell_id'] for r in schedule if phase is None or r['phase']==phase}-accounted
+    return dict(completed=len(completed),not_started=len(unstarted),registered=len(schedule),
+                frozen=accounted=={r['cell_id'] for r in schedule},batch_completed=batch_completed,
+                paused=pause_reason is not None,pause_reason=pause_reason,
+                phase_complete=not remaining,phase_remaining=len(remaining))
