@@ -13,7 +13,9 @@
 - [x] Verify V8 secuencial: 466 pasadas, 3 omitidas; smoke con 137 recibos,
   rollback y replay. Preflight 36/36, controles 36/36 y frontera offline válidos.
   Se conserva el fallo intermitente de cancelación systemd del primer verify.
-- [ ] Calibración V8 con replay previo de prompts sobredimensionados y apagado.
+- [x] Calibración V8 y sello: 11 checks funcionales, 263 recibos, 17.916 tokens
+  al traspasar, replay de los tres prompts y apagado confirmados.
+  Contrato operativo sellado; no implica resolución oficial del issue.
 - [ ] Campaña completa: V7 se detuvo antes del panel principal (10 calibraciones
   completas y una interrumpida en baseline). No se reutilizan sus entregas en V8.
 - [ ] Harness oficial, auditoría final, tasas de resolución y figuras medidas.
@@ -22,7 +24,8 @@
 Evidencia: [V5](REPOWORLD-V5-PHASES-20261015.md),
 [V6](REPOWORLD-V6-READINESS-20261015.md), [V7](REPOWORLD-V7-BATCHES-20261015.md),
 [V8 y procedimiento vigente](REPOWORLD-V8-CONTEXT-20261015.md).
-Cuota tras detener V7: **20,05 h**; worker, relay y túnel apagados.
+Cuota tras detener la calibración V8: **19,82 h**; worker, relay y túnel apagados
+antes del lanzamiento de la campaña sellada.
 Calendario conservado: 96 celdas principales + 24 de ablación + 16 de calibración
 + 14 de memoria = 150; 36 instancias distintas. I2 conserva dos propuestas
 independientes más selector. Solo las 24 instancias primarias entran al score

@@ -79,11 +79,39 @@ Cuota consultada tras detenerlo: **20,05 h**. No se consultó el oráculo final.
 - [x] Verify secuencial: 466 pruebas pasadas, 3 omitidas, 0 fallos. Smoke válido
   con rollback, replay idéntico y 137 recibos; preflight 36/36, controles 36/36,
   `check_ready.py`, `operate.py check` y empaquetado offline válidos.
-- [ ] Replay de los tres prompts con tokenizador fijado, todos ≤3.200.
-- [ ] Calibración funcional, presupuesto y apagado auditados.
+- [x] Replay real: 3.428→3.031, 3.410→3.016 y 3.459→3.030 tokens,
+  política y bytes fuente preservados, cero generaciones.
+- [x] Calibración funcional y apagado auditados: las 11 comprobaciones pasan.
 - [ ] Sello vigente y campaña completa congelada.
 - [ ] Evaluación oficial, métricas, figuras y comparación por pares.
 - [ ] Decisión de release sustentada en resultados; ECHO-5.5 sigue condicionado.
 
 Los resultados observados de esta secuencia se incorporarán aquí. No se declara
 ECHO-5.1 en verde por el mero funcionamiento de su infraestructura.
+
+## Resultado remoto V8 y sello
+
+SymPy-19007/E/73: `_entry` (235–247) observado completo antes del traspaso,
+17.916 tokens disponibles al entrar el editor, dos modificaciones aplicadas
+entre seis intentos, cinco ejecuciones de checks, 16 llamadas y 24.830 tokens.
+El episodio termina `budget_stopped` con diff no vacío retenido y checks
+públicos pasados. Auditoría válida: 263 recibos, `destroyed=0`, sin reservas
+pendientes. Diff SHA-256:
+`0e0066fd907a2484ffc01f395acbac33d81d5e953459ad03526104afe3e49256`.
+Es el mismo diff retenido en V6/V7; **no es una demostración de mejora en
+resolución**. Los tests públicos de `test_basic.py` no acreditan cobertura
+funcional de BlockMatrix. No se ha consultado el oráculo oficial.
+
+Kernel `rogeernavarro/echo51-repoworld-context-v8-20261015`: COMPLETE,
+65/65 capas, preparación 401,740 s, tiempo total 812,218 s. Worker detenido,
+sin errores, relay/túnel apagados. Cuota observada: 20,05→**19,82 h**.
+
+Contrato operativo: `remote/sealed/SWE-CONTRACT.json`, `status=sealed`,
+`launch_enabled=true`. Lock `remote/sealed/SWE-RUN-LOCK.json`, SHA-256:
+`91e0aab5dd5bc1da80f6a457af753b3efdf126c5227d0592faa6e9b70718869e`.
+El sello liga los cinco gates y el manifiesto de código de `209285d`.
+La campaña arranca mediante `python3
+ECHO-5.1/artifacts/repoworld-gates-v8-20261015/campaign_driver.py`.
+Sus lotes paran entre episodios, conservan presupuesto al reanudar y verifican
+el apagado antes de iniciar otro worker. El resultado científico sigue pendiente
+hasta completar congelación, evaluación oficial y auditoría.
