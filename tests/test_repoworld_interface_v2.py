@@ -139,3 +139,83 @@ class InterfaceV2Tests(unittest.TestCase):
         result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
         self.assertIn('+value = 2',result['model_patch'])
         self.assertGreater(result['budget']['remaining']['tokens'],10000)
+
+    def test_v5_partial_method_cannot_authorize_handoff_or_edit(self):
+        from echoai.repoworld.protocol import run_episode
+        text='value = 1\nclass Box:\n    def target(self, x):\n        first = x\n        second = first + 1\n        return second\n'
+        s=self.session(text)
+        class Recording(FiniteProvider):
+            def prepare(self,messages,*args):
+                self.contexts=getattr(self,'contexts',[])+[json.loads(messages[-1]['content'])]
+                return super().prepare(messages,*args)
+        p=Recording([
+            {'action':'file_view','arguments':{'path':'a.py','start_line':6,'line_count':1}},
+            {'action':'finish','arguments':{}},
+            {'action':'patch_apply','arguments':{'path':'a.py','search':'        return second\n','replace':'        return second + 1\n'}},
+            {'action':'file_view','arguments':{'path':'a.py','start_line':3,'line_count':4}},
+            {'action':'finish','arguments':{}},
+            {'action':'patch_apply','arguments':{'path':'a.py','search':'        return second\n','replace':'        return second + 1\n'}},
+            {'action':'finish','arguments':{}}])
+        result=run_episode(s.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertEqual(p.contexts[2]['role'],'locator')
+        self.assertIn('EPISTEMIC_LOCUS_INCOMPLETE',json.dumps(p.contexts[2]['feedback']))
+        self.assertEqual(p.contexts[3]['role'],'locator')
+        self.assertEqual(p.contexts[1]['source_evidence']['locus']['next_view'],{'start_line':3,'line_count':3})
+        self.assertIn('+        return second + 1',result['model_patch'])
+        self.assertEqual(result['budget']['used']['patches'],1)
+
+    def test_v5_retained_edit_hands_off_to_critic_despite_new_file_hash(self):
+        from echoai.repoworld.protocol import run_episode
+        class Recording(FiniteProvider):
+            def prepare(self,messages,*args):
+                self.contexts=getattr(self,'contexts',[])+[json.loads(messages[-1]['content'])]
+                return super().prepare(messages,*args)
+        p=Recording([{'action':'file_view','arguments':{'path':'a.py'}},
+            {'action':'finish','arguments':{}},
+            {'action':'patch_apply','arguments':{'path':'a.py','search':'value = 1\n','replace':'value = 2\n'}},
+            {'action':'finish','arguments':{}}])
+        result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertEqual(p.contexts[3]['role'],'critic')
+        self.assertIsNone(p.contexts[3]['source_evidence'])
+        self.assertIn('+value = 2',result['model_patch'])
+
+    def test_v5_revert_to_base_returns_editor_with_explicit_feedback(self):
+        from echoai.repoworld.protocol import run_episode
+        class Recording(FiniteProvider):
+            def prepare(self,messages,*args):
+                self.contexts=getattr(self,'contexts',[])+[json.loads(messages[-1]['content'])]
+                return super().prepare(messages,*args)
+        view={'action':'file_view','arguments':{'path':'a.py'}}
+        p=Recording([view,{'action':'finish','arguments':{}},
+            {'action':'patch_apply','arguments':{'path':'a.py','search':'value = 1\n','replace':'value = 2\n'}},view,
+            {'action':'patch_apply','arguments':{'path':'a.py','search':'value = 2\n','replace':'value = 1\n'}},
+            {'action':'finish','arguments':{}}])
+        result=run_episode(self.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertEqual(p.contexts[-1]['role'],'editor')
+        self.assertTrue(p.contexts[-1]['feedback']['base_restored'])
+        self.assertEqual(result['model_patch'],'')
+
+    def test_v5_redundant_partial_reads_abandon_without_editor(self):
+        from echoai.repoworld.protocol import run_episode
+        s=self.session('value = 1\ndef target(x):\n    a = x + 1\n    return a\n')
+        view={'action':'file_view','arguments':{'path':'a.py','start_line':4,'line_count':1}}
+        p=FiniteProvider([view]*3)
+        result=run_episode(s.base,'E',73,provider=p,output=self.root/'episode',check_plan={'public_targets':['positive']},check_fn=checks,interface_version=2)
+        self.assertEqual(result['status'],'finished')
+        self.assertEqual(result['budget']['used']['llm_calls'],3)
+        self.assertEqual(result['model_patch'],'')
+
+    def test_v5_locus_coverage_coalesces_views_and_is_hash_scoped(self):
+        from echoai.repoworld.source_evidence import projection
+        s=self.session('value = 1\ndef target(x):\n    a = x + 1\n    return a\n')
+        self.view(s,4,1);self.assertFalse(projection(s)['locus']['ready'])
+        self.view(s,2,2);self.assertTrue(projection(s)['locus']['ready'])
+        edit=self.edit(s,'    return a\n','    return a + 1\n')
+        from echoai.repoworld.types import PatchCandidate
+        row=next(x['body'] for x in s.receipts.records if x['body'].get('event')=='repoworld.stage')
+        candidate=PatchCandidate(row['base'],s.snapshot(row['candidate']),row['patch_sha256'],row['operation_id'])
+        # A checked retention creates a new content identity; old views cannot attest it.
+        receipt=s.receipts.append(dict(event='repoworld.public-property',candidate=candidate.snapshot.id,
+            property_status='supported',checker_id='fixture',scope='public'))
+        s.retain(candidate,expected_head=s.current.id,public_receipt_ids=(receipt['sha256'],))
+        self.assertIsNone(projection(s))

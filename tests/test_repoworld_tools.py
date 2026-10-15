@@ -121,3 +121,9 @@ class SearchPathTests(unittest.TestCase):
             reply=self.search(self.path,reply['cursor']);hits.extend(reply['matches'])
         self.assertEqual([x['line'] for x in hits],list(range(1,13)))
         self.assertFalse(any(x['body'].get('event')=='repoworld.cursor-reset' for x in self.session.receipts.records))
+
+    def test_invented_cursor_feedback_explains_null_without_accepting_it(self):
+        for token in ('issue','current'):
+            with self.subTest(token=token), self.assertRaisesRegex(ValueError,'cursor=null'):
+                dispatch_tool(dict(tool='file_view',snapshot_id=self.session.current.id,path='a.py',start_line=1,line_count=1,cursor=token),session=self.session)
+        self.assertEqual(self.session.budget.report()['pending'],0)

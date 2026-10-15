@@ -66,6 +66,37 @@ def observed_lines(session,path,raw):
             lines[n]=text
     return lines
 
+def locus_status(session,path,raw,lines,recent):
+    """Structural readiness, not a claim that this function causes the issue."""
+    if not path.endswith('.py'):
+        return dict(ready=bool(lines),kind='observed-lines')
+    digest=hashlib.sha256(raw).hexdigest()
+    cached=getattr(session,'_locus_symbols',None)
+    try:
+        if cached is None or cached[0]!=digest:
+            cached=(digest,parse_symbols(raw));session._locus_symbols=cached
+    except ValueError:
+        return dict(ready=False,kind='unparsed-source',guidance='Read a parsable source locus or finish(abandon=true).')
+    functions=[s for s in cached[1] if s['kind']=='function']
+    if not functions:
+        return dict(ready=any(t.strip() and not t.lstrip().startswith('#') for t in lines.values()),kind='observed-lines')
+    touched=[s for s in functions if any(s['start']<=r['number']<=s['end'] for r in recent)]
+    complete=[s for s in touched if all(n in lines for n in range(s['start'],s['end']+1))]
+    if complete:target=min(complete,key=lambda s:(s['end']-s['start'],s['start']))
+    elif touched:target=min(touched,key=lambda s:s['start'])
+    else:
+        # A docstring/import page is not a viewed implementation. Give only a
+        # structural navigation hint, never invent observed source coverage.
+        anchor=recent[-1]['number'] if recent else 1
+        target=next((s for s in functions if s['start']>=anchor),functions[0])
+    missing=[n for n in range(target['start'],target['end']+1) if n not in lines]
+    status=dict(target,ready=not missing)
+    if missing:
+        start=missing[0];count=1
+        while count<100 and start+count in missing:count+=1
+        status['next_view']=dict(start_line=start,line_count=count)
+    return status
+
 def projection(session,max_bytes=6000):
     """Whole-line bounded pin of most recently observed current-content file."""
     for row in reversed(session.receipts.records):
@@ -82,5 +113,6 @@ def projection(session,max_bytes=6000):
             cost=len(json.dumps(dict(number=n,text=lines[n]),ensure_ascii=False).encode())
             if size+cost>max_bytes:break
             selected.append(dict(number=n,text=lines[n]));size+=cost
-        return dict(path=path,file_sha256=b['file_sha256'],lines=sorted(selected,key=lambda x:x['number']),coverage_count=len(lines),receipt_id=row['sha256'])
+        return dict(path=path,file_sha256=b['file_sha256'],lines=sorted(selected,key=lambda x:x['number']),coverage_count=len(lines),receipt_id=row['sha256'],
+                    locus=locus_status(session,path,raw,lines,b['lines']))
     return None

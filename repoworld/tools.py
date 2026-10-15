@@ -48,7 +48,8 @@ def _position(session,request,default):
                 reason='authenticated cursor belongs to another query/snapshot'))
             return default
         return data['p']
-    except (TypeError,KeyError,UnicodeError) as exc: raise ValueError('invalid cursor') from exc
+    except (TypeError,KeyError,UnicodeError,ValueError) as exc:
+        raise ValueError(f'invalid cursor ({exc}); use cursor=null with explicit path/start_line for a new read, or copy the exact returned token for the identical query') from exc
 
 
 def _path(snapshot,path):
