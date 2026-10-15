@@ -207,3 +207,12 @@ class WorkspaceTests(unittest.TestCase):
             self.session.retain(candidate,expected_head=old,public_receipt_ids=(r['sha256'],))
         final=self.session.final_diff()
         self.assertEqual(final.count('+++ b/file'),9)
+
+    def test_search_path_tolerance_does_not_relax_snapshot_or_patch_paths(self):
+        from echoai.pcworld.snapshots import _parts
+        for bad in ('/','a.py/','../a.py','tests/../a.py'):
+            with self.subTest(path=bad):
+                with self.assertRaises(ValueError):_parts(bad)
+                with self.assertRaises(ValueError):self.session.stage(diff(bad,'value = 1\n','value = 3\n'),self.session.current.id)
+        source=self.root/'links';source.mkdir();(source/'escape').symlink_to('/etc')
+        with self.assertRaises(ValueError):repo_store(self.root/'unsafe-store').capture(source)

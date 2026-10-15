@@ -132,8 +132,36 @@ def _outline(session,request):
     return reply
 
 
+def _search_request(session,request,snap):
+    """Normalize directory spelling only; never resolve traversal or symlinks."""
+    original=request['path'];path=original.strip()
+    hint=('SEARCH_PATH_INVALID: use a relative repository path, e.g. '
+          'repo_search(path="sympy/matrices/expressions", pattern="BlockMatrix"), '
+          'or path="." for the repository root. Absolute paths, .., internal empty/dot '
+          'segments, NUL, backslashes and symlink targets are not accepted.')
+    # Check BEFORE rstrip: '/' must never become the repository root.
+    if path.startswith('/') or '\0' in path or '\\' in path:raise ValueError(hint)
+    path=path.rstrip('/') or '.'
+    try:
+        if path!='.':_parts(path)
+    except ValueError as error:raise ValueError(hint) from error
+    entry=snap.manifest['entries'].get(path)
+    if entry is None:
+        raise ValueError('SEARCH_PATH_NOT_FOUND: relative path absent from snapshot; '
+                         'use repo_search(path=".", pattern=...) to locate it.')
+    if entry['type'] not in ('file','directory') or (original.strip().endswith('/') and entry['type']!='directory'):
+        raise ValueError(hint)
+    normalized={**request,'path':path}
+    session.receipts.append(dict(event='repoworld.search-path',snapshot=snap.id,
+        original_path=original,canonical_path=path,
+        request_sha256=_query(request),canonical_request_sha256=_query(normalized)))
+    return normalized
+
+
 def _search(session,request):
-    snap=session.snapshot(request['snapshot_id']);_path(snap,request['path'])
+    snap=session.snapshot(request['snapshot_id'])
+    request=_search_request(session,request,snap)
+    _path(snap,request['path'])
     skip=_position(session,request,0)
     if type(skip) is not int or not 0<=skip<=100000: raise ValueError('invalid search offset')
     if any(c in request['pattern'] for c in ('\n','\r','\0')): raise ValueError('single-line literal required')
