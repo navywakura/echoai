@@ -104,6 +104,9 @@ el límite registrado de tiempo. Worker COMPLETE, 2.259,909 s, cuota
 un timeout de 22.500 s: admite hasta 9.000 s y el relay hasta 8.400 s.
 El intento de arranque primario no encendió ninguna GPU. Relay y túnel locales
 quedaron apagados. No hubo episodios primarios ni evaluación del oráculo final.
+`partial-custody-audit.json` autentica las 11 entregas: 1.880 recibos,
+180.976 tokens y cero reservas pendientes. Es una auditoría de custodia parcial,
+no una evaluación SWE-bench ni una congelación completa del calendario.
 
 Se conserva este estudio parcial y su lock original. La corrección de sesiones
 acotadas cambia el manifiesto y requiere compuertas/sello nuevos; los resultados

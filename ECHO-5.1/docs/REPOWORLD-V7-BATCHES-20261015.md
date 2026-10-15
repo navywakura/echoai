@@ -34,3 +34,31 @@ los prompts ni el evaluador. Se mantienen 24 issues principales × cuatro
 brazos, más ablación y memoria, 150 celdas en total. El sello V6 deja de ser
 ejecutable con este código. La nueva calibración, el nuevo sello y los
 resultados oficiales se documentarán aquí al obtener evidencia.
+
+## Calibración observada y sello V7
+
+Código: `d1759ef`. Calibración reservada SymPy-19007, brazo E, semilla 73:
+assessment funcional válido, vista completa del método antes del traspaso,
+**17.955 tokens disponibles al entrar el editor**, dos parches retenidos y
+checks públicos pasados. Finaliza `budget_stopped`: 16.516 tokens, 11 llamadas,
+tres intentos de parche, cuatro ejecuciones de checks, 188 recibos válidos,
+`destroyed=0` y cero reservas pendientes. El diff retenido es el mismo que
+en V6; no se ha comprobado la resolución oficial del issue. Los checks
+públicos de `test_basic.py` no equivalen a cobertura del fallo de BlockMatrix.
+
+Kernel privado `rogeernavarro/echo51-repoworld-batch-v7-20261015`, versión 1:
+COMPLETE, 65/65 capas en dos T4, preparación 391,191 s y total 689,437 s.
+Worker detenido sin errores; relay y túnel apagados. Cuota 20,78 → **20,59 h**.
+
+Las cinco compuertas quedan vinculadas al contrato operativo sellado en
+`remote/sealed/SWE-CONTRACT.json` (`launch_enabled=true`). Lock
+`remote/sealed/SWE-RUN-LOCK.json`, SHA-256:
+`6415ca83691507e71dc0b627c2e2634ed788b77e97f6caab5875e8ecc3a01a65`.
+El archivo de diseño en `docs/` sigue siendo la entrada, no el contrato operativo.
+
+El comando `python3 ECHO-5.1/artifacts/repoworld-gates-v7-20261015/campaign_driver.py`
+ejecuta el calendario sellado por sesiones, confirma cada apagado y conserva
+la cuota inicial entre reanudaciones. Antes de una sesión nueva autentica las
+entregas ya completadas. Solo después de congelar las 150 celdas permite
+evaluar con el curador y exportar las figuras. Una pausa de lote deja pendiente
+el siguiente episodio; no garantiza que alcance el presupuesto para todo el panel.
