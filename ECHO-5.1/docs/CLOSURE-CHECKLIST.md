@@ -1,6 +1,32 @@
 # ECHO-5.1 · checklist de desarrollo
 
-Actualización: 13 de octubre de 2026. El verde se aplica al alcance comprobado
+## Estado vigente · 15 de octubre de 2026
+
+- [x] Normalización de búsquedas, feedback de cursores y cobertura estructural
+  del locus; traspasos editor/crítico corregidos. Código congelado en `ba88312`.
+- [x] Verify: 455 pruebas pasadas, 3 omitidas; smoke hermético con rollback,
+  replay y 137 recibos. Preflight 36/36 y controles oficiales 36/36 reatestados.
+- [x] Calibración funcional V6: `_entry` leído completo, 17.939 tokens al
+  traspasar, dos parches retenidos, 248 recibos válidos, sin reservas huérfanas.
+  Terminó por presupuesto; **no acredita la resolución oficial del issue**.
+- [x] Cinco gates y contrato operativo sellados, `launch_enabled=true` en
+  `artifacts/repoworld-gates-v6-20261015/remote/sealed/`.
+- [ ] Campaña completa y congelación de entregas: ejecución por fases iniciada;
+  96 celdas principales, 24 de ablación, 16 de calibración y 14 de memoria.
+- [ ] Harness oficial, auditoría final, tasas de resolución y figuras medidas.
+- [ ] Confirmación de ventaja, release de ECHO-5.1 en verde y transición a
+  ECHO-5.5. No se declaran por pasar compuertas de infraestructura.
+
+Evidencia: [V5 y límites](REPOWORLD-V5-PHASES-20261015.md),
+[V6, rutas y sello](REPOWORLD-V6-READINESS-20261015.md).
+Cuota después de V6 y antes de campaña: 21,41 h; todos los workers de desarrollo
+terminados. La campaña tiene operadores propios y topes registrados. I2 conserva
+dos propuestas independientes más selector; las calibraciones no entran al score
+principal. Las entregas históricas siguientes mantienen sus fechas y alcance.
+
+## Historial de entregas
+
+Actualización inicial: 13 de octubre de 2026. El verde se aplica al alcance comprobado
 de cada fila; no equivale a una ventaja científica ni al cierre de ECHO-5.1.
 
 | Estado | Entrega | Evidencia y límite |
