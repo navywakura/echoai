@@ -89,6 +89,23 @@ class ProtocolSkipBaselineTests(unittest.TestCase):
         self.assertEqual(self.check_calls,2)
         self.assertEqual(self.provider.calls,2)
 
+    def test_call_limit_freezes_with_terminal_reason_instead_of_active(self):
+        def complete(*a,**kw):
+            return dict(content='{"action":"unsupported","arguments":{}}',tokens_evaluated=100,tokens_predicted=10)
+        self.provider.complete=complete
+        result=self.run_episode()
+        self.assertEqual(result['status'],'budget_stopped')
+        self.assertEqual(result['stop_reason'],'llm_call_limit')
+        self.assertEqual(result['budget']['used']['llm_calls'],24)
+
+    def test_context_stop_preserves_the_specific_reason(self):
+        self.provider.prepare=lambda *a:('too large',[1]*3201)
+        result=self.run_episode()
+        self.assertEqual(result['status'],'budget_stopped')
+        self.assertEqual(result['stop_reason'],'ContextOverflow')
+        self.assertIn('3200',result['stop_detail'])
+        self.assertEqual(result['budget']['used']['llm_calls'],0)
+
     def test_valid_v2_checkpoint_restores(self):
         self.checkpoint()
         result=self.run_episode()

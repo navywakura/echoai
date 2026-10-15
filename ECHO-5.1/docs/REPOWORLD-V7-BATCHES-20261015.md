@@ -1,5 +1,10 @@
 # RepoWorld V7 — sesiones acotadas y reanudación
 
+**Estado posterior:** V7 se detuvo antes del panel principal por exceso de
+contexto, con diez calibraciones completas y una interrumpida durante baseline.
+Su worker está apagado. Este sello queda como evidencia histórica; continuar
+con [V8](REPOWORLD-V8-CONTEXT-20261015.md), sin mezclar entregas entre manifiestos.
+
 La campaña V6 se detuvo antes del panel principal por incompatibilidad entre
 la duración de una fase y los topes del worker. Quedan preservadas sus 11
 entregas de calibración, cinco celdas no iniciadas y los recibos originales.

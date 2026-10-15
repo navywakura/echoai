@@ -16,6 +16,89 @@ class ContextOverflow(ProviderFailure): pass
 class InferencePending(ProviderFailure): pass
 
 
+def _whole_lines(text,limit):
+    kept=[];size=0
+    for line in text.splitlines(keepends=True):
+        cost=len(line.encode())
+        if size+cost>limit:break
+        kept.append(line);size+=cost
+    return ''.join(kept)
+
+
+def _project_messages(messages,source_limit,detail_limit):
+    """Display projection only: no source bytes, authority or system policy edits."""
+    projected=[]
+    for message in messages:
+        if message['role']!='user':projected.append(dict(message));continue
+        try:context=json.loads(message['content'])
+        except (ValueError,TypeError):projected.append(dict(message));continue
+        if not isinstance(context,dict):projected.append(dict(message));continue
+        for field in ('issue_page','issue'):
+            if isinstance(context.get(field),str):
+                raw=context[field].encode()
+                if len(raw)>detail_limit:
+                    context[field]=raw[:detail_limit].decode('utf-8',errors='ignore')
+                    context[field+'_visible_bytes']=len(context[field].encode())
+                    context[field+'_omitted_bytes']=len(raw)-len(context[field].encode())
+        evidence=context.get('source_evidence');feedback=context.get('feedback')
+        if isinstance(evidence,dict) and isinstance(evidence.get('lines'),list):
+            lines=evidence['lines']
+            if isinstance(feedback,dict) and feedback.get('lines') and all(x in lines for x in feedback['lines']):
+                feedback.pop('lines');feedback['source_lines_receipt']=evidence.get('receipt_id')
+            recent=evidence.get('recent_range') or evidence.get('locus') or {}
+            start=recent.get('start',lines[0]['number'] if lines else 1);end=recent.get('end',start)
+            ranked=sorted(lines,key=lambda x:(not start<=x['number']<=end,abs(x['number']-start),x['number']))
+            chosen=[];size=0
+            for line in ranked:
+                cost=len(canonical(line))
+                if size+cost>source_limit:continue
+                chosen.append(line);size+=cost
+            evidence['lines']=sorted(chosen,key=lambda x:x['number'])
+            evidence['projection_omitted_lines']=len(lines)-len(chosen)
+            if len(chosen)<len(lines):
+                evidence['projection_note']='Some observed lines omitted from this prompt; file_view retrieves exact missing ranges.'
+        for field in ('current_diff',):
+            if isinstance(context.get(field),str):
+                text=context[field];context[field]=_whole_lines(text,detail_limit)
+                if context[field]!=text:context[field+'_omitted_bytes']=len(text.encode())-len(context[field].encode())
+        if isinstance(context.get('candidates'),list):
+            for candidate in context['candidates']:
+                if isinstance(candidate,dict) and isinstance(candidate.get('patch'),str):
+                    old=candidate['patch'];candidate['patch']=_whole_lines(old,detail_limit)
+                    candidate['patch_omitted_bytes']=len(old.encode())-len(candidate['patch'].encode())
+        if isinstance(context.get('lessons'),list):
+            lessons=context['lessons'];kept=[];size=0
+            for lesson in lessons:
+                cost=len(canonical(lesson))
+                if size+cost>detail_limit:break
+                kept.append(lesson);size+=cost
+            context['lessons']=kept
+            if len(kept)<len(lessons):context['lessons_omitted']=len(lessons)-len(kept)
+        if isinstance(feedback,dict):
+            for field in ('detail','stdout','stderr','outline','summary','diagnostic'):
+                if isinstance(feedback.get(field),str) and len(feedback[field].encode())>detail_limit:
+                    old=feedback[field];feedback[field]=_whole_lines(old,detail_limit)
+                    feedback[field+'_omitted_bytes']=len(old.encode())-len(feedback[field].encode())
+            for field in ('lines','symbols','matches'):
+                if isinstance(feedback.get(field),list):
+                    old=feedback[field];kept=[];size=0
+                    for item in old:
+                        cost=len(canonical(item))
+                        if size+cost>detail_limit:break
+                        kept.append(item);size+=cost
+                    feedback[field]=kept
+                    if len(kept)<len(old):feedback[field+'_omitted']=len(old)-len(kept)
+            if isinstance(feedback.get('states'),dict) and len(canonical(feedback['states']))>detail_limit:
+                states=feedback['states'];kept={};size=0
+                for key,value in sorted(states.items(),key=lambda x:(x[1] in ('PASSED','XFAIL'),x[0])):
+                    cost=len(canonical({key:value}))
+                    if size+cost>detail_limit:continue
+                    kept[key]=value;size+=cost
+                feedback['states']=kept;feedback['states_omitted']=len(states)-len(kept)
+        projected.append({**message,'content':json.dumps(context,ensure_ascii=False,separators=(',',':'))})
+    return projected
+
+
 def provider_identity(config):
     # A tunnel origin/credential can rotate while the same durable relay and
     # model are retained. Experimental settings cannot change on resume.
@@ -97,13 +180,27 @@ class RepoProvider(HTTPProvider):
 
     def prepare(self,messages,request_id,deadline):
         with _deadline(deadline):
-            template=self._retry(self.config['template_endpoint'],dict(messages=messages,add_generation_prompt=True),
-                                 request_id=request_id+'-template',deadline=deadline)['prompt']
-            if type(template) is not str or len(template.encode())>65536: raise ContextOverflow('template bytes')
-            tokens=self._retry(self.config['tokenize_endpoint'],dict(content=template,add_special=False,parse_special=True),
-                               request_id=request_id+'-tokenize',deadline=deadline)['tokens']
-            if not isinstance(tokens,list) or any(type(t) is not int or t<0 for t in tokens): raise ProviderFailure('invalid tokenizer')
-            return template,tokens
+            seen=set();counts=[]
+            for level,limits in enumerate((None,(6000,1800),(3000,1200),(1500,800),(600,400))):
+                view=messages if limits is None else _project_messages(messages,*limits)
+                digest=hashlib.sha256(canonical(view)).hexdigest()
+                if digest in seen:continue
+                seen.add(digest)
+                if len(canonical(view))>60000:continue
+                prefix=request_id if level==0 else request_id+'-fit'+str(level)
+                template=self._retry(self.config['template_endpoint'],dict(messages=view,add_generation_prompt=True),
+                                     request_id=prefix+'-template',deadline=deadline)['prompt']
+                if type(template) is not str:raise ProviderFailure('invalid template')
+                if len(template.encode())>65536:continue
+                tokens=self._retry(self.config['tokenize_endpoint'],dict(content=template,add_special=False,parse_special=True),
+                                   request_id=prefix+'-tokenize',deadline=deadline)['tokens']
+                if not isinstance(tokens,list) or not tokens or any(type(t) is not int or t<0 for t in tokens):raise ProviderFailure('invalid tokenizer')
+                counts.append(len(tokens))
+                if len(tokens)<=3200:
+                    self.last_context_projection=dict(compacted=level>0,level=level,token_counts=counts,
+                        original_messages_sha256=hashlib.sha256(canonical(messages)).hexdigest(),projected_messages_sha256=digest)
+                    return template,tokens
+            raise ContextOverflow('formatted prompt cannot fit 3200 tokens without changing system policy; observed counts '+str(counts))
 
     def complete(self,prompt,*,schema,max_tokens,request_id,deadline,sample_seed=None):
         with _deadline(deadline):
@@ -153,7 +250,8 @@ def generate_repo(messages,response_schema,*,budget,provider,deadline,request_id
             # Fix the cost BEFORE reserving it. A crash between reservation and
             # intent must not recompute a smaller cap from already held funds.
             receipts.append(dict(event='repoworld.provider-prepared',request_id=request_id,identity=identity,
-                prompt=prompt,prompt_tokens=count,completion_cap=cap))
+                prompt=prompt,prompt_tokens=count,completion_cap=cap,
+                **({'context_projection':provider.last_context_projection} if hasattr(provider,'last_context_projection') else {})))
         costs=dict(tokens=count+cap,llm_calls=1)
         if role=='critic': costs['critic_calls']=1
         ticket=budget.reserve_for('generation:'+request_id,costs)

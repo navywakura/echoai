@@ -2,31 +2,30 @@
 
 ## Estado vigente · 15 de octubre de 2026
 
-- [x] Normalización de búsquedas, feedback de cursores y cobertura estructural
-  del locus; traspasos editor/crítico corregidos. Sesiones reanudables entre
-  episodios añadidas en `d1759ef` para respetar los topes del worker.
-- [x] Verify V7: 459 pruebas pasadas, 3 omitidas; smoke hermético con rollback,
-  replay y 137 recibos. Preflight 36/36 y controles oficiales 36/36 reatestados.
-- [x] Calibración funcional V6: `_entry` leído completo, 17.939 tokens al
-  traspasar, dos parches retenidos, 248 recibos válidos, sin reservas huérfanas.
-  Terminó por presupuesto; **no acredita la resolución oficial del issue**.
-- [x] Calibración y sello V7 bajo el manifiesto nuevo: 188 recibos válidos,
-  17.955 tokens al traspasar, edición retenida y comprobada con tests públicos.
-  No acredita resolución oficial. El sello V6 se conserva
-  como evidencia histórica; no permite ejecutar código modificado.
-- [ ] Campaña completa y congelación de entregas: V6 ejecutó 11 calibraciones
-  y contabilizó cinco no iniciadas, luego se detuvo antes del panel principal.
-  V7 mantiene 96 celdas principales, 24 de ablación, 16 de calibración y 14 de memoria.
+- [x] Normalización segura de directorios y feedback procesable, sin permitir
+  rutas absolutas, `..`, NUL o escapes por enlaces. Regresiones cubiertas.
+- [x] Lectura atómica, mapa estructural, edición Search/Replace exacta y
+  traspaso con función observada completa; sesiones acotadas y reanudables.
+- [x] Calibraciones V6/V7 completaron edición retenida y checks públicos.
+  No acreditan la resolución oficial de SymPy-19007.
+- [x] Corrección V8 del contexto: proyección determinista medida por tokenizador,
+  líneas completas y paridad de I2; siete pruebas nuevas, 18 focalizadas verdes.
+- [x] Verify V8 secuencial: 466 pasadas, 3 omitidas; smoke con 137 recibos,
+  rollback y replay. Preflight 36/36, controles 36/36 y frontera offline válidos.
+  Se conserva el fallo intermitente de cancelación systemd del primer verify.
+- [ ] Calibración V8 con replay previo de prompts sobredimensionados y apagado.
+- [ ] Campaña completa: V7 se detuvo antes del panel principal (10 calibraciones
+  completas y una interrumpida en baseline). No se reutilizan sus entregas en V8.
 - [ ] Harness oficial, auditoría final, tasas de resolución y figuras medidas.
-- [ ] Confirmación de ventaja, release de ECHO-5.1 en verde y transición a
-  ECHO-5.5. No se declaran por pasar compuertas de infraestructura.
+- [ ] Ventaja confirmada, release verde de ECHO-5.1 y transición a ECHO-5.5.
 
-Evidencia: [V5 y límites](REPOWORLD-V5-PHASES-20261015.md),
-[V6, rutas y sello](REPOWORLD-V6-READINESS-20261015.md).
-[V7, lotes y reanudación](REPOWORLD-V7-BATCHES-20261015.md).
-Cuota después de la calibración V7 y antes de su campaña: 20,59 h;
-su worker terminó y sus servicios locales están apagados. I2 conserva
-dos propuestas independientes más selector; las calibraciones no entran al score
+Evidencia: [V5](REPOWORLD-V5-PHASES-20261015.md),
+[V6](REPOWORLD-V6-READINESS-20261015.md), [V7](REPOWORLD-V7-BATCHES-20261015.md),
+[V8 y procedimiento vigente](REPOWORLD-V8-CONTEXT-20261015.md).
+Cuota tras detener V7: **20,05 h**; worker, relay y túnel apagados.
+Calendario conservado: 96 celdas principales + 24 de ablación + 16 de calibración
++ 14 de memoria = 150; 36 instancias distintas. I2 conserva dos propuestas
+independientes más selector. Solo las 24 instancias primarias entran al score
 principal. Las entregas históricas siguientes mantienen sus fechas y alcance.
 
 ## Historial de entregas

@@ -114,5 +114,6 @@ def projection(session,max_bytes=6000):
             if size+cost>max_bytes:break
             selected.append(dict(number=n,text=lines[n]));size+=cost
         return dict(path=path,file_sha256=b['file_sha256'],lines=sorted(selected,key=lambda x:x['number']),coverage_count=len(lines),receipt_id=row['sha256'],
+                    recent_range=dict(start=b['lines'][0]['number'],end=b['lines'][-1]['number']) if b['lines'] else {},
                     locus=locus_status(session,path,raw,lines,b['lines']))
     return None

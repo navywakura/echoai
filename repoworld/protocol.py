@@ -190,8 +190,9 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
                     request_id=identifier,receipts=records,role=role,token_ceiling=max_tokens-state['branch_tokens'],sample_seed=seed)
             except InferencePending:
                 _trace(session,base.task.instance_id,arm);raise
-            except (BudgetExceeded,ContextOverflow):
-                state['status']='budget_stopped';records.append(state);break
+            except (BudgetExceeded,ContextOverflow) as exc:
+                state={**state,'status':'budget_stopped','stop_reason':type(exc).__name__,'stop_detail':_bounded(str(exc),1000)}
+                records.append(state);break
             cost=_latest(records,'repoworld.provider-response',request_id=identifier)['cost']['tokens']
             state={**state,'branch_tokens':state['branch_tokens']+cost,
                    'command':command,'phase':'execute'};records.append(state)
@@ -322,12 +323,15 @@ def _branch(base,arm,seed,*,budget,provider,output,plan,branch_id='main',max_cal
         records.append(state);_trace(session,base.task.instance_id,arm)
     # End state and submission bytes are authenticated together. A repeated call
     # exports identical retained bytes, not another generation.
+    if state['status']=='active' and state['step']>=max_calls:
+        state={**state,'status':'budget_stopped','stop_reason':'llm_call_limit'};records.append(state)
     close_pending_generations(records,budget)
     if 'finished_at' not in state:
         state={**state,'finished_at':time.time()};records.append(state)
     diff=session.final_diff();result=dict(instance_id=base.task.instance_id,arm=arm,seed=seed,branch_id=branch_id,
         candidate_id=session.current.id,base_id=session.base.snapshot.id,model_patch=diff,
         diff_sha256=hashlib.sha256(diff.encode()).hexdigest(),status=state['status'],
+        stop_reason=state.get('stop_reason'),stop_detail=state.get('stop_detail'),
         branch_tokens=state['branch_tokens'],steps=state['step'],task_success=False,
         wall_seconds=max(0,state['finished_at']-state['started']),
         cam=_trace(session,base.task.instance_id,arm))
