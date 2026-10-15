@@ -1,6 +1,7 @@
 # ECHO-5.1 — V5: corrección de búsqueda y compuertas de lanzamiento
 
-Estado: fase 1 completa. V5 pendiente; no hay resultados de campaña.
+Estado: fase 1 completa bajo `66c2bec`; V5 ejecutada, funcionalmente fallida.
+No hay contrato sellado ni resultados de campaña.
 Raíz privada: `ECHO-5.1/artifacts/repoworld-gates-v5-20261015/`.
 
 ## Fase 1: búsqueda y verificación offline
@@ -46,6 +47,27 @@ traspaso con al menos 15.000 tokens, propuesta exacta, retención/checks públic
 y auditoría. Parada del worker y servicios al terminar. Un gate técnico válido
 no sustituye estos criterios funcionales.
 
+Resultado observado: búsqueda correcta con barra final; outline completo;
+el localizador pide L247–256 y entrega el control con **19.819 tokens restantes**.
+No lee L235–239 del método objetivo. El editor cambia la última línea por una
+expresión con atributos `start_row`/`start_col`, luego revierte esa edición.
+Ambos parches se aplican y pasan los 22 checks públicos de `test_basic.py`;
+estos checks no cubren el comportamiento de `BlockMatrix._entry`.
+El crítico repite lecturas de L240–259 y agota sus seis llamadas.
+
+- Estado final: `critic_exhausted`; diff vacío, no issue resuelto ni oráculo final consultado.
+- 17.171 tokens, 13 llamadas LLM, 2 parches, 4 ejecuciones de checks.
+- 208 recibos auditados; contabilidad íntegra; `destroyed=0`, reservas pendientes=0.
+- `functional-calibration.json`: `valid=false`; verificación criptográfica válida.
+- Worker: 65/65 capas, 2 T4; preparación 387,727 s, total 648,943 s.
+- Kaggle `rogeernavarro/echo51-repoworld-search-v5-20261015`, versión 1: COMPLETE.
+  Worker detenido, cero errores; relay/túnel apagados; cuota 21,80 → 21,62 h.
+
+La revisión local identifica dos transiciones incorrectas: cualquier proyección
+de líneas se trata como locus listo, aunque sea parcial; y la pérdida normal de
+una proyección tras cambiar el hash puede impedir el paso de editor a crítico.
+Se abordarán offline con nuevas pruebas; V5 se conserva como resultado fallido.
+
 ## Fase 3: contrato y campaña
 
 Se conserva la separación registrada: 24 issues × S/I2/F/E = 96 episodios
@@ -58,6 +80,13 @@ salidas se congelan antes del harness oficial; los tests ocultos nunca entran
 al proponente. El límite global registrado es 18 horas, con topes por fase y
 preservación de las celdas no iniciadas en el denominador. No es una promesa
 de completar todos los episodios dentro de ese tiempo.
+
+Operadores preparados en `campaign-remotes/` y procedimiento en
+`POST-CALIBRATION.md`, dentro de la raíz privada. Cada operador exige sello
+autenticado; el control negativo sin sello falla antes de iniciar servicios.
+`remote/seal_observed.py` exige además el assessment funcional; no se ejecuta
+el sellado con V5 fallida. Una revisión posterior del código exige renovar gates
+y una calibración nueva, sin reutilizar V5 como pase funcional.
 
 ## Fase 4: cierre y transición
 
