@@ -54,3 +54,33 @@ El assessment usa solo recibos y fuente pública; no consulta el oráculo reserv
 Los 22 checks de `test_basic.py` no constituyen cobertura de BlockMatrix ni prueban
 la solución del issue. Cualquier resultado oficial requiere el harness separado.
 Sin ese pase funcional no se sella el contrato ni se inicia la campaña.
+
+## Calibración real y sello
+
+V6 supera el assessment funcional: búsqueda, vista completa L235–247 antes de
+traspasar, **17.939 tokens disponibles al entrar el editor**, edición del método
+retenida y checks públicos pasados. Finaliza `budget_stopped` con 23.757 tokens,
+15 llamadas LLM, seis intentos de parche (dos aplicados, cuatro rechazados),
+cuatro ejecuciones de checks y 248 recibos válidos. Contabilidad completa,
+`destroyed=0`, reservas pendientes=0. No hay resultado oficial del issue.
+
+Kernel privado `rogeernavarro/echo51-repoworld-locus-v6-20261015`, versión 1:
+COMPLETE, 65/65 capas en 2 T4, preparación 382,749 s y total 739,113 s.
+Worker parado, cero errores; relay y túnel apagados al concluir V6.
+Cuota observada: 21,62 → **21,41 h**. V5 y V6 consumieron aproximadamente
+0,39 h conjuntamente, según el contador de Kaggle redondeado a centésimas.
+
+El contrato **operativo** está en `remote/sealed/SWE-CONTRACT.json`, con
+`status=sealed`, `launch_enabled=true`. El archivo de diseño en `docs/` se
+conserva como entrada. Lock: `remote/sealed/SWE-RUN-LOCK.json`, SHA-256
+`4d3e92b45067c6ce76a5408c7fd2524b37d6abf1a6e92af28c656ebd08517a49`.
+Las cinco compuertas y el manifiesto del código quedan autenticados por el sello.
+
+La campaña preparada conserva 150 celdas: 16 de calibración, 96 principales,
+24 E_no_guard, dos donantes y 12 receptores de memoria. Son 36 IDs distintos;
+solo los 24 IDs principales entran a la comparación S/I2/F/E. I2 mantiene dos
+propuestas independientes y selector. No se reclasifican las calibraciones como
+resultados primarios. `campaign_driver.py` ejecuta fases, apaga cada worker,
+congela todas las entregas, llama al curador y genera export/gráficas. Sus topes
+son límites de gasto, no garantías de completar todas las celdas; las no iniciadas
+por falta de presupuesto permanecen en el denominador.
