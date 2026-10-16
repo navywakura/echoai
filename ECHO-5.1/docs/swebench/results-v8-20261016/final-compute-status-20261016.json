@@ -1,0 +1,65 @@
+{
+  "utc": "2026-10-16T09:03:09Z",
+  "workers": [
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-calibration-01-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-guard-ablation-01-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-guard-ablation-02-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-memory-01-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-memory-donor-01-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-primary-01-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-primary-02-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-primary-03-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-primary-04-recovery01-20261016",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-primary-05-20261015",
+      "status": "COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "kernel": "rogeernavarro/echo51-swe-v8-primary-04-20261015",
+      "status": "ERROR",
+      "exit_code": 0
+    }
+  ],
+  "gpu_remaining": "9.95h",
+  "relay_8786_closed": true,
+  "curator_service_stopped": true,
+  "curator_containers_running": 0,
+  "local_cleanup_utc": "2026-10-16T09:15:03Z"
+}

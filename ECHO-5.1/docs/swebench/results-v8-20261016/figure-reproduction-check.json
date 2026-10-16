@@ -1,0 +1,78 @@
+{
+  "valid": true,
+  "figures": 14,
+  "byte_identical": 14,
+  "generated_directory": "/tmp/echo51-v8-figures-final-m5og2iy0",
+  "rows": [
+    {
+      "file": "01_resolution.pdf",
+      "sha256": "4a2fe2bbfc78c618aab94a3d7ae3ea4226525cdf91c65a0ab6d9d8ceb7604a63",
+      "identical": true
+    },
+    {
+      "file": "01_resolution.png",
+      "sha256": "f624b27444a6d54a5792abba246bfe3e5a8462a8f25f16731982f215db7833c3",
+      "identical": true
+    },
+    {
+      "file": "02_regressions.pdf",
+      "sha256": "735f39170cb61a7636ee292879f144cbea2cae5bcb72cc0560267a294932dae4",
+      "identical": true
+    },
+    {
+      "file": "02_regressions.png",
+      "sha256": "23d6d533dd476b498186afc5e576b050b0c5448f6ccc7070c795e86500d26ce1",
+      "identical": true
+    },
+    {
+      "file": "03_cost_resolution.pdf",
+      "sha256": "8188e2941260b796dac1378f4da43a9dc5e05a0b0ed9cd51181354bb2ad4e2bc",
+      "identical": true
+    },
+    {
+      "file": "03_cost_resolution.png",
+      "sha256": "60e48199b5785bdee6ffe7fa4a6bb0643e282179cbde939fc7f1d0cd3c04c7d1",
+      "identical": true
+    },
+    {
+      "file": "04_memory.pdf",
+      "sha256": "f92f0fd053dfddf376b94eb3269addcab21d0e7b976fd997be5a31f658a40d6d",
+      "identical": true
+    },
+    {
+      "file": "04_memory.png",
+      "sha256": "da9a90ca7361965ececb31569fdc47a0040cbf39b5e83c65112463e91599c9bc",
+      "identical": true
+    },
+    {
+      "file": "05_coverage.pdf",
+      "sha256": "85b71b0aed57d3d618cb2d40784a8c88db0ddd71535c1fd90d5a6615e088e56d",
+      "identical": true
+    },
+    {
+      "file": "05_coverage.png",
+      "sha256": "c1d06f36e870d1e109298c406ab2e4462e26391a8604c4c1060606c30a2e5eaf",
+      "identical": true
+    },
+    {
+      "file": "06_executed_subset.pdf",
+      "sha256": "cd7755a37dd89907216eef846aff164a078f536ceb671e015c093bac60daa198",
+      "identical": true
+    },
+    {
+      "file": "06_executed_subset.png",
+      "sha256": "5ff8c78df95d56ebcda3e7b03b58d7c4dc9196fd01fedbb134102db28164dd6a",
+      "identical": true
+    },
+    {
+      "file": "07_worker_time.pdf",
+      "sha256": "f69f203b76499e563d69c69e435f456badde9e6781b926bdf039ff605104d72a",
+      "identical": true
+    },
+    {
+      "file": "07_worker_time.png",
+      "sha256": "35aff93454b4c71cefca40604b8571afdb214ee4e44b455edea3f99b033e819a",
+      "identical": true
+    }
+  ]
+}

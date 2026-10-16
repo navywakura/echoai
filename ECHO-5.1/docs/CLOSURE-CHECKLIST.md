@@ -1,6 +1,6 @@
 # ECHO-5.1 · checklist de desarrollo
 
-## Estado vigente · 15 de octubre de 2026
+## Estado vigente · 16 de octubre de 2026
 
 - [x] Normalización segura de directorios y feedback procesable, sin permitir
   rutas absolutas, `..`, NUL o escapes por enlaces. Regresiones cubiertas.
@@ -16,16 +16,31 @@
 - [x] Calibración V8 y sello: 11 checks funcionales, 263 recibos, 17.916 tokens
   al traspasar, replay de los tres prompts y apagado confirmados.
   Contrato operativo sellado; no implica resolución oficial del issue.
-- [ ] Campaña completa: V7 se detuvo antes del panel principal (10 calibraciones
-  completas y una interrumpida en baseline). No se reutilizan sus entregas en V8.
-- [ ] Harness oficial, auditoría final, tasas de resolución y figuras medidas.
+- [x] Ejecución V8 cerrada: 115 episodios ejecutados y 35 no iniciados,
+  todos congelados antes del oráculo. Recuperación de Wi-Fi con el mismo
+  diario, presupuesto y reloj; sin reutilizar entregas V7.
+- [x] Harness oficial y auditoría final: 150 veredictos, 18.546 registros/recibos,
+  `valid=true`, cero episodios con contabilidad desconocida; 99 fuentes intactas.
+- [x] Resultado principal medido: S=2/17, I2=F=E=1/17. Sobre el registro de
+  24 por brazo: S=2/24 e I2=F=E=1/24. E ahorra 34,14 % de tokens totales,
+  pero tiene mayor coste por solución que S. No demuestra superioridad.
+- [x] Ablación 24/24 y memoria 14/14 ejecutadas: E_no_guard=1/24; donantes
+  y receptores sin soluciones ni lecciones. Dos rechazos por import inválido
+  se distinguen de regresiones con tests observados; estas últimas fueron cero.
+- [x] Siete figuras PNG/PDF, CSV/JSON completos, trazas de diagnóstico e informe.
+- [ ] Panel principal completo: quedaron 28/96 celdas sin iniciar por el límite
+  de fase; calibración 9/16. Continuar exige otro ensayo/contrato explícito.
+- [ ] Confirmación H1/H2/H3/H4/T20, transferencia efectiva en repositorios reales,
+  replicación independiente y arreglo de la intermitencia systemd.
 - [ ] Ventaja confirmada, release verde de ECHO-5.1 y transición a ECHO-5.5.
 
 Evidencia: [V5](REPOWORLD-V5-PHASES-20261015.md),
 [V6](REPOWORLD-V6-READINESS-20261015.md), [V7](REPOWORLD-V7-BATCHES-20261015.md),
-[V8 y procedimiento vigente](REPOWORLD-V8-CONTEXT-20261015.md).
-Cuota tras detener la calibración V8: **19,82 h**; worker, relay y túnel apagados
-antes del lanzamiento de la campaña sellada.
+[V8](REPOWORLD-V8-CONTEXT-20261015.md) e
+[informe final SWE-bench Lite](REPOWORLD-SWE-RESULTS-20261016.md).
+Cuota consultada al cierre (16 de octubre, 09:03 UTC): **9,95 h**; Kaggle,
+relay y túneles apagados. El consumo de cuota de campaña fue aproximadamente
+9,87 h, desde 19,82 h; no incluye la calibración V8 previa.
 Calendario conservado: 96 celdas principales + 24 de ablación + 16 de calibración
 + 14 de memoria = 150; 36 instancias distintas. I2 conserva dos propuestas
 independientes más selector. Solo las 24 instancias primarias entran al score

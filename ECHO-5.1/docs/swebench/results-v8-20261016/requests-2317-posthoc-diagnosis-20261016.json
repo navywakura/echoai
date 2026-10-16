@@ -1,0 +1,13 @@
+{
+  "schema": "repoworld.posthoc-diagnosis.v1",
+  "scope": "Descriptive trace comparison after all candidate patches were frozen; not a mechanism ablation",
+  "instance_id": "psf__requests-2317",
+  "source_trace_sha256": "00fa311922075effa5e420b7b3c69e6862707266af8386c436ce1ab68f1cdbfd",
+  "observations": [
+    "S: outlined Session, read request() including line 428, corrected leading indentation on its second patch attempt, retained the patch after public checks; official resolved true.",
+    "E: transitioned from locator after viewing the file beginning, then proposed the same essential bytes decoding change; first edit failed exact indentation matching.",
+    "E: the indented edit was rejected with UNOBSERVED_SEARCH requesting file_view at line 428. Subsequent reads started at 156, 89, 166 and finally 400; the episode stopped on budget before a successful edit.",
+    "No PUBLIC_REGRESSION or automatic regression rollback explains the E failure in this issue."
+  ],
+  "interpretation": "This trace supports a localization/feedback-following failure in this run. It does not estimate the causal effect of removing the source-evidence gate."
+}

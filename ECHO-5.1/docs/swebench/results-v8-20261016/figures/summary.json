@@ -1,0 +1,129 @@
+{
+  "data_kind": "measured",
+  "arms": {
+    "S": {
+      "n": 24,
+      "resolved": 2,
+      "rate": 0.08333333333333333,
+      "official_raw_resolved": 2,
+      "official_raw_missing": 20,
+      "discrepancies": 0,
+      "wilson95": [
+        0.023158815297043306,
+        0.25848802193210685
+      ],
+      "tokens": 404724,
+      "mean_tokens": 16863.5,
+      "mean_wall_seconds": 216.94090994199118,
+      "tokens_per_resolved": 202362.0,
+      "wall_seconds_per_resolved": 2603.290919303894,
+      "proposed_patches": 7,
+      "regressive_patches": 0,
+      "blocked": 0,
+      "blocked_fraction": null
+    },
+    "I2": {
+      "n": 24,
+      "resolved": 1,
+      "rate": 0.041666666666666664,
+      "official_raw_resolved": 1,
+      "official_raw_missing": 22,
+      "discrepancies": 0,
+      "wilson95": [
+        0.0073934561655057685,
+        0.20241806478655938
+      ],
+      "tokens": 343469,
+      "mean_tokens": 14311.208333333334,
+      "mean_wall_seconds": 204.53425387541452,
+      "tokens_per_resolved": 343469.0,
+      "wall_seconds_per_resolved": 4908.822093009949,
+      "proposed_patches": 3,
+      "regressive_patches": 0,
+      "blocked": 0,
+      "blocked_fraction": null
+    },
+    "F": {
+      "n": 24,
+      "resolved": 1,
+      "rate": 0.041666666666666664,
+      "official_raw_resolved": 1,
+      "official_raw_missing": 18,
+      "discrepancies": 0,
+      "wilson95": [
+        0.0073934561655057685,
+        0.20241806478655938
+      ],
+      "tokens": 266806,
+      "mean_tokens": 11116.916666666666,
+      "mean_wall_seconds": 178.64472484588623,
+      "tokens_per_resolved": 266806.0,
+      "wall_seconds_per_resolved": 4287.4733963012695,
+      "proposed_patches": 11,
+      "regressive_patches": 0,
+      "blocked": 0,
+      "blocked_fraction": null
+    },
+    "E": {
+      "n": 24,
+      "resolved": 1,
+      "rate": 0.041666666666666664,
+      "official_raw_resolved": 1,
+      "official_raw_missing": 19,
+      "discrepancies": 0,
+      "wilson95": [
+        0.0073934561655057685,
+        0.20241806478655938
+      ],
+      "tokens": 266562,
+      "mean_tokens": 11106.75,
+      "mean_wall_seconds": 233.29574091235796,
+      "tokens_per_resolved": 266562.0,
+      "wall_seconds_per_resolved": 5599.097781896591,
+      "proposed_patches": 9,
+      "regressive_patches": 0,
+      "blocked": 0,
+      "blocked_fraction": null
+    }
+  },
+  "paired_E": {
+    "S": {
+      "wins": 0,
+      "losses": 1,
+      "ties": 23
+    },
+    "I2": {
+      "wins": 0,
+      "losses": 0,
+      "ties": 24
+    },
+    "F": {
+      "wins": 0,
+      "losses": 0,
+      "ties": 24
+    }
+  },
+  "memory": {
+    "empty_tokens": 84941,
+    "shared_marginal_tokens": 65165,
+    "shared_full_tokens": 79947,
+    "empty_wall_seconds": 1176.5799164772034,
+    "shared_marginal_wall_seconds": 975.3889093399048,
+    "shared_full_wall_seconds": 1220.0150501728058,
+    "donor_tokens": 14782,
+    "donor_wall_seconds": 244.626140832901,
+    "empty_resolved": 0,
+    "shared_resolved": 0,
+    "n": 6
+  },
+  "not_started": 28,
+  "complete": false,
+  "custody_verified_by_plotter": false,
+  "uncertainty": "Wilson descriptive only; clustered issues/repeated seeds are not independent",
+  "input_sha256": "9e6dc22661f3c1c96e685d2176bfb56d26fab592d50c9df972464e4ce18e6f25",
+  "contract_sha256": "df5d00abfa05516734add52c6e31a769d3342acde8d003eb28f4b7721a7c1e40",
+  "audit_report_sha256": "17e52bd1ccca02233cb59f400d84ed7bef9387188232bbe0bff13b58c54bc58d",
+  "generator_sha256": "7ed3b3fba049c24a1c9747186a3b1f0a0b862ba63775f89bfe318f6948683872",
+  "python": "3.14.6",
+  "matplotlib": "3.10.9"
+}
