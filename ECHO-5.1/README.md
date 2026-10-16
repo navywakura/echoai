@@ -3,6 +3,7 @@
 Publicación del 16 de octubre de 2026. **Sin ventaja de resolución demostrada
 en SWE-bench Lite; no es un release verde científico.**
 
+- [Guía rápida: instalar dependencias, probar y reproducir gráficas](docs/QUICKSTART-REPRODUCTION.md).
 - [Conclusiones científicas, de ingeniería y estratégicas](docs/PUBLICATION-20261016.md).
 - [Informe final SWE-bench y límites](docs/REPOWORLD-SWE-RESULTS-20261016.md).
 - [Datos, contratos, auditoría e imágenes reproducibles](docs/swebench/results-v8-20261016/README.md).
