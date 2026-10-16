@@ -34,6 +34,17 @@ The separate **[echounity sandbox](https://github.com/navywakura/echounity)** pr
 
 The existing terminal package remains **4.5.0b1**. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic). ECHO-5 5.0.0 is distributed as a source workspace in this repository; the terminal installer remains separate.
 
+## ECHO-5.1 research closure · 16 October 2026
+
+[ECHO-5.1 research and conclusions](ECHO-5.1/README.md) are now published,
+including [seven reproducible PNG/PDF figures and full result tables](ECHO-5.1/docs/swebench/results-v8-20261016/README.md).
+On the 17 paired SWE-bench Lite issues executed, S resolved 2 and I2/F/E each
+resolved 1. E used 34.14% fewer total tokens than S, but more tokens per
+resolved issue. The campaign executed 115 episodes across its phases; 35
+registered cells were not started. **No resolution advantage or scientific
+green closure is claimed.** This research closure does not change the
+validated scope of ECHO-5 5.0.0.
+
 ## Work on ECHO-5
 
 Start with the [ECHO-5 setup](ECHO-5/README.md), [closure checklist](ECHO-5/docs/CLOSURE-CHECKLIST.md) and [module inventory](ECHO-5/docs/MODULE-INVENTORY.md). ECHO-5 has its own Python environment and optional sandbox dependencies. The commands below install the existing terminal distribution.

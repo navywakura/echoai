@@ -1,4 +1,22 @@
-# ECHO-5.1 · PCWORLD-1
+# ECHO-5.1 · investigación cerrada
+
+Publicación del 16 de octubre de 2026. **Sin ventaja de resolución demostrada
+en SWE-bench Lite; no es un release verde científico.**
+
+- [Conclusiones científicas, de ingeniería y estratégicas](docs/PUBLICATION-20261016.md).
+- [Informe final SWE-bench y límites](docs/REPOWORLD-SWE-RESULTS-20261016.md).
+- [Datos, contratos, auditoría e imágenes reproducibles](docs/swebench/results-v8-20261016/README.md).
+- [Cierre y pendientes](docs/CLOSURE-20261016.md).
+- [Verificación de publicación: fallos actuales conservados](docs/PUBLICATION-VERIFICATION-20261016.json).
+
+La verificación actual no obtuvo un gate completo verde: se documentan
+incidentes de cancelación, metadatos y longitud de ruta de socket.
+
+![Resolución y denominadores](docs/swebench/results-v8-20261016/figures/01_resolution.png)
+
+![Coste y resolución](docs/swebench/results-v8-20261016/figures/03_cost_resolution.png)
+
+## Inicio de PCWORLD-1 · contexto histórico
 
 Prototipo de investigación iniciado a partir del plan del 12 de octubre. Su
 primer contrato comprueba aislamiento, custodia y presupuesto. El verde de
@@ -10,7 +28,8 @@ seis familias nuevas de reparación. El primer piloto real terminó: **24/24
 episodios auditados, 2/6 tareas resueltas en cada brazo S/I2/F/E**. No se observó
 ventaja multiagente. Un diagnóstico separado sí completó el ciclo de
 contraejemplo, memoria, reparación y verificación con Qwen.
-**ECHO-5.1 sigue en investigación:** el cierre científico permanece pendiente.
+**Estado en aquel piloto:** la investigación seguía abierta; el cierre final
+se documenta en los enlaces anteriores.
 La entrega anterior validó 16/16 episodios programados y 576 recibos;
 [ese informe histórico](docs/RESULTS.md) no mide la capacidad de un LLM.
 

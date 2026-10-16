@@ -1,0 +1,207 @@
+{
+  "schema": "echo51.publication-verification.v1",
+  "date": "2026-10-16",
+  "publication_kind": "research_archive_not_validated_stable_release",
+  "current_full_verification_passed": false,
+  "attempts": [
+    {
+      "attempt": "software",
+      "valid": false,
+      "source_unchanged": true,
+      "suites": [
+        {
+          "exit_code": 0,
+          "log_sha256": "ac49522d0acc930649e752c4963a32daad84ee490129a32133864a32cb126afd",
+          "seconds": 69.63101584999822,
+          "suite": "repoworld",
+          "tests_run": 199,
+          "skipped": 3,
+          "errors": []
+        },
+        {
+          "exit_code": 1,
+          "log_sha256": "d7e682c72dcdef156b1bb7b6319c5f7cb06e3c60089a8a9c4f34f517925a27c7",
+          "seconds": 109.50648069399176,
+          "suite": "pcworld",
+          "tests_run": 257,
+          "skipped": 0,
+          "errors": [
+            "test_registration_after_frontend_death_is_stopped_and_observed (tests.test_pcworld_startup_cleanup.StartupCleanupTests.test_registration_after_frontend_death_is_stopped_and_observed)"
+          ]
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "c1f5a237ee41b03ee6b02a00ac8db689a1f04f79595cc0acdd0a04e3495d7822",
+          "seconds": 5.7799753439903725,
+          "suite": "design",
+          "tests_run": 13,
+          "skipped": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "attempt": "software-recheck",
+      "valid": false,
+      "source_unchanged": true,
+      "suites": [
+        {
+          "exit_code": 1,
+          "log_sha256": "b24a2dab906c5874b294a40c5a208ac8e7fe715dd70cbfa903580e52aa106660",
+          "seconds": 86.43891761999112,
+          "suite": "repoworld",
+          "tests_run": 199,
+          "skipped": 3,
+          "errors": [
+            "test_v2_locator_token_budget_cap_reserves_editor_tokens (tests.test_repoworld_interface_v2.InterfaceV2Tests.test_v2_locator_token_budget_cap_reserves_editor_tokens)"
+          ]
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "5927c07afd88efbca4428d6796920fd02e8f44853632d6447a9eb96437ea6f2d",
+          "seconds": 162.58621596498415,
+          "suite": "pcworld",
+          "tests_run": 257,
+          "skipped": 0,
+          "errors": []
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "edf810e84c510c7921ef128d5551b88531e022bd19bcb68012bbc2cffba9d3c2",
+          "seconds": 5.730312829022296,
+          "suite": "design",
+          "tests_run": 13,
+          "skipped": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "attempt": "software-isolated-tmp",
+      "valid": false,
+      "source_unchanged": true,
+      "suites": [
+        {
+          "exit_code": 0,
+          "log_sha256": "8ee6b068cda8ff12089e6b7a5c9dad06b747b6a93b13ccbe3351978fc313d327",
+          "seconds": 157.28742596201482,
+          "suite": "repoworld",
+          "tests_run": 199,
+          "skipped": 3,
+          "errors": []
+        },
+        {
+          "exit_code": 1,
+          "log_sha256": "6dc830b1fc65b07253e9151b28d6872ca9e000845501a5dceb4f230afebf8532",
+          "seconds": 247.71043917300995,
+          "suite": "pcworld",
+          "tests_run": 257,
+          "skipped": 0,
+          "errors": [
+            "test_unix_socket_is_rejected_without_opening_it (tests.test_pcworld_snapshots.TestSnapshots.test_unix_socket_is_rejected_without_opening_it)",
+            "test_registration_after_frontend_death_is_stopped_and_observed (tests.test_pcworld_startup_cleanup.StartupCleanupTests.test_registration_after_frontend_death_is_stopped_and_observed)"
+          ]
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "6f45040765f6b28e1ebc9ff03c46f21914b67ddf9bd65bb945d98a9c2b78ecae",
+          "seconds": 11.562288643006468,
+          "suite": "design",
+          "tests_run": 13,
+          "skipped": 0,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "targeted_startup_recheck": {
+    "tests_run": 2,
+    "exit_code": 0,
+    "sha256": "fc8c05cecc780cbb0282470938f37cad388a4363003de7fd5cc92f2451a0e692"
+  },
+  "figure_verification": {
+    "valid": true,
+    "byte_identical": 14,
+    "rows": [
+      {
+        "file": "01_resolution.pdf",
+        "sha256": "4a2fe2bbfc78c618aab94a3d7ae3ea4226525cdf91c65a0ab6d9d8ceb7604a63",
+        "identical": true
+      },
+      {
+        "file": "01_resolution.png",
+        "sha256": "f624b27444a6d54a5792abba246bfe3e5a8462a8f25f16731982f215db7833c3",
+        "identical": true
+      },
+      {
+        "file": "02_regressions.pdf",
+        "sha256": "735f39170cb61a7636ee292879f144cbea2cae5bcb72cc0560267a294932dae4",
+        "identical": true
+      },
+      {
+        "file": "02_regressions.png",
+        "sha256": "23d6d533dd476b498186afc5e576b050b0c5448f6ccc7070c795e86500d26ce1",
+        "identical": true
+      },
+      {
+        "file": "03_cost_resolution.pdf",
+        "sha256": "8188e2941260b796dac1378f4da43a9dc5e05a0b0ed9cd51181354bb2ad4e2bc",
+        "identical": true
+      },
+      {
+        "file": "03_cost_resolution.png",
+        "sha256": "60e48199b5785bdee6ffe7fa4a6bb0643e282179cbde939fc7f1d0cd3c04c7d1",
+        "identical": true
+      },
+      {
+        "file": "04_memory.pdf",
+        "sha256": "f92f0fd053dfddf376b94eb3269addcab21d0e7b976fd997be5a31f658a40d6d",
+        "identical": true
+      },
+      {
+        "file": "04_memory.png",
+        "sha256": "da9a90ca7361965ececb31569fdc47a0040cbf39b5e83c65112463e91599c9bc",
+        "identical": true
+      },
+      {
+        "file": "05_coverage.pdf",
+        "sha256": "85b71b0aed57d3d618cb2d40784a8c88db0ddd71535c1fd90d5a6615e088e56d",
+        "identical": true
+      },
+      {
+        "file": "05_coverage.png",
+        "sha256": "c1d06f36e870d1e109298c406ab2e4462e26391a8604c4c1060606c30a2e5eaf",
+        "identical": true
+      },
+      {
+        "file": "06_executed_subset.pdf",
+        "sha256": "cd7755a37dd89907216eef846aff164a078f536ceb671e015c093bac60daa198",
+        "identical": true
+      },
+      {
+        "file": "06_executed_subset.png",
+        "sha256": "5ff8c78df95d56ebcda3e7b03b58d7c4dc9196fd01fedbb134102db28164dd6a",
+        "identical": true
+      },
+      {
+        "file": "07_worker_time.pdf",
+        "sha256": "f69f203b76499e563d69c69e435f456badde9e6781b926bdf039ff605104d72a",
+        "identical": true
+      },
+      {
+        "file": "07_worker_time.png",
+        "sha256": "35aff93454b4c71cefca40604b8571afdb214ee4e44b455edea3f99b033e819a",
+        "identical": true
+      }
+    ]
+  },
+  "gpu_hours": 0,
+  "llm_calls": 0,
+  "experimental_sources_changed": false,
+  "limitations": [
+    "No full verification attempt passed all suites together. Each suite passed in at least one attempt; this does not replace a passing aggregate gate.",
+    "Startup cleanup confirmation failed intermittently; cause not isolated.",
+    "Second attempt detected a filesystem metadata race; cause not isolated.",
+    "Dedicated temporary path exceeded AF_UNIX socket path length in one test."
+  ]
+}
