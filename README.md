@@ -1,8 +1,9 @@
 <p align="center"><img src="assets/brand/banner-echo5.jpg" width="100%" alt="ECHO-5" /></p>
 <p align="center">
+  <img src="https://img.shields.io/badge/ECHO--5.8-A_%C2%B7_B_%C2%B7_C_green-15803d" alt="ECHO-5.8: tracks A, B and C green" />
   <img src="https://img.shields.io/badge/ECHO--5-5.0.0_scoped_green-15803d" alt="ECHO-5: validated within its declared scope" />
   <img src="https://img.shields.io/badge/terminal_release-4.5_beta-7c3aed" alt="Terminal release: 4.5 beta" />
-  <img src="https://img.shields.io/badge/S6-under_investigation-f59e0b" alt="S6 under investigation" />
+  <img src="https://img.shields.io/badge/next-C_v2_(liar)-f59e0b" alt="Next: C v2 with a liar" />
   <img src="https://img.shields.io/badge/core-deterministic-111827" alt="Deterministic core" />
   <a href="https://huggingface.co/RxLabs/echoai-4-cognitive-agentic"><img src="https://img.shields.io/badge/Hugging_Face-ECHO_4.0-ffd21e?logo=huggingface" alt="ECHO 4.0 on Hugging Face" /></a>
 </p>
@@ -14,6 +15,22 @@
   <img src="https://img.shields.io/badge/llama.cpp-local_GGUF-111827" alt="llama.cpp" />
   <img src="https://img.shields.io/badge/MCP-stdio_tools-111827" alt="MCP" />
 </p>
+
+## ECHO-5.8 · learn in one world, use it in another · 21 October 2026
+
+**ECHO-5.8 turned three old reds green — with new contracts, frozen exams and independent verification.** Old reds stay red; each green below is a new, separately named experiment with predictions written before measuring and controls that could have won.
+
+| Track | What ECHO did | Exam result |
+|---|---|---|
+| **A · MEMORIA-X** | Integer, append-only memory of *roles* ("this moves by itself and hurts", "this key opens that door") carried into worlds it had never seen | **Green.** Learned memory beat empty and shuffled memory on held-out families |
+| **B · ACUMULA-3** | Chose and chained edits to its own memory and policy from its own measured failures, round after round | **Green.** Probe failures 94.3 → 35.4 → 22.3 → 21.0 → 15.8 → 13.8 (five straight improvements), harm 58.6 → 0; beat all five controls in 10/10 macros |
+| **C · ENJAMBRE-1** | Four ECHO agents, each with a private memory plus a global memory shared as 16-byte WSP postcards, solving shared worlds together and asking each other for help | **Green.** Mission score 691 vs 920 without global memory, 989 without private memory, 1866 isolated; 20/20 teams vs most controls |
+
+Honest limits, published with the results: in B, the policy pieces were designed outside ECHO and handing them all over at once ends about the same (13.3 vs 13.8), so ECHO's merit is choosing, ordering and accumulating; in C, the shared worlds and the ask/hold protocol were hand-designed, help only pays off in worlds that cannot be solved alone, and the private-memory advantage is concentrated in 2 of 20 teams. Earlier attempts (B v1, B v2, C's first design) stay red and are published as such.
+
+Next: **C v2**, the same swarm with a strategic liar (building on LINK-3), and **D**, ECHO as a veto for a tool-using LLM agent. Full write-up: [rxlabs.org · ECHO-5.8](https://rxlabs.org/research/echo-58-aprender-en-un-mundo-y-usarlo-en-otro).
+
+## About ECHO-AI
 
 ECHO-AI studies object and relation representations, causal memory, program composition and planning through interaction. It combines a local cognitive core with an optional language adviser. This repository contains the core, research modules, development tests, `echo-dev`, the `echo-nexus` terminal and the new [ECHO-5 implementation](ECHO-5/README.md).
 
