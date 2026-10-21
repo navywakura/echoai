@@ -19,6 +19,7 @@
 ## ECHO-5.8 · learn in one world, use it in another · 21 October 2026
 
 **ECHO-5.8 turned three old reds green — with new contracts, frozen exams and independent verification.** Old reds stay red; each green below is a new, separately named experiment with predictions written before measuring and controls that could have won.
+<sup><sub>Used Claude to manage the GitHub publishing and issues</sub></sup>
 
 | Track | What ECHO did | Exam result |
 |---|---|---|
