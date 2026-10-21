@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/brand/banner-echo5.jpg" width="100%" alt="ECHO-5" /></p>
+<p align="center"><img src="assets/brand/banner-echo58.jpg" width="100%" alt="ECHO-5.8" /></p>
 <p align="center">
   <img src="https://img.shields.io/badge/ECHO--5.8-A_%C2%B7_B_%C2%B7_C_green-15803d" alt="ECHO-5.8: tracks A, B and C green" />
   <img src="https://img.shields.io/badge/ECHO--5-5.0.0_scoped_green-15803d" alt="ECHO-5: validated within its declared scope" />
