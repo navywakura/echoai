@@ -1,0 +1,165 @@
+{
+ "E1": true,
+ "E2": true,
+ "E2_without_plates": {
+  "enjambre": 445,
+  "p": 1.0,
+  "sin_ayuda": 445
+ },
+ "E3": true,
+ "E4": true,
+ "answers": {
+  "global": 43097,
+  "here": 8645,
+  "notes": 1316,
+  "private": 120302
+ },
+ "by_kind_harm": {
+  "aislados": {
+   "door": 0,
+   "lava": 87,
+   "local": 143,
+   "plate": 0
+  },
+  "enjambre": {
+   "door": 0,
+   "lava": 48,
+   "local": 89,
+   "plate": 0
+  },
+  "global_barajada": {
+   "door": 0,
+   "lava": 74,
+   "local": 131,
+   "plate": 0
+  },
+  "sin_ayuda": {
+   "door": 0,
+   "lava": 48,
+   "local": 89,
+   "plate": 0
+  },
+  "sin_global": {
+   "door": 0,
+   "lava": 89,
+   "local": 143,
+   "plate": 0
+  },
+  "sin_privada": {
+   "door": 0,
+   "lava": 45,
+   "local": 201,
+   "plate": 0
+  }
+ },
+ "card_bytes": [
+  16
+ ],
+ "destroyed": 0,
+ "enjambre_episodes": 532,
+ "green": true,
+ "macros": 20,
+ "sharing": {
+  "asked": 73,
+  "held": 403,
+  "helps": 85,
+  "notes_cards": 937,
+  "postcards": 11821
+ },
+ "sums": {
+  "aislados": {
+   "failed": 1383,
+   "harm": 230,
+   "score": 1866,
+   "solved": 119
+  },
+  "enjambre": {
+   "failed": 287,
+   "harm": 137,
+   "score": 691,
+   "solved": 160
+  },
+  "global_barajada": {
+   "failed": 469,
+   "harm": 205,
+   "score": 937,
+   "solved": 160
+  },
+  "sin_ayuda": {
+   "failed": 1281,
+   "harm": 137,
+   "score": 1685,
+   "solved": 120
+  },
+  "sin_global": {
+   "failed": 437,
+   "harm": 232,
+   "score": 920,
+   "solved": 160
+  },
+  "sin_privada": {
+   "failed": 487,
+   "harm": 246,
+   "score": 989,
+   "solved": 154
+  }
+ },
+ "tests": {
+  "aislados": {
+   "holm": true,
+   "metric": "score",
+   "p": 9.5367431640625e-07,
+   "win_tie_loss": [
+    20,
+    0,
+    0
+   ]
+  },
+  "global_barajada": {
+   "holm": true,
+   "metric": "score",
+   "p": 2.86102294921875e-06,
+   "win_tie_loss": [
+    19,
+    0,
+    1
+   ]
+  },
+  "sin_ayuda": {
+   "holm": true,
+   "metric": "score",
+   "p": 9.5367431640625e-07,
+   "win_tie_loss": [
+    20,
+    0,
+    0
+   ]
+  },
+  "sin_global": {
+   "holm": true,
+   "metric": "score",
+   "p": 9.5367431640625e-07,
+   "win_tie_loss": [
+    20,
+    0,
+    0
+   ]
+  },
+  "sin_privada": {
+   "holm": true,
+   "metric": "failed",
+   "p": 0.00048828125,
+   "win_tie_loss": [
+    11,
+    9,
+    0
+   ]
+  }
+ },
+ "uno_solo": {
+  "episodes": 1471,
+  "failed": 1352,
+  "harm": 125,
+  "solved": 119
+ }
+}

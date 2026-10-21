@@ -1,0 +1,321 @@
+{
+ "answers": {
+  "1": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "2": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "3": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  }
+ },
+ "at": "2026-10-20T13:04:32Z",
+ "hit_rate_pct": {
+  "1": 80,
+  "2": 79,
+  "3": 79
+ },
+ "macros": [
+  1,
+  2,
+  3
+ ],
+ "rules": {
+  "1": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "2": {
+   "l1_keys": 19,
+   "l1_rules": 17,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "3": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  }
+ },
+ "secs": {
+  "1": 16,
+  "2": 16,
+  "3": 16
+ },
+ "summary": {
+  "A1|aprendida|DoorKey6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 729,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|aprendida|DynObs6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 2559,
+   "success": 48,
+   "wasted": 66
+  },
+  "A1|aprendida|Island": {
+   "harm": 0,
+   "n": 60,
+   "steps": 240,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|aprendida|KeyCorridor3": {
+   "harm": 0,
+   "n": 60,
+   "steps": 1863,
+   "success": 60,
+   "wasted": 528
+  },
+  "A1|aprendida|LavaCrossing9": {
+   "harm": 0,
+   "n": 60,
+   "steps": 885,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|aprendida|LavaGapS7": {
+   "harm": 0,
+   "n": 60,
+   "steps": 627,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|techo|DoorKey6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 729,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|techo|DynObs6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 2559,
+   "success": 48,
+   "wasted": 66
+  },
+  "A1|techo|Island": {
+   "harm": 0,
+   "n": 60,
+   "steps": 240,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|techo|KeyCorridor3": {
+   "harm": 0,
+   "n": 60,
+   "steps": 1208,
+   "success": 60,
+   "wasted": 167
+  },
+  "A1|techo|LavaCrossing9": {
+   "harm": 0,
+   "n": 60,
+   "steps": 885,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|techo|LavaGapS7": {
+   "harm": 0,
+   "n": 60,
+   "steps": 627,
+   "success": 60,
+   "wasted": 0
+  },
+  "A1|vacia|DoorKey6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 2016,
+   "success": 60,
+   "wasted": 507
+  },
+  "A1|vacia|DynObs6": {
+   "harm": 60,
+   "n": 60,
+   "steps": 120,
+   "success": 0,
+   "wasted": 0
+  },
+  "A1|vacia|Island": {
+   "harm": 60,
+   "n": 60,
+   "steps": 240,
+   "success": 0,
+   "wasted": 60
+  },
+  "A1|vacia|KeyCorridor3": {
+   "harm": 0,
+   "n": 60,
+   "steps": 2469,
+   "success": 60,
+   "wasted": 660
+  },
+  "A1|vacia|LavaCrossing9": {
+   "harm": 60,
+   "n": 60,
+   "steps": 603,
+   "success": 0,
+   "wasted": 132
+  },
+  "A1|vacia|LavaGapS7": {
+   "harm": 60,
+   "n": 60,
+   "steps": 480,
+   "success": 0,
+   "wasted": 120
+  },
+  "A2|aprendida|DoorKey6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 918,
+   "success": 60,
+   "wasted": 135
+  },
+  "A2|aprendida|DynObs6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 3348,
+   "success": 42,
+   "wasted": 63
+  },
+  "A2|aprendida|Island": {
+   "harm": 0,
+   "n": 60,
+   "steps": 240,
+   "success": 60,
+   "wasted": 0
+  },
+  "A2|aprendida|KeyCorridor3": {
+   "harm": 0,
+   "n": 60,
+   "steps": 4341,
+   "success": 51,
+   "wasted": 2688
+  },
+  "A2|aprendida|LavaCrossing9": {
+   "harm": 48,
+   "n": 60,
+   "steps": 504,
+   "success": 12,
+   "wasted": 6
+  },
+  "A2|aprendida|LavaGapS7": {
+   "harm": 0,
+   "n": 60,
+   "steps": 891,
+   "success": 60,
+   "wasted": 132
+  },
+  "A2|techo|DoorKey6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 2046,
+   "success": 58,
+   "wasted": 991
+  },
+  "A2|techo|DynObs6": {
+   "harm": 15,
+   "n": 60,
+   "steps": 1959,
+   "success": 36,
+   "wasted": 36
+  },
+  "A2|techo|Island": {
+   "harm": 0,
+   "n": 60,
+   "steps": 240,
+   "success": 60,
+   "wasted": 0
+  },
+  "A2|techo|KeyCorridor3": {
+   "harm": 0,
+   "n": 60,
+   "steps": 7248,
+   "success": 38,
+   "wasted": 5519
+  },
+  "A2|techo|LavaCrossing9": {
+   "harm": 46,
+   "n": 60,
+   "steps": 532,
+   "success": 14,
+   "wasted": 21
+  },
+  "A2|techo|LavaGapS7": {
+   "harm": 45,
+   "n": 60,
+   "steps": 355,
+   "success": 15,
+   "wasted": 28
+  },
+  "A2|vacia|DoorKey6": {
+   "harm": 0,
+   "n": 60,
+   "steps": 2016,
+   "success": 60,
+   "wasted": 507
+  },
+  "A2|vacia|DynObs6": {
+   "harm": 60,
+   "n": 60,
+   "steps": 120,
+   "success": 0,
+   "wasted": 0
+  },
+  "A2|vacia|Island": {
+   "harm": 60,
+   "n": 60,
+   "steps": 240,
+   "success": 0,
+   "wasted": 60
+  },
+  "A2|vacia|KeyCorridor3": {
+   "harm": 0,
+   "n": 60,
+   "steps": 4524,
+   "success": 51,
+   "wasted": 2769
+  },
+  "A2|vacia|LavaCrossing9": {
+   "harm": 60,
+   "n": 60,
+   "steps": 603,
+   "success": 0,
+   "wasted": 132
+  },
+  "A2|vacia|LavaGapS7": {
+   "harm": 60,
+   "n": 60,
+   "steps": 480,
+   "success": 0,
+   "wasted": 120
+  }
+ }
+}

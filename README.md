@@ -2,7 +2,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/ECHO--5.8-A_%C2%B7_B_%C2%B7_C_green-15803d" alt="ECHO-5.8: tracks A, B and C green" />
   <img src="https://img.shields.io/badge/ECHO--5-5.0.0_scoped_green-15803d" alt="ECHO-5: validated within its declared scope" />
-  <img src="https://img.shields.io/badge/terminal_release-4.5_beta-7c3aed" alt="Terminal release: 4.5 beta" />
+  <img src="https://img.shields.io/badge/version-5.8.0-7c3aed" alt="Version 5.8.0" />
   <img src="https://img.shields.io/badge/next-C_v2_(liar)-f59e0b" alt="Next: C v2 with a liar" />
   <img src="https://img.shields.io/badge/core-deterministic-111827" alt="Deterministic core" />
   <a href="https://huggingface.co/RxLabs/echoai-4-cognitive-agentic"><img src="https://img.shields.io/badge/Hugging_Face-ECHO_4.0-ffd21e?logo=huggingface" alt="ECHO 4.0 on Hugging Face" /></a>
@@ -28,7 +28,7 @@
 
 Honest limits, published with the results: in B, the policy pieces were designed outside ECHO and handing them all over at once ends about the same (13.3 vs 13.8), so ECHO's merit is choosing, ordering and accumulating; in C, the shared worlds and the ask/hold protocol were hand-designed, help only pays off in worlds that cannot be solved alone, and the private-memory advantage is concentrated in 2 of 20 teams. Earlier attempts (B v1, B v2, C's first design) stay red and are published as such.
 
-Next: **C v2**, the same swarm with a strategic liar (building on LINK-3), and **D**, ECHO as a veto for a tool-using LLM agent. Full write-up: [rxlabs.org · ECHO-5.8](https://rxlabs.org/research/echo-58-aprender-en-un-mundo-y-usarlo-en-otro).
+Next: **C v2**, the same swarm with a strategic liar (building on LINK-3), and **D**, ECHO as a veto for a tool-using LLM agent. Code, contracts, frozen exam data and how to reproduce: [`ECHO-5.8/`](ECHO-5.8/README.md). Full write-up: [rxlabs.org · ECHO-5.8](https://rxlabs.org/research/echo-58-aprender-en-un-mundo-y-usarlo-en-otro).
 
 ## About ECHO-AI
 
@@ -49,7 +49,7 @@ ECHO-5 now includes typed object and relation programs, concept reuse, hierarchi
 
 The separate **[echounity sandbox](https://github.com/navywakura/echounity)** provides an isometric robot world, a first-person camera, an observed map and genuine recordings of its decisions. Its simulation results have their own scope and do not close ECHO-5.
 
-The existing terminal package remains **4.5.0b1**. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic). ECHO-5 5.0.0 is distributed as a source workspace in this repository; the terminal installer remains separate.
+The package version is now **5.8.0** (ECHO-5.8; code in [`echo58/`](echo58/), contracts, results and reproduction steps in [`ECHO-5.8/`](ECHO-5.8/README.md)); the terminal installer itself is unchanged since 4.5.0b1. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic). ECHO-5 5.0.0 is distributed as a source workspace in this repository; the terminal installer remains separate.
 
 ## ECHO-5.1 research closure · 16 October 2026
 

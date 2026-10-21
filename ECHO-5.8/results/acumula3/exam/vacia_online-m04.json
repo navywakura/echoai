@@ -1,0 +1,189 @@
+{
+ "arm": "vacia_online",
+ "macro": 4,
+ "rounds": [],
+ "probe": {
+  "0": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 9,
+    "steps": 139,
+    "failed": 30
+   },
+   "DistShift2": {
+    "success": 25,
+    "harm": 5,
+    "wasted": 16,
+    "steps": 388,
+    "failed": 5
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 171,
+    "steps": 17280,
+    "failed": 30
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 6,
+    "wasted": 18,
+    "steps": 895,
+    "failed": 13
+   }
+  },
+  "1": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 9,
+    "steps": 139,
+    "failed": 30
+   },
+   "DistShift2": {
+    "success": 25,
+    "harm": 5,
+    "wasted": 16,
+    "steps": 388,
+    "failed": 5
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 171,
+    "steps": 17280,
+    "failed": 30
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 6,
+    "wasted": 18,
+    "steps": 895,
+    "failed": 13
+   }
+  },
+  "2": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 9,
+    "steps": 139,
+    "failed": 30
+   },
+   "DistShift2": {
+    "success": 25,
+    "harm": 5,
+    "wasted": 16,
+    "steps": 388,
+    "failed": 5
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 171,
+    "steps": 17280,
+    "failed": 30
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 6,
+    "wasted": 18,
+    "steps": 895,
+    "failed": 13
+   }
+  },
+  "3": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 9,
+    "steps": 139,
+    "failed": 30
+   },
+   "DistShift2": {
+    "success": 25,
+    "harm": 5,
+    "wasted": 16,
+    "steps": 388,
+    "failed": 5
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 171,
+    "steps": 17280,
+    "failed": 30
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 6,
+    "wasted": 18,
+    "steps": 895,
+    "failed": 13
+   }
+  },
+  "4": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 9,
+    "steps": 139,
+    "failed": 30
+   },
+   "DistShift2": {
+    "success": 25,
+    "harm": 5,
+    "wasted": 16,
+    "steps": 388,
+    "failed": 5
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 171,
+    "steps": 17280,
+    "failed": 30
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 6,
+    "wasted": 18,
+    "steps": 895,
+    "failed": 13
+   }
+  },
+  "5": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 9,
+    "steps": 139,
+    "failed": 30
+   },
+   "DistShift2": {
+    "success": 25,
+    "harm": 5,
+    "wasted": 16,
+    "steps": 388,
+    "failed": 5
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 171,
+    "steps": 17280,
+    "failed": 30
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 6,
+    "wasted": 18,
+    "steps": 895,
+    "failed": 13
+   }
+  }
+ },
+ "edits": [],
+ "secs": 136
+}

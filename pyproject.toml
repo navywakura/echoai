@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "echoai"
-version = "4.5.0b1"
-description = "ECHO-AI deterministic cognitive core and development harness; S6 under investigation"
+version = "5.8.0"
+description = "ECHO-AI deterministic cognitive core and development harness; ECHO-5.8 (tracks A, B, C green)"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "RxLabs"}]

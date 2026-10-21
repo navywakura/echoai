@@ -1,0 +1,55 @@
+{
+ "arm": "uno_solo",
+ "macro": 3,
+ "phase": "exam",
+ "worlds": [
+  {
+   "kind": "local",
+   "seed": 9503000
+  },
+  {
+   "kind": "lava",
+   "seed": 9503001
+  },
+  {
+   "kind": "door",
+   "seed": 9503002
+  },
+  {
+   "kind": "door",
+   "seed": 9503003
+  },
+  {
+   "kind": "plate",
+   "seed": 9503004
+  },
+  {
+   "kind": "local",
+   "seed": 9503005
+  },
+  {
+   "kind": "lava",
+   "seed": 9503006
+  },
+  {
+   "kind": "plate",
+   "seed": 9503007
+  }
+ ],
+ "solved_episode": [
+  4,
+  6,
+  7,
+  8,
+  121,
+  39,
+  40,
+  121
+ ],
+ "solved": 6,
+ "episodes": 70,
+ "failed": 64,
+ "harm": 4,
+ "destroyed": 0,
+ "secs": 104
+}

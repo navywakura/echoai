@@ -1,0 +1,2723 @@
+{
+ "at": "2026-10-20T22:09:56Z",
+ "runs": [
+  {
+   "arm": "enjambre",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_round": [
+    1,
+    1,
+    4,
+    1,
+    5,
+    2,
+    31,
+    3
+   ],
+   "score": 48,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 112,
+   "harm": 19,
+   "postcards": 1197,
+   "notes_cards": 15,
+   "helps": 6,
+   "answers": {
+    "private": 12957,
+    "notes": 4031,
+    "global": 662
+   },
+   "secs": 40
+  },
+  {
+   "arm": "sin_global",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_round": [
+    1,
+    1,
+    4,
+    1,
+    5,
+    2,
+    31,
+    3
+   ],
+   "score": 48,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 120,
+   "failed": 112,
+   "harm": 25,
+   "postcards": 0,
+   "notes_cards": 21,
+   "helps": 6,
+   "answers": {
+    "private": 16093,
+    "notes": 15,
+    "global": 0
+   },
+   "secs": 41
+  },
+  {
+   "arm": "sin_ayuda",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_round": [
+    1,
+    1,
+    4,
+    1,
+    5,
+    2,
+    31,
+    3
+   ],
+   "score": 48,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 42,
+   "failed": 35,
+   "harm": 11,
+   "postcards": 491,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 3874,
+    "notes": 0,
+    "global": 597
+   },
+   "secs": 13
+  },
+  {
+   "arm": "sin_privada",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_round": [
+    1,
+    1,
+    4,
+    1,
+    5,
+    2,
+    31,
+    3
+   ],
+   "score": 48,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 110,
+   "harm": 14,
+   "postcards": 3980,
+   "notes_cards": 15,
+   "helps": 6,
+   "answers": {
+    "private": 0,
+    "notes": 4372,
+    "global": 11761
+   },
+   "secs": 40
+  },
+  {
+   "arm": "global_barajada",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_round": [
+    1,
+    1,
+    2,
+    1,
+    4,
+    2,
+    31,
+    3
+   ],
+   "score": 45,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 113,
+   "harm": 23,
+   "postcards": 1230,
+   "notes_cards": 24,
+   "helps": 5,
+   "answers": {
+    "private": 16427,
+    "notes": 17,
+    "global": 586
+   },
+   "secs": 43
+  },
+  {
+   "arm": "aislados",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_round": [
+    1,
+    1,
+    4,
+    1,
+    5,
+    2,
+    31,
+    3
+   ],
+   "score": 48,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 42,
+   "failed": 35,
+   "harm": 11,
+   "postcards": 0,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 3989,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 13
+  },
+  {
+   "arm": "uno_solo",
+   "macro": 1,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "FourRooms",
+     "seed": 9101000
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9101001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9101002
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9101003
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9101004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9101005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9101006
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9101007
+    }
+   ],
+   "solved_episode": [
+    1,
+    2,
+    6,
+    7,
+    11,
+    12,
+    121,
+    121
+   ],
+   "solved": 6,
+   "episodes": 120,
+   "failed": 114,
+   "harm": 10,
+   "destroyed": 0,
+   "secs": 46
+  },
+  {
+   "arm": "enjambre",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_round": [
+    5,
+    4,
+    1,
+    1,
+    2,
+    4,
+    3,
+    4
+   ],
+   "score": 24,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 20,
+   "failed": 10,
+   "harm": 9,
+   "postcards": 149,
+   "notes_cards": 6,
+   "helps": 3,
+   "answers": {
+    "private": 242,
+    "notes": 110,
+    "global": 665
+   },
+   "secs": 4
+  },
+  {
+   "arm": "sin_global",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_round": [
+    7,
+    4,
+    1,
+    1,
+    2,
+    4,
+    3,
+    4
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 28,
+   "failed": 20,
+   "harm": 20,
+   "postcards": 0,
+   "notes_cards": 6,
+   "helps": 3,
+   "answers": {
+    "private": 273,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 3
+  },
+  {
+   "arm": "sin_ayuda",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_round": [
+    5,
+    4,
+    1,
+    1,
+    2,
+    4,
+    3,
+    4
+   ],
+   "score": 24,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 17,
+   "failed": 9,
+   "harm": 9,
+   "postcards": 116,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 130,
+    "notes": 0,
+    "global": 508
+   },
+   "secs": 2
+  },
+  {
+   "arm": "sin_privada",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_round": [
+    5,
+    4,
+    1,
+    1,
+    2,
+    6,
+    3,
+    4
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 24,
+   "failed": 12,
+   "harm": 12,
+   "postcards": 574,
+   "notes_cards": 10,
+   "helps": 5,
+   "answers": {
+    "private": 0,
+    "notes": 103,
+    "global": 765
+   },
+   "secs": 4
+  },
+  {
+   "arm": "global_barajada",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_round": [
+    7,
+    2,
+    1,
+    1,
+    2,
+    7,
+    3,
+    3
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 28,
+   "failed": 20,
+   "harm": 17,
+   "postcards": 252,
+   "notes_cards": 4,
+   "helps": 2,
+   "answers": {
+    "private": 423,
+    "notes": 0,
+    "global": 785
+   },
+   "secs": 3
+  },
+  {
+   "arm": "aislados",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_round": [
+    7,
+    4,
+    1,
+    1,
+    2,
+    4,
+    3,
+    4
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 19,
+   "failed": 11,
+   "harm": 11,
+   "postcards": 0,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 231,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 2
+  },
+  {
+   "arm": "uno_solo",
+   "macro": 2,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DynObs5",
+     "seed": 9102000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9102001
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9102002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9102003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9102004
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9102005
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9102006
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9102007
+    }
+   ],
+   "solved_episode": [
+    7,
+    11,
+    12,
+    13,
+    14,
+    17,
+    18,
+    19
+   ],
+   "solved": 8,
+   "episodes": 19,
+   "failed": 11,
+   "harm": 11,
+   "destroyed": 0,
+   "secs": 1
+  },
+  {
+   "arm": "enjambre",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_round": [
+    1,
+    4,
+    1,
+    1,
+    5,
+    2,
+    2,
+    31
+   ],
+   "score": 47,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 112,
+   "harm": 17,
+   "postcards": 1278,
+   "notes_cards": 14,
+   "helps": 6,
+   "answers": {
+    "private": 13263,
+    "notes": 3825,
+    "global": 636
+   },
+   "secs": 48
+  },
+  {
+   "arm": "sin_global",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_round": [
+    1,
+    4,
+    1,
+    1,
+    5,
+    2,
+    2,
+    31
+   ],
+   "score": 47,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 120,
+   "failed": 112,
+   "harm": 24,
+   "postcards": 0,
+   "notes_cards": 18,
+   "helps": 6,
+   "answers": {
+    "private": 16165,
+    "notes": 17,
+    "global": 0
+   },
+   "secs": 38
+  },
+  {
+   "arm": "sin_ayuda",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_round": [
+    1,
+    4,
+    1,
+    1,
+    5,
+    2,
+    2,
+    31
+   ],
+   "score": 47,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 41,
+   "failed": 34,
+   "harm": 10,
+   "postcards": 441,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 3927,
+    "notes": 0,
+    "global": 561
+   },
+   "secs": 13
+  },
+  {
+   "arm": "sin_privada",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_round": [
+    1,
+    4,
+    1,
+    1,
+    5,
+    2,
+    2,
+    31
+   ],
+   "score": 47,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 110,
+   "harm": 14,
+   "postcards": 4277,
+   "notes_cards": 14,
+   "helps": 6,
+   "answers": {
+    "private": 0,
+    "notes": 3934,
+    "global": 11758
+   },
+   "secs": 41
+  },
+  {
+   "arm": "global_barajada",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_round": [
+    1,
+    4,
+    1,
+    1,
+    5,
+    2,
+    2,
+    31
+   ],
+   "score": 47,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 112,
+   "harm": 24,
+   "postcards": 1379,
+   "notes_cards": 22,
+   "helps": 6,
+   "answers": {
+    "private": 15881,
+    "notes": 36,
+    "global": 1460
+   },
+   "secs": 37
+  },
+  {
+   "arm": "aislados",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_round": [
+    1,
+    4,
+    1,
+    1,
+    5,
+    2,
+    2,
+    31
+   ],
+   "score": 47,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 41,
+   "failed": 34,
+   "harm": 10,
+   "postcards": 0,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 4186,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 14
+  },
+  {
+   "arm": "uno_solo",
+   "macro": 3,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9103000
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9103001
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9103002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9103003
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9103004
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9103005
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9103006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9103007
+    }
+   ],
+   "solved_episode": [
+    1,
+    5,
+    6,
+    121,
+    121,
+    121,
+    121,
+    121
+   ],
+   "solved": 3,
+   "episodes": 120,
+   "failed": 117,
+   "harm": 3,
+   "destroyed": 0,
+   "secs": 89
+  },
+  {
+   "arm": "enjambre",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_round": [
+    1,
+    31,
+    4,
+    1,
+    2,
+    2,
+    6,
+    3
+   ],
+   "score": 50,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 113,
+   "harm": 11,
+   "postcards": 959,
+   "notes_cards": 14,
+   "helps": 3,
+   "answers": {
+    "private": 1757,
+    "notes": 2402,
+    "global": 11699
+   },
+   "secs": 45
+  },
+  {
+   "arm": "sin_global",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_round": [
+    1,
+    31,
+    4,
+    1,
+    2,
+    2,
+    6,
+    3
+   ],
+   "score": 50,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 120,
+   "failed": 113,
+   "harm": 21,
+   "postcards": 0,
+   "notes_cards": 13,
+   "helps": 3,
+   "answers": {
+    "private": 13075,
+    "notes": 1107,
+    "global": 0
+   },
+   "secs": 35
+  },
+  {
+   "arm": "sin_ayuda",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_round": [
+    1,
+    31,
+    4,
+    1,
+    2,
+    2,
+    6,
+    3
+   ],
+   "score": 50,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 43,
+   "failed": 36,
+   "harm": 10,
+   "postcards": 194,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 1623,
+    "notes": 0,
+    "global": 2915
+   },
+   "secs": 16
+  },
+  {
+   "arm": "sin_privada",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_round": [
+    1,
+    31,
+    4,
+    1,
+    2,
+    2,
+    31,
+    3
+   ],
+   "score": 75,
+   "solved": 6,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 114,
+   "harm": 11,
+   "postcards": 3147,
+   "notes_cards": 8,
+   "helps": 2,
+   "answers": {
+    "private": 0,
+    "notes": 1249,
+    "global": 31315
+   },
+   "secs": 65
+  },
+  {
+   "arm": "global_barajada",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_round": [
+    1,
+    31,
+    4,
+    1,
+    2,
+    2,
+    6,
+    4
+   ],
+   "score": 51,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 120,
+   "failed": 113,
+   "harm": 21,
+   "postcards": 1038,
+   "notes_cards": 15,
+   "helps": 3,
+   "answers": {
+    "private": 12896,
+    "notes": 1111,
+    "global": 360
+   },
+   "secs": 40
+  },
+  {
+   "arm": "aislados",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_round": [
+    1,
+    31,
+    4,
+    1,
+    2,
+    2,
+    6,
+    3
+   ],
+   "score": 50,
+   "solved": 7,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 43,
+   "failed": 36,
+   "harm": 12,
+   "postcards": 0,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 4028,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 10
+  },
+  {
+   "arm": "uno_solo",
+   "macro": 4,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9104000
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9104001
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9104002
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9104003
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9104004
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9104005
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9104006
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9104007
+    }
+   ],
+   "solved_episode": [
+    1,
+    121,
+    121,
+    121,
+    121,
+    121,
+    121,
+    121
+   ],
+   "solved": 1,
+   "episodes": 120,
+   "failed": 119,
+   "harm": 5,
+   "destroyed": 0,
+   "secs": 39
+  },
+  {
+   "arm": "enjambre",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_round": [
+    4,
+    2,
+    1,
+    1,
+    2,
+    2,
+    6,
+    8
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 32,
+   "failed": 24,
+   "harm": 23,
+   "postcards": 326,
+   "notes_cards": 14,
+   "helps": 6,
+   "answers": {
+    "private": 1205,
+    "notes": 8,
+    "global": 619
+   },
+   "secs": 6
+  },
+  {
+   "arm": "sin_global",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_round": [
+    4,
+    2,
+    1,
+    1,
+    2,
+    2,
+    6,
+    7
+   ],
+   "score": 25,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 28,
+   "failed": 19,
+   "harm": 18,
+   "postcards": 0,
+   "notes_cards": 16,
+   "helps": 6,
+   "answers": {
+    "private": 1544,
+    "notes": 13,
+    "global": 0
+   },
+   "secs": 6
+  },
+  {
+   "arm": "sin_ayuda",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_round": [
+    4,
+    2,
+    1,
+    1,
+    2,
+    2,
+    6,
+    8
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 20,
+   "failed": 12,
+   "harm": 11,
+   "postcards": 206,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 1190,
+    "notes": 0,
+    "global": 571
+   },
+   "secs": 6
+  },
+  {
+   "arm": "sin_privada",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_round": [
+    4,
+    2,
+    1,
+    1,
+    2,
+    2,
+    6,
+    8
+   ],
+   "score": 26,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 32,
+   "failed": 18,
+   "harm": 17,
+   "postcards": 948,
+   "notes_cards": 14,
+   "helps": 6,
+   "answers": {
+    "private": 0,
+    "notes": 45,
+    "global": 853
+   },
+   "secs": 8
+  },
+  {
+   "arm": "global_barajada",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_round": [
+    4,
+    2,
+    1,
+    1,
+    2,
+    2,
+    6,
+    6
+   ],
+   "score": 24,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 24,
+   "failed": 15,
+   "harm": 14,
+   "postcards": 242,
+   "notes_cards": 13,
+   "helps": 3,
+   "answers": {
+    "private": 1345,
+    "notes": 0,
+    "global": 606
+   },
+   "secs": 10
+  },
+  {
+   "arm": "aislados",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_round": [
+    4,
+    2,
+    1,
+    1,
+    2,
+    2,
+    6,
+    7
+   ],
+   "score": 25,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 19,
+   "failed": 11,
+   "harm": 10,
+   "postcards": 0,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 1486,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 8
+  },
+  {
+   "arm": "uno_solo",
+   "macro": 5,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "DistShift1",
+     "seed": 9105000
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9105001
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9105002
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9105003
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9105004
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9105005
+    },
+    {
+     "family": "LavaGapS5",
+     "seed": 9105006
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9105007
+    }
+   ],
+   "solved_episode": [
+    4,
+    8,
+    121,
+    121,
+    121,
+    121,
+    121,
+    121
+   ],
+   "solved": 2,
+   "episodes": 120,
+   "failed": 118,
+   "harm": 3,
+   "destroyed": 0,
+   "secs": 81
+  },
+  {
+   "arm": "enjambre",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_round": [
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    5,
+    6
+   ],
+   "score": 22,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 24,
+   "failed": 10,
+   "harm": 10,
+   "postcards": 191,
+   "notes_cards": 13,
+   "helps": 6,
+   "answers": {
+    "private": 310,
+    "notes": 101,
+    "global": 518
+   },
+   "secs": 2
+  },
+  {
+   "arm": "sin_global",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_round": [
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    7,
+    6
+   ],
+   "score": 24,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 28,
+   "failed": 20,
+   "harm": 20,
+   "postcards": 0,
+   "notes_cards": 11,
+   "helps": 4,
+   "answers": {
+    "private": 424,
+    "notes": 25,
+    "global": 0
+   },
+   "secs": 2
+  },
+  {
+   "arm": "sin_ayuda",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_round": [
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    5,
+    6
+   ],
+   "score": 22,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 17,
+   "failed": 9,
+   "harm": 9,
+   "postcards": 114,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 268,
+    "notes": 0,
+    "global": 242
+   },
+   "secs": 2
+  },
+  {
+   "arm": "sin_privada",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_round": [
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    5,
+    6
+   ],
+   "score": 22,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 24,
+   "failed": 10,
+   "harm": 10,
+   "postcards": 650,
+   "notes_cards": 13,
+   "helps": 6,
+   "answers": {
+    "private": 0,
+    "notes": 103,
+    "global": 599
+   },
+   "secs": 3
+  },
+  {
+   "arm": "global_barajada",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_round": [
+    2,
+    1,
+    1,
+    1,
+    2,
+    2,
+    5,
+    6
+   ],
+   "score": 20,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [
+    16
+   ],
+   "episodes": 24,
+   "failed": 13,
+   "harm": 13,
+   "postcards": 195,
+   "notes_cards": 17,
+   "helps": 5,
+   "answers": {
+    "private": 355,
+    "notes": 48,
+    "global": 289
+   },
+   "secs": 3
+  },
+  {
+   "arm": "aislados",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_round": [
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    8,
+    6
+   ],
+   "score": 25,
+   "solved": 8,
+   "destroyed": 0,
+   "card_bytes": [],
+   "episodes": 20,
+   "failed": 12,
+   "harm": 12,
+   "postcards": 0,
+   "notes_cards": 0,
+   "helps": 0,
+   "answers": {
+    "private": 406,
+    "notes": 0,
+    "global": 0
+   },
+   "secs": 2
+  },
+  {
+   "arm": "uno_solo",
+   "macro": 6,
+   "phase": "dev",
+   "worlds": [
+    {
+     "family": "LavaGapS5",
+     "seed": 9106000
+    },
+    {
+     "family": "KeyCorridorS3R2",
+     "seed": 9106001
+    },
+    {
+     "family": "BlockedUnlockPickup",
+     "seed": 9106002
+    },
+    {
+     "family": "FourRooms",
+     "seed": 9106003
+    },
+    {
+     "family": "DoorKey5",
+     "seed": 9106004
+    },
+    {
+     "family": "SimpleCrossingS9N2",
+     "seed": 9106005
+    },
+    {
+     "family": "DynObs5",
+     "seed": 9106006
+    },
+    {
+     "family": "DistShift1",
+     "seed": 9106007
+    }
+   ],
+   "solved_episode": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    13,
+    17
+   ],
+   "solved": 8,
+   "episodes": 17,
+   "failed": 9,
+   "harm": 9,
+   "destroyed": 0,
+   "secs": 2
+  }
+ ]
+}

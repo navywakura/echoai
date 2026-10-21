@@ -1,0 +1,805 @@
+{
+ "agents": 4,
+ "arms": [
+  "enjambre",
+  "sin_global",
+  "sin_ayuda",
+  "sin_privada",
+  "global_barajada",
+  "aislados",
+  "uno_solo"
+ ],
+ "at": "2026-10-20T23:22:32Z",
+ "frozen": {
+  "acumula": {
+   "__init__.py": "81d511b214731dff8a4b60dea4191b13780435f9cedf3c451ba25aec51b2c2a2",
+   "agent.py": "2397542f4fb3c0c3dfe0dc67e1017ffdbe3fa6e8a0572f80895a6536b8312d5a",
+   "bench.py": "396cab997ef14948717743c52e58535bb4b36f1608f14963b0e04dc410cf1b2f",
+   "config.py": "0a868bb3ae4b88bf3590fe04261fac2886f2dc90452400a1a59356fa4a581c6a",
+   "diagnose.py": "e22a4b924c3c8b800fc4e8e7dba8bde3c18d65f21502e3752c6da45c68b33002",
+   "llm.py": "48588614a6cff9be453fb1968f836b70e569c233ff3c986b3d5885dcc10d5f68",
+   "report.py": "e7ff37d98eba46fe5391d2810b13486221d3edd1cd56f8eb26cd9340139f5654"
+  },
+  "acumula2": {
+   "__init__.py": "9d20597757a73e96942e4a12025c5c8a8ffd3a13495b593ec7e128af88558970",
+   "bench.py": "eec7c483a49c3736c36a0bc5614b434c8aabb1e008a160018091d29192689959"
+  },
+  "acumula3": {
+   "__init__.py": "5808eb8aa5345df81555ab804fd1c882633277f89a685d00a390fac84286d7a1",
+   "bench.py": "b73ffc2b1f6563f00e620d33d261588a361e18f55517c0faa795991c4f91fc11",
+   "report.py": "788daf58ebc92f606cfea9564c926c50ec541fc24ff323da5ff4ce1c45998f7d"
+  },
+  "asg_env": [
+   "3.10.22",
+   "1.23.5",
+   "1.2",
+   "2.5.1"
+  ],
+  "asg_tree": "8a62a0786cd72b5e600541943544a95c6c72262a602b3043b0cb431c551593b0",
+  "b3_init": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "b3_policy": "52f43e633d1d31dc1cb32e2307e14ce89361c17a051e4abfafc01fd57e441775",
+  "code": {
+   "echoai/echo58/__init__.py": "d4ee1efcfbea3ab4e23e3bd2e09a84e4fac90b4b7afd59eed800b42b207a1380",
+   "echoai/echo58/memx/__init__.py": "b4b4df2dd9d4fee337244611c9f6509910fc27246107133fd2bbff2ae2b5b48b",
+   "echoai/echo58/memx/agent.py": "8f4f8150fbb3ec60223bee9b647f4ee49fd01d478c88ba84ef6355895264405d",
+   "echoai/echo58/memx/asg_worker.py": "db70dfd1d75a74fda02b7b174bec7ca07322ceb5e593ac1a000d1e8236c4f4a4",
+   "echoai/echo58/memx/bench.py": "e52aa6a0130247cfbf35177a4459c03b8b0be35e022db8350c49742a05e1dd44",
+   "echoai/echo58/memx/media.py": "a8a97bc6302ff696e3d824770895e7e261d065e871b550d7c7a0697e9aee1c47",
+   "echoai/echo58/memx/memory.py": "04b403079b05a299586be86b96bb848f4b56db121df26b3dc64a0c7b67e154ea",
+   "echoai/echo58/memx/report.py": "5ef4b0e8ed887e08efc25934a189d0c07933249c17d4a2be5a0ad44fa6d82ddc",
+   "echoai/echo58/memx/world.py": "9d76a9855952e93c7380d1ae25e7a125df15ebc9a1f7bdd12efdbd3ff25f0d0f",
+   "navi10_wsp.py": "9dad51626c3fc729c018ea267cdad2bd79ce50d9c45c19b86e27de77c5913d62"
+  },
+  "contract": "d564762c14fb48e07faae4396413352e7f5dc4be8dde8918616fe1c8c9cd5c98",
+  "enjambre": {
+   "__init__.py": "7e084694a3d7f2ac42ef15441547737099e205568b5bc0dc3e23da513c5d387e",
+   "bench.py": "b15c49f2b7abc9189b1cefac134632cb7570e378eb15ab0876350a75389b8de3",
+   "bench_a2.py": "83cfbce310feb6e9e19abc5d0a67e5f3616d0eabd4d15999d56bbcbd23660e78",
+   "cagent.py": "898f95cc5987113f495067d8e4f2d675566c51d6110a671a0e52b9f7fb6e98cc",
+   "coop.py": "6378156a97d90b3a53dbf0136a0f89f33d19e06fb090f517851c72f61e990e37",
+   "report.py": "1a8568e93f5f8ced8906b5b7628ab06cee8a645392e1f2bbabf6ef2002bec730",
+   "team.py": "4ca5a176e1f93e2447d13e33ebcaed8052c89af653e50fd996f61033aafe99ad"
+  },
+  "enjambre_contract": "380acb744fb3627dce6f1fefe2f98bc0ff3de1929dc68fa5ee8072da5a731cb6",
+  "enjambre_tests": "fbaec4443711b21014ded43ebacc7a6d4d11c2138332c199dc1d91cbc4393e2b",
+  "families": {
+   "BlockedUnlockPickup": "MiniGrid-BlockedUnlockPickup-v0",
+   "DistShift1": "MiniGrid-DistShift1-v0",
+   "DistShift2": "MiniGrid-DistShift2-v0",
+   "DoorKey6": "MiniGrid-DoorKey-6x6-v0",
+   "DoorKey8": "MiniGrid-DoorKey-8x8-v0",
+   "DynObs16": "MiniGrid-Dynamic-Obstacles-16x16-v0",
+   "DynObs5": "MiniGrid-Dynamic-Obstacles-5x5-v0",
+   "DynObs6": "MiniGrid-Dynamic-Obstacles-6x6-v0",
+   "DynObs8": "MiniGrid-Dynamic-Obstacles-8x8-v0",
+   "DynObsRandom5": "MiniGrid-Dynamic-Obstacles-Random-5x5-v0",
+   "DynObsRandom6": "MiniGrid-Dynamic-Obstacles-Random-6x6-v0",
+   "KeyCorridor3": "MiniGrid-KeyCorridorS3R1-v0",
+   "KeyCorridorS3R2": "MiniGrid-KeyCorridorS3R2-v0",
+   "KeyCorridorS3R3": "MiniGrid-KeyCorridorS3R3-v0",
+   "LavaCrossing9": "MiniGrid-LavaCrossingS9N1-v0",
+   "LavaCrossingS11N5": "MiniGrid-LavaCrossingS11N5-v0",
+   "LavaCrossingS9N1": "MiniGrid-LavaCrossingS9N1-v0",
+   "LavaCrossingS9N2": "MiniGrid-LavaCrossingS9N2-v0",
+   "LavaCrossingS9N3": "MiniGrid-LavaCrossingS9N3-v0",
+   "LavaGapS5": "MiniGrid-LavaGapS5-v0",
+   "LavaGapS6": "MiniGrid-LavaGapS6-v0",
+   "LavaGapS7": "MiniGrid-LavaGapS7-v0",
+   "ObstructedMaze1Dl": "MiniGrid-ObstructedMaze-1Dl-v0",
+   "ObstructedMaze1Dlh": "MiniGrid-ObstructedMaze-1Dlh-v0",
+   "ObstructedMaze1Dlhb": "MiniGrid-ObstructedMaze-1Dlhb-v0",
+   "ObstructedMaze2Dl": "MiniGrid-ObstructedMaze-2Dl-v0",
+   "ObstructedMaze2Dlh": "MiniGrid-ObstructedMaze-2Dlh-v0",
+   "SimpleCrossingS9N1": "MiniGrid-SimpleCrossingS9N1-v0",
+   "Unlock": "MiniGrid-Unlock-v0",
+   "UnlockPickup": "MiniGrid-UnlockPickup-v0"
+  },
+  "gymnasium": "1.2.0",
+  "gymnasium_tree": "d7bb1d699887d9b6a39ab5536a94f058f521a2162f466e30d90da0e9a6644877",
+  "language": [
+   43,
+   58,
+   81,
+   118,
+   146,
+   156,
+   165,
+   207,
+   217,
+   218,
+   226,
+   228,
+   236
+  ],
+  "minigrid": "3.0.0",
+  "minigrid_tree": "d52bb47e2ddb6d6f109d3ccb7bf09b056d9b93ae841a3c14501543dc7570728b",
+  "numpy": "2.2.6",
+  "python": "3.12.13",
+  "tests": "191010598a3ac998cdc5df5d01322f5c03bb1eb7de523d8d867fbd077e776b42",
+  "wsp": "9dad51626c3fc729c018ea267cdad2bd79ce50d9c45c19b86e27de77c5913d62"
+ },
+ "missions": {
+  "1": [
+   {
+    "kind": "lava",
+    "seed": 9501000
+   },
+   {
+    "kind": "lava",
+    "seed": 9501001
+   },
+   {
+    "kind": "local",
+    "seed": 9501002
+   },
+   {
+    "kind": "plate",
+    "seed": 9501003
+   },
+   {
+    "kind": "plate",
+    "seed": 9501004
+   },
+   {
+    "kind": "door",
+    "seed": 9501005
+   },
+   {
+    "kind": "door",
+    "seed": 9501006
+   },
+   {
+    "kind": "local",
+    "seed": 9501007
+   }
+  ],
+  "2": [
+   {
+    "kind": "local",
+    "seed": 9502000
+   },
+   {
+    "kind": "lava",
+    "seed": 9502001
+   },
+   {
+    "kind": "local",
+    "seed": 9502002
+   },
+   {
+    "kind": "plate",
+    "seed": 9502003
+   },
+   {
+    "kind": "door",
+    "seed": 9502004
+   },
+   {
+    "kind": "plate",
+    "seed": 9502005
+   },
+   {
+    "kind": "door",
+    "seed": 9502006
+   },
+   {
+    "kind": "lava",
+    "seed": 9502007
+   }
+  ],
+  "3": [
+   {
+    "kind": "local",
+    "seed": 9503000
+   },
+   {
+    "kind": "lava",
+    "seed": 9503001
+   },
+   {
+    "kind": "door",
+    "seed": 9503002
+   },
+   {
+    "kind": "door",
+    "seed": 9503003
+   },
+   {
+    "kind": "plate",
+    "seed": 9503004
+   },
+   {
+    "kind": "local",
+    "seed": 9503005
+   },
+   {
+    "kind": "lava",
+    "seed": 9503006
+   },
+   {
+    "kind": "plate",
+    "seed": 9503007
+   }
+  ],
+  "4": [
+   {
+    "kind": "plate",
+    "seed": 9504000
+   },
+   {
+    "kind": "local",
+    "seed": 9504001
+   },
+   {
+    "kind": "local",
+    "seed": 9504002
+   },
+   {
+    "kind": "plate",
+    "seed": 9504003
+   },
+   {
+    "kind": "door",
+    "seed": 9504004
+   },
+   {
+    "kind": "lava",
+    "seed": 9504005
+   },
+   {
+    "kind": "door",
+    "seed": 9504006
+   },
+   {
+    "kind": "lava",
+    "seed": 9504007
+   }
+  ],
+  "5": [
+   {
+    "kind": "door",
+    "seed": 9505000
+   },
+   {
+    "kind": "local",
+    "seed": 9505001
+   },
+   {
+    "kind": "lava",
+    "seed": 9505002
+   },
+   {
+    "kind": "local",
+    "seed": 9505003
+   },
+   {
+    "kind": "lava",
+    "seed": 9505004
+   },
+   {
+    "kind": "plate",
+    "seed": 9505005
+   },
+   {
+    "kind": "door",
+    "seed": 9505006
+   },
+   {
+    "kind": "plate",
+    "seed": 9505007
+   }
+  ],
+  "6": [
+   {
+    "kind": "lava",
+    "seed": 9506000
+   },
+   {
+    "kind": "plate",
+    "seed": 9506001
+   },
+   {
+    "kind": "door",
+    "seed": 9506002
+   },
+   {
+    "kind": "plate",
+    "seed": 9506003
+   },
+   {
+    "kind": "lava",
+    "seed": 9506004
+   },
+   {
+    "kind": "local",
+    "seed": 9506005
+   },
+   {
+    "kind": "local",
+    "seed": 9506006
+   },
+   {
+    "kind": "door",
+    "seed": 9506007
+   }
+  ],
+  "7": [
+   {
+    "kind": "lava",
+    "seed": 9507000
+   },
+   {
+    "kind": "local",
+    "seed": 9507001
+   },
+   {
+    "kind": "local",
+    "seed": 9507002
+   },
+   {
+    "kind": "plate",
+    "seed": 9507003
+   },
+   {
+    "kind": "plate",
+    "seed": 9507004
+   },
+   {
+    "kind": "lava",
+    "seed": 9507005
+   },
+   {
+    "kind": "door",
+    "seed": 9507006
+   },
+   {
+    "kind": "door",
+    "seed": 9507007
+   }
+  ],
+  "8": [
+   {
+    "kind": "lava",
+    "seed": 9508000
+   },
+   {
+    "kind": "local",
+    "seed": 9508001
+   },
+   {
+    "kind": "lava",
+    "seed": 9508002
+   },
+   {
+    "kind": "door",
+    "seed": 9508003
+   },
+   {
+    "kind": "plate",
+    "seed": 9508004
+   },
+   {
+    "kind": "door",
+    "seed": 9508005
+   },
+   {
+    "kind": "plate",
+    "seed": 9508006
+   },
+   {
+    "kind": "local",
+    "seed": 9508007
+   }
+  ],
+  "9": [
+   {
+    "kind": "lava",
+    "seed": 9509000
+   },
+   {
+    "kind": "local",
+    "seed": 9509001
+   },
+   {
+    "kind": "lava",
+    "seed": 9509002
+   },
+   {
+    "kind": "local",
+    "seed": 9509003
+   },
+   {
+    "kind": "door",
+    "seed": 9509004
+   },
+   {
+    "kind": "plate",
+    "seed": 9509005
+   },
+   {
+    "kind": "door",
+    "seed": 9509006
+   },
+   {
+    "kind": "plate",
+    "seed": 9509007
+   }
+  ],
+  "10": [
+   {
+    "kind": "local",
+    "seed": 9510000
+   },
+   {
+    "kind": "local",
+    "seed": 9510001
+   },
+   {
+    "kind": "door",
+    "seed": 9510002
+   },
+   {
+    "kind": "door",
+    "seed": 9510003
+   },
+   {
+    "kind": "plate",
+    "seed": 9510004
+   },
+   {
+    "kind": "plate",
+    "seed": 9510005
+   },
+   {
+    "kind": "lava",
+    "seed": 9510006
+   },
+   {
+    "kind": "lava",
+    "seed": 9510007
+   }
+  ],
+  "11": [
+   {
+    "kind": "plate",
+    "seed": 9511000
+   },
+   {
+    "kind": "local",
+    "seed": 9511001
+   },
+   {
+    "kind": "door",
+    "seed": 9511002
+   },
+   {
+    "kind": "lava",
+    "seed": 9511003
+   },
+   {
+    "kind": "local",
+    "seed": 9511004
+   },
+   {
+    "kind": "lava",
+    "seed": 9511005
+   },
+   {
+    "kind": "door",
+    "seed": 9511006
+   },
+   {
+    "kind": "plate",
+    "seed": 9511007
+   }
+  ],
+  "12": [
+   {
+    "kind": "local",
+    "seed": 9512000
+   },
+   {
+    "kind": "door",
+    "seed": 9512001
+   },
+   {
+    "kind": "local",
+    "seed": 9512002
+   },
+   {
+    "kind": "lava",
+    "seed": 9512003
+   },
+   {
+    "kind": "plate",
+    "seed": 9512004
+   },
+   {
+    "kind": "lava",
+    "seed": 9512005
+   },
+   {
+    "kind": "plate",
+    "seed": 9512006
+   },
+   {
+    "kind": "door",
+    "seed": 9512007
+   }
+  ],
+  "13": [
+   {
+    "kind": "door",
+    "seed": 9513000
+   },
+   {
+    "kind": "local",
+    "seed": 9513001
+   },
+   {
+    "kind": "lava",
+    "seed": 9513002
+   },
+   {
+    "kind": "plate",
+    "seed": 9513003
+   },
+   {
+    "kind": "local",
+    "seed": 9513004
+   },
+   {
+    "kind": "lava",
+    "seed": 9513005
+   },
+   {
+    "kind": "door",
+    "seed": 9513006
+   },
+   {
+    "kind": "plate",
+    "seed": 9513007
+   }
+  ],
+  "14": [
+   {
+    "kind": "plate",
+    "seed": 9514000
+   },
+   {
+    "kind": "door",
+    "seed": 9514001
+   },
+   {
+    "kind": "local",
+    "seed": 9514002
+   },
+   {
+    "kind": "lava",
+    "seed": 9514003
+   },
+   {
+    "kind": "plate",
+    "seed": 9514004
+   },
+   {
+    "kind": "local",
+    "seed": 9514005
+   },
+   {
+    "kind": "door",
+    "seed": 9514006
+   },
+   {
+    "kind": "lava",
+    "seed": 9514007
+   }
+  ],
+  "15": [
+   {
+    "kind": "lava",
+    "seed": 9515000
+   },
+   {
+    "kind": "door",
+    "seed": 9515001
+   },
+   {
+    "kind": "lava",
+    "seed": 9515002
+   },
+   {
+    "kind": "local",
+    "seed": 9515003
+   },
+   {
+    "kind": "door",
+    "seed": 9515004
+   },
+   {
+    "kind": "plate",
+    "seed": 9515005
+   },
+   {
+    "kind": "plate",
+    "seed": 9515006
+   },
+   {
+    "kind": "local",
+    "seed": 9515007
+   }
+  ],
+  "16": [
+   {
+    "kind": "lava",
+    "seed": 9516000
+   },
+   {
+    "kind": "lava",
+    "seed": 9516001
+   },
+   {
+    "kind": "door",
+    "seed": 9516002
+   },
+   {
+    "kind": "local",
+    "seed": 9516003
+   },
+   {
+    "kind": "door",
+    "seed": 9516004
+   },
+   {
+    "kind": "plate",
+    "seed": 9516005
+   },
+   {
+    "kind": "plate",
+    "seed": 9516006
+   },
+   {
+    "kind": "local",
+    "seed": 9516007
+   }
+  ],
+  "17": [
+   {
+    "kind": "local",
+    "seed": 9517000
+   },
+   {
+    "kind": "plate",
+    "seed": 9517001
+   },
+   {
+    "kind": "plate",
+    "seed": 9517002
+   },
+   {
+    "kind": "lava",
+    "seed": 9517003
+   },
+   {
+    "kind": "door",
+    "seed": 9517004
+   },
+   {
+    "kind": "lava",
+    "seed": 9517005
+   },
+   {
+    "kind": "local",
+    "seed": 9517006
+   },
+   {
+    "kind": "door",
+    "seed": 9517007
+   }
+  ],
+  "18": [
+   {
+    "kind": "plate",
+    "seed": 9518000
+   },
+   {
+    "kind": "local",
+    "seed": 9518001
+   },
+   {
+    "kind": "plate",
+    "seed": 9518002
+   },
+   {
+    "kind": "door",
+    "seed": 9518003
+   },
+   {
+    "kind": "lava",
+    "seed": 9518004
+   },
+   {
+    "kind": "local",
+    "seed": 9518005
+   },
+   {
+    "kind": "lava",
+    "seed": 9518006
+   },
+   {
+    "kind": "door",
+    "seed": 9518007
+   }
+  ],
+  "19": [
+   {
+    "kind": "lava",
+    "seed": 9519000
+   },
+   {
+    "kind": "lava",
+    "seed": 9519001
+   },
+   {
+    "kind": "plate",
+    "seed": 9519002
+   },
+   {
+    "kind": "local",
+    "seed": 9519003
+   },
+   {
+    "kind": "local",
+    "seed": 9519004
+   },
+   {
+    "kind": "door",
+    "seed": 9519005
+   },
+   {
+    "kind": "plate",
+    "seed": 9519006
+   },
+   {
+    "kind": "door",
+    "seed": 9519007
+   }
+  ],
+  "20": [
+   {
+    "kind": "plate",
+    "seed": 9520000
+   },
+   {
+    "kind": "local",
+    "seed": 9520001
+   },
+   {
+    "kind": "door",
+    "seed": 9520002
+   },
+   {
+    "kind": "door",
+    "seed": 9520003
+   },
+   {
+    "kind": "lava",
+    "seed": 9520004
+   },
+   {
+    "kind": "plate",
+    "seed": 9520005
+   },
+   {
+    "kind": "local",
+    "seed": 9520006
+   },
+   {
+    "kind": "lava",
+    "seed": 9520007
+   }
+  ]
+ },
+ "missions_sha256": "1e4a6b174563f1e27b570346c2dd941a5296a2cb6ece4d6656f7a5d33414e0d1",
+ "rounds": 30
+}

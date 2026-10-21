@@ -1,0 +1,518 @@
+{
+ "arm": "llm",
+ "macro": 5,
+ "rounds": [
+  {
+   "round": 1,
+   "families": [
+    "DistShift1",
+    "LavaGapS5"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 19,
+    "wasted": 19,
+    "steps": 533
+   },
+   "misled": 30,
+   "surprises": 19,
+   "blamed_keys": 6,
+   "tried": [
+    "('verify', (8, 'ENTER', 0))",
+    "('bound', 2, 2, 95)",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (4, 'PICK', 0))",
+    "('verify', (4, 'TOGGLE', 0))"
+   ],
+   "accepted": [
+    "('verify', (8, 'ENTER', 0))",
+    "('bound', 2, 2, 95)"
+   ],
+   "llm": {
+    "tag": "m5-r1-exam",
+    "request_sha256": "9c45c6c6bd2ce3580718277fcfd979432e93e032e243fd5e0211d781ce7af3ae",
+    "model": "openai/gpt-oss-120b",
+    "error": null,
+    "picked": [
+     [
+      "verify",
+      "(8, 'ENTER', 0)"
+     ],
+     [
+      "bound",
+      "2",
+      "2",
+      "95"
+     ],
+     [
+      "verify",
+      "(14, 'PICK', 0)"
+     ],
+     [
+      "verify",
+      "(14, 'TOGGLE', 0)"
+     ],
+     [
+      "verify",
+      "(4, 'PICK', 0)"
+     ],
+     [
+      "verify",
+      "(4, 'TOGGLE', 0)"
+     ]
+    ]
+   },
+   "config": "ab20b491bcca"
+  },
+  {
+   "round": 2,
+   "families": [
+    "LavaCrossingS9N2",
+    "DynObs5"
+   ],
+   "play": {
+    "success": 15,
+    "harm": 19,
+    "wasted": 15,
+    "steps": 934
+   },
+   "misled": 2,
+   "surprises": 0,
+   "blamed_keys": 2,
+   "tried": [
+    "('verify', (0, 'ENTER', 0))",
+    "('refine', (0, 'ENTER', 0), 32)",
+    "('refine', (0, 'ENTER', 0), 64)",
+    "('bound', 1, 2, 70)",
+    "('bound', 1, 5, 95)",
+    "('order',)"
+   ],
+   "accepted": [
+    "('verify', (0, 'ENTER', 0))",
+    "('refine', (0, 'ENTER', 0), 32)",
+    "('refine', (0, 'ENTER', 0), 64)",
+    "('bound', 1, 2, 70)",
+    "('bound', 1, 5, 95)",
+    "('order',)"
+   ],
+   "llm": {
+    "tag": "m5-r2-exam",
+    "request_sha256": "883cdfe3e6d90abb0c26ef5206b6b90533c582582264668a3a872b3d2a920979",
+    "model": "openai/gpt-oss-120b",
+    "error": null,
+    "picked": [
+     [
+      "verify",
+      "(0, 'ENTER', 0)"
+     ],
+     [
+      "refine",
+      "(0, 'ENTER', 0)",
+      "32"
+     ],
+     [
+      "refine",
+      "(0, 'ENTER', 0)",
+      "64"
+     ],
+     [
+      "bound",
+      "1",
+      "2",
+      "70"
+     ],
+     [
+      "bound",
+      "1",
+      "5",
+      "95"
+     ],
+     [
+      "order"
+     ]
+    ]
+   },
+   "config": "cb8d7774b0e0"
+  },
+  {
+   "round": 3,
+   "families": [
+    "DistShift2",
+    "SimpleCrossingS9N1"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 20,
+    "wasted": 4,
+    "steps": 425
+   },
+   "misled": 5,
+   "surprises": 0,
+   "blamed_keys": 3,
+   "tried": [
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('merge', 4)",
+    "('merge', 8)",
+    "('bound', 2, 2, 70)",
+    "('bound', 2, 2, 85)"
+   ],
+   "accepted": [
+    "('merge', 4)",
+    "('merge', 8)",
+    "('bound', 2, 2, 70)"
+   ],
+   "llm": {
+    "tag": "m5-r3-exam",
+    "request_sha256": "1e70642bb2d5a4606bb90dab5950c1fb66823bfae79182f30dc864eb933acb69",
+    "model": "openai/gpt-oss-120b",
+    "error": null,
+    "picked": [
+     [
+      "verify",
+      "(14, 'PICK', 0)"
+     ],
+     [
+      "verify",
+      "(14, 'TOGGLE', 0)"
+     ],
+     [
+      "merge",
+      "4"
+     ],
+     [
+      "merge",
+      "8"
+     ],
+     [
+      "bound",
+      "2",
+      "2",
+      "70"
+     ],
+     [
+      "bound",
+      "2",
+      "2",
+      "85"
+     ]
+    ]
+   },
+   "config": "0b396f2fc5f1"
+  },
+  {
+   "round": 4,
+   "families": [
+    "LavaCrossingS9N3",
+    "KeyCorridorS3R2"
+   ],
+   "play": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 2869,
+    "steps": 3864
+   },
+   "misled": 45,
+   "surprises": 34,
+   "blamed_keys": 13,
+   "tried": [
+    "('verify', (0, 'ENTER', 0, 96))",
+    "('verify', (0, 'PICK', 1))",
+    "('verify', (2, 'PICK', 0))",
+    "('verify', (0, 'TOGGLE', 0))",
+    "('refine', (0, 'ENTER', 0), 4)",
+    "('refine', (0, 'ENTER', 0), 8)"
+   ],
+   "accepted": [
+    "('verify', (0, 'ENTER', 0, 96))",
+    "('verify', (0, 'PICK', 1))",
+    "('verify', (2, 'PICK', 0))",
+    "('verify', (0, 'TOGGLE', 0))",
+    "('refine', (0, 'ENTER', 0), 4)"
+   ],
+   "llm": {
+    "tag": "m5-r4-exam",
+    "request_sha256": "886089a0e25ac935575f5a90869cf22a77d8a08ef4109cb4d76d99a046488f39",
+    "model": "openai/gpt-oss-120b",
+    "error": null,
+    "picked": [
+     [
+      "verify",
+      "(0, 'ENTER', 0, 96)"
+     ],
+     [
+      "verify",
+      "(0, 'PICK', 1)"
+     ],
+     [
+      "verify",
+      "(2, 'PICK', 0)"
+     ],
+     [
+      "verify",
+      "(0, 'TOGGLE', 0)"
+     ],
+     [
+      "refine",
+      "(0, 'ENTER', 0)",
+      "4"
+     ],
+     [
+      "refine",
+      "(0, 'ENTER', 0)",
+      "8"
+     ]
+    ]
+   },
+   "config": "625b9f221085"
+  },
+  {
+   "round": 5,
+   "families": [
+    "ShiftTest",
+    "DoorKey8"
+   ],
+   "play": {
+    "success": 40,
+    "harm": 0,
+    "wasted": 115,
+    "steps": 820
+   },
+   "misled": 9,
+   "surprises": 0,
+   "blamed_keys": 8,
+   "tried": [
+    "('verify', (2, 'TOGGLE', 1))",
+    "('verify', (2, 'ENTER', 0))",
+    "('verify', (0, 'ENTER', 0, 100))",
+    "('verify', (0, 'PICK', 0))",
+    "('verify', (2, 'PICK', 1))",
+    "('verify', (0, 'TOGGLE', 1))"
+   ],
+   "accepted": [
+    "('verify', (2, 'ENTER', 0))",
+    "('verify', (0, 'ENTER', 0, 100))",
+    "('verify', (0, 'PICK', 0))",
+    "('verify', (2, 'PICK', 1))",
+    "('verify', (0, 'TOGGLE', 1))"
+   ],
+   "llm": {
+    "tag": "m5-r5-exam",
+    "request_sha256": "65fd80ab5b1694d8b5606f5ebcb0dd7922e4a0c1a3fb977376eafefd3268fca7",
+    "model": "openai/gpt-oss-120b",
+    "error": null,
+    "picked": [
+     [
+      "verify",
+      "(2, 'TOGGLE', 1)"
+     ],
+     [
+      "verify",
+      "(2, 'ENTER', 0)"
+     ],
+     [
+      "verify",
+      "(0, 'ENTER', 0, 100)"
+     ],
+     [
+      "verify",
+      "(0, 'PICK', 0)"
+     ],
+     [
+      "verify",
+      "(2, 'PICK', 1)"
+     ],
+     [
+      "verify",
+      "(0, 'TOGGLE', 1)"
+     ]
+    ]
+   },
+   "config": "8d6f9e723854"
+  }
+ ],
+ "probe": {
+  "0": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 1,
+    "steps": 177
+   },
+   "DynObsRandom6": {
+    "success": 23,
+    "harm": 0,
+    "wasted": 18,
+    "steps": 1203
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 157,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 129,
+    "steps": 945
+   }
+  },
+  "1": {
+   "LavaCrossingS11N5": {
+    "success": 2,
+    "harm": 28,
+    "wasted": 1,
+    "steps": 184
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 28,
+    "steps": 1503
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 158,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 132,
+    "steps": 946
+   }
+  },
+  "2": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 155
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 27,
+    "steps": 1503
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 150,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 130,
+    "steps": 942
+   }
+  },
+  "3": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 0,
+    "steps": 677
+   },
+   "DynObsRandom6": {
+    "success": 23,
+    "harm": 0,
+    "wasted": 17,
+    "steps": 1194
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 248,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 126,
+    "steps": 944
+   }
+  },
+  "4": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 94,
+    "steps": 839
+   },
+   "DynObsRandom6": {
+    "success": 24,
+    "harm": 0,
+    "wasted": 19,
+    "steps": 1083
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 250,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 205,
+    "steps": 1105
+   }
+  },
+  "5": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 93,
+    "steps": 836
+   },
+   "DynObsRandom6": {
+    "success": 21,
+    "harm": 0,
+    "wasted": 21,
+    "steps": 1491
+   },
+   "BlockedUnlockPickup": {
+    "success": 1,
+    "harm": 0,
+    "wasted": 242,
+    "steps": 16764
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 207,
+    "steps": 1143
+   }
+  }
+ },
+ "edits": [
+  "('verify', (8, 'ENTER', 0))",
+  "('bound', 2, 2, 95)",
+  "('verify', (0, 'ENTER', 0))",
+  "('refine', (0, 'ENTER', 0), 32)",
+  "('refine', (0, 'ENTER', 0), 64)",
+  "('bound', 1, 2, 70)",
+  "('bound', 1, 5, 95)",
+  "('order',)",
+  "('merge', 4)",
+  "('merge', 8)",
+  "('bound', 2, 2, 70)",
+  "('verify', (0, 'ENTER', 0, 96))",
+  "('verify', (0, 'PICK', 1))",
+  "('verify', (2, 'PICK', 0))",
+  "('verify', (0, 'TOGGLE', 0))",
+  "('refine', (0, 'ENTER', 0), 4)",
+  "('verify', (2, 'ENTER', 0))",
+  "('verify', (0, 'ENTER', 0, 100))",
+  "('verify', (0, 'PICK', 0))",
+  "('verify', (2, 'PICK', 1))",
+  "('verify', (0, 'TOGGLE', 1))"
+ ],
+ "chain_head": "04a2a40746ad5b4f52cec7da7e4a34ceb2525cda94ad1dd3a62eb4014f45146d",
+ "secs": 545
+}

@@ -1,0 +1,267 @@
+{
+ "arm": "fija",
+ "macro": 7,
+ "rounds": [
+  {
+   "round": 1,
+   "families": [
+    "DistShift1",
+    "LavaGapS5"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 20,
+    "wasted": 6,
+    "steps": 250
+   },
+   "misled": 20,
+   "surprises": 20,
+   "blamed_keys": 2,
+   "tried": [],
+   "accepted": [],
+   "llm": null,
+   "config": "4f53cda18c2b"
+  },
+  {
+   "round": 2,
+   "families": [
+    "LavaCrossingS9N2",
+    "DynObs5"
+   ],
+   "play": {
+    "success": 13,
+    "harm": 19,
+    "wasted": 13,
+    "steps": 1076
+   },
+   "misled": 11,
+   "surprises": 6,
+   "blamed_keys": 6,
+   "tried": [],
+   "accepted": [],
+   "llm": null,
+   "config": "4f53cda18c2b"
+  },
+  {
+   "round": 3,
+   "families": [
+    "DistShift2",
+    "SimpleCrossingS9N1"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 20,
+    "wasted": 2,
+    "steps": 418
+   },
+   "misled": 6,
+   "surprises": 0,
+   "blamed_keys": 6,
+   "tried": [],
+   "accepted": [],
+   "llm": null,
+   "config": "4f53cda18c2b"
+  },
+  {
+   "round": 4,
+   "families": [
+    "LavaCrossingS9N3",
+    "KeyCorridorS3R2"
+   ],
+   "play": {
+    "success": 12,
+    "harm": 20,
+    "wasted": 2131,
+    "steps": 2907
+   },
+   "misled": 69,
+   "surprises": 25,
+   "blamed_keys": 26,
+   "tried": [],
+   "accepted": [],
+   "llm": null,
+   "config": "4f53cda18c2b"
+  },
+  {
+   "round": 5,
+   "families": [
+    "ShiftTest",
+    "DoorKey8"
+   ],
+   "play": {
+    "success": 18,
+    "harm": 19,
+    "wasted": 115,
+    "steps": 2509
+   },
+   "misled": 53,
+   "surprises": 23,
+   "blamed_keys": 22,
+   "tried": [],
+   "accepted": [],
+   "llm": null,
+   "config": "4f53cda18c2b"
+  }
+ ],
+ "probe": {
+  "0": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 2,
+    "steps": 130
+   },
+   "DynObsRandom6": {
+    "success": 23,
+    "harm": 0,
+    "wasted": 18,
+    "steps": 1219
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 149,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 128,
+    "steps": 1198
+   }
+  },
+  "1": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 2,
+    "steps": 130
+   },
+   "DynObsRandom6": {
+    "success": 24,
+    "harm": 0,
+    "wasted": 16,
+    "steps": 1099
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 182,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 133,
+    "steps": 1215
+   }
+  },
+  "2": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 2,
+    "steps": 130
+   },
+   "DynObsRandom6": {
+    "success": 25,
+    "harm": 0,
+    "wasted": 18,
+    "steps": 1091
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 184,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 149,
+    "steps": 1255
+   }
+  },
+  "3": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 2,
+    "steps": 128
+   },
+   "DynObsRandom6": {
+    "success": 25,
+    "harm": 0,
+    "wasted": 17,
+    "steps": 1086
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 182,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 157,
+    "steps": 1287
+   }
+  },
+  "4": {
+   "LavaCrossingS11N5": {
+    "success": 1,
+    "harm": 29,
+    "wasted": 4,
+    "steps": 150
+   },
+   "DynObsRandom6": {
+    "success": 24,
+    "harm": 0,
+    "wasted": 19,
+    "steps": 1212
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 227,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 28,
+    "harm": 0,
+    "wasted": 212,
+    "steps": 1618
+   }
+  },
+  "5": {
+   "LavaCrossingS11N5": {
+    "success": 1,
+    "harm": 29,
+    "wasted": 4,
+    "steps": 150
+   },
+   "DynObsRandom6": {
+    "success": 23,
+    "harm": 0,
+    "wasted": 19,
+    "steps": 1344
+   },
+   "BlockedUnlockPickup": {
+    "success": 1,
+    "harm": 0,
+    "wasted": 217,
+    "steps": 16753
+   },
+   "ObstructedMaze1Dl": {
+    "success": 28,
+    "harm": 0,
+    "wasted": 200,
+    "steps": 1574
+   }
+  }
+ },
+ "edits": [],
+ "chain_head": "074eb47dc6cd4ffa14d2cc01265026bf3a327110147405c09b0c960e5b223f5c",
+ "secs": 476
+}

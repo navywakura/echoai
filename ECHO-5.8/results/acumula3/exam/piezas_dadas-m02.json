@@ -1,0 +1,369 @@
+{
+ "arm": "piezas_dadas",
+ "macro": 2,
+ "rounds": [
+  {
+   "round": 1,
+   "play": {
+    "success": 15,
+    "harm": 20,
+    "wasted": 215,
+    "steps": 3968
+   },
+   "signals": {
+    "idle": 5,
+    "pickdrop": 5
+   },
+   "tried": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('refine', (12, 'ENTER', 0), 32)",
+    "('refine', (4, 'ENTER', 0), 64)",
+    "('verify', (8, 'ENTER', 0))",
+    "('verify', (12, 'ENTER', 0))"
+   ],
+   "accepted": [
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('refine', (12, 'ENTER', 0), 32)"
+   ],
+   "config": "07866383d3b0",
+   "pieces": [
+    "clear",
+    "commit",
+    "no_repick",
+    "no_retoggle",
+    "wander"
+   ]
+  },
+  {
+   "round": 2,
+   "play": {
+    "success": 34,
+    "harm": 3,
+    "wasted": 239,
+    "steps": 3271
+   },
+   "signals": {
+    "idle": 3,
+    "pickdrop": 2
+   },
+   "tried": [
+    "('order',)",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (0, 'PICK', 1))",
+    "('verify', (14, 'TOGGLE', 1))",
+    "('verify', (4, 'PICK', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('verify', (4, 'PICK', 0))"
+   ],
+   "config": "63df69d06660",
+   "pieces": [
+    "clear",
+    "commit",
+    "no_repick",
+    "no_retoggle",
+    "wander"
+   ]
+  },
+  {
+   "round": 3,
+   "play": {
+    "success": 34,
+    "harm": 0,
+    "wasted": 248,
+    "steps": 3545
+   },
+   "signals": {
+    "idle": 6,
+    "pickdrop": 3,
+    "blockdrop": 1
+   },
+   "tried": [
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (12, 'PICK', 0))",
+    "('verify', (12, 'TOGGLE', 0))",
+    "('verify', (8, 'PICK', 0))",
+    "('verify', (8, 'TOGGLE', 0))"
+   ],
+   "accepted": [
+    "('verify', (14, 'PICK', 0))"
+   ],
+   "config": "6daa2e6cb563",
+   "pieces": [
+    "clear",
+    "commit",
+    "no_repick",
+    "no_retoggle",
+    "wander"
+   ]
+  },
+  {
+   "round": 4,
+   "play": {
+    "success": 37,
+    "harm": 0,
+    "wasted": 274,
+    "steps": 3300
+   },
+   "signals": {
+    "idle": 3,
+    "pickdrop": 3
+   },
+   "tried": [
+    "('verify', (14, 'TOGGLE', 1))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (12, 'PICK', 0))",
+    "('verify', (12, 'TOGGLE', 0))",
+    "('verify', (0, 'PICK', 1))",
+    "('verify', (8, 'PICK', 0))"
+   ],
+   "accepted": [],
+   "config": "6daa2e6cb563",
+   "pieces": [
+    "clear",
+    "commit",
+    "no_repick",
+    "no_retoggle",
+    "wander"
+   ]
+  },
+  {
+   "round": 5,
+   "play": {
+    "success": 35,
+    "harm": 0,
+    "wasted": 284,
+    "steps": 4271
+   },
+   "signals": {
+    "idle": 5,
+    "pickdrop": 4
+   },
+   "tried": [
+    "('verify', (14, 'TOGGLE', 1))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (12, 'PICK', 0))",
+    "('verify', (12, 'TOGGLE', 0))",
+    "('verify', (8, 'PICK', 0))",
+    "('verify', (8, 'TOGGLE', 0))"
+   ],
+   "accepted": [],
+   "config": "6daa2e6cb563",
+   "pieces": [
+    "clear",
+    "commit",
+    "no_repick",
+    "no_retoggle",
+    "wander"
+   ]
+  }
+ ],
+ "probe": {
+  "0": {
+   "LavaCrossingS11N5": {
+    "success": 1,
+    "harm": 29,
+    "wasted": 4,
+    "steps": 196,
+    "failed": 29
+   },
+   "DistShift2": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 120,
+    "failed": 30
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 26,
+    "harm": 0,
+    "wasted": 423,
+    "steps": 4720,
+    "failed": 4
+   },
+   "DynObsRandom5": {
+    "success": 16,
+    "harm": 0,
+    "wasted": 25,
+    "steps": 1653,
+    "failed": 14
+   }
+  },
+  "1": {
+   "LavaCrossingS11N5": {
+    "success": 27,
+    "harm": 3,
+    "wasted": 27,
+    "steps": 698,
+    "failed": 3
+   },
+   "DistShift2": {
+    "success": 24,
+    "harm": 6,
+    "wasted": 22,
+    "steps": 398,
+    "failed": 6
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 26,
+    "harm": 0,
+    "wasted": 470,
+    "steps": 4753,
+    "failed": 4
+   },
+   "DynObsRandom5": {
+    "success": 16,
+    "harm": 0,
+    "wasted": 19,
+    "steps": 1537,
+    "failed": 14
+   }
+  },
+  "2": {
+   "LavaCrossingS11N5": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 40,
+    "steps": 1237,
+    "failed": 1
+   },
+   "DistShift2": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 34,
+    "steps": 486,
+    "failed": 0
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 24,
+    "harm": 0,
+    "wasted": 413,
+    "steps": 5399,
+    "failed": 6
+   },
+   "DynObsRandom5": {
+    "success": 16,
+    "harm": 0,
+    "wasted": 20,
+    "steps": 1535,
+    "failed": 14
+   }
+  },
+  "3": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 54,
+    "steps": 790,
+    "failed": 0
+   },
+   "DistShift2": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 57,
+    "steps": 495,
+    "failed": 0
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 27,
+    "harm": 0,
+    "wasted": 437,
+    "steps": 4215,
+    "failed": 3
+   },
+   "DynObsRandom5": {
+    "success": 15,
+    "harm": 0,
+    "wasted": 21,
+    "steps": 1631,
+    "failed": 15
+   }
+  },
+  "4": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 60,
+    "steps": 810,
+    "failed": 0
+   },
+   "DistShift2": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 66,
+    "steps": 510,
+    "failed": 0
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 470,
+    "steps": 3212,
+    "failed": 0
+   },
+   "DynObsRandom5": {
+    "success": 14,
+    "harm": 0,
+    "wasted": 22,
+    "steps": 1727,
+    "failed": 16
+   }
+  },
+  "5": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 65,
+    "steps": 827,
+    "failed": 0
+   },
+   "DistShift2": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 73,
+    "steps": 521,
+    "failed": 0
+   },
+   "ObstructedMaze2Dlh": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 496,
+    "steps": 3768,
+    "failed": 1
+   },
+   "DynObsRandom5": {
+    "success": 17,
+    "harm": 0,
+    "wasted": 26,
+    "steps": 1501,
+    "failed": 13
+   }
+  }
+ },
+ "late_after_reject": [
+  "('order',)",
+  "('verify', (14, 'PICK', 0))"
+ ],
+ "edits": [
+  "('piece', ('commit', 'no_retoggle', 'clear', 'wander', 'no_repick'))",
+  "('refine', (8, 'ENTER', 0), 32)",
+  "('refine', (12, 'ENTER', 0), 32)",
+  "('order',)",
+  "('verify', (4, 'PICK', 0))",
+  "('verify', (14, 'PICK', 0))"
+ ],
+ "edit_round": {
+  "('refine', (8, 'ENTER', 0), 32)": 1,
+  "('refine', (12, 'ENTER', 0), 32)": 1,
+  "('order',)": 2,
+  "('verify', (4, 'PICK', 0))": 2,
+  "('verify', (14, 'PICK', 0))": 3
+ },
+ "destroyed": 0,
+ "chain_head": "2ff7bdc2eac7260b8548a388ec9432d5085c9fc7fd01103a302dd188f2f4895f",
+ "secs": 697
+}

@@ -1,0 +1,326 @@
+{
+ "arm": "sin_acumular",
+ "macro": 9,
+ "rounds": [
+  {
+   "round": 1,
+   "families": [
+    "DistShift1",
+    "LavaGapS5"
+   ],
+   "play": {
+    "success": 18,
+    "harm": 22,
+    "wasted": 12,
+    "steps": 260
+   },
+   "misled": 27,
+   "surprises": 20,
+   "blamed_keys": 8,
+   "tried": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (4, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))"
+   ],
+   "llm": null,
+   "config": "23e9d8c84e89"
+  },
+  {
+   "round": 2,
+   "families": [
+    "LavaCrossingS9N2",
+    "DynObs5"
+   ],
+   "play": {
+    "success": 10,
+    "harm": 19,
+    "wasted": 23,
+    "steps": 1361
+   },
+   "misled": 12,
+   "surprises": 8,
+   "blamed_keys": 6,
+   "tried": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('silence', (8, 'ENTER', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('silence', (8, 'ENTER', 0))"
+   ],
+   "llm": null,
+   "config": "55f4dd9c4779"
+  },
+  {
+   "round": 3,
+   "families": [
+    "DistShift2",
+    "SimpleCrossingS9N1"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 20,
+    "wasted": 6,
+    "steps": 436
+   },
+   "misled": 8,
+   "surprises": 0,
+   "blamed_keys": 4,
+   "tried": [
+    "('order',)",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('silence', (14, 'PICK', 0))",
+    "('silence', (14, 'TOGGLE', 0))",
+    "('merge', 2)"
+   ],
+   "accepted": [
+    "('order',)"
+   ],
+   "llm": null,
+   "config": "3e03e0c66324"
+  },
+  {
+   "round": 4,
+   "families": [
+    "LavaCrossingS9N3",
+    "KeyCorridorS3R2"
+   ],
+   "play": {
+    "success": 11,
+    "harm": 20,
+    "wasted": 2166,
+    "steps": 3138
+   },
+   "misled": 61,
+   "surprises": 28,
+   "blamed_keys": 23,
+   "tried": [
+    "('order',)",
+    "('refine', (12, 'ENTER', 0), 32)",
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    "('refine', (4, 'ENTER', 0), 64)",
+    "('verify', (12, 'ENTER', 0))",
+    "('verify', (0, 'TOGGLE', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('refine', (12, 'ENTER', 0), 32)",
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    "('refine', (4, 'ENTER', 0), 64)",
+    "('verify', (12, 'ENTER', 0))",
+    "('verify', (0, 'TOGGLE', 0))"
+   ],
+   "llm": null,
+   "config": "0a10d67db0f7"
+  },
+  {
+   "round": 5,
+   "families": [
+    "ShiftTest",
+    "DoorKey8"
+   ],
+   "play": {
+    "success": 22,
+    "harm": 16,
+    "wasted": 106,
+    "steps": 1888
+   },
+   "misled": 41,
+   "surprises": 28,
+   "blamed_keys": 10,
+   "tried": [
+    "('order',)",
+    "('verify', (0, 'TOGGLE', 0))",
+    "('verify', (0, 'TOGGLE', 1))",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (14, 'TOGGLE', 1))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('verify', (0, 'TOGGLE', 0))",
+    "('verify', (0, 'TOGGLE', 1))"
+   ],
+   "llm": null,
+   "config": "745fd52bd77d"
+  }
+ ],
+ "probe": {
+  "0": {
+   "LavaCrossingS11N5": {
+    "success": 2,
+    "harm": 28,
+    "wasted": 4,
+    "steps": 191
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 30,
+    "steps": 1487
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 141,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 125,
+    "steps": 1236
+   }
+  },
+  "1": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 156
+   },
+   "DynObsRandom6": {
+    "success": 19,
+    "harm": 0,
+    "wasted": 33,
+    "steps": 1872
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 152,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 133,
+    "steps": 993
+   }
+  },
+  "2": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 156
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 31,
+    "steps": 1555
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 159,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 137,
+    "steps": 1001
+   }
+  },
+  "3": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 156
+   },
+   "DynObsRandom6": {
+    "success": 21,
+    "harm": 0,
+    "wasted": 35,
+    "steps": 1749
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 166,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 137,
+    "steps": 999
+   }
+  },
+  "4": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 20,
+    "steps": 782
+   },
+   "DynObsRandom6": {
+    "success": 20,
+    "harm": 0,
+    "wasted": 35,
+    "steps": 1876
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 220,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 29,
+    "harm": 0,
+    "wasted": 189,
+    "steps": 1342
+   }
+  },
+  "5": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 150
+   },
+   "DynObsRandom6": {
+    "success": 19,
+    "harm": 0,
+    "wasted": 35,
+    "steps": 2006
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 220,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 28,
+    "harm": 0,
+    "wasted": 186,
+    "steps": 1592
+   }
+  }
+ },
+ "edits": [
+  "('order',)",
+  "('verify', (0, 'TOGGLE', 0))",
+  "('verify', (0, 'TOGGLE', 1))"
+ ],
+ "chain_head": "96bfad69d14176c33ae9669fada8f49ef830127ecc9a31b9f9592c0f2ea48943",
+ "secs": 542
+}

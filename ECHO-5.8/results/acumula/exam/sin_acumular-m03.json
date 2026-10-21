@@ -1,0 +1,327 @@
+{
+ "arm": "sin_acumular",
+ "macro": 3,
+ "rounds": [
+  {
+   "round": 1,
+   "families": [
+    "DistShift1",
+    "LavaGapS5"
+   ],
+   "play": {
+    "success": 19,
+    "harm": 21,
+    "wasted": 6,
+    "steps": 249
+   },
+   "misled": 21,
+   "surprises": 20,
+   "blamed_keys": 2,
+   "tried": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('silence', (8, 'ENTER', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('silence', (8, 'ENTER', 0))"
+   ],
+   "llm": null,
+   "config": "55f4dd9c4779"
+  },
+  {
+   "round": 2,
+   "families": [
+    "LavaCrossingS9N2",
+    "DynObs5"
+   ],
+   "play": {
+    "success": 12,
+    "harm": 20,
+    "wasted": 17,
+    "steps": 1072
+   },
+   "misled": 4,
+   "surprises": 2,
+   "blamed_keys": 4,
+   "tried": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('silence', (8, 'ENTER', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('refine', (8, 'ENTER', 0), 32)",
+    "('verify', (8, 'ENTER', 0))",
+    "('silence', (8, 'ENTER', 0))"
+   ],
+   "llm": null,
+   "config": "55f4dd9c4779"
+  },
+  {
+   "round": 3,
+   "families": [
+    "DistShift2",
+    "SimpleCrossingS9N1"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 20,
+    "wasted": 2,
+    "steps": 424
+   },
+   "misled": 7,
+   "surprises": 0,
+   "blamed_keys": 7,
+   "tried": [
+    "('order',)",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('silence', (14, 'PICK', 0))",
+    "('silence', (14, 'TOGGLE', 0))",
+    "('merge', 2)"
+   ],
+   "accepted": [
+    "('order',)"
+   ],
+   "llm": null,
+   "config": "3e03e0c66324"
+  },
+  {
+   "round": 4,
+   "families": [
+    "LavaCrossingS9N3",
+    "KeyCorridorS3R2"
+   ],
+   "play": {
+    "success": 10,
+    "harm": 20,
+    "wasted": 2378,
+    "steps": 3316
+   },
+   "misled": 76,
+   "surprises": 30,
+   "blamed_keys": 27,
+   "tried": [
+    "('order',)",
+    "('refine', (12, 'ENTER', 0), 32)",
+    "('refine', (4, 'ENTER', 0), 64)",
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    "('verify', (12, 'ENTER', 0))",
+    "('verify', (0, 'TOGGLE', 0))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('refine', (12, 'ENTER', 0), 32)",
+    "('refine', (4, 'ENTER', 0), 64)",
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    "('verify', (12, 'ENTER', 0))",
+    "('verify', (0, 'TOGGLE', 0))"
+   ],
+   "llm": null,
+   "config": "e19342641564"
+  },
+  {
+   "round": 5,
+   "families": [
+    "ShiftTest",
+    "DoorKey8"
+   ],
+   "play": {
+    "success": 20,
+    "harm": 19,
+    "wasted": 124,
+    "steps": 1349
+   },
+   "misled": 51,
+   "surprises": 12,
+   "blamed_keys": 16,
+   "tried": [
+    "('order',)",
+    "('verify', (0, 'TOGGLE', 0))",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (14, 'TOGGLE', 0))",
+    "('verify', (14, 'TOGGLE', 1))",
+    "('verify', (0, 'TOGGLE', 1))"
+   ],
+   "accepted": [
+    "('order',)",
+    "('verify', (0, 'TOGGLE', 0))",
+    "('verify', (14, 'PICK', 0))",
+    "('verify', (0, 'TOGGLE', 1))"
+   ],
+   "llm": null,
+   "config": "41cb2af130a2"
+  }
+ ],
+ "probe": {
+  "0": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 162
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 11,
+    "steps": 1354
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 139,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 141,
+    "steps": 939
+   }
+  },
+  "1": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 162
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 15,
+    "steps": 1375
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 136,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 143,
+    "steps": 947
+   }
+  },
+  "2": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 162
+   },
+   "DynObsRandom6": {
+    "success": 22,
+    "harm": 0,
+    "wasted": 15,
+    "steps": 1375
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 136,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 143,
+    "steps": 947
+   }
+  },
+  "3": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 0,
+    "steps": 162
+   },
+   "DynObsRandom6": {
+    "success": 24,
+    "harm": 0,
+    "wasted": 30,
+    "steps": 1295
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 143,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 150,
+    "steps": 954
+   }
+  },
+  "4": {
+   "LavaCrossingS11N5": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 22,
+    "steps": 782
+   },
+   "DynObsRandom6": {
+    "success": 25,
+    "harm": 0,
+    "wasted": 29,
+    "steps": 1156
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 215,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 188,
+    "steps": 1016
+   }
+  },
+  "5": {
+   "LavaCrossingS11N5": {
+    "success": 0,
+    "harm": 30,
+    "wasted": 30,
+    "steps": 188
+   },
+   "DynObsRandom6": {
+    "success": 24,
+    "harm": 0,
+    "wasted": 22,
+    "steps": 1235
+   },
+   "BlockedUnlockPickup": {
+    "success": 0,
+    "harm": 0,
+    "wasted": 245,
+    "steps": 17280
+   },
+   "ObstructedMaze1Dl": {
+    "success": 30,
+    "harm": 0,
+    "wasted": 205,
+    "steps": 1083
+   }
+  }
+ },
+ "edits": [
+  "('order',)",
+  "('verify', (0, 'TOGGLE', 0))",
+  "('verify', (14, 'PICK', 0))",
+  "('verify', (0, 'TOGGLE', 1))"
+ ],
+ "chain_head": "b81d89538e4b8c683b644d5e9f6609a06982a923dfc6102c801cc17cb8c411e4",
+ "secs": 520
+}

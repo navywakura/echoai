@@ -1,0 +1,88 @@
+{
+ "arm": "sin_privada",
+ "macro": 17,
+ "phase": "exam",
+ "worlds": [
+  {
+   "kind": "local",
+   "seed": 9517000
+  },
+  {
+   "kind": "plate",
+   "seed": 9517001
+  },
+  {
+   "kind": "plate",
+   "seed": 9517002
+  },
+  {
+   "kind": "lava",
+   "seed": 9517003
+  },
+  {
+   "kind": "door",
+   "seed": 9517004
+  },
+  {
+   "kind": "lava",
+   "seed": 9517005
+  },
+  {
+   "kind": "local",
+   "seed": 9517006
+  },
+  {
+   "kind": "door",
+   "seed": 9517007
+  }
+ ],
+ "solved_round": [
+  6,
+  8,
+  9,
+  3,
+  4,
+  5,
+  10,
+  7
+ ],
+ "score": 52,
+ "solved": 8,
+ "destroyed": 0,
+ "card_bytes": [
+  16
+ ],
+ "episodes": 40,
+ "failed": 26,
+ "harm": 11,
+ "postcards": 847,
+ "notes_cards": 39,
+ "helps": 6,
+ "asked": 5,
+ "held": 18,
+ "answers": {
+  "here": 0,
+  "private": 0,
+  "notes": 257,
+  "global": 13799
+ },
+ "by_kind": {
+  "door": {
+   "harm": 0,
+   "episodes": 2
+  },
+  "lava": {
+   "harm": 2,
+   "episodes": 4
+  },
+  "plate": {
+   "harm": 0,
+   "episodes": 20
+  },
+  "local": {
+   "harm": 9,
+   "episodes": 14
+  }
+ },
+ "secs": 36
+}

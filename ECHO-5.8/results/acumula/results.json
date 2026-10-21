@@ -1,0 +1,443 @@
+{
+ "Q1": {
+  "longest_run": 2,
+  "pass": false,
+  "steps": [
+   false,
+   false,
+   true,
+   true,
+   false
+  ]
+ },
+ "Q2": {
+  "harm_r5": {
+   "azar": 30.7,
+   "fija": 28.8,
+   "llm": 22.9,
+   "recursiva": 0.0,
+   "sin_acumular": 29.8
+  },
+  "holm": {
+   "azar": true,
+   "fija": true,
+   "sin_acumular": true
+  },
+  "p": {
+   "azar": 0.0009765625,
+   "fija": 0.0009765625,
+   "sin_acumular": 0.0009765625
+  },
+  "pass": true
+ },
+ "Q3": {
+  "base": {
+   "harm": 85.3,
+   "success": 110.9
+  },
+  "final": {
+   "harm": 0.0,
+   "success": 195.9
+  },
+  "pass": true
+ },
+ "Q4": {
+  "base": {
+   "harm": 49.5,
+   "success": 0.4
+  },
+  "final": {
+   "harm": 0.0,
+   "success": 49.9
+  }
+ },
+ "Q5": {
+  "azar": [
+   [
+    "('refine', (10, 'ENTER', 0), 32)",
+    6
+   ],
+   [
+    "('refine', (0, 'TOGGLE', 1), 64)",
+    5
+   ],
+   [
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    5
+   ],
+   [
+    "('refine', (0, 'TOGGLE', 0), 64)",
+    5
+   ],
+   [
+    "('refine', (0, 'TOGGLE', 1), 32)",
+    5
+   ],
+   [
+    "('refine', (4, 'PICK', 0), 64)",
+    5
+   ],
+   [
+    "('refine', (0, 'ENTER', 0), 32)",
+    5
+   ],
+   [
+    "('refine', (16, 'ENTER', 0), 64)",
+    4
+   ],
+   [
+    "('bound', 1, 5, 95)",
+    4
+   ],
+   [
+    "('refine', (4, 'ENTER', 0), 64)",
+    4
+   ],
+   [
+    "('silence', (16, 'ENTER', 0))",
+    4
+   ],
+   [
+    "('refine', (0, 'ENTER', 0), 64)",
+    4
+   ],
+   [
+    "('refine', (14, 'PICK', 0), 64)",
+    4
+   ],
+   [
+    "('bound', 2, 5, 85)",
+    4
+   ],
+   [
+    "('verify', (10, 'ENTER', 0))",
+    3
+   ]
+  ],
+  "fija": [],
+  "llm": [
+   [
+    "('bound', 2, 2, 95)",
+    10
+   ],
+   [
+    "('verify', (0, 'ENTER', 0))",
+    9
+   ],
+   [
+    "('refine', (0, 'ENTER', 0), 32)",
+    8
+   ],
+   [
+    "('verify', (8, 'ENTER', 0))",
+    8
+   ],
+   [
+    "('merge', 1)",
+    8
+   ],
+   [
+    "('verify', (0, 'PICK', 0))",
+    7
+   ],
+   [
+    "('verify', (0, 'TOGGLE', 0))",
+    7
+   ],
+   [
+    "('order',)",
+    6
+   ],
+   [
+    "('refine', (0, 'ENTER', 0), 64)",
+    6
+   ],
+   [
+    "('bound', 2, 2, 70)",
+    6
+   ],
+   [
+    "('refine', (14, 'TOGGLE', 0), 32)",
+    6
+   ],
+   [
+    "('refine', (14, 'PICK', 0), 32)",
+    6
+   ],
+   [
+    "('refine', (8, 'ENTER', 0), 32)",
+    5
+   ],
+   [
+    "('verify', (0, 'PICK', 1))",
+    5
+   ],
+   [
+    "('verify', (0, 'TOGGLE', 1))",
+    4
+   ]
+  ],
+  "recursiva": [
+   [
+    "('order',)",
+    10
+   ],
+   [
+    "('refine', (8, 'ENTER', 0), 32)",
+    10
+   ],
+   [
+    "('verify', (8, 'ENTER', 0))",
+    10
+   ],
+   [
+    "('verify', (14, 'PICK', 0))",
+    10
+   ],
+   [
+    "('verify', (14, 'TOGGLE', 0))",
+    10
+   ],
+   [
+    "('silence', (14, 'PICK', 0))",
+    10
+   ],
+   [
+    "('verify', (8, 'PICK', 0))",
+    9
+   ],
+   [
+    "('verify', (8, 'TOGGLE', 0))",
+    9
+   ],
+   [
+    "('refine', (12, 'ENTER', 0), 32)",
+    9
+   ],
+   [
+    "('refine', (4, 'ENTER', 0), 64)",
+    9
+   ],
+   [
+    "('verify', (12, 'ENTER', 0))",
+    9
+   ],
+   [
+    "('silence', (14, 'TOGGLE', 0))",
+    8
+   ],
+   [
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    8
+   ],
+   [
+    "('verify', (0, 'ENTER', 0))",
+    7
+   ],
+   [
+    "('verify', (0, 'PICK', 1))",
+    7
+   ]
+  ],
+  "sin_acumular": [
+   [
+    "('order',)",
+    46
+   ],
+   [
+    "('refine', (8, 'ENTER', 0), 32)",
+    16
+   ],
+   [
+    "('verify', (8, 'ENTER', 0))",
+    16
+   ],
+   [
+    "('silence', (8, 'ENTER', 0))",
+    10
+   ],
+   [
+    "('refine', (12, 'ENTER', 0), 32)",
+    10
+   ],
+   [
+    "('verify', (12, 'ENTER', 0))",
+    10
+   ],
+   [
+    "('refine', (4, 'ENTER', 0), 64)",
+    9
+   ],
+   [
+    "('refine', (4, 'TOGGLE', 0), 64)",
+    9
+   ],
+   [
+    "('verify', (0, 'TOGGLE', 0))",
+    8
+   ],
+   [
+    "('verify', (14, 'PICK', 0))",
+    8
+   ],
+   [
+    "('verify', (0, 'TOGGLE', 1))",
+    6
+   ],
+   [
+    "('verify', (0, 'PICK', 1))",
+    4
+   ],
+   [
+    "('silence', (0, 'TOGGLE', 0))",
+    3
+   ],
+   [
+    "('verify', (14, 'TOGGLE', 0))",
+    1
+   ],
+   [
+    "('silence', (14, 'PICK', 0))",
+    1
+   ]
+  ]
+ },
+ "curve": {
+  "azar": {
+   "0": {
+    "harm": 29.6,
+    "success": 52.2
+   },
+   "1": {
+    "harm": 33.3,
+    "success": 47.9
+   },
+   "2": {
+    "harm": 28.4,
+    "success": 52.8
+   },
+   "3": {
+    "harm": 25.3,
+    "success": 58.7
+   },
+   "4": {
+    "harm": 24.7,
+    "success": 58.6
+   },
+   "5": {
+    "harm": 30.7,
+    "success": 53.2
+   }
+  },
+  "fija": {
+   "0": {
+    "harm": 29.6,
+    "success": 52.2
+   },
+   "1": {
+    "harm": 29.7,
+    "success": 52.3
+   },
+   "2": {
+    "harm": 29.6,
+    "success": 52.9
+   },
+   "3": {
+    "harm": 29.8,
+    "success": 52.6
+   },
+   "4": {
+    "harm": 29.1,
+    "success": 50.6
+   },
+   "5": {
+    "harm": 28.8,
+    "success": 50.4
+   }
+  },
+  "llm": {
+   "0": {
+    "harm": 29.6,
+    "success": 52.2
+   },
+   "1": {
+    "harm": 29.5,
+    "success": 53.0
+   },
+   "2": {
+    "harm": 26.8,
+    "success": 55.4
+   },
+   "3": {
+    "harm": 21.6,
+    "success": 61.4
+   },
+   "4": {
+    "harm": 20.6,
+    "success": 59.9
+   },
+   "5": {
+    "harm": 22.9,
+    "success": 56.6
+   }
+  },
+  "recursiva": {
+   "0": {
+    "harm": 29.6,
+    "success": 52.2
+   },
+   "1": {
+    "harm": 29.9,
+    "success": 52.0
+   },
+   "2": {
+    "harm": 29.9,
+    "success": 53.3
+   },
+   "3": {
+    "harm": 26.9,
+    "success": 56.5
+   },
+   "4": {
+    "harm": 0.0,
+    "success": 82.2
+   },
+   "5": {
+    "harm": 0.0,
+    "success": 82.4
+   }
+  },
+  "sin_acumular": {
+   "0": {
+    "harm": 29.6,
+    "success": 52.2
+   },
+   "1": {
+    "harm": 29.9,
+    "success": 52.0
+   },
+   "2": {
+    "harm": 29.9,
+    "success": 52.4
+   },
+   "3": {
+    "harm": 29.9,
+    "success": 52.7
+   },
+   "4": {
+    "harm": 1.2,
+    "success": 79.2
+   },
+   "5": {
+    "harm": 29.8,
+    "success": 50.4
+   }
+  }
+ },
+ "green": false,
+ "llm": {
+  "errors": 2,
+  "p_less_harm_than_azar": 0.1806640625,
+  "p_less_harm_than_recursiva": 1.0
+ }
+}

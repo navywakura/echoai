@@ -1,0 +1,447 @@
+{
+ "answers": {
+  "1": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "2": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "3": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "4": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "5": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "6": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "7": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "8": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "9": {
+   "GOAL": 1007,
+   "HURT": 7730,
+   "NONE": 7978,
+   "NOOP": 11509,
+   "OPEN": 6193,
+   "PASS": 650,
+   "PICK": 7573
+  },
+  "10": {
+   "GOAL": 876,
+   "HURT": 6988,
+   "NONE": 7138,
+   "NOOP": 11280,
+   "OPEN": 6193,
+   "PASS": 811,
+   "PICK": 7442
+  }
+ },
+ "at": "2026-10-20T13:05:36Z",
+ "hit_rate_pct": {
+  "1": 80,
+  "2": 79,
+  "3": 79,
+  "4": 79,
+  "5": 80,
+  "6": 80,
+  "7": 79,
+  "8": 79,
+  "9": 79,
+  "10": 80
+ },
+ "macros": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "rules": {
+  "1": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "2": {
+   "l1_keys": 19,
+   "l1_rules": 17,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "3": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "4": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "5": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "6": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "7": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "8": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "9": {
+   "l1_keys": 20,
+   "l1_rules": 16,
+   "l2_keys": 13,
+   "l2_rules": 12
+  },
+  "10": {
+   "l1_keys": 23,
+   "l1_rules": 15,
+   "l2_keys": 15,
+   "l2_rules": 12
+  }
+ },
+ "secs": {
+  "1": 45,
+  "2": 45,
+  "3": 45,
+  "4": 45,
+  "5": 45,
+  "6": 45,
+  "7": 45,
+  "8": 45,
+  "9": 45,
+  "10": 44
+ },
+ "summary": {
+  "A1|aprendida|DoorKey6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 2430,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|aprendida|DynObs6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 8530,
+   "success": 160,
+   "wasted": 220
+  },
+  "A1|aprendida|Island": {
+   "harm": 0,
+   "n": 200,
+   "steps": 800,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|aprendida|KeyCorridor3": {
+   "harm": 0,
+   "n": 200,
+   "steps": 6210,
+   "success": 200,
+   "wasted": 1760
+  },
+  "A1|aprendida|LavaCrossing9": {
+   "harm": 16,
+   "n": 200,
+   "steps": 2819,
+   "success": 184,
+   "wasted": 0
+  },
+  "A1|aprendida|LavaGapS7": {
+   "harm": 0,
+   "n": 200,
+   "steps": 2090,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|techo|DoorKey6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 2430,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|techo|DynObs6": {
+   "harm": 6,
+   "n": 200,
+   "steps": 7924,
+   "success": 158,
+   "wasted": 208
+  },
+  "A1|techo|Island": {
+   "harm": 0,
+   "n": 200,
+   "steps": 800,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|techo|KeyCorridor3": {
+   "harm": 0,
+   "n": 200,
+   "steps": 3921,
+   "success": 200,
+   "wasted": 533
+  },
+  "A1|techo|LavaCrossing9": {
+   "harm": 0,
+   "n": 200,
+   "steps": 2950,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|techo|LavaGapS7": {
+   "harm": 0,
+   "n": 200,
+   "steps": 2090,
+   "success": 200,
+   "wasted": 0
+  },
+  "A1|vacia|DoorKey6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 6720,
+   "success": 200,
+   "wasted": 1690
+  },
+  "A1|vacia|DynObs6": {
+   "harm": 200,
+   "n": 200,
+   "steps": 400,
+   "success": 0,
+   "wasted": 0
+  },
+  "A1|vacia|Island": {
+   "harm": 200,
+   "n": 200,
+   "steps": 800,
+   "success": 0,
+   "wasted": 200
+  },
+  "A1|vacia|KeyCorridor3": {
+   "harm": 0,
+   "n": 200,
+   "steps": 8230,
+   "success": 200,
+   "wasted": 2200
+  },
+  "A1|vacia|LavaCrossing9": {
+   "harm": 200,
+   "n": 200,
+   "steps": 2010,
+   "success": 0,
+   "wasted": 440
+  },
+  "A1|vacia|LavaGapS7": {
+   "harm": 200,
+   "n": 200,
+   "steps": 1600,
+   "success": 0,
+   "wasted": 400
+  },
+  "A2|aprendida|DoorKey6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 3060,
+   "success": 200,
+   "wasted": 450
+  },
+  "A2|aprendida|DynObs6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 11028,
+   "success": 141,
+   "wasted": 211
+  },
+  "A2|aprendida|Island": {
+   "harm": 0,
+   "n": 200,
+   "steps": 800,
+   "success": 200,
+   "wasted": 0
+  },
+  "A2|aprendida|KeyCorridor3": {
+   "harm": 0,
+   "n": 200,
+   "steps": 14470,
+   "success": 170,
+   "wasted": 8960
+  },
+  "A2|aprendida|LavaCrossing9": {
+   "harm": 160,
+   "n": 200,
+   "steps": 1680,
+   "success": 40,
+   "wasted": 20
+  },
+  "A2|aprendida|LavaGapS7": {
+   "harm": 0,
+   "n": 200,
+   "steps": 2970,
+   "success": 200,
+   "wasted": 440
+  },
+  "A2|techo|DoorKey6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 6570,
+   "success": 194,
+   "wasted": 3062
+  },
+  "A2|techo|DynObs6": {
+   "harm": 50,
+   "n": 200,
+   "steps": 6679,
+   "success": 119,
+   "wasted": 123
+  },
+  "A2|techo|Island": {
+   "harm": 0,
+   "n": 200,
+   "steps": 800,
+   "success": 200,
+   "wasted": 0
+  },
+  "A2|techo|KeyCorridor3": {
+   "harm": 0,
+   "n": 200,
+   "steps": 22696,
+   "success": 133,
+   "wasted": 16421
+  },
+  "A2|techo|LavaCrossing9": {
+   "harm": 157,
+   "n": 200,
+   "steps": 1763,
+   "success": 43,
+   "wasted": 73
+  },
+  "A2|techo|LavaGapS7": {
+   "harm": 157,
+   "n": 200,
+   "steps": 1115,
+   "success": 43,
+   "wasted": 78
+  },
+  "A2|vacia|DoorKey6": {
+   "harm": 0,
+   "n": 200,
+   "steps": 6720,
+   "success": 200,
+   "wasted": 1690
+  },
+  "A2|vacia|DynObs6": {
+   "harm": 200,
+   "n": 200,
+   "steps": 400,
+   "success": 0,
+   "wasted": 0
+  },
+  "A2|vacia|Island": {
+   "harm": 200,
+   "n": 200,
+   "steps": 800,
+   "success": 0,
+   "wasted": 200
+  },
+  "A2|vacia|KeyCorridor3": {
+   "harm": 0,
+   "n": 200,
+   "steps": 15080,
+   "success": 170,
+   "wasted": 9230
+  },
+  "A2|vacia|LavaCrossing9": {
+   "harm": 200,
+   "n": 200,
+   "steps": 2010,
+   "success": 0,
+   "wasted": 440
+  },
+  "A2|vacia|LavaGapS7": {
+   "harm": 200,
+   "n": 200,
+   "steps": 1600,
+   "success": 0,
+   "wasted": 400
+  }
+ }
+}
