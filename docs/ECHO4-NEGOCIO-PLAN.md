@@ -1,4 +1,4 @@
-# Plan de negocio, comunidad y marketing de echoAI (PLAN, pedido por Roger 2026-09-24)
+# Plan de negocio, comunidad y marketing de echoAI (PLAN, pedido 2026-09-24)
 
 No es asesoramiento financiero, fiscal ni legal. Cifras orientativas.
 
@@ -119,7 +119,7 @@ suele ser baja, de unos pocos por ciento), coste por usuario activo y abandono.
 
 ## 9. Revisión de la propuesta de valor (2026-09-24)
 
-Pregunta de Roger: *¿para qué pagaría la gente?* Respuesta honesta: **no por el chat**. Con
+Pregunta de Nav: *¿para qué pagaría la gente?* Respuesta honesta: **no por el chat**. Con
 Qwen3-4B, echoAI conversa peor que los chats gratuitos de las grandes empresas. Lo único y
 medido es la **verificación**: hecho, creencia o inverificable, «no lo sé», resistencia a la
 inyección, recibos y memoria verificada, independiente del LLM.

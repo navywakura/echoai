@@ -1,4 +1,4 @@
-# Plan de alojamiento: echoai-4-cognitive-agentic en servidor con GPU (PLAN, pedido por Roger 2026-09-24)
+# Plan de alojamiento: echoai-4-cognitive-agentic en servidor con GPU (PLAN, pedido 2026-09-24)
 
 No es contrato. Va **después de RELEASE**. Cifras aproximadas, a confirmar con
 precios actuales y una **prueba de carga** antes de contratar nada.

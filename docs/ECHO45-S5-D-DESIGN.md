@@ -1,6 +1,6 @@
 # ECHO-4.5 · S5-D (examen de S5) · contrato (fijado el 2026-09-26, antes de medir)
 
-Roger: «si haz S5-D». S5 salió rojo con su contrato original y verde solo con versiones declaradas
+Nav: «si haz S5-D». S5 salió rojo con su contrato original y verde solo con versiones declaradas
 después de los rojos (gym v2 y agente v5.2), ajustadas mirando gym-train. Este examen mide **una sola
 vez**, con juegos que nadie ha mirado, para saber si ese verde es real.
 

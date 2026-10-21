@@ -1,6 +1,6 @@
 # S6-B8 · aplicabilidad, consecuencias y refinamiento adaptativo
 
-2026-09-29. Contrato previo a medir B8. Orden de Roger: implementar la
+2026-09-29. Contrato previo a medir B8. Orden de Nav: implementar la
 propuesta, cerrar S6 si la evidencia lo permite y después continuar 4.5.
 Los negativos B5/B6/B7 y sus fuentes permanecen intactos.
 

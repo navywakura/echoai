@@ -319,7 +319,7 @@ conteo de las 24 principales ni en la tabla de arriba.
 ## 6. Cómo está construido
 
 ```text
-Custodio (Roger)   protocolo, partición, secretos     — fuera de este árbol
+Custodio (Nav)   protocolo, partición, secretos     — fuera de este árbol
         │
 Supervisor (host)  paquete privado, SDF efectivo, canarios
         │

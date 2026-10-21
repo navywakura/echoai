@@ -169,7 +169,7 @@ Plan de una entrega **usable y demostrable**, no solo una página:
   esa subida; no se ejecuta ahora. El Space tendrá recursos y despliegue
   propios, que se acordarán antes de activar cómputo de pago.
 
-#### Decisión de protección (2026-09-24): modelo híbrido, elegido por Roger
+#### Decisión de protección (2026-09-24): modelo híbrido, elegido
 
 Nombre propuesto actualizado: `rxlabs/echoai-4-cognitive-agentic` (disponibilidad
 sin comprobar). Ningún código ejecutado en una máquina ajena es incopiable; la

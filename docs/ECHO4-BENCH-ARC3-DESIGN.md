@@ -1,6 +1,6 @@
-# E4-BENCH-ARC3 · ECHO juega ARC-AGI-3 — contrato (APROBADO por Roger el 2026-09-24)
+# E4-BENCH-ARC3 · ECHO juega ARC-AGI-3 — contrato
 
-2026-09-24. Parte de E4-BENCH-GENERAL (ver `ECHO4-BENCH1-A-DESIGN.md`). Roger lo puso **primero**
+2026-09-24. Parte de E4-BENCH-GENERAL (ver `ECHO4-BENCH1-A-DESIGN.md`). Nav lo puso **primero**
 en la cola, porque el brazo de ECHO solo no cuesta dinero.
 
 ## Pregunta
@@ -56,8 +56,8 @@ el agente completo de MAINTAIN adaptado; se declara así.
 | **RANDOM** | el agente aleatorio oficial, con el mismo presupuesto de acciones | 0 $ |
 | **ECHO** | ECHO-ARC3 sin modelo de lenguaje | 0 $ |
 | **ECHO sin BOUNDARY** | ablación: no distingue qué depende de él, y en los juegos de clic pulsa al azar | 0 $ |
-| LLM | la plantilla oficial con un modelo barato (DeepSeek o Qwen) | de pago, bloque posterior, con orden de Roger |
-| ECHO + córtex | el modelo propone reglas y ECHO las comprueba actuando | de pago, bloque posterior, con orden de Roger |
+| LLM | la plantilla oficial con un modelo barato (DeepSeek o Qwen) | de pago, bloque posterior, con orden de Nav |
+| ECHO + córtex | el modelo propone reglas y ECHO las comprueba actuando | de pago, bloque posterior, con orden de Nav |
 
 ## Métricas
 

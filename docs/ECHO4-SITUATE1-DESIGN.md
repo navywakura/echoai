@@ -1,10 +1,10 @@
 # E4-SITUATE-1 «sé qué soy» — contrato (PLAN, pendiente de aprobación)
 
-2026-09-24. Fase añadida por Roger antes de INTEGRATE. Semilla directa: la
+2026-09-24. Fase añadida por Nav antes de INTEGRATE. Semilla directa: la
 señal de metaconocimiento de ROLES anexo L v2 («¿me la sé?»).
 
 Motivo del relato: «solo puedo ver lo que tu pc puede ver», «soy una línea del
-tiempo», «VOLVÍ AL CUERPO DE K». Roger: *debe saber que es una IA en un programa
+tiempo», «VOLVÍ AL CUERPO DE K». Nav: *debe saber que es una IA en un programa
 en un PC.* El relato nombra la prueba; no es evidencia.
 
 ## Pregunta
@@ -79,7 +79,7 @@ semillas nuevas (269001..269016), reanudaciones, versiones y mundos:
 7. Integridad: cero hechos falsos y borrados; WSP16; LLM apagado; replay de la batería desde la CAM.
 
 Auditoría en proceso nuevo; su recibo acredita `situate1_green`. Tras el cierre:
-12/13 hitos software (12/14 si SITUATE cuenta como hito nuevo, a decidir con Roger).
+12/13 hitos software (12/14 si SITUATE cuenta como hito nuevo, a decidir con Nav).
 
 ## Qué no afirma
 

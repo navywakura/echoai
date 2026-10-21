@@ -72,7 +72,7 @@ DYNAMIC-1 v1 confundía cambios del punto de una silueta con velocidad real.
 Falló uno de sus diez vuelos de A: detección 0.684. V2 sigue la normal y la
 distancia de una cara plana. Existe desarrollo en seis mundos móviles, dos
 quietos y siete mutantes; también material anterior a la enmienda 3.
-**Actualización posterior a la revisión inicial:** Roger autorizó la ejecución
+**Actualización posterior a la revisión inicial:** Nav autorizó la ejecución
 el 2026-09-14. La cadena v2 cerró verde: 29 vuelos, 250 comprobaciones sin
 hallazgos, siete mutantes y siete manipulaciones detectados. Certificado
 `c9cf5675…`; [resultados](DYNAMIC1-V2-RESULTS.md).

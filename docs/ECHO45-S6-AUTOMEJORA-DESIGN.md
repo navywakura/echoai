@@ -1,10 +1,10 @@
 # ECHO-4.5 · S6 (automejora: ECHO pregunta, el modelo propone, ECHO verifica) · contrato · APROBADO
 
-Estado: **aprobado por Roger el 2026-09-26** («cuando acabes empieza S6»). Paso 0 en Kaggle con GPU
-gratis (elección de Roger), subiendo `echoai/seed` y las tareas de entrenamiento públicas como dataset
+Estado: **aprobado el 2026-09-26** («cuando acabes empieza S6»). Paso 0 en Kaggle con GPU
+gratis (elección de Nav), subiendo `echoai/seed` y las tareas de entrenamiento públicas como dataset
 privado.
 
-Roger, 2026-09-26: «¿el LLM hace más listo a ECHO? que ECHO intente modificarse usando una API…
+Nav, 2026-09-26: «¿el LLM hace más listo a ECHO? que ECHO intente modificarse usando una API…
 y ver si se automejora para ir más a lo general… poder poner una solicitud al LLM personalizada».
 
 Esto adelanta y concreta la S6 de `ECHO45-DECISIONES.md` §5 («córtex opcional: el modelo propone y
@@ -117,13 +117,13 @@ Se informa además:
 ## Modelos y coste
 
 - **Paso 0 · gratis (se hace primero):**
-  - un modelo abierto de código en las 2×T4 de Kaggle, que Roger elige;
+  - un modelo abierto de código en las 2×T4 de Kaggle, que Nav elige;
   - el bucle entero corre en el notebook: verificar es CPU;
-  - antes hay que subir `echoai/seed` como dataset de Kaggle, **con confirmación de Roger**;
+  - antes hay que subir `echoai/seed` como dataset de Kaggle, **con confirmación de Nav**;
   - estimación: 600 llamadas en 3–5 h de GPU, dentro de la cuota semanal.
-- **Paso 1 · de pago, solo con orden de Roger:**
+- **Paso 1 · de pago, solo con orden de Nav:**
   - repetir los brazos FIJO y ECHO con un modelo frontier (OpenRouter, Claude Code o Codex), con un
-    tope en dólares que fija Roger;
+    tope en dólares que fija Nav;
   - hoy quedan unos 0,58 $ en OpenRouter;
   - `claude -p` dio límite de gasto mensual: confirmar la facturación antes.
 - Así se responde a una segunda pregunta: **¿un modelo mejor hace más listo a ECHO?**
@@ -163,7 +163,7 @@ Se informa además:
 Se decidieron al construir el bucle (`seed/selfimprove.py`) y probarlo sin modelo. **No se ha
 hecho ninguna llamada real todavía.**
 
-1. **Modelo del paso 0:** `Qwen/Qwen2.5-Coder-7B-Instruct` en las 2×T4 de Kaggle (elección de Roger:
+1. **Modelo del paso 0:** `Qwen/Qwen2.5-Coder-7B-Instruct` en las 2×T4 de Kaggle (elección de Nav:
    Kaggle GPU gratis). Temperatura 0,7 y 700 tokens como máximo.
 2. **Rondas:** cada ronda son 30 peticiones generadas en bloque. El aprendizaje de qué pedir se
    actualiza al final de cada ronda. Dentro de una ronda, las peticiones ya encargadas cuentan como

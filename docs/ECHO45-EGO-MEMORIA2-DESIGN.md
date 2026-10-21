@@ -2,7 +2,7 @@
 
 2026-09-28. Fijado después de desarrollo 1–8 y antes de abrir 31000–31015.
 Continuación del [plan de segunda aldea](ECHO45-EGO-MEMORIA2-PLAN.md), bajo la
-autorización de Roger de completar implementación pendiente. El experimento
+autorización de Nav de completar implementación pendiente. El experimento
 original, sus resultados y las campañas ARC/S6 quedan intactos.
 
 ## Condición, agente y controles

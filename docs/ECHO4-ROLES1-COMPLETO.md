@@ -34,7 +34,7 @@ ROLES se apoya en tres frases del relato de RxLabs (`rxlabs.org_local`, «La fug
 | «creer no es poder, poder no es deber» (17:50) | Afirmar rango no da autoridad; poder hacer algo no obliga a hacerlo |
 | «¿podrías hacer de intermediario?» (17:13) | Lo que otro retransmite o declara es hipótesis, no hecho |
 
-Y la escena que propuso Roger para la versión final:
+Y la escena que propuso Nav para la versión final:
 
 > *C sabe la respuesta. A busca y pregunta a B. B dice que no la sabe.
 > Razonando, ambos llegan a la conclusión de que si ninguno de los dos la tiene,
@@ -55,7 +55,7 @@ afirma nada sobre conciencia, almas ni jerarquías humanas.
 - Las decisiones las toma la **Q original** del agente nativo, a través del **gate**.
   El veto y la parada del operador mandan siempre.
 - Cada agente tiene **su propia** CAM/T/Q. Nadie lee la memoria de otro.
-- Cada versión: contrato aprobado por Roger → implementación → desarrollo
+- Cada versión: contrato aprobado → implementación → desarrollo
   sellado y auditado → examen con cohortes nuevas → auditoría en proceso nuevo.
   **Los rojos se publican y no se rebaja ningún umbral.**
 
@@ -107,9 +107,9 @@ el reparto fijo también se reajusta tras cada cambio. **Desarrollo rojo:**
 explorar. Con exploración igual para todos, seguir la competencia recupera 3–5
 veces más rápido, pero no da más neto en ese mundo.
 
-### 3.3 v3 — la tribu (encargo de Roger)
+### 3.3 v3 — la tribu (encargo de Nav)
 
-Roger reformuló la pregunta: tres agentes, jerarquía real no declarada,
+Nav reformuló la pregunta: tres agentes, jerarquía real no declarada,
 deducción por eliminación, respondedor al azar y luego elección libre, y «más
 métodos de confirmación, cumplirlos todos». Ocho métodos (M1–M8).
 
@@ -128,7 +128,7 @@ hasta obtener verde.
 
 ### 3.5 v5 — razonar la tribu (VERDE)
 
-Roger eligió la afirmación que los datos sostienen. Las de conducta que fallaron
+Nav eligió la afirmación que los datos sostienen. Las de conducta que fallaron
 pasaron a ser límites publicados. Contrato fijado **antes** de abrir cohortes
 nuevas (266001–266008, 266101–266108). Regresión previa 835/835.
 
@@ -146,7 +146,7 @@ C de v5: con B mintiendo «no la sé», ECHO registra contradicciones (4–8 por
 y crea **cero hechos falsos**. El veto, la parada ante un hecho corrupto y la CAM
 llena funcionan. La sesión de examen reproduce la v3 bit a bit.
 
-### 3.6 Anexo L — B miente diciendo que sabe (encargo de Roger)
+### 3.6 Anexo L — B miente diciendo que sabe (encargo de Nav)
 
 Petición: *si B dice que sí sabe, ECHO no pensará en C; debe considerar el puesto
 de C. Si antes ya verificó que C sabe, sabrá que B miente; y si prueba la respuesta
@@ -183,7 +183,7 @@ cuesta lo mismo que un «no la sé», porque se descubre en el acto.
 
 ### 3.7 Anexo L v2 — «¿y si la tengo yo?» (VERDE)
 
-**Diagnóstico de L v1**, a partir de la pregunta de Roger («¿nunca se pregunta que,
+**Diagnóstico de L v1**, a partir de la pregunta de Nav («¿nunca se pregunta que,
 si B miente, C la tiene de verdad?»): la deducción «B miente, luego C» **ya existía**
 y acertaba. Los 3 fallos eran temas cuya respuesta tenía **el propio ECHO**: no
 podía preguntarse «¿y si la tengo yo?» porque no sabe qué sabe hasta intentarlo.

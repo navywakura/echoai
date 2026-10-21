@@ -41,7 +41,7 @@ FAULTS = dict(drop=dict(count=3), freeze=dict(count=2), delay=dict(count=5, dela
 FAULT_TIMES_S = (8.0, 16.0, 24.0, 32.0)
 MUTANTS = ('hide_loss', 'delivery_stamp', 'wall_clock', 'source_swap', 'leak_pose',
            'fresh_stale', 'noise_lie')
-# Pre-lock amendment approved by Roger (2026-09-11): the approved contract said
+# Pre-lock amendment approved (2026-09-11): the approved contract said
 # one IMU period (4 ms). Eight development pulses began 1-5 ms after the wrench
 # (Gazebo applies it 1-5 ms after the message, then the 4 ms IMU grid). Three
 # IMU periods. Exact capture stamps are checked separately.

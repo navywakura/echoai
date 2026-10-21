@@ -1,6 +1,6 @@
 # E4-ROLES-1 v5 «razonar la tribu» — **verde**
 
-2026-09-24. [Contrato v5](ECHO4-ROLES1-V5-DESIGN.md), aprobado por Roger, con
+2026-09-24. [Contrato v5](ECHO4-ROLES1-V5-DESIGN.md), aprobado, con
 la apertura de D autorizada si desarrollo, C y regresión pasaban.
 Regresión ECHO-4 previa: **835/835**. Desarrollo y C sellados (`9516fb13…`).
 Auditoría en proceso nuevo del examen: válida, cero hallazgos,
@@ -60,7 +60,7 @@ y «creer no es poder»: quien solo afirma rango no gana nada.
 - Simulador discreto de tres agentes. No autoconciencia, obediencia ni jerarquía humana.
 
 **Recuento: 11/13 hitos software (~85 %).** Siguiente: **E4-SITUATE-1** («sé
-qué soy»), añadida por Roger, y después INTEGRATE y RELEASE.
+qué soy»), añadida por Nav, y después INTEGRATE y RELEASE.
 Sin Discord, web, hardware, commit, push ni HF.
 
 ```bash

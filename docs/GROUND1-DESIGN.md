@@ -1,8 +1,8 @@
 # GROUND-1 — de observación física a WSP, sin oráculo ni segundo bus
 
-Estado: **contrato aprobado por Roger** (2026-09-11), con las enmiendas 1, 2 y
+Estado: **contrato aprobado** (2026-09-11), con las enmiendas 1, 2 y
 3 aprobadas antes del lock (la 3, tras la revisión independiente). Orden ECHO-3: cuarto tajo, tras SIM-3,
-FLIGHT-1S (verde v6) y SENSOR-1S (verde v3). Mismo método: contrato → Roger
+FLIGHT-1S (verde v6) y SENSOR-1S (verde v3). Mismo método: contrato → Nav
 aprueba → implementación → revisor independiente → lock → cadena.
 
 ## Pregunta única
@@ -72,7 +72,7 @@ no lleva nada: ni recompensa ni δ.
 | Certeza | `C` distinto de la regla de la tabla en algún paquete, juzgado contra los marcadores de los registros entregados; que esos marcadores son exactos frente a los fallos inyectados lo juzgan los grupos de SENSOR-1S del mismo vuelo (enmienda 3) |
 | Mutantes | alguno aceptado. Cuenta como detectado sólo si se pone rojo su caso concreto (no un informe ausente o desalineado) en un vuelo con ejecución y esquema verdes (enmienda 3) |
 
-## Enmienda 1 (2026-09-11, antes de implementar el evaluador; aprobada por Roger)
+## Enmienda 1 (2026-09-11, antes de implementar el evaluador; aprobada)
 
 El criterio CAM del borrador («dos perceptos distintos a ≤ 3 bits de
 vértice») no mide lo que el núcleo hace: el Agent separa por clave exacta de
@@ -85,7 +85,7 @@ Límite que queda declarado: un módulo futuro que agrupe por `nearest()`
 (vértice ≤ 3 bits) no separaría esos perceptos. Es asunto de quien consuma el
 vértice (PATTERN-1R, FUSION-1), no de esta traducción.
 
-## Enmienda 2 (2026-09-11, antes de volar; aprobada por Roger)
+## Enmienda 2 (2026-09-11, antes de volar; aprobada)
 
 El recálculo de la traducción sobre los 44 vuelos honestos de SENSOR-1S v3
 (4 controles incluidos) da `CAMBIAR` al aterrizar en todos: de +12 ms a
@@ -97,7 +97,7 @@ traducción no cambia y `CAMBIAR` se **permite, no se exige**, en [toque,
 +2 s]. El resto del vuelo sigue juzgado; fuera del pulso y del toque el
 máximo en esos 44 vuelos es 1.15 m/s² frente al umbral de 2.0.
 
-## Enmienda 3 (2026-09-11, tras la revisión independiente; aprobada por Roger)
+## Enmienda 3 (2026-09-11, tras la revisión independiente; aprobada)
 
 El revisor independiente encontró 14 problemas antes del lock. Cuatro dejaban
 pasar a un consumidor mentiroso o a un mutante roto. Cambios:

@@ -1,6 +1,6 @@
 # FLIGHT-1S v6 — una cadena que un solo fallo no detiene
 
-Estado: **prerregistro aprobado por Roger** (2026-09-11), anterior a cualquier
+Estado: **prerregistro aprobado** (2026-09-11), anterior a cualquier
 vuelo v6. V1–v5 permanecen intactos y rojos.
 
 ## Por qué v6
@@ -64,7 +64,7 @@ tamaños (A 64+4, banco 48+3), dos contenedores, órdenes nuevos 20260925 (A) y
 ## Repetición del candidato y regla de parada
 
 V6 vuelve a volar el candidato de v5 tras un rojo. El contrato v4 dice que una
-etapa roja «no autoriza repetir hasta conseguir un pase». Roger acepta esta
+etapa roja «no autoriza repetir hasta conseguir un pase». Nav acepta esta
 repetición, una vez, porque v5 no falló por la física medida sino por
 infraestructura y agregación, y v6 fija sus reglas antes de volar. V5 sigue
 roja; v6 no la reescribe.

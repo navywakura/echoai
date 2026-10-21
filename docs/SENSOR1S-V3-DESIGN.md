@@ -1,6 +1,6 @@
 # SENSOR-1S v3 — el sesgo del LiDAR, sólo donde la verdad puede juzgarlo
 
-Estado: **prerregistro aprobado por Roger** (2026-09-11), anterior a cualquier
+Estado: **prerregistro aprobado** (2026-09-11), anterior a cualquier
 vuelo v3. V1 y v2 se conservan rojas e intactas.
 
 ## Por qué v3

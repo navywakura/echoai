@@ -1,6 +1,6 @@
 # E4-BENCH-1 — un modelo con ECHO frente al mismo modelo sin ECHO (PLAN)
 
-2026-09-24. Pedido por Roger: demostrar con métricas, gráficas y benchmarks oficiales en
+2026-09-24. Pedido por Nav: demostrar con métricas, gráficas y benchmarks oficiales en
 qué mejora un LLM cuando se conecta a ECHO. **Es un plan, no un contrato.** Los umbrales se
 fijarán en un contrato aparte, antes de ver ningún resultado.
 

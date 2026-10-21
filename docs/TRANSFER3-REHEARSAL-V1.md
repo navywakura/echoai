@@ -60,7 +60,7 @@ Las trazas, geometría y metadatos viven en el examinador externo.
 3. El protocolo sigue siendo público y de desarrollo, sin N/potencia ni
    umbrales de cierre final. No existen compromisos privados B/C.
 
-Antes de pedir custodia a Roger falta un generador conductual con exclusión
+Antes de pedir custodia a Nav falta un generador conductual con exclusión
 geométrica entre particiones, verificar el alcance de la comparación scratch
 y fijar los criterios de aceptación. La pregunta abierta no se resuelve
 renombrando este ensayo ni aumentando sólo el número de semillas.

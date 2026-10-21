@@ -1,6 +1,6 @@
 # ECHO-RSI-2: simulación, evolución de pesos y selección de neocórtex
 
-2 de octubre de 2026. **Propuesta de investigación, sin implementación ni entrenamiento iniciado.** Amplía la línea futura [ECHO-RSI-1](ECHO-RSI-1-LAB-PLAN.md). El experimento privado RSI1-R1 ya terminó rojo y conserva sus fuentes, resultados y criterios. Este documento organiza las ideas de Roger sobre dreaming, especialistas y modelos intercambiables; todavía necesita contratos específicos antes de medir. S6 continúa pendiente.
+2 de octubre de 2026. **Propuesta de investigación, sin implementación ni entrenamiento iniciado.** Amplía la línea futura [ECHO-RSI-1](ECHO-RSI-1-LAB-PLAN.md). El experimento privado RSI1-R1 ya terminó rojo y conserva sus fuentes, resultados y criterios. Este documento organiza las ideas de Nav sobre dreaming, especialistas y modelos intercambiables; todavía necesita contratos específicos antes de medir. S6 continúa pendiente.
 
 La hipótesis es que ECHO pueda producir experiencias verificadas, aprender de ellas una biblioteca y un adaptador de lenguaje, y usar el sistema actualizado para producir mejores experiencias en un ciclo posterior. Cambiar a un proveedor más potente puede mejorar el producto; atribuir ese cambio a aprendizaje de ECHO requiere controles adicionales. Los vídeos propuestos sirven como motivación narrativa. Las afirmaciones técnicas se apoyan aquí en código, mediciones y fuentes primarias.
 

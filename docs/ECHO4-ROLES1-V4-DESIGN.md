@@ -1,4 +1,4 @@
-# E4-ROLES-1 v4 «la tribu: la deducción propone» — contrato (aprobado por Roger 2026-09-24)
+# E4-ROLES-1 v4 «la tribu: la deducción propone» — contrato (aprobado 2026-09-24)
 
 **Declarado:** se formula después de la exploración de v3 (no sellada). En v3,
 la inferencia era correcta (M1 ≈97 %, rango correcto 4/4, M6 idéntico), pero
@@ -48,4 +48,4 @@ Se sostiene: eliminación ≈97 %, jerarquía propia correcta 4/4 y actualizada,
 afirmación de rango ignorada (idéntico bit a bit), menos preguntas por
 respuesta (≈143 frente a 239 de `fixed_order`) y cortafuegos. No se sostiene:
 más neto que los controles, ni ventaja del rango en temas nuevos.
-Iteración detenida para no ajustar hasta obtener verde. Decisión de Roger pendiente.
+Iteración detenida para no ajustar hasta obtener verde. Decisión pendiente.

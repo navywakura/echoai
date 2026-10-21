@@ -3,7 +3,7 @@
     python -m echoai.echo4.bench1 run   OUT_DIR --split dev|exam [--models ...]
     python -m echoai.echo4.bench1 audit OUT_DIR          (rebuilds everything from receipts)
 
-Contract: docs/ECHO4-BENCH1-A-DESIGN.md (approved by Roger, 2026-09-24).
+Contract: docs/ECHO4-BENCH1-A-DESIGN.md (approved, 2026-09-24).
 
 Arms (SimpleQA, MMLU-Pro):
   M          the model alone (closed book)

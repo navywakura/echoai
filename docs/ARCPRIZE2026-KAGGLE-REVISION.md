@@ -25,7 +25,7 @@ Leído con la API de Kaggle (cuenta `rogeernavarro`). Copias de las páginas en
 - Se puede **participar y aparecer en la tabla** sin premio. Liberar solo es obligatorio para cobrar.
 - **Conflicto:** la release 4.0.0rc2 de ECHO es PolyForm-NC con el núcleo compilado. Para optar a
   premio habría que liberar **la parte que genera la entrada** (por ejemplo `echoai/seed/` y el
-  agente de ARC-3) en CC-BY 4.0. **Es una decisión de negocio de Roger.** Se puede separar: liberar
+  agente de ARC-3) en CC-BY 4.0. **Es una decisión de negocio de Nav.** Se puede separar: liberar
   el agente de la competición y mantener el resto como está.
 
 ## Lo que cambia para nosotros

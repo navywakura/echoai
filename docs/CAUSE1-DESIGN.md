@@ -1,6 +1,6 @@
 # CAUSE-1 — atribución de movimiento en una cara plana
 
-2026-09-17. Roger autoriza iniciar CAUSE-1. Protocolo de desarrollo previo al
+2026-09-17. Nav autoriza iniciar CAUSE-1. Protocolo de desarrollo previo al
 código y a los datos. COMPOSE-1 v4 permanece congelado. Este documento concreta
 la pregunta de §6 de ECHO-3-ACCEPTANCE; no cierra PX4-1 ni TRANSFER-3.
 

@@ -1,6 +1,6 @@
 # B v3 · investigación: cómo actúa ECHO y por qué se atasca
 
-20 de octubre de 2026. Investigación pedida por Roger tras cerrar B v2 en
+20 de octubre de 2026. Investigación pedida tras cerrar B v2 en
 desarrollo. **No es un contrato ni una medida de examen**: son trazas de
 desarrollo (semillas 7 000 000+, 10 episodios por familia, régimen A2) con la
 memoria de A leída con las correcciones que B encontró (`order`, `refine` de
@@ -179,7 +179,7 @@ Lectura:
    contrato por una familia que no haya mirado.
 
 Con la regla de corte de Argon (≥ 3 escalones encontrados por ECHO), el
-prototipo **pasa en desarrollo**. Siguiente: contrato B v3 para que Roger lo
+prototipo **pasa en desarrollo**. Siguiente: contrato B v3 para que Nav lo
 apruebe (afirmación: «ECHO elige y encadena ediciones de memoria y de política
 desde sus propios fallos»; no «inventa» políticas).
 
@@ -190,5 +190,5 @@ desde sus propios fallos»; no «inventa» políticas).
 2. Medir en desarrollo cada pieza sola y en orden, en las familias de esta
    investigación: confirmar que hay cadenas de ≥ 3 escalones *que ECHO
    encuentra solo*.
-3. Si las hay: contrato de B v3 para que Roger lo apruebe. Si no: cerrar B y
+3. Si las hay: contrato de B v3 para que Nav lo apruebe. Si no: cerrar B y
    pasar a C (ENJAMBRE).

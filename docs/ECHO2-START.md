@@ -1,6 +1,6 @@
 # ECHO-2 — arranque incremental, 2026-09-09
 
-Roger autoriza empezar implementación por tajos y fija como destino el
+Nav autoriza empezar implementación por tajos y fija como destino el
 **AKD1500 M.2**. Las notas de rol «Codex no pica» de NOW son históricas.
 El mapa funcional de ECHO-2: VITA-1 →
 FOOD-1 → SURV-1 → SHIFT-S; escala y herencia después.
@@ -48,7 +48,7 @@ vidas frente a reset. No afirmar aprendizaje de supervivencia hasta medir
 
 ## Segundo incremento: VITA-1, FOOD-1 y SURV-1
 
-Roger autoriza 2–3 fases por sesión, con consumo acotado. Implementación
+Nav autoriza 2–3 fases por sesión, con consumo acotado. Implementación
 en `loop.py`, `encoder.py`, `vita1.py`, `food1.py`; banco `echo2.py` y
 pruebas `tests/test_echo2.py`. Se conserva el mismo Agent, gate, CAM y Q/T.
 

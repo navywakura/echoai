@@ -1,8 +1,8 @@
 # SENSOR-1S — sensores simulados con tiempo, ruido, latencia, pérdida y fuente
 
-Estado: **borrador de contrato**, pendiente de aprobación de Roger. Sin código,
+Estado: **borrador de contrato**, pendiente de Aprobado:. Sin código,
 sin lock, sin vuelos. Orden ECHO-3: tercer tajo, tras SIM-3 y FLIGHT-1S (verde
-bajo v6). Trabajo sin Codex: Claude diseña e implementa; Roger aprueba este
+bajo v6). Trabajo sin Codex: Claude diseña e implementa; Nav aprueba este
 contrato; un revisor independiente (subagente sin este contexto) intenta
 romper código, denominadores y certificado antes del lock.
 
@@ -122,7 +122,7 @@ mutaciones de informe de v6 (omitir, cambiar medida, verde inventado, etc.).
 - Mismo coordinador robusto de v6: agregación sin excepciones, reinicio
   pre-tratamiento, `start` desacoplado, sin reintentos tras el heartbeat.
 
-## Enmienda previa al lock (aprobada por Roger, 2026-09-11)
+## Enmienda previa al lock (aprobada, 2026-09-11)
 
 Fijada con vuelos de desarrollo en A (`lab/sensor1s/dev/`, conservados, no
 cuentan), antes de cualquier vuelo de validación:
@@ -146,7 +146,7 @@ consumidor coincidieron con lo inyectado en cada fuente; el control sin
 fuerza no dio marcas; cada mutante puso rojo su grupo objetivo con el vuelo
 completo.
 
-## Segunda enmienda previa al lock (aprobada por Roger, 2026-09-11)
+## Segunda enmienda previa al lock (aprobada, 2026-09-11)
 
 Un revisor independiente (subagente sin el contexto del implementador) atacó
 el evaluador antes del lock con adaptadores mentirosos reconstruidos desde la

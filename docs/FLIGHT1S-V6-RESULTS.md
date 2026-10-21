@@ -66,7 +66,7 @@ Cero fallos observados no es tasa de fallo cero.
 - V1–v5 siguen rojos y no se reescriben. V4: 44/64, interrumpida, un
   perturbado sin recuperar (otro candidato). V5: 64/64, un cuelgue MAVLink
   de PX4 y parada del agregador antes del informe.
-- V6 vuelve a volar el candidato de v5 tras su rojo; aceptado por Roger antes
+- V6 vuelve a volar el candidato de v5 tras su rojo; aceptado por Nav antes
   del lock, con regla de parada: un rojo físico cerraba el candidato. No se
   activó.
 - V6 relaja la regla de cero reintentos sólo para un arranque sin heartbeat,

@@ -60,7 +60,7 @@ un hecho.*
 
 ### El bibliotecario local — Qwen-0
 
-Un modelo pequeño, en el PC de Roger, sin nube. No escribe
+Un modelo pequeño, en el PC de Nav, sin nube. No escribe
 novelas dentro del animal. Habla el idioma del cable: 16
 bytes, átomos, punto. Si suelta prosa, se tira a la basura.
 
@@ -87,7 +87,7 @@ predicción, ganas, portero, y si el bibliotecario se
 despertó. GUI-1 es el replay. GUI-2 es en vivo, como un
 monitor en urgencias. Todavía mira el anillo, no el cubo.
 
-*Habilidad: que Roger vea lo que el animal hizo de verdad,
+*Habilidad: que Nav vea lo que el animal hizo de verdad,
 no una narración.*
 
 ---
@@ -375,7 +375,7 @@ traductor dice “giré por la pared”, el test es rojo.
 Los subtítulos no son el pensamiento. El pensamiento ya
 estaba en el diario.
 
-*Habilidad: contarle a Roger qué pasó, sin reescribir lo
+*Habilidad: contarle a Nav qué pasó, sin reescribir lo
 que pasó.*
 
 ### PATTERN-0 — pillar el riff

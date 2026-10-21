@@ -1,6 +1,6 @@
 # FUSION-1 — evidencia por fuente, predicado y tiempo
 
-Diseño previo a implementación y aceptación, 2026-09-14. Autorización de Roger:
+Diseño previo a implementación y aceptación, 2026-09-14. Autorización de Nav:
 implementar FUSION-1 y, sólo tras su verde, continuar COMPOSE-1.
 
 ## Pregunta y alcance

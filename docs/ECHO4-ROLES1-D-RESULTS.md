@@ -1,7 +1,7 @@
 # E4-ROLES-1 — D v1 **rojo**
 
 2026-09-24. Examen preregistrado en el [contrato C/D](ECHO4-ROLES1-CD-DESIGN.md),
-abierto con la aprobación de Roger tras una regresión ECHO-4 de 815/815.
+abierto con la Aprobado: tras una regresión ECHO-4 de 815/815.
 Auditoría en proceso nuevo válida, cero hallazgos: **`criteria_passed=false`,
 `roles1_green=false`**. Digest
 `168e978b6c160b321c1a244d878c8971ffdbf1bb239b43cca9af20c572119462`.

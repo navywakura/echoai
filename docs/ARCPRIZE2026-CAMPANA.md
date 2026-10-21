@@ -1,13 +1,13 @@
 # ARC Prize 2026 · plan de campaña de RxLabs (2026-09-25)
 
-Decisión de Roger: **«vamos a participar para intentar ganar, vamos con todo»**. Primero se termina
+Decisión : **«vamos a participar para intentar ganar, vamos con todo»**. Primero se termina
 y se entrena ECHO-4.5, y eso es lo que se sube. Reglas revisadas en `ARCPRIZE2026-KAGGLE-REVISION.md`.
 
 ## Decisiones tomadas
 
 | Tema | Decisión |
 |---|---|
-| Equipo | una persona: Roger (`rogeernavarro`), nombre RxLabs |
+| Equipo | una persona: Nav (`rogeernavarro`), nombre RxLabs |
 | Licencia | paquete aparte **`echo-arc`**, autocontenido: agente de ARC-3, ECHO-SEED y la memoria verificada mínima. Si ganamos, **solo eso** se publica en CC-BY 4.0. La release de ECHO-4 (núcleo, EGO…) sigue en PolyForm-NC y la entrega **no la importa** |
 | Reglas aceptadas | ARC-AGI-3 ✅ · ARC-AGI-2 ✅ · paper track ✅ (comprobado por la API el 2026-09-25) |
 | Qué se sube | **ECHO-4.5** (ECHO-SEED con S1–S5) integrado en `echo-arc` |
@@ -33,7 +33,7 @@ y se entrena ECHO-4.5, y eso es lo que se sube. Reglas revisadas en `ARCPRIZE202
    - **Opción acordada:** construir sobre el mejor agente **público y abierto** de la competición.
      El «duck harness» de Tufa Labs, ganador del hito de junio, usa un Qwen de 27B en GPU. Se le
      añaden las piezas de ECHO y se mide **con ablación** cuánto sube gracias a ECHO.
-   - **Licencia confirmada por Roger (2026-09-25): Apache 2.0.** Se puede reutilizar. Lo suyo conserva
+   - **Licencia confirmada por Nav (2026-09-25): Apache 2.0.** Se puede reutilizar. Lo suyo conserva
      su aviso y su licencia Apache 2.0; lo que añadamos va en CC-BY 4.0.
 2. **ARC-2, entrada digna sin expectativa de premio:** ECHO-SEED (búsqueda verificada, CPU) + un
    modelo abierto en la GPU L4 que propone programas, con ECHO como juez.

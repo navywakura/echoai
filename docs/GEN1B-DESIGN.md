@@ -1,6 +1,6 @@
 # GEN-1b — contrato congelado antes de medir
 
-Fecha: 2026-09-09. Estado inicial: diseño aprobado por Roger, sin resultados.
+Fecha: 2026-09-09. Estado inicial: diseño aprobado, sin resultados.
 GEN-1 permanece como resultado negativo y no se reescribe.
 
 ## Hipótesis

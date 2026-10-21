@@ -1,6 +1,6 @@
 # E4-ROLES-1 — C implementada, testigos de desarrollo válidos
 
-2026-09-24. [Contrato C/D](ECHO4-ROLES1-CD-DESIGN.md), aprobado por Roger.
+2026-09-24. [Contrato C/D](ECHO4-ROLES1-CD-DESIGN.md), aprobado.
 Auditoría en proceso nuevo válida, cero hallazgos. Digest
 `ba7225c4217a99786b85a63070e554588cf27783819ba333ae0ed205bd41e863`.
 `roles1_green=false`: D sin abrir. Custodia de ROLES A/B (`36b9cab3…`) y RELATION comprobada.

@@ -1,6 +1,6 @@
 """E4-INTEGRATE-1 exam: the approved D contract on 16 new seeds.
 
-Contract: docs/ECHO4-INTEGRATE1-D-DESIGN.md (approved by Roger, 2026-09-24).
+Contract: docs/ECHO4-INTEGRATE1-D-DESIGN.md (approved, 2026-09-24).
 Parent: the sealed and audited development campaign integrate1-dev-v1.
 Thresholds are the contract's, verbatim; nothing here is tuned after the exam.
 """

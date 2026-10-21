@@ -1,6 +1,6 @@
 """echo-arc · ECHO's ARC-AGI-3 agent, self-contained (ARC Prize 2026 submission package).
 
-Copyright 2026 RxLabs (Roger Navarro). If this submission wins a prize it is released under
+Copyright 2026 RxLabs (Nav). If this submission wins a prize it is released under
 CC-BY 4.0 as the competition rules require. It does NOT import the echoAI-4 core.
 
 Ported from echoai/echo4/arc3_agent.py (v2 = Arc3EchoV2, exam 2026-09-24/25). The only change:

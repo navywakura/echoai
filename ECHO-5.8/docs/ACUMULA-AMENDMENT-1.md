@@ -21,7 +21,7 @@ identificador interior más común, 64 = el segundo. `refine(k, b)` puede usar
 también esos bits. **La configuración base los oculta**: comprobado que la
 memoria de partida reconstruida da exactamente las mismas tablas que la
 memoria congelada de A (macro 1: 539 observaciones, capas 1 y 2 idénticas) y
-un test lo fija. Es un cambio del contrato aprobado: **aprobado por Roger el 20/10/2026**
+un test lo fija. Es un cambio del contrato aprobado: **aprobado el 20/10/2026**
 («apruebo los bits de rango»). El revisor comprobó la identidad con A en
 las 10 macros (516–572 observaciones cada una), no solo en la macro 1.
 
@@ -57,7 +57,7 @@ las 10 macros (516–572 observaciones cada una), no solo en la macro 1.
   separar puerta y lava en la ronda 4).
 - Validación: 10 mundos por familia de la ronda (20 por ronda), sin aprender.
 
-## 4. Brazo LLM (aprobado por Roger)
+## 4. Brazo LLM
 
 `openai/gpt-oss-120b` en Groq, temperatura 0, respuesta JSON. Ve el mismo
 diagnóstico (claves como números) y el menú completo de ediciones válidas;
@@ -92,7 +92,7 @@ protege y corrige, sin curva sucesiva», y B quedará **roja**.
 
 ## 7. Segunda revisión independiente (20/10)
 
-Veredicto: congelar, con dos condiciones, cumplidas: la aprobación de Roger de
+Veredicto: congelar, con dos condiciones, cumplidas: la Aprobado: de
 §1, y que el examen no se pueda perder por un fallo de red. Ahora un trabajo
 que falla queda escrito como `crash` con su traza en vez de abortar el
 examen. La llamada al LLM captura cualquier excepción, y las respuestas con

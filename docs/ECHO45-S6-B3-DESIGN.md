@@ -1,7 +1,7 @@
 # S6-B3 · cuatro brazos sobre la base temporal v5.8
 
 2026-09-27. Contrato previo a llamadas al modelo y al examen 18000–18059.
-Roger autoriza ejecutar el examen H1/H3 y los cuatro brazos en segundo plano.
+Nav autoriza ejecutar el examen H1/H3 y los cuatro brazos en segundo plano.
 S5-F2 es independiente: no se usa su resultado para cambiar esta campaña.
 Los cierres anteriores S6-A/B2 permanecen ROJOS.
 

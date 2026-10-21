@@ -1,6 +1,6 @@
 # ECHO-4.5 · S6-B: estrategias de juego · contrato B0
 
-Autorizado por Roger el 2026-09-27: «hagamos S6-B». Esta orden abre la fase B
+Autorizado por Nav el 2026-09-27: «hagamos S6-B». Esta orden abre la fase B
 aunque S6-A salió rojo. El resultado de A no cambia. Este contrato se fija antes
 de generar propuestas o abrir el examen de B.
 

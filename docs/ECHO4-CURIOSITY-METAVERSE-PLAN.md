@@ -1,11 +1,11 @@
-# Plan: E4-CURIOSITY-1 y METAVERSE-1 «vida en un mundo de vóxeles» (PLAN, pedido por Roger 2026-09-24)
+# Plan: E4-CURIOSITY-1 y METAVERSE-1 «vida en un mundo de vóxeles» (PLAN, pedido 2026-09-24)
 
 No es contrato. Orden previsto: SITUATE-2 → INTEGRATE → RELEASE → **CURIOSITY-1** →
 **METAVERSE-1** (último, como siempre).
 
 ## E4-CURIOSITY-1 — curiosidad propia
 
-Roger: *«que sean curiosos de por sí; no hace falta tener motivos, aunque también
+Nav: *«que sean curiosos de por sí; no hace falta tener motivos, aunque también
 pueden tenerlos; quizá les interese aprender para hacer algo nuevo».*
 
 - **Motivación intrínseca:** recompensa interna por **progreso de aprendizaje** del

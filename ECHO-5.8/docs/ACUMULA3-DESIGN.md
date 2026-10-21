@@ -1,10 +1,10 @@
-# B v3 · ACUMULA-3 — contrato (APROBADO por Roger el 20/10/2026)
+# B v3 · ACUMULA-3 — contrato
 
 20 de octubre de 2026. Pista B del [roadmap](ROADMAP.md). **Versión nueva tras
 dos rojos**: B v1 roja en examen ([resultados](ACUMULA-RESULTS.md)), B v2
 cerrada roja en desarrollo ([nota](ACUMULA2-DEV-NOTE.md)). Ninguno de los dos
 se reetiqueta. Origen: [investigación B v3](B3-INVESTIGACION.md) (§6:
-prototipo de desarrollo). Aprobación de Roger: «sí, apruebo, adelante con el
+prototipo de desarrollo). Aprobado: «sí, apruebo, adelante con el
 contrato B v3, puedes seguir hasta hacer el examen».
 
 ## 1. Afirmación (y lo que no afirma)

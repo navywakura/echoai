@@ -1,7 +1,7 @@
 # GUI-4 — contrato prospectivo
 
 **Estado:** contrato escrito antes de implementar. 20 de septiembre de 2026.
-**Tipo:** excepción de fase pedida por Roger. **No es un hito de ECHO-3.**
+**Tipo:** excepción de fase pedida. **No es un hito de ECHO-3.**
 **Sucesor previsto:** METAVERSE-1 (ver `POST-ECHO3-DRONE-METAVERSE.md`).
 
 ---

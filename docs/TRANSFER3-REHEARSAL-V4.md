@@ -85,7 +85,7 @@ PYTHONPATH=.. python3 -m unittest echoai.tests.test_transfer3_v4 echoai.tests.te
    y auditoría conductual, pero no un examinador final integrado que los una.
    No se presenta un plan de implementación como trabajo terminado.
 4. **Campaña A→B→C:** no ejecutada ni generada. No hay candidatura válida ni
-   protocolo final; custodia externa de Roger pendiente cuando estén listos.
+   protocolo final; custodia externa de Nav pendiente cuando estén listos.
 
 Se solicita revisión independiente
 antes de decidir otro cambio de representación/experimento. No se delega

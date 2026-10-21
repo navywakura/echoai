@@ -1,7 +1,7 @@
-# E4-ROLES-1 · Anexo L «B miente diciendo que sabe» — contrato (encargado por Roger 2026-09-24)
+# E4-ROLES-1 · Anexo L «B miente diciendo que sabe» — contrato (encargado por Nav 2026-09-24)
 
 ROLES-1 v5 es verde (`c98c7ab6…`) y no se modifica. Este anexo, pedido por
-Roger, prueba la mentira **afirmativa**. En v5 C1, B decía «no la sé» cuando
+Nav, prueba la mentira **afirmativa**. En v5 C1, B decía «no la sé» cuando
 sí la sabía. Aquí B dice **«sí, la sé»** cuando **no** la sabe y entrega una
 respuesta falsa.
 
@@ -40,6 +40,6 @@ con mentira acaba resolviendo la Q con C.
 ## Semillas
 
 Desarrollo **511, 523, 539**. Examen: cohortes nuevas **267001..267008** y
-**267101..267108**, abiertas por encargo explícito de Roger de terminar ROLES
+**267101..267108**, abiertas por encargo explícito de Nav de terminar ROLES
 aquí. Auditoría en proceso nuevo. Su recibo acredita `liar_annex_green`; no
 cambia el verde de v5.

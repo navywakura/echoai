@@ -1,6 +1,6 @@
 # ECHO-4.5 · S5-E: examen de v5.7 frente a v5.6
 
-2026-09-27, fijado antes de abrir estas semillas. Roger autoriza continuar v5.7.
+2026-09-27, fijado antes de abrir estas semillas. Nav autoriza continuar v5.7.
 La implementación de `Arc3EchoV57` ya existía; no se atribuye a esta sesión.
 El examen cierra su mejora en estado oculto, independientemente de S6-B0.
 

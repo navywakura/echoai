@@ -18,7 +18,7 @@ parciales y un nuevo fallo en la variante de recompensa; aún no se promueve
 una candidatura para custodia. Los apartados siguientes conservan el recorrido.
 
 2026-09-18. **Preparación, no cierre. ECHO-3 continúa en 13/15.**
-Roger confirma que todavía no ha preparado la custodia. No hay compromiso
+Nav confirma que todavía no ha preparado la custodia. No hay compromiso
 de campaña registrado en esta preparación. «C sin consumir» en los informes
 anteriores no demuestra que exista un examen final generado y sellado.
 
@@ -94,7 +94,7 @@ ya excluye geometrías equivalentes y compara Q transferida contra scratch
 con la misma cinemática. Ambos llegan en 15/16 casos: ventaja no demostrada.
 Estas dos limitaciones de v1 están corregidas en el banco funcional, pero
 todavía no hay candidatura justificada para el examen final ni hace falta
-que Roger genere secretos. Se conserva el resultado negativo.
+que Nav genere secretos. Se conserva el resultado negativo.
 El ensayo de custodia no sustituye ese banco. No iniciar aún entrenamiento
 de campaña, generar B/C finales ni pedir secretos al custodio.
 
@@ -102,7 +102,7 @@ de campaña, generar B/C finales ni pedir secretos al custodio.
 
 1. El implementador termina el banco usando exclusivamente ensayos públicos,
    fija el protocolo y entrega código, dependencias y hashes verificables.
-2. Roger prepara un entorno privado fuera del acceso de los agentes:
+2. Nav prepara un entorno privado fuera del acceso de los agentes:
    preferiblemente otro equipo o una cuenta aislada sin acceso desde esta
    sesión. Una carpeta fuera del repo, `.gitignore` o permisos `0700` bajo
    el mismo usuario **no bastan**. No es necesario hacerlo ahora.
@@ -110,7 +110,7 @@ de campaña, generar B/C finales ni pedir secretos al custodio.
    genera el secreto de 256 bits, B/C y salts; conserva el ledger de rechazos
    (máximo 100 intentos por caso), inventarios y registro de accesos. No
    escoge mundos según cómo se comporte la política.
-4. Antes del aprendizaje de campaña en A, Roger registra fuera de este repo,
+4. Antes del aprendizaje de campaña en A, Nav registra fuera de este repo,
    con fecha, su identidad y los hashes del protocolo y compromisos B/C.
    Al implementador sólo le entrega el aviso público, sin secretos, seeds,
    salts, mapas, inventarios privados ni paquetes reservados.
@@ -123,7 +123,7 @@ de campaña, generar B/C finales ni pedir secretos al custodio.
 La futura herramienta real debe ligar el aviso publicado y el freeze al
 examinador antes de abrir paquetes, comprobar hashes de sus bytes y rechazar
 rehearsal como campaña. **No existe todavía un comando de campaña listo para
-Roger**; no ejecutar el ensayo con secretos reales ni interpretarlo como tal.
+Nav**; no ejecutar el ensayo con secretos reales ni interpretarlo como tal.
 
 Referencia normativa: [SIM3-DESIGN §5](SIM3-DESIGN.md#5-abc-aislamiento-y-examen-sin-consumir)
 y [contrato ECHO-3](ECHO-3-ACCEPTANCE.md).

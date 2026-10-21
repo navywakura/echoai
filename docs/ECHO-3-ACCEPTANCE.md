@@ -49,7 +49,7 @@ dos paredes, sin hardware, HIL ni vuelo real. Siguiente hito: DRONE-3. Véase la
 [revisión por fase y versión](ECHO3-STATUS-20260917.md): un objetivo descrito
 aquí no equivale por sí mismo a una capacidad demostrada. HIL/jaula pendientes.
 **Origen de la revisión:** hipótesis elaborada con GPT-6 Astra High, revisada
-y adoptada por Roger como hoja de ruta.  
+y adoptada por Nav como hoja de ruta.  
 **Regla:** un tajo, una pregunta causal, un banco congelado y un informe JSON.
 
 ## 1. Tesis medible

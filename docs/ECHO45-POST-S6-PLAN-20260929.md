@@ -1,6 +1,6 @@
 # ECHO-4.5 después de S6 · orden de trabajo
 
-Orden de Roger del 29 de septiembre: prioridad inmediata cerrar S6; después
+Orden de Nav del 29 de septiembre: prioridad inmediata cerrar S6; después
 continuar los módulos pendientes y medir transferencia en ARC-AGI-1/2/3.
 Actualizado el 29 de septiembre: comparador y diagnóstico de capacidades
 preparados mientras continúa S6. No se ha abierto su examen final ni iniciado

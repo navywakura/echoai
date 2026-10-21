@@ -1,7 +1,7 @@
-# E4-BENCH-ARC3-LLM2 · el modelo resuelve ARC-AGI-3 usando ECHO como laboratorio — contrato (APROBADO por Roger el 2026-09-25)
+# E4-BENCH-ARC3-LLM2 · el modelo resuelve ARC-AGI-3 usando ECHO como laboratorio — contrato
 
 2026-09-25. **Segunda versión** del bloque con modelo de lenguaje, declarada **después** de ver
-el examen de la primera (`ECHO4-BENCH-ARC3-LLM-RESULTS.md`). Idea de Roger: el que resuelve es
+el examen de la primera (`ECHO4-BENCH-ARC3-LLM-RESULTS.md`). Idea de Nav: el que resuelve es
 el modelo, y tiene que aprender a usar las capacidades de ECHO-4 como ayuda.
 
 ## Qué se aprendió de la v1
@@ -12,11 +12,11 @@ el modelo, y tiene que aprender a usar las capacidades de ECHO-4 como ayuda.
 - Hace falta un modelo capaz de deducir reglas, y que ECHO le sirva para **comprobarlas**, no
   solo para explorar en su lugar.
 
-## Modelos (Roger: «los dos»)
+## Modelos (Nav: «los dos»)
 
 | Modelo | Vía | Coste |
 |---|---|---|
-| **Claude Opus 5.5** | Claude Code sin interfaz (`claude -p`) en modo limpio: sin herramientas, sin ajustes, sin servidores MCP y sin comandos. Solo ve nuestro texto (comprobado: 467 tokens de entrada en una llamada de prueba). | 0 $ (cuota de la suscripción de Roger) |
+| **Claude Opus 5.5** | Claude Code sin interfaz (`claude -p`) en modo limpio: sin herramientas, sin ajustes, sin servidores MCP y sin comandos. Solo ve nuestro texto (comprobado: 467 tokens de entrada en una llamada de prueba). | 0 $ (cuota de la suscripción de Nav) |
 | **GPT-5.4 mini** | OpenRouter, temperatura 0 | ≈5 $, con suelo de crédito |
 
 Cada modelo se compara **solo consigo mismo**, nunca en ranking con el otro.
@@ -89,7 +89,7 @@ contrato D → aprobación → examen con los 16 juegos → auditoría por repet
 
 La v1 queda publicada tal cual. Esta v2 no la sustituye.
 
-## Aprobación (Roger, 2026-09-25): «GPT solo en 8 juegos»
+## Aprobación (Nav, 2026-09-25): «GPT solo en 8 juegos»
 
 - **Opus 5.5:** desarrollo con los 8 juegos de desarrollo; examen con los 16.
 - **GPT-5.4 mini:** desarrollo con 4 juegos de desarrollo y examen con 8 juegos de examen,

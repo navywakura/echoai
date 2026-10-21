@@ -38,7 +38,7 @@ ObstructedMaze-1Dlh, KeyCorridorS3R3). No hay contrato ni examen.
    el siguiente atasco. Es el terreno de RSI-1 (biblioteca DSL), que salió
    rojo.
 
-## Opciones (decide Roger)
+## Opciones (decide Nav)
 
 | Opción | Qué es | Coste / riesgo |
 |---|---|---|

@@ -45,11 +45,11 @@ llegaron a ejecutarse: su clase necesita el código fuente para arrancar.
   explícita en `echoai/`.
 - **REL-A: rojo tal como está escrito**, solo por A5. No se rebaja el criterio.
 
-**Reformulación propuesta para A5**, declarada después del rojo; **la decide Roger**:
+**Reformulación propuesta para A5**, declarada después del rojo; **la decide Nav**:
 > «Con el núcleo compilado, 0 fallos de comportamiento en la suite de ECHO-1; y la suite
 > completa, 488/488 en modo fuente.»
 
-Con los datos actuales se cumplen las dos condiciones. **Roger la aprobó el 2026-09-24** (enmienda 1 del contrato): **REL-A queda en verde en su versión declarada post-rojo (A5 v2)**, y el rojo de A5 v1 sigue publicado.
+Con los datos actuales se cumplen las dos condiciones. **Nav la aprobó el 2026-09-24** (enmienda 1 del contrato): **REL-A queda en verde en su versión declarada post-rojo (A5 v2)**, y el rojo de A5 v1 sigue publicado.
 
 ## Qué se construyó
 

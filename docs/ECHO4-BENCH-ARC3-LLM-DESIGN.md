@@ -1,6 +1,6 @@
-# E4-BENCH-ARC3-LLM · un modelo de lenguaje juega ARC-AGI-3, con y sin ECHO — contrato (APROBADO por Roger el 2026-09-24)
+# E4-BENCH-ARC3-LLM · un modelo de lenguaje juega ARC-AGI-3, con y sin ECHO — contrato
 
-2026-09-24. Aprobado por Roger el 2026-09-24. Contratos previos: `ECHO4-BENCH-ARC3-DESIGN.md`
+2026-09-24. Aprobado el 2026-09-24. Contratos previos: `ECHO4-BENCH-ARC3-DESIGN.md`
 y `ECHO4-BENCH-ARC3-D-DESIGN.md`. Los resultados de ECHO solo (`ECHO4-BENCH-ARC3-RESULTS.md`)
 son **referencia**, no la pregunta.
 
@@ -85,7 +85,7 @@ auditoría.
     unas 950 por juego. No es ECHO jugando solo.
 - No se ajustaron los textos tras el desarrollo: el arnés se congela tal cual.
 
-## Contrato D (APROBADO por Roger el 2026-09-25, antes del examen)
+## Contrato D (APROBADO el 2026-09-25, antes del examen)
 
 - **Arnés congelado:** `lab/arc3/llm-exam-v1/arc3_llm-v1.py`, sha256
   `2ad09a5ca70dee0e530d816430d619c6ad2d5ef96d690bbcae53416e271b3168`.

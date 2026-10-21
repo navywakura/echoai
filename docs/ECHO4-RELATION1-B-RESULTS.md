@@ -1,6 +1,6 @@
 # E4-RELATION-1 — RELATION-B implementada, desarrollo verde (no examen)
 
-2026-09-23. [Contrato B](ECHO4-RELATION1-B-DESIGN.md), aprobado por Roger antes
+2026-09-23. [Contrato B](ECHO4-RELATION1-B-DESIGN.md), aprobado antes
 de implementar. Auditoría de reconstrucción en proceso nuevo válida, cero
 hallazgos. Digest `ea6f55c28a58582df934e259367bc6fa88ecbe256f1fc196e49da737e780239f`.
 **`relation1_green=false`**: B es desarrollo; D (cohortes nuevas) sigue sin abrir.

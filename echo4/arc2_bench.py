@@ -4,7 +4,7 @@
     python3 -m echoai.echo4.arc2_bench solo OUT --split dev|exam        (ECHO alone: program search, $0)
     python3 -m echoai.echo4.arc2_bench audit OUT                        (re-executes stored programs, rescores)
 
-Contract: docs/ECHO4-BENCH-ARC2-DESIGN.md (approved by Roger, 2026-09-25; thresholds fixed before dev).
+Contract: docs/ECHO4-BENCH-ARC2-DESIGN.md (approved, 2026-09-25; thresholds fixed before dev).
 
   L      the model writes up to 2 output grids per test input (official 2 attempts)
   LECHO  the model writes transform(grid); ECHO executes it on the solved examples and reports

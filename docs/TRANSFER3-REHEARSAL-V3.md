@@ -124,5 +124,5 @@ No se han modificado criterios, escogido nuevas salas tras ver resultados,
 combinado intervenciones ni abierto una confirmación reservada.
 
 Antes de cerrar TRANSFER-3 falta una ventaja robusta, con su coste incluido,
-y un protocolo final justificado. C final sigue sin generarse; Roger aún no
+y un protocolo final justificado. C final sigue sin generarse; Nav aún no
 necesita preparar secretos. ECHO-3 permanece en 13/15.

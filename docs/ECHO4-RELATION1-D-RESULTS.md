@@ -1,7 +1,7 @@
 # E4-RELATION-1 — D verde; RELATION cerrada en su perfil
 
 2026-09-24. Examen preregistrado en el [contrato C/D](ECHO4-RELATION1-CD-DESIGN.md),
-abierto tras la aprobación de Roger para congelar y una regresión ECHO-4 de
+abierto tras la Aprobado: para congelar y una regresión ECHO-4 de
 790/790. Auditoría reconstructiva en proceso nuevo: válida, cero hallazgos,
 **`relation1_green=true`** en el recibo. Digest
 `42a6efc51d7bbbe413d104fdb099039cf02f5b670e2a8e6245fd8f2526c48345`.

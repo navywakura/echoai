@@ -3,7 +3,7 @@
     (ARC venv) python -m echoai.echo4.arc3_agent play OUT_DIR --split dev|exam --arm ECHO|NOBOUNDARY|RANDOM
     (ARC venv) python -m echoai.echo4.arc3_agent audit OUT_DIR       (replays every recorded game)
 
-Contract: docs/ECHO4-BENCH-ARC3-DESIGN.md (approved by Roger, 2026-09-24).
+Contract: docs/ECHO4-BENCH-ARC3-DESIGN.md (approved, 2026-09-24).
 
   perceive   frame -> discrete state (fingerprint) + objects; each new state is a WSP fact in CAM
   BOUNDARY   separate what depends on me from what changes with time: the frame border holds
@@ -394,7 +394,7 @@ def games_for(split_name):
 
 
 def arcade():
-    """Local play with Roger's key. Importing arc_agi may load a .env.example from the working
+    """Local play with Nav's key. Importing arc_agi may load a .env.example from the working
     directory (placeholder key, online mode), so the key and the mode are passed explicitly."""
     key = KEY_FILE.read_text().strip() if KEY_FILE.is_file() else os.environ.get("ARC_API_KEY", "")
     os.environ["ENVIRONMENTS_DIR"] = str(ROOT / "lab/arc3/environment_files")

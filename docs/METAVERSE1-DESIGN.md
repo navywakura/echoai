@@ -1,6 +1,6 @@
 # METAVERSE-1 — contrato de apertura
 
-**Estado:** fase abierta el 20 de septiembre de 2026 por decisión de Roger.
+**Estado:** fase abierta el 20 de septiembre de 2026 por Decisión.
 **Tipo:** excepción de puerta. El roadmap pedía ECHO-3 completo y estamos en
 14/15. Se abre igual, y esta excepción queda escrita, no implícita.
 **Origen del diseño:** `POST-ECHO3-DRONE-METAVERSE.md` (9/09/2026), donde la

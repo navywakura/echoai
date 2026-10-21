@@ -1,6 +1,6 @@
 # ECHO-4.5: integración de memoria y solver, sin S6
 
-2 de octubre de 2026. Roger cambia el orden: S6 queda aplazado y se priorizan
+2 de octubre de 2026. Nav cambia el orden: S6 queda aplazado y se priorizan
 memoria→ARC, refinamiento, síntesis, vistas, consistencia y capacidad. Los
 resultados y criterios anteriores de S6 permanecen intactos.
 

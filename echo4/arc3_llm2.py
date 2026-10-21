@@ -5,7 +5,7 @@
     (ARC venv) python -m echoai.echo4.arc3_llm2 manual OUT --backend B --arm A      (dev lessons -> manual)
     (ARC venv) python -m echoai.echo4.arc3_agent audit OUT                          (replay)
 
-Contract: docs/ECHO4-BENCH-ARC3-LLM2-DESIGN.md (approved by Roger, 2026-09-25).
+Contract: docs/ECHO4-BENCH-ARC3-LLM2-DESIGN.md (approved, 2026-09-25).
 
 Both arms: grid, last results, the model's own NOTES (unverified, returned next call) and its own
 MANUAL (lessons it wrote on dev games). LECHO adds ECHO as a laboratory: object perception,

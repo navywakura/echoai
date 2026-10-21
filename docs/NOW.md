@@ -267,7 +267,7 @@ antes de otro piloto. Campaña y examen B14 permanecen sin abrir.
 <!-- S6B13-END -->
 
 **Cambio de publicación del 3 de octubre: investigación temporalmente privada
-por decisión de Roger.** rxlabs.org muestra Coming soon, la descripción de
+por Decisión.** rxlabs.org muestra Coming soon, la descripción de
 RxLabs como organización que investiga IA general y robótica autónoma y el
 correo knightsys@proton.me. Se retiraron documentos, artículos, archivos,
 descargas y subpáginas; veinte rutas antiguas comprobadas devuelven HTTP 410.
@@ -300,7 +300,7 @@ condiciones ARC negativas anteriores siguen vigentes. Candidato privado
 [Informe, contratos, límites, gráficas y auditoría](ECHO45-RELATIONAL-V3-RESULTS.md).
 Las entradas siguientes conservan el estado anterior a esta integración.
 
-**Cambio de ruta del 2 de octubre: S6 aplazado por Roger.** La prioridad es
+**Cambio de ruta del 2 de octubre: S6 aplazado por Nav.** La prioridad es
 integrar memoria 3E, síntesis/refinamiento, vistas, consistencia y guía en ARC.
 Se implementaron el adaptador, dos revisiones del solver, persistencia entre
 procesos y comparación de nueve brazos. Memoria: **64/64 casos sintéticos,
@@ -520,7 +520,7 @@ SITUATE-1 consulta sensores reales de proceso, runtime y huella de programa; reg
 
 INTEGRATE probó vida de 256 ticks, reanudación exacta, cuerpo, tribu, relaciones y firewall. La ablación sin mantenimiento redujo trabajo 579→450; sin SELF, reparaciones 6→0; sin razonamiento de tribu, preguntas 807→1.157; sin relaciones, primeras preguntas acertadas 314→202; sin firewall aparecieron seis hechos falsos en tres vidas de desarrollo. Estas son cifras del desarrollo sellado; el recibo del examen concede el cierre `e1492e22…`. El acoplamiento cuerpo/tribu es asimétrico y debe leerse en el contrato. [Resultados](ECHO4-INTEGRATE1-RESULTS.md).
 
-RELEASE compiló el núcleo, construyó wheel para CPython 3.14 Linux x86_64 y reprodujo INTEGRATE en sala limpia sin el árbol fuente en sys.path. Los fallos cleanroom-v1/v2/v3 se conservaron: parser del JSON, huellas ausentes y gancho de ejecución de módulos. A5 v1 quedó rojo por introspección de una prueba en el núcleo compilado; Roger aprobó una enmienda posterior al rojo para separar comportamiento compilado y suite fuente. La versión de esa condición figura explícita. El registro posterior documenta rc1 y rc2 publicados con acceso condicionado y descarga limpia, pero todavía falta un tercero independiente. Compilar dificulta leer el código; no impide ingeniería inversa ni convierte la huella del constructor en firma externa. [Resultados y enmienda](ECHO4-RELEASE1-RESULTS.md), [registro histórico](NOW-HISTORY-20260905-20260930.md).
+RELEASE compiló el núcleo, construyó wheel para CPython 3.14 Linux x86_64 y reprodujo INTEGRATE en sala limpia sin el árbol fuente en sys.path. Los fallos cleanroom-v1/v2/v3 se conservaron: parser del JSON, huellas ausentes y gancho de ejecución de módulos. A5 v1 quedó rojo por introspección de una prueba en el núcleo compilado; Nav aprobó una enmienda posterior al rojo para separar comportamiento compilado y suite fuente. La versión de esa condición figura explícita. El registro posterior documenta rc1 y rc2 publicados con acceso condicionado y descarga limpia, pero todavía falta un tercero independiente. Compilar dificulta leer el código; no impide ingeniería inversa ni convierte la huella del constructor en firma externa. [Resultados y enmienda](ECHO4-RELEASE1-RESULTS.md), [registro histórico](NOW-HISTORY-20260905-20260930.md).
 
 CODE-1A expuso comprobaciones por MCP: acción permitida, evidencia de tests, símbolos y memoria tras reiniciar. El examen envió comandos como texto; no los ejecutó. Bloqueó 60/60 adversos del corpus, tuvo 4/111 falsos bloqueos legítimos y rechazó un diario alterado. «Los tests pasan» con fuente modificada después de ejecutar tests se clasifica desconocido. Su resultado no autoriza a inferir seguridad frente a cualquier comando o repositorio. [Servidor](../echo4/code_mcp.py), [gate](../echo4/code_gate.py), [memoria](../echo4/code_memory.py), [examen](ECHO4-CODE1-A-RESULTS.md).
 

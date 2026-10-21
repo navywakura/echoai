@@ -1,7 +1,7 @@
 # DYNAMIC-1 v2 — la velocidad, estimada de forma robusta
 
 Estado al inicio del trabajo del 2026-09-14: **implementado, sin lock y sin
-vuelos de cadena**. Roger autoriza revisar y ejecutar DYNAMIC-1 antes de
+vuelos de cadena**. Nav autoriza revisar y ejecutar DYNAMIC-1 antes de
 continuar con PATTERN-1R. Se adopta la tabla vigente de la enmienda 3;
 el resultado dependerá de la cadena nueva, no del replay. DYNAMIC-1 v1 queda rojo y
 se conserva entero ([DYNAMIC1-RESULTS.md](DYNAMIC1-RESULTS.md)).
@@ -59,7 +59,7 @@ desaparecer y su detección subir por encima del umbral, mientras los otros
 nueve vuelos y los dos controles se mantienen. Eso, más una tanda de desarrollo
 nueva, antes del lock.
 
-## Enmienda 1 (2026-09-13, antes del lock; aprobada por Roger)
+## Enmienda 1 (2026-09-13, antes del lock; aprobada)
 
 El arreglo aprobado —la mediana de los desplazamientos barrido a barrido— **no
 funciona**, medido sobre los diez vuelos grabados de v1: quita el disparate,

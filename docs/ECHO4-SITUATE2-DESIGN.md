@@ -1,4 +1,4 @@
-# E4-SITUATE-2 «qué creo que soy» — contrato (encargado por Roger 2026-09-24: «escribe ya y haz SITUATE-2»)
+# E4-SITUATE-2 «qué creo que soy» — contrato (encargado por Nav 2026-09-24: «escribe ya y haz SITUATE-2»)
 
 SITUATE-1 es verde (`f7ac08df…`) y no se modifica. Plan previo:
 [ECHO4-SITUATE2-PLAN.md](ECHO4-SITUATE2-PLAN.md).
@@ -79,7 +79,7 @@ validada por la comunidad».
 | S8 | Integridad: recibos del LLM válidos con la huella del modelo; auditoría que reconstruye todo desde los recibos sin volver a inferir; núcleo con córtex apagado en el banco |
 
 Desarrollo: semillas **811, 823, 839**. Examen: **270001..270016** (16 condiciones),
-con apertura encargada por Roger si el desarrollo pasa. Auditoría en proceso nuevo;
+con apertura encargada por Nav si el desarrollo pasa. Auditoría en proceso nuevo;
 su recibo acredita `situate2_green`.
 
 ## Qué no afirma

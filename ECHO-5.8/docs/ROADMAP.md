@@ -1,6 +1,6 @@
 # ECHO-5.8 · roadmap oficial: poner en verde lo que falló
 
-20 de octubre de 2026. Estado: **PLAN APROBADO por Roger el 20/10/2026**
+20 de octubre de 2026. Estado: **PLAN APROBADO el 20/10/2026**
 (orden A → B → C; D y E en paralelo). Nada de lo que sigue está implementado
 salvo donde se dice; cada pista necesita su contrato antes de medir. Sustituye como
 marco general al roadmap candidato WSP del 17/10
@@ -67,7 +67,7 @@ Repartir un modelo en especialistas solo divide el gasto. Un enjambre aporta
 cuando sus agentes ven **cosas distintas** y lo juntan.
 
 **C5 · Deudas de ingeniería y de decisión (R-i, R-j, R-k, R-n).** No son
-problemas de la idea: falta tiempo, un análisis o un sí de Roger.
+problemas de la idea: falta tiempo, un análisis o un sí de Nav.
 
 **C6 · Falta de material (R-m).** Sin compra, no hay medida.
 
@@ -118,7 +118,7 @@ roadmap. Ninguna pista toca la campaña ARC antes del 1/11.
 > **20/10/2026: v1 ROJA en examen** (Q1 racha 2 < 3; Q2 y Q3 pasan: sonda 0 daños frente a ~30 de los controles, familias de A daño 85 → 0). Todo el daño de la sonda estaba en una familia → curva en escalón. Siguiente: B v2. `docs/ACUMULA-RESULTS.md`.
 > **20/10/2026: B v2 cerrada ROJA en desarrollo** (sin examen): con rondas estacionarias ECHO corrige todos sus errores de memoria en la ronda 1 (311 → 34 fallos) y gana a todos los controles, `lote_final` incluido (51 frente a 127), pero no hay segunda ni tercera mejora: lo que queda son límites de la política base. `docs/ACUMULA2-DEV-NOTE.md`. **Siguiente: investigación B v3** (cómo actúa ECHO y por qué se atasca), `docs/B3-INVESTIGACION.md`.
 
-> **20/10/2026: prototipo B v3 en desarrollo** (sin contrato ni examen): menú de memoria + piezas de política genéricas propuestas desde señales de sus fallos. Sonda 267 → 118 → 84 → 63 → 38 → 39 (4 mejoras seguidas; daño 173 → 0); piezas rechazadas en r1 y aceptadas después. Pero «todas las piezas dadas desde r0» acaba igual (43): ECHO elige y ordena, las piezas las diseñé yo. Siguiente: contrato B v3 (pendiente de Roger). `docs/B3-INVESTIGACION.md` §6.
+> **20/10/2026: prototipo B v3 en desarrollo** (sin contrato ni examen): menú de memoria + piezas de política genéricas propuestas desde señales de sus fallos. Sonda 267 → 118 → 84 → 63 → 38 → 39 (4 mejoras seguidas; daño 173 → 0); piezas rechazadas en r1 y aceptadas después. Pero «todas las piezas dadas desde r0» acaba igual (43): ECHO elige y ordena, las piezas las diseñé yo. Siguiente: contrato B v3 (pendiente de Nav). `docs/B3-INVESTIGACION.md` §6.
 
 > **20/10/2026: B v3 (ACUMULA-3) VERDE en examen**, verificado independientemente: sonda 94,3 → 35,4 → 22,3 → 21,0 → 15,8 → 13,8 (5 mejoras seguidas, daño 58,6 → 0); gana a los 5 controles en 10/10 macros (p 0,00098, Holm); Q3 daño 78,3 → 0. Límites: `piezas_dadas` empata (13,3), las piezas las diseñó Claude; DynObsRandom5 empeora (91 → 103). B v1 y B v2 siguen rojas. **Con A y B verdes, ECHO-5.8 cumple §5.** `docs/ACUMULA3-RESULTS.md`.
 
@@ -135,7 +135,7 @@ roadmap. Ninguna pista toca la campaña ARC antes del 1/11.
 
 ### C · ENJAMBRE: experiencia compartida (ataca R-f)
 
-> **21/10/2026: C v1 (ENJAMBRE-1) VERDE en examen**, verificado independientemente (primer diseño cerrado en desarrollo; rediseño aprobado por Roger). 4 ECHO con memoria privada + global por WSP y ayuda: puntuación 691 frente a 920 sin global, 937 barajada, 989 sin privada, 1685 sin ayuda, 1866 aislados; gana 20/20 salvo barajada 19/20 y sin_privada 11 ganadas + 9 empates. Límites: la ayuda solo cuenta en los mundos de placa (sin ellos 445 = 445); la ventaja de la privada se concentra en 2 macros; los mundos y el protocolo de ayuda los diseñó Claude. Siguiente: C v2 con mentiroso (LINK-3). `docs/ENJAMBRE1-RESULTS.md`.
+> **21/10/2026: C v1 (ENJAMBRE-1) VERDE en examen**, verificado independientemente (primer diseño cerrado en desarrollo; rediseño aprobado). 4 ECHO con memoria privada + global por WSP y ayuda: puntuación 691 frente a 920 sin global, 937 barajada, 989 sin privada, 1685 sin ayuda, 1866 aislados; gana 20/20 salvo barajada 19/20 y sin_privada 11 ganadas + 9 empates. Límites: la ayuda solo cuenta en los mundos de placa (sin ellos 445 = 445); la ventaja de la privada se concentra en 2 macros; los mundos y el protocolo de ayuda los diseñó Claude. Siguiente: C v2 con mentiroso (LINK-3). `docs/ENJAMBRE1-RESULTS.md`.
 
 - **Qué:** N agentes ECHO en mundos **distintos** escriben en la misma
   memoria por WSP (pila LINK). Uno de ellos puede mentir.
@@ -166,7 +166,7 @@ roadmap. Ninguna pista toca la campaña ARC antes del 1/11.
 4. ECHO-4.5: decidir Hugging Face, cerrar y publicar con sus rojos.
 5. ARC: los dos envíos finales antes del 1/11 (campaña 5.5, no 5.8).
 
-### P · PERCIBE-X: identidad percibida + memoria de roles (desbloqueada por Roger el 20/10)
+### P · PERCIBE-X: identidad percibida + memoria de roles (desbloqueada el 20/10)
 
 - **Por qué:** MEMORIA-X recibe identificadores opacos que le da el mundo.
   PATTERN-1R v4 ya produce identidades anónimas desde LiDAR (familias), pero
@@ -202,12 +202,12 @@ A en verde, y además B **o** C en verde, con cada pista publicada con sus
 números, sus controles y sus rojos. D, E y W suman pero no deciden la versión.
 Si A sale roja, 5.8 se publica como resultado negativo y B y C no se abren.
 
-## 6. Decisiones pendientes de Roger
+## 6. Decisiones pendientes 
 
 1. ~~Aprobar este roadmap~~: aprobado el 20/10/2026.
 2. ~~Familias de mundos para A~~: fijadas en el contrato de MEMORIA-X (aprobado) y examinadas; A verde.
 3. ~~Congelar DYNAMIC-1 v2~~: no hacía falta, ya estaba verde (corrección 20/10).
-4. LLM para D1: Roger dio claves de Groq y Google AI Studio el 20/10 (en ficheros de su home; nunca en el repo). Probado: llamada a herramientas OK en gpt-oss-20b (Groq), gemma-4-31b-it, gemini-3.5-flash-lite y gemini-3.5-flash; gpt-oss-120b y qwen3.8-27b bloqueados en la organización de Groq. **Elegido por Roger el 20/10:** gemini-3.5-flash como modelo principal y gemma-4-31b-it como réplica de pesos abiertos; antes del contrato se mide la cuota gratuita de Google con una prueba pequeña.
+4. LLM para D1: Nav dio claves de Groq y Google AI Studio el 20/10 (en ficheros de su home; nunca en el repo). Probado: llamada a herramientas OK en gpt-oss-20b (Groq), gemma-4-31b-it, gemini-3.5-flash-lite y gemini-3.5-flash; gpt-oss-120b y qwen3.8-27b bloqueados en la organización de Groq. **Elegido por Nav el 20/10:** gemini-3.5-flash como modelo principal y gemma-4-31b-it como réplica de pesos abiertos; antes del contrato se mide la cuota gratuita de Google con una prueba pequeña.
 
 ## 7. Lo que queda al implementador
 

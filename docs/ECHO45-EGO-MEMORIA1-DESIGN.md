@@ -1,7 +1,7 @@
-# EGO-MEMORIA-1 · la necesidad de documentar y las memorias que forman el yo — contrato (APROBADO por Roger el 2026-09-25: «corre en paralelo»)
+# EGO-MEMORIA-1 · la necesidad de documentar y las memorias que forman el yo — contrato (APROBADO el 2026-09-25: «corre en paralelo»)
 
 2026-09-25. Parte del programa EGO (`ECHO4-EGO-PROGRAMA.md`), en paralelo a ECHO-4.5. Idea de
-Roger: la humanidad desarrolló la escritura **por necesidad de documentar**. Si ECHO desarrolla esa
+Nav: la humanidad desarrolló la escritura **por necesidad de documentar**. Si ECHO desarrolla esa
 necesidad (porque en el futuro tendrá que demostrar algo), aprenderá que registrar y aprender cosas
 nuevas importa. Y sus recuerdos deben guardar **cómo le hizo reaccionar** cada interacción: si otro
 agente le mintió y la mentira le hizo tardar más, esa acción queda marcada como negativa. Con lo
@@ -74,5 +74,5 @@ formado por su propia historia y comprobable desde fuera.
 
 ## Método
 
-Contrato → aprobación de Roger → construir la aldea y el diario en ECHO-SEED → desarrollo con
+Contrato → Aprobado: → construir la aldea y el diario en ECHO-SEED → desarrollo con
 semillas de desarrollo → contrato D → examen con semillas congeladas → auditoría. Todo en CPU, 0 $.

@@ -4,7 +4,7 @@
 Contrato concreto: [S6-B3](ECHO45-S6-B3-DESIGN.md). Supervisor y seguimiento:
 [procesos](../lab/kaggle/s6b3-20260927/README.md). El plan histórico siguiente
 conserva el motivo de la campaña; ejecución y criterios se rigen por el contrato.
-Roger prioriza obtener evidencia de S6 VERDE pronto. Los contratos y rojos
+Nav prioriza obtener evidencia de S6 VERDE pronto. Los contratos y rojos
 anteriores permanecen cerrados. Este documento no autoriza gasto de pago.
 
 ## Orden inmediato

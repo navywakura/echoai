@@ -1,6 +1,6 @@
 # ECHO-5.1 · conclusiones de la investigación publicada
 
-16 de octubre de 2026. Publicación solicitada por Roger en
+16 de octubre de 2026. Publicación solicitada por Nav en
 [navywakura/echoai](https://github.com/navywakura/echoai).
 Cierre de investigación, no certificación de superioridad ni release verde.
 

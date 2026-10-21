@@ -1,6 +1,6 @@
 # E4-SITUATE-1 «sé qué soy» — **verde**
 
-2026-09-24. [Contrato](ECHO4-SITUATE1-DESIGN.md), aprobado por Roger con la
+2026-09-24. [Contrato](ECHO4-SITUATE1-DESIGN.md), aprobado con la
 apertura del examen autorizada si el desarrollo pasaba. Desarrollo sellado
 `d8abbb50…`; regresión ECHO-4 previa **854/854**. Examen: 16 condiciones nuevas
 (269001–269016), cada una en **procesos hijos nuevos**: nominal, sin sensores,

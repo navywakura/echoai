@@ -1,6 +1,6 @@
 # E4-RELATION-1 — RELATION-C implementada, testigos de desarrollo válidos
 
-2026-09-23. [Contrato C/D](ECHO4-RELATION1-CD-DESIGN.md), aprobado por Roger.
+2026-09-23. [Contrato C/D](ECHO4-RELATION1-CD-DESIGN.md), aprobado.
 Auditoría en proceso nuevo válida, cero hallazgos. Digest
 `ac7a1aab95f228270142d6dc49d05edf96287e5485b9cc06c0e3c3c9253df3cb`.
 `relation1_green=false`: D sigue sin abrir. Custodia de A (`ce24ccaa…`) y
@@ -49,4 +49,4 @@ relevo, y se corrigió antes de sellar.
 
 Módulo `echo4/relation_d.py` preparado: lock, criterios del contrato y
 auditoría. La pasada en seco con semillas de desarrollo, que no es evidencia,
-cumple los cinco criterios. **D solo se abre con la aprobación de Roger para congelar.**
+cumple los cinco criterios. **D solo se abre con la Aprobado: para congelar.**

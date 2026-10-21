@@ -47,4 +47,6 @@ PYTHONPATH=. venv/bin/python -m echoai.echo58.enjambre.report      # recalcula E
 La pista A usa además AI Safety Gridworlds en un intérprete aparte
 (`~/.venvs/asg`, ver `echo58/memx/world.py`). La comprobación de congelación
 (`frozen_state()`) recalcula los hashes del código, del contrato y de los
-tests: en esta copia coincide con la del examen de C.
+tests. El código y los tests de esta copia son idénticos a los congelados; los
+documentos se retocaron después para publicarlos (solo redacción), así que el
+hash de los contratos ya no coincide con el `preflight.json` original.

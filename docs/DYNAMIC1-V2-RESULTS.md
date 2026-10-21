@@ -9,7 +9,7 @@ El rojo de [v1](DYNAMIC1-RESULTS.md), su código y todas sus trazas se conservan
 
 ## Cadena ejecutada
 
-Roger autorizó revisar DYNAMIC-1 y continuar con PATTERN-1R tras su cierre.
+Nav autorizó revisar DYNAMIC-1 y continuar con PATTERN-1R tras su cierre.
 La revisión previa corrigió el constructor de tratamientos del auditor:
 todavía usaba v1, que no reconoce el mutante `blind_place`. Ejecución y auditoría
 usan ahora `scheduled_spec`; se verifican también `arm` y `faulted` contra el

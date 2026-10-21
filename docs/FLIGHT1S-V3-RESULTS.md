@@ -139,7 +139,7 @@ evidencia y **se repitió la campaña entera**, nunca sólo el vuelo fallido.
 
 ## 6. La vía elegida: corregir la etiqueta del sensor
 
-Roger autorizó atacar la causa raíz. Se construyó
+Nav autorizó atacar la causa raíz. Se construyó
 `echoai-flight1s-px4:v1.15.4-gpseph`, la imagen congelada con **una línea**
 cambiada:
 

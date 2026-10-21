@@ -19,7 +19,7 @@ y las clasifica: respaldada, contradicha, no verificable o desconocida. La
 - **D:** examen con cohortes nuevas: 0 afirmaciones no verificables promovidas,
   0 contradicciones adoptadas.
 - **INTEGRATE:** reevaluar el perfil de indicadores con las capacidades unidas.
-- **E «soñar pruebas de conciencia»** (pedido por Roger): ciclo Dream-RSI sobre el
+- **E «soñar pruebas de conciencia»** (pedido): ciclo Dream-RSI sobre el
   córtex. Soñar pruebas o teorías candidatas fuera del catálogo; operacionalizarlas;
   evaluarlas sin ejecuciones nuevas sobre historiales grabados y un banco de sistemas
   de referencia (trivial, tabla de consulta, aleatorio, ECHO completo, ECHO con

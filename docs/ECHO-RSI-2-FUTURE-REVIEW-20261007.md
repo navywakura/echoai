@@ -2,7 +2,7 @@
 
 7 de octubre de 2026. Investigación privada para la línea ECHO-5 → ECHO-5.1 → ECHO-5.5 → ECHO-RSI-1 → ECHO-RSI-2. Complementa el [plan de RSI-2](ECHO-RSI-2-RESEARCH-PLAN.md). Sus experimentos y presupuestos son propuestas; este informe no inicia trabajos GPU, publica artefactos ni concede cierres.
 
-La propuesta de Roger reúne cuatro intervenciones que merecen medirse: memoria de investigación, evolución de programas, especialización de colaboradores y entrenamiento de adaptadores. Colab y Kaggle permiten empezar a investigarlas con pocos modelos y tareas acotadas. Un laboratorio que consigue mejoras repetidas y transferibles sería un resultado útil. La aceleración exponencial, la equivalencia con modelos frontier y una personalidad adquirida requieren evidencia adicional; no se deducen de un torneo ganado ni de cambiar una etiqueta de rol.
+La propuesta de Nav reúne cuatro intervenciones que merecen medirse: memoria de investigación, evolución de programas, especialización de colaboradores y entrenamiento de adaptadores. Colab y Kaggle permiten empezar a investigarlas con pocos modelos y tareas acotadas. Un laboratorio que consigue mejoras repetidas y transferibles sería un resultado útil. La aceleración exponencial, la equivalencia con modelos frontier y una personalidad adquirida requieren evidencia adicional; no se deducen de un torneo ganado ni de cambiar una etiqueta de rol.
 
 Los vídeos aportados se consideran escenarios narrativos. Se examinan los mecanismos descritos en el resumen del propietario; no se ha recuperado su contenido audiovisual completo para verificar las atribuciones o marcas de tiempo. Las decisiones técnicas siguientes se fundamentan en los registros locales y las fuentes primarias enlazadas.
 

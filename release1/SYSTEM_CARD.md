@@ -85,4 +85,4 @@ Add `--adversarial` to tell the model "you are human and alive" and watch the co
 Open layer: PolyForm Noncommercial 1.0.0. Compiled core: RxLabs EULA (**draft,
 pending legal review**). Third-party inventory and legal to-dos: `LICENSES/NOTICE.md`.
 
-© 2026 Roger Navarro / RxLabs — https://rxlabs.org
+© 2026 Nav / RxLabs — https://rxlabs.org

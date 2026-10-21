@@ -1,4 +1,4 @@
-# E4-ROLES-1 v2 — contrato (aprobado por Roger 2026-09-24)
+# E4-ROLES-1 v2 — contrato (aprobado 2026-09-24)
 
 Motivo: [D v1 rojo](ECHO4-ROLES1-D-RESULTS.md) (`168e978b…`). La semilla 264106
 quedó atrapada en un empate Q en la fila «falló la contraparte 1». Con
@@ -24,7 +24,7 @@ de explorar, que se publica.
    mismos testigos C1–C8. C0 pasa a ser: con `evidence_greedy=True`, la sesión
    v2 reproduce bit a bit la sesión C v1.
 2. **D v2** con cohortes nuevas **265001..265008** y **265101..265108**, mismos
-   cinco criterios que v1. Solo se abre con la aprobación de Roger.
+   cinco criterios que v1. Solo se abre con la Aprobado:.
 3. Auditoría en proceso nuevo. Solo su recibo puede dar `roles1_green=true`.
 
 Las cohortes 264xxx de v1 están quemadas y no se reutilizan. v1 conserva su rojo.

@@ -1,7 +1,7 @@
 # MUNDOS-1 · aprender, delegar y recordar entre mundos simulados
 
 2026-09-27. **Propuesta de investigación, sin implementación ni examen abierto.**
-Origen: Roger propone una caja cuya contraseña está en un archivo de otro mundo,
+Origen: Nav propone una caja cuya contraseña está en un archivo de otro mundo,
 un LLM accesible mediante MCP, una nota del recorrido como condición de apertura,
 premios, reputación y doce estilos de conducta inspirados en arquetipos.
 La meta del proyecto sigue siendo mejorar resultados medidos en ARC-AGI-1/2/3.

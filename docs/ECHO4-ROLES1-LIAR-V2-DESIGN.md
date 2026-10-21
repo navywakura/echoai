@@ -1,4 +1,4 @@
-# E4-ROLES-1 · Anexo L v2 «¿y si la tengo yo?» — contrato (aprobado por Roger 2026-09-24)
+# E4-ROLES-1 · Anexo L v2 «¿y si la tengo yo?» — contrato (aprobado 2026-09-24)
 
 **Declarado posterior al rojo** de L v1 (`c77b31cd…`, L4 21/24). Diagnóstico:
 la deducción «B miente, luego C» ya existía y acertaba. Los 3 fallos eran temas
@@ -29,6 +29,6 @@ recibos, y el neto con y sin mentiras.
 
 ## Semillas
 
-Desarrollo **611, 623, 639**. Examen, si el desarrollo pasa (encargo de Roger de
+Desarrollo **611, 623, 639**. Examen, si el desarrollo pasa (encargo de Nav de
 dejarlo verde si es legítimo): **268001..268008** y **268101..268108**.
 Auditoría en proceso nuevo; su recibo acredita `liar_annex_green`.

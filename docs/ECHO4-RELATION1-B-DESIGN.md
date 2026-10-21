@@ -105,7 +105,7 @@ Todos los brazos mantienen gate, ejecución, aprendizaje Q, costes y presupuesto
 Criterio de desarrollo (no es examen): en las tres vidas, `history` supera en
 neto B del aprendiz a **cada** brazo aprendido (`other_only`, `shuffled`,
 `pooled`, `no_history`) y a `solo`. Si no lo hace, se publica el rojo y se
-decide con Roger si hay v2; no se retocan pagos ni la regla de reciprocidad
+decide con Nav si hay v2; no se retocan pagos ni la regla de reciprocidad
 después de ver resultados. Los márgenes numéricos de D se fijan en el contrato
 C/D, antes de abrir cohortes nuevas.
 

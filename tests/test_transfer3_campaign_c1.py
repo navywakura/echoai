@@ -123,7 +123,7 @@ class Ordering(unittest.TestCase):
 
 
 class Regression(unittest.TestCase):
-    """Roger's amendment: block on losses the oracle-calibrated agent avoids."""
+    """Nav's amendment: block on losses the oracle-calibrated agent avoids."""
     def row(self, seed, reached, **bad):
         return dict(dict(seed=seed, reached=bool(reached), energy=10, collisions=0,
                          reserve_violations=0, unsafe_admissions=0, false_facts=0,

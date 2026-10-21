@@ -191,4 +191,4 @@ distinga, sin introducir geometría oracle. Más episodios con los mismos
 features no resuelven por sí solos un conflicto de representación.
 
 Custodia externa, generador final, protocolo final y ventaja amortizada siguen
-pendientes. No hace falta ningún secreto ni intervención de Roger en esta fase.
+pendientes. No hace falta ningún secreto ni intervención de Nav en esta fase.

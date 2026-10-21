@@ -1,6 +1,6 @@
 # S6-B1 · corregir el protocolo de propuestas, sin rebajar la prueba
 
-2026-09-27. Continuación de la orden de Roger de hacer S6-B. B0 conserva su
+2026-09-27. Continuación de la orden de Nav de hacer S6-B. B0 conserva su
 campaña: 30/30 por brazo, todas V1. Las respuestas quedaron cortadas cerca de
 400 tokens y contienen también operadores sin comillas, nombres incorrectos
 y condiciones no permitidas. No se aceptan ni reparan a posteriori.

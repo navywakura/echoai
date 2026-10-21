@@ -79,7 +79,7 @@ contrato D aparte, como en fases anteriores. Criterios previstos:
 
 ## Método
 
-Contrato → aprobación de Roger → A → B y C en desarrollo sellado → contrato D con umbrales →
+Contrato → Aprobado: → A → B y C en desarrollo sellado → contrato D con umbrales →
 aprobación para congelar → examen → auditoría en proceso nuevo. Los rojos se publican.
 
 ## Qué no afirma
@@ -87,7 +87,7 @@ aprobación para congelar → examen → auditoría en proceso nuevo. Los rojos 
 No conciencia, vida ni inteligencia general. Integración en mundos simulados discretos, no en
 METAVERSE ni en hardware. Sin Discord, web, hardware, commit, push ni HF.
 
-## Enmiendas aprobadas por Roger (2026-09-24, antes de implementar)
+## Enmiendas aprobadas (2026-09-24, antes de implementar)
 
 1. **Reanudación por reconstrucción verificada.** El volcado de MAINTAIN/CONTINUITY rechaza
    la energía que llega de la tribu, porque su validador exige que cada unidad cuadre con la

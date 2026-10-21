@@ -83,7 +83,7 @@ igual en todos y durante toda la vida: la deriva no avisa.
 Criterio de desarrollo, que no es examen: en las 3 vidas, `competence` supera
 en neto del aprendiz a `cumulative`, `static_role`, `claimed_rank`, `rank_follow`
 y `self_only`. Además recupera antes que `cumulative` tras las derivas, en
-media. Si falla, se publica y se decide con Roger; no se tocan pagos ni la
+media. Si falla, se publica y se decide con Nav; no se tocan pagos ni la
 deriva después de ver resultados.
 
 Los márgenes de D y los escenarios C (negarse a ejecutar, intermediario que
@@ -106,7 +106,7 @@ liderazgo, estatus, obediencia, justicia de reparto ni conciencia. La
 competencia es una variable del simulador, no una evaluación de personas.
 Sin Discord, web, hardware, commit, push ni HF.
 
-## Enmienda 1 (2026-09-24, aprobada por Roger)
+## Enmienda 1 (2026-09-24, aprobada)
 
 Motivo, antes de sellar ningún banco. En ejecuciones exploratorias (semillas de
 desarrollo, no evidencia), la fila `competence` tal como estaba definida («tipo +

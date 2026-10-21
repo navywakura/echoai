@@ -33,4 +33,4 @@ Lectura:
 4. **La memoria privada no aporta** en esta tarea: solo global iguala o gana
    (193). E3 saldría rojo.
 
-Sin examen. Decisión de Roger pendiente.
+Sin examen. Decisión pendiente.

@@ -1,6 +1,6 @@
 # PATTERN-1R — identidad de objeto entre vistas, sin oráculo
 
-Estado: **contrato aprobado por Roger** (2026-09-12). Los umbrales de
+Estado: **contrato aprobado** (2026-09-12). Los umbrales de
 identidad y confusión se fijan en una enmienda **antes del lock**, con los
 números de los vuelos de desarrollo: el techo analítico (0.81–0.86) se midió
 sin ruido y elegirlos a ciegas arriesga un rojo ajeno a la pregunta. Sin lock
@@ -77,7 +77,7 @@ y **2 de examen**, los mismos en todos los vuelos. El examen no escribe.
 | Ceguera | el aprendiz recibe algo que no sea la firma de 16 bits |
 | Mutantes | alguno aceptado |
 
-## Enmienda 1 (2026-09-12, antes del lock; aprobada por Roger)
+## Enmienda 1 (2026-09-12, antes del lock; aprobada)
 
 Implementado el reconocimiento y medido contra la verdad, el planteamiento del
 borrador no contesta la pregunta. Lo que se midió:

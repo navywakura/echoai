@@ -1,6 +1,6 @@
 # ECHO-RSI-1: laboratorio económico y evaluación de automejora recursiva
 
-1 de octubre de 2026. **PLAN, sin capacidades acreditadas ni entrenamiento iniciado.** Nombre propuesto por Roger para la línea posterior a ECHO-5.5: `RxLabs/echo-rsi-1`. Designaría un sistema híbrido y sus artefactos identificados —núcleo, biblioteca, neocórtex y, si se entrena, adaptador—. El adaptador por sí solo no acredita RSI.
+1 de octubre de 2026. **PLAN, sin capacidades acreditadas ni entrenamiento iniciado.** Nombre propuesto por Nav para la línea posterior a ECHO-5.5: `RxLabs/echo-rsi-1`. Designaría un sistema híbrido y sus artefactos identificados —núcleo, biblioteca, neocórtex y, si se entrena, adaptador—. El adaptador por sí solo no acredita RSI.
 
 Este modelo futuro se distingue del **experimento privado RSI1** ya congelado en [ECHO-RSI1-DESIGN.md](ECHO-RSI1-DESIGN.md). Su contrato no cambia. El nombre de un producto posterior no convierte aquel ensayo en certificación general ni cierra S6. La base de esta propuesta sigue siendo la [visión de los dos cerebros](ECHO5-51-55-RESEARCH-VISION.md).
 

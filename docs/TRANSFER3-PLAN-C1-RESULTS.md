@@ -176,7 +176,7 @@ regla estricta suspendería una campaña real con probabilidad ≈ 0,66 sólo po
 suerte del control. Estimación de un único evento: muy incierta, pero el riesgo
 es real, y un B en rojo no se borra.
 
-### Enmienda de Roger, antes de existir el protocolo real
+### Enmienda de Nav, antes de existir el protocolo real
 
 **Regla atribuible**: el aprendido no puede perder ninguna misión que complete
 un agente con el desplazamiento **verdadero** —brazo `oracle`, cota externa, con
@@ -290,7 +290,7 @@ y el mismo total, tampoco gana ninguna que el oráculo pierda.
 **C pasa por la enmienda.** Bajo la regla estricta original de C1
 (`no_new_failures`), C no habría pasado. Hay una misión que el nominal
 descalibrado completa y el aprendido no, y que el oráculo tampoco completa: es
-el caso de suerte del control que describe la enmienda. Roger la decidió
+el caso de suerte del control que describe la enmienda. Nav la decidió
 después del ensayo 1 y antes de que existiera ningún protocolo real, y va
 dentro del protocolo que compromete el aviso.
 

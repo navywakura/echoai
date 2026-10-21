@@ -112,10 +112,10 @@ excluir ese operador de E0 y declararlo.
 | Resultado de E1/E1b | Conclusión permitida | Siguiente paso |
 |---|---|---|
 | ≥ 1 parche individual pasa V3 | Existe al menos una solución individual desde 378. No dice que ECHO la habría encontrado | Intervención I1 (§4) + muestreador como brazo de control |
-| ≥ 1 par pasa V3 | Justifica investigar composición. **No** demuestra que ningún parche individual pueda funcionar | Contrato nuevo de dos parches (aceptado por Roger si la evidencia lo justifica), sin bajar V3 y corrigiendo antes el límite de 32 reglas |
-| 0 individuales y 0 pares | **No encontramos solución con este presupuesto.** No dice que el lenguaje esté agotado | Decidir con Roger: más presupuesto, otra estrategia de búsqueda o P7 |
+| ≥ 1 par pasa V3 | Justifica investigar composición. **No** demuestra que ningún parche individual pueda funcionar | Contrato nuevo de dos parches (aceptado por Nav si la evidencia lo justifica), sin bajar V3 y corrigiendo antes el límite de 32 reglas |
+| 0 individuales y 0 pares | **No encontramos solución con este presupuesto.** No dice que el lenguaje esté agotado | Decidir con Nav: más presupuesto, otra estrategia de búsqueda o P7 |
 
-*Corregido el 30-09-2026 según la revisión de Roger. Contrato:
+*Corregido el 30-09-2026 según la revisión de Nav. Contrato:
 [ECHO45-S6-PROBE1-DESIGN.md](ECHO45-S6-PROBE1-DESIGN.md). La estimación
 anterior de «3–4 h» no estaba medida y se retira.*
 

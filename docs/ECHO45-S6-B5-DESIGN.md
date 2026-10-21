@@ -1,6 +1,6 @@
 # S6-B5: cambios precisos, piloto y continuación — contrato
 
-2026-09-28. Orden de Roger: mejorar desarrollo sin regresión, obtener una
+2026-09-28. Orden de Nav: mejorar desarrollo sin regresión, obtener una
 mejora propuesta/verificada por ECHO con ayuda LLM y ejecutar cuatro brazos
 en un examen nuevo. Condiciones fijadas antes de la primera llamada B5.
 S6-A/B0/B2/B3/B4 y los controles anteriores conservan fuentes y resultados.
@@ -53,7 +53,7 @@ SEMILLA conserva v5.8. FIJO/ECHO mantienen solo propuestas que pasan V1–V4.
 **SIN FILTRO acumula todas las propuestas de ECHO que pasan V1/V2**, incluso
 las rechazadas por utilidad/regresión; omite V3/V4 y no necesita llamadas
 nuevas. Cada composición tiene replay de A para verificar ejecutabilidad.
-Esta definición restaura literalmente la propuesta original de Roger;
+Esta definición restaura literalmente la propuesta original de Nav;
 B4 usaba la última política completa, que se conserva como condición anterior.
 
 Examen nuevo 24200–24259, versiones 2/3, reps 0/1/2: 360 partidas y 1800

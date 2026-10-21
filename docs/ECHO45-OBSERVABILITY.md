@@ -15,7 +15,7 @@ existente y se distinguen de decisiones del agente. El mismo visor descubre
 
 2026-09-27. Visor local de desarrollo, separado de los exámenes S5-E/S6 ya cerrados.
 
-Roger pidió ver qué hace ECHO en cada prueba, en una mini terminal que abra el
+Nav pidió ver qué hace ECHO en cada prueba, en una mini terminal que abra el
 agente. El núcleo ya tenía `nexus0/thought.py` y `nexus0/talk.py` (TALK-1).
 Se reutiliza ese registro; ARC v5.7 recibe un observador externo para guardar
 decisiones que antes no se exportaban. El visor también lee los diarios S6.

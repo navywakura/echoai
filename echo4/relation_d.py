@@ -1,4 +1,4 @@
-"""RELATION-D preregistered exam. Opening D requires Roger's freeze approval.
+"""RELATION-D preregistered exam. Opening D requires the freeze approval.
 
 Two new cohorts; thresholds fixed in docs/ECHO4-RELATION1-CD-DESIGN.md before
 any cohort life is executed. Only the fresh-process audit receipt can grant

@@ -1,8 +1,8 @@
 # DYNAMIC-1 — movimiento externo y predicción corta
 
-Estado: **borrador de contrato**, pendiente de aprobación de Roger. Sin
+Estado: **borrador de contrato**, pendiente de Aprobado:. Sin
 código, sin lock, sin vuelos. Orden ECHO-3: se adelanta a PATTERN-1R por
-decisión de Roger (2026-09-12), porque la identidad entre vistas descansa en
+Decisión (2026-09-12), porque la identidad entre vistas descansa en
 seguir objetos, que es la pregunta de este tajo
 ([PATTERN1R-RESULTS.md](PATTERN1R-RESULTS.md)).
 

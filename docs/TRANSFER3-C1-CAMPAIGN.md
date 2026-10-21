@@ -1,8 +1,8 @@
-# TRANSFER-3 — campaña sellada de C1: lo que necesito de Roger
+# TRANSFER-3 — campaña sellada de C1: lo que necesito de Nav
 
 2026-09-19. **CAMPAÑA COMPLETADA; este documento conserva el procedimiento.**
 El candidato estaba confirmado prospectivamente (nivel 2):
-[resultados de C1](TRANSFER3-PLAN-C1-RESULTS.md). Roger ejecutó la custodia y la
+[resultados de C1](TRANSFER3-PLAN-C1-RESULTS.md). Nav ejecutó la custodia y la
 campaña independiente final `campaign-c1-v2/` emitió un certificado verde.
 
 La primera campaña real, bajo el protocolo `c9933cac…`, quedó consumida antes
@@ -69,7 +69,7 @@ pueda leerlo, ni lo pegues en el chat.**
 ```sh
 PYTHONPATH=.. python3 -m echoai.nexus0.transfer3.custodian_c1 commit \
   ~/custodia/bundle.json lab/transfer3/campaign-c1/protocol.json ~/custodia/notice.json \
-  --custodian "Roger Navarro" --publication-reference "DONDE_LO_PUBLICAS"
+  --custodian "Nav" --publication-reference "DONDE_LO_PUBLICAS"
 ```
 
 `notice.json` es **público**: sólo lleva compromisos, ni semillas ni secreto.
@@ -176,7 +176,7 @@ Criterios que **bloquean**: restricciones duras en todos los brazos, **ninguna
 pérdida atribuible a la calibración**, más misiones que el nominal, amortización,
 más allá de los priors fijos, y significación.
 
-### Enmienda decidida por Roger antes del protocolo real
+### Enmienda decidida antes del protocolo real
 
 El primer ensayo encontró que la regla estricta de C1 —«el aprendido nunca
 pierde una misión que complete el nominal descalibrado»— falló una vez en 1 080

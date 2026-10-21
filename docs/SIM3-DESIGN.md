@@ -55,7 +55,7 @@ y el núcleo rápido permanece entero; SIM-3 no modifica sus representaciones.
 ## 3. Arquitectura y permisos
 
 ```text
-Custodio (Roger)     protocolo + partición + secretos C
+Custodio (Nav)     protocolo + partición + secretos C
        │
        ▼
 Supervisor privado ── paquete SDF/manifiesto ── Gazebo

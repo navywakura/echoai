@@ -1,4 +1,4 @@
-# Plan: E4-CODE-1 — echoAI como capa de verificación y memoria para agentes de código (PLAN, pedido por Roger 2026-09-24)
+# Plan: E4-CODE-1 — echoAI como capa de verificación y memoria para agentes de código (PLAN, pedido 2026-09-24)
 
 No es contrato. Surge de la pregunta: *¿por qué pagaría alguien?*
 
@@ -53,7 +53,7 @@ Contrato previo, repositorios y tareas de prueba nuevos, y comparación con el m
 Después de RELEASE, en paralelo o antes de CURIOSITY-1, porque es lo que puede financiar el
 resto. Sin afirmaciones de conciencia: aquí echoAI es una herramienta de verificación.
 
-## Trae tu propio modelo (BYOK) y automejora (añadido 2026-09-24, idea de Roger)
+## Trae tu propio modelo (BYOK) y automejora (añadido 2026-09-24, idea de Nav)
 
 - **Independiente del modelo:** el usuario conecta el suyo, por API con su propia clave
   (GPT, Opus, Gemini, Qwen, Kimi, DeepSeek…) o en local (llama.cpp, vLLM, Ollama). echoAI

@@ -1,6 +1,6 @@
 # ECHO-4.5 · S3 (el juego como objetos) · contrato (fijado el 2026-09-25, antes de construir) y cierre: VERDE
 
-Roger: «sigue con S3». Roadmap: `ECHO45-DECISIONES.md`. Se desarrolla y mide **solo** en los 8
+Nav: «sigue con S3». Roadmap: `ECHO45-DECISIONES.md`. Se desarrolla y mide **solo** en los 8
 juegos de desarrollo (bp35, g50t, lp85, m0r0, s5i5, sk48, su15, wa30). Los 16 juegos de examen de
 ECHO-4.5 no se tocan.
 

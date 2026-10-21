@@ -413,7 +413,7 @@ operador con Qwen 4B es separado y no es requisito para ejecutar tests,
 pero sí es la segunda puerta para declarar SIGN-C completamente verde.
 
 SIGN-Cd quedó verificado por Codex con sus nueve pruebas focales, los bancos
-deterministas y la suite completa de 392 pruebas. Roger repitió después la
+deterministas y la suite completa de 392 pruebas. Nav repitió después la
 puerta con el Qwen real y obtuvo `green=true`: 6/8 filas, 4/6 paráfrasis
 frente a 0 del stub, ambos canónicos correctos, ROI +16, 8 llamadas, cero
 rechazos y cero hechos falsos. Las dos amenazas no canónicas equivocadas

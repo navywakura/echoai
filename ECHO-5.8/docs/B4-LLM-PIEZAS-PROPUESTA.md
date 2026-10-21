@@ -1,6 +1,6 @@
 # Propuesta: que el córtex (LLM) invente las piezas — nota de investigación
 
-21 de octubre de 2026. **PLAN, sin contrato ni medida.** Propuesta de Roger:
+21 de octubre de 2026. **PLAN, sin contrato ni medida.** Propuesta de Nav:
 «que ECHO genere sus mejoras llamando al LLM: que las piezas para corregirse
 las invente el LLM (neocórtex)».
 

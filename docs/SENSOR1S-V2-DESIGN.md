@@ -1,6 +1,6 @@
 # SENSOR-1S v2 — el canal de sensores en su propio proceso
 
-Estado: **prerregistro aprobado por Roger** (2026-09-11), anterior a cualquier
+Estado: **prerregistro aprobado** (2026-09-11), anterior a cualquier
 vuelo v2 de validación. V1 se conserva roja e intacta.
 
 ## Por qué v2

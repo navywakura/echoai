@@ -131,7 +131,7 @@ continuación; pago desactivado. No se promete VERDE por ejecutar más propuesta
 
 SIN FILTRO acumula todas las propuestas ECHO seguras y ejecutables, omitiendo
 utilidad/regresión; cero llamadas nuevas. Recupera la definición original
-de Roger. B4 conserva su condición anterior de última política completa.
+de Nav. B4 conserva su condición anterior de última política completa.
 
 **S6 VERDE solo si B1–B5 pasan juntos:**
 

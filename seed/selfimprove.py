@@ -354,10 +354,10 @@ def mock_proposer(prompt, rng=random.Random(0)):
 
 
 def openrouter_proposer(model, paid_ok=False):
-    """OpenRouter. Only ':free' models unless Roger has approved paid ones (paid_ok): S6 step 0 costs $0."""
+    """OpenRouter. Only ':free' models unless Nav has approved paid ones (paid_ok): S6 step 0 costs $0."""
     import urllib.request, urllib.error
     if not model.endswith(":free") and not paid_ok:
-        raise SystemExit("paid model %s needs Roger's go (use a :free model for step 0)" % model)
+        raise SystemExit("paid model %s needs Nav's go (use a :free model for step 0)" % model)
     key = (gym.ROOT / ".openrouterkey").read_text().strip()
 
     def call(prompt):

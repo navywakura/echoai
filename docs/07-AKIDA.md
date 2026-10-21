@@ -1,6 +1,6 @@
 # 07 — Akida AKD1000 (PLAN — no hay placa)
 
-**Actualización 2026-09-09:** Roger fija el destino ECHO-2 en **AKD1500
+**Actualización 2026-09-09:** Nav fija el destino ECHO-2 en **AKD1500
 M.2**. Ver [arranque ECHO-2](ECHO2-START.md) para la ruta vigente y fuentes
 oficiales. Este documento conserva el plan histórico AKD1000; sus IDs y
 restricciones específicas no certifican compatibilidad con AKD1500.

@@ -1,4 +1,4 @@
-# E4-BENCH-ARC3 · contrato D (APROBADO por Roger el 2026-09-24: «haz las 2»)
+# E4-BENCH-ARC3 · contrato D (APROBADO el 2026-09-24: «haz las 2»)
 
 Examen de ARC-AGI-3 con los 16 juegos congelados (`lab/arc3/split.json`, sha256 `91f23200…`,
 sin ls20). Contrato de origen: `ECHO4-BENCH-ARC3-DESIGN.md`.

@@ -95,7 +95,7 @@ Detalle de símbolos, hashes, imports, consumidores, tests y documentos: [module
 | [echo4/relation_bench.py](../../../echo4/relation_bench.py) | RELATION-A history/provenance benchmark; never grants relational transfer. | 9 | 1 |
 | [echo4/relation_c.py](../../../echo4/relation_c.py) | RELATION-C: rupture, reunion, same identity with another body, and limits. | 8 | 1 |
 | [echo4/relation_c_bench.py](../../../echo4/relation_c_bench.py) | RELATION-C witnesses on development seeds. Limits are published, not hidden. | 9 | 0 |
-| [echo4/relation_d.py](../../../echo4/relation_d.py) | RELATION-D preregistered exam. Opening D requires Roger's freeze approval. | 7 | 0 |
+| [echo4/relation_d.py](../../../echo4/relation_d.py) | RELATION-D preregistered exam. Opening D requires the freeze approval. | 7 | 0 |
 | [echo4/relation_help.py](../../../echo4/relation_help.py) | RELATION-B help task: A history, recorded in each agent's own CAM, indexes B. | 9 | 2 |
 | [echo4/relation_memory.py](../../../echo4/relation_memory.py) | Bounded observed encounter history in the agent's existing CAM. | 8 | 2 |
 | [echo4/relation_session.py](../../../echo4/relation_session.py) | Passive relation history on original native social executions, not transfer. | 2 | 1 |
@@ -103,7 +103,7 @@ Detalle de símbolos, hashes, imports, consumidores, tests y documentos: [module
 | [echo4/roles_bench.py](../../../echo4/roles_bench.py) | ROLES-1 A/B development bench. Development seeds only; never an exam. | 6 | 1 |
 | [echo4/roles_c.py](../../../echo4/roles_c.py) | ROLES-C: refusal, intermediary relay, new member, absence, and a veto fix. | 8 | 2 |
 | [echo4/roles_c_bench.py](../../../echo4/roles_c_bench.py) | ROLES-C witnesses on development seeds. Limits are published, not hidden. | 7 | 0 |
-| [echo4/roles_d.py](../../../echo4/roles_d.py) | ROLES-D preregistered exam. Opening D requires Roger's freeze approval. | 8 | 0 |
+| [echo4/roles_d.py](../../../echo4/roles_d.py) | ROLES-D preregistered exam. Opening D requires the freeze approval. | 8 | 0 |
 | [echo4/roles_v2.py](../../../echo4/roles_v2.py) | ROLES-1 v2: the only change is native periodic exploration for the learner. | 9 | 1 |
 | [echo4/self_agent.py](../../../echo4/self_agent.py) | SELF-A opt-in observation hook; no change to policy or historical loops. | 3 | 4 |
 | [echo4/self_attribution.py](../../../echo4/self_attribution.py) | SELF-B: finite, model-conditional diagnosis from public observations. | 6 | 4 |

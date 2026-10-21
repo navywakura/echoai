@@ -1,6 +1,6 @@
 # ECHO-4.5 · S5 (ARC3-GYM: simulador propio de juegos) · contrato (fijado el 2026-09-26, antes de medir)
 
-Roger: «ve y haz S5». Roadmap (`ECHO45-DECISIONES.md` §5): «solo hay 8 juegos de desarrollo y sin
+Nav: «ve y haz S5». Roadmap (`ECHO45-DECISIONES.md` §5): «solo hay 8 juegos de desarrollo y sin
 él se sobreajusta».
 
 ## Por qué S5 ahora
@@ -215,7 +215,7 @@ Por familias (gym v2 test, niveles/5):
 
 ## Después de S5-D: caja y juegos de clic (2026-09-26) — v5.6
 
-Encargo de Roger: «mejora la caja y los juegos de clic en el gym». Todo se desarrolló **solo en
+Encargo de Nav: «mejora la caja y los juegos de clic en el gym». Todo se desarrolló **solo en
 gym-train v2**; gym-test y los 8 juegos de desarrollo solo se usaron para medir.
 
 | Versión | Qué añade | Resultado en gym-train |
@@ -254,7 +254,7 @@ Por familias (gym v2 test, niveles/5 · puntuación):
 
 ## Gym v3 (estado oculto) y v5.7 (2026-09-26/27)
 
-A partir de la revisión externa de Roger: los juegos profundos tienen estado que no se ve. **ARC3-GYM
+A partir de la revisión externa de Nav: los juegos profundos tienen estado que no se ve. **ARC3-GYM
 v3** añade cuatro familias ocultas, y los v1 y v2 quedan idénticos (400 juegos comparados antes y
 después):
 - **H1:** orden de dos interruptores;

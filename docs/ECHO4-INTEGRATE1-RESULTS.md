@@ -90,7 +90,7 @@ la tribu sin cuerpo también la pasan.
    es el antiguo. INTEGRATE no mide la actualización de la jerarquía: eso ya lo midió
    ROLES (8/8).
 
-## Examen (contrato D aprobado por Roger)
+## Examen (contrato D aprobado)
 
 - Directorio: `lab/echo4/integrate1-d-v1`
 - Digest: `e1492e22131fc755f3f11bf47c3747edb42640c004fe3be479cd71c2c8952a05`
@@ -138,4 +138,4 @@ Retirar cada pieza empeora exactamente lo que esa pieza debía aportar, en las 1
 
 ## Siguiente
 
-**RELEASE.** Hay dos decisiones pendientes de Roger: la licencia y el compilador del núcleo (modelo híbrido).
+**RELEASE.** Hay dos Decisiones pendientes : la licencia y el compilador del núcleo (modelo híbrido).

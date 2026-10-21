@@ -457,7 +457,7 @@ conservación de B1–B5. No es una mejora demostrada ni una fecha de VERDE.
 | Estado | Paso pendiente | Qué falta |
 |---|---|---|
 | ❌ | S6: demostrar automejora | B7 acepta una mejora ECHO, pero empata con FIJO: 537–537 en A. Falta superar el piloto y medir los cuatro brazos en reserva nueva; B1–B5 se mantienen. [Resultado](ECHO45-S6-B7-RESULTS.md) |
-| ❌ | Kaggle: enviar el mejor agente actual | Constructor del borrador CPU/v5.8 implementado; falta ensayo privado contra gateway y visto bueno de Roger. [Borrador](../lab/kaggle/echo45-release-20260928/README.md) |
+| ❌ | Kaggle: enviar el mejor agente actual | Constructor del borrador CPU/v5.8 implementado; falta ensayo privado contra gateway y visto bueno de Nav. [Borrador](../lab/kaggle/echo45-release-20260928/README.md) |
 | ✅ | R1: medición ARC-AGI-1 | 31/400 frente a 20/400, 7,75 % frente a 5 %; criterio pasa y R4 certifica los registros. [Resultado](ECHO45-FINAL-EXAM-RESULTS.md) |
 | ✅ | R2: medición ARC-AGI-2 | ROJO auditado: 0/120 en SEMILLA y ECHO |
 | ✅ | R3: medición ARC-AGI-3 | ROJO auditado: 11/112 frente a 13/112; objetivo ≥23. Score contrato 0,643679 frente a 0,069413/100 |
@@ -488,10 +488,10 @@ mediante un contrato y una evaluación propios.
 3. ✅ **Examen congelado S5-E:** cerrado VERDE; v5.7 475 frente a 399 niveles de v5.6;
    puntuación 3,7604 frente a 2,2658; azar 4,1 %. Fuentes intactas y replay exacto.
    `ECHO45-S5-E-RESULTS.md`.
-4. ❌ **Kaggle:** subir el mejor agente (con el visto bueno de Roger). La prueba del notebook ya solo
+4. ❌ **Kaggle:** subir el mejor agente (con el visto bueno de Nav). La prueba del notebook ya solo
    juega los 8 juegos de desarrollo.
 5. ✅ **EGO-MEMORIA-2:** condición nueva con coste de verificar mayor que el beneficio inmediato, reclamaciones diferidas y cuatro acciones conjuntas aprendidas por resultados reales. Contrato previo, ocho semillas de desarrollo, dieciséis semillas reservadas y auditoría independiente completados. **ROJO:** M1–M4 16/16, M5 15/16 y M6 exacto; en 31011 verificar crece 195 por mil (umbral 200), diferencia con control 165 (umbral 200). ✅ Cumplimiento completo alcanzado después por la condición 3E, con examen nuevo y M1–M6 completos. No se cambia el resultado ni el contrato de la condición 2. [Resultado](ECHO45-EGO-MEMORIA2-RESULTS.md).
-6. ✅ **S6 fase B, campaña cerrada:** Roger ordenó abrirla pese al rojo de A. S6-B0 se ejecutó con contrato
+6. ✅ **S6 fase B, campaña cerrada:** Nav ordenó abrirla pese al rojo de A. S6-B0 se ejecutó con contrato
    `ECHO45-S6-B-DESIGN.md`: estrategias acotadas de control de v5.7, 30 propuestas
    por brazo en GPU gratis, cuatro brazos y un examen nuevo. El verde exige superar
    a SEMILLA, FIJO y SIN FILTRO, conservar el desarrollo oficial y reproducir todo.
@@ -588,7 +588,7 @@ metafísicas.
 | ❌ | **MDL-1** | ¿comprender = comprimir? ¿Los conceptos que más acortan son los que más transfieren? | bajo |
 | ❌ | **KENYON-1** | memoria inspirada en la abeja: expansión escasa de LIF enteros a 4k → 64k → 1M neuronas para saber «¿he estado aquí?» y «¿salió bien?»; ¿mejora la exploración? | por medir en hardware disponible; sin placa comprometida |
 | ❌ | **DEPTH-1** | 0, 1, 3, 5, 10 y 15 niveles de abstracción: ¿cuántos hacen falta? (el 10 no se da por supuesto) | medio |
-| ❌ | **S6 paso 1** | el mismo bucle con un modelo frontier: ¿un modelo mejor hace más listo a ECHO? | de pago, con visto bueno de Roger |
+| ❌ | **S6 paso 1** | el mismo bucle con un modelo frontier: ¿un modelo mejor hace más listo a ECHO? | de pago, con visto bueno de Nav |
 
 Orden propuesto: SITRA-1 y RETRO-1 → KENYON-1 (4k y 64k) y DEPTH-1 → TIKKUN-1 y MDL-1 → SPLIT-1
 → S6 paso 1 → KENYON a 1M, si la curva de mejora y coste lo justifica.

@@ -136,7 +136,7 @@ Dos LLM, 8B, API, MiniGrid, 8 acciones: **después** de 1, o nunca si 1 ya basta
 
 ---
 
-## Compactar — respuesta a Roger
+## Compactar — respuesta a Nav
 
 En 32 celdas, compactar **casi no sirve**. El mapa cabe. El informe tiene razón.
 

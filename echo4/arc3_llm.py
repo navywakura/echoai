@@ -3,7 +3,7 @@
     (ARC venv) python -m echoai.echo4.arc3_llm play OUT --split dev|exam --arm L|LP|LECHO --games G...
     (ARC venv) python -m echoai.echo4.arc3_agent audit OUT          (replays the recorded actions)
 
-Contract: docs/ECHO4-BENCH-ARC3-LLM-DESIGN.md (approved by Roger, 2026-09-24).
+Contract: docs/ECHO4-BENCH-ARC3-LLM-DESIGN.md (approved, 2026-09-24).
 
   L      the model sees the 64x64 grid as text and what its last actions did
   LP     + ECHO's perception: objects (colour, size, centre) and which objects moved

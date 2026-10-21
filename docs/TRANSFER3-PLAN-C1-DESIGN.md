@@ -134,7 +134,7 @@ amplía N después de mirar.
 ## Regla de parada
 
 Una sola confirmación. Si falla, se publica y no se repite. Si pasa, hay
-**candidato de nivel 2** y se prepara el paquete de custodia para Roger. No hay
+**candidato de nivel 2** y se prepara el paquete de custodia para Nav. No hay
 `transfer3_green` sin la campaña sellada A→B→C con custodia externa.
 
 ## Qué no demuestra aunque pase

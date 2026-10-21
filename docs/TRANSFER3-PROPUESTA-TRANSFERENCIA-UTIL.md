@@ -5,7 +5,7 @@
 **Lo aprendido en A debe mejorar el comportamiento en mundos nuevos B/C frente
 al mismo agente sin ese aprendizaje, sin transferir el mapa ni conocer el examen.**
 
-Roger autoriza investigar alternativas y persistir hacia esa demostración.
+Nav autoriza investigar alternativas y persistir hacia esa demostración.
 No hay hardware en el laboratorio: este trabajo es software y simulación.
 El verde funcional, si se obtiene bajo el contrato aplicable, no acredita
 hardware, HIL, vuelo real ni DRONE-3.

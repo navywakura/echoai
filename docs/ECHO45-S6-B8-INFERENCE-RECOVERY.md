@@ -1,7 +1,7 @@
 # S6-B8 · recuperación única de infraestructura
 
 2026-09-29, después del fallo p2 y antes de su recuperación. La orden vigente
-de Roger autoriza continuar y corregir S6. No es un reintento automático ni
+de Nav autoriza continuar y corregir S6. No es un reintento automático ni
 una nueva selección de propuestas tras ver sus resultados.
 
 Los trabajos p0 y p1 completaron seis propuestas cada uno. p1 repitió las

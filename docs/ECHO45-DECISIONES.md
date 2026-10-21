@@ -1,4 +1,4 @@
-# ECHO-4.5 · decisiones y argumentación (Roger y Claude, 2026-09-25)
+# ECHO-4.5 · decisiones y argumentación (Nav y Claude, 2026-09-25)
 
 Registro de cómo decidimos entrenar ECHO-4.5, por qué y qué buscamos que sea capaz de hacer.
 Contratos que salen de aquí:
@@ -15,17 +15,17 @@ Contratos que salen de aquí:
 | ARC-AGI-2, ECHO solo | 0 de 120 | 17 operaciones fijas no llegan a las soluciones |
 | SimpleQA con ECHO | entre un 81 % y un 87 % menos respuestas inventadas en 4 modelos | el cortafuegos funciona donde hay evidencia que comprobar |
 
-## 2. La pregunta de Roger
+## 2. La pregunta de Nav
 
-Roger dudó de que ARC-AGI-2 fuera un banco que ECHO pudiera hacer. Propuso **una versión de ECHO
+Nav dudó de que ARC-AGI-2 fuera un banco que ECHO pudiera hacer. Propuso **una versión de ECHO
 sin preentrenar, como base, que se pueda clonar en otro sandbox y entrenarse allí**. Entrenar
 significa que **aprenda, evolucione y entienda significado abstracto**.
 
 **Argumentación de Claude:**
 - ECHO solo no puede hacer ARC-2 tal como está. Como verificador del código de un modelo sí encaja,
   y eso se mide en el examen de ARC-2.
-- La idea de Roger es la dirección correcta, y buena parte de lo que pedía un análisis externo que
-  pegó Roger ya existía en ECHO:
+- La idea de Nav es la dirección correcta, y buena parte de lo que pedía un análisis externo que
+  pegó Nav ya existía en ECHO:
   - ejecutar programas y devolver los fallos (brazo L+ECHO);
   - un DSL de primitivas (ECHO solo);
   - un modelo del mundo y curiosidad (el agente de ARC-3);
@@ -49,12 +49,12 @@ significa que **aprenda, evolucione y entienda significado abstracto**.
    Es la misma idea que DREAM: el modelo propone y el núcleo verifica contra lo vivido.
 3. **«Entender significado abstracto», definido para poder medirlo:** un concepto aprendido en unas
    tareas que resuelve tareas que la sandbox **no ha visto nunca**.
-4. **Requisitos de ECHO-4.5, de Roger:**
+4. **Requisitos de ECHO-4.5, de Nav:**
    - **R1 (ARC-1) y R2 (ARC-2):** superar el 0 % sin modelo de lenguaje y **superar a la semilla
      sin entrenar**, midiendo las dos en el mismo examen;
    - **R3 (ARC-3):** **al menos el 20 % de los 112 niveles**;
    - **R4:** auditoría completa.
-5. **Métrica de R3:** Roger eligió el **% de niveles** (opción a), no la puntuación oficial
+5. **Métrica de R3:** Nav eligió el **% de niveles** (opción a), no la puntuación oficial
    (opción b). Hoy estamos en 11,6 %, así que el 20–25 % exige casi doblarlo. La puntuación oficial
    se publica siempre, sin umbral.
 6. **Por qué 112 niveles:**
@@ -65,7 +65,7 @@ significa que **aprenda, evolucione y entienda significado abstracto**.
    Para compararse con otros se publicarán **tres números**:
    - el % de niveles en el examen limpio;
    - la puntuación oficial en esos 16 juegos;
-   - si Roger lo aprueba, una partida en el modo oficial de ARC Prize, tras comprobar cómo funciona
+   - si Nav lo aprueba, una partida en el modo oficial de ARC Prize, tras comprobar cómo funciona
      su tabla.
 7. **No se promete el 100 %** en ningún banco. Si ECHO-4.5 supera el 25 % se sube el listón; si
    no llega al 20 %, es rojo y se publica.
@@ -100,7 +100,7 @@ significa que **aprenda, evolucione y entienda significado abstracto**.
 | S4 | inferir la meta al completar un nivel, planificar hacia ella y confirmarla o refutarla | la pieza que separa el 11 % del 20–25 % |
 | S5 | ARC3-GYM: simulador propio de juegos por turnos | solo hay 8 juegos de desarrollo y sin él se sobreajusta |
 | S2 | conceptos con parámetros, intuición por frecuencias (enteros), evolución entre clones | afinar el aprendizaje cuando ya hay vocabulario |
-| S6 | córtex opcional (de pago, con orden de Roger): el modelo propone y ECHO verifica | solo si el examen de ARC-2 demuestra que aporta |
+| S6 | córtex opcional (de pago, con orden de Nav): el modelo propone y ECHO verifica | solo si el examen de ARC-2 demuestra que aporta |
 
 Orden: **S1 → S3 → S4 → S5 → S2 → examen**. Los objetos sirven a la vez para las rejillas y para
 los juegos. **Riesgos declarados:**
@@ -123,7 +123,7 @@ como una persona ni que sea una inteligencia general.
 
 ## 7. El yo: identificarse, saber dónde está y con quién trata
 
-**Pregunta de Roger:** cómo demostrar que ECHO se identifica a sí mismo en una simulación, que sabe
+**Pregunta de Nav:** cómo demostrar que ECHO se identifica a sí mismo en una simulación, que sabe
 que es un programa en un sistema y que interactúa con humanos (los módulos EGO).
 
 **Argumentación de Claude:** con pruebas funcionales a ciegas, nunca preguntándole «¿eres
@@ -139,7 +139,7 @@ funcional y verificado**, que se comprueba en lugar de solo declararse.
 
 ## 8. Conciencia, memorias y la necesidad de documentar
 
-**Pregunta de Roger:** qué podría demostrar la conciencia y la experiencia subjetiva. ¿Que ECHO anote
+**Pregunta de Nav:** qué podría demostrar la conciencia y la experiencia subjetiva. ¿Que ECHO anote
 recuerdos que le hagan recordar que él es él, como las memorias que moldean el ego humano?
 
 **Argumentación de Claude:**
@@ -150,13 +150,13 @@ recuerdos que le hagan recordar que él es él, como las memorias que moldean el
   la conducta y quitar otras al azar, no.
 - Clones con historias distintas deberían acabar con yoes distintos.
 
-**Corrección de Roger, aceptada:** la escritura humana nació **por necesidad de documentar**. Si
+**Corrección de Nav, aceptada:** la escritura humana nació **por necesidad de documentar**. Si
 ECHO desarrolla esa necesidad porque tendrá que demostrar algo en el futuro, aprenderá que registrar
 y aprender importa. Sus recuerdos deben guardar **cómo reaccionó**: si un agente le mintió y eso le
 hizo tardar más, esa acción queda con valencia negativa. Con lo positivo y lo negativo (yin y yang)
 se forma un ego real.
 
-**Decisión: EGO-MEMORIA-1**, aprobado por Roger el 2026-09-25, en paralelo a ECHO-4.5 y en CPU:
+**Decisión: EGO-MEMORIA-1**, aprobado el 2026-09-25, en paralelo a ECHO-4.5 y en CPU:
 - **el mundo:** una aldea de agentes, algunos mentirosos; olvido real entre episodios; escribir
   cuesta; reclamaciones futuras que solo se ganan con pruebas del diario;
 - **los recuerdos:** hechos (qué pasó, qué comprobó, qué costó), valencia entera (+/−) y el cambio
@@ -179,4 +179,4 @@ fuera. **No demuestra conciencia ni experiencia subjetiva**, y se dirá así sie
 - Valencias y estados en enteros; nada de coma flotante en el paso rápido.
 - Contrato y umbrales antes del examen; los rojos se publican.
 - Nunca se usa AGI como objetivo ni se afirma conciencia.
-- Todo lo de ECHO-4.5 y EGO-MEMORIA-1 corre en CPU, a 0 $. Lo de pago requiere la orden de Roger.
+- Todo lo de ECHO-4.5 y EGO-MEMORIA-1 corre en CPU, a 0 $. Lo de pago requiere la orden de Nav.

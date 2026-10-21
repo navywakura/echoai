@@ -3507,7 +3507,7 @@ se pregunta por la celda de llegada  8
 
 ### El informe de operador
 
-`lab/nexus0_qwen_signc_report.json`, generado por Roger, nunca exigido por
+`lab/nexus0_qwen_signc_report.json`, generado por Nav, nunca exigido por
 CI. Ocho filas: dos canónicas y seis paráfrasis que el stub **no** conoce
 (hay un test que lo comprueba). Sin `NAVI_QWEN_MODEL` / `NAVI_QWEN_URL` el
 brazo 4B es silencio y el informe lo dice: `model_configured` false,
@@ -3859,7 +3859,7 @@ las nueve formas de mentir sobre esto y comprueba que `green()` se cae.
 
 ### Puerta real de operador — verde
 
-Roger repitió el banco con el servidor local y el GGUF Q4_K_M. El informe
+Nav repitió el banco con el servidor local y el GGUF Q4_K_M. El informe
 escrito en `lab/nexus0_qwen_signc_report.json` vuelve a pasar `green()` al
 recomputarlo desde código y conserva los dos hashes anteriores:
 

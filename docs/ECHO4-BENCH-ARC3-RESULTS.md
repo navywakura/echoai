@@ -63,7 +63,7 @@ cuál es el objetivo del juego.** Completa un nivel cuando su exploración lo al
 porque haya entendido la regla. Para puntuar alto hace falta **inferir la regla** («hay que
 llevar el bloque a la casilla del mismo color») y actuar directamente. Ese es el papel del
 brazo con córtex del contrato: el modelo propone la regla y ECHO la comprueba actuando. Es de
-pago y necesita la orden de Roger.
+pago y necesita la orden de Nav.
 
 ## Qué no afirma
 

@@ -7,7 +7,7 @@ ECHO-3.
 3D de mayor fidelidad, escala y calidad de presentación, con órdenes humanas
 libres y pruebas posteriores entre cuerpos.
 
-Este documento guarda una decisión de Roger del 9 de septiembre de 2026 y su
+Este documento guarda una Decisión del 9 de septiembre de 2026 y su
 reclasificación del 10 de septiembre. Los tres mundos geométricos mínimos,
 sensores esenciales, PX4, composición y transferencia A→B/C se ejecutan dentro
 de ECHO-3 según `ECHO-3-ACCEPTANCE.md`. Aquí sólo se escala lo ya cerrado.

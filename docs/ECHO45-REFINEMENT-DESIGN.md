@@ -1,6 +1,6 @@
 # Refinamiento y síntesis de programas: primera extensión
 
-2026-09-28. Propuesta de Roger, incorporada como desarrollo independiente
+2026-09-28. Propuesta de Nav, incorporada como desarrollo independiente
 de S6. Código aditivo `seed/refinement.py`; el solver histórico se conserva.
 
 **Implementado:** varias hipótesis DSL; crítica de forma, celdas, colores y

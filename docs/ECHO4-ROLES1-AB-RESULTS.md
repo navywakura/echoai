@@ -1,7 +1,7 @@
 # E4-ROLES-1 — A/B implementadas, desarrollo verde (no examen)
 
 2026-09-24. [Contrato A/B con enmienda 1](ECHO4-ROLES1-AB-DESIGN.md), aprobado
-por Roger. Auditoría en proceso nuevo válida, cero hallazgos. Digest
+por Nav. Auditoría en proceso nuevo válida, cero hallazgos. Digest
 `36b9cab337eb10dfab37557f2a4a42d12a08e08dbdf65d2642652b9523c257a6`.
 `roles1_green=false`: C/D sin abrir. Custodia de RELATION-D (`42a6efc5…`) comprobada.
 

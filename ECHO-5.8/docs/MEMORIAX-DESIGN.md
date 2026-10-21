@@ -1,6 +1,6 @@
 # MEMORIA-X · contrato de la pista A de ECHO-5.8
 
-20 de octubre de 2026. Estado: **APROBADO por Roger el 20/10/2026** («sí, apruebo, adelante con la programación»).
+20 de octubre de 2026. Estado: **APROBADO el 20/10/2026** («sí, apruebo, adelante con la programación»).
 Nada implementado ni medido. Tras la aprobación: implementación, desarrollo,
 revisor independiente, enmienda (si hace falta) y congelación **antes** de
 abrir las semillas de examen.

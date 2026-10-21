@@ -1,6 +1,6 @@
 # ECHO-4.5 — integración de memoria y resolución de rejillas
 
-2 de octubre de 2026. Roger aplaza S6 y prioriza memoria, refinamiento,
+2 de octubre de 2026. Nav aplaza S6 y prioriza memoria, refinamiento,
 síntesis, vistas, consistencia y guía de capacidad. Se han implementado y
 medido candidatos conjuntos en CPU. **ECHO-4.5 sigue sin estar listo para
 cierre, incluso dejando S6 aparte.** Hay avances verificables y un resultado

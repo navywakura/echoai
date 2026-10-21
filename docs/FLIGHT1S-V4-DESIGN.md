@@ -1,6 +1,6 @@
 # FLIGHT-1S v4 — separación del control y recuperación física
 
-Estado inicial: protocolo prospectivo, sin vuelos v4. Autorizado por Roger al
+Estado inicial: protocolo prospectivo, sin vuelos v4. Autorizado por Nav al
 pedir continuar tras el diagnóstico v3. Los resultados v1–v3 se conservan.
 
 ## Pregunta y cambio de alcance

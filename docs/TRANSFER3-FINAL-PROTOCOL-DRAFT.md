@@ -2,7 +2,7 @@
 
 2026-09-18. **Borrador no congelado; no autoriza generar una campaña.**
 No hay candidato que haya superado el cribado v4. Este documento no sustituye
-el contrato de ECHO-3 ni declara cerrados los puntos 2–4 solicitados por Roger.
+el contrato de ECHO-3 ni declara cerrados los puntos 2–4 solicitados por Nav.
 
 ## Dependencias de cierre
 
@@ -92,5 +92,5 @@ paquete/salt/commitment alterados, fuga de seed, doble apertura/concurrencia,
 crash, B rojo con intento de C, informe falsificado, caso omitido y escritura
 de aprendizaje durante examen.
 
-No pedir aún secretos a Roger ni usar a Claude como custodio mientras tenga
+No pedir aún secretos a Nav ni usar a Claude como custodio mientras tenga
 acceso al desarrollo. La revisión independiente sí puede hacerse ahora.

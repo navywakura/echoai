@@ -1,6 +1,6 @@
 # Recuperación ECHO-4.5 · 29 de septiembre de 2026
 
-Trabajo autorizado por Roger: completar lo posible de EGO-MEMORIA y S6,
+Trabajo autorizado por Nav: completar lo posible de EGO-MEMORIA y S6,
 conservar los umbrales y registrar también los negativos.
 
 ## Memoria: cierre VERDE de la condición 3E

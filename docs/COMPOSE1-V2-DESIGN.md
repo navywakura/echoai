@@ -1,6 +1,6 @@
 # COMPOSE-1 v2 — horizonte útil y ejecución situada
 
-2026-09-14. Continuación autorizada por Roger hasta cerrar COMPOSE-1.
+2026-09-14. Continuación autorizada por Nav hasta cerrar COMPOSE-1.
 V1 se conserva, incluido su `compose1_green=false`. Esta versión se desarrolla
 y mide en carpetas nuevas. CAUSE-1 va después del cierre, no se declara aquí.
 

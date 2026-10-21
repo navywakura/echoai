@@ -1,6 +1,6 @@
 # E4-RELEASE-1 · REL-A, REL-B y REL-C — contrato
 
-2026-09-24. Roger ordenó ejecutar REL-A, REL-B y REL-C ("haz REL-A, REL-B y REL-C")
+2026-09-24. Nav ordenó ejecutar REL-A, REL-B y REL-C ("haz REL-A, REL-B y REL-C")
 tras aceptar las recomendaciones: licencia en dos capas y compilador Nuitka.
 REL-D (publicar en Hugging Face) **no** está incluido: exige su autorización
 expresa y resolver los bloqueos legales de REL-C.
@@ -75,7 +75,7 @@ expresa y resolver los bloqueos legales de REL-C.
 - **ECHO-3 sigue 14/15:** el tramo físico de DRONE-3 necesita hardware.
 - Nada de push, commit ni HF en este contrato.
 
-## Enmienda 1 (2026-09-24, aprobada por Roger, **declarada después del rojo**)
+## Enmienda 1 (2026-09-24, aprobada, **declarada después del rojo**)
 
 **A5 v1**, tal como estaba escrito («suite de ECHO-1 verde con el núcleo compilado»), dio
 **rojo** en `cleanroom-v4`. Se ejecutaron 404 de 488 pruebas y hubo 58 fallos; los 58 leen

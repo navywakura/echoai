@@ -2,7 +2,7 @@
 
 2026-09-18. **Desarrollo público. TRANSFER-3 no cerrado.** Filtro previo a
 campaña, fijado antes de ejecutar. Sin escuela, sin jaula, sin candidato, sin
-B/C. Roger autoriza explícitamente tocar el planificador, que hasta ahora se
+B/C. Nav autoriza explícitamente tocar el planificador, que hasta ahora se
 trataba como fijo; la extensión es **versionada, acotada y documentada**, no un
 núcleo cognitivo nuevo.
 

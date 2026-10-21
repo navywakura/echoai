@@ -1,6 +1,6 @@
 # S6: control de cambios precisos — contrato previo
 
-2026-09-28. Autorizado por Roger: permitir cambios precisos, demostrar primero
+2026-09-28. Autorizado por Nav: permitir cambios precisos, demostrar primero
 una mejora de desarrollo sin regresiones y después intentar automejora LLM.
 Este contrato solo mide la capacidad del instrumento; no certifica S6 verde.
 

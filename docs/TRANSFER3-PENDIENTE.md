@@ -95,7 +95,7 @@ introduce un canal oracle disimulado ni convierte desconocidos en hechos.
   cualquier propiedad asimétrica del cuerpo se diluye con la rotación de la
   sala. Es lo que estropeó B1. Afecta al diseño de cualquier plan futuro.
 
-### 4. Nivel 3 — aquí sí, y sólo aquí, hace falta Roger
+### 4. Nivel 3 — aquí sí, y sólo aquí, hace falta Nav
 
 **No lo montes todavía.** Sin candidato de nivel 2 no hay nada que sellar.
 Cuando lo haya, esto es lo que necesito, y conviene que lo vayas preparando

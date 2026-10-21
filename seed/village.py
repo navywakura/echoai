@@ -3,7 +3,7 @@
     python3 -m echoai.seed.village dev OUT          all development experiments (M1-M5), seeds 1-3
     python3 -m echoai.seed.village audit OUT        replays every run from its seed and compares
 
-Contract: docs/ECHO45-EGO-MEMORIA1-DESIGN.md (approved by Roger, 2026-09-25).
+Contract: docs/ECHO45-EGO-MEMORIA1-DESIGN.md (approved, 2026-09-25).
 
 World (simulated agents; the lying is programmed, no person is deceived):
   each episode ECHO must find a key hidden in one of 6 places. It asks one of 5 agents for a hint.

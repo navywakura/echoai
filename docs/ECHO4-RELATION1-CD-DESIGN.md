@@ -34,7 +34,7 @@ criterio, en las semillas de desarrollo. C2 y C4 solo tienen que publicarse.
 
 ## D: examen preregistrado
 
-Solo se abre si B y C pasan y **Roger aprueba la congelación**. Antes de abrir:
+Solo se abre si B y C pasan y **Nav aprueba la congelación**. Antes de abrir:
 lock de código, contrato, pruebas, brazos, semillas, umbrales y custodia de A y B.
 No se ajusta nada tras ver D. Un rojo se publica y exige otra versión.
 

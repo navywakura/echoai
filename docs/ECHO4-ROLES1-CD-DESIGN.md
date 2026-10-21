@@ -27,7 +27,7 @@ C cierra cuando todas sus pruebas pasan y los criterios se cumplen en las semill
 
 ## D: examen preregistrado
 
-Solo se abre si A/B y C pasan y **Roger aprueba la congelación**. Antes:
+Solo se abre si A/B y C pasan y **Nav aprueba la congelación**. Antes:
 lock de código, contratos, pruebas, brazos, semillas, umbrales y custodia de
 RELATION y del desarrollo de ROLES. Nada se ajusta tras ver D. Un rojo se
 publica y exige una v2.

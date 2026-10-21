@@ -1,6 +1,6 @@
 # ECHO RSI 1 contrato privado de automejora
 
-1 de octubre de 2026. Roger autoriza preparar el experimento y ejecutarlo
+1 de octubre de 2026. Nav autoriza preparar el experimento y ejecutarlo
 después de PROBE2. Esta primera condición utiliza el GGUF Qwen3 4B Instruct
 existente, CPU y **0 euros de servicios externos**. ECHO-5.5 es un objetivo
 posterior; el banco no acredita vida subjetiva ni capacidad general frontier.

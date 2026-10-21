@@ -1,6 +1,6 @@
 # EGO-MEMORIA-2 · desarrollo posterior a los límites de la aldea inicial
 
-2026-09-28. Implementación autorizada por Roger: completar los pendientes de
+2026-09-28. Implementación autorizada por Nav: completar los pendientes de
 ECHO-4.5. La aldea inicial y sus ocho resultados se conservan. No se modifica
 ninguna fuente de S6-B4 ni se abre su examen.
 

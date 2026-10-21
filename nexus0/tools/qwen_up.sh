@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Start llama-server for Qwen-0. Roger runs this; CI never does.
+# Start llama-server for Qwen-0. Nav runs this; CI never does.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 MODEL="${NAVI_QWEN_MODEL:-$HOME/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf}"

@@ -8,7 +8,7 @@ hash a campaña y perfiles íntegros; examen sin abrir también en el filesystem
 y no cambia ningún veredicto de B12.
 
 Origen: [respuesta de Opus](ECHO45-S6-CAPACITY-ANALYSIS-20260930.md), con las
-correcciones de Roger del 30-09-2026 (redacción de conclusiones, pares
+correcciones de Nav del 30-09-2026 (redacción de conclusiones, pares
 complementarios con ganancia cero, sin estimación de tiempo no medida).
 
 ## 1. Pregunta
@@ -174,7 +174,7 @@ Artefactos: `lab/seed/s6probe1-20260930/` (`profile.json`, `parity.json`,
 `e0.json`, `singles-plan.json`, `singles/NNN.json`, `pairs-plan.json`,
 `pairs/NNN.json`, `result.json`, `budget.json`, `cache/`).
 
-## 10. Auditoría independiente (Codex, por encargo de Roger)
+## 10. Auditoría independiente (Codex, por encargo de Nav)
 
 - Paridad de la base con B12 (`parity.json`).
 - Recalcular E0 y el plan desde la caché y comparar `E0_SHA` y `PLAN_SHA`.

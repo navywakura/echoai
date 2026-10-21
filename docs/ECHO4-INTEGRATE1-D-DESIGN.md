@@ -1,4 +1,4 @@
-# E4-INTEGRATE-1 · contrato D (examen preregistrado) — APROBADO por Roger 2026-09-24
+# E4-INTEGRATE-1 · contrato D (examen preregistrado) — APROBADO 2026-09-24
 
 2026-09-24. Se fija **después** del desarrollo sellado (`integrate1-dev-v1`, `873a9461…`,
 auditado) y **antes** de abrir cohortes nuevas. Ningún umbral se rebaja después del examen.

@@ -1,4 +1,4 @@
-# B · ACUMULA — contrato (APROBADO por Roger el 20/10/2026, con brazo LLM)
+# B · ACUMULA — contrato (APROBADO el 20/10/2026, con brazo LLM)
 
 20 de octubre de 2026. Pista B del [roadmap](ROADMAP.md). Requisito cumplido:
 A · MEMORIA-X verde ([resultados](MEMORIAX-RESULTS.md)). Nada de esto está
@@ -125,7 +125,7 @@ las familias de sonda y la métrica no cambian.
 4. Diez macros comparten la memoria de partida de A, que era casi idéntica
    entre macros. La variación entre macros viene de los mundos de cada ronda.
 
-## 8. Decisiones de Roger
+## 8. Decisiones 
 
 1. Aprobar este contrato (familias de ronda y de sonda incluidas).
 2. **Brazo LLM — APROBADO (se informa, no decide):** el mismo diagnóstico se le

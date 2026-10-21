@@ -1,8 +1,8 @@
-# ECHO-4.5 · ECHO-SEED: un ECHO sin entrenar que aprende conceptos en sandboxes clonables — contrato (APROBADO por Roger el 2026-09-25)
+# ECHO-4.5 · ECHO-SEED: un ECHO sin entrenar que aprende conceptos en sandboxes clonables — contrato
 
-2026-09-25. Idea de Roger: «una versión de ECHO sin preentrenar, como base, que se pueda clonar
+2026-09-25. Idea de Nav: «una versión de ECHO sin preentrenar, como base, que se pueda clonar
 en otro sandbox y que en ese sandbox se pueda entrenar; entrenar significa que aprenda,
-evolucione y entienda significado abstracto». Objetivo de Roger: **ECHO-4.5 debe superar
+evolucione y entienda significado abstracto». Objetivo de Nav: **ECHO-4.5 debe superar
 ARC-AGI-1 y ARC-AGI-2 en porcentaje (aunque sea poco) y hacer un 20–25 % en ARC-AGI-3 como
 requisito mínimo.**
 
@@ -56,14 +56,14 @@ tareas que resuelve tareas que la sandbox no ha visto nunca.**
 - La semilla sin entrenar también se mide en ese momento: así se ve **qué aporta el
   entrenamiento**.
 
-| Id | Condición | Requisito de Roger |
+| Id | Condición | Requisito de Nav |
 |---|---|---|
 | R1 | ARC-AGI-1, 400 tareas de evaluación: ECHO-4.5 solo > 0 % **y** > la semilla sin entrenar | «superar en porcentaje, aunque sea poco» |
 | R2 | ARC-AGI-2, 120 tareas de evaluación: ECHO-4.5 solo > 0 % **y** > la semilla | igual |
-| R3 | ARC-AGI-3, 16 juegos de examen: **≥ 20 % de los 112 niveles completados** (decisión de Roger: métrica a). La puntuación oficial se publica siempre, sin umbral | «20–25 % como requisito mínimo» |
+| R3 | ARC-AGI-3, 16 juegos de examen: **≥ 20 % de los 112 niveles completados** (Decisión : métrica a). La puntuación oficial se publica siempre, sin umbral | «20–25 % como requisito mínimo» |
 | R4 | la auditoría rehace cada programa, cada concepto y la cadena del diario | custodia |
 
-**Decisión de Roger (2026-09-25): métrica (a), % de niveles.** Las opciones que se le presentaron:
+**Decisión (2026-09-25): métrica (a), % de niveles.** Las opciones que se le presentaron:
 - **(a) % de niveles completados.** Hoy estamos en 11,6 %. El 20–25 % exige casi doblarlo: difícil
   pero alcanzable si ECHO aprende a inferir metas.
 - **(b) Puntuación oficial de ARC Prize** (niveles × eficiencia frente a un humano). Hoy

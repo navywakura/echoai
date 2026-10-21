@@ -105,7 +105,7 @@ nuevo como el antiguo. Los informes v1/v2 no se sobrescriben.
 Resueltas en este dominio las dos limitaciones de v1: geometrías repetidas y
 scratch inmóvil. **No resuelta la hipótesis de ventaja transferible**. La
 campaña final continúa bloqueada por falta de una candidatura y criterios
-de aceptación justificados; no por falta de secretos de Roger.
+de aceptación justificados; no por falta de secretos de Nav.
 
 Siguiente: diagnosticar las decisiones donde Q cambia la ruta, explorar el
 aprendizaje sólo con datos de desarrollo y conservar los resultados negativos.

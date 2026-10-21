@@ -1,6 +1,6 @@
 # ECHO-5.1 · checklist de desarrollo
 
-**Investigación cerrada por decisión de Roger el 16 de octubre de 2026.**
+**Investigación cerrada por decisión propia el 16 de octubre de 2026.**
 Véase el [acta de cierre](CLOSURE-20261016.md). Las casillas científicas
 pendientes se conservan como obligaciones no demostradas; el cierre no
 equivale a un release verde. La continuación corresponde a ECHO-5.5.

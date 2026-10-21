@@ -1,6 +1,6 @@
 # GROUND-1 v2 — el sello de entrega, arreglado en su origen
 
-Estado: **contrato aprobado por Roger** (2026-09-11). Sin lock ni vuelos de
+Estado: **contrato aprobado** (2026-09-11). Sin lock ni vuelos de
 banco. GROUND-1 v1 queda rojo y se conserva entero
 ([GROUND1-RESULTS.md](GROUND1-RESULTS.md)).
 

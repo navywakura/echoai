@@ -1,10 +1,10 @@
-# E4-BENCH-1 A · contrato D del examen (APROBADO por Roger el 2026-09-25)
+# E4-BENCH-1 A · contrato D del examen
 
 Contrato de origen: `ECHO4-BENCH1-A-DESIGN.md`. Desarrollo: `lab/echo4/bench1-a-dev-v1`. Datos
 congelados: `lab/echo4/bench1-data/samples.json` (sha256 `a068c4f5…`). Examen: 200 de SimpleQA,
 100 de MMLU-Pro y 50 de GSM8K, que **nadie ha mirado**.
 
-## Enmienda de modelos (orden de Roger del 2026-09-25: «máximo 2 dólares»)
+## Enmienda de modelos (orden de Nav del 2026-09-25: «máximo 2 dólares»)
 
 - **Gemini 3.5 Flash sale del examen.** En el desarrollo costó 0,85 de 1,12 $, porque razona y
   no se puede desactivar. En el examen serían ≈3,7 $.

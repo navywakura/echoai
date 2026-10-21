@@ -157,7 +157,7 @@ y se corre el banco de 48. Si no, no se abre B/C.
 
 ### Corrección de la etiqueta del sensor: candidato `gpsfix_7n`
 
-Autorizada explícitamente por Roger tras publicar el bloqueo de `noaid_7n`.
+Autorizada explícitamente por Nav tras publicar el bloqueo de `noaid_7n`.
 Se declara aquí antes de construir la imagen y antes de volar.
 
 `noaid_7n` midió 68 vuelos nominales con 1 por encima de 250 mm: 1,5 % por

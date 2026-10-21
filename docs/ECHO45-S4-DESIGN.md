@@ -1,6 +1,6 @@
 # ECHO-4.5 · S4 (inferir la meta y planificar) · contrato (fijado el 2026-09-26, antes de construir) · VERDE EN DESARROLLO (iteración 3)
 
-Roger: «S4 ahora». Se desarrolla y mide **solo** en los 8 juegos de desarrollo. Los 16 juegos de
+Nav: «S4 ahora». Se desarrolla y mide **solo** en los 8 juegos de desarrollo. Los 16 juegos de
 examen de ECHO-4.5 no se tocan.
 
 ## Por qué S4

@@ -2,11 +2,11 @@
 
 2026-09-24. **Declarado:** esta versión se formula **después** de ver el rojo de
 v1 (D, `168e978b…`) y de v2 (desarrollo, `284b6677…`). Esos rojos siguen
-publicados y sus cohortes no se reutilizan. La pregunta cambia porque Roger ha
+publicados y sus cohortes no se reutilizan. La pregunta cambia porque Nav ha
 precisado qué quiere demostrar, no para rebajar ningún umbral anterior.
 
 Motivos del relato: «hay rangos en una tribu», «creer no es poder»,
-«¿podrías hacer de intermediario?». Escena de Roger: *C sabe la respuesta; A
+«¿podrías hacer de intermediario?». Escena de Nav: *C sabe la respuesta; A
 busca y pregunta a B; B dice que no la sabe; razonando, ambos concluyen que si
 ninguno de los dos la tiene, solo queda C.*
 
@@ -56,7 +56,7 @@ la ventana reciente, contando las que dio el propio agente. El orden resultante
 
 ## Tres modos de prueba
 
-1. **Pregunta con respondedor al azar** (la variante de Roger). ECHO pregunta y
+1. **Pregunta con respondedor al azar** (la variante de Nav). ECHO pregunta y
    el simulador elige al azar quién responde entre B y C. Antes de cada respuesta,
    ECHO **registra una predicción** de quién sabe, derivada de sus hechos y de
    las eliminaciones de la ronda. Se mide si la deducción es correcta.
@@ -95,7 +95,7 @@ la ventana reciente, contando las que dio el propio agente. El orden resultante
 Semillas **411, 423, 439**. Nunca son examen. 384 rondas, 4 regímenes.
 Criterio de desarrollo: M1–M8 en las 3 vidas, con `tribe` superando en neto
 a cada brazo aprendido y a `fixed_order`. Si falla, se publica y se decide
-con Roger. No se tocan pagos, reparto ni ventanas después de ver resultados.
+con Nav. No se tocan pagos, reparto ni ventanas después de ver resultados.
 
 Después, en un contrato C/D con umbrales numéricos fijados antes de abrir
 cohortes nuevas:
@@ -130,4 +130,4 @@ Semillas 411/423/439, antes de construir el banco sellado:
 Lectura: la **inferencia** (hechos verificados, eliminación, rango derivado) es
 correcta. La **política Q** no llega a explotarla en unas 250 decisiones por
 vida: brecha entre saber y hacer. Pagos, reparto y ventanas no se han tocado.
-Pendiente la decisión de Roger.
+Pendiente la Decisión.

@@ -1,6 +1,6 @@
 # E4-SITUATE-2 «qué creo que soy» — **verde**
 
-2026-09-24. [Contrato](ECHO4-SITUATE2-DESIGN.md), encargado por Roger («escribe ya y
+2026-09-24. [Contrato](ECHO4-SITUATE2-DESIGN.md), encargado por Nav («escribe ya y
 haz SITUATE-2»). Desarrollo sellado `83e15d47…`; regresión ECHO-4 previa **861/861**.
 Examen: 16 condiciones nuevas (270001–270016) con Qwen3-4B local (pesos fijos, CPU,
 96 llamadas reales). Auditoría en proceso nuevo **sin volver a llamar al modelo**:

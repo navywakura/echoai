@@ -1,6 +1,6 @@
-# E4-BENCH-ARC2 · ARC-AGI-2 con un modelo, con ECHO y con ECHO solo — contrato (APROBADO por Roger el 2026-09-25)
+# E4-BENCH-ARC2 · ARC-AGI-2 con un modelo, con ECHO y con ECHO solo — contrato
 
-Aprobación de Roger: «ok perfecto haz», sobre la propuesta «Qwen completo + DeepSeek en 60
+Aprobado: «ok perfecto haz», sobre la propuesta «Qwen completo + DeepSeek en 60
 tareas + ECHO solo, con los 4,10 $ que quedan». **Los umbrales se fijan aquí, antes del
 desarrollo.** Así no hace falta un contrato D aparte, y es más estricto.
 
@@ -94,7 +94,7 @@ tokens igual en los tres brazos; una respuesta que lo agote cuenta como fallo.
 
 **Arnés congelado:** `lab/arc2/exam-v1/arc2_bench-v1.py`, sha256 `e33c3d238f14b24dc4eec66432ba280003c72aa2570ec70eb37fc26618e366fc`.
 
-**Enmienda de presupuesto durante el examen (orden de Roger, 2026-09-25: «quiero que complete
+**Enmienda de presupuesto durante el examen (orden de Nav, 2026-09-25: «quiero que complete
 arc-agi-2 al 100 %»; saldo de 2,10 $):**
 - el suelo de crédito baja de 0,60 $ a **0,05 $** y el tope de DeepSeek sube a 3,5 $, para
   terminar las 450 partidas;

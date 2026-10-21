@@ -1,7 +1,7 @@
 # COMPOSE-1 — composición espacial acotada
 
 Diseño previo al código y al examen, 2026-09-14. FUSION-1 ya cerró su contrato
-funcional y replay SITL; Roger autorizó continuar directamente.
+funcional y replay SITL; Nav autorizó continuar directamente.
 
 ## Pregunta
 

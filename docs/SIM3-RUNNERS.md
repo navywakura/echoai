@@ -25,7 +25,7 @@ La familia reproduce los doce hashes de paquetes publicados. Los rangos salen
 ahora de JSON validado, pero la topología v1 sigue cerrada para evitar plugins,
 sensores o una ruta oracle.
 
-Para una campaña real, Roger conserva fuera del repositorio secreto, salt,
+Para una campaña real, Nav conserva fuera del repositorio secreto, salt,
 inventario B/C y registro de accesos. Se genera C sólo tras el freeze; ningún
 prompt, runner ni agente debe crearla en el árbol de trabajo.
 

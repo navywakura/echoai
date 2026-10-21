@@ -1,7 +1,7 @@
 # E4-ROLES-1 v5 «razonar la tribu» — contrato C/D (PLAN, pendiente de aprobación)
 
 2026-09-24. **Declarado:** se formula después de ver v1 (D rojo), v2 (desarrollo
-rojo), v3 y v4 (exploraciones no selladas). Todo sigue publicado. Roger eligió
+rojo), v3 y v4 (exploraciones no selladas). Todo sigue publicado. Nav eligió
 la afirmación que los datos sí sostienen. Las afirmaciones de conducta que
 fallaron («más neto que los controles», «el rango ayuda en temas nuevos»,
 «B converge tras un no») pasan a **límites publicados**, no a criterios.
@@ -55,7 +55,7 @@ rango, y convergencia de B tras un «no».
 
 ## Proceso
 
-Desarrollo y C sellados y auditados → con la aprobación de Roger, congelar y
+Desarrollo y C sellados y auditados → con la Aprobado:, congelar y
 abrir D → auditoría en proceso nuevo. **Solo su recibo da `roles1_green=true`.**
 Un rojo se publica y no se ajusta nada.
 

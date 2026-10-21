@@ -1,4 +1,4 @@
-# E4-BENCH-1 A · el mismo modelo con y sin ECHO — contrato (APROBADO por Roger el 2026-09-24)
+# E4-BENCH-1 A · el mismo modelo con y sin ECHO — contrato
 
 2026-09-24. Plan general: [ECHO4-BENCH1-PLAN.md](ECHO4-BENCH1-PLAN.md).
 
@@ -67,7 +67,7 @@ cálculos. Se espera que se abstenga, y lo publicamos como límite.
   - precisión frente a cobertura;
   - coste en tiempo y llamadas con y sin ECHO.
 
-## Decisiones de Roger (2026-09-24)
+## Decisiones (2026-09-24)
 
 - **Dónde corre el modelo:** OpenRouter, con su clave (BYOK), leída de `~/.config/openrouter/key`.
   La clave nunca aparece en recibos, salidas ni documentos.
@@ -114,15 +114,15 @@ cálculos. Se espera que se abstenga, y lo publicamos como límite.
 
 ---
 
-# E4-BENCH-GENERAL · benchmarks frontera (PLAN, aprobado en parte por Roger el 2026-09-24)
+# E4-BENCH-GENERAL · benchmarks frontera (PLAN, aprobado en parte por Nav el 2026-09-24)
 
 **Estado:**
-- Roger aprueba **MMLU + HLE + FrontierScience**, **ARC-AGI-2** (como prueba real de si
+- Nav aprueba **MMLU + HLE + FrontierScience**, **ARC-AGI-2** (como prueba real de si
   ECHO sube la puntuación), **ARC-AGI-3** y **Opus 5.5 vía Claude Code**.
 - Queda fuera por ahora: el piloto de SWE-bench.
 - **No se gasta nada todavía:** A también espera. Primero el plan.
 
-2026-09-24. Pedido por Roger: los benchmarks que usa toda la industria, con el mismo método
+2026-09-24. Pedido por Nav: los benchmarks que usa toda la industria, con el mismo método
 que A (el mismo modelo con y sin ECHO), vía OpenRouter y, para código, el servidor MCP de
 E4-CODE-1. **No sustituye a A: se añade.**
 
@@ -178,7 +178,7 @@ Se publica todo.
 **Opus 5.5 (opcional), dos vías:**
 - **OpenRouter** (4 $ / 20 $ por millón de tokens): unos 1,5 $ en A, 10–20 $ en GENERAL
   sin SWE-bench, y 60–190 $ en SWE-bench completo.
-- **Claude Code con la suscripción de Roger:** 0 $ adicionales, pero consume su cuota.
+- **Claude Code con la suscripción de Nav:** 0 $ adicionales, pero consume su cuota.
   Iría en **sesiones sin interfaz separadas** (`claude -p`), nunca en la conversación que
   desarrolla ECHO: esa sesión no debe ver las preguntas del examen.
 
@@ -255,7 +255,7 @@ entornos locales del paquete oficial.
 **Qué esperamos:** no lo sabemos, y por eso es interesante. Es el primer banco externo en
 el que ECHO **sin modelo de lenguaje** puede competir.
 
-## Opus 5.5 vía Claude Code (suscripción de Roger)
+## Opus 5.5 vía Claude Code (suscripción de Nav)
 
 - Se ejecuta en **sesiones sin interfaz separadas** (`claude -p`), **sin herramientas**,
   con salida JSON y un recibo por llamada. La conversación que desarrolla ECHO **nunca**
@@ -285,4 +285,4 @@ el que ECHO **sin modelo de lenguaje** puede competir.
 4. ARC-AGI-3.
 
 Cada bloque tiene su contrato D con umbrales, su examen y su auditoría. **Antes de gastar en
-cada bloque, Roger da la orden.**
+cada bloque, Nav da la orden.**

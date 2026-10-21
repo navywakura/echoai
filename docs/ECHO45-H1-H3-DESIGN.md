@@ -1,6 +1,6 @@
 # ECHO-4.5 · H1/H3: memoria temporal, v5.8
 
-2026-09-27. Desarrollo autorizado por Roger. Este documento se escribe antes
+2026-09-27. Desarrollo autorizado por Nav. Este documento se escribe antes
 de medir la implementación. No abre un examen ni modifica S5-E/S6 cerrados.
 
 ## Funciones

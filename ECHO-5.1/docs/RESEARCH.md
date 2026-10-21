@@ -1,6 +1,6 @@
 # ECHO-5.1 Investigación y plan de validación para Astra
 
-**Destinatario:** Roger Navarro y el agente de implementación en Codex.  
+**Destinatario:** Nav y el agente de implementación en Codex.  
 **Fecha:** 12 de octubre de 2026.  
 **Estado:** propuesta de investigación; no es una certificación ni un resultado de ECHO-5.1.  
 **Base pública revisada:** `navywakura/echoai`, commit `f6062de0462a523296eb2cbb704472f4faa4a022`.  

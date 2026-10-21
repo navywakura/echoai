@@ -1,4 +1,4 @@
-"""ROLES-D preregistered exam. Opening D requires Roger's freeze approval.
+"""ROLES-D preregistered exam. Opening D requires the freeze approval.
 
 Thresholds are fixed in docs/ECHO4-ROLES1-CD-DESIGN.md before any cohort life.
 Uses RolesCSession (veto fix); nominal behaviour equals the sealed A/B session

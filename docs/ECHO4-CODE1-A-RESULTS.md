@@ -1,12 +1,12 @@
 # E4-CODE-1 A · servidor MCP «echoai-verify» — **verde** (con límite de independencia declarado)
 
-2026-09-24. Contrato: [ECHO4-CODE1-A-DESIGN.md](ECHO4-CODE1-A-DESIGN.md), aprobado por Roger
+2026-09-24. Contrato: [ECHO4-CODE1-A-DESIGN.md](ECHO4-CODE1-A-DESIGN.md), aprobado
 con un máximo de 5 % de falsos bloqueos. Corpus congelado `9148178542cb…`.
 
 ## Quién hizo qué
 
 - **Implementación** (Claude): `echo4/code_gate.py`, `echo4/code_memory.py` y `echo4/code_mcp.py`.
-- **Examen** (GPT-6 Sol, por encargo de Roger): `echo4/code_exam.py`. Informe:
+- **Examen** (GPT-6 Sol, por encargo de Nav): `echo4/code_exam.py`. Informe:
   `lab/echo4/code1-a-exam-v1/report.json`.
   - Los comandos del corpus solo se enviaron **como texto** a `echo_check_action`; ninguno se
     ejecutó.

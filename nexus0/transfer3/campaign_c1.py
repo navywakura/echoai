@@ -32,7 +32,7 @@ ROOT = bench_c1.ROOT
 # otherwise it could never exercise the opening of C.
 COUNTS = dict(campaign={'B': 64, 'C': 64}, rehearsal={'B': 16, 'C': 16})
 
-# Amendment decided by Roger on 2026-09-19, before any real protocol existed,
+# Amendment decided by Nav on 2026-09-19, before any real protocol existed,
 # after the first rehearsal. The strict rule "the learned arm never loses a
 # mission the uncalibrated nominal completes" failed once in 1 080 C1 missions,
 # and that loss was NOT caused by calibration: in that room the agent with
