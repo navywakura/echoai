@@ -75,7 +75,7 @@ def main():
         from echo5.mission import run_benchmark
         output = Path(args.out).resolve()
         if not output.is_relative_to((root/"artifacts").resolve()):
-            raise ValueError("software outputs must be inside ECHO-5/artifacts")
+            raise ValueError("software outputs must be inside simulation/artifacts")
         output.mkdir(parents=True, exist_ok=False)
         with Recorder(output/"thought.jsonl") as journal:
             report = run_benchmark(dict(seed=args.seed, cases=args.cases), journal=journal)
@@ -87,7 +87,7 @@ def main():
     # The campaign owns output creation. A sibling trace avoids pre-creating it.
     output = Path(args.out).resolve()
     if not output.is_relative_to((root/"artifacts").resolve()) or output.exists():
-        raise ValueError("use a new ECHO-5/artifacts output directory")
+        raise ValueError("use a new simulation/artifacts output directory")
     output.parent.mkdir(parents=True, exist_ok=True)
     trace = output.with_name(output.name+".thought.jsonl")
     if trace.exists():

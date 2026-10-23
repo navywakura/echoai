@@ -54,8 +54,8 @@ def source_manifest():
     files += list((root/'pcworld').glob('*.py'))+list((root/'core').glob('*.py'))
     files += list((root/'tests').glob('test_repoworld_*.py'))
     files += list((root/'tests').glob('test_pcworld*.py'))
-    files += [root/'ECHO-5.1/scripts/run_repoworld.py',root/'ECHO-5.1/scripts/inference_relay.py',root/'scripts/plot_swebench_results.py']
-    files += [root/'ECHO-5.1/docs/swebench'/name for name in ('SWE-TOOLS.schema.json','SWE-RUN-LOCK.schema.json','SWE-RESULTS.schema.json')]
+    files += [root/'repository/scripts/run_repoworld.py',root/'repository/scripts/inference_relay.py',root/'scripts/plot_swebench_results.py']
+    files += [root/'repository/docs/swebench'/name for name in ('SWE-TOOLS.schema.json','SWE-RUN-LOCK.schema.json','SWE-RESULTS.schema.json')]
     return {str(path.relative_to(root)):sha256_file(path) for path in sorted(files)}
 
 
@@ -149,7 +149,7 @@ def calibrate_issue(task,source,environment,directory,sentinel):
 
 def run_local(*,dataset,sample,runtime,sources,output):
     output=Path(output);output.mkdir(parents=True,exist_ok=False,mode=0o700)
-    doc=Path(__file__).resolve().parents[1]/'ECHO-5.1/docs/SWE-CONTRACT.json'
+    doc=Path(__file__).resolve().parents[1]/'repository/docs/SWE-CONTRACT.json'
     contract=json.loads(doc.read_bytes());sample_path=Path(sample)
     if sha256_file(sample_path)!=contract['dataset']['sample_sha256']: raise ValueError('registered sample changed')
     roster=json.loads(sample_path.read_bytes())['calibration']
@@ -186,7 +186,7 @@ def audit_local(directory):
     """
     directory=Path(directory)
     report=json.loads((directory/'result.json').read_bytes())
-    docs=Path(__file__).resolve().parents[1]/'ECHO-5.1/docs'
+    docs=Path(__file__).resolve().parents[1]/'repository/docs'
     sample=docs/'swebench/SWE-SAMPLE.json'
     refs=json.loads(sample.read_bytes())['calibration']
     if report.get('schema')!='repoworld.local-calibration.v1' or report.get('source_manifest')!=source_manifest():

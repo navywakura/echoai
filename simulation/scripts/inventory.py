@@ -156,7 +156,7 @@ def main():
     result = {"generated_at": datetime.now(timezone.utc).isoformat(), "source_root": str(SOURCE),
               "scope": list(ROOTS) + ["root *.py"],
               "excluded": ["lab (datasets, sealed results, snapshots, third-party tools)",
-                           "ROGEX-LABORATORIES", "echo-discord", "ECHO-5", "binary assets", "environments"],
+                           "ROGEX-LABORATORIES", "echo-discord", "simulation", "binary assets", "environments"],
               "method": "AST only; all lexical imports including conditional/test imports; no execution",
               "limitations": ["imports are potential dependencies, not a runtime call graph",
                               "external_or_unresolved does not imply missing installation",

@@ -52,7 +52,7 @@ def bench(output, contract):
     write_json(output / 'legacy-sources.json', original)
     write_json(output / 'host-sources.json', host)
     with zipfile.ZipFile(output / 'sources.zip', 'x', compression=zipfile.ZIP_DEFLATED) as archive:
-        for prefix, base, receipt in (('ECHO-5', ROOT, source),
+        for prefix, base, receipt in (('simulation', ROOT, source),
                                        ('echoai', ROOT.parent, original),
                                        ('host', ROOT.parent, host)):
             for name in receipt['files']:

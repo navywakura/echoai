@@ -1,6 +1,6 @@
 """ACUMULA-3 (ECHO-5.8 track B v3) invariants.
 
-    cd /home/user/REALRXOS/RXos && PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.tests.test_echo58_acumula3
+    cd /home/user/REALRXOS/RXos && PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.tests.test_echo58_acumula3
 """
 import ast
 import re

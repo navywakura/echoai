@@ -76,7 +76,7 @@ def main():
             sources=study.source_manifest()
             args.output.mkdir(parents=True,exist_ok=True,mode=0o700);rows=[]
             for name,command in [('repoworld',[sys.executable,str(Path(__file__).resolve()),'test']),
-                ('pcworld',[sys.executable,'-I','-B',str(ROOT/'ECHO-5.1/scripts/run.py'),'test']),
+                ('pcworld',[sys.executable,'-I','-B',str(ROOT/'repository/scripts/run.py'),'test']),
                 ('design',[sys.executable,'-m','unittest','discover','-s','tests','-p','test_swebench_design_tools.py'])]:
                 log=args.output/(name+'.log');started=time.monotonic()
                 with log.open('wb') as f:proc=subprocess.run(command,cwd=ROOT,stdout=f,stderr=f,timeout=600)

@@ -427,7 +427,7 @@ def score_result(case, result, *, ledger=None):
 
 def _source_identity(ledger):
     root = Path(__file__).resolve().parents[3]
-    paths = [f'ECHO-5/src/echo5/{name}.py' for name in (
+    paths = [f'simulation/src/echo5/{name}.py' for name in (
         '__init__', 'budget', 'concepts', 'grounding', 'legacy', 'programs', 'solver',
         'trace', 'transfer', 'transfer_independent')]
     paths += ['__init__.py', 'seed/__init__.py', 'seed/dsl.py', 'seed/learn.py',

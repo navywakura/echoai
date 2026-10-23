@@ -11,7 +11,7 @@ import runpy
 import sys
 
 ROOT=Path(__file__).resolve().parents[2]
-runpy.run_path(str(ROOT/'ECHO-5.1/scripts/run.py'))
+runpy.run_path(str(ROOT/'repository/scripts/run.py'))
 from echoai.pcworld.pilot import Episode, CONTRACT, source_manifest, save, audit_run
 from echoai.pcworld.provider import HTTPProvider
 from echoai.pcworld.receipts import ReceiptStore, digest

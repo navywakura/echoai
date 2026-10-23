@@ -12,7 +12,7 @@ def backend(root=ROOT):
  tests=[{'id':name,'title':title,'kind':'development','default':name=='core-test',
          'argv':[sys.executable,'-m','echoai','devrun',name],'cwd':str(root),'timeout':180}
         for name,title in (('core-test','Core · deterministic policy and evidence checks'),('grid-test','Grid memory · development contracts'))]
- path.write_text(json.dumps({'schema':'echo-nexus-backend-v1','name':'ECHO-AI 4.5 beta · S6 research','tests':tests},indent=2))
+ path.write_text(json.dumps({'schema':'echo-nexus-backend-v1','name':f'ECHO {__version__}','tests':tests},indent=2))
  return path
 
 def launch_tui(root=ROOT,extra=None):
@@ -25,17 +25,35 @@ def dev_main():
  from .harness.localdev.__main__ import main as dev
  return dev()
 
+def memory_demo(path):
+ from .echo58.memx.memory import Memory
+ from .echo58.wspfiles.memory import export_memory, load_memory
+ try:
+  memory=Memory()
+  for _ in range(3):memory.observe(7,16,'ENTER',0,'HURT')
+  export_memory(memory,path,provenance={'source_kind':'synthetic getting-started example'})
+  restored=load_memory(path)
+  print(json.dumps({'observations':len(restored.records),'new_object_prediction':restored.recall(99,16,'ENTER',0),'memory_file':str(path)},indent=2))
+  return 0
+ except (OSError,ValueError,TypeError) as exc:
+  print(str(exc),file=sys.stderr);return 2
+
+
 def main(argv=None):
- p=argparse.ArgumentParser(description='ECHO-AI 4.5 beta · source, development checks and optional neocortex; S6 remains research')
+ p=argparse.ArgumentParser(description=f'ECHO {__version__} · memory, local tools and simulation')
  p.add_argument('--version',action='version',version=__version__)
  sub=p.add_subparsers(dest='cmd')
  for name in ('info','verify','doctor','backend'):sub.add_parser(name)
+ s=sub.add_parser('memory',help='Inspect, verify or convert WSP memory');s.add_argument('args',nargs=argparse.REMAINDER)
+ s=sub.add_parser('demo',help='Learn a role and save it in WSP');s.add_argument('--memory',type=Path,default=Path('echo-memory.wsp'))
  s=sub.add_parser('setup');s.add_argument('action',nargs='?',default='menu',choices=('menu','verify','doctor','list'))
  s=sub.add_parser('devrun');s.add_argument('name');s.add_argument('--allow-modified',action='store_true')
  s=sub.add_parser('tui');s.add_argument('args',nargs=argparse.REMAINDER)
  s=sub.add_parser('connect');s.add_argument('--name',default='neocortex');s.add_argument('--default',action='store_true');s.add_argument('args',nargs=argparse.REMAINDER)
  args=p.parse_args(argv)
- if args.cmd=='info':print(json.dumps({'version':__version__,'status':'beta','s6':'research-open','core_cortex_default':'off','adviser':'optional; proposals are not verified facts','source_root':str(ROOT)},indent=2));return 0
+ if args.cmd=='info':print(json.dumps({'version':__version__,'status':'stable','runtime':'cpu','memory':'MEMORIA-X / WSP','interface':'echoai','adviser':'optional','source_root':str(ROOT)},indent=2));return 0
+ if args.cmd=='memory':return subprocess.call([sys.executable,'-m','echoai.echo58.wspfiles',*args.args])
+ if args.cmd=='demo':return memory_demo(args.memory)
  if args.cmd in ('verify','doctor'):return source_setup.main([args.cmd,'--root',str(ROOT)])
  if args.cmd=='backend':print(str(backend()));return 0
  if args.cmd=='setup':return source_setup.main([args.action,'--root',str(ROOT)])

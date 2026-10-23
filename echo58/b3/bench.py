@@ -2,7 +2,7 @@
 memory edits *and* policy pieces (policy.py), proposed from signals in ECHO's own failed episodes.
 
     cd /home/user/REALRXOS/RXos
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.b3.bench --macros 1 2 3
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.b3.bench --macros 1 2 3
 
 Same mix, gate, seeds and controls as ACUMULA-2 dev; dev probe swaps ObstructedMaze1Dlh (already
 solved from round 1) for ObstructedMaze1Dlhb (box + ball). The hand-key fix is in the base agent

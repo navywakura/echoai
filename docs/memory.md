@@ -1,5 +1,13 @@
 # WSP memory
 
+After installation, use `echoai memory` for all WSP commands. For example:
+
+```bash
+echoai demo --memory echo-memory.wsp
+echoai memory verify echo-memory.wsp
+echoai memory inspect echo-memory.wsp
+```
+
 ECHO stores observations and their consequences in memory. A `.wsp` archive
 keeps that memory with its packets and metadata so it can be loaded again.
 
@@ -27,4 +35,4 @@ PYTHON
 ```
 
 To export your own `Memory` object, call `export_memory(memory, path)` from
-`echoai.echo58.wspfiles.memory`. [General usage](../docs/USAGE.md).
+`echoai.echo58.wspfiles.memory`. [General usage](USAGE.md).

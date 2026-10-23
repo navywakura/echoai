@@ -28,7 +28,7 @@ class ServiceManifestTests(unittest.TestCase):
 
     def test_run_lock_can_pin_service_without_requiring_one_for_other_repos(self):
         import jsonschema
-        schema=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-RUN-LOCK.schema.json').read_bytes())['properties']['instances']['items']
+        schema=json.loads((ROOT/'repository/docs/swebench/SWE-RUN-LOCK.schema.json').read_bytes())['properties']['instances']['items']
         row=dict(instance_id='psf__requests-2148',base_commit='a'*40,
             online_rootfs_sha256='b'*64,online_tree_sha256='c'*64,public_checks_sha256='d'*64,
             official_image_digest='sha256:'+'e'*64,official_eval_script_sha256='f'*64,

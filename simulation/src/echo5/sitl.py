@@ -141,7 +141,7 @@ def _config(config):
         raise ValueError("sitl_confirmation_contract")
     output = Path(cfg["output"]).expanduser().resolve()
     if not output.is_relative_to((ROOT/"artifacts").resolve()) or output == (ROOT/"artifacts").resolve():
-        raise ValueError("new output directory must be inside ECHO-5/artifacts")
+        raise ValueError("new output directory must be inside simulation/artifacts")
     cfg["output"] = str(output)
     return cfg
 

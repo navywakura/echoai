@@ -1,6 +1,6 @@
 """B v3 investigation: switch on generic policy fixes one at a time and see what the next obstacle is.
 
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.b3.probe_fixes FAMILY [FIX ...]
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.b3.probe_fixes FAMILY [FIX ...]
 
 Fixes (generic, nameless; candidates for a B v3 policy-edit menu):
     loop     a state seen 3 times means the intent pursued there does nothing: believe NOOP for this episode

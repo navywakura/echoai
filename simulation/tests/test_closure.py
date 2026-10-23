@@ -41,10 +41,10 @@ class ClosureCustodyTests(unittest.TestCase):
             receipts = {key: {'files': {}} for key in ('own', 'legacy', 'host')}
             receipts['own']['files']['actor.py'] = hashlib.sha256(b'good').hexdigest()
             with zipfile.ZipFile(root / 'sources.zip', 'w') as z:
-                z.writestr('ECHO-5/actor.py', b'good')
+                z.writestr('simulation/actor.py', b'good')
             verify_archive(root, receipts)
             with zipfile.ZipFile(root / 'sources.zip', 'w') as z:
-                z.writestr('ECHO-5/actor.py', b'bad')
+                z.writestr('simulation/actor.py', b'bad')
             with self.assertRaises(ValueError):
                 verify_archive(root, receipts)
 

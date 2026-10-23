@@ -10,7 +10,7 @@ try:
     from .repoworld_support import ROOT
 except ImportError:
     from repoworld_support import ROOT
-spec=importlib.util.spec_from_file_location('repo_relay',ROOT/'ECHO-5.1/scripts/inference_relay.py')
+spec=importlib.util.spec_from_file_location('repo_relay',ROOT/'repository/scripts/inference_relay.py')
 relay=importlib.util.module_from_spec(spec);spec.loader.exec_module(relay)
 
 

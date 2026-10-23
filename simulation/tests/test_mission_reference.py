@@ -133,7 +133,7 @@ print(json.dumps(report, allow_nan=False))
         self.assertFalse(report['parser']['passed'])
 
 
-@unittest.skipUnless(native_available(), 'native checks require ECHO-5/.venv-sandbox')
+@unittest.skipUnless(native_available(), 'native checks require simulation/.venv-sandbox')
 class NativeReferenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

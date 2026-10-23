@@ -12,11 +12,11 @@ jobs:
           python-version: '3.12'
       - run: python tools/source_setup.py verify
       - run: python tests/test_source_setup.py
-      - name: Offline 5.8.2 format and symbolic-memory checks
+      - name: Offline memory format and symbolic-memory checks
         env:
           PYTHONPATH: '..:.'
         run: |
-          python -m unittest tests.test_echo58_wspfiles tests.test_echo58_wspstrongjson tests.test_echo58_llmstudy -v
+          python -m unittest tests.test_echo58_wspfiles tests.test_echo58_wspstrongjson tests.test_echo58_llmstudy tests.test_public_release -v
           python -m echoai.echo58.wspfiles verify examples/memory.wsp
           python -m echoai.echo58.wspfiles use-memory examples/memory.wsp
   echo5:
@@ -26,13 +26,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12.13'
-      - name: Set up isolated ECHO-5 environments
-        working-directory: ECHO-5
+      - name: Set up simulation environments
+        working-directory: simulation
         run: |
           python3.12 -I scripts/dev.py setup
           python3.12 -I scripts/setup_sandbox.py
       - name: Core and native sandbox regressions
-        working-directory: ECHO-5
+        working-directory: simulation
         run: |
           .venv/bin/python -I scripts/dev.py test
           .venv-sandbox/bin/python -I scripts/closure.py test-external

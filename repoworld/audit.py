@@ -134,7 +134,7 @@ def audit_study(directory,sealed_dir,sample_path,*,export=None):
                 donor_tokens=sum(d['budget']['used']['tokens'] for d in donors),donor_wall_seconds=sum(d['wall_seconds'] for d in donors),
                 target_instances=[r['instance_id'] for r in chain['targets']]))
         import jsonschema
-        schema=Path(__file__).resolve().parents[1]/'ECHO-5.1/docs/swebench/SWE-RESULTS.schema.json'
+        schema=Path(__file__).resolve().parents[1]/'repository/docs/swebench/SWE-RESULTS.schema.json'
         jsonschema.Draft202012Validator(json.loads(schema.read_bytes())).validate(data)
         _atomic_write(Path(export),canonical(data));_atomic_write(Path(export).with_suffix('.audit.json'),canonical(report))
     return report

@@ -33,7 +33,7 @@ class SupplementIntegrationTests(unittest.TestCase):
         cls.runtime_temp = tempfile.TemporaryDirectory(prefix='supplement-runtime-test-')
         cls.addClassCleanup(cls.runtime_temp.cleanup)
         root = Path(cls.runtime_temp.name)
-        existing = ROOT/'ECHO-5.1/artifacts/runtime-python314-20261013'
+        existing = ROOT/'repository/artifacts/runtime-python314-20261013'
         stdlib = load_runtime(existing) if existing.exists() else build_runtime(root/'stdlib')
         cls.runtime = repository_runtime(stdlib, root/'runtime')
         cls.environment = environment_ref(cls.runtime, scope='stdlib-calibration')

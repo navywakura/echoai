@@ -2,8 +2,8 @@
 
 Does not authenticate or submit. The manifest must name the frozen files and
 explicit unittest selections. Original test source bytes are never rewritten.
-Example manifest: {"files": {"ECHO-5/src/echo5/sitl_recovery.py": "<sha256>",
-"ECHO-5/tests/test_sitl_recovery.py": "<sha256>"},
+Example manifest: {"files": {"simulation/src/echo5/sitl_recovery.py": "<sha256>",
+"simulation/tests/test_sitl_recovery.py": "<sha256>"},
 "tests": ["test_sitl_recovery.RecoveryTests"]}.
 """
 
@@ -15,13 +15,13 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "ECHO-5/artifacts/kaggle-sitl-20261011-r1"
+ARTIFACTS = ROOT / "simulation/artifacts/kaggle-sitl-20261011-r1"
 ALLOWED = {
-    "ECHO-5/src/echo5/sitl_recovery.py",
-    "ECHO-5/tests/test_sitl_recovery.py",
+    "simulation/src/echo5/sitl_recovery.py",
+    "simulation/tests/test_sitl_recovery.py",
     "nexus0/drone3/assets/runner.py",
-    "ECHO-5/src/echo5/sitl_parameters.py",
-    "ECHO-5/tests/test_sitl_parameters.py",
+    "simulation/src/echo5/sitl_parameters.py",
+    "simulation/tests/test_sitl_parameters.py",
 }
 
 CHILD = r'''
@@ -32,8 +32,8 @@ project = root / "stdlib-project"
 manifest = json.loads((root / "source-manifest.json").read_text())
 assert platform.python_version() == "3.12.13", "exact project Python pin required"
 assert sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode
-sys.path.insert(0, str(project / "ECHO-5/src"))
-sys.path.insert(0, str(project / "ECHO-5/tests"))
+sys.path.insert(0, str(project / "simulation/src"))
+sys.path.insert(0, str(project / "simulation/tests"))
 def hashes():
     return {name: hashlib.sha256((project / name).read_bytes()).hexdigest()
             for name in manifest["files"]}

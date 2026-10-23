@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
-TOOL=runpy.run_path(str(ROOT/'ECHO-5.1/scripts/retry_curator_infrastructure.py'),run_name='retry_tool')
+TOOL=runpy.run_path(str(ROOT/'repository/scripts/retry_curator_infrastructure.py'),run_name='retry_tool')
 from echoai.repoworld.study import write_gate
 
 class CuratorRetryTests(unittest.TestCase):

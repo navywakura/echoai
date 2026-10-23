@@ -19,7 +19,7 @@ class EnvironmentTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.temp=tempfile.TemporaryDirectory(); cls.root=Path(cls.temp.name)
-        existing=ROOT/'ECHO-5.1/artifacts/runtime-python314-20261013'
+        existing=ROOT/'repository/artifacts/runtime-python314-20261013'
         cls.runtime=load_runtime(existing) if existing.exists() else build_runtime(cls.root/'runtime')
         cls.runtime=repository_runtime(cls.runtime,cls.root/'repo-runtime')
         cls.environment=environment_ref(cls.runtime,scope='stdlib-calibration')

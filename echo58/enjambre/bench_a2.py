@@ -2,9 +2,9 @@
 (contract ENJAMBRE1-DESIGN.md).
 
     cd /home/user/REALRXOS/RXos
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 dev --macros 1,2,3
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 preflight
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 exam
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 dev --macros 1,2,3
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 preflight
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 exam
 """
 from __future__ import annotations
 

@@ -21,7 +21,7 @@ def main():
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')
     target = Path(args.output).resolve() if args.output else base / f'closure-{args.job}-{stamp}'
     if not target.is_relative_to(base.resolve()):
-        raise ValueError('Output must stay under ECHO-5/artifacts')
+        raise ValueError('Output must stay under simulation/artifacts')
     python = ROOT / '.venv/bin/python'
     if args.job == 'checks':
         command = [str(python), '-I', str(ROOT / 'scripts/checks.py'), str(target)]

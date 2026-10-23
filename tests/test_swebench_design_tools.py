@@ -88,8 +88,8 @@ class AnalysisTests(unittest.TestCase):
 
     def test_registration_binds_the_actual_sample_bytes(self):
         plot = module('plot_swebench_results')
-        contract = ROOT / 'ECHO-5.1/docs/SWE-CONTRACT.json'
-        sample = ROOT / 'ECHO-5.1/docs/swebench/SWE-SAMPLE.json'
+        contract = ROOT / 'repository/docs/SWE-CONTRACT.json'
+        sample = ROOT / 'repository/docs/swebench/SWE-SAMPLE.json'
         registered = plot.load_registration(contract, sample)
         self.assertEqual(len(registered['primary_instances']),24)
         with tempfile.TemporaryDirectory() as tmp:
@@ -153,7 +153,7 @@ class AnalysisTests(unittest.TestCase):
 class SamplingTests(unittest.TestCase):
     def test_selection_independent_of_metadata_order_and_contains_no_gold(self):
         sample = module('select_swebench_subset')
-        path = ROOT / 'ECHO-5.1/docs/swebench/SWE-LITE-PUBLIC-METADATA.json'
+        path = ROOT / 'repository/docs/swebench/SWE-LITE-PUBLIC-METADATA.json'
         self.assertTrue(path.exists(), 'public metadata projection required')
         data = json.loads(path.read_text())
         a = sample.select(data)

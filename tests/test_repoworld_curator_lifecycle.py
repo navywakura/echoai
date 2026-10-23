@@ -31,7 +31,7 @@ class ImageLifecycleTests(unittest.TestCase):
      with curator.control_image(client,'public/image:tag',allow_pull=allow,evict=True):pass
    client.images.pull.assert_not_called();client.images.remove.assert_not_called()
  def test_cli_accepts_remote_calibration_alias_without_starting_provider(self):
-  result=subprocess.run([sys.executable,str(ROOT/'ECHO-5.1/scripts/run_repoworld.py'),'calibrate-remote','--help'],capture_output=True,text=True)
+  result=subprocess.run([sys.executable,str(ROOT/'repository/scripts/run_repoworld.py'),'calibrate-remote','--help'],capture_output=True,text=True)
   self.assertEqual(result.returncode,0,result.stderr)
   self.assertIn('--provider',result.stdout)
 

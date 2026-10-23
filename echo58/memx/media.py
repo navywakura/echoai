@@ -1,7 +1,7 @@
 """MEMORIA-X GIFs: the same exam world played with an empty and with a learned memory.
 
     # 1. capture frames (MiniGrid venv)
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.memx.media capture --out DIR
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.memx.media capture --out DIR
     # 2. compose side-by-side GIFs (PIL venv)
     PYTHONPATH=. ~/.venvs/doc/bin/python -m echoai.echo58.memx.media compose --out DIR
 

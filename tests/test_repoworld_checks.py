@@ -74,7 +74,7 @@ class CheckTests(unittest.TestCase):
 
     def test_all_twelve_catalogs_and_native_commands(self):
         import json
-        rows=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json').read_text())['primary']
+        rows=json.loads((ROOT/'repository/docs/swebench/SWE-SAMPLE.json').read_text())['primary']
         repos={r['repo'] for r in rows}
         self.assertEqual(len(repos),12)
         for repo in repos:

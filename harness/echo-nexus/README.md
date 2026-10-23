@@ -1,7 +1,7 @@
 # echo-nexus
 
 The terminal interface for ECHO: commands, observation panels, images and optional
-language-adviser connections. It is included by the [repository installer](../../README.md#start).
+language-adviser connections. It is included by the [repository installer](../../README.md#getting-started).
 
 ```bash
 echoai tui

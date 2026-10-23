@@ -39,6 +39,20 @@ class InfrastructureTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             module('os')
 
+    def test_same_installation_through_symlink_is_not_a_foreign_package(self):
+        from unittest.mock import patch
+        from echo5.legacy import ROOT
+        module('seed.relational_dsl')
+        import echoai
+        with tempfile.TemporaryDirectory() as folder:
+            alias = Path(folder) / 'package'
+            alias.symlink_to(ROOT, target_is_directory=True)
+            with patch.object(echoai, '__path__', [str(alias)]):
+                self.assertIs(module('seed.relational_dsl'), module('echoai.seed.relational_dsl'))
+            with patch.object(echoai, '__path__', [folder]):
+                with self.assertRaises(RuntimeError):
+                    module('seed.relational_dsl')
+
     def test_existing_journal_detects_tampering_and_never_overwrites(self):
         with tempfile.TemporaryDirectory() as folder:
             p = Path(folder) / 'thought.jsonl'

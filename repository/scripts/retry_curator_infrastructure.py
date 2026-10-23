@@ -14,7 +14,7 @@ import runpy
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
-runpy.run_path(str(ROOT / 'ECHO-5.1/scripts/run_repoworld.py'), run_name='bootstrap')
+runpy.run_path(str(ROOT / 'repository/scripts/run_repoworld.py'), run_name='bootstrap')
 from echoai.pcworld.receipts import canonical, _atomic_write
 from echoai.repoworld.calibration import source_manifest
 from echoai.repoworld.dataset import sample_roster, sha256_file

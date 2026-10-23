@@ -14,7 +14,7 @@ from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / 'ECHO-5.1/scripts/inference_relay.py'
+SCRIPT = ROOT / 'repository/scripts/inference_relay.py'
 spec = importlib.util.spec_from_file_location('inference_relay', SCRIPT)
 relay = importlib.util.module_from_spec(spec) if SCRIPT.exists() else None
 if relay:

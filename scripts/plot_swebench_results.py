@@ -14,7 +14,7 @@ import platform
 import statistics
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA = ROOT / 'ECHO-5.1/docs/swebench/SWE-RESULTS.schema.json'
+SCHEMA = ROOT / 'repository/docs/swebench/SWE-RESULTS.schema.json'
 ARMS = ('S', 'I2', 'F', 'E')
 COLORS = ('#6b7280', '#a07853', '#357e9d', '#175c44')
 

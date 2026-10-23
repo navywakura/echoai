@@ -78,7 +78,7 @@ def run(root,project,name,allow_modified=False):
  print('Log: '+str(logfile));return code
 
 def menu(root,project):
- integrity=verify(root);print('\033[38;5;141m\n  ✦ '+('ECHO-AI 5.8.2' if project=='echoai' else 'echOS 3.0 · kernel source')+'\033[0m')
+ integrity=verify(root);print('\033[38;5;141m\n  ✦ '+('ECHO-AI 5.8.3' if project=='echoai' else 'echOS 3.0 · kernel source')+'\033[0m')
  print('Source: '+str(root));print('Integrity: '+('PASS' if integrity['valid'] else 'FAIL')+' · '+str(integrity['checked'])+' files')
  registry=list(actions(root,project))
  while True:

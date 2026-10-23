@@ -36,7 +36,7 @@ def module(name):
         package = importlib.util.module_from_spec(spec)
         sys.modules['echoai'] = package
         spec.loader.exec_module(package)
-    elif str(ROOT) not in getattr(package, '__path__', ()):
+    elif ROOT not in {Path(path).resolve() for path in getattr(package, '__path__', ())}:
         raise RuntimeError('another echoai installation is already loaded')
     # Some unmodified legacy modules still use bare imports. The local directory
     # is made visible only when a caller explicitly requests an integration.

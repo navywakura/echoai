@@ -395,7 +395,7 @@ def make_server(manager, host='127.0.0.1', port=8765):
             if path == '/api/config':
                 from .sandbox import catalogue
                 return self._reply(200, {'token': manager.token, 'catalogue': catalogue(),
-                                         'version': 'ECHO-5', 'neocortex': 'off',
+                                         'version': '5.8.3', 'neocortex': 'off',
                                          'source_identity': identity,
                                          'diagnostics': {'neural': {'default': True, 'optional': True,
                                                                   'drives_policy': False}}})

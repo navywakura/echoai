@@ -37,7 +37,7 @@ def prepare(run,output,slug):
     jobs=collect_jobs(run)
     config_path=run/'provider.json'
     config=(json.loads(config_path.read_text())['config'] if config_path.exists() else
-            json.loads((ROOT/'ECHO-5.1/docs/QWEN-LOCAL-REPAIR.example.json').read_text()))
+            json.loads((ROOT/'repository/docs/QWEN-LOCAL-REPAIR.example.json').read_text()))
     config.update(model='pcworld-qwen25-coder14b',revision='d0a692ef765eefbf2fabb130b3cb2e8917e3d225',
                   tokenizer='embedded GGUF c1e659736d89ac1065fb495330fb824d94001974a4bfa78e7270e43476a8d940')
     bundle={'schema':'pcworld.gpu-repair-input.v1','scientific_claim':False,

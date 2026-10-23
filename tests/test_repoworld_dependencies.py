@@ -24,7 +24,7 @@ class DependencyTests(unittest.TestCase):
         from echoai.pcworld.runtime import load_runtime,repository_runtime
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp);deps=p/'deps';deps.mkdir();(deps/'sentinel_dependency.py').write_text('value=67\n')
-            stdlib=load_runtime(ROOT/'ECHO-5.1/artifacts/runtime-python314-20261013')
+            stdlib=load_runtime(ROOT/'repository/artifacts/runtime-python314-20261013')
             runtime=dependency_runtime(stdlib,deps,p/'runtime',expected_manifest=freeze_dependencies(deps))
             ref=environment_ref(runtime,scope='public-dependencies')
             self.assertEqual(ref.rootfs_sha256,runtime.id)

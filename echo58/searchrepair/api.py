@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 
 BASE=Path(__file__).resolve().parents[2]
-SRC=BASE/'ECHO-5/src'
+SRC=BASE/'simulation/src'
 if str(SRC) not in sys.path:sys.path.insert(0,str(SRC))
 import echo5
 if Path(echo5.__file__).resolve().parent!=SRC/'echo5':raise RuntimeError('wrong echo5 source')

@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "echoai"
-version = "5.8.2"
+version = "5.8.3"
 description = "Cognitive agent with persistent memory, WSP archives and local tools"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "RxLabs"}]
 license = {file = "LICENSE"}
-classifiers = ["Development Status :: 4 - Beta", "Programming Language :: Python :: 3", "Environment :: Console"]
+classifiers = ["Development Status :: 5 - Production/Stable", "Programming Language :: Python :: 3", "Environment :: Console"]
 
 [project.optional-dependencies]
 arc = ["numpy>=1.26,<3"]
@@ -21,4 +21,4 @@ echo-dev = "echoai.cli:dev_main"
 
 [project.urls]
 Source = "https://github.com/navywakura/echoai"
-StableModel = "https://huggingface.co/RxLabs/echoai-5.8"
+Download = "https://huggingface.co/RxLabs/echoai-5.8"

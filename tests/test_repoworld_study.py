@@ -117,7 +117,7 @@ class StudyTests(unittest.TestCase):
 
     def test_curator_calibration_scope_cannot_satisfy_full_controls_gate(self):
         from echoai.repoworld.study import curator_scope
-        sample=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json').read_bytes())
+        sample=json.loads((ROOT/'repository/docs/swebench/SWE-SAMPLE.json').read_bytes())
         kind,rows=curator_scope(sample,'calibration')
         self.assertEqual(kind,'official-calibration-controls')
         self.assertEqual({r['instance_id'] for r in rows},{r['instance_id'] for r in sample['calibration']})
@@ -157,8 +157,8 @@ class StudyTests(unittest.TestCase):
     def test_calibration_rejects_gate_for_another_registry_before_provider(self):
         from unittest.mock import patch
         from echoai.repoworld.study import calibrate_remote
-        sample=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json'
-        contract=json.loads((ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json').read_bytes())
+        sample=ROOT/'repository/docs/swebench/SWE-SAMPLE.json'
+        contract=json.loads((ROOT/'repository/docs/SWE-CONTRACT.json').read_bytes())
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp);registry=p/'registry.json';registry.write_text('{}')
             report={'valid':True,'registry_sha256':'0'*64}
@@ -169,7 +169,7 @@ class StudyTests(unittest.TestCase):
 
     def test_model_settings_are_fixed_but_a_tunnel_origin_can_rotate(self):
         from echoai.repoworld.provider import validate_model_config,provider_identity
-        contract=json.loads((ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json').read_bytes())
+        contract=json.loads((ROOT/'repository/docs/SWE-CONTRACT.json').read_bytes())
         config=dict(backend='llama_cpp',revision=contract['model']['revision'],context_tokens=4096,
             max_output_tokens=768,temperature_milli=200,timeout_seconds=240,endpoint='https://a.invalid/completion')
         validate_model_config(config,contract)
@@ -200,8 +200,8 @@ class StudyTests(unittest.TestCase):
             self.assertEqual(curator_command(venv,'--controls','request.json')[0],str(venv))
 
     def test_schedule_includes_controls_and_memory_before_any_final_release(self):
-        c=json.loads((ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json').read_bytes())
-        s=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json').read_bytes())
+        c=json.loads((ROOT/'repository/docs/SWE-CONTRACT.json').read_bytes())
+        s=json.loads((ROOT/'repository/docs/swebench/SWE-SAMPLE.json').read_bytes())
         rows=schedule_for(c,s)
         self.assertEqual(len(rows),150)
         self.assertEqual(len({r['cell_id'] for r in rows}),150)
@@ -226,5 +226,5 @@ class StudyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp)
             for name in ('SWE-CONTRACT.json','SWE-RUN-LOCK.json','schedule.json'):(p/name).write_text('{}')
-            with self.assertRaises(ValueError):validate_seal(p,ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json')
+            with self.assertRaises(ValueError):validate_seal(p,ROOT/'repository/docs/swebench/SWE-SAMPLE.json')
             self.assertFalse((p/'authority').exists())

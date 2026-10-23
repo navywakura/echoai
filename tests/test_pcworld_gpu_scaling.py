@@ -6,7 +6,7 @@ import unittest
 ROOT=Path(__file__).resolve().parents[1]
 class GPUScaling(unittest.TestCase):
     def setUp(self):
-        self.worker=runpy.run_path(str(ROOT/'ECHO-5.1/scripts/kaggle_repair_worker.py'))
+        self.worker=runpy.run_path(str(ROOT/'repository/scripts/kaggle_repair_worker.py'))
     def test_32b_uses_two_devices_and_fixed_context(self):
         profile=self.worker['model_profile']('qwen25-coder32b')
         cmd=self.worker['server_command']('/bin/llama-server','/weights/model.gguf',profile)

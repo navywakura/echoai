@@ -1,7 +1,7 @@
 """B v3 investigation: rebuild the `recursiva` arm of ACUMULA-2 dev round by round and trace its probe
 exactly as the bench plays it (each family on a throw-away copy, learning online over the 30 seeds).
 
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.b3.replay [--macro 1]
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.b3.replay [--macro 1]
 
 Checks itself against the dev JSON (failed per family per round must match) before explaining anything.
 """

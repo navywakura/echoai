@@ -59,7 +59,7 @@ def audit_bundle(folder, *, replay=False):
         raise ValueError('live sources differ from frozen experiment')
     with zipfile.ZipFile(folder / 'sources.zip') as archive:
         expected_names = set()
-        for prefix, receipt in (('ECHO-5', read('sources.json')), ('echoai', read('legacy-sources.json')),
+        for prefix, receipt in (('simulation', read('sources.json')), ('echoai', read('legacy-sources.json')),
                                 ('host', read('host-sources.json'))):
             for name, sha in receipt['files'].items():
                 key = f'{prefix}/{name}'

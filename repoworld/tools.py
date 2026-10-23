@@ -18,7 +18,7 @@ from ..pcworld.receipts import canonical
 from ..pcworld.snapshots import _parts
 from .environment import execute_repo
 
-SCHEMA=Path(__file__).resolve().parents[1]/'ECHO-5.1/docs/swebench/SWE-TOOLS.schema.json'
+SCHEMA=Path(__file__).resolve().parents[1]/'repository/docs/swebench/SWE-TOOLS.schema.json'
 
 
 def _query(request):

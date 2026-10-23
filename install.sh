@@ -3,12 +3,12 @@ set -euo pipefail
 root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 py=${ECHO_PYTHON:-python3}
 "$py" "$root/tools/source_setup.py" verify --root "$root"
-install_root=${ECHO_INSTALL_HOME:-"${XDG_DATA_HOME:-$HOME/.local/share}/echoai/4.5-beta"}
+install_root=${ECHO_INSTALL_HOME:-"${XDG_DATA_HOME:-$HOME/.local/share}/echoai/current"}
 log_root=${XDG_STATE_HOME:-$HOME/.local/state}/echoai/install
 mkdir -p "$log_root"
 log="$log_root/$(date -u +%Y%m%dT%H%M%SZ).log"
 exec > >(tee "$log") 2>&1
-printf '\n  ✦ ECHO-AI 5.8.2\n  Install log: %s\n' "$log"
+printf '\n  ✦ ECHO-AI 5.8.3\n  Install log: %s\n' "$log"
 "$py" -m venv "$install_root/venv"
 python_bin="$install_root/venv/bin/python"
 "$python_bin" -m pip install "$root[arc]" "$root/harness/echo-nexus"

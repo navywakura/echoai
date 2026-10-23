@@ -26,7 +26,7 @@ def sources():
  files=[*sorted((BASE/'echo58/searchrepair').glob('*.py')),BASE/'echo58/shield2/custody.py',
   BASE/'tests/test_echo58_searchrepair.py',BASE/'ECHO-5.8/docs/E-BUSQUEDA-REPAIR-DESIGN.md',
   BASE/'__init__.py',BASE/'echo58/__init__.py']
- files += [BASE/f'ECHO-5/src/echo5/{n}.py' for n in ('__init__','budget','concepts','grounding','legacy','programs','solver','trace','search_cache','transfer_independent')]
+ files += [BASE/f'simulation/src/echo5/{n}.py' for n in ('__init__','budget','concepts','grounding','legacy','programs','solver','trace','search_cache','transfer_independent')]
  files += [BASE/f'seed/{n}.py' for n in ('__init__','dsl','learn','refinement','relational_dsl')]
  return files+[BASE/'echo_arc/__init__.py',BASE/'echo_arc/observe.py']
 

@@ -53,8 +53,8 @@ class DatasetTests(unittest.TestCase):
         with self.assertRaises(ValueError): select_public_tasks([row()],[reference])
 
     def test_design_contract_and_missing_lock_cannot_launch(self):
-        contract=json.loads((ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json').read_text())
-        sample=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json'
+        contract=json.loads((ROOT/'repository/docs/SWE-CONTRACT.json').read_text())
+        sample=ROOT/'repository/docs/swebench/SWE-SAMPLE.json'
         with self.assertRaises(ValueError): validate_launch(contract,sample,None)
         contract.update(status='sealed',launch_enabled=True)
         with self.assertRaises(ValueError): validate_launch(contract,sample,None)
@@ -72,10 +72,10 @@ class DatasetTests(unittest.TestCase):
     def test_sealed_lock_rejects_missing_duplicate_and_changed_commits(self):
         from echoai.repoworld.dataset import sample_roster
         import copy
-        contract=json.loads((ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json').read_text())
+        contract=json.loads((ROOT/'repository/docs/SWE-CONTRACT.json').read_text())
         contract.update(status='sealed',launch_enabled=True)
-        sample=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json'
-        schema=json.loads((ROOT/'ECHO-5.1/docs/swebench/SWE-RUN-LOCK.schema.json').read_text())
+        sample=ROOT/'repository/docs/swebench/SWE-SAMPLE.json'
+        schema=json.loads((ROOT/'repository/docs/swebench/SWE-RUN-LOCK.schema.json').read_text())
         lock={key: spec.get('const','1'*64) for key,spec in schema['properties'].items() if key!='instances'}
         lock.update(contract_sha256='2'*64,sample_sha256=hashlib.sha256(sample.read_bytes()).hexdigest(),
                     model_sha256=contract['model']['sha256'],created_utc='2026-10-13T00:00:00Z')

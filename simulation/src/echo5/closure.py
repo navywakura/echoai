@@ -98,7 +98,7 @@ def freeze(folder):
     receipts = {'own': own, 'legacy': old, 'host': host}
     write_json(folder / 'sources.json', receipts)
     with zipfile.ZipFile(folder / 'sources.zip', 'x', compression=zipfile.ZIP_DEFLATED) as archive:
-        for prefix, base, receipt in [('ECHO-5', ROOT, own), ('echoai', ROOT.parent, old),
+        for prefix, base, receipt in [('simulation', ROOT, own), ('echoai', ROOT.parent, old),
                                       ('host', ROOT.parent, host)]:
             for name in receipt['files']:
                 archive.write(base / name, f'{prefix}/{name}')
@@ -154,7 +154,7 @@ def verify_manifest(folder, manifest, required=()):
 def verify_archive(folder, receipts):
     with zipfile.ZipFile(Path(folder) / 'sources.zip') as archive:
         expected = {f'{prefix}/{name}': sha for prefix, key in
-                    [('ECHO-5', 'own'), ('echoai', 'legacy'), ('host', 'host')]
+                    [('simulation', 'own'), ('echoai', 'legacy'), ('host', 'host')]
                     for name, sha in receipts[key]['files'].items()}
         if len(archive.namelist()) != len(expected) or set(archive.namelist()) != set(expected):
             raise ValueError('Archive entries differ from frozen source manifest')

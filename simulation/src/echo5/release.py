@@ -35,7 +35,7 @@ def required_gates(campaign, audit, reports, checks, browser, sitl, sitl_audit):
 def _folder(value):
     path = Path(value).resolve()
     if not path.is_relative_to((ROOT / 'artifacts').resolve()):
-        raise ValueError('Receipt paths must remain inside ECHO-5/artifacts')
+        raise ValueError('Receipt paths must remain inside simulation/artifacts')
     return path
 
 

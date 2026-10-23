@@ -1,9 +1,9 @@
 """ACUMULA-2 bench: every round plays the same mix of families; the probe counts failed episodes.
 
     cd /home/user/REALRXOS/RXos
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula2.bench dev [--macros 1,2,3] [--no-llm]
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula2.bench preflight
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula2.bench exam
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula2.bench dev [--macros 1,2,3] [--no-llm]
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula2.bench preflight
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula2.bench exam
 """
 from __future__ import annotations
 

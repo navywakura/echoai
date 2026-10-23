@@ -1,6 +1,6 @@
 """Dev check: play a family with some B v3 pieces on, learning online like the bench probe.
 
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.b3.probe_pieces FAMILY [PIECE ...]
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.b3.probe_pieces FAMILY [PIECE ...]
 """
 from __future__ import annotations
 

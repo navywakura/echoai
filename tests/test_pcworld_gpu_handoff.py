@@ -10,8 +10,8 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PREPARE = runpy.run_path(str(ROOT/'ECHO-5.1/scripts/prepare_kaggle_repair.py'))['prepare']
-DOWNLOAD = runpy.run_path(str(ROOT/'ECHO-5.1/scripts/kaggle_repair_worker.py'))['download']
+PREPARE = runpy.run_path(str(ROOT/'repository/scripts/prepare_kaggle_repair.py'))['prepare']
+DOWNLOAD = runpy.run_path(str(ROOT/'repository/scripts/kaggle_repair_worker.py'))['download']
 
 
 class GPUHandoff(unittest.TestCase):
@@ -52,7 +52,7 @@ class GPUHandoff(unittest.TestCase):
             compile((out/'kernel.py').read_text(),'kernel.py','exec')
 
     def test_private_worker_source_embedding_rejects_path_escape(self):
-        write=runpy.run_path(str(ROOT/'ECHO-5.1/scripts/prepare_kaggle_repair.py'))['write_bundle']
+        write=runpy.run_path(str(ROOT/'repository/scripts/prepare_kaggle_repair.py'))['write_bundle']
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);bundle={'jobs':[], 'config':{}}
             write(bundle,root/'valid','owner/private-test',extra_sources={'inference_relay.py':'# transport only'})
@@ -92,7 +92,7 @@ class GPUHandoff(unittest.TestCase):
                     'records':[{'task':task['id'],'job_sha256':digest(job),'output':{'content':FIXED}}]}
             downloaded=root/'downloaded.json';downloaded.write_text(json.dumps(report))
             build_runtime(root/'runtime')
-            cmd=[sys.executable,'-I','-B',str(ROOT/'ECHO-5.1/scripts/verify_kaggle_repair.py'),
+            cmd=[sys.executable,'-I','-B',str(ROOT/'repository/scripts/verify_kaggle_repair.py'),
                  str(run),str(inputs),str(downloaded),str(root/'runtime'),str(root/'verified')]
             check=subprocess.run(cmd,capture_output=True,text=True,timeout=30)
             self.assertEqual(check.returncode,0,check.stderr)

@@ -2,9 +2,9 @@
 pieces (b3/policy.py) proposed from ECHO's own failed episodes (contract ACUMULA3-DESIGN.md).
 
     cd /home/user/REALRXOS/RXos
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula3.bench dev --macros 1,2,3
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula3.bench preflight
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula3.bench exam
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula3.bench dev --macros 1,2,3
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula3.bench preflight
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula3.bench exam
 """
 from __future__ import annotations
 

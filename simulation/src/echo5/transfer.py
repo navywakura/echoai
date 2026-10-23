@@ -357,11 +357,11 @@ def source_identity(budget=None):
 
     The parent also archives its whole run. No discovered report path is opened.
     """
-    paths = [f'ECHO-5/src/echo5/{name}.py' for name in
+    paths = [f'simulation/src/echo5/{name}.py' for name in
              ('__init__', 'grounding', 'programs', 'concepts', 'solver', 'transfer', 'budget', 'legacy', 'trace')]
     paths += ['__init__.py', 'seed/__init__.py', 'seed/dsl.py', 'seed/learn.py',
               'seed/refinement.py', 'seed/relational_dsl.py', 'echo_arc/__init__.py',
-              'echo_arc/observe.py', 'ECHO-5/config/transfer.json']
+              'echo_arc/observe.py', 'simulation/config/transfer.json']
     files = {}
     for relative in sorted(paths):
         raw = (ROOT.parent / relative).read_bytes()

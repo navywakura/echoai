@@ -26,7 +26,7 @@ from .repairs import repair_tasks, repair_task_variants
 from .adversarial import choose_category, critic_instructions, matches_category, audit_probe_records
 
 ROOT=Path(__file__).resolve().parents[1]
-CONTRACT=ROOT/'ECHO-5.1/docs/PCWORLD-1.json'
+CONTRACT=ROOT/'repository/docs/PCWORLD-1.json'
 
 def save(path,value):
     path.parent.mkdir(parents=True,exist_ok=True)

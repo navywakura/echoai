@@ -1,9 +1,9 @@
 """ACUMULA bench: five rounds, five arms, a probe of unseen families after each round.
 
     cd /home/user/REALRXOS/RXos
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench dev [--macros 1,2,3] [--no-llm]
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench preflight
-    PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench exam
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench dev [--macros 1,2,3] [--no-llm]
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench preflight
+    PYTHONPATH=. echoai/simulation/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench exam
 
 Development and exam use disjoint seed blocks and different probe families;
 the exam probe families are never played before the exam.

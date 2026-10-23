@@ -11,7 +11,7 @@ import re
 from .types import PublicTask
 
 PUBLIC_FIELDS = ('instance_id', 'repo', 'base_commit', 'problem_statement')
-DOCS = Path(__file__).resolve().parents[1] / 'ECHO-5.1/docs'
+DOCS = Path(__file__).resolve().parents[1] / 'repository/docs'
 
 
 def sha256_file(path):
