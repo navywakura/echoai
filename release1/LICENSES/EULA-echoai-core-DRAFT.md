@@ -4,7 +4,7 @@
 > lawyer has reviewed it and RxLabs publishes a final version. See "Legal to-dos"
 > in `NOTICE.md`.
 
-Copyright © 2026 Roger Navarro / RxLabs (Rogex Laboratories). All rights reserved.
+Copyright © 2026 RxLabs / RxLabs (Rogex Laboratories). All rights reserved.
 
 1. **What this covers.** The compiled binaries of the echoAI-4 core
    (`echoai.*.so`, `navi10_*.so`) distributed in this package. The open layer

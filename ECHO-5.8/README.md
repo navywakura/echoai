@@ -2,7 +2,8 @@
 
 Abierto el 20 de octubre de 2026. **Estado (21/10/2026): pistas A, B y C en
 verde en examen**, cada una con contrato escrito antes de medir, examen
-congelado de una sola pasada y verificación independiente. Los rojos
+congelado de una sola pasada y verificaciones internas en procesos separados
+(incluida revisión cruzada por agentes de IA, no certificación externa). Los rojos
 históricos se conservan como rojos.
 
 | Pista | Resultado | Documento |
@@ -14,9 +15,18 @@ históricos se conservan como rojos.
 | C v1, primer diseño | cerrado en desarrollo | [`docs/ENJAMBRE1-DEV-NOTE.md`](docs/ENJAMBRE1-DEV-NOTE.md) |
 | **C v1 · ENJAMBRE-1**: 4 ECHO con memoria privada + global por postales WSP, que se ayudan | **VERDE** (la ayuda solo cuenta donde hace falta) | [`docs/ENJAMBRE1-RESULTS.md`](docs/ENJAMBRE1-RESULTS.md) |
 
-Roadmap: [`docs/ROADMAP.md`](docs/ROADMAP.md). Contratos: `docs/*-DESIGN.md`
-y sus enmiendas. Siguiente: C v2 (con mentiroso, sobre LINK-3) y la propuesta
-de que el córtex invente las piezas ([`docs/B4-LLM-PIEZAS-PROPUESTA.md`](docs/B4-LLM-PIEZAS-PROPUESTA.md)).
+## Cierre 5.8.2 · 24/10/2026
+
+[Resultados y límites de 5.8.2](docs/RELEASE-5.8.2.md) ·
+[Reproducir sin API](docs/REPRODUCE-5.8.2.md) ·
+[Inventario público](results-5.8.2/EXPORT-INVENTORY.json).
+
+WSP, D1, D2 y P tienen resultados técnicos o acotados. E, C v3, CRECE y W R2
+conservan sus rojos. C v2 fue desfavorable en desarrollo. Las tres pistas de
+5.8 de la tabla anterior mantienen sus verdes científicos originales.
+Los documentos fechados son históricos: sus «siguientes pasos» y prohibiciones
+de publicación ya no son el estado actual. La entrega 5.8.2 fue autorizada
+posteriormente; no se vuelve a abrir ningún examen.
 
 ## Código y datos
 
@@ -47,6 +57,7 @@ PYTHONPATH=. venv/bin/python -m echoai.echo58.enjambre.report      # recalcula E
 La pista A usa además AI Safety Gridworlds en un intérprete aparte
 (`~/.venvs/asg`, ver `echo58/memx/world.py`). La comprobación de congelación
 (`frozen_state()`) recalcula los hashes del código, del contrato y de los
-tests. El código y los tests de esta copia son idénticos a los congelados; los
-documentos se retocaron después para publicarlos (solo redacción), así que el
-hash de los contratos ya no coincide con el `preflight.json` original.
+tests. Esta copia pública incluye supresión de identidad y rutas locales en fuentes,
+tests y documentos. No es una copia byte a byte de la congelación privada.
+Los hashes históricos se conservan como procedencia; SOURCE-MANIFEST.json
+verifica los bytes públicos actuales. Véase la guía de reproducción.

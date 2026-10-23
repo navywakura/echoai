@@ -1,6 +1,6 @@
 """ACUMULA bench: five rounds, five arms, a probe of unseen families after each round.
 
-    cd /home/roger/REALRXOS/RXos
+    cd /home/user/REALRXOS/RXos
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench dev [--macros 1,2,3] [--no-llm]
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench preflight
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.acumula.bench exam

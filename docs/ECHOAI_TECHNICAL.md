@@ -312,7 +312,7 @@ relabelar edge learning de BrainChip como STDP propio, crear
 ## 9. Cómo verlo y reproducirlo
 
 ```bash
-cd /home/roger/REALRXOS/RXos
+cd /home/user/REALRXOS/RXos
 export PYTHONPATH=.
 
 python3 -m echoai.nexus0.demo            # en vivo, 352 turnos, 5 fps

@@ -3,7 +3,7 @@
 Fecha: 7 de octubre de 2026. El contrato experimental sigue siendo
 `ECHO45-S6-B23-MICRO-DESIGN.md`; este documento solo registra el transporte.
 
-La cuenta `rogeernavarro` respondió por la API. Se creó el dataset privado
+La cuenta `navywakura` respondió por la API. Se creó el dataset privado
 `echo45-s6b23-private-20261007` con el paquete previamente preparado,
 SHA-256 `575bdc3212c7cfc1e663a6a28615a20e4ef993622e9a2376f0d190f36e5904b1`.
 Kaggle descomprimió el ZIP al montar el dataset: aparecieron 86 archivos.
@@ -56,8 +56,8 @@ La enmienda está declarada en el contrato antes de cualquier resultado.
 Los 48 tests de B23 pasan con Python 3.12.13; incluyen diferencias de
 plantilla embebida, manipulación de metadatos, delimitadores inválidos y BOS.
 
-Nuevo notebook privado: `rogeernavarro/echo45-s6b23-micro-r3-20261008`.
-Nuevo dataset privado: `rogeernavarro/echo45-s6b23-private-r3-20261008`.
+Nuevo notebook privado: `navywakura/echo45-s6b23-micro-r3-20261008`.
+Nuevo dataset privado: `navywakura/echo45-s6b23-private-r3-20261008`.
 Paquete SHA-256:
 `46208bd294c7d34190c343c67879662cd2f8aa93c22f5dc13611e48a4d002a23`.
 La fuente recuperada de Kaggle coincide con la local. Kaggle confirma

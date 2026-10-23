@@ -86,7 +86,7 @@ def prepare():
 
 
 def transport(command, *args):
-    result = subprocess.run(['/home/roger/.venvs/kaggle/bin/python',
+    result = subprocess.run(['/home/user/.venvs/kaggle/bin/python',
         str(s.BASE / 'recovery_transport1.py'), command, *map(str, args)],
         text=True, capture_output=True, timeout=300)
     if result.returncode:
@@ -100,7 +100,7 @@ def transport(command, *args):
 def metadata(stage):
     assert stage in STAGES
     value = original_generator().metadata(stage)
-    value['id'] = 'rogeernavarro/echo45-s6b12-r1-' + stage + '-20260930'
+    value['id'] = 'navywakura/echo45-s6b12-r1-' + stage + '-20260930'
     value['title'] = value['id'].split('/')[1]
     return value
 

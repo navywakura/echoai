@@ -1,0 +1,50 @@
+{
+  "DoorKey6-202610230-A1-empty.json": "247639e16c665c978aabeb34027941599221c65d39f109abc492dd5897df8b7b",
+  "DoorKey6-202610230-A1-original.json": "9b1abf5bc827405dd747802ddc4efbfc8beb0aaf550f40422f4bcc4c87050ac1",
+  "DoorKey6-202610230-A1-wsp.json": "9b1abf5bc827405dd747802ddc4efbfc8beb0aaf550f40422f4bcc4c87050ac1",
+  "DoorKey6-202610230-A2-empty.json": "a865e2c23749eb5e77208742668b7c7e7d4471bc019ce14add5d8a99705eeb2d",
+  "DoorKey6-202610230-A2-original.json": "95c9335b74e0f1c6514ccbeba60b97f523c544a374e095449cb2e3234140fec5",
+  "DoorKey6-202610230-A2-wsp.json": "95c9335b74e0f1c6514ccbeba60b97f523c544a374e095449cb2e3234140fec5",
+  "DoorKey6-202610231-A1-empty.json": "39d4a4ba455da37e98e03a9bf68eed8c70adeff53d5818b694753e1e71b5aa5d",
+  "DoorKey6-202610231-A1-original.json": "3dd45b44acd3f940c27154ec4883660075d1d5d0c6d14a19fd178279c46e7099",
+  "DoorKey6-202610231-A1-wsp.json": "3dd45b44acd3f940c27154ec4883660075d1d5d0c6d14a19fd178279c46e7099",
+  "DoorKey6-202610231-A2-empty.json": "fc4fa9cc55fbb10cfd054c898203990b88ae12aba5f2c801242a10dea23647b2",
+  "DoorKey6-202610231-A2-original.json": "8162fa9fa981aa10e0f1bd80419362f0240d6d10c65825284d75718d53ac889e",
+  "DoorKey6-202610231-A2-wsp.json": "8162fa9fa981aa10e0f1bd80419362f0240d6d10c65825284d75718d53ac889e",
+  "DynObs6-202610230-A1-empty.json": "e29caa886bc2547d97ca60fe17097db738d8a781186d99216c56e2561f22093b",
+  "DynObs6-202610230-A1-original.json": "b57e0458d4d6dd95ee5ff3bc18b742c630ba8590192fa74015ec0f6b661b0ed9",
+  "DynObs6-202610230-A1-wsp.json": "b57e0458d4d6dd95ee5ff3bc18b742c630ba8590192fa74015ec0f6b661b0ed9",
+  "DynObs6-202610230-A2-empty.json": "1d9cd64b4a0f151e3ee0052a1e5dbc410fc926506e8395238e4dd2df34e9a32b",
+  "DynObs6-202610230-A2-original.json": "1f82b5a0385805a96eac9badd87a71d10a5ab5c66789c29922c0a755e25f5002",
+  "DynObs6-202610230-A2-wsp.json": "1f82b5a0385805a96eac9badd87a71d10a5ab5c66789c29922c0a755e25f5002",
+  "DynObs6-202610231-A1-empty.json": "39d154751b6dc4020b2ed12da708d4e225a7414f308f9c361f3a38090d86cca9",
+  "DynObs6-202610231-A1-original.json": "0437d67d2a1766fd6d5a894941f3f6a96d2d9c02b22d1bf3c37528028f360649",
+  "DynObs6-202610231-A1-wsp.json": "0437d67d2a1766fd6d5a894941f3f6a96d2d9c02b22d1bf3c37528028f360649",
+  "DynObs6-202610231-A2-empty.json": "5d56debf19ea71202216f2abd2d55c30e2a5a691211d4323b2acbf5a7c3b9af6",
+  "DynObs6-202610231-A2-original.json": "1dd168cb957b9524cab8f822e189df5f6df9b8e9639cfe14dc726a2e7329beb9",
+  "DynObs6-202610231-A2-wsp.json": "1dd168cb957b9524cab8f822e189df5f6df9b8e9639cfe14dc726a2e7329beb9",
+  "LavaGapS7-202610230-A1-empty.json": "0ed06f4f539c1c1510671eb1b5719b97f3821b60d5e12ad0b6d2a1ad890f5051",
+  "LavaGapS7-202610230-A1-original.json": "b9d5b7f78f60aa1d2bee2d73078d6c64ee7268556b86a87f70090e729c775e88",
+  "LavaGapS7-202610230-A1-wsp.json": "b9d5b7f78f60aa1d2bee2d73078d6c64ee7268556b86a87f70090e729c775e88",
+  "LavaGapS7-202610230-A2-empty.json": "526eb44edd2eb3930d5171c23826b42c303a0010c874e7417d243a20fb66cc81",
+  "LavaGapS7-202610230-A2-original.json": "ba5df59eac77afa1823f9b33314aa705eaf54443bfdad5659d8b4729f0bd4f9d",
+  "LavaGapS7-202610230-A2-wsp.json": "ba5df59eac77afa1823f9b33314aa705eaf54443bfdad5659d8b4729f0bd4f9d",
+  "LavaGapS7-202610231-A1-empty.json": "cbaaf3e2e4d01dbff7ce3cf1f65bf247c86777e4e2997b6c91e6516aa864d51d",
+  "LavaGapS7-202610231-A1-original.json": "6b491aaa096df3f4e6cf3592e13d65d214e7474b8e13d018447cdc720735f6bc",
+  "LavaGapS7-202610231-A1-wsp.json": "6b491aaa096df3f4e6cf3592e13d65d214e7474b8e13d018447cdc720735f6bc",
+  "LavaGapS7-202610231-A2-empty.json": "a7ab1c254631b2646c86547275c7d9ab6e620614b8264b3c93f6db3038eaf545",
+  "LavaGapS7-202610231-A2-original.json": "ef805947444320c536b2a4bb14e21254e9bb2d74eb8d8a7b067a0265c3377aca",
+  "LavaGapS7-202610231-A2-wsp.json": "ef805947444320c536b2a4bb14e21254e9bb2d74eb8d8a7b067a0265c3377aca",
+  "archive": {
+    "path": "/home/user/REALRXOS/RXos/echoai/lab/echo58/wspfiles/20261023-r1/artifacts/memory-training-m01.wsp",
+    "sha256": "f61087c5484210d587fb01a2c3d270091aa98b3b3603ce0fb0193a4a58613d85"
+  },
+  "original_memory": {
+    "path": "/home/user/REALRXOS/RXos/echoai/lab/echo58/memx/memories/aprendida-m01.jsonl",
+    "sha256": "c2acb9d69db7e67c57e4d99b259e456b3a0e4afeb2d9aa69eb134e16b237dfbe"
+  },
+  "sources": {
+    "/home/user/REALRXOS/RXos/echoai/echo58/wspfiles/integration.py": "ba9f3350e2396869a579052a6afbb8bd4fc994558bb9c791997d8646dd86d252",
+    "/home/user/REALRXOS/RXos/echoai/echo58/wspfiles/play.py": "7842d22b61da7f5b42fc81c59318b2fd16b5400e63043200ce837351f62cb2bb"
+  }
+}

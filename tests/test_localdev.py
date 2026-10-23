@@ -110,7 +110,7 @@ class LocalDevelopment(unittest.TestCase):
 from pathlib import Path
 assert "TEST_PRIVATE_TOKEN" not in os.environ
 assert not Path({str(secret)!r}).exists()
-assert not Path("/home/roger").exists()
+assert not Path("/home/user").exists()
 assert not Path("/dev/dri").exists()
 try: Path("app.py").write_text("damaged")
 except OSError: pass

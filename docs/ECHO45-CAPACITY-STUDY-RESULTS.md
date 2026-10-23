@@ -119,7 +119,7 @@ No incluye las fuentes privadas del motor ni modifica las fuentes congeladas
 de S6 o del banco de capacidad. Debe ejecutarse desde la terminal del usuario:
 
 ```bash
-bash /home/roger/REALRXOS/RXos/echoai/lab/publication/publish-rxlabs-capacity-20261001.sh
+bash /home/user/REALRXOS/RXos/echoai/lab/publication/publish-rxlabs-capacity-20261001.sh
 ```
 
 Ruta pública prevista: `/articulos/echo45-memoria-asociativa-500k`.

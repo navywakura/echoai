@@ -1,0 +1,20 @@
+[
+  {
+    "file": "echo-ai-agent-logo.png",
+    "original_sha256": "bdfcf084c25a33aa64dd66fc260513fc265d3962cb233b1dd076ded475338cbd",
+    "public_sha256": "9fd5308b8b1124cb3b0aadd05ddd1a2420776048b46eaaa27450c9027b2c95ec",
+    "unchanged_compressed_pixels_sha256": "ab270e8a20d3d36a2d63cb4960996c28cdbacbe6fa136c178eb695be7c08f36e",
+    "removed_metadata_chunks": [
+      "iTXt"
+    ]
+  },
+  {
+    "file": "assets/brand/banner.png",
+    "original_sha256": "8a7371cc3f54a17194fb251c31d4861a1e2a66fc146ab2e000486d447ba45635",
+    "public_sha256": "d47b16c01198c2a92fabb42cee258f3404a7ef9f4e6498a62b99f794ca896dc4",
+    "unchanged_compressed_pixels_sha256": "23f7465455c7c3c808639980bf4db85bf7a597b6da31a0af998a733bafde5fee",
+    "removed_metadata_chunks": [
+      "iTXt"
+    ]
+  }
+]

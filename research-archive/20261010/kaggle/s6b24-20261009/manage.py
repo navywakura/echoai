@@ -10,9 +10,9 @@ import sys
 import time
 
 HERE=Path(__file__).resolve().parent
-REF='rogeernavarro/echo45-s6b24-20261009'
-CHECKPOINT='rogeernavarro/echo45-s6b24-checkpoint-20261009'
-os.environ['KAGGLE_API_TOKEN']=Path('/home/roger/.kaggleapikey').read_text().strip()
+REF='navywakura/echo45-s6b24-20261009'
+CHECKPOINT='navywakura/echo45-s6b24-checkpoint-20261009'
+os.environ['KAGGLE_API_TOKEN']=Path('/home/user/.kaggleapikey').read_text().strip()
 from kaggle.api.kaggle_api_extended import KaggleApi
 from kagglesdk.kernels.types.kernels_api_service import ApiDownloadKernelOutputRequest
 import requests
@@ -47,7 +47,7 @@ def launch():
 def download(version,name,dest):
     if dest.exists():return
     with api.build_kaggle_client() as client:
-        req=ApiDownloadKernelOutputRequest();req.owner_slug='rogeernavarro';req.kernel_slug=REF.split('/')[1]
+        req=ApiDownloadKernelOutputRequest();req.owner_slug='navywakura';req.kernel_slug=REF.split('/')[1]
         req.file_path=name;req.version_number=version
         response=client.kernels.kernels_api_client.download_kernel_output(req)
         with requests.get(response.url,stream=True,timeout=(30,120)) as result:
@@ -85,7 +85,7 @@ def checkpoint_dataset(dest,version):
         if r.get('error'):raise RuntimeError('checkpoint upload rejected')
         save(receipt,r)
     metadata=read(HERE/'notebook/kernel-metadata.json')
-    metadata['dataset_sources']=['rogeernavarro/echo45-s6b24-private-20261009',CHECKPOINT]
+    metadata['dataset_sources']=['navywakura/echo45-s6b24-private-20261009',CHECKPOINT]
     save(HERE/'notebook/kernel-metadata.json',metadata)
 
 

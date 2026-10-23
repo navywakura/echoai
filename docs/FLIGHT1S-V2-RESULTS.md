@@ -18,7 +18,7 @@ El rojo se conserva. §4 dice exactamente qué falló.
 ## 1. Comandos y salidas reales
 
 ```bash
-cd /home/roger/REALRXOS/RXos/echoai
+cd /home/user/REALRXOS/RXos/echoai
 
 PYTHONPATH=.. python3 -m echoai.nexus0.flight1s.v2 validate                                     # exit 0
 PYTHONPATH=.. python3 -m echoai.nexus0.flight1s.v2 preflight \

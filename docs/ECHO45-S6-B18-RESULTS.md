@@ -110,7 +110,7 @@ principal, la campaña y el examen de cuatro brazos B1–B5. **No queda ningún
 piloto, campaña o examen B18 pendiente de lanzamiento automático.**
 
 [Contrato congelado](ECHO45-S6-B18-DESIGN.md) ·
-[Notebook privado de Kaggle](https://www.kaggle.com/code/rogeernavarro/echo45-s6b18-micro-20261005) ·
+[Notebook privado de Kaggle](https://www.kaggle.com/code/navywakura/echo45-s6b18-micro-20261005) ·
 [Cierre](../lab/seed/s6b18-20261005/kaggle-results/closed.json) ·
 [Auditoría A](../lab/seed/s6b18-20261005/kaggle-results/micro-audit.json) ·
 [Auditoría B](../lab/seed/s6b18-20261005/kaggle-results/retention-audit.json) ·

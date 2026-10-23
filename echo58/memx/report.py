@@ -1,6 +1,6 @@
 """MEMORIA-X: predictions P1-P5 from lab/echo58/memx/exam/m*.json (contract §5, amendment 1).
 
-    PYTHONPATH=/home/roger/REALRXOS/RXos python3 -m echoai.echo58.memx.report
+    PYTHONPATH=/home/user/REALRXOS/RXos python3 -m echoai.echo58.memx.report
 
 Counts per macro-seed (n = 10) are integers out of 50 episodes per family.
 Each macro-seed has its own block of exam worlds; every arm runs on it.

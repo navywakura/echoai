@@ -172,7 +172,7 @@ forma canónica y se rechaza cualquier subdirectorio de PROBE1. Los controles
 ## 10. Ejecución
 
 ```bash
-cd /home/roger/REALRXOS/RXos/echoai
+cd /home/user/REALRXOS/RXos/echoai
 PY=lab/arc3/ARC-AGI-3-Agents/.venv/bin/python
 PYTHONPATH=. $PY -m unittest tests.test_s6probe2   # 11 tests, sin partidas
 PYTHONPATH=. $PY -m seed.s6probe2 prepare          # exige la auditoría de PROBE1

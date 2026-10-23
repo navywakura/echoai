@@ -62,7 +62,7 @@ expresa y resolver los bloqueos legales de REL-C.
 | # | Criterio |
 |---|---|
 | C1 | Lista explícita de lo que se exporta; nada fuera de ella |
-| C2 | Escaneo de la wheel en busca de secretos y datos privados: 0 hallazgos (tokens, claves, correos, rutas `/home/roger`, Discord, `private/`, conversaciones) |
+| C2 | Escaneo de la wheel en busca de secretos y datos privados: 0 hallazgos (tokens, claves, correos, rutas `/home/user`, Discord, `private/`, conversaciones) |
 | C3 | Licencias: texto oficial de PolyForm, borrador de EULA, inventario de terceros (`NOTICE.md`) y **bloqueos legales declarados** |
 | C4 | Tarjeta de sistema (README para HF), changelog y checksums |
 | C5 | Los pesos de Qwen y Phi no se redistribuyen: solo se referencian |

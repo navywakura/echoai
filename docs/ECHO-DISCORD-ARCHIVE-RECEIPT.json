@@ -1,8 +1,8 @@
 {
   "date": "2026-09-22",
   "status": "archived",
-  "source": "/home/roger/REALRXOS/RXos/echo-discord",
-  "destination": "/home/roger/archivos-laboratorio/echo-discord-2026-09-22",
+  "source": "/home/user/REALRXOS/RXos/echo-discord",
+  "destination": "/home/user/archivos-laboratorio/echo-discord-2026-09-22",
   "operation": "same-filesystem directory rename",
   "entries_preserved": 4205,
   "all_entry_inodes_modes_sizes_mtimes_links_equal": true,

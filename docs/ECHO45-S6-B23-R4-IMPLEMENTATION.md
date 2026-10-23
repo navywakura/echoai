@@ -48,7 +48,7 @@ Validación previa a Kaggle:
   no se trunca silenciosamente el contexto.
 
 Notebook privado:
-`rogeernavarro/echo45-s6b23-micro-r4-20261008`, versión 1, enviado a las 14:08
+`navywakura/echo45-s6b23-micro-r4-20261008`, versión 1, enviado a las 14:08
 Madrid. SHA-256 del paquete:
 `9b9cf90d896ac8da4f49c848373050d9f1d00d6c3b8bcaa5868f47a15c5b3b94`.
 Hasta confirmar las ocho inferencias remotas, la reparación está probada

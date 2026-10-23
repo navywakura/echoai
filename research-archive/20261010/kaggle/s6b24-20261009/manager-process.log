@@ -1,23 +1,23 @@
-{"at": 1791499235.3104951, "stage": "SUBMITTED", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1, "url": "https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-20261009"}
-{"at": 1791499235.497584, "stage": "REMOTE_QUEUED", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499295.6702454, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499355.9162383, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499416.0950053, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499476.271392, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499536.4440167, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499596.6289275, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499656.8809931, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499717.3280647, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499777.5117285, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499837.6898687, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499897.8680873, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791499958.1217644, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500018.3209739, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500078.4992228, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500138.680477, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500198.8530266, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500259.078595, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500319.2562752, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500379.435101, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500439.6151166, "stage": "REMOTE_RUNNING", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1}
-{"at": 1791500507.8561778, "stage": "INSTRUMENT_BLOCKED", "ref": "rogeernavarro/echo45-s6b24-20261009", "version": 1, "remote_status": {"at": "2026-10-08T23:00:27.541121+00:00", "condition": "S6-B24", "reason": "RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)", "s6_green": false, "stage": "INSTRUMENT_BLOCKED"}}
+{"at": 1791499235.3104951, "stage": "SUBMITTED", "ref": "navywakura/echo45-s6b24-20261009", "version": 1, "url": "https://www.kaggle.com/code/navywakura/echo45-s6b24-20261009"}
+{"at": 1791499235.497584, "stage": "REMOTE_QUEUED", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499295.6702454, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499355.9162383, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499416.0950053, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499476.271392, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499536.4440167, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499596.6289275, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499656.8809931, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499717.3280647, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499777.5117285, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499837.6898687, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499897.8680873, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791499958.1217644, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500018.3209739, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500078.4992228, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500138.680477, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500198.8530266, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500259.078595, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500319.2562752, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500379.435101, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500439.6151166, "stage": "REMOTE_RUNNING", "ref": "navywakura/echo45-s6b24-20261009", "version": 1}
+{"at": 1791500507.8561778, "stage": "INSTRUMENT_BLOCKED", "ref": "navywakura/echo45-s6b24-20261009", "version": 1, "remote_status": {"at": "2026-10-08T23:00:27.541121+00:00", "condition": "S6-B24", "reason": "RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)", "s6_green": false, "stage": "INSTRUMENT_BLOCKED"}}

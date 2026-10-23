@@ -172,7 +172,7 @@ después de congelarse. No se abren campaña ni examen por una mejora aislada.
 
 Los artefactos B20 fijaban Qwen3-4B-Instruct-2507 Q4_K_M; B21 y B22 no hicieron
 llamadas LLM. La comparación propuesta de 7B y 14B será una condición nueva.
-En este entorno solo se ha localizado el GGUF 4B bajo `/home/roger/models`;
+En este entorno solo se ha localizado el GGUF 4B bajo `/home/user/models`;
 la resolución de DNS hacia Kaggle y Hugging Face falla. El micro con modelos
 quedó inicialmente como borrador. La [implementación posterior](ECHO45-S6-B23-IMPLEMENTATION.md)
 ya completa selector y ejecutor; faltan los pesos verificados y el acceso operativo. No se ha reservado

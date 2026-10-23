@@ -1,7 +1,7 @@
 """ENJAMBRE-1 (C v1, redesign) bench: four ECHO agents solve a mission of eight shared worlds
 (coop.py) with a private memory each, a global memory of WSP postcards and help between them.
 
-    cd /home/roger/REALRXOS/RXos
+    cd /home/user/REALRXOS/RXos
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench dev --macros 1,2,3
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench preflight
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench exam

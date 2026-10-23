@@ -11,7 +11,7 @@ Contrato: [`GUI4-DESIGN.md`](GUI4-DESIGN.md). Se cumple entero.
 ## 1. Cómo se abre
 
 ```bash
-cd /home/roger/REALRXOS/RXos
+cd /home/user/REALRXOS/RXos
 python3 -m echoai.gui4
 ```
 

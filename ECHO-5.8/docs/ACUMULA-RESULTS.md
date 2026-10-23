@@ -49,7 +49,7 @@ puede ser un escalón: Q1 no podía ver tres mejoras seguidas.
 
 ## Declaraciones
 
-- La enmienda 1 (bits de rango, aprobados; diagnóstico; K = 6;
+- La enmienda 1 (bits de rango, aprobados por Nav; diagnóstico; K = 6;
   puerta de no inferioridad) se escribió antes de congelar. El riesgo de Q1 se
   declaró antes del examen (§6).
 - Q5: varias ediciones aceptadas no hacen nada (p. ej. `verify`/`silence` de

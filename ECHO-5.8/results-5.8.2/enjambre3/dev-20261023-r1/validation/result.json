@@ -1,0 +1,2130 @@
+{
+  "amendment_sha256": "9437fc44cff3a81b012d9b6888ed5938de6a024d5c01e853f610a618356a4991",
+  "audit_green": true,
+  "audit_runner_sha256": "f9c3ac81b5823c02ec1ff94aa48124654aa4104d988732d9e9306312d912f4f2",
+  "byte_identical_prefix_rounds": 20,
+  "checks": {
+    "ablation:probe_harm_lt_sin_alarma": true,
+    "ablation:progress_gt_sin_liberacion": true,
+    "ablation:solved_geq_sin_alarma": true,
+    "false_alarm:exposure": true,
+    "false_alarm:harm_leq_ingenuo": false,
+    "false_alarm:harm_leq_prudente": true,
+    "false_alarm:harm_leq_sin_global": true,
+    "false_alarm:probe_harm_leq_prudente": true,
+    "false_alarm:score_leq_prudente": true,
+    "false_alarm:solved_geq_ingenuo": true,
+    "false_alarm:solved_geq_prudente": false,
+    "false_remote:exposure": true,
+    "false_remote:harm_leq_ingenuo": true,
+    "false_remote:harm_leq_prudente": true,
+    "false_remote:harm_leq_sin_global": true,
+    "false_remote:probe_harm_leq_prudente": true,
+    "false_remote:score_leq_prudente": true,
+    "false_remote:solved_geq_ingenuo": false,
+    "false_remote:solved_geq_prudente": false,
+    "false_safe:exposure": true,
+    "false_safe:harm_leq_ingenuo": true,
+    "false_safe:harm_leq_prudente": true,
+    "false_safe:harm_leq_sin_global": true,
+    "false_safe:probe_harm_leq_prudente": true,
+    "false_safe:score_leq_prudente": true,
+    "false_safe:solved_geq_ingenuo": false,
+    "false_safe:solved_geq_prudente": false,
+    "harm_lt_ingenuo": true,
+    "holm:harm_ingenuo": false,
+    "holm:score_por_autor": false,
+    "holm:score_sin_global": false,
+    "recovery:original_receipts_and_prefixes_intact": true,
+    "score_lt_por_autor": true,
+    "score_lt_sin_global": true
+  },
+  "completed_sha256": "dc74c666dc5a823f7e423be12c969adb60bca24923997d888ef9b5c895e96693",
+  "exact_one_sided_p": {
+    "harm_ingenuo": 0.21875,
+    "score_por_autor": 0.052734375,
+    "score_sin_global": 0.0419921875
+  },
+  "exam_run": false,
+  "failed_gates": [
+    "false_safe:solved_geq_ingenuo",
+    "false_safe:solved_geq_prudente",
+    "false_alarm:harm_leq_ingenuo",
+    "false_alarm:solved_geq_prudente",
+    "false_remote:solved_geq_ingenuo",
+    "false_remote:solved_geq_prudente",
+    "holm:score_sin_global",
+    "holm:score_por_autor",
+    "holm:harm_ingenuo"
+  ],
+  "holm_pass": {
+    "harm_ingenuo": false,
+    "score_por_autor": false,
+    "score_sin_global": false
+  },
+  "interrupted_jobs_restarted": 2,
+  "inventory_sha256": "e7dd6a342ca0dc8b4bb6bc39fc5292425d08289a4f61c93af444c1a6b53f0920",
+  "original_receipts_preserved": 158,
+  "paired_differences_control_minus_candidate": {
+    "harm_ingenuo": [
+      -2,
+      10,
+      4,
+      3,
+      3,
+      1,
+      -2,
+      -12,
+      2,
+      -1
+    ],
+    "score_por_autor": [
+      21,
+      30,
+      148,
+      40,
+      209,
+      26,
+      28,
+      -16,
+      82,
+      -358
+    ],
+    "score_sin_global": [
+      45,
+      36,
+      78,
+      44,
+      27,
+      20,
+      43,
+      4,
+      72,
+      -345
+    ]
+  },
+  "phase": "validation",
+  "preflight_sha256": "00c8bdd232f7eadec9c051e45c5efbfc42fab44f40560d08b5ea2cfccc1b4987",
+  "previous_audit_runner_sha256": "019b89522fde7c292b76729f6bc97be1e28b7ca4b6308688e3e0b6fffb65cb6f",
+  "protocol": "deterministically recovered validation; not uninterrupted",
+  "recovered_jobs": 52,
+  "recovery_audit_green": true,
+  "report_adapter_sha256": "7fad955fb49ab356d9ed42d3e75f8689e82fb48328960d123d6b1b0974199033",
+  "report_fix": "macro keys m1..m10; unchanged scientific criteria",
+  "report_fix_plan_sha256": "e771d56026086f09f4d95421955c378d70d2e45a34e49ba555f88618d4211a6b",
+  "runner_sha256": "23c680c7ac3b725b5dc8ff9e3e5c1f6930722d23d53026e042702a6cdf9addf0",
+  "scientific_green": false,
+  "selected": "v3_n1",
+  "selection_sha256": "1b4ac42bc8e74f0c37d2f7f4cb093a5f5b1376b4ca2d01c57347ac66e44f2dd9",
+  "table": {
+    "ingenuo": {
+      "false_alarm": {
+        "actions": 134129,
+        "affected_memory_responses": 173010,
+        "by_kind": {
+          "door": {
+            "failed": 53,
+            "harm": 0,
+            "score": 209,
+            "solved": 15
+          },
+          "lava": {
+            "failed": 294,
+            "harm": 29,
+            "score": 371,
+            "solved": 10
+          },
+          "local": {
+            "failed": 136,
+            "harm": 28,
+            "score": 263,
+            "solved": 14
+          },
+          "plate": {
+            "failed": 437,
+            "harm": 0,
+            "score": 499,
+            "solved": 6
+          }
+        },
+        "episodes": 980,
+        "exposure_queries": 173428,
+        "failed": 920,
+        "harm": 57,
+        "harm_probe_legacy": 34,
+        "macros": {
+          "m1": {
+            "harm": 3,
+            "score": 132,
+            "solved": 4
+          },
+          "m10": {
+            "harm": 6,
+            "score": 166,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 9,
+            "score": 134,
+            "solved": 4
+          },
+          "m3": {
+            "harm": 2,
+            "score": 108,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 8,
+            "score": 191,
+            "solved": 2
+          },
+          "m5": {
+            "harm": 4,
+            "score": 218,
+            "solved": 1
+          },
+          "m6": {
+            "harm": 5,
+            "score": 33,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 7,
+            "score": 136,
+            "solved": 4
+          },
+          "m8": {
+            "harm": 6,
+            "score": 64,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 7,
+            "score": 160,
+            "solved": 3
+          }
+        },
+        "probe_actions": 635,
+        "probe_harm": 34,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 1342,
+        "solved": 45,
+        "steps": 261626
+      },
+      "false_remote": {
+        "actions": 13473,
+        "affected_memory_responses": 4491,
+        "by_kind": {
+          "door": {
+            "failed": 0,
+            "harm": 0,
+            "score": 65,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 26,
+            "harm": 26,
+            "score": 80,
+            "solved": 20
+          },
+          "local": {
+            "failed": 33,
+            "harm": 33,
+            "score": 84,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 90,
+            "harm": 0,
+            "score": 126,
+            "solved": 20
+          }
+        },
+        "episodes": 272,
+        "exposure_queries": 4491,
+        "failed": 149,
+        "harm": 59,
+        "harm_probe_legacy": 37,
+        "macros": {
+          "m1": {
+            "harm": 7,
+            "score": 34,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 5,
+            "score": 40,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 6,
+            "score": 29,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 4,
+            "score": 31,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 8,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 7,
+            "score": 31,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 5,
+            "score": 31,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 5,
+            "score": 35,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 7,
+            "score": 47,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 5,
+            "score": 29,
+            "solved": 8
+          }
+        },
+        "probe_actions": 589,
+        "probe_harm": 37,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 355,
+        "solved": 80,
+        "steps": 32922
+      },
+      "false_safe": {
+        "actions": 14942,
+        "affected_memory_responses": 16258,
+        "by_kind": {
+          "door": {
+            "failed": 5,
+            "harm": 0,
+            "score": 75,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 32,
+            "harm": 32,
+            "score": 86,
+            "solved": 20
+          },
+          "local": {
+            "failed": 41,
+            "harm": 44,
+            "score": 95,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 97,
+            "harm": 0,
+            "score": 136,
+            "solved": 20
+          }
+        },
+        "episodes": 300,
+        "exposure_queries": 16591,
+        "failed": 175,
+        "harm": 76,
+        "harm_probe_legacy": 29,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 53,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 10,
+            "score": 37,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 4,
+            "score": 31,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 7,
+            "score": 31,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 9,
+            "score": 32,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 7,
+            "score": 47,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 5,
+            "score": 29,
+            "solved": 8
+          }
+        },
+        "probe_actions": 511,
+        "probe_harm": 29,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 392,
+        "solved": 80,
+        "steps": 34109
+      }
+    },
+    "por_autor": {
+      "false_alarm": {
+        "actions": 55706,
+        "affected_memory_responses": 118676,
+        "by_kind": {
+          "door": {
+            "failed": 24,
+            "harm": 0,
+            "score": 134,
+            "solved": 19
+          },
+          "lava": {
+            "failed": 140,
+            "harm": 35,
+            "score": 191,
+            "solved": 18
+          },
+          "local": {
+            "failed": 69,
+            "harm": 37,
+            "score": 173,
+            "solved": 18
+          },
+          "plate": {
+            "failed": 175,
+            "harm": 0,
+            "score": 243,
+            "solved": 18
+          }
+        },
+        "episodes": 532,
+        "exposure_queries": 118676,
+        "failed": 408,
+        "harm": 72,
+        "harm_probe_legacy": 51,
+        "macros": {
+          "m1": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 10,
+            "score": 54,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 9,
+            "score": 39,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 5,
+            "score": 122,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 6,
+            "score": 50,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 5,
+            "score": 218,
+            "solved": 1
+          },
+          "m6": {
+            "harm": 9,
+            "score": 47,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 6,
+            "score": 44,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 6,
+            "score": 48,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 11,
+            "score": 91,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1042,
+        "probe_harm": 51,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 741,
+        "solved": 73,
+        "steps": 107104
+      },
+      "false_remote": {
+        "actions": 15159,
+        "affected_memory_responses": 5199,
+        "by_kind": {
+          "door": {
+            "failed": 0,
+            "harm": 0,
+            "score": 72,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 37,
+            "harm": 37,
+            "score": 92,
+            "solved": 20
+          },
+          "local": {
+            "failed": 44,
+            "harm": 44,
+            "score": 101,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 100,
+            "harm": 0,
+            "score": 142,
+            "solved": 20
+          }
+        },
+        "episodes": 304,
+        "exposure_queries": 5199,
+        "failed": 181,
+        "harm": 81,
+        "harm_probe_legacy": 45,
+        "macros": {
+          "m1": {
+            "harm": 7,
+            "score": 34,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 7,
+            "score": 46,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 11,
+            "score": 49,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 6,
+            "score": 42,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 7,
+            "score": 39,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 7,
+            "score": 47,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 9,
+            "score": 37,
+            "solved": 8
+          }
+        },
+        "probe_actions": 896,
+        "probe_harm": 45,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 407,
+        "solved": 80,
+        "steps": 36951
+      },
+      "false_safe": {
+        "actions": 15736,
+        "affected_memory_responses": 22025,
+        "by_kind": {
+          "door": {
+            "failed": 0,
+            "harm": 0,
+            "score": 74,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 36,
+            "harm": 36,
+            "score": 93,
+            "solved": 20
+          },
+          "local": {
+            "failed": 52,
+            "harm": 54,
+            "score": 109,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 106,
+            "harm": 0,
+            "score": 148,
+            "solved": 20
+          }
+        },
+        "episodes": 320,
+        "exposure_queries": 22163,
+        "failed": 194,
+        "harm": 90,
+        "harm_probe_legacy": 36,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 7,
+            "score": 46,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 11,
+            "score": 49,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 40,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 7,
+            "score": 47,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 9,
+            "score": 38,
+            "solved": 8
+          }
+        },
+        "probe_actions": 734,
+        "probe_harm": 36,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 424,
+        "solved": 80,
+        "steps": 36747
+      }
+    },
+    "prudente": {
+      "false_alarm": {
+        "actions": 20912,
+        "affected_memory_responses": 73,
+        "by_kind": {
+          "door": {
+            "failed": 3,
+            "harm": 0,
+            "score": 85,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 47,
+            "harm": 41,
+            "score": 106,
+            "solved": 20
+          },
+          "local": {
+            "failed": 63,
+            "harm": 63,
+            "score": 120,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 139,
+            "harm": 0,
+            "score": 173,
+            "solved": 20
+          }
+        },
+        "episodes": 376,
+        "exposure_queries": 7025,
+        "failed": 252,
+        "harm": 104,
+        "harm_probe_legacy": 75,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 7,
+            "score": 46,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 11,
+            "score": 38,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 12,
+            "score": 50,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 49,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 12,
+            "score": 81,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 15,
+            "score": 52,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1099,
+        "probe_harm": 75,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 484,
+        "solved": 80,
+        "steps": 50715
+      },
+      "false_remote": {
+        "actions": 32109,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 22,
+            "harm": 0,
+            "score": 104,
+            "solved": 19
+          },
+          "lava": {
+            "failed": 63,
+            "harm": 41,
+            "score": 122,
+            "solved": 19
+          },
+          "local": {
+            "failed": 62,
+            "harm": 62,
+            "score": 119,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 174,
+            "harm": 0,
+            "score": 208,
+            "solved": 18
+          }
+        },
+        "episodes": 436,
+        "exposure_queries": 32028,
+        "failed": 321,
+        "harm": 103,
+        "harm_probe_legacy": 70,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 7,
+            "score": 46,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 11,
+            "score": 38,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 12,
+            "score": 50,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 8,
+            "score": 47,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 49,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 12,
+            "score": 151,
+            "solved": 4
+          },
+          "m9": {
+            "harm": 15,
+            "score": 52,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1051,
+        "probe_harm": 70,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 553,
+        "solved": 76,
+        "steps": 71115
+      },
+      "false_safe": {
+        "actions": 20825,
+        "affected_memory_responses": 547,
+        "by_kind": {
+          "door": {
+            "failed": 4,
+            "harm": 0,
+            "score": 86,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 46,
+            "harm": 41,
+            "score": 106,
+            "solved": 20
+          },
+          "local": {
+            "failed": 63,
+            "harm": 63,
+            "score": 120,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 139,
+            "harm": 0,
+            "score": 173,
+            "solved": 20
+          }
+        },
+        "episodes": 376,
+        "exposure_queries": 32783,
+        "failed": 252,
+        "harm": 104,
+        "harm_probe_legacy": 64,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 7,
+            "score": 46,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 11,
+            "score": 38,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 12,
+            "score": 50,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 49,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 12,
+            "score": 82,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 15,
+            "score": 52,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1058,
+        "probe_harm": 64,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 485,
+        "solved": 80,
+        "steps": 49989
+      }
+    },
+    "sin_alarma_n1": {
+      "false_alarm": {
+        "actions": 29557,
+        "affected_memory_responses": 65,
+        "by_kind": {
+          "door": {
+            "failed": 54,
+            "harm": 0,
+            "score": 123,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 34,
+            "harm": 33,
+            "score": 82,
+            "solved": 20
+          },
+          "local": {
+            "failed": 40,
+            "harm": 43,
+            "score": 115,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 143,
+            "harm": 0,
+            "score": 183,
+            "solved": 18
+          }
+        },
+        "episodes": 388,
+        "exposure_queries": 6143,
+        "failed": 271,
+        "harm": 76,
+        "harm_probe_legacy": 47,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 29,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 7,
+            "score": 34,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 28,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 7,
+            "score": 39,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 6,
+            "score": 34,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 12,
+            "score": 60,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 8,
+            "score": 34,
+            "solved": 8
+          }
+        },
+        "probe_actions": 793,
+        "probe_harm": 47,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 503,
+        "solved": 75,
+        "steps": 62554
+      },
+      "false_remote": {
+        "actions": 28573,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 51,
+            "harm": 0,
+            "score": 115,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 29,
+            "harm": 28,
+            "score": 77,
+            "solved": 20
+          },
+          "local": {
+            "failed": 32,
+            "harm": 35,
+            "score": 106,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 140,
+            "harm": 0,
+            "score": 175,
+            "solved": 18
+          }
+        },
+        "episodes": 372,
+        "exposure_queries": 5948,
+        "failed": 252,
+        "harm": 63,
+        "harm_probe_legacy": 30,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 29,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 7,
+            "score": 34,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 24,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 2,
+            "score": 28,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 7,
+            "score": 34,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 4,
+            "score": 29,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 5,
+            "score": 33,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 12,
+            "score": 60,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 8,
+            "score": 34,
+            "solved": 8
+          }
+        },
+        "probe_actions": 726,
+        "probe_harm": 30,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 473,
+        "solved": 75,
+        "steps": 60580
+      },
+      "false_safe": {
+        "actions": 29624,
+        "affected_memory_responses": 4572,
+        "by_kind": {
+          "door": {
+            "failed": 55,
+            "harm": 0,
+            "score": 124,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 29,
+            "harm": 29,
+            "score": 78,
+            "solved": 20
+          },
+          "local": {
+            "failed": 41,
+            "harm": 44,
+            "score": 116,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 144,
+            "harm": 0,
+            "score": 183,
+            "solved": 18
+          }
+        },
+        "episodes": 384,
+        "exposure_queries": 69521,
+        "failed": 269,
+        "harm": 73,
+        "harm_probe_legacy": 36,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 29,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 8,
+            "score": 35,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 28,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 7,
+            "score": 39,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 7,
+            "score": 34,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 6,
+            "score": 34,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 10,
+            "score": 59,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 8,
+            "score": 34,
+            "solved": 8
+          }
+        },
+        "probe_actions": 786,
+        "probe_harm": 36,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 501,
+        "solved": 75,
+        "steps": 62992
+      }
+    },
+    "sin_global": {
+      "false_alarm": {
+        "actions": 18380,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 5,
+            "harm": 0,
+            "score": 83,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 42,
+            "harm": 42,
+            "score": 100,
+            "solved": 20
+          },
+          "local": {
+            "failed": 59,
+            "harm": 59,
+            "score": 117,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 119,
+            "harm": 0,
+            "score": 162,
+            "solved": 20
+          }
+        },
+        "episodes": 352,
+        "exposure_queries": 0,
+        "failed": 225,
+        "harm": 101,
+        "harm_probe_legacy": 99,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 53,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 12,
+            "score": 39,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 12,
+            "score": 50,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 46,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 9,
+            "score": 54,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 15,
+            "score": 52,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1245,
+        "probe_harm": 99,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 462,
+        "solved": 80,
+        "steps": 44088
+      },
+      "false_remote": {
+        "actions": 18380,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 5,
+            "harm": 0,
+            "score": 83,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 42,
+            "harm": 42,
+            "score": 100,
+            "solved": 20
+          },
+          "local": {
+            "failed": 59,
+            "harm": 59,
+            "score": 117,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 119,
+            "harm": 0,
+            "score": 162,
+            "solved": 20
+          }
+        },
+        "episodes": 352,
+        "exposure_queries": 0,
+        "failed": 225,
+        "harm": 101,
+        "harm_probe_legacy": 99,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 53,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 12,
+            "score": 39,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 12,
+            "score": 50,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 46,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 9,
+            "score": 54,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 15,
+            "score": 52,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1245,
+        "probe_harm": 99,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 462,
+        "solved": 80,
+        "steps": 44088
+      },
+      "false_safe": {
+        "actions": 18380,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 5,
+            "harm": 0,
+            "score": 83,
+            "solved": 20
+          },
+          "lava": {
+            "failed": 42,
+            "harm": 42,
+            "score": 100,
+            "solved": 20
+          },
+          "local": {
+            "failed": 59,
+            "harm": 59,
+            "score": 117,
+            "solved": 20
+          },
+          "plate": {
+            "failed": 119,
+            "harm": 0,
+            "score": 162,
+            "solved": 20
+          }
+        },
+        "episodes": 352,
+        "exposure_queries": 0,
+        "failed": 225,
+        "harm": 101,
+        "harm_probe_legacy": 99,
+        "macros": {
+          "m1": {
+            "harm": 10,
+            "score": 43,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 53,
+            "solved": 8
+          },
+          "m2": {
+            "harm": 12,
+            "score": 39,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 12,
+            "score": 50,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 9,
+            "score": 48,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 9,
+            "score": 36,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 9,
+            "score": 41,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 10,
+            "score": 46,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 9,
+            "score": 54,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 15,
+            "score": 52,
+            "solved": 8
+          }
+        },
+        "probe_actions": 1245,
+        "probe_harm": 99,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 462,
+        "solved": 80,
+        "steps": 44088
+      }
+    },
+    "sin_liberacion_n1": {
+      "false_alarm": {
+        "actions": 44553,
+        "affected_memory_responses": 47973,
+        "by_kind": {
+          "door": {
+            "failed": 79,
+            "harm": 0,
+            "score": 190,
+            "solved": 15
+          },
+          "lava": {
+            "failed": 51,
+            "harm": 17,
+            "score": 147,
+            "solved": 17
+          },
+          "local": {
+            "failed": 69,
+            "harm": 35,
+            "score": 140,
+            "solved": 18
+          },
+          "plate": {
+            "failed": 257,
+            "harm": 0,
+            "score": 267,
+            "solved": 14
+          }
+        },
+        "episodes": 560,
+        "exposure_queries": 72160,
+        "failed": 456,
+        "harm": 52,
+        "harm_probe_legacy": 28,
+        "macros": {
+          "m1": {
+            "harm": 5,
+            "score": 30,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 4,
+            "score": 221,
+            "solved": 1
+          },
+          "m2": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 3,
+            "score": 36,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 10,
+            "score": 36,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 3,
+            "score": 30,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 4,
+            "score": 109,
+            "solved": 5
+          },
+          "m7": {
+            "harm": 9,
+            "score": 32,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 4,
+            "score": 195,
+            "solved": 2
+          },
+          "m9": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          }
+        },
+        "probe_actions": 571,
+        "probe_harm": 28,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 744,
+        "solved": 64,
+        "steps": 125685
+      },
+      "false_remote": {
+        "actions": 40825,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 85,
+            "harm": 0,
+            "score": 167,
+            "solved": 16
+          },
+          "lava": {
+            "failed": 42,
+            "harm": 16,
+            "score": 112,
+            "solved": 18
+          },
+          "local": {
+            "failed": 26,
+            "harm": 27,
+            "score": 98,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 181,
+            "harm": 0,
+            "score": 214,
+            "solved": 16
+          }
+        },
+        "episodes": 444,
+        "exposure_queries": 33202,
+        "failed": 334,
+        "harm": 43,
+        "harm_probe_legacy": 22,
+        "macros": {
+          "m1": {
+            "harm": 4,
+            "score": 26,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 4,
+            "score": 192,
+            "solved": 2
+          },
+          "m2": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 24,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 2,
+            "score": 28,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 4,
+            "score": 37,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 7,
+            "score": 32,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m9": {
+            "harm": 4,
+            "score": 30,
+            "solved": 8
+          }
+        },
+        "probe_actions": 495,
+        "probe_harm": 22,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 591,
+        "solved": 69,
+        "steps": 90056
+      },
+      "false_safe": {
+        "actions": 41716,
+        "affected_memory_responses": 16992,
+        "by_kind": {
+          "door": {
+            "failed": 56,
+            "harm": 0,
+            "score": 116,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 43,
+            "harm": 18,
+            "score": 88,
+            "solved": 19
+          },
+          "local": {
+            "failed": 35,
+            "harm": 41,
+            "score": 107,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 209,
+            "harm": 0,
+            "score": 218,
+            "solved": 16
+          }
+        },
+        "episodes": 456,
+        "exposure_queries": 338464,
+        "failed": 343,
+        "harm": 59,
+        "harm_probe_legacy": 29,
+        "macros": {
+          "m1": {
+            "harm": 7,
+            "score": 29,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 24,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 10,
+            "score": 36,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 4,
+            "score": 40,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 9,
+            "score": 32,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 6,
+            "score": 117,
+            "solved": 5
+          },
+          "m9": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          }
+        },
+        "probe_actions": 571,
+        "probe_harm": 29,
+        "release_queries": 0,
+        "released_actions": 0,
+        "released_harm": 0,
+        "score": 529,
+        "solved": 72,
+        "steps": 89596
+      }
+    },
+    "v3_n1": {
+      "false_alarm": {
+        "actions": 26804,
+        "affected_memory_responses": 97,
+        "by_kind": {
+          "door": {
+            "failed": 51,
+            "harm": 0,
+            "score": 112,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 21,
+            "harm": 21,
+            "score": 66,
+            "solved": 20
+          },
+          "local": {
+            "failed": 35,
+            "harm": 43,
+            "score": 107,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 131,
+            "harm": 0,
+            "score": 167,
+            "solved": 18
+          }
+        },
+        "episodes": 360,
+        "exposure_queries": 6089,
+        "failed": 238,
+        "harm": 64,
+        "harm_probe_legacy": 33,
+        "macros": {
+          "m1": {
+            "harm": 9,
+            "score": 29,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 24,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 10,
+            "score": 36,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 7,
+            "score": 37,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 9,
+            "score": 32,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 6,
+            "score": 44,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          }
+        },
+        "probe_actions": 751,
+        "probe_harm": 37,
+        "release_queries": 98114,
+        "released_actions": 164,
+        "released_harm": 4,
+        "score": 452,
+        "solved": 75,
+        "steps": 57466
+      },
+      "false_remote": {
+        "actions": 27176,
+        "affected_memory_responses": 0,
+        "by_kind": {
+          "door": {
+            "failed": 51,
+            "harm": 0,
+            "score": 109,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 22,
+            "harm": 21,
+            "score": 68,
+            "solved": 20
+          },
+          "local": {
+            "failed": 29,
+            "harm": 29,
+            "score": 101,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 132,
+            "harm": 0,
+            "score": 167,
+            "solved": 18
+          }
+        },
+        "episodes": 352,
+        "exposure_queries": 5946,
+        "failed": 234,
+        "harm": 50,
+        "harm_probe_legacy": 22,
+        "macros": {
+          "m1": {
+            "harm": 4,
+            "score": 26,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 24,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 2,
+            "score": 28,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 4,
+            "score": 29,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 5,
+            "score": 31,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 12,
+            "score": 57,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          }
+        },
+        "probe_actions": 697,
+        "probe_harm": 28,
+        "release_queries": 58524,
+        "released_actions": 181,
+        "released_harm": 6,
+        "score": 445,
+        "solved": 75,
+        "steps": 57977
+      },
+      "false_safe": {
+        "actions": 27652,
+        "affected_memory_responses": 1137,
+        "by_kind": {
+          "door": {
+            "failed": 51,
+            "harm": 0,
+            "score": 112,
+            "solved": 18
+          },
+          "lava": {
+            "failed": 25,
+            "harm": 26,
+            "score": 71,
+            "solved": 20
+          },
+          "local": {
+            "failed": 38,
+            "harm": 46,
+            "score": 111,
+            "solved": 19
+          },
+          "plate": {
+            "failed": 135,
+            "harm": 0,
+            "score": 171,
+            "solved": 18
+          }
+        },
+        "episodes": 372,
+        "exposure_queries": 164616,
+        "failed": 249,
+        "harm": 72,
+        "harm_probe_legacy": 29,
+        "macros": {
+          "m1": {
+            "harm": 9,
+            "score": 29,
+            "solved": 8
+          },
+          "m10": {
+            "harm": 6,
+            "score": 168,
+            "solved": 3
+          },
+          "m2": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m3": {
+            "harm": 2,
+            "score": 24,
+            "solved": 8
+          },
+          "m4": {
+            "harm": 10,
+            "score": 36,
+            "solved": 8
+          },
+          "m5": {
+            "harm": 5,
+            "score": 27,
+            "solved": 8
+          },
+          "m6": {
+            "harm": 7,
+            "score": 37,
+            "solved": 8
+          },
+          "m7": {
+            "harm": 9,
+            "score": 32,
+            "solved": 8
+          },
+          "m8": {
+            "harm": 14,
+            "score": 57,
+            "solved": 8
+          },
+          "m9": {
+            "harm": 5,
+            "score": 28,
+            "solved": 8
+          }
+        },
+        "probe_actions": 732,
+        "probe_harm": 35,
+        "release_queries": 41791,
+        "released_actions": 166,
+        "released_harm": 6,
+        "score": 465,
+        "solved": 75,
+        "steps": 59156
+      }
+    }
+  }
+}

@@ -142,7 +142,7 @@ el nuevo se seleccionó explícitamente y figura en `tasks.json`.
 - Un error de episodio: `BudgetExceeded: tools reservation exceeds remaining
   budget`, en CSV01 de F. Se conserva como no aceptado. Sin timeouts ni errores
   de proveedor. No confundir evidencia válida con tarea resuelta.
-- Notebook privado `rogeernavarro/echo51-categories14b-20261013`, versión 1,
+- Notebook privado `navywakura/echo51-categories14b-20261013`, versión 1,
   `COMPLETE`. Solo inferencia remota; los candidatos se ejecutan localmente
   en Bubblewrap/cgroups con rootfs fijado. Los oráculos no se suben a Kaggle.
 - Qwen2.5-Coder-14B-Instruct Q4_K_M y llama.cpp b11577 fijados como antes;

@@ -6,7 +6,7 @@ Se consultó el envío existente antes de reanudarlo: **p0 COMPLETE**, seis
 propuestas guardadas. La última respuesta remota figura a los 1488,5 segundos
 de ejecución. No se volvió a enviar p0.
 
-El trabajo recuperado es `rogeernavarro/echo45-s6b10-p0-20260929`. Sus respuestas,
+El trabajo recuperado es `navywakura/echo45-s6b10-p0-20260929`. Sus respuestas,
 modelo, pesos, perfil y pertenencia a las gramáticas por petición pasan las
 comprobaciones congeladas. Esto acredita la inferencia, no la utilidad de las
 propuestas. El perfil sigue siendo

@@ -18,7 +18,7 @@ MAX_HEADER = 512
 MAX_PAYLOAD = 256 * 1024
 MUTANT = os.environ.get('GROUND1_MUTANT', '')
 
-# echoai.core.wsp atoms and the 16-byte layout ("<BBBBbbbbbbBBBBBB"); tests assert identity.
+# navi10_wsp atoms and the 16-byte layout ("<BBBBbbbbbbBBBBBB"); tests assert identity.
 YO, AHORA, CAMBIAR, OBSERVAR, DESCONOCIDO, ALLI, FUERA = 2, 8, 13, 14, 31, 5, 7
 DOMAIN_PHYSICAL, GENERATOR_GROUND = 7, 0x06
 E_NAMES = ('V', 'A', 'D', 'C', 'U', 'B')

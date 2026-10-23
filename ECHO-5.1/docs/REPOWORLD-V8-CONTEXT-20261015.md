@@ -107,7 +107,7 @@ Es el mismo diff retenido en V6/V7; **no es una demostración de mejora en
 resolución**. Los tests públicos de `test_basic.py` no acreditan cobertura
 funcional de BlockMatrix. No se ha consultado el oráculo oficial.
 
-Kernel `rogeernavarro/echo51-repoworld-context-v8-20261015`: COMPLETE,
+Kernel `navywakura/echo51-repoworld-context-v8-20261015`: COMPLETE,
 65/65 capas, preparación 401,740 s, tiempo total 812,218 s. Worker detenido,
 sin errores, relay/túnel apagados. Cuota observada: 20,05→**19,82 h**.
 

@@ -104,7 +104,7 @@ def package(stage):
 
 
 def transport_call(command, *args):
-    process = subprocess.run(['/home/roger/.venvs/kaggle/bin/python',
+    process = subprocess.run(['/home/user/.venvs/kaggle/bin/python',
         str(s.BASE / 'recovery_transport2.py'), command, *map(str, args)],
         capture_output=True, text=True, timeout=180)
     if process.returncode:

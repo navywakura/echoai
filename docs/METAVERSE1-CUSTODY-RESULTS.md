@@ -7,7 +7,7 @@
 no hardware y no física.
 
 ```bash
-cd /home/roger/REALRXOS/RXos
+cd /home/user/REALRXOS/RXos
 PYTHONPATH=. python3 -m echoai.tests.test_metaverse1     # 40/40
 PYTHONPATH=. python3 -m echoai.metaverse1.bench          # certificado intacto
 ```

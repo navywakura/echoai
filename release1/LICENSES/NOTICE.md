@@ -1,6 +1,6 @@
 # echoAI-4 — notices and licence inventory
 
-Copyright © 2026 Roger Navarro / RxLabs (Rogex Laboratories).
+Copyright © 2026 RxLabs / RxLabs (Rogex Laboratories).
 
 ## Two layers
 
@@ -9,7 +9,7 @@ Copyright © 2026 Roger Navarro / RxLabs (Rogex Laboratories).
 | Open | `echoai_release/` (CLI, BYOK cortex, identity, reproduction), contracts (`echoai/docs/*.md`), results, receipts (`echoai/receipts`, `echoai/lab`) | PolyForm Noncommercial 1.0.0 |
 | Compiled core | `echoai.*.so`, `navi10_*.so` (Nuitka) | RxLabs EULA — **DRAFT, pending legal review** |
 
-Required notice for the open layer: `Required Notice: Copyright © 2026 Roger Navarro / RxLabs (https://rxlabs.org)`
+Required notice for the open layer: `Required Notice: Copyright © 2026 RxLabs / RxLabs (https://rxlabs.org)`
 
 ## Third-party components
 
@@ -32,9 +32,9 @@ The core imports only the Python standard library. Optional viewers in the lab
    GitHub remote that holds it (`navywakura/RXos`, `knightslabs/echos`,
    `knightslabs/rxos-9`, `knightslabs/rxos-8.5`) is **private**, so the echoAI code
    was never distributed to third parties under GPLv3. Git history: the only
-   non-Roger author is `qwen.ai[bot]` (one commit, `.gitignore` and two docs, no
+   non-Nav author is `qwen.ai[bot]` (one commit, `.gitignore` and two docs, no
    echoAI code); pull requests #1–#6 came from branches of `navywakura` (confirm it
-   is Roger's own account). As sole author, RxLabs may license echoAI as it
+   is Nav's own account). As sole author, RxLabs may license echoAI as it
    chooses. Before publishing: add an explicit licence file to `echoai/` so the
    repository-level GPLv3 notice does not appear to cover it, and have a lawyer
    glance at the EULA. **No longer a blocker; a to-do.**

@@ -175,7 +175,7 @@ def build():
     recovery = dict(schema="echoai.s6b24.recovery.v1", recovery_id="S6-B24-R1-20261009",
         status="DECLARED_NOT_EXECUTED", initial_checkpoint=False,
         reason="input ChatML EOG at token index 127 stops the pinned noninteractive CLI at -b 128 before proposal sampling",
-        parent=dict(kaggle_ref="rogeernavarro/echo45-s6b24-20261009", version=1,
+        parent=dict(kaggle_ref="navywakura/echo45-s6b24-20261009", version=1,
             bundle_sha256=PARENT_ZIP_SHA, evidence_sha256=EVIDENCE_SHA, profile_sha256=PROFILE_SHA,
             manifest_sha256=digest((canonical(manifest) + "\n").encode()),
             failed_case="FORMAT-ID/001", failed_stdout_sha256="ef9ea7f6620ab14103f8da54b436115262606a0d462faea70dd1661d3d554df8",
@@ -248,8 +248,8 @@ def build():
     write(HERE / "notebook.diff", "".join(difflib.unified_diff(old_notebook.splitlines(True),
           notebook.splitlines(True), fromfile="v1/notebook/run.py", tofile="r1/notebook/run.py")))
     metadata = json.loads((PARENT / "notebook/kernel-metadata.json").read_text())
-    metadata.update(id="rogeernavarro/echo45-s6b24-r1-20261009", title="echo45-s6b24-r1-20261009",
-                    dataset_sources=["rogeernavarro/echo45-s6b24-r1-private-20261009"])
+    metadata.update(id="navywakura/echo45-s6b24-r1-20261009", title="echo45-s6b24-r1-20261009",
+                    dataset_sources=["navywakura/echo45-s6b24-r1-private-20261009"])
     save(HERE / "notebook/kernel-metadata.json", metadata)
     save(HERE / "dataset/dataset-metadata.json", dict(id=metadata["dataset_sources"][0],
         title="echo45-s6b24-r1-private-20261009", licenses=[{"name": "other"}],

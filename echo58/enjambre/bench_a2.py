@@ -1,7 +1,7 @@
 """ENJAMBRE-1 (C v1), FIRST design (A2 MiniGrid missions; closed in development, see ENJAMBRE1-DEV-NOTE.md).
 (contract ENJAMBRE1-DESIGN.md).
 
-    cd /home/roger/REALRXOS/RXos
+    cd /home/user/REALRXOS/RXos
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 dev --macros 1,2,3
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 preflight
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.enjambre.bench_a2 exam

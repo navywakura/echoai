@@ -19,7 +19,7 @@ Este arranque todavía no acredita que la reproducción remota haya pasado.
 [Condición, coste y diagnóstico](ECHO45-S6-B12-RECOVERY1.md).
 
 Kaggle confirmó **RUNNING a las 12:52 CEST** para
-`rogeernavarro/echo45-s6b12-r1-c2-20260930`, privado, CPU y tope 7200 s.
+`navywakura/echo45-s6b12-r1-c2-20260930`, privado, CPU y tope 7200 s.
 La fuente ejecutada conserva el SHA-256 original c2
 `f72fee76a7d8ec076d3a115035aaf0497e9d97908624fa654a4bef38dca42baa`.
 La reproducción de las siete respuestas y los tres resultados restantes
@@ -62,7 +62,7 @@ El monitor independiente publica [seguimiento](ECHO45-S6-B12-LIVE.md) y
 existentes. No ejecuta el agente ni lee trayectorias protegidas. La mini
 terminal existente se abrió mediante `python3 observe.py --launch`.
 
-Primera inferencia real: `rogeernavarro/echo45-s6b12-c0-20260930`, privada y
+Primera inferencia real: `navywakura/echo45-s6b12-c0-20260930`, privada y
 sin GPU. Kaggle confirmó `S6_CPU_WEIGHT_HASHES_VERIFIED`, la comprobación
 de arquitectura Q8 y `S6_B12_CONTEXT_PREFLIGHT_OK`. El trabajo comenzó a
 generar el brazo FIJO; todavía no hay un veredicto de campaña. Los snapshots

@@ -45,7 +45,7 @@ También se debe comprobar el estado terminal del cuaderno en Kaggle.
 
 ## Resultados remotos
 
-Cuaderno privado `rogeernavarro/echo51-repoworld-interface-v2-20261015`, versión 1.
+Cuaderno privado `navywakura/echo51-repoworld-interface-v2-20261015`, versión 1.
 Estado final observado: **COMPLETE**. Dos Tesla T4, **65/65 capas** en GPU.
 Modelo y binario coinciden con el contrato: revisión
 `9d3053fce650fe1cdbdb75998c2a87add9d178ef`, SHA-256 del modelo

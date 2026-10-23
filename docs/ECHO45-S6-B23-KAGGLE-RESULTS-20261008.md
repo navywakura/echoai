@@ -1,7 +1,7 @@
 # S6-B23 R3: resultado del micro en Kaggle
 
 8 de octubre de 2026. Notebook privado
-`rogeernavarro/echo45-s6b23-micro-r3-20261008`. El cierre remoto se produjo
+`navywakura/echo45-s6b23-micro-r3-20261008`. El cierre remoto se produjo
 a las 06:31, hora de Madrid. Estado de Kaggle: `COMPLETE`.
 
 El recibo `b23-closed.json` declara `DIAGNOSTIC_COMPLETE`, `valid=true`,

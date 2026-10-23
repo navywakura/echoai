@@ -555,7 +555,7 @@ Hardware HIL/cage validation remains outstanding, so ECHO-3 stays at 14/15. See 
 and [roadmap](ROADMAP.md). The sections below preserve the historical results;
 their old “next” instructions do not override this checkpoint.
 
-Reproduce with, from `/home/roger/REALRXOS/RXos`:
+Reproduce with, from `/home/user/REALRXOS/RXos`:
 
 ```
 PYTHONPATH=. python3 -m echoai.tests.test_nexus0

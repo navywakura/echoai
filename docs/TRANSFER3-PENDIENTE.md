@@ -103,7 +103,7 @@ porque es lo más lento.
 
 **Lo que NO vale como custodia** —está así en el contrato, y `custody_v2`
 rechaza campañas reales por eso—: `.gitignore`, otra carpeta, otro repo tuyo,
-permisos bajo el mismo usuario. Si un agente que corre como `roger` puede
+permisos bajo el mismo usuario. Si un agente que corre como `Nav` puede
 leerlo, no es custodia.
 
 **Tres niveles, de menos a más sólido:**

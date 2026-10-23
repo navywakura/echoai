@@ -1,0 +1,158 @@
+{
+  "artifacts_matched": 64,
+  "datasets": [
+    {
+      "name": "honesto-none-m1",
+      "records": 104,
+      "sizes": {
+        "b64-columns": {
+          "full": 10108,
+          "full.zlib": 1212,
+          "payload": 10076,
+          "payload.zlib": 1142
+        },
+        "b64-rows": {
+          "full": 10901,
+          "full.zlib": 1001,
+          "payload": 10869,
+          "payload.zlib": 938
+        },
+        "b85-columns": {
+          "full": 9968,
+          "full.zlib": 1035,
+          "payload": 9936,
+          "payload.zlib": 974
+        },
+        "wsp": {
+          "full": 9604,
+          "full.zlib": 980,
+          "payload": 9572,
+          "payload.zlib": 921
+        }
+      }
+    },
+    {
+      "name": "memory-training-m01",
+      "records": 12,
+      "sizes": {
+        "b64-columns": {
+          "full": 104728,
+          "full.zlib": 26693,
+          "payload": 104696,
+          "payload.zlib": 26614
+        },
+        "b64-rows": {
+          "full": 104817,
+          "full.zlib": 26671,
+          "payload": 104785,
+          "payload.zlib": 26594
+        },
+        "b85-columns": {
+          "full": 104712,
+          "full.zlib": 26688,
+          "payload": 104680,
+          "payload.zlib": 26606
+        },
+        "wsp": {
+          "full": 104716,
+          "full.zlib": 26693,
+          "payload": 104684,
+          "payload.zlib": 26623
+        }
+      }
+    },
+    {
+      "name": "oraculo-false_remote-m3",
+      "records": 102,
+      "sizes": {
+        "b64-columns": {
+          "full": 9926,
+          "full.zlib": 1164,
+          "payload": 9894,
+          "payload.zlib": 1106
+        },
+        "b64-rows": {
+          "full": 10705,
+          "full.zlib": 955,
+          "payload": 10673,
+          "payload.zlib": 897
+        },
+        "b85-columns": {
+          "full": 9790,
+          "full.zlib": 1003,
+          "payload": 9758,
+          "payload.zlib": 937
+        },
+        "wsp": {
+          "full": 9434,
+          "full.zlib": 952,
+          "payload": 9402,
+          "payload.zlib": 894
+        }
+      }
+    },
+    {
+      "name": "prudente-false_safe-m1",
+      "records": 104,
+      "sizes": {
+        "b64-columns": {
+          "full": 10111,
+          "full.zlib": 1232,
+          "payload": 10079,
+          "payload.zlib": 1165
+        },
+        "b64-rows": {
+          "full": 10904,
+          "full.zlib": 1032,
+          "payload": 10872,
+          "payload.zlib": 962
+        },
+        "b85-columns": {
+          "full": 9971,
+          "full.zlib": 1060,
+          "payload": 9939,
+          "payload.zlib": 1003
+        },
+        "wsp": {
+          "full": 9607,
+          "full.zlib": 999,
+          "payload": 9575,
+          "payload.zlib": 952
+        }
+      }
+    }
+  ],
+  "freeze_sha256": "69238adcea06efddffe58f0c1d4319e8a8cf6a405fc5a05ab6d4cdb5912310bf",
+  "kind": "independent stdlib reconstruction without study codec imports",
+  "passed": true,
+  "result_sha256": "075d9796d63f26c0ddd34287ccaf2a8b54d46ff02b1c69f97cda04d61c98e92a",
+  "scope": "four previously seen Archives; bytes only; no worlds or model calls",
+  "source_sha256": "e57f4d2f0251d5e30fa7f23605db52e736fa4e730e96abe07275aebfba6764a4",
+  "totals": {
+    "b64-columns": {
+      "full": 134873,
+      "full.zlib": 30301,
+      "payload": 134745,
+      "payload.zlib": 30027
+    },
+    "b64-rows": {
+      "full": 137327,
+      "full.zlib": 29659,
+      "payload": 137199,
+      "payload.zlib": 29391
+    },
+    "b85-columns": {
+      "full": 134441,
+      "full.zlib": 29786,
+      "payload": 134313,
+      "payload.zlib": 29520
+    },
+    "wsp": {
+      "full": 133361,
+      "full.zlib": 29624,
+      "payload": 133233,
+      "payload.zlib": 29390
+    }
+  },
+  "utc": "2026-10-23T03:15:59.077246+00:00"
+}

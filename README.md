@@ -2,10 +2,10 @@
 <p align="center">
   <img src="https://img.shields.io/badge/ECHO--5.8-A_%C2%B7_B_%C2%B7_C_green-15803d" alt="ECHO-5.8: tracks A, B and C green" />
   <img src="https://img.shields.io/badge/ECHO--5-5.0.0_scoped_green-15803d" alt="ECHO-5: validated within its declared scope" />
-  <img src="https://img.shields.io/badge/version-5.8.0-7c3aed" alt="Version 5.8.0" />
-  <img src="https://img.shields.io/badge/next-C_v2_(liar)-f59e0b" alt="Next: C v2 with a liar" />
+  <img src="https://img.shields.io/badge/version-5.8.2-7c3aed" alt="Version 5.8.2" />
+  <img src="https://img.shields.io/badge/closure-5.8.2-2563eb" alt="5.8.2 closure" />
   <img src="https://img.shields.io/badge/core-deterministic-111827" alt="Deterministic core" />
-  <a href="https://huggingface.co/RxLabs/echoai-4-cognitive-agentic"><img src="https://img.shields.io/badge/Hugging_Face-ECHO_4.0-ffd21e?logo=huggingface" alt="ECHO 4.0 on Hugging Face" /></a>
+  <a href="https://huggingface.co/RxLabs/echoai-5.8"><img src="https://img.shields.io/badge/Hugging_Face-ECHO_5.8.2-ffd21e?logo=huggingface" alt="ECHO 5.8.2 on Hugging Face" /></a>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python" />
@@ -18,18 +18,18 @@
 
 ## ECHO-5.8 · learn in one world, use it in another · 21 October 2026
 
-**ECHO-5.8 turned three old reds green — with new contracts, frozen exams and independent verification.** Old reds stay red; each green below is a new, separately named experiment with predictions written before measuring and controls that could have won.
+**ECHO-5.8 turned three old reds green — with new contracts, frozen exams and internal checks in separate processes (including AI cross-review).** Old reds stay red; each green below is a new, separately named experiment with predictions written before measuring and controls that could have won.
 <sup><sub>Used Claude to manage the GitHub publishing and issues</sub></sup>
 
 | Track | What ECHO did | Exam result |
 |---|---|---|
-| **A · MEMORIA-X** | Integer, append-only memory of *roles* ("this moves by itself and hurts", "this key opens that door") carried into worlds it had never seen | **Green.** Learned memory beat empty and shuffled memory on held-out families |
+| **A · MEMORIA-X** | Integer, append-only memory of *roles* ("this moves by itself and hurts", "this key opens that door") carried into worlds it had never seen | **Green under the contracted aggregate gates.** Moving-object role memory transfers in the tested task families; negative transfer remains in A2 lava / ASG and some shuffled controls win |
 | **B · ACUMULA-3** | Chose and chained edits to its own memory and policy from its own measured failures, round after round | **Green.** Probe failures 94.3 → 35.4 → 22.3 → 21.0 → 15.8 → 13.8 (five straight improvements), harm 58.6 → 0; beat all five controls in 10/10 macros |
 | **C · ENJAMBRE-1** | Four ECHO agents, each with a private memory plus a global memory shared as 16-byte WSP postcards, solving shared worlds together and asking each other for help | **Green.** Mission score 691 vs 920 without global memory, 989 without private memory, 1866 isolated; 20/20 teams vs most controls |
 
 Honest limits, published with the results: in B, the policy pieces were designed outside ECHO and handing them all over at once ends about the same (13.3 vs 13.8), so ECHO's merit is choosing, ordering and accumulating; in C, the shared worlds and the ask/hold protocol were hand-designed, help only pays off in worlds that cannot be solved alone, and the private-memory advantage is concentrated in 2 of 20 teams. Earlier attempts (B v1, B v2, C's first design) stay red and are published as such.
 
-Next: **C v2**, the same swarm with a strategic liar (building on LINK-3), and **D**, ECHO as a veto for a tool-using LLM agent. Code, contracts, frozen exam data and how to reproduce: [`ECHO-5.8/`](ECHO-5.8/README.md). Full write-up: [rxlabs.org · ECHO-5.8](https://rxlabs.org/research/echo-58-aprender-en-un-mundo-y-usarlo-en-otro).
+**5.8 / 5.8.2 are now closed.** The [5.8.2 release](ECHO-5.8/docs/RELEASE-5.8.2.md) adds working `.wsp` archives, bounded LLM tool tests and simulated perception, with their limits and negative results. C v2/v3, CRECE and residual E repairs did not establish the intended advantage. No old red has been relabelled. [Reproduce the local checks](ECHO-5.8/docs/REPRODUCE-5.8.2.md).
 
 ## About ECHO-AI
 
@@ -50,7 +50,7 @@ ECHO-5 now includes typed object and relation programs, concept reuse, hierarchi
 
 The separate **[echounity sandbox](https://github.com/navywakura/echounity)** provides an isometric robot world, a first-person camera, an observed map and genuine recordings of its decisions. Its simulation results have their own scope and do not close ECHO-5.
 
-The package version is now **5.8.0** (ECHO-5.8; code in [`echo58/`](echo58/), contracts, results and reproduction steps in [`ECHO-5.8/`](ECHO-5.8/README.md)); the terminal installer itself is unchanged since 4.5.0b1. The previous ECHO-4.0 artifact is available on [Hugging Face](https://huggingface.co/RxLabs/echoai-4-cognitive-agentic). ECHO-5 5.0.0 is distributed as a source workspace in this repository; the terminal installer remains separate.
+The package version is now **5.8.2** (ECHO-5.8; code in [`echo58/`](echo58/), contracts, results and reproduction steps in [`ECHO-5.8/`](ECHO-5.8/README.md)); the terminal installer itself is unchanged since 4.5.0b1. The 5.8.2 source and selected evidence are available on [Hugging Face](https://huggingface.co/RxLabs/echoai-5.8). ECHO-5 5.0.0 is distributed as a source workspace in this repository; the terminal installer remains separate.
 
 ## ECHO-5.1 research closure · 16 October 2026
 

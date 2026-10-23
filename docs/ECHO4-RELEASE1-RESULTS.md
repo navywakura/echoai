@@ -98,7 +98,7 @@ Con los datos actuales se cumplen las dos condiciones. **Nav la aprobó el 2026-
   correos y rutas privadas: **0 hallazgos sin revisar**. Se revisaron a mano y se
   declaran 3 hallazgos de constantes del código:
   - la clave **falsa** de la prueba de API;
-  - `/home/roger` en la ruta del modelo por defecto de `situate2_bench.py`, que está
+  - `/home/user` en la ruta del modelo por defecto de `situate2_bench.py`, que está
     sellado; **revela el usuario del laboratorio**;
   - `echo-discord` en la guarda que **rechaza** esos modelos.
 - **C3:**

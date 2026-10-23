@@ -279,7 +279,7 @@ dependency and verifies wheel hashes from PyPI release metadata. No training
 extras, Torch, models, credits or cloud services are required.
 
 ```sh
-cd /home/roger/REALRXOS/RXos/echoai/ECHO-5
+cd /home/user/REALRXOS/RXos/echoai/ECHO-5
 python3.12 -I scripts/setup_sandbox.py
 python3.12 -I scripts/setup_sandbox.py --check
 ```

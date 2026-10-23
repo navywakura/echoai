@@ -26,7 +26,7 @@ el campo `limitations` del informe; no se resume aquí en positivo.
 ## 1. Qué se ejecutó
 
 ```bash
-cd /home/roger/REALRXOS/RXos/echoai
+cd /home/user/REALRXOS/RXos/echoai
 
 PYTHONPATH=.. python3 -m echoai.nexus0.sim3 validate \
     --package docs/examples/sim3 --protocol docs/examples/sim3/protocol.json
@@ -184,7 +184,7 @@ raíz visible  bin dev lib lib64 probe proc sbin usr work
 procesos      1
 ```
 
-En cada ejecución el probe intenta y se le deniega: `/home`, `/home/roger`,
+En cada ejecución el probe intenta y se le deniega: `/home`, `/home/user`,
 `/root`, `/var`, `/var/tmp`, `/run`, `/run/user`, `/etc`, `/etc/passwd`,
 `/etc/shadow`, `/sys/class/net`; escrituras en `/`, `/probe`, `/usr` y
 `/proc` (EROFS); TCP a 127.0.0.1:11345, :11317 y :8080; multicast UDP de

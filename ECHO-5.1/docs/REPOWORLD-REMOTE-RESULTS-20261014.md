@@ -3,7 +3,7 @@
 ## Intento 1: rechazo local anterior a inferencia
 
 Directorio privado: `artifacts/repoworld-remote-calibration-20261014T115920Z`.
-Kaggle: `rogeernavarro/echo51-repoworld-calibration32b-20261014`, versión 1.
+Kaggle: `navywakura/echo51-repoworld-calibration32b-20261014`, versión 1.
 Estado final comprobado: COMPLETE. Modelo 32B cargado en las dos T4;
 `errors=[]`, `relay_result.requests=0`, `relay_result.stopped=true`.
 Preparación remota: 401,135 segundos; worker completo: 409,333 segundos.

@@ -31,9 +31,9 @@ class B5Tests(unittest.TestCase):
                 self.assertIn("prefill_chunk_size=512", template)
                 self.assertNotIn("samples=model.generate(**enc,max_new_tokens=", template)
             else:
-                self.assertTrue(module.valid_ref("rogeernavarro/echo45-s6b5-pilot-20260928"))
-                self.assertFalse(module.valid_ref("rogeernavarro/unrelated"))
-                self.assertFalse(module.valid_ref("rogeernavarro/echo45-s6b5-r6-20260928"))
+                self.assertTrue(module.valid_ref("navywakura/echo45-s6b5-pilot-20260928"))
+                self.assertFalse(module.valid_ref("navywakura/unrelated"))
+                self.assertFalse(module.valid_ref("navywakura/echo45-s6b5-r6-20260928"))
 
     def test_unchanged_green_criteria(self):
         from seed.s6_precise_exam import checks

@@ -1,0 +1,502 @@
+{
+  "differs_from_empty": 12,
+  "episodes": 36,
+  "identical": 12,
+  "source_hits": 1283,
+  "source_queries": 1668,
+  "summary": [
+    {
+      "differs_from_empty": true,
+      "family": "LavaGapS7",
+      "hits": 86,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": 0,
+          "steps": 10,
+          "success": 0,
+          "wasted": 3
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 940,
+          "steps": 13,
+          "success": 1,
+          "wasted": 0
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 940,
+          "steps": 13,
+          "success": 1,
+          "wasted": 0
+        }
+      },
+      "queries": 134,
+      "regime": "A1",
+      "same": true,
+      "seed": 202610230
+    },
+    {
+      "differs_from_empty": true,
+      "family": "LavaGapS7",
+      "hits": 100,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": 0,
+          "steps": 10,
+          "success": 0,
+          "wasted": 3
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 931,
+          "steps": 15,
+          "success": 1,
+          "wasted": 2
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 931,
+          "steps": 15,
+          "success": 1,
+          "wasted": 2
+        }
+      },
+      "queries": 151,
+      "regime": "A2",
+      "same": true,
+      "seed": 202610230
+    },
+    {
+      "differs_from_empty": true,
+      "family": "LavaGapS7",
+      "hits": 79,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": 0,
+          "steps": 12,
+          "success": 0,
+          "wasted": 3
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 945,
+          "steps": 12,
+          "success": 1,
+          "wasted": 0
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 945,
+          "steps": 12,
+          "success": 1,
+          "wasted": 0
+        }
+      },
+      "queries": 123,
+      "regime": "A1",
+      "same": true,
+      "seed": 202610231
+    },
+    {
+      "differs_from_empty": true,
+      "family": "LavaGapS7",
+      "hits": 116,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": 0,
+          "steps": 12,
+          "success": 0,
+          "wasted": 3
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 908,
+          "steps": 20,
+          "success": 1,
+          "wasted": 2
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 908,
+          "steps": 20,
+          "success": 1,
+          "wasted": 2
+        }
+      },
+      "queries": 186,
+      "regime": "A2",
+      "same": true,
+      "seed": 202610231
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DoorKey6",
+      "hits": 134,
+      "outcomes": {
+        "empty": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 898,
+          "steps": 41,
+          "success": 1,
+          "wasted": 9
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 960,
+          "steps": 16,
+          "success": 1,
+          "wasted": 0
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 960,
+          "steps": 16,
+          "success": 1,
+          "wasted": 0
+        }
+      },
+      "queries": 149,
+      "regime": "A1",
+      "same": true,
+      "seed": 202610230
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DoorKey6",
+      "hits": 202,
+      "outcomes": {
+        "empty": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 898,
+          "steps": 41,
+          "success": 1,
+          "wasted": 9
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 938,
+          "steps": 25,
+          "success": 1,
+          "wasted": 3
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 938,
+          "steps": 25,
+          "success": 1,
+          "wasted": 3
+        }
+      },
+      "queries": 260,
+      "regime": "A2",
+      "same": true,
+      "seed": 202610230
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DoorKey6",
+      "hits": 135,
+      "outcomes": {
+        "empty": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 910,
+          "steps": 36,
+          "success": 1,
+          "wasted": 9
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 962,
+          "steps": 15,
+          "success": 1,
+          "wasted": 0
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 962,
+          "steps": 15,
+          "success": 1,
+          "wasted": 0
+        }
+      },
+      "queries": 149,
+      "regime": "A1",
+      "same": true,
+      "seed": 202610231
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DoorKey6",
+      "hits": 248,
+      "outcomes": {
+        "empty": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 910,
+          "steps": 36,
+          "success": 1,
+          "wasted": 9
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 940,
+          "steps": 24,
+          "success": 1,
+          "wasted": 3
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 940,
+          "steps": 24,
+          "success": 1,
+          "wasted": 3
+        }
+      },
+      "queries": 298,
+      "regime": "A2",
+      "same": true,
+      "seed": 202610231
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DynObs6",
+      "hits": 53,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": -1000,
+          "steps": 2,
+          "success": 0,
+          "wasted": 0
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 888,
+          "steps": 18,
+          "success": 1,
+          "wasted": 0
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 888,
+          "steps": 18,
+          "success": 1,
+          "wasted": 0
+        }
+      },
+      "queries": 53,
+      "regime": "A1",
+      "same": true,
+      "seed": 202610230
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DynObs6",
+      "hits": 36,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": -1000,
+          "steps": 2,
+          "success": 0,
+          "wasted": 0
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 888,
+          "steps": 18,
+          "success": 1,
+          "wasted": 0
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 888,
+          "steps": 18,
+          "success": 1,
+          "wasted": 0
+        }
+      },
+      "queries": 53,
+      "regime": "A2",
+      "same": true,
+      "seed": 202610230
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DynObs6",
+      "hits": 56,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": -1000,
+          "steps": 2,
+          "success": 0,
+          "wasted": 0
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 881,
+          "steps": 19,
+          "success": 1,
+          "wasted": 1
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 881,
+          "steps": 19,
+          "success": 1,
+          "wasted": 1
+        }
+      },
+      "queries": 56,
+      "regime": "A1",
+      "same": true,
+      "seed": 202610231
+    },
+    {
+      "differs_from_empty": true,
+      "family": "DynObs6",
+      "hits": 38,
+      "outcomes": {
+        "empty": {
+          "harm": 1,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 1,
+          "ret": -1000,
+          "steps": 2,
+          "success": 0,
+          "wasted": 0
+        },
+        "original": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 881,
+          "steps": 19,
+          "success": 1,
+          "wasted": 1
+        },
+        "wsp": {
+          "harm": 0,
+          "harm_auto": 0,
+          "harm_other": 0,
+          "harm_probe": 0,
+          "ret": 881,
+          "steps": 19,
+          "success": 1,
+          "wasted": 1
+        }
+      },
+      "queries": 56,
+      "regime": "A2",
+      "same": true,
+      "seed": 202610231
+    }
+  ],
+  "worlds": 12
+}

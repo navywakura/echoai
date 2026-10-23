@@ -13,7 +13,7 @@ from seed import s6b21_build as prior
 REPO=r.REPO
 RUNTIME=r.ROOT/'runtime'
 CONTRACT='docs/ECHO45-S6-B22-DESIGN.md'
-PDF=Path('/home/roger/Descargas/B22-investigacion-20261006.pdf')
+PDF=Path('/home/user/Descargas/B22-investigacion-20261006.pdf')
 
 
 def closure():

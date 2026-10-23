@@ -126,7 +126,7 @@ Hay tres discrepancias oficiales que afectan a la preparación:
   no autoriza ni realiza publicación o cambio de licencia.
 
 **Opciones accionables de runner, inspeccionadas pero no ejecutadas.**
-Comandos desde `/home/roger/REALRXOS/RXos/echoai`, para una fase posterior.
+Comandos desde `/home/user/REALRXOS/RXos/echoai`, para una fase posterior.
 
 1. **Rejillas ARC-1/2: candidato V3 sin LLM, una tarea permitida.**
    [CLI real](../seed/echo45_v3.py): acepta `train` con demostraciones y

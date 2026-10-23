@@ -64,7 +64,7 @@ retenida y checks públicos pasados. Finaliza `budget_stopped` con 23.757 tokens
 cuatro ejecuciones de checks y 248 recibos válidos. Contabilidad completa,
 `destroyed=0`, reservas pendientes=0. No hay resultado oficial del issue.
 
-Kernel privado `rogeernavarro/echo51-repoworld-locus-v6-20261015`, versión 1:
+Kernel privado `navywakura/echo51-repoworld-locus-v6-20261015`, versión 1:
 COMPLETE, 65/65 capas en 2 T4, preparación 382,749 s y total 739,113 s.
 Worker parado, cero errores; relay y túnel apagados al concluir V6.
 Cuota observada: 21,62 → **21,41 h**. V5 y V6 consumieron aproximadamente

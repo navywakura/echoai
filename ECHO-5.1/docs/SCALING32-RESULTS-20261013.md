@@ -31,7 +31,7 @@ amortizó en estos doce receptores. ECHO-5.1 no queda cerrado científicamente.
 - Las ejecuciones de código candidato siguieron en Bubblewrap/cgroup/rootfs
   local. Kaggle ejecutó únicamente inferencia; no recibió autoridad de verificador.
 
-Notebook **privado**: `rogeernavarro/echo51-scaling32-20261013`, versión 1.
+Notebook **privado**: `navywakura/echo51-scaling32-20261013`, versión 1.
 Kaggle terminó `COMPLETE`; worker `stopped: true`. Supervisor, relay, túnel y
 observador de cola inactivos. El mini terminal solo conserva el diario visible.
 

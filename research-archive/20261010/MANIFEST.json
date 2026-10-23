@@ -2,7 +2,7 @@
   "schema": "echo-research-snapshot-v1",
   "started_at": "2026-10-10T14:55:12.903332+00:00",
   "completed_at": "2026-10-10T14:55:14.386395+00:00",
-  "original_workspace": "/home/roger/REALRXOS/RXos/echoai",
+  "original_workspace": "/home/user/REALRXOS/RXos/echoai",
   "snapshot_only": true,
   "experiment_launched": false,
   "S6_pass": false,

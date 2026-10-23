@@ -91,7 +91,7 @@ class Grammar(unittest.TestCase):
         self.assertIn('row_grammars[batch_id].allowed', code)
         self.assertIn("r['guard_schema']", code)
         self.assertFalse(generator.metadata('p0')['enable_gpu'])
-        self.assertEqual(generator.metadata('c5')['id'], 'rogeernavarro/echo45-s6b10-c5-20260929')
+        self.assertEqual(generator.metadata('c5')['id'], 'navywakura/echo45-s6b10-c5-20260929')
 
 
 @unittest.skipUnless(importlib.util.find_spec('numpy') and importlib.util.find_spec('arcengine'), 'managed ARC runtime')

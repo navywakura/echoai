@@ -125,8 +125,8 @@ class ContinuationTests(unittest.TestCase):
             module.validate_metadata(meta)
             self.assertFalse(meta['enable_gpu'])
             self.assertTrue(meta['is_private'])
-        for ref in ('rogeernavarro/echo45-s6b12-c2-20260930',
-                    'rogeernavarro/echo45-s6b12-r1-c6-20260930'):
+        for ref in ('navywakura/echo45-s6b12-c2-20260930',
+                    'navywakura/echo45-s6b12-r1-c6-20260930'):
             self.assertFalse(module.valid_ref(ref))
 
     def test_ambiguous_absent_upload_cannot_be_sent_again(self):

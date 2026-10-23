@@ -44,7 +44,7 @@ class TransportTests(unittest.TestCase):
             (folder / 'notebook').mkdir(parents=True)
             source = b'answer = 1\n'
             (folder / 'notebook/run.py').write_bytes(source)
-            meta = {'id': 'rogeernavarro/echo45-s6b11-p0-20260929', 'is_private': True}
+            meta = {'id': 'navywakura/echo45-s6b11-p0-20260929', 'is_private': True}
             r.s.atomic(folder / 'notebook/kernel-metadata.json', meta)
             r.s.atomic(folder / 'submission.json', {'ref': meta['id'], 'wrapper_sha256': r.digest(source)})
             with patch.object(r.s, 'BASE', base), patch.object(r, 'integrity', return_value={}), \

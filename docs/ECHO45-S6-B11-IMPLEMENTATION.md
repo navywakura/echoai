@@ -80,7 +80,7 @@ La [segunda adenda de transporte](ECHO45-S6-B11-TRANSPORT-RECOVERY2.md) usa LZMA
 **72655 bytes**, con descompresión idéntica byte a byte al programa congelado.
 Sus cuatro pruebas pasan. El supervisor reanudó a las **16:45:40 Madrid** y
 Kaggle confirmó **RUNNING a las 16:46:17** para el primer lote privado CPU
-`rogeernavarro/echo45-s6b11-p0-20260929`. Este es un estado de arranque fechado;
+`navywakura/echo45-s6b11-p0-20260929`. Este es un estado de arranque fechado;
 el resultado actual está en los enlaces de seguimiento anteriores.
 
 La auditoría adicional comprobará también el recibo remoto de los bytes

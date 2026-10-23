@@ -29,7 +29,7 @@ R1 conserva el fallo y los costes, usa un ZIP separado con lote lógico 8192,
 microlote 64 y exige ocho comprobaciones nuevas. Las 100 fuentes originales
 siguen intactas; 69 pruebas locales pasan y los dos validadores nativos
 quedan para el runtime CUDA. [Recuperación](ECHO45-S6-B24-R1-RECOVERY-20261009.md).
-[Kaggle R1 privado](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-r1-20261009)
+[Kaggle R1 privado](https://www.kaggle.com/code/navywakura/echo45-s6b24-r1-20261009)
 aceptó la versión 1 a las 01:47. A las 01:52:38 pasó las ocho comprobaciones
 de formato; a las 01:53 ya registra partidas de la base R4-REF. El seguimiento
 está en `lab/kaggle/s6b24-r1-20261009/pipeline-status.json` y
@@ -60,7 +60,7 @@ inferencias reales. [Registro de ejecución](ECHO45-S6-B24-RUN-20261009.md).
 Todavía no hay resultado científico B24.
 [Contrato ejecutable](ECHO45-S6-B24-DESIGN.md) ·
 [Capacidades confirmadas y opciones ARC](ECHO45-CLOSURE-EVIDENCE-20261009.md).
-[Ejecución privada](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-20261009).
+[Ejecución privada](https://www.kaggle.com/code/navywakura/echo45-s6b24-20261009).
 El estado operativo está en `lab/kaggle/s6b24-20261009/pipeline-status.json`;
 la cuota puede exigir continuaciones con el mismo perfil. Los bloques
 anteriores conservan sus resultados y decisiones históricas.
@@ -248,7 +248,7 @@ en metadatos y llms.txt. Las subpáginas y los archivos detallados dejan de
 estar publicados; no aparece el nombre personal ni Discord.
 
 La web anterior se conservó localmente, con 1.754 archivos y el historial Git,
-en `/home/roger/rxlabs-private-archive/20261003-130623/`, fuera del repositorio
+en `/home/user/rxlabs-private-archive/20261003-130623/`, fuera del repositorio
 desplegable. El repositorio de la web pasó a privado. El commit `16199cf` está
 READY en Vercel; la portada y siete archivos de identidad/contexto coinciden
 con los bytes del build local, y veinte rutas retiradas devuelven HTTP 410.

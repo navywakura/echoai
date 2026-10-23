@@ -1,7 +1,7 @@
 RXos — copyright and license
 =============================
 
-Copyright (C) 2026 Roger Navarro / Rogex Laboratories (Knights Labs)
+Copyright (C) 2026 RxLabs / Rogex Laboratories (Knights Labs)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ You may NOT:
 Project name and identity
 -------------------------
 "RXos", "rxOS", "Rogex", "Rogex Laboratories", and "Knights Labs" identify
-this project and its author, Roger Navarro. Distributing a fork does not
+this project and its author, RxLabs. Distributing a fork does not
 grant a trademark license to pass your product off as the official RXos
 from Rogex Laboratories, nor to erase that the codebase originates here.
 Contributions and public derivatives are expected to stay in the RXos

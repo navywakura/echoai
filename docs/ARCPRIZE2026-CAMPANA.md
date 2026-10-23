@@ -7,7 +7,7 @@ y se entrena ECHO-4.5, y eso es lo que se sube. Reglas revisadas en `ARCPRIZE202
 
 | Tema | Decisión |
 |---|---|
-| Equipo | una persona: Nav (`rogeernavarro`), nombre RxLabs |
+| Equipo | una persona: Nav (`navywakura`), nombre RxLabs |
 | Licencia | paquete aparte **`echo-arc`**, autocontenido: agente de ARC-3, ECHO-SEED y la memoria verificada mínima. Si ganamos, **solo eso** se publica en CC-BY 4.0. La release de ECHO-4 (núcleo, EGO…) sigue en PolyForm-NC y la entrega **no la importa** |
 | Reglas aceptadas | ARC-AGI-3 ✅ · ARC-AGI-2 ✅ · paper track ✅ (comprobado por la API el 2026-09-25) |
 | Qué se sube | **ECHO-4.5** (ECHO-SEED con S1–S5) integrado en `echo-arc` |

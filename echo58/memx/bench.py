@@ -1,6 +1,6 @@
 """MEMORIA-X bench: train, develop, freeze, examine, report.
 
-    PYTHONPATH=/home/roger/REALRXOS/RXos echoai/ECHO-5/.venv-sandbox/bin/python \
+    PYTHONPATH=/home/user/REALRXOS/RXos echoai/ECHO-5/.venv-sandbox/bin/python \
         -m echoai.echo58.memx.bench dev|preflight|exam|report
 
 Seeds (contract §3, amendment 2): training 100000*m + 1000*f + i (m = 1..10

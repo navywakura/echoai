@@ -1,0 +1,12 @@
+{
+  "scope": "independent small receipt/aggregate/exact-statistic cross-check; no worlds or large transcript re-audit",
+  "receipts": 210,
+  "totals_identical": true,
+  "p_values": {
+    "harm_ingenuo": 0.21875,
+    "score_sin_global": 0.0419921875,
+    "score_por_autor": 0.052734375
+  },
+  "scientific_green": false,
+  "result_sha256": "6ddaa21434d550fa16f46c51c5050545910cab362ebf78e33d7e06dfa66442cb"
+}

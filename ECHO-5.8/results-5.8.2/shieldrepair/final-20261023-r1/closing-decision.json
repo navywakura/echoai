@@ -1,0 +1,52 @@
+{
+  "utc": "2026-10-23T02:34:24.954862+00:00",
+  "track": "E",
+  "status": "red",
+  "closure": "deuda residual, autopsiada",
+  "final_attempt_consumed": true,
+  "additional_attempts_authorized": false,
+  "reason": "progress below80percent of both controls in both replicas",
+  "numeric_U": "red",
+  "numeric_B": "green",
+  "numeric_sign": {
+    "denominator": 512,
+    "losses": 1,
+    "numerator": 10,
+    "significant": true,
+    "ties": 91,
+    "wins": 8
+  },
+  "pooled": {
+    "legacy": {
+      "cost": 1202,
+      "episodes": 100,
+      "goals": 222,
+      "max_cost": 236,
+      "over25": 8,
+      "steps": 100000
+    },
+    "repair": {
+      "cost": 30,
+      "episodes": 100,
+      "goals": 105,
+      "max_cost": 16,
+      "over25": 0,
+      "steps": 100000
+    },
+    "slow": {
+      "cost": 235,
+      "episodes": 100,
+      "goals": 162,
+      "max_cost": 67,
+      "over25": 4,
+      "steps": 100000
+    }
+  },
+  "original_protocol": "interrupted_global_oom",
+  "original_contract_full_green": false,
+  "recovered_complete_episodes": 380,
+  "original_complete_bytewise_preserved": 232,
+  "reconstructed_interrupted_jobs": 4,
+  "retained_old_transitions": 0,
+  "report": "/home/user/REALRXOS/RXos/echoai/ECHO-5.8/docs/E-FINAL-RESULTS-20261023.md"
+}

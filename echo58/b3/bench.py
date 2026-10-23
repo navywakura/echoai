@@ -1,7 +1,7 @@
 """B v3 prototype bench (development only, no contract): ACUMULA-2's rounds with a menu that holds
 memory edits *and* policy pieces (policy.py), proposed from signals in ECHO's own failed episodes.
 
-    cd /home/roger/REALRXOS/RXos
+    cd /home/user/REALRXOS/RXos
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.b3.bench --macros 1 2 3
 
 Same mix, gate, seeds and controls as ACUMULA-2 dev; dev probe swaps ObstructedMaze1Dlh (already

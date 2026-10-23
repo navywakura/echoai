@@ -8,7 +8,7 @@ ni de presupuesto durante el episodio.
 
 ## Ejecución y parada
 
-Cuaderno privado: `rogeernavarro/echo51-repoworld-usability-v2-20261014`, v1.
+Cuaderno privado: `navywakura/echo51-repoworld-usability-v2-20261014`, v1.
 Qwen2.5-Coder-32B-Instruct Q4_K_M fijado; 65/65 capas en CUDA0/CUDA1, dos T4.
 Kaggle terminó COMPLETE; `errors=[]`, `relay_result.stopped=true`.
 Relay y túnel locales propios también detenidos, verificando PID e identidad.

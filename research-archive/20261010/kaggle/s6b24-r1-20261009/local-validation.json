@@ -1,7 +1,7 @@
 {
   "changed_original_sources": [],
   "cloud_operations": 0,
-  "isolated_project": "/home/roger/REALRXOS/RXos/echoai/lab/kaggle/s6b24-r1-20261009/checks/isolated-r1-x703re9_",
+  "isolated_project": "/home/user/REALRXOS/RXos/echoai/lab/kaggle/s6b24-r1-20261009/checks/isolated-r1-x703re9_",
   "native_validation": "not run; inherited native grammar checks explicitly skipped",
   "new_games": 0,
   "new_model_calls": 0,

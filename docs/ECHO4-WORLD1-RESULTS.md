@@ -90,7 +90,7 @@ exacto al agente como atajo.
 
 ## Reproducción
 
-Desde `/home/roger/REALRXOS/RXos/echoai`:
+Desde `/home/user/REALRXOS/RXos/echoai`:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.. python3 -m echoai.echo4 audit

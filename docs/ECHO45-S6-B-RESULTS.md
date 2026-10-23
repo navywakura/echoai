@@ -221,7 +221,7 @@ Paquete: `dac54765521a7ce1123a0d2f0410fd7da46108020b74b629b53a9e043d854bb7`.
 Código, perfiles, respuestas y resultados en las carpetas `s6b2-20260927`
 y `s6b2-final-20260927`. El recibo fija las estrategias con SHA-256
 `7fc03cce8e1fe43e8c3ab3e340ec2cb10ef4dfdd1476957eef058c69829bfa1c`.
-Kaggle privado: `rogeernavarro/echo45-s6b2-game-strategies`, estado COMPLETE.
+Kaggle privado: `navywakura/echo45-s6b2-game-strategies`, estado COMPLETE.
 Examen local iniciado 12:41 UTC, terminado y auditado a las 13:40 UTC.
 Entorno: Python 3.12.13, NumPy 2.3.2, arcengine 0.9.3, arc-agi 0.9.1,
 cuatro trabajadores; sin modelo durante las partidas.

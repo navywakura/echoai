@@ -1,5 +1,5 @@
 {
-  "id": "rogeernavarro/echo45-s6b24-20261009",
+  "id": "navywakura/echo45-s6b24-20261009",
   "title": "echo45-s6b24-20261009",
   "code_file": "run.py",
   "language": "python",
@@ -9,7 +9,7 @@
   "enable_tpu": false,
   "enable_internet": true,
   "dataset_sources": [
-    "rogeernavarro/echo45-s6b24-private-20261009"
+    "navywakura/echo45-s6b24-private-20261009"
   ],
   "competition_sources": [],
   "kernel_sources": []

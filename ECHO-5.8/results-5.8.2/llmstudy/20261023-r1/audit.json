@@ -1,0 +1,12 @@
+{
+  "D1_advantage_green": false,
+  "D1_technical_green": true,
+  "D2_utility_green": true,
+  "api_calls_during_audit": 0,
+  "deterministic_memory_ceiling": 24,
+  "jobs": 208,
+  "memory_chains_verified": true,
+  "ok": true,
+  "prompts_and_proposals_rebuilt": true,
+  "utc": "2026-10-23T01:06:59.525481+00:00"
+}

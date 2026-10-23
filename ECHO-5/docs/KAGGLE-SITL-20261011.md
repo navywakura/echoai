@@ -13,7 +13,7 @@ All artifacts are under `ECHO-5/artifacts/kaggle-sitl-20261011-r1/`.
 
 Kaggle MCP quota/search calls returned `Unauthenticated`; `authorize` returned
 `Authentication required`. The existing separately managed
-`/home/roger/.venvs/kaggle` API environment authenticated successfully.
+`/home/user/.venvs/kaggle` API environment authenticated successfully.
 Only launch mechanics and metadata from `lab/kaggle` were inspected; its
 managers and campaigns were not imported, relaunched or changed.
 
@@ -33,7 +33,7 @@ full repository or sealed evaluation data were uploaded.
 
 ## Runtime capability
 
-[Private capability probe, version 1](https://www.kaggle.com/code/rogeernavarro/echo5-sitl-capability-20261011-r1)
+[Private capability probe, version 1](https://www.kaggle.com/code/navywakura/echo5-sitl-capability-20261011-r1)
 completed its code in **2.056 seconds**, below its 240-second internal limit.
 Exact command outputs: [capability.json](../artifacts/kaggle-sitl-20261011-r1/output-v1/capability.json).
 
@@ -67,7 +67,7 @@ GPU acceleration was neither assumed nor requested.
 
 ## Exact Python
 
-[Private interpreter probe, version 1](https://www.kaggle.com/code/rogeernavarro/echo5-python312-capability-20261011-r1)
+[Private interpreter probe, version 1](https://www.kaggle.com/code/navywakura/echo5-python312-capability-20261011-r1)
 found system Python 3.12.3 and default 3.13.15, neither matching the pin.
 Portable setup installed **3.12.13** entirely under
 `/kaggle/working/portable-runtime` in **3.391 seconds** including checks.
@@ -91,8 +91,8 @@ Installed interpreter executable SHA-256:
 
 | Private CPU notebook, version 1 | Scope | Result | Test time |
 |---|---|---|---|
-| [Recovery](https://www.kaggle.com/code/rogeernavarro/echo5-sitl-stdlib-r1-20261011) | Complete suite: 14 recovery + 4 guarded adapter tests | 18/18 passed | 0.178964 s |
-| [Parameters](https://www.kaggle.com/code/rogeernavarro/echo5-sitl-stdlib-r2-20261011) | Explicit calibration, ULog framing/binding and EOF selections | 10/10 passed | 0.004509 s |
+| [Recovery](https://www.kaggle.com/code/navywakura/echo5-sitl-stdlib-r1-20261011) | Complete suite: 14 recovery + 4 guarded adapter tests | 18/18 passed | 0.178964 s |
+| [Parameters](https://www.kaggle.com/code/navywakura/echo5-sitl-stdlib-r2-20261011) | Explicit calibration, ULog framing/binding and EOF selections | 10/10 passed | 0.004509 s |
 
 Both jobs reported **zero failures, errors, skips, expected failures or
 unexpected successes**. Runner times including interpreter setup were

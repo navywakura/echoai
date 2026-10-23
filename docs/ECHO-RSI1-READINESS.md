@@ -59,10 +59,10 @@ comprobar que libera su lock y usar el comando siguiente. No detener PROBE2:
 ```sh
 systemd-run --user --unit=echoai-rsi1-after-probe2 \
   --property=Nice=10 \
-  --property=WorkingDirectory=/home/roger/REALRXOS/RXos/echoai \
-  --property=StandardOutput=append:/home/roger/REALRXOS/RXos/echoai/lab/research/echo-rsi1-20261001/queue-process.log \
-  --property=StandardError=append:/home/roger/REALRXOS/RXos/echoai/lab/research/echo-rsi1-20261001/queue-process.log \
-  /home/roger/REALRXOS/RXos/echoai/lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -u -m seed.rsi1_queue
+  --property=WorkingDirectory=/home/user/REALRXOS/RXos/echoai \
+  --property=StandardOutput=append:/home/user/REALRXOS/RXos/echoai/lab/research/echo-rsi1-20261001/queue-process.log \
+  --property=StandardError=append:/home/user/REALRXOS/RXos/echoai/lab/research/echo-rsi1-20261001/queue-process.log \
+  /home/user/REALRXOS/RXos/echoai/lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -u -m seed.rsi1_queue
 ```
 
 Estado y lanzamiento se guardan en `queue-status.json`, `queue-process.log`

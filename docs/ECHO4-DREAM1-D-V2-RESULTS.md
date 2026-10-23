@@ -129,8 +129,8 @@ La campaña local opt-in usa `campaign` y exige un directorio inexistente:
 
 ```bash
 PYTHONPATH=.. python3 -m echoai.echo4.dream_v2_bench campaign lab/echo4/dream1-d-v2-reproduction \
-  --server /home/roger/src/llama.cpp/build/bin/llama-server \
-  --model /home/roger/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf \
+  --server /home/user/src/llama.cpp/build/bin/llama-server \
+  --model /home/user/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf \
   --threads 4
 ```
 

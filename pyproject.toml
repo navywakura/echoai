@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "echoai"
-version = "5.8.0"
-description = "ECHO-AI deterministic cognitive core and development harness; ECHO-5.8 (tracks A, B, C green)"
+version = "5.8.2"
+description = "ECHO-AI deterministic cognitive core and development harness; ECHO-5.8.2 research closure, scoped results and WSP archives"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "RxLabs"}]
@@ -21,4 +21,4 @@ echo-dev = "echoai.cli:dev_main"
 
 [project.urls]
 Source = "https://github.com/navywakura/echoai"
-StableModel = "https://huggingface.co/RxLabs/echoai-4-cognitive-agentic"
+StableModel = "https://huggingface.co/RxLabs/echoai-5.8"

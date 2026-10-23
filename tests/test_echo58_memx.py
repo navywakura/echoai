@@ -1,6 +1,6 @@
 """MEMORIA-X (ECHO-5.8 track A) invariants.
 
-    cd /home/roger/REALRXOS/RXos && PYTHONPATH=. python3 -m echoai.tests.test_echo58_memx
+    cd /home/user/REALRXOS/RXos && PYTHONPATH=. python3 -m echoai.tests.test_echo58_memx
 """
 import ast
 import json

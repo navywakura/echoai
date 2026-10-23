@@ -51,7 +51,7 @@ tres intentos de parche, cuatro ejecuciones de checks, 188 recibos válidos,
 en V6; no se ha comprobado la resolución oficial del issue. Los checks
 públicos de `test_basic.py` no equivalen a cobertura del fallo de BlockMatrix.
 
-Kernel privado `rogeernavarro/echo51-repoworld-batch-v7-20261015`, versión 1:
+Kernel privado `navywakura/echo51-repoworld-batch-v7-20261015`, versión 1:
 COMPLETE, 65/65 capas en dos T4, preparación 391,191 s y total 689,437 s.
 Worker detenido sin errores; relay y túnel apagados. Cuota 20,78 → **20,59 h**.
 

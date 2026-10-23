@@ -28,7 +28,7 @@ nuevas, privadas y fuera de Git. No se modificó el código durante estas compue
 Una instancia reservada: `sympy__sympy-19007`, brazo E, semilla 73.
 Qwen2.5-Coder-32B-Instruct Q4_K_M, 2 T4, límite global 25.000 tokens,
 24 llamadas LLM y 8 parches. Cuaderno privado:
-`rogeernavarro/echo51-repoworld-handoff-v4-20261015`, versión 1.
+`navywakura/echo51-repoworld-handoff-v4-20261015`, versión 1.
 
 No hay comparación entre brazos ni evaluación del oráculo final en este ensayo.
 El contrato sigue `design`, `launch_enabled:false`; no se sella la campaña.

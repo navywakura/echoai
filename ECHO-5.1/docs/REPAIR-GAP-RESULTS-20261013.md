@@ -51,7 +51,7 @@ GPU vinculado a otras entradas. Esta suite prueba software, no superioridad.
 
 Se cumple el requisito de una reparación local comprobada. Se envió un
 microensayo de dos propuestas, exclusivamente inferencia, a
-`rogeernavarro/echo51-repair-proposer14b-20261013` (versiones 1, 2 y 3).
+`navywakura/echo51-repair-proposer14b-20261013` (versiones 1, 2 y 3).
 La lectura posterior de metadatos confirma `is_private=true` y `NvidiaTeslaT4`.
 No es la campaña interactiva S/I2/F/E: Kaggle no ofrece la frontera local
 Bubblewrap/cgroups. Las propuestas se ejecutarán aquí, en el rootfs fijado.

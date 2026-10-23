@@ -85,7 +85,7 @@ subir retrospectivamente la puntuación. Esta es una ejecución nueva y distinta
 - 12/12 episodios terminados; 619 recibos válidos en la auditoría automática y
   su repetición explícita. Sin discrepancias, errores de episodio, timeouts ni
   destrucción de memoria (`destroyed == 0`). Alcance finito, no prueba universal.
-- Notebook privado `rogeernavarro/echo51-graduation14b-20261013`, versión 1,
+- Notebook privado `navywakura/echo51-graduation14b-20261013`, versión 1,
   estado `COMPLETE`. Kaggle solo ejecuta inferencia; candidatos y oráculos se
   ejecutan localmente bajo Bubblewrap/cgroups con el rootfs fijado.
 - 49/49 capas en GPU, 9.161 MiB en CUDA0 y 105 MiB en la segunda T4 al cargar.

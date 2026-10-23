@@ -1,6 +1,6 @@
 # Corrección de rutas de la galería de GIFs
 
-2026-10-01. Repositorio oficial local: `/home/roger/rxlabs.org_local`.
+2026-10-01. Repositorio oficial local: `/home/user/rxlabs.org_local`.
 Sitio oficial: `https://www.rxlabs.org`.
 
 Se reproduce un fallo en la galería de capacidad al abrir su ruta sin barra
@@ -38,7 +38,7 @@ el commit; su [recibo](../lab/publication/rxlabs-gif-fix-20261001.json)
 contiene las comprobaciones y SHA-256. Ejecutar desde la terminal del dueño:
 
 ```bash
-bash /home/roger/REALRXOS/RXos/echoai/lab/publication/publish-rxlabs-gif-fix-20261001.sh
+bash /home/user/REALRXOS/RXos/echoai/lab/publication/publish-rxlabs-gif-fix-20261001.sh
 ```
 
 El script comprueba hashes, remoto y estado de las ramas, aplica el commit

@@ -77,7 +77,7 @@ After all components are programmed, the parent can use the existing orchestrato
 with a **new** output directory (these commands were not executed here):
 
 ```sh
-cd /home/roger/REALRXOS/RXos/echoai/ECHO-5
+cd /home/user/REALRXOS/RXos/echoai/ECHO-5
 nohup .venv/bin/python -I scripts/closure.py worker transfer --phase development \
   --output artifacts/transfer-development-v1 > artifacts/transfer-development-v1.log 2>&1 &
 ```

@@ -7,7 +7,7 @@
 Certificado `f508b10858e2a762e079106dfcb2ea3e5c3d9ac579e190482e4b19345c05d4e0`.
 
 ```bash
-cd /home/roger/REALRXOS/RXos
+cd /home/user/REALRXOS/RXos
 python3 -m echoai.metaverse1.bench
 python3 -m echoai.tests.test_metaverse1
 ```

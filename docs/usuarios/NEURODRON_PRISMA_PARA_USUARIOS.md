@@ -16,7 +16,7 @@ Esa línea aprovecha capacidades ya construidas en **echoAI** y **echOS 3.0**. T
 
 El motor y la suite de análisis pueden funcionar por separado. Los métodos clásicos proceden de MNE y sus bibliotecas asociadas; la aportación de PRISMA está en el flujo de trabajo, integración, procesamiento por eventos e integridad. No necesita una placa neuromórfica para ejecutar su ruta CPU.
 
-Existen lectores para BrainVision, EDF/BDF, GDF, CNT, EEGLAB y FIF, con distintos tipos de comprobación documentada. Se ha procesado un dataset Flanker de 73 participantes y se ha comprobado la importación de épocas de imaginería motora BCI Competition IV 2a. **Leer y analizar esas épocas no equivale a haber validado un decoder de órdenes.** La documentación técnica recoge 135 tests automáticos; esta guía no los ha vuelto a ejecutar. [Documento técnico consultado](/home/roger/rxlabs.org_local/src/content/prisma/tecnico.md).
+Existen lectores para BrainVision, EDF/BDF, GDF, CNT, EEGLAB y FIF, con distintos tipos de comprobación documentada. Se ha procesado un dataset Flanker de 73 participantes y se ha comprobado la importación de épocas de imaginería motora BCI Competition IV 2a. **Leer y analizar esas épocas no equivale a haber validado un decoder de órdenes.** La documentación técnica recoge 135 tests automáticos; esta guía no los ha vuelto a ejecutar. [Documento técnico consultado](/home/user/rxlabs.org_local/src/content/prisma/tecnico.md).
 
 La capa de integridad también conserva resultados negativos: la hipótesis de que calibrar el umbral por sujeto predijera comportamiento no replicó en dos datasets públicos. Ese resultado limita la hipótesis, sin borrar las herramientas de análisis que sí funcionan.
 
@@ -24,7 +24,7 @@ La capa de integridad también conserva resultados negativos: la hipótesis de q
 
 El informe técnico de Engine 0.1.0 registra un microbenchmark de **32 canales y 200.000 muestras**: **1,81 µs de media** y **43,9 µs como peor valor observado** en el camino caliente, con búferes fijos. Es rendimiento de una operación de software en una configuración concreta. No mide adquisición del sensor, evidencia necesaria para decidir, radio, movimiento ni percepción humana; tampoco establece un máximo garantizado.
 
-La entrada TCP ya existe: cabecera con canales/frecuencia y muestras `float32` intercaladas. El puente LSL permite conectarle otros productores. La versión inspeccionada asigna el tiempo al recibir la muestra y no transporta en cada muestra el tiempo original del sensor ni marcadores de tarea. Por eso aún falta instrumentación para demostrar una latencia desde la adquisición física. Una marca de recepción no puede reconstruir por sí sola ese dato ausente. [Código de entrada](/home/roger/Escritorio/PRISMA-Engine-Workspace/prisma-engine-dev-full/src/live_source.rs), [puente LSL](/home/roger/Escritorio/PRISMA-Engine-Workspace/prisma-engine-dev-full/scripts/bridges/lsl_to_prisma.py).
+La entrada TCP ya existe: cabecera con canales/frecuencia y muestras `float32` intercaladas. El puente LSL permite conectarle otros productores. La versión inspeccionada asigna el tiempo al recibir la muestra y no transporta en cada muestra el tiempo original del sensor ni marcadores de tarea. Por eso aún falta instrumentación para demostrar una latencia desde la adquisición física. Una marca de recepción no puede reconstruir por sí sola ese dato ausente. [Código de entrada](/home/user/Escritorio/PRISMA-Engine-Workspace/prisma-engine-dev-full/src/live_source.rs), [puente LSL](/home/user/Escritorio/PRISMA-Engine-Workspace/prisma-engine-dev-full/scripts/bridges/lsl_to_prisma.py).
 
 ## Qué quiere decir «subir» en este proyecto
 
@@ -57,7 +57,7 @@ La recomendación de otra IA de «añadir una SNN y un LLM pequeño» describe p
 
 ## Qué significan las cifras de latencia del resumen anterior
 
-**98, 163 y 1.245 ms son sumas de asignaciones propuestas, no medidas ni límites biológicos.** Incluyen evidencia, adquisición, inferencia, selección, gates, transporte, autopiloto, mecánica y retorno físico. El [presupuesto original](/home/roger/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_PRESUPUESTO_LATENCIA.md) conserva cada término.
+**98, 163 y 1.245 ms son sumas de asignaciones propuestas, no medidas ni límites biológicos.** Incluyen evidencia, adquisición, inferencia, selección, gates, transporte, autopiloto, mecánica y retorno físico. El [presupuesto original](/home/user/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_PRESUPUESTO_LATENCIA.md) conserva cada término.
 
 | Escenario de trabajo | Señal detectable → retorno físico | Añadiendo la reserva perceptiva hipotética de 80 ms |
 |---|---:|---:|
@@ -100,4 +100,4 @@ AKD1500 M.2 es un acelerador candidato previsto, no una pieza validada de este r
 4. ¿Qué comunica la interfaz cuando el gate modifica una orden o falta telemetría?
 5. ¿Qué parte del beneficio procede del usuario y cuál de la autonomía del dron?
 
-Fuentes de alcance: [revisión NEURO-DRON](/home/roger/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_INFORME.md), [registro de evidencia](/home/roger/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_LEDGER_EVIDENCIA.md), [decisión por horizonte](/home/roger/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_DECISION.md). Lectura pública: [PRISMA técnico](https://www.rxlabs.org/docs/prisma/tecnico), [EEG y dron](https://www.rxlabs.org/docs/prisma/eeg-dron).
+Fuentes de alcance: [revisión NEURO-DRON](/home/user/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_INFORME.md), [registro de evidencia](/home/user/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_LEDGER_EVIDENCIA.md), [decisión por horizonte](/home/user/Escritorio/PRISMA-Engine-Workspace/docs/research/astra/neurodron/NEURODRON_DECISION.md). Lectura pública: [PRISMA técnico](https://www.rxlabs.org/docs/prisma/tecnico), [EEG y dron](https://www.rxlabs.org/docs/prisma/eeg-dron).

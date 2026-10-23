@@ -8,7 +8,7 @@ sellado un nuevo contrato ni lanzado la campaña de 96 episodios.
 
 Fuentes: commit `c805cd9` (código de `1dc18c0` sin cambios), rama
 `research/echo-5.1-pcworld1`. Cuaderno privado
-`rogeernavarro/echo51-repoworld-atomic-v3-20261014`, versión 1.
+`navywakura/echo51-repoworld-atomic-v3-20261014`, versión 1.
 Artefactos: `ECHO-5.1/artifacts/repoworld-gates-v3-20261014/remote/`.
 
 ## Ejecución y contabilidad

@@ -1,4 +1,4 @@
-# C v1 · ENJAMBRE-1 — contrato (APROBADO el 21/10/2026; §2–§8 sustituidos por la enmienda 1, §11)
+# C v1 · ENJAMBRE-1 — contrato (APROBADO por Nav el 21/10/2026; §2–§8 sustituidos por la enmienda 1, §11)
 
 21 de octubre de 2026. Pista C del [roadmap](ROADMAP.md). Requisito cumplido:
 A verde ([MEMORIA-X](MEMORIAX-RESULTS.md)), B verde ([ACUMULA-3](ACUMULA3-RESULTS.md)).
@@ -89,7 +89,7 @@ todos los brazos. Sin automejora (eso fue B). Cada agente empieza con
 
 ## 8. Predicciones (escritas antes de medir)
 
-Métrica principal (elegida el 21/10): **suma de rondas por mundo**:
+Métrica principal (elegida por Nav el 21/10): **suma de rondas por mundo**:
 por cada uno de los 8 mundos, la ronda en que se resolvió por primera vez
 (31 si no se resolvió en 30); se suman los 8 (mínimo 8, máximo 248). Menos es
 mejor. Se informan al lado los mundos resueltos, los episodios fallidos y el
@@ -134,12 +134,12 @@ Invariantes: WSP 16 B, enteros, `destroyed == 0`, córtex apagado, nada nuevo
 bajo `nexus0/`, `memx/` `acumula*/` `b3/` sin tocar (el código nuevo en
 `echo58/enjambre/`), campaña ARC intacta.
 
-## 11. Enmienda 1 — rediseño (21/10/2026, antes de cualquier examen; APROBADA el 21/10)
+## 11. Enmienda 1 — rediseño (21/10/2026, antes de cualquier examen; APROBADA por Nav el 21/10)
 
 El primer diseño (misiones de MiniGrid en A2) se cerró en desarrollo: ningún
 brazo se distinguía ([nota](ENJAMBRE1-DEV-NOTE.md)). Nav eligió rediseñar la
 tarea. Esta sección **sustituye §2–§8**; los nombres de los brazos y la
-métrica elegida (suma de rondas por mundo) se mantienen. El código
+métrica elegida por Nav (suma de rondas por mundo) se mantienen. El código
 del primer diseño queda como registro en `echo58/enjambre/bench_a2.py`.
 
 **Mundos compartidos propios** (`echo58/enjambre/coop.py`; enteros; mecánica

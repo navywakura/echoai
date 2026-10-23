@@ -25,7 +25,7 @@ nadie podría comprobarlo. La custodia existe para que no haga falta fiarse de m
 
 ## Qué NO vale como custodia
 
-Cualquier sitio que un agente que corre como `roger` pueda leer: otra carpeta,
+Cualquier sitio que un agente que corre como `Nav` pueda leer: otra carpeta,
 `.gitignore`, otro repo tuyo en este disco, permisos bajo el mismo usuario. Si yo
 puedo leer `bundle.json`, no es custodia.
 

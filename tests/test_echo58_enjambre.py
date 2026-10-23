@@ -1,6 +1,6 @@
 """ENJAMBRE-1 (ECHO-5.8 track C v1) invariants.
 
-    cd /home/roger/REALRXOS/RXos && PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.tests.test_echo58_enjambre
+    cd /home/user/REALRXOS/RXos && PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.tests.test_echo58_enjambre
 """
 import ast
 import unittest

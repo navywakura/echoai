@@ -15,7 +15,7 @@ Redimensionado mecánico autorizado, sin IA generativa, recorte o rediseño.
 
 ## Web local
 
-Repositorio correcto: `/home/roger/rxlabs.org_local`, no la copia histórica
+Repositorio correcto: `/home/user/rxlabs.org_local`, no la copia histórica
 `echoai/ROGEX-LABORATORIES`.
 
 - Logo visible en `/echoai` y en el artículo nuevo.

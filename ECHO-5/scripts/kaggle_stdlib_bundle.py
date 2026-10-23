@@ -193,7 +193,7 @@ def build(manifest_path, output_name):
     notebook.mkdir()
     slug = "echo5-sitl-" + output_name + "-20261011"
     metadata = dict(
-        id="rogeernavarro/" + slug, title=slug, code_file="run.py",
+        id="navywakura/" + slug, title=slug, code_file="run.py",
         language="python", kernel_type="script", is_private=True,
         enable_gpu=False, enable_tpu=False, enable_internet=True,
         dataset_sources=[], kernel_sources=[], competition_sources=[], model_sources=[])

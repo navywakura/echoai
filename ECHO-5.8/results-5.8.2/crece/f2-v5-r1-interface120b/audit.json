@@ -1,0 +1,233 @@
+{
+  "F3_started": false,
+  "audit_green": false,
+  "cache_hits": 0,
+  "diagnostic_source_sha256": "d08c12b486a3b2d8e36f29900c61a4dc7651414f1c7357c803e8b89ffce51513",
+  "exam_run": false,
+  "failed_identity_checks": [
+    "attempt prompts identical",
+    "all reservation prompts",
+    "attempt prompts identical",
+    "all reservation prompts",
+    "attempt prompts identical",
+    "all reservation prompts",
+    "attempt prompts identical",
+    "all reservation prompts",
+    "attempt prompts identical",
+    "all reservation prompts",
+    "attempt prompts identical",
+    "all reservation prompts"
+  ],
+  "minimum_reserved_call_gap_seconds": 59.995139147,
+  "models": {
+    "openai/gpt-oss-120b": {
+      "curves": {
+        "acepta_azar": [
+          142,
+          142,
+          138,
+          138,
+          138,
+          138
+        ],
+        "azar_gramatica": [
+          142,
+          139,
+          131,
+          131,
+          131,
+          129
+        ],
+        "crece": [
+          142,
+          142,
+          136,
+          132,
+          132,
+          132
+        ],
+        "piezas_b3": [
+          111,
+          111,
+          111,
+          111,
+          111,
+          111
+        ],
+        "sin_fichas": [
+          142,
+          142,
+          142,
+          142,
+          138,
+          138
+        ],
+        "sin_piezas": [
+          142,
+          142,
+          142,
+          142,
+          142,
+          142
+        ],
+        "sin_relevo": [
+          142,
+          130,
+          130,
+          130,
+          131,
+          131
+        ]
+      },
+      "green": true
+    }
+  },
+  "new_http_tokens": 148492,
+  "note": "Strict audit FAILED. Additional checks only diagnose the recorded failure; no retrospective approval, worlds, model calls or replay.",
+  "numerical_gate_green": true,
+  "other_artifact_checks_green": true,
+  "prompt_differences": [
+    {
+      "cause": "JSON object key order after loading sorted persisted fiches",
+      "observations_unchanged": true,
+      "prefix_and_suffix_byte_identical": true,
+      "receipts": [
+        {
+          "path": "openai--gpt-oss-120b/m1/crece/request-5/attempt-0-result.json",
+          "prompt_sha256": "fa29fe5e50ed583ff1ed869ec7f0a0b241cb03d2c8e306cddc3c919891d9cd80",
+          "receipt_sha256": "c2e5cac68631fed5f784e652171a9387858413f6bb8261bb7e72dc61505db1c7",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m1/crece/request-5/attempt-1-result.json",
+          "prompt_sha256": "30735ec78dd62b09703a5b1165fe388a3f27d9843503a63aae6b663a8bdbe712",
+          "receipt_sha256": "5429ab5fa4e84215c4c008ca4f1a29ed8319ff330cc648481c8298a2ed4cfd38",
+          "status": 200
+        }
+      ],
+      "request": "openai--gpt-oss-120b/m1/crece/request-5",
+      "strict_prompt_identity": false
+    },
+    {
+      "cause": "JSON object key order after loading sorted persisted fiches",
+      "observations_unchanged": true,
+      "prefix_and_suffix_byte_identical": true,
+      "receipts": [
+        {
+          "path": "openai--gpt-oss-120b/m1/sin_relevo/request-4/attempt-0-result.json",
+          "prompt_sha256": "a0782222531e17f3949339b8eee14d9c310a0803aeae5952e30439e3b3110df9",
+          "receipt_sha256": "63ee6c47e0d82d5a08691a8d72eb51abb98935b7eb44bb37ff7d12dea0e30310",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m1/sin_relevo/request-4/attempt-1-result.json",
+          "prompt_sha256": "563fd08fae04af7929750abd31fa2191a30bcdadd386f86b90b05dcf09f3d14a",
+          "receipt_sha256": "aacfc4811cbfd53aab47738d93d6646aa6cdb180c5ace60c05a817db76179234",
+          "status": 200
+        }
+      ],
+      "request": "openai--gpt-oss-120b/m1/sin_relevo/request-4",
+      "strict_prompt_identity": false
+    },
+    {
+      "cause": "JSON object key order after loading sorted persisted fiches",
+      "observations_unchanged": true,
+      "prefix_and_suffix_byte_identical": true,
+      "receipts": [
+        {
+          "path": "openai--gpt-oss-120b/m1/sin_relevo/request-5/attempt-0-result.json",
+          "prompt_sha256": "aa93a4db4014957c533f97ae55909e3161190e1879ccb29ed51692646cc75e87",
+          "receipt_sha256": "a80e7ceb3504f41a0ca91c562d759676f0859b7d0fda4d9c1b5e7b4f9653b837",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m1/sin_relevo/request-5/attempt-1-result.json",
+          "prompt_sha256": "288849e98acd056dfd3a08142dc46c4f802d8d25d6080cee45849fd7fb0ad2e6",
+          "receipt_sha256": "73f9083f4af713bc39e59b3a2314445b2513942cb5f710e3d3d16698b480784f",
+          "status": 200
+        }
+      ],
+      "request": "openai--gpt-oss-120b/m1/sin_relevo/request-5",
+      "strict_prompt_identity": false
+    },
+    {
+      "cause": "JSON object key order after loading sorted persisted fiches",
+      "observations_unchanged": true,
+      "prefix_and_suffix_byte_identical": true,
+      "receipts": [
+        {
+          "path": "openai--gpt-oss-120b/m2/crece/request-5/attempt-0-result.json",
+          "prompt_sha256": "8829c66b4fd57eb29cba1104cc2aab927ef922fe38e900afb27791b07d320401",
+          "receipt_sha256": "00e4842486e02cddb893689cfe7d954c6b2ffd00a964ccc3f73da3b08fbf7f18",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m2/crece/request-5/attempt-1-result.json",
+          "prompt_sha256": "c69787070a055402a2f9775f6c829271ac8aea5514a44e82a3d508c10744d795",
+          "receipt_sha256": "9ad8f18735adf3353c1bc7a2d9af81de6cf23346bf0938a3749667d0753847ab",
+          "status": 200
+        }
+      ],
+      "request": "openai--gpt-oss-120b/m2/crece/request-5",
+      "strict_prompt_identity": false
+    },
+    {
+      "cause": "JSON object key order after loading sorted persisted fiches",
+      "observations_unchanged": true,
+      "prefix_and_suffix_byte_identical": true,
+      "receipts": [
+        {
+          "path": "openai--gpt-oss-120b/m2/sin_relevo/request-4/attempt-0-result.json",
+          "prompt_sha256": "9a960ed7a6339fa0111738907a607bdce025c68d144f7a059bfc882bfa1ce326",
+          "receipt_sha256": "c14a1eedc53dde18570210e5020d370b50bd5db24fc5002c201fcda390fbc11b",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m2/sin_relevo/request-4/attempt-1-result.json",
+          "prompt_sha256": "270688510a0e08b6f986978fed283092ba40953a557a42245b3834c76a75e927",
+          "receipt_sha256": "72397d59efb6c602249ed9dfa7183792159754678776d4650ee6fa4b8716ad75",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m2/sin_relevo/request-4/attempt-2-result.json",
+          "prompt_sha256": "270688510a0e08b6f986978fed283092ba40953a557a42245b3834c76a75e927",
+          "receipt_sha256": "390ce30343c2c30497ddd69f01a409528832097844ad32fa3ce27f29103c31e3",
+          "status": 200
+        }
+      ],
+      "request": "openai--gpt-oss-120b/m2/sin_relevo/request-4",
+      "strict_prompt_identity": false
+    },
+    {
+      "cause": "JSON object key order after loading sorted persisted fiches",
+      "observations_unchanged": true,
+      "prefix_and_suffix_byte_identical": true,
+      "receipts": [
+        {
+          "path": "openai--gpt-oss-120b/m2/sin_relevo/request-5/attempt-0-result.json",
+          "prompt_sha256": "db979470cac193a0e72740ba12a1400bfe356362af7731aaa49f989435582602",
+          "receipt_sha256": "9bb9b6c2458a9d1a10f713a4ecdca60c84f62e908d7ded00afe8027c95cff78c",
+          "status": 429
+        },
+        {
+          "path": "openai--gpt-oss-120b/m2/sin_relevo/request-5/attempt-1-result.json",
+          "prompt_sha256": "5a7f29ce824475039d800000db0c5ca37a044914962392f337383ff757f49799",
+          "receipt_sha256": "39a99a322bd22cd22a319a1e1f66663240206e95f50534cf8dd87d6ffd0301e6",
+          "status": 200
+        }
+      ],
+      "request": "openai--gpt-oss-120b/m2/sin_relevo/request-5",
+      "strict_prompt_identity": false
+    }
+  ],
+  "receipts": 41,
+  "requests": 30,
+  "reservations_without_receipt": [],
+  "reserved_http_attempts": 41,
+  "result_sha256": "9e40ba37b7d7c406a83190e47ae7b005a69f0ebd8ca86ba5688e432710ff0c8b",
+  "snapshots": 84,
+  "strict_auditor_sha256": "b5bad559a9c09497598b92c8890eabf89225affd434f6f879d48bc475177b705",
+  "strict_prompt_identity": false,
+  "tokens": 148492,
+  "trials": 40
+}

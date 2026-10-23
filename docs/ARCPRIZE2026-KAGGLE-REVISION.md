@@ -1,6 +1,6 @@
 # ARC Prize 2026 en Kaggle · revisión de reglas (2026-09-25)
 
-Leído con la API de Kaggle (cuenta `rogeernavarro`). Copias de las páginas en
+Leído con la API de Kaggle (cuenta `navywakura`). Copias de las páginas en
 `lab/kaggle/arcprize2026/*-pages.json`.
 
 ## Las tres competiciones

@@ -26,7 +26,7 @@ variable concreta lo impide y qué haría falta, sin tocarla.
 ## 1. Qué se ejecutó
 
 ```bash
-cd /home/roger/REALRXOS/RXos/echoai
+cd /home/user/REALRXOS/RXos/echoai
 
 PYTHONPATH=.. python3 -m echoai.nexus0.flight1s validate                                   # exit 0
 PYTHONPATH=.. python3 -m echoai.nexus0.flight1s preflight --output lab/flight1s/runtime-lock.json

@@ -1,6 +1,6 @@
 """ENJAMBRE-1 (C v1): predictions E1-E4 from lab/echo58/enjambre/exam/*.json (contract §11).
 
-    PYTHONPATH=/home/roger/REALRXOS/RXos python3 -m echoai.echo58.enjambre.report
+    PYTHONPATH=/home/user/REALRXOS/RXos python3 -m echoai.echo58.enjambre.report
 """
 from __future__ import annotations
 

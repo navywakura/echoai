@@ -79,7 +79,7 @@ nota. La aceptación del protocolo se conserva separada de calidad observada.
   implica cero alucinaciones universales ni aislamiento inexpugnable.
 - 198 pruebas PCWorld pasan (71,960 s), incluidas diez pruebas del transporte:
   capacidades separadas, rutas exactas, caducidad, replay, límites y worker.
-- Notebook privado `rogeernavarro/echo51-two-gate14b-20261013`, versión 1,
+- Notebook privado `navywakura/echo51-two-gate14b-20261013`, versión 1,
   confirmado `COMPLETE`; solo inferencia, ningún programa candidato ejecutado allí.
 - Qwen2.5-Coder-14B-Instruct Q4_K_M y llama.cpp b11577 fijados como en el diagnóstico
   anterior. 49/49 capas en GPU, 9.161 MiB en CUDA0 (105 MiB en la segunda T4).

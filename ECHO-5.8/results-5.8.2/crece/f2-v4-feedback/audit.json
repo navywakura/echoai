@@ -1,0 +1,74 @@
+{
+  "audit_green": true,
+  "models": {
+    "openai/gpt-oss-20b": {
+      "curves": {
+        "acepta_azar": [
+          145,
+          145,
+          145,
+          145,
+          145,
+          145
+        ],
+        "azar_gramatica": [
+          145,
+          143,
+          143,
+          143,
+          139,
+          139
+        ],
+        "crece": [
+          145,
+          145,
+          145,
+          145,
+          145,
+          145
+        ],
+        "piezas_b3": [
+          110,
+          110,
+          110,
+          110,
+          110,
+          110
+        ],
+        "sin_fichas": [
+          145,
+          145,
+          145,
+          145,
+          145,
+          145
+        ],
+        "sin_piezas": [
+          145,
+          145,
+          145,
+          145,
+          145,
+          145
+        ],
+        "sin_relevo": [
+          145,
+          145,
+          145,
+          145,
+          145,
+          145
+        ]
+      },
+      "green": false
+    }
+  },
+  "note": "Arithmetic and provenance audit only; no new worlds or model requests.",
+  "receipts": 30,
+  "requests": 30,
+  "result_sha256": "4ed24bbde7b6bec866e444dd1ace89c9fdb3fe905a079984fddb00cc8c1b1e64",
+  "scientific_green": false,
+  "snapshots": 84,
+  "tokens": 127790,
+  "trials": 40
+}

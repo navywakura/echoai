@@ -132,7 +132,7 @@ Mediciones: `probe-*.json` y `replay-probe-*.json` en ese directorio.
 Fuente congelada, notebooks privados y herramientas de reproducción:
 `lab/kaggle/s6-final-20260927/`. Huella del paquete: `c295e291fb1cc15bac76acbadf1b27ed07621a0c817244cbbd4f61f8d41a6313`.
 
-Notebooks: `rogeernavarro/echo45-s6-fijo-final` y `rogeernavarro/echo45-s6-echo-final`.
+Notebooks: `navywakura/echo45-s6-fijo-final` y `navywakura/echo45-s6-echo-final`.
 
 **S6-A queda cerrado con este resultado.** La fase B de juegos y el paso de pago con un modelo
 frontier son experimentos posteriores; no forman parte de esta campaña.

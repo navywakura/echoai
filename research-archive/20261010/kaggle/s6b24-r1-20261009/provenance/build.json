@@ -20,7 +20,7 @@
     "local_validation": "see local-validation.json; package build itself performs no inference or games",
     "native_archive_sha256": "a0dac5390422129b6cf4eacda0746d4e1f7b1ee81edea6c96d9aa5f90128b2f8",
     "parent_bundle_sha256": "a2cab9b6a6d5d1dd3fd9b0bcdf294c190f051ef733e695c2af77f4be91a74b2b",
-    "path": "/home/roger/REALRXOS/RXos/echoai/lab/kaggle/s6b24-r1-20261009/dataset/echo-b24-r1-private.zip",
+    "path": "/home/user/REALRXOS/RXos/echoai/lab/kaggle/s6b24-r1-20261009/dataset/echo-b24-r1-private.zip",
     "private": true,
     "published": false,
     "recovery_sha256": "414f1b336a806c3bcca56132036de72fa3859f1363c48a63f51f882a70e124e5",

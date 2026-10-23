@@ -10,7 +10,7 @@ from types import FunctionType, SimpleNamespace
 from seed import s6b8 as s
 
 BASE = s.REPO / "lab/kaggle/s6b8-recovery-20260929"
-REF = "rogeernavarro/echo45-s6b8-recovery-p2-20260929"
+REF = "navywakura/echo45-s6b8-recovery-p2-20260929"
 SOURCES = ("seed/s6b8_recovery.py", "lab/kaggle/s6b8-recovery-20260929/transport.py",
            "docs/ECHO45-S6-B8-INFERENCE-RECOVERY.md", "tests/test_s6b8_recovery.py")
 
@@ -44,7 +44,7 @@ def prepare():
 
 
 def transport(stage, *values):
-    result = subprocess.run(["/home/roger/.venvs/kaggle/bin/python", str(BASE / "transport.py"),
+    result = subprocess.run(["/home/user/.venvs/kaggle/bin/python", str(BASE / "transport.py"),
                              stage, *map(str, values)], check=True, capture_output=True, text=True, timeout=180)
     return json.loads(result.stdout.splitlines()[-1])
 

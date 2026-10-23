@@ -32,7 +32,7 @@ esta prueba antes de afirmar estabilidad bajo carga concurrente.
 
 ## Rutas y comandos locales
 
-Desde `/home/roger/github-restructure/worktrees/echoai-pcworld1`:
+Desde `/home/user/github-restructure/worktrees/echoai-pcworld1`:
 
 ```bash
 G="$PWD/ECHO-5.1/artifacts/repoworld-gates-v3-20261014"
@@ -115,7 +115,7 @@ Las claves client/worker son nuevas, distintas entre sí y respecto a v2.
 En una fase futura autorizada:
 
 1. `python3 "$RUN/operate.py" start` inicia relay/túnel propios y prepara el
-   cuaderno **privado** `rogeernavarro/echo51-repoworld-atomic-v3-20261014`.
+   cuaderno **privado** `navywakura/echo51-repoworld-atomic-v3-20261014`.
    No lo sube automáticamente a Kaggle.
 2. Iniciar una única sesión con dos T4 y el modelo fijado; esperar readiness.
 3. `python3 "$RUN/operate.py" calibrate` ejecuta una sola instancia reservada,

@@ -5,9 +5,11 @@ El símbolo blanco sobre negro es el logo oficial del **agente echoAI**,
 incluido ECHO-4. No sustituye la R de la marca general RxLabs.
 
 Fuente canónica: [echo-ai-agent-logo.png](../../../echo-ai-agent-logo.png),
-PNG de 2000 × 2000, conservado sin cambios.
+PNG de 2000 × 2000, derivado público sin metadatos personales. El original se conserva sin cambios
+en el laboratorio; los píxeles comprimidos IDAT de esta copia son idénticos.
 
-SHA-256: `bdfcf084c25a33aa64dd66fc260513fc265d3962cb233b1dd076ded475338cbd`.
+SHA-256 original privado: `bdfcf084c25a33aa64dd66fc260513fc265d3962cb233b1dd076ded475338cbd`.
+Hash público y prueba de píxeles conservados: [PUBLIC-METADATA.json](PUBLIC-METADATA.json).
 
 Las versiones pequeñas deben conservar encuadre, proporciones, fondo negro
 y trazos blancos, sin rediseño, recorte ni reinterpretación generativa.

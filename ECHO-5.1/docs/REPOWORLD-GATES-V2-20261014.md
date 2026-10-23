@@ -5,7 +5,7 @@ Esta entrega no inicia GPU, cuaderno Kaggle, relay ni túnel; no consulta al LLM
 
 ## Rutas
 
-Desde `/home/roger/github-restructure/worktrees/echoai-pcworld1`:
+Desde `/home/user/github-restructure/worktrees/echoai-pcworld1`:
 
 ```bash
 G="$PWD/ECHO-5.1/artifacts/repoworld-gates-v2-20261014"

@@ -3,8 +3,8 @@
 2026-09-22. Por indicación del responsable del proyecto, `echo-discord`
 queda congelado y fuera del desarrollo activo del agente.
 
-- Origen: `/home/roger/REALRXOS/RXos/echo-discord`.
-- Archivo: `/home/roger/archivos-laboratorio/echo-discord-2026-09-22`.
+- Origen: `/home/user/REALRXOS/RXos/echo-discord`.
+- Archivo: `/home/user/archivos-laboratorio/echo-discord-2026-09-22`.
 - Movimiento autorizado dentro del mismo filesystem, sin copiar sobre otro
   proyecto, sin borrados, sin cambios al contenido y sin symlink de retorno.
 - 4.205 entradas conservadas: mismos inodos, permisos, tamaños, fechas de

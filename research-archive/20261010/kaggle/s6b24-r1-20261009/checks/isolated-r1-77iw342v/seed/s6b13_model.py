@@ -11,7 +11,7 @@ from seed.game_selfimprove import sha, canonical
 from seed.s6b11 import atomic
 from seed.s6b13_prompt import gbnf
 
-MODEL = Path('/home/roger/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf')
+MODEL = Path('/home/user/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf')
 MODEL_SHA = '2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e'
 CLI, TOKENIZER = Path('/usr/bin/llama-cli'), Path('/usr/bin/llama-tokenize')
 MAX_INPUT, MAX_OUTPUT, CONTEXT, TIMEOUT = 3072, 160, 4096, 900

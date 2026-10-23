@@ -45,13 +45,13 @@ existentes y genera `lab/echo-nexus/backend.json`. Configuración:
 
 ```sh
 python3 harness/local_bridge.py manifest lab/echo-nexus/backend.json
-echo-nexus --backend /home/roger/REALRXOS/RXos/echoai/lab/echo-nexus/backend.json
+echo-nexus --backend /home/user/REALRXOS/RXos/echoai/lab/echo-nexus/backend.json
 ```
 
 Para guardar la conexión, dentro de la TUI:
 
 ```text
-/backend /home/roger/REALRXOS/RXos/echoai/lab/echo-nexus/backend.json
+/backend /home/user/REALRXOS/RXos/echoai/lab/echo-nexus/backend.json
 /devtest
 ```
 

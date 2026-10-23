@@ -1,6 +1,6 @@
 """B v3 investigation (lab tool, not the agent): watch ECHO play, find where it gets stuck, and why.
 
-    cd /home/roger/REALRXOS/RXos
+    cd /home/user/REALRXOS/RXos
     PYTHONPATH=. echoai/ECHO-5/.venv-sandbox/bin/python -m echoai.echo58.b3.trace FAMILY [--n 10] [--seed0 7000000]
 
 The agent never sees names; this tool translates ids back to MiniGrid names only

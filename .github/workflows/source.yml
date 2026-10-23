@@ -12,6 +12,13 @@ jobs:
           python-version: '3.12'
       - run: python tools/source_setup.py verify
       - run: python tests/test_source_setup.py
+      - name: Offline 5.8.2 format and symbolic-memory checks
+        env:
+          PYTHONPATH: '..:.'
+        run: |
+          python -m unittest tests.test_echo58_wspfiles tests.test_echo58_wspstrongjson tests.test_echo58_llmstudy -v
+          python -m echoai.echo58.wspfiles verify ECHO-5.8/results-5.8.2/wspfiles/artifacts/memory-training-m01.wsp
+          python -m echoai.echo58.wspfiles use-memory ECHO-5.8/results-5.8.2/wspfiles/artifacts/memory-training-m01.wsp
   echo5:
     runs-on: ubuntu-latest
     steps:

@@ -406,8 +406,8 @@ PYTHONPATH=.. python3 -m echoai.echo4.dream_bench verify lab/echo4/dream1-bcd-v1
 # Repetición del experimento ya publicado; directorio nuevo obligatorio.
 # Necesita el servidor/modelo locales y permiso para el puerto loopback.
 PYTHONPATH=.. python3 -m echoai.echo4.dream_bench campaign lab/echo4/dream1-bcd-reproduction \
-  --server /home/roger/src/llama.cpp/build/bin/llama-server \
-  --model /home/roger/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf \
+  --server /home/user/src/llama.cpp/build/bin/llama-server \
+  --model /home/user/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf \
   --threads 4
 ```
 

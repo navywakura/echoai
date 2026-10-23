@@ -22,13 +22,13 @@ R1 amplía el límite remoto a 7200 s por trabajo; conserva la cancelación orig
 Máximo de contexto en rondas completas: **4665/6000 tokens**.
 
 Trabajos privados Kaggle:
-- [c0](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-c0-20260930): COMPLETE
-- [c1](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-c1-20260930): COMPLETE
-- [c2](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-c2-20260930): CANCEL_ACKNOWLEDGED
-- [c2 R1](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-r1-c2-20260930): COMPLETE
-- [c3 R1](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-r1-c3-20260930): COMPLETE
-- [c4 R1](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-r1-c4-20260930): COMPLETE
-- [c5 R1](https://www.kaggle.com/code/rogeernavarro/echo45-s6b12-r1-c5-20260930): COMPLETE
+- [c0](https://www.kaggle.com/code/navywakura/echo45-s6b12-c0-20260930): COMPLETE
+- [c1](https://www.kaggle.com/code/navywakura/echo45-s6b12-c1-20260930): COMPLETE
+- [c2](https://www.kaggle.com/code/navywakura/echo45-s6b12-c2-20260930): CANCEL_ACKNOWLEDGED
+- [c2 R1](https://www.kaggle.com/code/navywakura/echo45-s6b12-r1-c2-20260930): COMPLETE
+- [c3 R1](https://www.kaggle.com/code/navywakura/echo45-s6b12-r1-c3-20260930): COMPLETE
+- [c4 R1](https://www.kaggle.com/code/navywakura/echo45-s6b12-r1-c4-20260930): COMPLETE
+- [c5 R1](https://www.kaggle.com/code/navywakura/echo45-s6b12-r1-c5-20260930): COMPLETE
 
 S6: **NO VERDE / PENDIENTE**.
 

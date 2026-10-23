@@ -1,7 +1,7 @@
 {
   "budget": 500000,
-  "candidate": "/home/roger/REALRXOS/RXos/echoai/lab/seed/arc-v3-calibration-20261009/arc2/artifacts/candidate.json",
-  "journal": "/home/roger/REALRXOS/RXos/echoai/lab/seed/arc-v3-calibration-20261009/arc2/journals/ccd554ac/journal.jsonl",
+  "candidate": "/home/user/REALRXOS/RXos/echoai/lab/seed/arc-v3-calibration-20261009/arc2/artifacts/candidate.json",
+  "journal": "/home/user/REALRXOS/RXos/echoai/lab/seed/arc-v3-calibration-20261009/arc2/journals/ccd554ac/journal.jsonl",
   "public": {
     "test": [
       {

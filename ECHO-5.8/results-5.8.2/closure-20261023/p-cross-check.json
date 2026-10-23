@@ -1,0 +1,142 @@
+{
+  "audit_sha256": "a2489e1a6ff73154b5855407a9af75fe77170c7974667bb72c5de347e6a8a7eb",
+  "checker_sha256": "4898095a91f8780effb0266dba4bcd4e2af6c8c1d401917143c91ba3136fee29",
+  "comparison": [
+    {
+      "exam_inspections": {
+        "EMPTY": 16,
+        "MEMX": 2,
+        "VISITS": 1
+      },
+      "fewer_than_empty": true,
+      "tied_with_visits": false,
+      "world": 0
+    },
+    {
+      "exam_inspections": {
+        "EMPTY": 16,
+        "MEMX": 1,
+        "VISITS": 1
+      },
+      "fewer_than_empty": true,
+      "tied_with_visits": true,
+      "world": 1
+    }
+  ],
+  "exam_inspection_totals": {
+    "EMPTY": 32,
+    "MEMX": 3,
+    "VISITS": 2
+  },
+  "passed": true,
+  "percibex_narrow_green_reported": true,
+  "scope": "six evaluation/metadata/reload receipts, 31 source hashes, WSP envelopes and aggregate controls; no raw sensor, policy or physics replay",
+  "source_checks": {
+    "ECHO-5.8/docs/PERCIBEX-DESIGN-20261023.md": true,
+    "ECHO-5.8/docs/PERCIBEX-PLAN-20261023.md": true,
+    "docs/examples/sim3-families/pattern1r-v1.json": true,
+    "echo58/memx/memory.py": true,
+    "echo58/percibex/__init__.py": true,
+    "echo58/percibex/audit.py": true,
+    "echo58/percibex/bundle.py": true,
+    "echo58/percibex/campaign.py": true,
+    "echo58/percibex/consumer.py": true,
+    "echo58/percibex/flight.py": true,
+    "echo58/percibex/online.py": true,
+    "echo58/percibex/protocol.py": true,
+    "echo58/percibex/resources.py": true,
+    "echo58/percibex/session.py": true,
+    "lab/echo3_pattern1r_v4_report.json": true,
+    "lab/echo58/closure-20261023/recovery-oom/p-container-cleanup-preflight.json": true,
+    "lab/echo58/percibex/20261023-r1/contract-freeze-review.json": true,
+    "lab/echo58/percibex/20261023-r1/reboot-recovery-record.json": true,
+    "lab/echo58/percibex/20261023-r1/recovery-candidate/review.json": true,
+    "lab/echo58/percibex/20261023-r1/resource-cleanup-review.json": true,
+    "lab/flight1s-v6/lock.json": true,
+    "nexus0/pattern1.py": true,
+    "nexus0/pattern1r/assets/sensor_runner.py": true,
+    "nexus0/pattern1r_v4/assets/consumer.py": true,
+    "nexus0/pattern1r_v4/assets/flightrunner_survey.py": true,
+    "nexus0/pattern1r_v4/contract.py": true,
+    "nexus0/pattern1r_v4/memory.py": true,
+    "nexus0/pattern1r_v4/session.py": true,
+    "nexus0/sensor1s/model.py": true,
+    "nexus0/sim3/sandbox.py": true,
+    "tests/test_echo58_percibex.py": true
+  },
+  "utc": "2026-10-23T03:53:55.014216+00:00",
+  "wsp_files": [
+    {
+      "file": "memory.wsp",
+      "label": "val-w0-memx",
+      "packets": 2,
+      "sha256": "5972287b6b42a75b77c9ff9bcb4a474d26bf85d86a108ded7cfe40e6289867e3"
+    },
+    {
+      "file": "session.wsp",
+      "label": "val-w0-memx",
+      "packets": 1450,
+      "sha256": "321ace5073f250c10952fdf6b5e8f87f167a585bac3b76e971e8d91a0f54f31e"
+    },
+    {
+      "file": "memory.wsp",
+      "label": "val-w0-empty",
+      "packets": 3,
+      "sha256": "44c731d0a9eb7bb2445ea00f3951fe348d76c5836718322884e8310b2cd04ea3"
+    },
+    {
+      "file": "session.wsp",
+      "label": "val-w0-empty",
+      "packets": 2305,
+      "sha256": "30022eb60990e2aed94ad5442da56057a6e2fb840c9d90ee9b0007687aea6357"
+    },
+    {
+      "file": "memory.wsp",
+      "label": "val-w0-visits",
+      "packets": 2,
+      "sha256": "3e76a57078091e4fc129433961821695077450e3b769d6e938ab3c20567890dc"
+    },
+    {
+      "file": "session.wsp",
+      "label": "val-w0-visits",
+      "packets": 1711,
+      "sha256": "ceac3a9ee6ae30ca35482f48e93f1ddde4392d820f42ddfb862750871b26a290"
+    },
+    {
+      "file": "memory.wsp",
+      "label": "val-w1-memx",
+      "packets": 2,
+      "sha256": "96239c81dd430afa0bf4c0f53cf1aebb2cb0190488985649b5cc7cc0781e2713"
+    },
+    {
+      "file": "session.wsp",
+      "label": "val-w1-memx",
+      "packets": 1552,
+      "sha256": "5f1f14f4a9fb2ead27c0a9c34db2889be3e63b43cb2bc6fe1205802903d088ce"
+    },
+    {
+      "file": "memory.wsp",
+      "label": "val-w1-empty",
+      "packets": 3,
+      "sha256": "55c7641f508635e6d2698a53404fca2c31b540cf8a1d28291db23d79df8f649a"
+    },
+    {
+      "file": "session.wsp",
+      "label": "val-w1-empty",
+      "packets": 2404,
+      "sha256": "1c4defee5f69e32599820ef13d51aaa8d3e443494d7198b1e147e56f94f35e8b"
+    },
+    {
+      "file": "memory.wsp",
+      "label": "val-w1-visits",
+      "packets": 2,
+      "sha256": "aca92845755fbfabb02476b9ea4cc3ca555f9f5fc931c0c90f1c5d402b471914"
+    },
+    {
+      "file": "session.wsp",
+      "label": "val-w1-visits",
+      "packets": 1478,
+      "sha256": "d1d622e006b2d6e1c5b0ffd0eeb3f1d47ee37ec884332c723a3f7806f626f0de"
+    }
+  ]
+}

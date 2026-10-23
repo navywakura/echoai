@@ -6,7 +6,7 @@ en esas ocho comprobaciones. Todavía no hay resultado científico final.
 Las seis llamadas históricas siguen cobradas: 14 de formato acumuladas.
 
 La ejecución privada es
-[echo45-s6b24-r1-20261009](https://www.kaggle.com/code/rogeernavarro/echo45-s6b24-r1-20261009).
+[echo45-s6b24-r1-20261009](https://www.kaggle.com/code/navywakura/echo45-s6b24-r1-20261009).
 Los servicios locales `echoai-s6b24-r1-manager` y `echoai-s6b24-r1-live`
 recogen resultados y proyectan el stream real. El gestor puede continuar un
 checkpoint exacto cuando haya cuota; no relanza fallos científicos o de
@@ -117,8 +117,8 @@ Parent evidence is preserved under `provenance/`, outside the upload dataset;
 no parent execution checkpoint is imported into R1.
 
 **Notebook/dataset integration.** The prepared private reference is
-`rogeernavarro/echo45-s6b24-r1-20261009`, with sole dataset source
-`rogeernavarro/echo45-s6b24-r1-private-20261009`. The dataset contains only its
+`navywakura/echo45-s6b24-r1-20261009`, with sole dataset source
+`navywakura/echo45-s6b24-r1-private-20261009`. The dataset contains only its
 metadata, new ZIP and `b24-native.bin`; there is no `b24-checkpoint.bin`.
 The project root is `/kaggle/working/b24-r1-project`, and results root is
 `/kaggle/working/b24-r1-results`. Inherited entrypoints remain in use.

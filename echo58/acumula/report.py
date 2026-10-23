@@ -1,6 +1,6 @@
 """ACUMULA: predictions Q1-Q5 from lab/echo58/acumula/exam/*.json (contract §5, amendment 1).
 
-    PYTHONPATH=/home/roger/REALRXOS/RXos python3 -m echoai.echo58.acumula.report
+    PYTHONPATH=/home/user/REALRXOS/RXos python3 -m echoai.echo58.acumula.report
 """
 from __future__ import annotations
 

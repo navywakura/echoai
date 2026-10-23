@@ -13,7 +13,7 @@ debe ejecutarse otra vez bajo lock nuevo antes de publicar un resultado comparab
 | `echo3-slice.schema.json` | contrato de aceptación de una fase ECHO-3 | no |
 
 ```bash
-cd /home/roger/REALRXOS/RXos/echoai
+cd /home/user/REALRXOS/RXos/echoai
 PYTHONPATH=.. python3 -m echoai.nexus0.sim3 declaration family docs/examples/sim3-families/rehearsal-v1.json
 PYTHONPATH=.. python3 -m echoai.nexus0.sim3 declaration campaign docs/examples/sim3-campaigns/sim3-rehearsal-20260910.json
 PYTHONPATH=.. python3 -m echoai.nexus0.sim3 declaration slice docs/examples/echo3-slices/sim3.json

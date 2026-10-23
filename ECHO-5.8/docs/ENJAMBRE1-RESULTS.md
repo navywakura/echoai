@@ -1,7 +1,7 @@
 # C v1 · ENJAMBRE-1 — resultados del examen
 
 21 de octubre de 2026. Contrato: [ENJAMBRE1-DESIGN.md](ENJAMBRE1-DESIGN.md)
-(§11 enmienda 1, rediseño, aprobada; §12 enmienda 2 tras la
+(§11 enmienda 1, rediseño, aprobada por Nav; §12 enmienda 2 tras la
 revisión). Examen corrido **una vez**: 140 trabajos (7 brazos × 20 equipos),
 0 fallos de ejecución. Congelación `lab/echo58/enjambre/preflight.json`
 (misiones `1e4a6b17…`); datos `lab/echo58/enjambre/exam/`; informe

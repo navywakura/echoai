@@ -5,10 +5,10 @@ import os
 from pathlib import Path
 import time
 HERE=Path(__file__).resolve().parent
-os.environ['KAGGLE_API_TOKEN']=Path('/home/roger/.kaggleapikey').read_text().strip()
+os.environ['KAGGLE_API_TOKEN']=Path('/home/user/.kaggleapikey').read_text().strip()
 from kaggle.api.kaggle_api_extended import KaggleApi
 api=KaggleApi();api.authenticate()
-REF='rogeernavarro/echo45-s6b24-r1-20261009'
+REF='navywakura/echo45-s6b24-r1-20261009'
 seen=set();finished=set()
 
 def save(name,value):

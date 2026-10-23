@@ -60,7 +60,7 @@ El crítico repite lecturas de L240–259 y agota sus seis llamadas.
 - 208 recibos auditados; contabilidad íntegra; `destroyed=0`, reservas pendientes=0.
 - `functional-calibration.json`: `valid=false`; verificación criptográfica válida.
 - Worker: 65/65 capas, 2 T4; preparación 387,727 s, total 648,943 s.
-- Kaggle `rogeernavarro/echo51-repoworld-search-v5-20261015`, versión 1: COMPLETE.
+- Kaggle `navywakura/echo51-repoworld-search-v5-20261015`, versión 1: COMPLETE.
   Worker detenido, cero errores; relay/túnel apagados; cuota 21,80 → 21,62 h.
 
 La revisión local identifica dos transiciones incorrectas: cualquier proyección

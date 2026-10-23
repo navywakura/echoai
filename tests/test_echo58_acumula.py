@@ -1,6 +1,6 @@
 """ACUMULA (ECHO-5.8 track B) invariants.
 
-    cd /home/roger/REALRXOS/RXos && PYTHONPATH=. python3 -m echoai.tests.test_echo58_acumula
+    cd /home/user/REALRXOS/RXos && PYTHONPATH=. python3 -m echoai.tests.test_echo58_acumula
 """
 import ast
 import re

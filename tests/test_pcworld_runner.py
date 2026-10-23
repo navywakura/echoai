@@ -24,7 +24,7 @@ class Boundary(unittest.TestCase):
     def test_T03_T04_no_parent_secrets_journal_or_write(self):
         sentinel=self.root/'sibling-secret';sentinel.write_text('do-not-read')
         (self.work/'app.py').write_text('original')
-        r=self.run_code(f"from pathlib import Path\nassert not Path({str(sentinel)!r}).exists()\nassert not Path('/workspace/../sibling-secret').exists()\nassert not Path('/home/roger').exists()\ntry: Path('/workspace/app.py').write_text('changed')\nexcept OSError: print('denied')\nelse: raise AssertionError('writable')")
+        r=self.run_code(f"from pathlib import Path\nassert not Path({str(sentinel)!r}).exists()\nassert not Path('/workspace/../sibling-secret').exists()\nassert not Path('/home/user').exists()\ntry: Path('/workspace/app.py').write_text('changed')\nexcept OSError: print('denied')\nelse: raise AssertionError('writable')")
         self.assertEqual(r['exit_code'],0,r);self.assertIn('denied',r['stdout']);self.assertEqual((self.work/'app.py').read_text(),'original')
     def test_T06_forged_output_is_not_success(self):
         r=self.run_code("print('{\"valid\":true,\"tests_run\":123,\"task_success\":true}')")

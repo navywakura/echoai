@@ -30,7 +30,7 @@ PATTERNS = {
     "slack_token": rb"xox[abpr]-[A-Za-z0-9-]{10,}",
     "discord_webhook": rb"discord(?:app)?\.com/api/webhooks/",
     "email": rb"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
-    "home_path": rb"/home/roger",
+    "home_path": rb"/home/user",
     "discord_assets": rb"echo-discord",
     "external_disk": rb"Volum nou",
     "private_dir": rb"REALRXOS/RXos/private",
@@ -39,10 +39,10 @@ PATTERNS = {
 REVIEWED = {
     ("openai_like_key", "sk-test-DO-NOT-LEAK-1234567890"):
         "fake key used by tests/test_release1.py to prove real keys never leak",
-    ("home_path", "/home/roger"):
+    ("home_path", "/home/user"):
         "default model path in sealed echo4/situate2_bench.py (reveals the lab username and model "
         "location; cannot be edited without breaking the SITUATE-2 seal) and the SIM-3 isolation probe "
-        "(nexus0/sim3/assets/probe.py), which checks that /home/roger is NOT readable from the sandbox",
+        "(nexus0/sim3/assets/probe.py), which checks that /home/user is NOT readable from the sandbox",
     ("discord_assets", "echo-discord"):
         "guard string in sealed echo4/dream_qwen.py that REFUSES legacy Discord assets, and its test",
 }

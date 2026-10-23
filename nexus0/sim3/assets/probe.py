@@ -30,7 +30,7 @@ MAX_LINE = 256
 # never told which package, split or seed produced its ticks.
 FORBIDDEN_PATHS = (
     "/home",
-    "/home/roger",
+    "/home/user",
     "/root",
     "/var",
     "/var/tmp",

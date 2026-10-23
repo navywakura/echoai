@@ -87,5 +87,5 @@ raise SystemExit(code)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('run',type=Path);p.add_argument('output',type=Path)
-    p.add_argument('--slug',default='rogeernavarro/echo51-repair-proposer14b-20261013')
+    p.add_argument('--slug',default='navywakura/echo51-repair-proposer14b-20261013')
     a=p.parse_args();prepare(a.run,a.output,a.slug)

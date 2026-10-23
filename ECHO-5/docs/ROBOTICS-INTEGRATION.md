@@ -210,7 +210,7 @@ veto con evidencia en caché, límites, costes y el Recorder heredado.
 
 Inspección sólo de lectura: `gz`, `gazebo` y `px4` no están en PATH. Sí existen
 `/usr/bin/podman`, `/usr/bin/bwrap` y el binario
-`/home/roger/px4/PX4-Autopilot/build/px4_sitl_default/bin/px4`.
+`/home/user/px4/PX4-Autopilot/build/px4_sitl_default/bin/px4`.
 `podman images` muestra `localhost/echoai-sim3-gz:harmonic` y las imágenes
 PX4 v1.15.4, gpseph y gpsaccuracy. ID de gpsaccuracy observado:
 `5364c865ebf08b1dd19ee7a6a46ca3c3911056269974e7d9db2ced4a74201d27`.

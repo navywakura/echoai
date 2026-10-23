@@ -150,7 +150,7 @@ trayectoria, acciones y resultados necesarios para replay y comparación.
 ## 9. Ejecución
 
 ```bash
-cd /home/roger/REALRXOS/RXos/echoai
+cd /home/user/REALRXOS/RXos/echoai
 lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -m unittest tests.test_s6probe1
 lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -m seed.s6probe1 prepare
 lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -m seed.s6probe1 estimate

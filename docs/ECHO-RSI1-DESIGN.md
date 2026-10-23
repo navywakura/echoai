@@ -125,7 +125,7 @@ El resultado incluye `S6_green: false` siempre. No se publica en la web.
 Comandos con el Python congelado:
 
 ```sh
-lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -m seed.rsi1 prepare --model /home/roger/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf
+lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -m seed.rsi1 prepare --model /home/user/models/qwen3-4b-instruct-2507/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf
 lab/arc3/ARC-AGI-3-Agents/.venv/bin/python -u -m seed.rsi1_queue
 ```
 
