@@ -17,8 +17,8 @@ jobs:
           PYTHONPATH: '..:.'
         run: |
           python -m unittest tests.test_echo58_wspfiles tests.test_echo58_wspstrongjson tests.test_echo58_llmstudy -v
-          python -m echoai.echo58.wspfiles verify ECHO-5.8/results-5.8.2/wspfiles/artifacts/memory-training-m01.wsp
-          python -m echoai.echo58.wspfiles use-memory ECHO-5.8/results-5.8.2/wspfiles/artifacts/memory-training-m01.wsp
+          python -m echoai.echo58.wspfiles verify examples/memory.wsp
+          python -m echoai.echo58.wspfiles use-memory examples/memory.wsp
   echo5:
     runs-on: ubuntu-latest
     steps:

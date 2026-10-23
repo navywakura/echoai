@@ -32,7 +32,7 @@ from .sitl_parameters import (audit_parameters, validate_parameters,
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CONTRACT = ROOT / "docs/MISSION-CONTRACT.json"
+CONTRACT = ROOT / "config/mission.json"
 IMAGE_ID = "5364c865ebf08b1dd19ee7a6a46ca3c3911056269974e7d9db2ced4a74201d27"
 CONDITIONS = ("static", "contradiction", "low_energy", "sensor_stale", "agent_hang", "static")
 PX4_BINARY = "/opt/PX4-Autopilot/build/px4_sitl_default/bin/px4"

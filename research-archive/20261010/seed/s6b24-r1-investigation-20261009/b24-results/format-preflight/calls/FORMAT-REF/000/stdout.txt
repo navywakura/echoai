@@ -1,7 +1,0 @@
-{
-  "patches": [
-   {"set":{"HOLD":4},"when":{"body_known":["eq",0]}}
-  ]
-} [end of text]
-
-

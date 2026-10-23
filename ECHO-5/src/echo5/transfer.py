@@ -2,7 +2,7 @@
 
 Generators/oracles live here, outside the solver. Public actor inputs contain
 only demonstrations and query inputs. Historical exact32 is not used here.
-See docs/TRANSFER-CONTRACT.json for the preregistered domain and limits.
+See config/transfer.json for the preregistered domain and limits.
 
 V2 is the coordinator's measurement amendment after development and before
 confirmation. The fixed manual knowledge oracle remains a reported comparison;
@@ -28,7 +28,7 @@ from .solver import solve, validate_synthesis
 
 SCHEMA = 'echo5.transfer.v2'
 ROOT = Path(__file__).resolve().parents[2]
-CONTRACT_PATH = ROOT / 'docs' / 'TRANSFER-CONTRACT.json'
+CONTRACT_PATH = ROOT / 'config' / 'transfer.json'
 SUPPORTED_FAMILIES = ('outline_extract_scale', 'fill_extract_tile',
                       'pack_rotate_scale', 'inside_erase_crop')
 CONTROL_FAMILIES = ('ambiguous_rotation', 'unsupported_color')
@@ -61,7 +61,7 @@ def normalize_config(config):
         raise ValueError('unknown transfer config keys; use default_config(phase)')
     actual = {**defaults, **deepcopy(config)}
     if phase == 'confirmation' and actual != defaults:
-        raise ValueError('confirmation settings are frozen by TRANSFER-CONTRACT.json')
+        raise ValueError('confirmation settings are frozen by transfer.json')
     for key in ('work_per_case', 'training_work_per_case', 'preparation_work', 'generator_work_per_case'):
         if type(actual[key]) is not int or not 1 <= actual[key] <= 100_000_000:
             raise ValueError('invalid work ceiling: ' + key)
@@ -361,7 +361,7 @@ def source_identity(budget=None):
              ('__init__', 'grounding', 'programs', 'concepts', 'solver', 'transfer', 'budget', 'legacy', 'trace')]
     paths += ['__init__.py', 'seed/__init__.py', 'seed/dsl.py', 'seed/learn.py',
               'seed/refinement.py', 'seed/relational_dsl.py', 'echo_arc/__init__.py',
-              'echo_arc/observe.py', 'ECHO-5/docs/TRANSFER-CONTRACT.json']
+              'echo_arc/observe.py', 'ECHO-5/config/transfer.json']
     files = {}
     for relative in sorted(paths):
         raw = (ROOT.parent / relative).read_bytes()

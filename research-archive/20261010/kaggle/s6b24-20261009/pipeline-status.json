@@ -1,1 +1,0 @@
-{"at": 1791500507.8561778, "ref": "navywakura/echo45-s6b24-20261009", "remote_status": {"at": "2026-10-08T23:00:27.541121+00:00", "condition": "S6-B24", "reason": "RuntimeError: B24 instrument failure: invalid selection: Expecting value: line 1 column 1 (char 0)", "s6_green": false, "stage": "INSTRUMENT_BLOCKED"}, "stage": "INSTRUMENT_BLOCKED", "version": 1}

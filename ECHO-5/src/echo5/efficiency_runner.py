@@ -13,7 +13,7 @@ from .evaluation import digest
 from .trace import Recorder, verify_journal
 from .budget import BudgetExceeded
 
-PROTOCOL = ROOT/'docs/SEARCH-EFFICIENCY-PILOT.json'
+PROTOCOL = ROOT/'config/search-efficiency.json'
 STAGES = ('search_development', 'search_fresh', 'exploration', 'curriculum')
 
 

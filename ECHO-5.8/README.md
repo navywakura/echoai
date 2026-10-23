@@ -1,63 +1,30 @@
-# ECHO-5.8 · poner en verde lo que falló
+# WSP memory
 
-Abierto el 20 de octubre de 2026. **Estado (21/10/2026): pistas A, B y C en
-verde en examen**, cada una con contrato escrito antes de medir, examen
-congelado de una sola pasada y verificaciones internas en procesos separados
-(incluida revisión cruzada por agentes de IA, no certificación externa). Los rojos
-históricos se conservan como rojos.
+ECHO stores observations and their consequences in memory. A `.wsp` archive
+keeps that memory with its packets and metadata so it can be loaded again.
 
-| Pista | Resultado | Documento |
-|---|---|---|
-| **A · MEMORIA-X**: memoria entera de roles entre mundos | **VERDE** | [`docs/MEMORIAX-RESULTS.md`](docs/MEMORIAX-RESULTS.md) |
-| B v1 · ACUMULA | roja en examen | [`docs/ACUMULA-RESULTS.md`](docs/ACUMULA-RESULTS.md) |
-| B v2 · ACUMULA-2 | cerrada roja en desarrollo | [`docs/ACUMULA2-DEV-NOTE.md`](docs/ACUMULA2-DEV-NOTE.md) |
-| **B v3 · ACUMULA-3**: ECHO elige y encadena ediciones de memoria y piezas de política desde sus fallos | **VERDE** (las piezas no las inventó ECHO) | [`docs/ACUMULA3-RESULTS.md`](docs/ACUMULA3-RESULTS.md) |
-| C v1, primer diseño | cerrado en desarrollo | [`docs/ENJAMBRE1-DEV-NOTE.md`](docs/ENJAMBRE1-DEV-NOTE.md) |
-| **C v1 · ENJAMBRE-1**: 4 ECHO con memoria privada + global por postales WSP, que se ayudan | **VERDE** (la ayuda solo cuenta donde hace falta) | [`docs/ENJAMBRE1-RESULTS.md`](docs/ENJAMBRE1-RESULTS.md) |
-
-## Cierre 5.8.2 · 24/10/2026
-
-[Resultados y límites de 5.8.2](docs/RELEASE-5.8.2.md) ·
-[Reproducir sin API](docs/REPRODUCE-5.8.2.md) ·
-[Inventario público](results-5.8.2/EXPORT-INVENTORY.json).
-
-WSP, D1, D2 y P tienen resultados técnicos o acotados. E, C v3, CRECE y W R2
-conservan sus rojos. C v2 fue desfavorable en desarrollo. Las tres pistas de
-5.8 de la tabla anterior mantienen sus verdes científicos originales.
-Los documentos fechados son históricos: sus «siguientes pasos» y prohibiciones
-de publicación ya no son el estado actual. La entrega 5.8.2 fue autorizada
-posteriormente; no se vuelve a abrir ningún examen.
-
-## Código y datos
-
-- Código: [`../echo58/`](../echo58/) (`memx`, `acumula`, `acumula2`, `b3`,
-  `acumula3`, `enjambre`). Enteros en el agente y la memoria; córtex apagado.
-- Tests: `../tests/test_echo58_*.py`.
-- Datos de examen y desarrollo: [`results/`](results/) (`preflight.json` =
-  congelación, `exam/` = trabajos crudos, `results.json` = informe).
-- `../navi10_qn.py` y `../navi10_wsp.py`: el paquete WSP de 16 bytes del que
-  dependen las postales (copia sin cambios del árbol de investigación).
-
-## Reproducir
-
-El código espera la disposición del árbol de investigación: el paquete
-`echoai` dentro de una carpeta que también contiene los módulos `navi10_*`, y
-los datos en `echoai/lab/echo58/`.
+Run these commands from the repository root, in a checkout named `echoai`:
 
 ```bash
-mkdir work && cd work
-git clone https://github.com/navywakura/echoai.git
-cp echoai/navi10_qn.py echoai/navi10_wsp.py .
-mkdir -p echoai/lab && cp -r echoai/ECHO-5.8/results echoai/lab/echo58
-python3.12 -m venv venv && venv/bin/pip install gymnasium "minigrid==3.0.0" numpy
-PYTHONPATH=. venv/bin/python -m echoai.tests.test_echo58_enjambre
-PYTHONPATH=. venv/bin/python -m echoai.echo58.enjambre.report      # recalcula E1–E4 desde exam/
+PYTHONPATH=..:. python3 -m echoai.echo58.wspfiles verify examples/memory.wsp
+PYTHONPATH=..:. python3 -m echoai.echo58.wspfiles inspect examples/memory.wsp
+PYTHONPATH=..:. python3 -m echoai.echo58.wspfiles export-json examples/memory.wsp /tmp/echo-memory.json
+PYTHONPATH=..:. python3 -m echoai.echo58.wspfiles import-json /tmp/echo-memory.json /tmp/echo-memory.wsp
 ```
 
-La pista A usa además AI Safety Gridworlds en un intérprete aparte
-(`~/.venvs/asg`, ver `echo58/memx/world.py`). La comprobación de congelación
-(`frozen_state()`) recalcula los hashes del código, del contrato y de los
-tests. Esta copia pública incluye supresión de identidad y rutas locales en fuentes,
-tests y documentos. No es una copia byte a byte de la congelación privada.
-Los hashes históricos se conservan como procedencia; SOURCE-MANIFEST.json
-verifica los bytes públicos actuales. Véase la guía de reproducción.
+`verify` confirms the archive structure and checksum. `inspect` shows the records.
+The conversion commands create new files; choose unused destination paths.
+The included example contains synthetic observations for learning the format.
+
+To load the memory in Python, from the same checkout:
+
+```bash
+PYTHONPATH=..:. python3 - <<'PYTHON'
+from echoai.echo58.wspfiles.memory import load_memory
+memory = load_memory('examples/memory.wsp')
+print(memory.recall(7, 0, 'ENTER', 0))  # HURT
+PYTHON
+```
+
+To export your own `Memory` object, call `export_memory(memory, path)` from
+`echoai.echo58.wspfiles.memory`. [General usage](../docs/USAGE.md).

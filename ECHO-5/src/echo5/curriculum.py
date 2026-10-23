@@ -22,7 +22,7 @@ from .programs import execute
 
 SCHEMA = 'echo5-curriculum-closure-v2'
 CONDITIONS = ('sequential', 'random', 'adaptive')
-CONTRACT_PATH = Path(__file__).resolve().parents[2] / 'docs' / 'CURRICULUM-CONTRACT.json'
+CONTRACT_PATH = Path(__file__).resolve().parents[2] / 'config' / 'curriculum.json'
 DIRECTIONS = ('right', 'above', 'left', 'below')
 SUFFIXES = (None, 'rot90', 'fliplr', 'flipud')
 

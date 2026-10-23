@@ -20,7 +20,7 @@ from .trace import Recorder, verify_journal
 
 ROOT = Path(__file__).resolve().parents[2]
 DOMAINS = ('transfer', 'curriculum', 'sandbox', 'mission')
-CONTRACTS = {name: f'docs/{name.upper()}-CONTRACT.json' for name in DOMAINS}
+CONTRACTS = {name: f'config/{name}.json' for name in DOMAINS}
 
 
 def write_json(path, value, *, replace=False):
@@ -89,7 +89,7 @@ def domain_config(domain, phase):
 
 def freeze(folder):
     folder = Path(folder)
-    own = source_snapshot(ROOT, ['src', 'scripts', 'tests', 'docs', 'pyproject.toml',
+    own = source_snapshot(ROOT, ['src', 'scripts', 'tests', 'config', 'pyproject.toml',
                                 '.python-version', 'requirements-sandbox.lock'],
                           suffixes=('.py', '.json', '.js', '.css', '.html', '.toml', '.lock', ''))
     old = source_snapshot(ROOT.parent, ['seed', 'echo_arc', 'echo4', 'nexus0', '__init__.py'],

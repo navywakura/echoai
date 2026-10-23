@@ -1,5 +1,0 @@
-{
-  "candidate_id": "C000"
-} [end of text]
-
-

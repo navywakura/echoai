@@ -67,7 +67,7 @@ class ClosureReconciliationTests(unittest.TestCase):
         self.root = Path(temporary.name)
         self.folder = self.root / 'artifacts/run'
         self.folder.mkdir(parents=True)
-        (self.root / 'docs').mkdir()
+        (self.root / 'config').mkdir()
         self.campaign = {'campaign_id': 'test-campaign', 'phase': 'development'}
         self.config = {'phase': 'development', 'cases': 1}
         self.journal = {'events': 0, 'last_hash': '0' * 64}

@@ -43,3 +43,19 @@ GPT-*-PROMPT.md
 /.github/copilot-instructions.md
 /.github/agents/
 /.github/prompts/
+
+# Keep private research records and generated session output out of publications.
+research-archive/
+**/results/
+**/results-*/
+**/artifacts/
+**/handoff/
+*.log
+*.jsonl
+**/*-PLAN*.md
+**/*-DESIGN*.md
+**/*-RESULTS*.md
+**/*-REVIEW*.md
+**/*-HANDOFF*.md
+**/ROADMAP*.md
+**/DEVELOPMENT-*.json

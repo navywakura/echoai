@@ -18,7 +18,7 @@ from .sandbox import (ACTIONS, COLORS, MODES, EXPLORATION_OPTIONS, PINS, Session
                       dependency_status, parse_mission, sanitize_observation)
 
 ROOT = Path(__file__).resolve().parents[2]
-CONTRACT_PATH = ROOT / 'docs' / 'SANDBOX-CONTRACT.json'
+CONTRACT_PATH = ROOT / 'config' / 'sandbox.json'
 SCENARIOS = {
     'door_key': {'name': 'Key, locked door and goal',
                  'environment': 'MiniGrid-DoorKey-8x8-v0'},
@@ -221,7 +221,7 @@ def source_manifest():
     """Portable source/dependency identities, not measurements or evidence of success."""
     local = ('src/echo5/sandbox.py', 'src/echo5/sandbox_eval.py',
              'src/echo5/budget.py', 'src/echo5/interaction.py',
-             'docs/SANDBOX-CONTRACT.json', 'requirements-sandbox.lock')
+             'config/sandbox.json', 'requirements-sandbox.lock')
     files = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in local}
     external = {}
     for name in ('minigrid', 'gymnasium'):
@@ -282,7 +282,7 @@ def load_contract():
 def normalize_config(config):
     allowed = {'split', 'seed', 'cases_per_family', 'budget', 'families', 'modes', 'contract'}
     if type(config) is not dict or set(config) - allowed:
-        raise ValueError('Invalid benchmark config fields; see SANDBOX-CONTRACT.json')
+        raise ValueError('Invalid benchmark config fields; see sandbox.json')
     contract = load_contract()
     if config.get('contract', contract['schema']) != contract['schema']:
         raise ValueError('Benchmark contract version mismatch')

@@ -18,12 +18,12 @@ def main():
     audit.add_argument('directory',type=Path)
     p=sub.add_parser('calibrate-local')
     for name in ('dataset','runtime','sources','output'): p.add_argument('--'+name,required=True,type=Path)
-    p.add_argument('--sample',type=Path,default=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json')
+    p.add_argument('--sample',type=Path,required=True)
     for name in ('preflight','smoke','calibrate'):
         q=sub.add_parser(name,aliases=["calibrate-remote"] if name=="calibrate" else [])
         q.add_argument('--registry',type=Path,required=True);q.add_argument('--output',type=Path,required=True)
-        q.add_argument('--contract',type=Path,default=ROOT/'ECHO-5.1/docs/SWE-CONTRACT.json')
-        q.add_argument('--sample',type=Path,default=ROOT/'ECHO-5.1/docs/swebench/SWE-SAMPLE.json')
+        q.add_argument('--contract',type=Path,required=True)
+        q.add_argument('--sample',type=Path,required=True)
         if name!='preflight':q.add_argument('--instance',required=True)
         if name=='smoke':q.add_argument('--actions',type=Path,required=True)
         if name=='calibrate':

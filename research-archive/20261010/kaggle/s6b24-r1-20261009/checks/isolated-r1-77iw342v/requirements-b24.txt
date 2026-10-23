@@ -1,2 +1,0 @@
-numpy==2.3.2
-arcengine==0.9.3

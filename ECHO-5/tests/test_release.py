@@ -293,7 +293,7 @@ class ReleaseCampaignEvidenceTests(unittest.TestCase):
         self.root = Path(temporary.name)
         self.folder = self.root / 'artifacts/campaign'
         self.folder.mkdir(parents=True)
-        (self.root / 'docs').mkdir()
+        (self.root / 'config').mkdir()
         # Replace only the scientific configuration boundary, not its custody
         # checks. These modules have no benchmark/auditor methods to execute.
         module = SimpleNamespace(normalize_config=self.normalize, _config=self.normalize)

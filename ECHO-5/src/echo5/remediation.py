@@ -19,7 +19,7 @@ STAGES = ('exploration', 'semantics', 'transfer', 'search', 'curriculum')
 MODULES = dict(exploration='exploration_study', semantics='mission_reference',
                transfer='transfer_independent', search='search_diagnostics',
                curriculum='curriculum_lazy')
-PROTOCOL = ROOT / 'docs/REMEDIATION-PILOT.json'
+PROTOCOL = ROOT / 'config/remediation.json'
 
 
 def validate_protocol(plan):
@@ -119,7 +119,6 @@ def run(folder):
         verify_archive(folder, sources)
         plan = validate_protocol(json.loads(PROTOCOL.read_text()))
         write_json(folder/'plan.json', plan)
-        shutil.copyfile(ROOT/'docs/REMEDIATION-IMPLEMENTATION-20261011.md', folder/'IMPLEMENTATION.md')
         write_json(folder/'identity.json', {'schema': 'echo5.remediation.run.v1',
             'started_utc': datetime.now(timezone.utc).isoformat(), 'pid': os.getpid(),
             'plan_sha256': digest(plan), 'own_source_sha256': sources['own']['sha256'],

@@ -26,7 +26,7 @@ def source_receipts():
     """
     from .evaluation import source_snapshot
     return {
-        'own': source_snapshot(ROOT, ['src', 'scripts', 'tests', 'docs', 'pyproject.toml',
+        'own': source_snapshot(ROOT, ['src', 'scripts', 'tests', 'config', 'pyproject.toml',
                                      '.python-version', 'requirements-sandbox.lock'],
                                suffixes=('.py', '.json', '.js', '.css', '.html', '.toml', '.lock', '')),
         'legacy': source_snapshot(ROOT.parent, ['seed', 'echo_arc', 'echo4', 'nexus0', '__init__.py'],

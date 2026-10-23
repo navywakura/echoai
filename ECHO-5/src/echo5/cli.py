@@ -41,7 +41,7 @@ def bench(output, contract):
     output.mkdir(parents=True, exist_ok=False)
     config = json.loads(Path(contract).read_text())
     write_json(output / 'contract.json', config)
-    source = source_snapshot(ROOT, ['src', 'scripts', 'tests', 'docs/BENCHMARK-CONTRACT.json',
+    source = source_snapshot(ROOT, ['src', 'scripts', 'tests', 'config/benchmark.json',
                                     'pyproject.toml', '.python-version'],
                              suffixes=('.py', '.json', '.toml', ''))
     legacy_folders = ['seed', 'echo_arc', 'echo4', 'nexus0', '__init__.py']
@@ -106,7 +106,7 @@ def main(argv=None):
     commands = parser.add_subparsers(dest='command', required=True)
     run = commands.add_parser('bench', help='banco controlado sintético con recibos y trazas')
     run.add_argument('--output', required=True)
-    run.add_argument('--contract', default=str(ROOT / 'docs/BENCHMARK-CONTRACT.json'))
+    run.add_argument('--contract', default=str(ROOT / 'config/benchmark.json'))
     audit = commands.add_parser('audit', help='recalcular resultados; opcionalmente repetir casos')
     audit.add_argument('folder')
     audit.add_argument('--replay', action='store_true')

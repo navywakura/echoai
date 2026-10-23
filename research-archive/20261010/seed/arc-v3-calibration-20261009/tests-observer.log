@@ -1,9 +1,0 @@
-test_development_decisions_are_discovered_by_existing_observer (tests.test_arc_v3_batch.Batch.test_development_decisions_are_discovered_by_existing_observer) ... {"stage": "RUNNING", "at": "2026-10-08T23:51:36.731740+00:00", "completed": 0, "total": 1, "exact_tasks": 0, "timeouts": 0, "errors": 0, "model_calls": 0}
-{"stage": "RUNNING", "at": "2026-10-08T23:51:36.846082+00:00", "completed": 1, "total": 1, "exact_tasks": 1, "timeouts": 0, "errors": 0, "model_calls": 0}
-{"stage": "COMPLETE", "at": "2026-10-08T23:51:36.848522+00:00", "completed": 1, "total": 1, "exact_tasks": 1, "timeouts": 0, "errors": 0, "model_calls": 0}
-ok
-
-----------------------------------------------------------------------
-Ran 1 test in 0.605s
-
-OK

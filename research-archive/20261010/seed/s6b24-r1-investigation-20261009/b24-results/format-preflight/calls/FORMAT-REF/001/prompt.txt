@@ -1,5 +1,0 @@
-<|im_start|>system
-Return one executable JSON proposal, no prose.<|im_end|>
-<|im_start|>user
-{"allowed_atoms":{"body_known":[["eq",0],["eq",1]],"click_only":[["eq",0],["eq",1]],"count_known":[["eq",0],["eq",1]]},"allowed_hold_values":[0,1,2,4,8,12,16,20,24,32],"example_warning":"Syntax example only; no measured utility. Select your own conditions and duration using the provided observations and your own previous results.","format_example":{"patches":[{"set":{"HOLD":4},"when":{"body_known":["eq",0]}}]},"output_instructions":"Return only the JSON object. Exactly one patch. when is an object with 1 to 3 distinct allowed feature keys in alphabetical order. Each value is [operator, integer] from allowed_atoms. set contains only HOLD: ONE integer from allowed_hold_values. No markdown, commentary, schema, extra keys or value lists.","purpose":"Neutral protocol test, no game utility or evidence.","task":"Construct one patch: HOLD is 8; body_known equals 1 AND click_only equals 0."}<|im_end|>
-<|im_start|>assistant

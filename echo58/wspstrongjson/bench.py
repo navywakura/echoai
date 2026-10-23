@@ -17,8 +17,7 @@ NAMES = ('honesto-none-m1', 'memory-training-m01', 'oraculo-false_remote-m3', 'p
 MANIFEST_SHA = '8bae0fbd8af0db432b3e5ee5159ffc116095dd3db153b0119faf18094596cc3a'
 SOURCES = ('echo58/wspstrongjson/__init__.py', 'echo58/wspstrongjson/codec.py',
            'echo58/wspstrongjson/bench.py', 'echo58/wspstrongjson/audit.py',
-           'echo58/wspfiles/codec.py', 'tests/test_echo58_wspstrongjson.py',
-           'ECHO-5.8/docs/WSP-STRONGJSON-PLAN-20261023.md')
+           'echo58/wspfiles/codec.py', 'tests/test_echo58_wspstrongjson.py')
 VARIANTS = ('payload', 'full', 'payload.zlib', 'full.zlib')
 
 

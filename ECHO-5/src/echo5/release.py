@@ -57,7 +57,7 @@ def verify_snapshot_identity(frozen, expected):
 def current_release_sources():
     # Fixed verifier scope; never choose coverage from a supplied receipt.
     return {
-        'own': source_snapshot(ROOT, ['src', 'scripts', 'tests', 'docs', 'pyproject.toml',
+        'own': source_snapshot(ROOT, ['src', 'scripts', 'tests', 'config', 'pyproject.toml',
                                      '.python-version', 'requirements-sandbox.lock'],
                                suffixes=('.py', '.json', '.js', '.css', '.html', '.toml', '.lock', '')),
         'legacy': source_snapshot(ROOT.parent, ['seed', 'echo_arc', 'echo4', 'nexus0', '__init__.py'],
@@ -235,7 +235,7 @@ def verify_sitl_evidence(folder, report, audit, sources):
                         if name.startswith(('src/', 'scripts/')) and name.endswith('.py')}
     if not expected_sources or _read(folder, 'sources.json') != expected_sources:
         raise ValueError('SITL needs the complete frozen runtime source set')
-    if _read(folder, 'contract.json') != _read(ROOT / 'docs', 'MISSION-CONTRACT.json'):
+    if _read(folder, 'contract.json') != _read(ROOT / 'config', 'mission.json'):
         raise ValueError('SITL contract mismatch')
     for index, row in enumerate(rows):
         case, mode = index // len(MODES), MODES[index % len(MODES)]
